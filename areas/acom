@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd ..
+cvs commit -m "Offline Commiting Areas" areas
+wait
+cd areas
+echo {ROffline Commiting Areas was Finished.{x | romtell imms

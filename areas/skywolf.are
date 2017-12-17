@@ -1,0 +1,102 @@
+#AREADATA
+Name Skywolves~
+Builders Rei~
+VNUMs 80351 80400
+Credits <  0 110> Skywolves~
+Security 1
+Flags 2
+Clan skywolves~
+Version 3
+End
+
+
+
+#MOBILES
+#80351
+healer sky wolf~
+Лекарь Небесных Волков~
+Добрый доктор жаждет спасти чью-то жизнь.
+~
+Не раз этот ччеловек спасал чужие жизни.
+Вот и сейчас он занимается своим любимым делом.
+~
+human~
+ABQVa DF 0 0
+110 220 100d100+10000 0d0+0 0d0+110 none
+0 0 0 0
+0 ABCD 0 0
+stand stand none 0
+AHMV medium
+#80352
+skywolf teacher~
+Спасатель~
+Спасатель показывает как делать искусственное дыхание.
+~
+Мастер спасения на воде, на суше и где угодно.
+Он готов поделится опытом и с тобой.
+~
+human~
+ABJKVb DF 0 0
+110 220 100d100+10000 0d0+0 0d0+110 none
+0 0 0 0
+0 ABCD 0 0
+stand stand none 0
+AHMV medium
+#80353
+skywolf merchant~
+Торговец~
+Торговец предлагает тебе купить шприц.
+~
+Очень добрый и участливый человек.
+~
+human~
+ABNV DF 0 0
+109 218 100d100+10000 0d0+0 5d10+21 none
+19 0 0 0
+CEFKNO ABCD 0 0
+stand stand none 0
+AHMV medium
+#0
+
+#OBJECTS
+#80351
+skywolf bed~
+{Cдвуярусная кровать{X~
+{CДвуярусные Кровати{X стоят вдоль стен.~
+mithril~
+furniture BOY 0
+50 100000 GJ 200 200
+0 0 0 850 D
+T 0 0
+#80352
+skywolf fountain~
+{Cисточник{X~
+{CИсточник{X с {Wмолоком{X.~
+mithril~
+fountain BO 0
+2147483647 2147483647 'milk' 0 0 
+0 0 0 850 D
+T 0 0
+#0
+
+#ROOMS
+#0
+
+
+
+#SPECIALS
+M 80353 spec_breath_any Load to: Торговец
+S
+
+#RESETS
+S
+
+
+
+#SHOPS
+80353 9 5 33 8 32 0 0 0 24
+0
+
+
+
+#$

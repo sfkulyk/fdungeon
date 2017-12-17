@@ -1,0 +1,33 @@
+; Configuration file
+Rebootcounter 54
+Global_config GIO
+Autologin 0 0
+FILE_WHO who.htm~
+FILE_ONLINE online.htm~
+; Birthday phrazes (emote)
+BD0 (null)~
+BD1 (null)~
+BD2 (null)~
+BD3 (null)~
+BD4 (null)~
+BD5 (null)~
+BD6 (null)~
+BD7 (null)~
+BD8 (null)~
+BD9 (null)~
+; Disabled commands:
+; Guilds data:
+GUILD
+Dwarves Guild~
+5064003
+GUILD
+Assasin Guild~
+0
+GUILD
+Vampire Guild~
+0
+GUILD
+Druides Guild~
+0
+; Offers data:
+#END

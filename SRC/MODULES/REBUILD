@@ -1,0 +1,21 @@
+#!/bin/sh
+##
+# $Id: rebuild,v 1.3 2001/01/28 21:40:23 cvsuser Exp $
+#
+# 2001, unicorn
+
+LIBOWN=`id -un`; export LIBOWN
+LIBGRP=`id -gn`; export LIBGRP
+
+echo "{D>{g>{G>{W> {cStarting module rebuild script as {W$LIBOWN{c:{W$LIBGRP{c.{x"
+
+echo "{D>{g>{G>{W> {cUpdating work copy from the repository...{x"
+cvs update
+
+echo "{D>{g>{G>{W> {cMaking dependence...{x"
+make depend
+echo "{D>{g>{G>{W> {cBuilding modules...{x"
+make
+echo "{D>{g>{G>{W> {cInstalling modules...{x"
+make install
+echo "{D>{g>{G>{W> {cRebuild script: {RDONE{c.{x"

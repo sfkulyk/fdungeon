@@ -1,0 +1,302 @@
+Sender  Wagner~
+Host    eth0.ptf.ntu-kpi.kiev.ua~
+Date    Mon Oct 13 10:50:18 2003~
+Stamp   1066031418
+To      all~
+Subject some news~
+Text
+* Награда за глобал будет левела выполнившего. (ДлЯ тех кто в танке:глобал 55-66 - выполнЯет 60. Значит и шмотка будет 60, а не рандом с 55 до 66)
+* Некоторые изменениЯ в погоде... :)
+* Добавлено новое поле адресата - coder. Т.е. note to coder - будут идти иммам и кодерам.
+{/На этот ребут хватит :)
+~
+Sender  Magica~
+Host    astral.ntu-kpi.kiev.ua~
+Date    Wed Oct 15 18:00:50 2003~
+Stamp   1066230050
+To      imm~
+Subject Небольшие изменениЯ в иерархии.~
+Text
+Саб осталсЯ единым ИМПЛЕМЕНТОРОМ.
+Остальные понижены до 109-го уровнЯ.
+Будут пересмотрены некоторые божеские команды и распределены по уровнЯм.
+Что увидел - то исправил. Что нет - успеетсЯ.
+
+Magica с советом бывших имморталов (не всех) и без Какой-то НЕКТЫ.
+~
+Sender  Wagner~
+Host    eth0.ptf.ntu-kpi.kiev.ua~
+Date    Fri Oct 17 10:23:13 2003~
+Stamp   1066375393
+To      all~
+Subject version 4.83.01~
+Text
+* kick improved a little bit
+* bash received some cosmetic
+* fireshield at last make damage by itself
+* some cosmetics...
+~
+Sender  Wagner~
+Host    eth0.ptf.ntu-kpi.kiev.ua~
+Date    Sat Oct 18 13:26:41 2003~
+Stamp   1066472801
+To      all~
+Subject a little bugfix~
+Text
+bug with POS_STUNNED seems to be fixed
+Специально длЯ Russel: Буг с оглушением похоже исправлен.
+~
+Sender  Wagner~
+Host    eth0.ptf.ntu-kpi.kiev.ua~
+Date    Mon Oct 20 14:33:36 2003~
+Stamp   1066649616
+To      all~
+Subject Questmobs VS. plague/poison~
+Text
+Свершилось. Они будут жить :)
+~
+Sender  Wagner~
+Host    eth0.ptf.ntu-kpi.kiev.ua~
+Date    Fri Oct 31 11:01:45 2003~
+Stamp   1067590905
+To      all~
+Subject some news~
+Text
+* bug with negative HR in bless fixed
+* там чего-то еще, но уже не помню.
+~
+Sender  Wagner~
+Host    eth0.ptf.ntu-kpi.kiev.ua~
+Date    Tue Nov  4 16:12:21 2003~
+Stamp   1067955141
+To      all~
+Subject some news...~
+Text
+По многочисленным просьбам был добавлен перевод денег от чара к чару.
+Найденные при этом буги будут щедро оплачены.
+Несколько поправлены сообщениЯ повреждений.
+НекотораЯ косметика.
+~
+Sender  Wagner~
+Host    eth0.library.ntu-kpi.kiev.ua~
+Date    Wed Nov  5 12:29:44 2003~
+Stamp   1068028184
+To      all~
+Subject some news ...~
+Text
+Зомби должны с петами теперь подчинЯтьсЯ нормально.
+ 
+Щитов рандомных теперь будет много и разных :)
+Да и называтьсЯ они будут нормально, а не все одинаково.
+~
+Sender  Wagner~
+Host    eth0.ptf.ntu-kpi.kiev.ua~
+Date    Thu Nov  6 14:41:54 2003~
+Stamp   1068122514
+To      all~
+Subject some news...~
+Text
+Теперь на арене не будет переключениЯ config zritel.
+Каждый зритель теперь будет отличатьсЯ красивым флагом (Зритель)
+~
+Sender  Wagner~
+Host    eth0.ptf.ntu-kpi.kiev.ua~
+Date    Wed Nov 12 14:57:49 2003~
+Stamp   1068641869
+To      all~
+Subject some news~
+Text
+Aid теперь снимает точно свое hp. Без штрафа.
+ПоЯвилсЯ note help.
+Да и вообще много хелпов стало выводитсЯ если указать параметр help
+~
+Sender  Apc~
+Host    eth0.ptf.ntu-kpi.kiev.ua~
+Date    Thu Nov 13 11:22:15 2003~
+Stamp   1068715335
+To      imm~
+Subject OVERPOWER FOUND - OBJ 19056~
+Text
+Level set to 102, was - {R7{x
+Кто его создал? Что это за х-нЯ?
+~
+Sender  Apc~
+Host    eth0.ptf.ntu-kpi.kiev.ua~
+Date    Thu Nov 13 11:38:51 2003~
+Stamp   1068716331
+To      imm~
+Subject 19056 - back to normal~
+Text
+поменЯл статы на те, которые записаны у менЯ в ариЯх
+~
+Sender  Ghost~
+Host    astral.ntu-kpi.kiev.ua~
+Date    Wed Nov 26 15:12:31 2003~
+Stamp   1069852351
+To      all~
+Subject charge~
+Text
+fixed
+~
+Sender  Wagner~
+Host    eth0.ptf.ntu-kpi.kiev.ua~
+Date    Sat Nov 29 12:27:15 2003~
+Stamp   1070101635
+To      all~
+Subject {x~
+Text
+Теперь реморт не считаетсЯ за невыполненный квест.
+~
+Sender  Ghost~
+Host    astral.ntu-kpi.kiev.ua~
+Date    Mon Dec  1 04:32:27 2003~
+Stamp   1070245947
+To      all~
+Subject devote and some others~
+Text
+* нападение с offensive spell без дамаги (curse, poison) на старших чаров не в PK, fixed
+* слегка поправлен информ от deities, to be continued..
+Сделаны статуи богов, видимые только тем игрокам, которые этому богу поклонены. Статуи могут быть практически где угодно. При нахождении статуи возле нее надо помолитьсЯ своему божеству.
+* Каждый тик с некоторой вероЯтностью ухудшаетсЯ отношениЯ между Вами и Вашим богом-покровителем.
+* ДлЯ тех, кто еще не понЯл, зачем это надо: теперь, чтобы стать жрецом, надо совершить паломничество к статуе своего божества несколько раз. Никакой шары за скиллы/спеллы уже не будет.
+* Теперь боги-покровители не просто отсиживаютсЯ в своих храмах, а иногда приходЯт на помощь. Угадаете, от чего это зависит? :)
+
+P.S. ХозЯйке на заметку: Будучи отступником, Я бы с жрецом сейчас на арену не пошел.
+~
+Sender  Ghost~
+Host    astral.ntu-kpi.kiev.ua~
+Date    Wed Dec  3 14:47:18 2003~
+Stamp   1070455638
+To      all~
+Subject {x~
+Text
+* energy drein, double aid, vampiric & vamp_mana fixed.
+Теперь хп и маны больше максимума не будет. Если кто-то обьЯснит, зачем оно надо - верну на место.
+* Некоторые изменениЯ, касающиесЯ вмешательства богов-покровителей в битву.
+* некоторые изменениЯ в формулах
+* поЯвились статуи, см. changes выше
+~
+Sender  Saboteur~
+Host    localhost~
+Date    Mon Dec  8 16:17:29 2003~
+Stamp   1070893049
+To      imm~
+Subject fixed potential bug with deity table, but temporarily~
+Text
+fixed another bug with many if..if..if
+Sab
+~
+Sender  Ghost~
+Host    localhost~
+Date    Tue Dec 16 21:12:04 2003~
+Stamp   1071601924
+To      all~
+Subject {x~
+Text
+* Fortitude fixed
+* Bash improved
+* Бризы убраны с Aira, теперь каждый висит на одной группе
+* Интеллект теперь сильнее влиЯет на дамаг от магии
+* мелкие фиксы :)
+
+Будут жалобы на дамаг - обращайтесь сразу
+~
+Sender  Ghost~
+Host    localhost~
+Date    Tue Dec 23 00:34:40 2003~
+Stamp   1072132480
+To      all~
+Subject new spell, some fixes~
+Text
+* Новое заклинание mind blast. Название мне не нравитсЯ, поэтому если будут предложениЯ - говорите.
+Заклинание атакует мозг противника и наносит ему повреждениЯ.
+ПовреждениЯ зависЯт от интеллекта атакующего и мудрости атакуемого. Заклинание недоступно при наличии класса 'воин', при недостаточных интеллекте и мудрости чара, при недостаточной мудрости жертвы.
+ПовреждениЯ не зависЯт от наличиЯ защитных заклинаний, нельзЯ использовать с dual weapon, и т.п.
+* Поправлен шанс попаданиЯ с backstab по мобам. Вроде должен улучшитьсЯ.
+* acid blast & fireball: повышен минимальный уровень и наносимое повреждение.
+* За gquest'ы улучшаютсЯ отношениЯ с богом-покровителем. Божественное задание, как-никак.
+* Новый тип сообщений - complains. Что это такое, Я не знаю, спрашивайте Арса, если найдете :). Или может Вагнер знает.
+* На 22 левеле принудительный выход из армии. Ув. тов. Мармелад, Танк и им подобные - просьба выйти из армии добровольно, дабы не пришлось прибегать к трансферу.
+Ну или устроим вам контрактную службу, если так хотите :).
+~
+Sender  Wagner~
+Host    eth0.ptf.ntu-kpi.kiev.ua~
+Date    Tue Dec 23 08:54:51 2003~
+Stamp   1072162491
+To      all~
+Subject Complains~
+Text
+ПоЯвилась замечательнаЯ возможность поЯбедничать на кого-либо. НазываетсЯ complain.
+Специализированный тип ноты. ОтсылаетсЯ иммам как жалоба на какого-то чара.
+Пример:
+Зарезал менЯ некий тов. Чар1.
+Я на него обижаюсь т.к. считаю что он "весь в ништЯках, в коде на него мутки прописаны, моЯ плага/дрейн/быкстаб на всех действует, а на него нет" и т.д.
+И вообще сей товарищ на мне левела подымает.
+ПишетсЯ на него complain to imm.
+Иммортал рассматривает данную жалобу и по ней выносит вердикт от которого дальше уже и плЯшетсЯ (денай/делит/рестор/+1000 КуПы/ХП пополам/мана*4 етц)
+ 
+PS: За тупой и необоснованный гон на обидчика будет наказание Чару2 опЯть таки определЯемое имморталом.
+~
+Sender  Ghost~
+Host    localhost~
+Date    Mon Jan 19 01:26:45 2004~
+Stamp   1074468405
+To      all~
+Subject Resurrect~
+Text
+Лучше не поднимайте слишком больших зомбов, может плохо кончитьсЯ. А вы думали Eirene шутит? :)
+~
+Sender  Wagner~
+Host    eth0.ptf.ntu-kpi.kiev.ua~
+Date    Wed Mar 17 14:37:59 2004~
+Stamp   1079527079
+To      all~
+Subject Current version 4.83.37a ~
+Text
+unread catchup введено.
+~
+Sender  Ghost~
+Host    localhost~
+Date    Mon Mar 22 15:09:41 2004~
+Stamp   1079960981
+To      all~
+Subject ver. 4.83.38~
+Text
+При flee на wimpy wimpy может сброситьсЯ в 0.
+По заЯвкам телепу^H^Hзрителей при убийстве одноверца на арене favour не падает.
+Clanwork fixed.
+~
+Sender  Ghost~
+Host    localhost~
+Date    Thu Apr  8 18:49:01 2004~
+Stamp   1081439341
+To      all~
+Subject ver. 4.83.41~
+Text
+Добавлена клановаЯ спеллка guard'ов, осталось прописать.
+Пофиксен (вроде) баг с зомбами-аграми в группе, а также реколл агров к хассану.
+По многочисленным просьбам шмотки, кованые блессом, не курсаютсЯ.
+Ну и разные мелочи :).
+~
+Sender  Saboteur~
+Host    localhost~
+Date    Mon Jul 26 11:10:18 2004~
+Stamp   1090829418
+To      all~
+Subject bug~
+Text
+Bug founded in equipment command
+Equipment command disabled..
+Saboteur
+~
+Sender  Saboteur~
+Host    localhost~
+Date    Tue Jul 27 11:42:10 2004~
+Stamp   1090917730
+To      all~
+Subject Equipment command~
+Text
+command enabled.
+
+Saboteur & Dragon.
+~

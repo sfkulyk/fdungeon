@@ -1,0 +1,116 @@
+#AREADATA
+Name Temple of Light~
+Builders Rei~
+VNUMs 80151 80200
+Credits <  0 110> Temple of Light~
+Security 1
+Flags 2
+Clan light~
+Version 2
+End
+
+
+
+#MOBILES
+#80151
+healer light old~
+Светлый лекарь~
+Светлый лекарь пытается вылечить тебя.
+~
+Свет исходит от этого старца.
+ 
+~
+human~
+ABQVa DF 0 0
+110 220 100d100+10000 0d0+0 0d0+110 none
+0 0 0 0
+0 ABCD 0 0
+stand stand none 0
+AHMV medium
+#80152
+holy paladin~
+Светлый Паладин~
+Светлый Паладин хочет обучить тебя чему-нибудь.
+~
+Сильный, стройный и красивый мужчина.
+~
+human~
+ABJKVb DF 0 0
+110 220 100d100+10000 0d0+0 0d0+110 none
+0 0 0 0
+0 ABCD 0 0
+stand stand none 0
+AHMV medium
+#80153
+old merchant~
+Старый торговец~
+Светлый торговец готов отдать тебе все почти за даром.
+~
+Очень добрый и совершенно некорыстолюбивый старик.
+~
+human~
+ABV DF 0 0
+107 214 100d100+10000 0d0+0 5d10+21 none
+8 0 0 0
+CEFKNO ABCD 0 0
+stand stand none 0
+AHMV medium
+#0
+
+#OBJECTS
+#80151
+bed light~
+{Wкровать{X~
+{WКровати{X застеленные белыми простынями.~
+mithril~
+furniture BOY 0
+50 100000 GJ 200 200
+0 0 0 P
+T 0 0
+#80152
+magic fountain~
+{WСвятой источник{X~
+{WСвятой источник{X тихонько журчит здесь.~
+mithril~
+fountain BO 0
+2147483647 2147483647 'milk' 0 0 
+0 0 0 P
+T 0 0
+#0
+
+#ROOMS
+#80154
+Усыпальница {WХрама Света{X~
+~
+0 271396 0
+D5
+~
+~
+0 0 80151
+M 500 H 500
+S
+#0
+
+
+
+#SPECIALS
+M 80153 spec_breath_any Load to: Старый торговец
+S
+
+#RESETS
+O 0 80151 0 80151
+O 0 80152 0 80151
+M 1 80151 1 80151 1 
+M 1 80152 1 80152 1 
+M 1 80153 1 80153 1 
+S
+
+
+
+#SHOPS
+80153 9 5 33 8 32 0 0 0 24
+0
+
+
+
+#$

@@ -1,0 +1,359 @@
+#PLAYER
+Name Saboteur~
+Id   950136288
+LogO 1488654833
+Vers 5
+Carma 0
+Favour 0
+DeityCurse 0
+Deitynumber 25
+DeityRank 0
+Ldefend 0
+Host winamp.com~
+LastLogin 1488654790
+QuestPnts 4750179
+Qstat 111 108 104
+GQstat 4 3
+VicNPC 92
+DeathNPC 15
+VicPCTot 11
+ShD  {wкинжал||а|у||ом|е|а|ов с тонким {Wлезвием{x~
+LnD  Saboteur~
+Prom {G%h/%H {C%m/%M {X%v/%V {Y%g %e> ~
+Ticks ~
+Race zombie~
+Guild AC
+Elder AC
+Clan loner~
+Rank 0
+Bou 0
+Sex 1
+Classdat 3 1 0 1
+Class 1 0 1 1
+Remort 2
+Levl 110
+Tru 110
+Sec 9
+Plyd 79343
+Not 951296949 960670342 1106943564 1106943561 1106943566 0 0 0
+Scro 22
+Room 3005
+HMV 5650 5650 12725 12725 2772 2772
+Gold 1000
+Silv 640
+Account 0
+Exp 330000
+Act NQT
+Immun BLMOPQ
+Resist BCDHIKLQ
+Vulner HJKLNPQRSYZ
+Autologout 5
+AfBy DF
+Talk ABCDEFGHIJKLMNOPQRSTUV
+Comm IJ
+Coms 0
+Spam D
+Cfg  BCDEFK
+Maxrun 100
+Wizn AMVWXYZ
+Pos 8
+Prac 500
+Trai 256
+Trained 0 0
+Save -2
+Alig 686
+Ralig -1
+DeathCounter 5
+Hit   41
+Dam   41
+ACs 2 2 5 39
+Attr 26 17 17 18 22
+AMod 8 2 2 8 0
+Pass 12345~
+Pseudo ~
+Titl Легендарный{x~
+Pnts 40
+TSex 1
+LLev 4
+HMVP 5000 12075 2772
+Cnd  0 -10 7 5
+Marry Testt~
+Father ~
+Mother ~
+Kins ~
+Mroom 0
+Lovers ~
+Vislist ~
+IgnoreList ~
+Quenia 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Alias home goto 23004~
+Alias ff c 'fire breath'~
+Sk 100 'reserved'
+Sk 100 'acid blast'
+Sk 100 'aid'
+Sk 100 'bless'
+Sk 100 'armor'
+Sk 100 'blindness'
+Sk 100 'burning hands'
+Sk 100 'call lightning'
+Sk 100 'calm'
+Sk 100 'cancellation'
+Sk 100 'cause critical'
+Sk 100 'cause light'
+Sk 100 'cause serious'
+Sk 100 'chain lightning'
+Sk 100 'change sex'
+Sk 100 'charm person'
+Sk 100 'chill touch'
+Sk 100 'colour spray'
+Sk 100 'continual light'
+Sk 100 'control weather'
+Sk 100 'create food'
+Sk 100 'create rose'
+Sk 100 'create spring'
+Sk 100 'create water'
+Sk 100 'cure blindness'
+Sk 100 'cure critical'
+Sk 100 'cure disease'
+Sk 100 'cure light'
+Sk 100 'cure poison'
+Sk 100 'cure serious'
+Sk 100 'curse'
+Sk 100 'demonfire'
+Sk 100 'detect evil'
+Sk 100 'detect good'
+Sk 100 'detect hidden'
+Sk 100 'detect magic'
+Sk 100 'detect poison'
+Sk 100 'detect invis'
+Sk 100 'dispel evil'
+Sk 100 'dispel good'
+Sk 100 'dispel magic'
+Sk 100 'earthquake'
+Sk 100 'enchant armor'
+Sk 100 'enchant weapon'
+Sk 100 'energy drain'
+Sk 100 'faerie fire'
+Sk 100 'faerie fog'
+Sk 100 'farsight'
+Sk 100 'fireball'
+Sk 100 'fireproof'
+Sk 100 'flamestrike'
+Sk 100 'fly'
+Sk 100 'floating disc'
+Sk 100 'frenzy'
+Sk 100 'gate'
+Sk 100 'giant strength'
+Sk 100 'harm'
+Sk 100 'haste'
+Sk 100 'heal'
+Sk 100 'heat metal'
+Sk 100 'holy word'
+Sk 100 'identify'
+Sk 100 'infravision'
+Sk 100 'invisibility'
+Sk 100 'know person'
+Sk 100 'lightning bolt'
+Sk 100 'locate object'
+Sk 100 'magic missile'
+Sk 100 'mass healing'
+Sk 100 'mass invis'
+Sk 100 'nexus'
+Sk 100 'observation'
+Sk 100 'pass door'
+Sk 100 'plague'
+Sk 100 'poison'
+Sk 100 'portal'
+Sk 100 'protection evil'
+Sk 100 'protection good'
+Sk 100 'ray of truth'
+Sk 100 'recharge'
+Sk 100 'refresh'
+Sk 100 'remove curse'
+Sk 100 'sanctuary'
+Sk 100 'shield'
+Sk 100 'shocking grasp'
+Sk 100 'sleep'
+Sk 100 'slow'
+Sk 100 'ensnare'
+Sk 100 'stone skin'
+Sk 100 'summon'
+Sk 100 'teleport'
+Sk 100 'ventriloquate'
+Sk 100 'weaken'
+Sk 100 'word of recall'
+Sk 100 'acid breath'
+Sk 100 'fire breath'
+Sk 100 'frost breath'
+Sk 100 'gas breath'
+Sk 100 'lightning breath'
+Sk 100 'sunray'
+Sk 100 'spirit lash'
+Sk 100 'black cloud'
+Sk 100 'distortion'
+Sk 100 'oasis'
+Sk 1 'mind blast'
+Sk 100 'mind channel'
+Sk 100 'resurrect'
+Sk 100 'general purpose'
+Sk 100 'high explosive'
+Sk 100 'regeneration'
+Sk 100 'fireshield'
+Sk 100 'nostalgia'
+Sk 100 'vbite'
+Sk 100 'fear'
+Sk 100 'wbreath'
+Sk 100 'magic web'
+Sk 100 'evil presence'
+Sk 100 'life stream'
+Sk 1 'mummy'
+Sk 1 'gaseous form'
+Sk 100 'axe'
+Sk 100 'dagger'
+Sk 100 'flail'
+Sk 100 'mace'
+Sk 100 'polearm'
+Sk 100 'shield block'
+Sk 100 'spear'
+Sk 100 'staff'
+Sk 100 'sword'
+Sk 100 'whip'
+Sk 100 'missile weapons'
+Sk 100 'backstab'
+Sk 100 'bash'
+Sk 100 'strangle'
+Sk 100 'berserk'
+Sk 100 'cleave'
+Sk 100 'dirt kicking'
+Sk 100 'disarm'
+Sk 100 'dodge'
+Sk 100 'enhanced damage'
+Sk 100 'envenom'
+Sk 100 'hand to hand'
+Sk 100 'kick'
+Sk 100 'parry'
+Sk 100 'pray'
+Sk 100 'dual weapon'
+Sk 100 'second dual attack'
+Sk 100 'rescue'
+Sk 100 'trip'
+Sk 100 'second attack'
+Sk 100 'third attack'
+Sk 100 'frame'
+Sk 100 'fast healing'
+Sk 100 'haggle'
+Sk 100 'hide'
+Sk 100 'lore'
+Sk 100 'meditation'
+Sk 100 'morph'
+Sk 100 'peek'
+Sk 100 'pick lock'
+Sk 100 'sneak'
+Sk 100 'steal'
+Sk 100 'shock hit'
+Sk 100 'deaf'
+Sk 100 'scrolls'
+Sk 100 'staves'
+Sk 100 'wands'
+Sk 100 'quenia'
+Sk 100 'charge'
+Sk 100 'lash'
+Sk 100 'recall'
+Sk 100 'blink'
+Gr 'weaponsmaster'
+Gr 'beguiling'
+Gr 'benedictions'
+Gr 'combat'
+Gr 'creation'
+Gr 'detection'
+Gr 'draconian'
+Gr 'enchantment'
+Gr 'enhancement'
+Gr 'healing'
+Gr 'illusion'
+Gr 'maladictions'
+Gr 'protective'
+Gr 'transportation'
+Gr 'weather'
+Gr 'regeneration'
+Gr 'highmagic'
+Gr 'clan'
+End
+
+#O
+Vnum 11635
+Nest 0
+Name scales ivory~
+ShD вес|ы|ов|ам|ы|ами|ах|ов|ов из слоновой кости~
+Desc Позолоченные весы лежит здесь.~
+Wear 9
+Cost 4334
+End
+
+#O
+Vnum 3365
+Nest 0
+Name banner знамя боевое war merc~
+ShD боев|ое|ого|ому|ое|ым|ом|ых|ых знам|я|ени|ени|я|енем|ени|ени|ен~
+Desc Боевое знамя лежит на полу.~
+Wear 0
+Cost 640
+Val  0 0 308 0 0
+End
+
+#O
+Vnum 3364
+Nest 0
+Name ring Печатка signet~
+ShD Печатк|а|и|е|у|ой|е|и|ок~
+Desc Печатка с символом стража лежит тут.~
+Wear 2
+Cost 1280
+End
+
+#O
+Vnum 3353
+Nest 0
+Name vest жилет Обыкновенный standard merc~
+ShD обыкновенн|ый|ого|ому|ый|ым|ом|ых|ых жилет||а|у||ом|е|а|ов~
+Desc Обыкновенный жилет лежит тут.~
+Wear 5
+Cost 900
+End
+
+#O
+Vnum 1001
+Nest 0
+Wear 6
+Cost 0
+End
+
+#O
+Vnum 11891
+Nest 0
+Name power laerkai presense~
+ShD сил|а|ы|е|у|ой|е|ы| Лаэркаи~
+Desc Присутствие огромной силы заполняет тебя.~
+Mater nothingness~
+Wear 15
+Cost 55000
+End
+
+#O
+Vnum 11891
+Nest 0
+Wear 14
+Cost 55000
+End
+
+#O
+Vnum 3350
+Nest 0
+Name sword меч Обыкновенный standard merc~
+ShD обыкновенн|ый|ого|ому|ый|ым|ом|ых|ых  меч||а|у||ом|е|а|ей~
+Desc Обыкновенный меч лежит тут.~
+Wear 16
+Cost 1280
+End
+
+#END

@@ -1,0 +1,48 @@
+#AREADATA
+Name Silencer~
+Builders Rei~
+VNUMs 700 701
+Credits <  0 110> Silencer~
+Security 1
+Flags 2
+Clan silencer~
+Version 3
+End
+
+
+
+#MOBILES
+#0
+
+#OBJECTS
+#0
+
+#ROOMS
+#700
+{GError Room{X~
+~
+0 271396 0
+D5
+~
+~
+0 0 3001
+M 500 H 500
+S
+#0
+
+
+
+#SPECIALS
+S
+
+#RESETS
+S
+
+
+
+#SHOPS
+0
+
+
+
+#$

@@ -1,0 +1,165 @@
+Version 2
+#Deity
+Name Astellar~
+Russian Астеллар||а|у|а|ом|е|а|ов~
+MinAlign 350
+MaxAlign 1000
+Descr Бог {yМудрости{x, {wСправедливости{x, {mМагии{x и {cВечности{x~
+Worship 0
+App 2 1 0 0 6 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Tymothy~
+Russian Тимоти||||||||~
+MinAlign -350
+MaxAlign 350
+Descr БогинЯ {YЛунного {WЛика{x, Утренней и Вечерней {MЗари{x~
+Worship 0
+App 0 0 0 0 14 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Irenicus~
+Russian Ирэникус||а|у|а|ос|е|а|ов~
+MinAlign -1000
+MaxAlign 0
+Descr Бог Черного Мрака, Зависти и Злобы~
+Worship 1
+App 0 0 0 0 8 3 7 2 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Ketsalkoathl~
+Russian Кецалькоатл|ь|Я|ю|Я|ем|е|Я|ей~
+MinAlign -1000
+MaxAlign -360
+Descr Бог Злобы и Ненависти ко всему {GЖивому{x~
+Worship 3
+App 4 1 0 0 8 1 7 2 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Mishra~
+Russian Мишр|а|ы|е|у|ой|е|ы|~
+MinAlign 200
+MaxAlign 1000
+Descr БогинЯ Таланта, {WСветлых {xИскусств и Умений~
+Worship 1
+App 0 0 0 0 12 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Thanatos~
+Russian Танатос||а|у|а|ом|е|а|ов~
+MinAlign -1000
+MaxAlign -975
+Descr Бог {DСмерти{x, Покрова {DНочи{x и {cВечного{x ПокоЯ~
+Worship 12
+App 3 1 0 0 8 1 7 3 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Ignissa~
+Russian Игнисс|а|ы|е|у|ой|е|ы|~
+MinAlign -1000
+MaxAlign 1000
+Descr БогинЯ Багрового {RПламени{x, {RОгнЯ{x и {rКрови{x~
+Worship 0
+App 0 0 0 0 4 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Aikanaro~
+Russian Айканаро||||||||~
+MinAlign -500
+MaxAlign 500
+Descr Бог Тактики, Стратегии и Искусства БоЯ~
+Worship 0
+App 5 1 3 1 14 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Eteiros~
+Russian Этэйрос||а|у|а|ом|е|а|ов~
+MinAlign -1000
+MaxAlign 1000
+Descr Бог {RВойны{x, {wУничтожениЯ{x, {DГорЯ{x и Безнадежности~
+Worship 3
+App 0 0 3 1 13 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Saboteur~
+Russian Саботер||а|у|а|ом|е|а|ов~
+MinAlign -1000
+MaxAlign 1000
+Descr Бог ПознаниЯ, Мудрости и РавновесиЯ~
+Worship 15
+App 3 1 0 0 12 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Aularyas~
+Russian Аулариас||||||||~
+MinAlign 950
+MaxAlign 1000
+Descr БогинЯ Природы, {GЛесов{x, {CРучьев{x и Лета~
+Worship 2
+App 3 1 0 0 5 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Votan~
+Russian Вотан||а|у|а|ом|е|а|ов~
+MinAlign -1000
+MaxAlign 1000
+Descr Бог Гор, Силы, Ремесла и Подземных Копей~
+Worship 3
+App 5 1 0 0 15 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Xetharex~
+Russian Ксетарекс||а|у|а|ом|е|а|ов~
+MinAlign -1000
+MaxAlign 500
+Descr Бог {rГнева{x, {DМести{x и Безудержной {RЯрости{x~
+Worship 1
+App 0 0 5 1 13 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Ligreff~
+Russian Лигрефф||а|у|а|ом|е|а|ов~
+MinAlign -750
+MaxAlign 750
+Descr Бог Воровства, Озорства, ВесельЯ и Обмана~
+Worship 0
+App 4 1 5 1 11 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Emortarys~
+Russian Эмортарис||||||||~
+MinAlign -1000
+MaxAlign -666
+Descr БогинЯ {cВласти {DТьмы{x, ТщеславиЯ и {DТемной{x Магии~
+Worship 1
+App 2 1 3 1 8 2 7 1 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Urza~
+Russian Урз|а|ы|е|у|ой|е|ы|ов~
+MinAlign -1000
+MaxAlign 1000
+Descr Бог {CВоздуха{x, {YМолний{x, {cВетров{x и {yУраганов{x~
+Worship 1
+App 0 0 0 0 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Thawneous~
+Russian Таунэус||а|у|а|ом|е|а|ов~
+MinAlign -1000
+MaxAlign 1000
+Descr Бог Глубин, {BВодных{x Просторов, {cХолода{x и {WЛьда{x~
+Worship 0
+App 0 0 0 0 1 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#Deity
+Name Zagroxer~
+Russian Зэгроксер||а|у|а|ом|е|а|ов~
+MinAlign -1000
+MaxAlign 1000
+Descr Бог Темных Пещер, Сил Земли и Тьмы~
+Worship 2
+App 5 1 0 0 3 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+END
+#END
+; Detected and saved 18 deities.

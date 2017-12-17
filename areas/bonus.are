@@ -1,0 +1,348 @@
+#AREADATA
+Name Bonus Items~
+Builders LastSoul~
+VNUMs 400 499
+Credits <  0 110> Bonus Items~
+Security 1
+Flags 58
+Clan none~
+Version 3
+End
+
+
+
+#MOBILES
+#0
+
+#OBJECTS
+#400
+scroll restore~
+ancient scroll of {CRestore{x~
+Ancient scroll of {CRestore{x~
+papirus~
+bonus AGIT A
+1 0 1 0 0
+1 1 100 90 B
+T 0 0
+#401
+scroll enforce ancient~
+ancient scroll of {CEnforce{x~
+Ancient scroll of {CEnforce{x~
+papirus~
+bonus AGT A
+1 1 1 0 0
+1 1 100 90 B
+T 0 0
+#402
+scroll curse ancient~
+ancient scroll of {RCurse{x~
+Ancient scroll of {RCurse{x~
+papirus~
+bonus AEGT A
+1 2 1 0 0
+10 5 200 90 B
+T 0 0
+#403
+ancient scroll power~
+ancient scroll of {CPower{x~
+Ancient scroll of {CPower{x~
+magic material~
+bonus AGT A
+1 3 3 0 0
+1 1 150 710 D
+T 0 0
+#404
+bless scroll ancienc~
+ancient scroll of {YBless{x~
+Ancient scroll of {YBless{x~
+papirus~
+bonus ABIT A
+1 4 1 0 0
+1 2 200 90 B
+T 0 0
+#405
+scroll ancient fireproof~
+ancient scroll of {MFireproof{x~
+Ancient scroll of {MFireproof{x~
+magic material~
+bonus ABGTY A
+1 5 1 0 0
+2 3 20 710 D
+T 0 0
+#406
+ancient scroll peace~
+ancient scroll of {WPeace{x~
+Ancient scroll of {WPeace{x~
+papirus~
+bonus 0 A
+1 6 2 0 0
+1 1 100 90 B
+T 0 0
+#410
+dagger random tester~
+кинжал~
+{x~
+mithril~
+weapon MPZ AN
+dagger 4 4 pierce CD
+1 0 0 850 D
+T 0 0
+#411
+scroll clanskill~
+{Cscroll {xof {MG{xreat {YK{xnowledge~
+{CScroll {xof {MG{xreat {YK{xnowledge лежит здесь.~
+magic material~
+bonus T A
+2 136 50 0 0
+6 10 1000 710 D
+T 0 0
+#420
+qp coupon~
+{xKупон на получение ништяка.~
+ќбычный купон на получение ништяка.  акой дадут  - такой и получишь.~
+paper~
+trash 0 AP
+0 0 0 0 0
+0 0 0 50 B
+T 0 0
+#430
+trap~
+trap~
+Trap~
+none~
+none 0 AG
+0 0 0 0 0
+90 1 0 1 B
+T 0 0
+#450
+piece ice~
+{G—транное зелье{x~
+ћгновение {Cзамороженной{x вечности лежит тут.~
+ice~
+pill 0 AQ
+101 'sanctuary' 'frenzy' 'shield' 'bless'
+0 1 10000 60 B
+T 0 0
+#451
+coupon~
+{Y упон на получение {W75 квестпоинтов{W~
+QP~
+paper~
+trash 0 AO
+0 0 0 0 0
+0 0 0 50 B
+T 0 0
+#452
+shield ice~
+{wўит {bс символом {c”{Cдун{cа{X~
+{RЅольшой {D отел{X~
+ice~
+container BY 0
+100 0 0 100 100
+0 10 10 60 B
+T 0 0
+#453
+oath udun~
+{CЋ{cедяна{Cя {Wтабличка{X~
+{CЋ{cедяна{Cя {Wтабличка {xс выгравироваными на ней {wписьменами.{X~
+ice~
+gem BOTY A
+0 0 0 0 0
+0 0 0 60 B
+E
+oath~
+{R лятва {Wјдепта {C”{cдун{Cа {WЋ{cедяного{X
+{Wя, {B<имя, раса>{W, всей душой верую в твое могущество, {C”{cду{Cн {WЋ{cедяной, {Bѕовелитель {w’олода и
+{C—еверных {w¬етров, {Wи готов стать твоим служителем, дабы нести “вою славу по всему миру.
+¬ подтверждение прими от меня ƒар и  лятву:
+{X
+{Y" лянусь замерзшим сердцем{X
+{Y» ледяной рукой,{X
+{Y—лужит “ому, что правит ветром{X
+{Y» снежною «имой,{X
+{Y„тить Ѕога, что ћороз приносит{X
+{Y»юльским теплым днем,{X
+{Y“ому, что снегом все заносит,{X
+{Y огда тепло кругом.{X                             
+{Y√отов невзгоды все стерпеть,{X
+{YЌепониманьем пренебречь,{X
+{Y» если надо - умереть{X
+{YЌо веру в душе сберечь.{X
+{Y лянусь нести по всей земле,{X
+{Y√де процветает атеизм{X
+{Y“о —лово ¬ечной ћерзлоты,{X
+{Y„то молвил мне ”дун!"{X
+~
+T 0 0
+#454
+note~
+ледяные слова~
+Ќа большом куске {Cльда{X выбиты какие-то слова.~
+ice~
+gem AGO 0
+0 0 0 0 0
+0 0 0 60 B
+E
+note~
+{rјдепт {C”{cдун{Cа{X
+                          
+{W        “ы сделал свой выбор. “ы чувствуешь в себе достаточно веры, чтобы нести славу{X
+{C”{cдун{Cа {WЋ{cедяного{W по всему миру. Ќу что ж. ѕрочитай этот надпись до конца и прийми{X
+{Wокончательное решение...{X
+{W        “ы должен понимать, что твоя жизнь не будет такой беспечной, как раньше. ќтныне,{X
+{Wцелью твоего существования является служение {Bѕовелителю {w’олода и {C—еверных {W¬етров.{X
+{Wѕомни, что ты получаешь покровительство {C”{cдун{Cа {WЋ{cедяного{W, но на твои плечи ложится{X
+{Wтяжелый груз. √отов ли ты посвятить свое тело и душу {C¬ечноу {w’олоду{W? √отов ли{X 
+{Wникогда в жизни не ощутить тепла земного? ¬еришь ли ты в могущество {C”{cдун{Cа {WЋ{cедяного,{x
+{Wнастолько чтоб стать его јдептом? √отов ли ты ставить его {C»мя{W и {B—лова{W выше имен и слов{X
+{Wсмертных(в том числе и соклановцев младших и старших по званию)? ѕодумай еще раз.{X
+{W¬ерен ли твой выбор?{X
+{X
+{rјдепт {C”{cдун{Cа {WЋ{cедяного {RЌ≈ ƒќЋ∆≈Ќ{Y использовать любые умения, связанные с огнем и теплом,{X
+{Wтеперь {w’олод{W твоя стихия.{X
+{rјдепт {C”{cдун{Cа {WЋ{cедяного {Yдолжен вести себя со смертными, и особенно с {MЅогами{Y, как подобает {X
+{Yадепту великого Ѕога(т.е. {Rролеплэйно{Y).{X
+{rјдепт {C”{cдун{Cа {WЋ{cедяного{Y должен нести {C¬ечный {w’олод{Y в сердца жителей мира и прославлять{X 
+{C”{cдун{Cа{Y неустанно и рьяно.{X
+{X
+{R—лужи и да будешь вознагражден. {Gѕочивай в лености и изгнан будешь и{X {Dнаказан.{X                 
+~
+T 0 0
+#455
+dagger~
+кинжал~
+(no description)~
+wood~
+weapon M AN
+dagger 0 0 stab 0
+10 0 0 450 D
+T 0 0
+#470
+cake birthday~
+праздничный “орт~
+{MЅаальшой {Wѕ{cр{Mа{Gз{bд{rн{dи{Yч{Cн{Bы{m{й{X {W“орт{X для {Rјстеллара{x~
+food~
+container O 0
+2147483647 0 0 10000000 0
+0 0 0 25 B
+T 0 0
+#471
+cake piece~
+(no short description)~
+(no description)~
+none~
+food 0 A
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#480
+throne~
+ледяной трон~
+{W—{mв{wе{Wр{Mк{Wа{wю{mщ{Wи{wй{X {C“рон {wизо {WЋьда{X стоит тут.~
+ice~
+furniture B A
+1 2147483647 E 200 200
+107 2147483647 0 60 B
+T 0 0
+#495
+blade~
+{RBlade{x~
+(no description)~
+etherealness~
+weapon BH AN
+dagger 25 2 pierce ABD
+30 1 0 65 B
+A
+18 10
+A
+19 10
+T 0 0
+#496
+belt~
+{CBelt{x~
+(no description)~
+none~
+armor A AL
+20 20 15 15 0
+21 1 526 1 B
+A
+19 5
+A
+18 5
+A
+13 20
+A
+12 40
+A
+17 -100
+A
+5 3
+A
+4 3
+A
+3 3
+T 0 0
+#497
+collar~
+{yошейник {W—вященного {D¬орона{x~
+{yошейник {W—вященного {D¬орона{x леhт тут.~
+none~
+armor 0 AC
+5 5 5 5 0
+1 0 0 1 B
+T 0 0
+#498
+satanic illusion~
+{DSatan{ric {WIl{wlu{Ds{wi{Won{x~
+(no description)~
+none~
+armor B AQ
+10 10 8 0 0
+1 0 0 1 B
+A
+13 10
+A
+12 10
+A
+18 1
+A
+19 1
+T 0 0
+#499
+coupon rename~
+{RR{GE{WN{YA{BM{CE {ycoupon{x~
+ упон на переименовку потерян тут манчкином.~
+energy~
+trash 0 A
+0 0 0 0 0
+1 0 100 555 D
+T 0 0
+#0
+
+#ROOMS
+#401
+“емнота~
+{D«десь стоит жуткий холод...“емно и страшно.{X
+{D“олько {cслова высеченные во льду{D светятся неземным светом{X
+~
+0 2646020 0
+S
+#0
+
+
+
+#SPECIALS
+S
+
+#RESETS
+O 0 454 0 401 Ћед€ные слова loaded to “емнота
+S
+
+
+
+#SHOPS
+0
+
+
+
+#$

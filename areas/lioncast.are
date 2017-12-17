@@ -1,0 +1,389 @@
+#AREADATA
+Name Львиный замок~
+Builders None~
+VNUMs 500 510
+Credits < 67 110> Львиный замок~
+Security 8
+Flags 0
+Clan none~
+Version 3
+End
+
+
+
+#MOBILES
+#500
+healer adept~
+Лекарь~
+Лекарь Львиного Замка(healer) готов вылечить тебя.
+~
+Старый клерик с желтыми глазами
+~
+human~
+ABQVae DFH 1000 0
+80 160 1d1+20999 1d1+999 2d4+80 claw
+-75 -75 -75 -25
+FHIK ABC D 0
+stand stand male 1000
+AHMV medium
+#501
+guard lionman guardian~
+Страж~
+Страж(guardian) охраняет вход.
+~
+Его когти чуют твою плоть.
+~
+human~
+ABW DFHJVZ 0 0
+82 164 2d500+18000 1d200+1600 5d35+82 claw
+-70 -70 -70 -30
+ACEFNU AB 0 S
+stand stand male 5000
+AHMV medium
+#502
+guildmaster master~
+Глава гильдии~
+Глава гильдии(guildmaster) стоит тут.
+~
+Это старый но сильный Лев.
+~
+human~
+ABKRV DEFZ 1000 0
+86 172 1d1+22999 1d1+999 3d8+86 chop
+-60 -60 -60 -20
+FG ABD C 0
+stand stand male 0
+AHMV medium
+#503
+Old Keeper~
+Старый Хранитель~
+Старый Хранитель(Old Keeper) стоит тут, он готов защитить сокровища.
+~
+Этому старику должно быть с тысячу лет, но он по прежнему в прекрасной форме. Ходят слухи что во время нашествия тьмы
+он был воеводой сил Света.
+~
+human~
+ABGRT DFHV 1000 0
+67 300 100d50+23000 100d50+20000 50d10+150 crush
+-100 -100 -100 -100
+EFHK B ACDFG 0
+stand stand male 0
+AHMV huge
+#504
+white dragon Белый дракон~
+{WБелый дракон{x~
+{WБелый дракон{x спит здесь.
+~
+~
+dragon~
+ABCGQRST BDFHJTVa 1000 0
+110 5000 1d1+29600 10d10+20000 15d15+2500 flbite
+-700 -700 -700 -700
+ACDEFHIKN ABHJKNPS BDEHNP FI
+sleep sleep none 0
+AHZ huge
+#0
+
+#OBJECTS
+#500
+key small wooden~
+деревянный ключик(wooden key)~
+Маленький деревянный ключик(wooden key) лежит на земле.~
+wood~
+key OY AO
+0 0 0 0 0
+40 4 0 450 D
+T 0 0
+#501
+altar~
+алтарь(altar)~
+В центре комнаты стоит огромный деревянный алтарь(altar).~
+gold~
+container OY P
+10 ABCD 500 15 100
+60 1 20 380 D
+T 0 0
+#502
+code secret~
+секретный код(сode of secret)~
+Секретный код(code of secret) лежит тут.~
+gold~
+treasure O AO
+0 0 0 0 0
+60 1 1000 380 D
+T 0 0
+#503
+lion sword~
+серебрянный меч(silver sword)~
+Серебрянный меч(silver sword) с глазом на рукояти лежит тут.~
+silver~
+weapon KLT AN
+sword 3 4 slash BH
+1 100 1 480 D
+T 0 0
+#504
+te-waza~
+{Wтe-Ваза {WПреобладания{x(te-waza)~
+{WTe-Ваза {WПреобладания{x(te-waza)лежит тут.~
+magic material~
+armor ABGIKLY AO
+10 10 10 10 0
+54 10 10000 710 D
+A
+13 150
+A
+19 20
+A
+18 20
+A
+17 -60
+A
+1 3
+A
+2 3
+A
+3 3
+A
+4 3
+A
+5 3
+A
+20 -20
+A
+12 150
+E
+te-waza~
+Дрючок непонятной формы, но аура...
+~
+T 0 0
+#505
+crucifix saint holy свЯтое распЯтие~
+{R¤ {cCвЯт|ое|ого|ому|ое|ым|ом|ых|ых {WРаспЯти|е|Я|ю|е|ем|и|Я|й {R¤{x~
+СиЯющий символ {Wдобра {xосвещает округу.~
+mithril~
+wand ABGIKLY AO
+110 30 20 'holy word' 0
+97 10 10000 850 D
+A
+20 -60
+A
+5 7
+A
+4 5
+A
+3 5
+A
+2 6
+A
+1 8
+A
+13 300
+A
+12 300
+A
+18 40
+A
+19 40
+A
+17 -400
+T 0 0
+#0
+
+#ROOMS
+#500
+Вход в гильдию~
+Ты стоишь у входа в гильдию Львов. Стража посматривает на тебя с 
+недоверием. Лучше тебе идти отсюда.
+~
+0 8388616 0
+D0
+The doorway looks leading to a great guild room.
+~
+~
+0 -1 501
+D2
+This way leads outside to the lionman's guild.
+~
+~
+1 -1 6002
+S
+#501
+Inside the Guild~
+This room connects to three rooms at north, west and east. Beside all doors
+there are Lion EYE's placed like guarding the doorways.
+~
+0 8388616 0
+D0
+That room is the altar.
+~
+~
+0 -1 504
+D1
+A sign on the door reads: 'Meeting Room'.
+~
+~
+0 -1 502
+D2
+Enterance guild room can be seen.
+~
+~
+0 -1 500
+D3
+An oak door protects the storge room.
+~
+~
+0 -1 503
+S
+#502
+Meeting room~
+This room is for the for the lionMan's to talk about their future and 
+enemies.
+~
+0 8388616 0
+D3
+Doorway to the greater guild room.
+~
+~
+0 -1 501
+S
+#503
+Storge Room~
+You are inside the storge room of LionMan. This room is for the EYEd swords
+ to rest.
+~
+0 8388616 0
+D1
+Doorway to the greater guild room.
+~
+~
+0 -1 501
+S
+#504
+The Altar~
+You stand beside the huge wooden altar.  One other side a heavy rag of 
+cleric is found.  On the north wall the Eye of a Lion is carved.
+~
+0 8388616 0
+D2
+Doorway to the greater hall.
+~
+~
+0 -1 501
+D4
+~
+~
+1 0 505
+S
+#505
+Hidden Lair~
+Ты попал в скрытую пещеру, здесь очень темно и ты с трудом можешь
+разглядеть стены.  Присмотревшись ты замечаешь разветвление в горе.  
+~
+0 0 0
+D1
+~
+~
+0 0 507
+D3
+~
+~
+0 0 506
+D5
+~
+~
+1 0 504
+S
+#506
+Тупик~
+Ты неправильно выбрал направление и забрел в тупик.  Чтож ты зря потерял
+своё время 
+~
+0 0 0
+D1
+~
+~
+0 0 505
+S
+#507
+Разрушенный Колодец~
+Ты оказалсЯ слишком неуклюж и сорвалсЯ с устyпа.  Но тебе повезло ты не
+разбилсЯ о камни, а упал в полуразрушенный колодец.
+~
+0 8192 0
+D1
+~
+~
+0 0 508
+S
+#508
+Сокровищница~
+~
+0 2629633 0
+D3
+~
+~
+0 0 507
+D4
+~
+~
+1 0 509
+S
+#509
+Спасительный Лаз~
+Ты с трудом протискиваешся в лаз и вот ты уже чувствуешь ветерок на лице.
+Да ты Вылез 
+~
+0 0 0
+D4
+~
+~
+0 0 510
+D5
+~
+~
+1 0 508
+S
+#510
+{WЛогово Огромного Белого {YДракона{x ~
+~
+0 1056772 9
+D5
+~
+~
+0 0 509
+M 400 H 400
+S
+#0
+
+
+
+#SPECIALS
+M 504 spec_breath_fire Load to: {WБелый дракон{x
+S
+
+#RESETS
+D 0 504 4 1 The up door of The Altar is closed
+D 0 505 5 1 The down door of Hidden Lair is closed
+D 0 508 4 1 The up door of Сокровищница is closed
+D 0 509 5 1 The down door of Спасительный Лаз is closed
+M 1 501 1 500 1 Load Страж
+E 0 500 0 19 деревянный ключик(wooden key) is loaded нет of Страж
+M 1 502 1 502 1 Load Глава гильдии
+M 1 500 1 504 1 Load Лекарь
+O 0 501 0 504 Алтарь(altar) loaded to The Altar
+P 0 502 1 501 1 Секретный код(сode of secret) put inside секретный код(сode of secret)
+P 0 503 1 501 1 Серебрянный меч(silver sword) put inside серебрянный меч(silver sword)
+M 1 503 1 508 1 Load Старый Хранитель
+E 0 504 0 19 {Wтe-Ваза {WПреобладания{x(te-waza) is loaded нет of Старый Хранитель
+M 1 504 1 510 1 Load {WБелый дракон{x
+E 0 505 0 19 {R¤ {cCвЯтое {WРаспЯтие {R¤{x is loaded нет of {WБелый дракон{x
+S
+
+
+
+#SHOPS
+0
+
+
+
+#$

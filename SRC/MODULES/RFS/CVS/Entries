@@ -1,0 +1,27 @@
+/Makefile/1.1.1.1/Mon Jan 22 12:44:00 2001//
+/README/1.1.1.1/Mon Jan 22 12:43:40 2001//
+/cdir.c/1.1.1.1/Mon Jan 22 12:43:40 2001//
+/cint.c/1.1.1.1/Mon Jan 22 12:45:12 2001//
+/cint64.c/1.1.1.1/Mon Jan 22 12:45:14 2001//
+/const.c/1.1.1.1/Mon Jan 22 12:45:28 2001//
+/const.h/1.1.1.1/Mon Jan 22 12:45:14 2001//
+/cstring.c/1.1.1.1/Mon Jan 22 12:44:00 2001//
+/link.c/1.1.1.1/Mon Jan 22 12:45:28 2001//
+/mount.h/1.1.1.1/Mon Jan 22 12:44:00 2001//
+/mount_server.c/1.1.1.1/Mon Jan 22 12:45:12 2001//
+/mount_svc.c/1.1.1.1/Mon Jan 22 12:45:12 2001//
+/mount_xdr.c/1.1.1.1/Mon Jan 22 12:44:00 2001//
+/nfs_prot.h/1.1.1.1/Mon Jan 22 12:43:40 2001//
+/nfs_prot_svc.c/1.1.1.1/Mon Jan 22 12:45:14 2001//
+/nfs_prot_xdr.c/1.1.1.1/Mon Jan 22 12:43:20 2001//
+/nfs_server.c/1.1.1.1/Mon Jan 22 12:44:00 2001//
+/rfs.c/1.2/Sun Jan 28 04:12:50 2001//
+/rfs.h/1.1.1.1/Mon Jan 22 12:45:12 2001//
+/room.h/1.1.1.1/Mon Jan 22 12:43:40 2001//
+/roomlist.c/1.1.1.1/Mon Jan 22 12:45:14 2001//
+/roomlist.h/1.1.1.1/Mon Jan 22 12:45:14 2001//
+/enum.c/1.3/Sun Jul 21 18:31:34 2002//
+/exit.c/1.2/Sun Jul 21 18:31:34 2002//
+/flags.c/1.4/Sun Jul 21 18:31:34 2002//
+/room.c/1.2/Sun Jul 21 18:31:34 2002//
+D

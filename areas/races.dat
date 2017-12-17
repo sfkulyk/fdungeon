@@ -1,0 +1,1503 @@
+; Races data version 2
+#Race
+Name null race~
+WName error!  ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off 0
+Imm 0
+Res 0
+Vuln 0
+Form 0
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand none
+Wealth 0
+END
+#Race
+Name human~
+WName Человек ~
+Pc_race TRUE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off 0
+Imm 0
+Res 0
+Vuln 0
+Form AHMV
+Spec U
+Size 2
+Cbonus M
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand punch
+Wealth 1
+END
+#Race
+Name elf~
+WName Эльф    ~
+Pc_race TRUE~
+Points 5
+Class 120 150 100 120
+Act 0
+Aff J
+Off 0
+Imm 0
+Res B
+Vuln Z
+Form AHMV
+Spec KX
+Size 2
+Cbonus HKM
+Cpenalty F
+Stats 12 15 14 16 12
+Mstats 17 20 19 21 17
+Hstats 23 26 25 27 23
+Sk1 'sneak'
+Sk2 'hide'
+Sk3 'quenia'
+Sk4 'farsight'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -33 0
+Wbonus 0 7 3 0 -4 -2 0 0 0 0 0
+Hand punch
+Wealth 1
+END
+#Race
+Name dwarf~
+WName Гном    ~
+Pc_race TRUE~
+Points 8
+Class 150 100 125 100
+Act 0
+Aff JZ
+Off 0
+Imm 0
+Res LQ
+Vuln R
+Form AHMV
+Spec L
+Size 2
+Cbonus FO
+Cpenalty E
+Stats 15 12 14 11 16
+Mstats 20 17 19 16 21
+Hstats 26 24 25 22 27
+Sk1 'berserk'
+Sk2 'axe'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 -33 0 0 0 0 -33 40 0 0 0 0 0
+Wbonus 0 2 -7 0 2 7 -2 -5 -4 0 0
+Hand pound
+Wealth 1
+END
+#Race
+Name giant~
+WName Гигант  ~
+Pc_race TRUE~
+Points 6
+Class 180 120 150 105
+Act 0
+Aff 0
+Off 0
+Imm 0
+Res HI
+Vuln JP
+Form AHMV
+Spec J
+Size 4
+Cbonus IJ
+Cpenalty H
+Stats 19 10 10 11 17
+Mstats 24 15 15 16 22
+Hstats 30 21 21 22 30
+Sk1 'bash'
+Sk2 'fast healing'
+Sk3 'mace'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 -33 -33 33 0 0 0 0 0 33 0 0 0 0 0 0 0
+Wbonus -3 -1 -7 0 6 3 7 -4 0 0 0
+Hand crush
+Wealth 1
+END
+#Race
+Name vampire~
+WName Вампир  ~
+Pc_race TRUE~
+Points 5
+Class 125 200 100 150
+Act 0
+Aff PTZ
+Off 0
+Imm MO
+Res 0
+Vuln NSY
+Form AHMV
+Spec ABGNS
+Size 2
+Cbonus HL
+Cpenalty K
+Stats 16 15 15 16 12
+Mstats 21 20 20 21 17
+Hstats 27 26 26 27 23
+Sk1 'fast healing'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 -100 0 -100 0 0 0 33 0 0 0 0
+Wbonus 1 0 0 0 0 0 0 0 0 0 0
+Hand punch
+Wealth 1
+END
+#Race
+Name ogre~
+WName Огр     ~
+Pc_race TRUE~
+Points 6
+Class 180 150 130 100
+Act 0
+Aff c
+Off R
+Imm K
+Res LQ
+Vuln HPR
+Form AHMV
+Spec JM
+Size 3
+Cbonus I
+Cpenalty HM
+Stats 17 11 11 12 16
+Mstats 22 16 16 17 21
+Hstats 28 22 22 23 27
+Sk1 'berserk'
+Sk2 'fast healing'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 20 0 0 -100 -33 0 0 0 20 -33 33 0 0 0 0 0
+Wbonus -2 0 -5 2 7 0 3 0 0 0 0
+Hand pound
+Wealth 1
+END
+#Race
+Name hobbit~
+WName Хоббит  ~
+Pc_race TRUE~
+Points 3
+Class 120 120 100 200
+Act 0
+Aff F
+Off 0
+Imm 0
+Res 0
+Vuln 0
+Form AHMV
+Spec Oa
+Size 1
+Cbonus N
+Cpenalty I
+Stats 11 13 13 19 11
+Mstats 16 18 18 24 16
+Hstats 22 24 24 30 22
+Sk1 'sneak'
+Sk2 'hide'
+Sk3 'missile weapons'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 2 7 -3 -7 -7 -4 0 -5 0 0
+Hand scratch
+Wealth 1
+END
+#Race
+Name orc~
+WName Орк     ~
+Pc_race TRUE~
+Points 2
+Class 120 120 120 120
+Act 0
+Aff 0
+Off 0
+Imm 0
+Res Q
+Vuln S
+Form AHMV
+Spec E
+Size 2
+Cbonus L
+Cpenalty K
+Stats 16 12 11 15 14
+Mstats 21 17 16 20 19
+Hstats 27 23 22 26 25
+Sk1 'berserk'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 -33 0 33 0 0 0 0
+Wbonus -2 5 0 2 0 2 -2 0 -2 0 0
+Hand punch
+Wealth 1
+END
+#Race
+Name drow~
+WName Дроу    ~
+Pc_race TRUE~
+Points 5
+Class 100 150 100 100
+Act 0
+Aff EJZ
+Off 0
+Imm BP
+Res L
+Vuln S
+Form AHMV
+Spec K
+Size 2
+Cbonus FHLM
+Cpenalty IK
+Stats 12 15 14 15 12
+Mstats 17 20 19 21 17
+Hstats 23 26 25 27 23
+Sk1 'sword'
+Sk2 'whip'
+Sk3 'dagger'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 -33 0 0 0 -100 0 0 33 0 0 -100 0
+Wbonus 0 0 0 0 -4 -4 -2 7 0 0 0
+Hand punch
+Wealth 1
+END
+#Race
+Name centaur~
+WName Кентавр ~
+Pc_race TRUE~
+Points 5
+Class 150 110 150 100
+Act 0
+Aff 0
+Off 0
+Imm I
+Res 0
+Vuln 0
+Form AHMV
+Spec DV
+Size 3
+Cbonus 0
+Cpenalty 0
+Stats 14 12 13 13 15
+Mstats 19 17 18 18 20
+Hstats 27 23 25 24 26
+Sk1 'kick'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 -100 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 -2 7 -3 0 0 0 0 0 0
+Hand crush
+Wealth 0
+END
+#Race
+Name lizard~
+WName Ящер    ~
+Pc_race TRUE~
+Points 5
+Class 120 130 100 100
+Act 0
+Aff FL
+Off 0
+Imm KL
+Res EI
+Vuln F
+Form AHMV
+Spec FWY
+Size 2
+Cbonus E
+Cpenalty C
+Stats 14 12 13 14 13
+Mstats 19 17 18 19 18
+Hstats 25 23 24 25 25
+Sk1 'envenom'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 -33 13 0 0 -33 0 0 -33 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 2 0 0 3 -4 0 3 0 3 7 0
+Hand bite
+Wealth 0
+END
+#Race
+Name ethereal~
+WName Призрак ~
+Pc_race TRUE~
+Points 7
+Class 100 100 100 200
+Act 0
+Aff TU
+Off 0
+Imm 0
+Res OT
+Vuln MS
+Form AHMV
+Spec ABRTW
+Size 1
+Cbonus DG
+Cpenalty 0
+Stats 11 15 17 15 10
+Mstats 16 20 22 20 15
+Hstats 22 26 28 26 21
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 -33 0 0 0 0 0 0 33 0 -33 0 0 0 33 0 0 0 0
+Wbonus 2 0 0 -3 -5 -5 0 0 0 0 0
+Hand slash
+Wealth 0
+END
+#Race
+Name sprite~
+WName ФеЯ     ~
+Pc_race TRUE~
+Points 8
+Class 100 100 150 200
+Act 0
+Aff BQT
+Off 0
+Imm B
+Res C
+Vuln DKLQ
+Form AHMV
+Spec ACP
+Size 1
+Cbonus DGH
+Cpenalty I
+Stats 11 17 15 15 10
+Mstats 15 22 20 20 14
+Hstats 21 28 26 26 20
+Sk1 'meditation'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 8 8 8 -33 -33 -33 33 33 -33 -33 -33 -33 33 -33 -33 0 0 -33 -33
+Wbonus 0 0 10 -10 -10 -10 -10 -10 -10 1 0
+Hand scratch
+Wealth 0
+END
+#Race
+Name half-gryphon~
+WName Полугриф~
+Pc_race TRUE~
+Points 7
+Class 120 140 110 100
+Act 0
+Aff JT
+Off 0
+Imm 0
+Res 0
+Vuln 0
+Form AHMV
+Spec AQV
+Size 3
+Cbonus DH
+Cpenalty 0
+Stats 14 14 13 14 15
+Mstats 19 19 18 19 20
+Hstats 25 25 24 25 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 2 0 0 0 -2 -2 0 0 0 0 0
+Hand peckb
+Wealth 0
+END
+#Race
+Name druid~
+WName Друид   ~
+Pc_race TRUE~
+Points 8
+Class 100 100 150 180
+Act 0
+Aff CDEFGZ
+Off R
+Imm BLNPQ
+Res 0
+Vuln HMO
+Form AHMV
+Spec K
+Size 2
+Cbonus GJK
+Cpenalty L
+Stats 12 15 19 13 12
+Mstats 17 20 24 18 17
+Hstats 23 26 30 24 23
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 33 0 0 0 -100 33 -100 33 -100 -100 0 0 0 0 -100 0
+Wbonus 2 0 -5 5 3 -7 -5 0 -3 0 0
+Hand pound
+Wealth 1
+END
+#Race
+Name skeleton~
+WName Скелет  ~
+Pc_race TRUE~
+Points 3
+Class 100 200 160 100
+Act 0
+Aff JZ
+Off F
+Imm LQ
+Res FG
+Vuln E
+Form AHMV
+Spec HIW
+Size 2
+Cbonus CLM
+Cpenalty K
+Stats 15 14 13 13 13
+Mstats 20 18 18 18 18
+Hstats 26 25 24 24 25
+Sk1 'parry'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 13 -13 -13 0 0 0 0 -100 0 0 0 0 -100 0 0 0 0 0 0
+Wbonus 0 3 0 0 -4 4 0 -3 0 0 0
+Hand slash
+Wealth 0
+END
+#Race
+Name zombie~
+WName Зомби   ~
+Pc_race TRUE~
+Points 5
+Class 150 200 130 100
+Act 0
+Aff DF
+Off 0
+Imm Q
+Res D
+Vuln N
+Form AHMV
+Spec HIWZ
+Size 2
+Cbonus IL
+Cpenalty K
+Stats 16 10 11 10 17
+Mstats 21 15 16 18 22
+Hstats 27 21 22 25 28
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 -33 -33 -33 0 0 0 0 0 0 33 0 0 -100 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand smash
+Wealth 0
+END
+#Race
+Name bat~
+WName Лет.мышь~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff JTZ
+Off FH
+Imm 0
+Res 0
+Vuln S
+Form AGV
+Spec 0
+Size 1
+Cbonus 0
+Cpenalty 0
+Stats 12 10 10 16 13
+Mstats 17 15 15 21 18
+Hstats 23 21 21 27 24
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand beating
+Wealth 0
+END
+#Race
+Name bear~
+WName Медведь ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off DEO
+Imm 0
+Res EI
+Vuln 0
+Form AGV
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 15 12 12 15 17
+Mstats 20 17 17 20 22
+Hstats 28 25 25 28 30
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand pound
+Wealth 0
+END
+#Race
+Name cat~
+WName Кот     ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff Z
+Off FH
+Imm 0
+Res 0
+Vuln 0
+Form AGV
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand scratch
+Wealth 0
+END
+#Race
+Name centipede~
+WName Многонож~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff Z
+Off 0
+Imm 0
+Res FI
+Vuln E
+Form ABGO
+Spec V
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand slap
+Wealth 0
+END
+#Race
+Name dog~
+WName Собака  ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off H
+Imm 0
+Res 0
+Vuln 0
+Form AGV
+Spec V
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand bite
+Wealth 0
+END
+#Race
+Name doll~
+WName Кукла   ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off 0
+Imm ILMNPQR
+Res ES
+Vuln GHJKO
+Form EJMc
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand slap
+Wealth 0
+END
+#Race
+Name dragon~
+WName Дракон  ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff JT
+Off 0
+Imm 0
+Res BEH
+Vuln FI
+Form AHZ
+Spec V
+Size 4
+Cbonus CDEGHI
+Cpenalty 0
+Stats 17 17 17 17 17
+Mstats 22 22 22 22 22
+Hstats 30 30 30 30 30
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand claw
+Wealth 1
+END
+#Race
+Name fido~
+WName Тварь   ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off FR
+Imm 0
+Res 0
+Vuln C
+Form ABGV
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand bite
+Wealth 0
+END
+#Race
+Name fox~
+WName Лис     ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff Z
+Off FH
+Imm 0
+Res 0
+Vuln 0
+Form AGV
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand bite
+Wealth 0
+END
+#Race
+Name goblin~
+WName Гоблин  ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff J
+Off 0
+Imm 0
+Res Q
+Vuln C
+Form AHMV
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand punch
+Wealth 1
+END
+#Race
+Name hobgoblin~
+WName Хобгобл.~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff J
+Off 0
+Imm 0
+Res LQ
+Vuln 0
+Form AHMV
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand punch
+Wealth 1
+END
+#Race
+Name kobold~
+WName Кобольд ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff J
+Off 0
+Imm 0
+Res L
+Vuln C
+Form ABHMV
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand punch
+Wealth 1
+END
+#Race
+Name modron~
+WName Модрон  ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff J
+Off QR
+Imm BMNPQ
+Res HIK
+Vuln 0
+Form H
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand punch
+Wealth 1
+END
+#Race
+Name pig~
+WName Кабан   ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off 0
+Imm 0
+Res 0
+Vuln 0
+Form AGV
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand crush
+Wealth 0
+END
+#Race
+Name rabbit~
+WName Кролик  ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off FH
+Imm 0
+Res 0
+Vuln 0
+Form AGV
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 15 13
+Mstats 18 18 18 20 18
+Hstats 26 26 26 28 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand bite
+Wealth 0
+END
+#Race
+Name school monster~
+WName Монстр  ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act U
+Aff 0
+Off 0
+Imm AB
+Res 0
+Vuln C
+Form AMV
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand sting
+Wealth 1
+END
+#Race
+Name snake~
+WName Змей    ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff L
+Off 0
+Imm 0
+Res L
+Vuln I
+Form AGXYc
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand acbite
+Wealth 0
+END
+#Race
+Name song bird~
+WName Птица   ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff T
+Off FH
+Imm 0
+Res 0
+Vuln 0
+Form AGW
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand peck
+Wealth 0
+END
+#Race
+Name troll~
+WName Тролль  ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff FJc
+Off D
+Imm 0
+Res BE
+Vuln HK
+Form ABHMV
+Spec 0
+Size 2
+Cbonus I
+Cpenalty GH
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand pound
+Wealth 1
+END
+#Race
+Name water fowl~
+WName Водяной ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff T
+Off 0
+Imm 0
+Res R
+Vuln 0
+Form AGW
+Spec W
+Size 2
+Cbonus E
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand grep
+Wealth 0
+END
+#Race
+Name wolf~
+WName Волк    ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff Z
+Off FH
+Imm 0
+Res 0
+Vuln 0
+Form AGV
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand bite
+Wealth 0
+END
+#Race
+Name wyvern~
+WName Виверна ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff DFT
+Off CFH
+Imm L
+Res 0
+Vuln S
+Form ABGZ
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand peckb
+Wealth 0
+END
+#Race
+Name fish~
+WName Рыба    ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff T
+Off 0
+Imm 0
+Res R
+Vuln 0
+Form AGW
+Spec W
+Size 2
+Cbonus E
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand beating
+Wealth 0
+END
+#Race
+Name beast~
+WName Зверь   ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off DE
+Imm 0
+Res EI
+Vuln 0
+Form AGV
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 15 12 12 15 17
+Mstats 20 17 17 20 22
+Hstats 28 25 25 28 30
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand smash
+Wealth 0
+END
+#Race
+Name unique~
+WName Уникальн~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off 0
+Imm 0
+Res 0
+Vuln 0
+Form 0
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand slash
+Wealth 1
+END
+#Race
+Name golem~
+WName Голем   ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off 0
+Imm 0
+Res 0
+Vuln 0
+Form 0
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand slash
+Wealth 0
+END
+#Race
+Name elemental~
+WName Элемент.~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off 0
+Imm 0
+Res 0
+Vuln 0
+Form 0
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand ray
+Wealth 0
+END
+#Race
+Name demonical~
+WName Демонич.~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off 0
+Imm 0
+Res 0
+Vuln 0
+Form 0
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand flame
+Wealth 0
+END
+#Race
+Name rat~
+WName Крыса   ~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off 0
+Imm 0
+Res 0
+Vuln 0
+Form 0
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand bite
+Wealth 0
+END
+#Race
+Name minotaur~
+WName Минотавр~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off 0
+Imm 0
+Res 0
+Vuln 0
+Form 0
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand crush
+Wealth 1
+END
+#Race
+Name gargoyle~
+WName Горгулия~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off 0
+Imm 0
+Res 0
+Vuln 0
+Form 0
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 13 13
+Mstats 18 18 18 18 18
+Hstats 26 26 26 26 26
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand pierce
+Wealth 0
+END
+#Race
+Name plant~
+WName Растение~
+Pc_race FALSE~
+Points 0
+Class 100 100 100 100
+Act 0
+Aff 0
+Off 0
+Imm 0
+Res 0
+Vuln 0
+Form 0
+Spec 0
+Size 2
+Cbonus 0
+Cpenalty 0
+Stats 13 13 13 5 25
+Mstats 18 18 18 7 25
+Hstats 26 26 26 10 30
+Sk1 '(null)'
+Sk2 '(null)'
+Sk3 '(null)'
+Sk4 '(null)'
+Sk5 '(null)'
+Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Hand suction
+Wealth 0
+END
+#END
+; Saved 50 races

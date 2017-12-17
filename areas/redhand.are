@@ -1,0 +1,115 @@
+#AREADATA
+Name Red Hand~
+Builders Rei~
+VNUMs 80051 80100
+Credits <  0 110> Red Hand~
+Security 1
+Flags 2
+Clan redhand~
+Version 2
+End
+
+
+
+#MOBILES
+#80051
+death healer~
+—луга —мерти~
+≈два заметный {Dпризрак{X пытается сделать тебе вскрытие.
+~
+Ёто призрак давноумершего лекаря. “еперь он служит смерти.
+~
+human~
+ABQVa DF 0 0
+110 220 100d100+10000 0d0+0 0d0+110 none
+0 0 0 0
+0 ABCD 0 0
+stand stand none 0
+AHMV medium
+#80052
+teacher vampire~
+ѕрепод-¬ампир~
+¬ампир квадратных размеров в узеньких очках добродушно улыбается тебе.
+~
+3x4 метра и очень улыбчивый.
+~
+human~
+ABJKVb DF 0 0
+110 220 100d100+10000 0d0+0 0d0+110 none
+0 0 0 0
+0 ABCD 0 0
+stand stand none 0
+AHMV medium
+#80053
+zombie~
+”грюмый «омби~
+”грюмый зомби пытается продать тебе {yржавый{x меч.
+~
+ќдноглазый, беззубый и очень угрюмый мертвец.
+~
+human~
+ABV DF 0 0
+107 214 100d100+10000 0d0+0 5d10+21 none
+15 0 0 0
+CEFKNO ABCD 0 0
+stand stand none 0
+AHMV medium
+#0
+
+#OBJECTS
+#80051
+coffin grob~
+{Bгроб{X~
+ƒлинный ряд {Bгробов{X стоит тут.~
+none~
+furniture BOY 0
+50 100000 IL 200 200
+0 0 0 P
+T 0 0
+#80052
+fountain blood~
+{Rфонтан с кровью{X~
+{w‘онтан с {R кровью{w невинно убиенных стоит тут.{X~
+mithril~
+fountain BO 0
+2147483647 2147483647 'blood' 0 0 
+0 0 0 P
+T 0 0
+#0
+
+#ROOMS
+#80054
+{r„истилище{X~
+~
+0 271396 0
+D5
+~
+~
+0 0 80051
+M 500 H 500
+S
+#0
+
+
+
+#SPECIALS
+M 80053 spec_breath_any Load to: ”грюмый «омби
+S
+
+#RESETS
+O 0 80051 0 80051
+O 0 80052 0 80051
+M 1 80051 1 80051 1 
+M 1 80052 1 80052 1 
+M 1 80053 1 80053 1 
+S
+
+
+
+#SHOPS
+80053 9 5 33 8 32 0 0 0 24
+0
+
+
+
+#$

@@ -1,0 +1,77 @@
+#CLAN
+Name rom~
+Showname [{CНовые  {MЛонеры{x] ~
+Recalmsg1 {y$c1{x разводит пальцы и технично сьезжает в указанном направлении.~
+Recalmsg2 $c1 сваливает.~
+Clanqp 0
+Clangold 0
+Clanrecal 26251
+Clandeath 26250
+Flag A
+Enchant 8
+Short {Mмалинов|ый|ого|ому|ый|ым|ом|ых|ых пиджак||а|у||ом|е|а|ов {x~
+Long Крутой {Mмалиновый пиджак{x из дорогой ткани.~
+
+#CLAN
+Name loner~
+Showname [одинокий воин] {x~
+Recalmsg1 {y$c1{x молит Богов перенести его!~
+Recalmsg2 {y$c1{x исчезает.~
+Clanqp 0
+Clangold 0
+Clanrecal 3001
+Clandeath 3058
+Flag A
+
+#CLAN
+Name evil~
+Showname [{DR{res{Rid{ren{DT {DE{rvi{DL{x] ~
+Recalmsg1 {y$c1 окутываетсЯ {Dтемно-{rкрасным {cтуманом{w.{x~
+Recalmsg2 {DТьма {cпоглощает {y$c1.{x~
+Clanqp 6366
+Clangold 451180
+Clanrecal 80251
+Clandeath 80254
+Flag CDEFHIJMOQ
+War judges guards judges~
+Enchant 4
+Short {W-{C={B*{RПе{rнт{Dа{Wг{Dр{rам{Rма {DХАОСА{B*{C={W-{x~
+Long {DТемный {Rмедальoн{w, излучаеющий {rЗЛО, {wлежит здесь.{x~
+Affc 'reserved' 0 0 0 6 18 0
+
+#CLAN
+Name judges~
+Showname [   {RJudges    {x] {x~
+Recalmsg1 {y$c1{x молит Богов перенести его!~
+Recalmsg2 {y$c1{x исчезает.~
+Clanqp 157
+Clangold 68517
+Clanrecal 80202
+Clandeath 80201
+Flag DEFGHIJ
+War guards evil~
+Enchant 8
+Short {RМантиЯ{W Судьи{x~
+Long {RМантиЯ{W Судьи{x брошена тут.~
+Affc 'reserved' 0 0 0 3 18 0
+Affc 'reserved' 0 0 0 -2 20 0
+
+#CLAN
+Name guards~
+Showname [{WСтражи  {CНебес{x] ~
+Recalmsg1 {CНебеса {Wп{wр{Dи{wз{Wы{Dв{wа{Wю{wт {y$c1{x.~
+Recalmsg2 {y$c1 {Wв{wз{Dм{wы{Dв{Wа{wе{Dт {Cввысь{x.~
+Clanqp 3651
+Clangold 513187
+Clanrecal 80302
+Clandeath 80300
+Flag CDEGHIJO
+War evil judges~
+Enchant 8
+Short {W-{C-{B=#{W K р {Cы л{W ь Я {B#={C-{W-{x~
+Long {W-{C-{B=#{W K р {Cы л{W ь Я {B#={C-{W-{x СТРАЖА лежат перед тобой.~
+Affc 'reserved' 0 0 0 3 18 0
+Affc 'reserved' 0 0 0 -2 20 0
+
+#END
+; Currently 5 clans in Forgotten Dungeon

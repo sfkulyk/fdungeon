@@ -1,0 +1,347 @@
+#AREADATA
+Name {W—омнительные ништяки {CApc{W'{Cа{x~
+Builders None~
+VNUMs 80800 80900
+Credits <  0 110> {W—омнительные ништяки {CApc{W'{Cа{x~
+Security 9
+Flags 2
+Clan none~
+Version 3
+End
+
+
+
+#MOBILES
+#0
+
+#OBJECTS
+#80800
+Apc Bed ќгромная кровать јрса~
+{WЎестиспальная кровать {CApc{W'{Ca{x~
+{Wќгромная ровная кровать стоит прямо посреди комнаты{x~
+soft leather~
+furniture ACEGHIMSTXYZ P
+6 0 BEHK 200 200
+18 6666 9999 100 B
+T 0 0
+#80801
+Apc light~
+(no short description)~
+(no description)~
+none~
+light 0 AO
+0 0 998 0 0
+0 0 0 1 B
+T 0 0
+#80802
+Apc head~
+(no short description)~
+(no description)~
+none~
+jewelry 0 AE
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#80803
+apc neck~
+(no short description)~
+(no description)~
+none~
+trash 0 AC
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#80804
+apc shoulders~
+(no short description)~
+(no description)~
+none~
+trash 0 AI
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#80805
+Apc body~
+(no short description)~
+(no description)~
+none~
+trash 0 AD
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#80806
+tight бюстгалтер leather bodice Apc torso~
+{R расный бюстгалтер с {Yсерпом {Dи {Yмолотом{x~
+(no description)~
+none~
+trash 0 A
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#80807
+Apc hands gloves~
+(no short description)~
+(no description)~
+none~
+trash 0 AH
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#80808
+Apc lhand~
+(no short description)~
+(no description)~
+none~
+trash 0 0
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#80809
+Apc whip bloody kerchief~
+{rќкровавленный {Dплаток{x~
+{W¬роде и шмотка неплохая, вот только настораживает надпись{x{/{Y"—делано в ———–"{x~
+mithril~
+weapon ABCDEGHINSXYZ AN
+whip 0 0 pierce ABCDEGHIJKL
+107 0 0 850 D
+T 0 0
+#80810
+apc wrist2~
+(no short description)~
+(no description)~
+none~
+trash 0 AM
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#80811
+Apc ring of power~
+{CЌ{cаперсток{x~
+{C’мм.. может, это и одевается на палец, но тебе не советую...{x~
+black dragonscale~
+jewelry ABCEGHINSXYZ AB
+0 0 0 0 0
+106 0 0 550 D
+A
+18 65535
+A
+19 65535
+A
+25 2
+A
+25 128
+A
+25 8192
+A
+25 16384
+A
+25 32768
+A
+25 65536
+A
+25 524288
+A
+25 1048576
+A
+25 2097152
+A
+25 33554432
+A
+25 134217728
+A
+20 -131072
+A
+17 -65536
+A
+20 -65536
+T 0 0
+#80812
+apc ring2~
+(no short description)~
+(no description)~
+none~
+trash 0 AB
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#80850
+pacifica~
+{Wѕацифик|а|и|е|у|ой|е|и|{x~
+{C«начек прирожденного {Wпацифиста{C - такой {Wм{wя{Wг{wк{Wи{wй {Cи {Wп{wу{Wш{wи{Wс{wт{Wы{wй {R:){x~
+fur~
+jewelry ABCDEIMSTXYZ AC
+0 0 0 0 0
+0 0 0 40 B
+A
+25 4194304
+T 0 0
+#80851
+toska sorrow rodina тоска по родине~
+{G“оска {Yпо {R–{rо{Rд{rи{Rн{rе{x~
+{c≈е обладателя тоже неумолимо {M–¬јЋќ{c на {R–одину...{x~
+energy~
+jewelry ABITXY AQ
+0 0 0 0 0
+0 0 0 555 D
+A
+25 131072
+T 0 0
+#80852
+pacifizdilka пацифиздилка~
+{Wѕациф{Rиздилка{x~
+(no description)~
+adamantite~
+weapon AHMTXZ AN
+exotic 0 0 punch F
+0 0 0 810 D
+A
+25 4194304
+A
+18 -500
+A
+19 -500
+T 0 0
+#80853
+Kubatai personal ass-medal medal~
+{Yћедаль в, {Dхм{Y, {cпояснице...{x~
+{R√игантская {Yмедаль {cторчит из не менее {yгигантского {Dотверстия..{x~
+gold~
+jewelry ABHITY AL
+0 0 0 0 0
+101 0 0 380 D
+A
+20 -35
+A
+12 100
+A
+19 30
+A
+18 20
+A
+13 300
+T 0 0
+#80855
+good dagger~
+{W’{Cо{Wр{Cо{Wш{Cи{W… {Gƒ{yа{Gгг{yе{Gр{x~
+{Cќ„≈Ќ№ {W’ќ–ќЎ»… {Dƒј√√≈– {Gлежит тут{x~
+adamantite~
+weapon AGHIJKLMU AN
+dagger 5 5 pierce CDGH
+25 200 5000 810 D
+A
+25 2097152
+T 0 0
+#80856
+1000 qp штука ~
+{MЎтука {W"{C ю{Yѕэ{W"{x~
+{G’м.. —транная штука.. ƒля чего она? —боку вырезана надпись: {W"{C у{Yѕе{W"{x~
+diamond~
+furniture ABEHMXZ AO
+1 1000 ILP 1 200
+1 1 0 350 D
+A
+25 268435456
+A
+25 536870912
+T 0 0
+#80857
+cursed dagger~
+{R«{rлой {Rƒ{rаггер{x~
+{Rѕрокляятый кинжал ожидает душу, чтобы поработить ее..{x~
+mithril~
+weapon ACEGHJKLMTZ AN
+dagger 3 4 pierce ABCDEFGHL
+10 20 10000 850 G
+A
+25 256
+A
+25 8388608
+T 0 0
+#80858
+vacuum пылесос Ascold~
+{cѕылесос {wAscold'a{x~
+{c—тарый пылесос советского образца.{w Ascold {cс ним никогда не расстается.{x~
+metal~
+weapon BCDSWX A
+exotic 12 20 suction ABDGHIJK
+101 300 300 500 W
+A
+9 -20
+A
+18 25
+A
+19 25
+A
+1 -2
+T 0 0
+#80859
+shit total~
+{RT{ro{Rt{ra{Rl S{rhi{RT{x~
+—трашная вешь разлагается тут. Ћучше не брать...~
+flesh~
+portal CDEGHMNTUWX AELOPQ
+1 J J 11696 0
+0 100 100 50 B
+A
+5 -20
+A
+2 -20
+A
+4 -20
+A
+3 -20
+A
+1 -20
+A
+12 -20
+A
+13 -20
+A
+19 -20
+A
+18 -20
+E
+label~
+Ќа ярлычке написано: {W"Concept by {RGera{W"{x
+~
+T 0 0
+#0
+
+#ROOMS
+#80800
+{W—омнительная —пальня {Cјрс{W'{Cа{x~
+{W’м.. ѕо всем первичным признакам - это спальня.
+Ќо по всем вторичным становится ясно, что в Ё“ќ… комнате никто никогда не спит 
+~
+0 11298555 0
+E
+bed~
+{Dќгромное поле на шесть персон простирается перед тобой{x
+ ровать обита {Dмягкой кожей{x, приятно ласкающей тело.. ({yчеловечьей?{x)
+Ќо несовершеннолетних сюда не пускат..{x
+~
+D2
+~
+~
+0 0 3054
+M 300 H 300
+S
+#0
+
+
+
+#SPECIALS
+S
+
+#RESETS
+O 0 80800 0 80800 {wшестиспальна€ кровать {capc{w'{ca{x loaded to {W—омнительная —пальня {Cјрс{W'{Cа{x
+S
+
+
+
+#SHOPS
+0
+
+
+
+#$

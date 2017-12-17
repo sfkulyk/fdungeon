@@ -1,0 +1,351 @@
+#AREADATA
+Name Imp's Lair~
+Builders Imperror~
+VNUMs 26700 26799
+Credits <  0 110> Imp's Lair~
+Security 9
+Flags 10
+Clan none~
+Version 3
+End
+
+
+
+#MOBILES
+#0
+
+#OBJECTS
+#26700
+compiler gcc~
+{C омпилятор {Rgcc{x~
+(no description)~
+none~
+weapon HZ AN
+sword 30 30 smash ABDH
+106 0 0 1 B
+T 0 0
+#26701
+password long~
+{Cƒ{cл{Cи{cн{Cн{cы{Cй {RP{r{Ra{rs{Rs{rw{Ro{Rr{rd{x~
+(no description)~
+none~
+armor 0 AJ
+10000 10000 10000 10000 0
+106 0 0 1 B
+A
+19 1000
+A
+18 1000
+T 0 0
+#26702
+debugger~
+{Yƒ{yеб{Yу{yгг{Yе{yр{x~
+(no description)~
+none~
+light 0 A
+0 0 998 0 0
+106 0 0 1 B
+T 0 0
+#26703
+overflow~
+{Mѕ{mере{Mпо{mлнен{yие {bпам{Bят{bи{x~
+(no description)~
+none~
+armor 0 AE
+10000 10000 10000 10000 0
+106 0 0 1 B
+T 0 0
+#26704
+invisible bugs~
+{DЌев{dи{Dдим{rы{Dе гл{y{Dюки{x~
+(no description)~
+none~
+armor F AQ
+10000 10000 10000 10000 0
+106 0 0 1 B
+A
+17 -10000
+A
+13 10000
+T 0 0
+#26705
+tail mouse~
+{G({wЌакручено{G) {w’востик от мыши {WMitsumi{x~
+(no description)~
+none~
+jewelry 0 AB
+0 0 0 0 0
+106 0 0 1 B
+A
+18 50000
+A
+19 50000
+T 0 0
+#26706
+log file~
+{wƒл{rи{bи{gи{yи{mи{Dи{wнный {GЋог{x~
+(no description)~
+none~
+armor 0 AC
+30000 30000 30000 30000 0
+106 0 0 1 B
+T 0 0
+#26707
+red bug~
+{R расненький {cглючок{x~
+(no description)~
+none~
+jewelry 0 AM
+0 0 0 0 0
+106 0 0 1 B
+A
+13 10000
+T 0 0
+#26708
+green bug~
+{G«елененький {cглючок{x~
+(no description)~
+none~
+jewelry 0 AM
+0 0 0 0 0
+106 0 0 1 B
+T 0 0
+#26709
+main1~
+{Wvoid {Ymain {C( {Wint {Yargc{C, {Wchar *{Yargv {C){x~
+(no description)~
+none~
+armor Y AI
+10000 10000 10000 10000 0
+106 0 0 1 B
+A
+14 50000
+A
+1 1000
+A
+3 1000
+A
+4 1000
+A
+2 1000
+A
+5 1000
+A
+13 1000000
+A
+13 100000000
+T 0 0
+#26710
+main2~
+{W{{{x~
+(no description)~
+none~
+jewelry 0 AK
+0 0 0 0 0
+106 0 0 1 B
+T 0 0
+#26711
+main4~
+{W}{x~
+(no description)~
+none~
+jewelry 0 AH
+0 0 0 0 0
+106 0 0 1 B
+T 0 0
+#26712
+main3~
+{x     {Yprintf{W({C"Hello World!\n"{W);{x~
+(no description)~
+none~
+jewelry 0 AD
+0 0 0 0 0
+106 0 0 1 B
+T 0 0
+#26713
+segmentation fault~
+{RSegmentation fault:{w core dumped{x~
+(no description)~
+none~
+container HMZ AL
+1000 0 0 1000 1
+106 0 0 1 B
+T 0 0
+#26714
+sigarette prima~
+{w—игарета {Wѕрима{w-{RЋюкс{x~
+(no description)~
+none~
+jewelry 0 AB
+0 0 0 0 0
+106 0 0 1 B
+A
+12 25000
+T 0 0
+#26715
+sneakers jordache~
+{w {Dр{wо{Dс{wс{Dо{wв{Dк{wи {WJordache{x~
+(no description)~
+none~
+armor 0 AG
+100000 100000 100000 100000 0
+106 0 0 1 B
+A
+2 100
+A
+20 -100000
+T 0 0
+#26716
+session fd died~
+{w¬се хорошее рано или поздно заканчивается.{x~
+(no description)~
+none~
+treasure 0 AF
+0 0 0 0 0
+106 0 0 1 B
+A
+14 100000
+T 0 0
+#26730
+star light~
+{W—вет {W«{Cв{Wе{Cз{Wд{Cы{x~
+—вет упавшей «везды мерцаеи на полу.~
+paper~
+light ABI A
+0 0 300 0 0
+30 50 -50402 50 B
+A
+19 3
+A
+18 3
+A
+20 -2
+A
+12 30
+A
+13 30
+T 0 0
+#26731
+ressore belarusia~
+{D–ессора {wот трактора {W"Ѕеларусь"{x~
+ усок отломанной рессоры привлекает твое внимание.~
+none~
+weapon BHZ AN
+sword 5 10 pierce DE
+25 2 1000 1 B
+A
+18 6
+A
+19 5
+A
+13 50
+A
+14 -100
+A
+12 -200
+T 0 0
+#26732
+wand sancturay~
+посох {W—вятости{x~
+“яжелый магический посох окружен таинственной аурой.~
+none~
+wand FG AO
+36 20 20 'sanctuary' 0
+10 1 9500 1 B
+T 0 0
+#26733
+scroll power~
+свиток могущества~
+(no description)~
+none~
+scroll BG A
+48 'sanctuary' 'frenzy' 'haste' 'stone skin'
+20 0 4000 1 B
+T 0 0
+#26735
+wand water~
+{D∆езл водной стихии{x~
+“яжелый каменный жезл, покрытый капельками воды, мерцает магическим светом.~
+stone~
+wand BG AO
+8 7 7 'acid blast' 0
+1 1 100000 550 D
+T 0 0
+#26736
+scroll letter brief~
+свиток пергамента~
+$»&щ%и^%¬*о&л^ш*е8б&н7и&к8а87в68с*е&л^е8н7и6и96х*о*б5б6и5т7о(в*~
+none~
+trash Z A
+0 0 0 0 0
+0 0 1000000 1 B
+T 0 0
+#26737
+silver ring обруч~
+{W—{wе{Wр{wе{Wб{wр{Wя{wн{Wы{wй {Cобруч{x~
+ќбруч из чистого серебра излучает {Cмагическое {xсияние~
+none~
+portal BG A
+1 0 0 1400 0
+0 0 1000 1 B
+T 0 0
+#26738
+black whip черный хлыст~
+{D„ерный хлыст{x~
+(no description)~
+none~
+weapon ABCMT AN
+whip 4 6 whip AGH
+10 3 12500 1 B
+T 0 0
+#26799
+death~
+{W—{Dвистяща{Wя {R—мерть{x~
+...............~
+metal~
+weapon 0 AN
+sword 1 1 pierce CD
+91 5 10000 500 D
+A
+18 25
+A
+19 25
+T 0 0
+#0
+
+#ROOMS
+#26700
+{DImp's {RLair{x~
+You see {Ddark {xroom fullfilled with {RBLOOD{x
+Terrible screams you hear coming from nowhere...
+-
+ 
+ 
+-
+ 
+~
+0 4 0
+S
+#26701
+~
+~
+0 4 0
+S
+#0
+
+
+
+#SPECIALS
+S
+
+#RESETS
+S
+
+
+
+#SHOPS
+0
+
+
+
+#$

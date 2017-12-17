@@ -1,0 +1,696 @@
+#AREADATA
+Name Limbo~
+Builders None~
+VNUMs 1 99
+Credits <  1 999> Limbo~
+Security 8
+Flags 24
+Clan none~
+Version 3
+End
+
+
+
+#MOBILES
+#1
+zombie зомби~
+{D«омби{x~
+«омби, оживший мертвец здесь.
+~
+~
+zombie~
+A DF 0 0
+1 2 1d1+1 1d1+1 1d1+1 pound
+0 0 0 0
+L LQ D N
+stand stand either 0
+AHMV medium
+#2
+dendroid дендроид~
+{Gдендроид||а|у|а|ом|е|а|ов{x~
+Ёто {Gсущество{x, которое ты вначале принял за {yпень{x, похоже {Gживое...{x
+~
+~
+druid~
+A CDEFGZ 0 0
+1 2 1d1+1 1d1+1 1d1+1 none
+0 0 0 0
+LR BLNPQ DL HMO
+stand stand none 0
+AHMV medium
+#98
+bounty hunter bountyhunter~
+{Yќхотник за {Wголовами{x~
+{YЌаемный убица высматривает свою жертву{x
+~
+~
+modron~
+A J 0 0
+120 800 1d1+30000 0d0+0 1000d1+200 stab
+500 500 500 500
+BCDEFHIKMNOQR BMNPQ HIKL S
+stand stand none 1
+AHMV medium
+#99
+law guard lawguard~
+{Y—траж {W«ј ќЌј{x~
+{Y—траж {W«ј ќЌј{x ищет кому-бы вломить
+~
+~
+human~
+ABGMNQTU 0 0 0
+999 1500 100d100+15000 100d100+15000 20d50+300 none
+-100 -100 -100 -100
+CDEFHIJKNTU ABLPQ 0 0
+stand stand none 100000
+AHMV medium
+#0
+
+#OBJECTS
+#1
+silver gcash~
+серебр€нную монету~
+ќдна маленька€ серебр€нна€ монетка.~
+silver~
+money 0 A
+1 0 0 0 0
+0 10 0 480 W
+T 0 0
+#2
+gold gcash~
+золотую монету~
+ќдна золота€ монета.~
+gold~
+money 0 A
+0 1 0 0 0
+0 10 0 380 W
+T 0 0
+#3
+gold gcash~
+%u золотых монет~
+ учка золотых монет.~
+gold~
+money 0 A
+0 0 0 0 0
+0 10 0 380 W
+T 0 0
+#4
+silver gcash~
+%u серебр€ных монет~
+ учка серебр€ных монет(silver coins).~
+silver~
+money 0 A
+0 0 0 0 0
+0 10 0 480 W
+T 0 0
+#5
+coins silver gold gcash~
+%u серебр€ных и %u золотых монет~
+ учка монет.~
+gold~
+money 0 A
+0 0 0 0 0
+0 10 0 380 W
+T 0 0
+#10
+corpse~
+труп||а|у||ом|е|а|ов %s~
+“руп %s лежит тут.~
+meat~
+npc_corpse 0 A
+0 0 0 1 0
+0 1000 0 100 B
+T 0 0
+#11
+corpse~
+труп||а|у||ом|е|а|ов %s~
+“руп %s лежит тут.~
+meat~
+pc_corpse O A
+0 0 0 1 0
+0 1000 0 100 B
+T 0 0
+#12
+head~
+голов|а|ы|е|у|ой|е|ы| %s~
+ќтрубленна€ голова %s лежит тут.~
+meat~
+trash 0 A
+0 0 0 0 0
+0 50 0 100 B
+T 0 0
+#13
+heart~
+серд|це|ца|цу|це|цем|це|ца|ец %s~
+¬ырванное сердце %s лежит тут.~
+meat~
+food 0 A
+16 16 0 0 0
+0 20 0 100 B
+T 0 0
+#14
+arm~
+рук|а|ы|е|у|ой|е|и| of %s~
+ќтрубленна€ рука %s лежит тут.~
+meat~
+food 0 A
+20 20 0 0 0
+0 50 0 100 B
+T 0 0
+#15
+leg~
+ног|а|ы|е|у|ой|е|и| %s~
+ќтрубленна€ нога %s лежит тут.~
+meat~
+food 0 A
+20 20 0 0 0
+0 50 0 100 B
+T 0 0
+#16
+guts entrails~
+куч|а|ы|е|у|ой|е|и| внутренностей %s~
+¬онюча€ куча внутренностей %s лежит тут.~
+meat~
+food 0 A
+5 5 0 A 0
+0 20 0 100 B
+T 0 0
+#17
+brains brain~
+куч|а|ы|е|у|ой|е|и| мозгов(brains) %s~
+ћозги %s лежат тут.~
+meat~
+food 0 A
+10 10 0 0 0
+0 20 0 100 B
+T 0 0
+#18
+frost wand палочка льда~
+{cпалочк|а|и|е|у|ой|е|и|ек|ами|ах льда{x~
+{cледяянаяя сосулька лежит на дне..{x~
+ice~
+wand GTUVWX AO
+0 0 0 'chill touch' 0
+0 5 0 60 B
+T 0 0
+#20
+mushroom~
+¬олшебн|ый|ого|ому|ый|ым|ом|ых|ых √риб||а|у||ом|е|а|ов~
+¬кусный магический гриб растет тут.~
+food~
+food 0 A
+8 8 0 0 0
+0 10 0 25 B
+T 0 0
+#21
+ball light~
+€рк|ий|ого|ому|ий|им|ом|их|их шарик||а|у||ом|е|а|ов света~
+яркий шарик света освещает все вокруг.~
+energy~
+light A A
+0 0 999 0 0
+0 0 0 555 A
+T 0 0
+#22
+spring~
+магический родник~
+ћагический родник течет из-под земли.~
+water~
+fountain G 0
+100000 100000 'water' 0 0 
+0 0 0 350 W
+T 0 0
+#23
+disc disk floating black~
+летающ|ий|ого|ому|ий|им|ом|их|их диск||а|у||ом|е|а|ов~
+„ерный диск завис в воздухе.~
+energy~
+container GMPUYZ AQ
+0 E 0 0 0
+0 0 0 555 A
+T 0 0
+#24
+ear~
+”хо~
+”хо лежит здесь.~
+meat~
+food S AC
+1 1 0 0 0
+0 0 1 100 B
+T 0 0
+#25
+gate portal~
+√уд€щ|ий|ого|ому|ий|им|ом|их|их портал||а|у||ом|е|а|ов~
+„ерный гуд€щий портал зи€ет открытым проходом в неизвестность.~
+shadow~
+portal GOT 0
+0 0 0 0 0
+0 0 0 170 D
+T 0 0
+#26
+magic ball~
+{Cћагическ|ий|ого|ому|ий|им|ом|их|их Ўар||а|у||ом|е|а|ов{x~
+{Cћагический Ўар{x лежит тут.~
+magic material~
+light ASUY AP
+0 0 999 0 0
+1 0 0 710 A
+T 0 0
+#27
+ear~
+ухо~
+”хо %s лежит тут.~
+body~
+food S A
+1 1 0 0 0
+1 0 0 50 B
+T 0 0
+#28
+waybottle~
+{Yбездонн|а€|ой|ой|ую|ой|ой|ых|ых фл€г|а|и|е|у|ой|е|и|~
+{YЅездонна€ фл€га лежит тут~
+none~
+drink SY A
+-1 -1 'orange juice' 0 0
+0 0 0 1 B
+T 0 0
+#29
+divan DIVAN~
+{Yдиван||а|у||ом|е|а|ов~
+{Y”добный диван{x стоит тут.~
+wood~
+furniture SY A
+1 0 DEFGHIJKL 150 150
+0 0 0 450 W
+T 0 0
+#30
+dummy object~
+a dummy object~
+Dummy object si used for loading non-existent objects~
+none~
+none 0 0
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#32
+crystal black bc~
+„ерн|ый|ого|ому|ый|ым|ом|ых|ых  ристалл||а|у||ом|е|а|ов~
+„ерный  ристалл сверкает полированными гранями~
+darkness~
+jewelry ABW AO
+0 0 0 0 0
+0 0 1000000 666 A
+T 0 0
+#33
+scuba акваланг скуба~
+{yакваланг(scuba){x~
+Scuba for underwater swimming lies there.~
+metal~
+scuba HZ A
+0 0 0 0 0
+1 5 100 500 W
+T 0 0
+#34
+veksel вексель~
+{C¬ексель на {GRENAME{x~
+{C¬ексель на {GRENAME{C одного предмета.{x~
+wood~
+jewelry ATY AP
+0 0 0 0 0
+1 0 0 450 W
+T 0 0
+#40
+light random~
+% фонар|ь|€|ю|ь|ем|е|€|ей~
+A random light source makes the 'VNUM' for a random light.~
+none~
+light AT A
+0 0 999 0 0
+0 0 0 1 B
+T 0 0
+#41
+ring random~
+%s перст|ень|н€|ню|ень|нем|не|н€|ней~
+A random ring makes the 'VNUM' for a random ring.~
+none~
+armor T AB
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#42
+ring random~
+%s перст|ень|н€|ню|ень|нем|не|н€|ней~
+A random ring makes the 'VNUM' for a random ring.~
+none~
+armor T AB
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#43
+necklace random~
+%s медальон||а|у||ом|е|а|ов~
+A random necklace makes the 'VNUM' for a random necklace.~
+none~
+armor T AC
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#44
+cape random~
+%s плащ||а|у||ом|е|а|ей~
+A random cape makes the 'VNUM' for a random cape.~
+none~
+armor T AK
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#45
+armor random body~
+%s доспех||а|у||ом|е|а|ов~
+Random body armor makes the 'VNUM' for random body armor.~
+none~
+armor T AD
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#46
+helmet random~
+%s шлем||а|у||ом|е|а|ов~
+A random helmet makes the 'VNUM' for a random helmet.~
+none~
+armor T AE
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#47
+leggings random~
+%s наколенн|ый|ого|ому|ый|ым|ом|ых|ых щиток||а|у||ом|е|а|ов~
+Random leggings make the 'VNUM' for random leggings.~
+none~
+armor T AF
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#48
+leggings random~
+%s ножн|ой|ого|ому|ой|ым|ом|ых|ых доспех||а|у||ом|е|а|ов~
+Random boots make the 'VNUM' for random boots.~
+none~
+armor T AG
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#49
+handprint random~
+%s щит|ок|ка|ку|ок|ком|ке|ка|ков~
+Random gauntlets make the 'VNUM' for random gauntlets.~
+none~
+armor T AH
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#50
+sleeves random~
+%s наплечн|ый|ого|ому|ый|ым|ом|ых|ых доспех||а|у||ом|е|а|ов~
+Random sleeves make the 'VNUM' for random sleeves.~
+none~
+armor T AI
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#51
+shield random~
+%s щит||а|у||ом|е|а|ов~
+A random shield makes the 'VNUM' for a random shield.~
+none~
+armor T AJ
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#52
+robe random~
+%s плащ||а|у||ом|е|а|ей~
+A random robe makes the 'VNUM' for a random robe.~
+none~
+armor T AK
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#53
+belt random~
+%s по€с||а|у||ом|е|а|ов~
+A random belt makes the 'VNUM' for a random belt.~
+none~
+armor T AL
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#54
+bracelet random~
+%s браслет||а|у||ом|е|а|ов~
+A random bracelet makes the 'VNUM' for a random bracelet.~
+none~
+armor T AM
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#55
+bracer random~
+%s наруч||а|у||ом|е|а|ей~
+A random bracer makes the 'VNUM' for a random bracer.~
+none~
+armor T AM
+0 0 0 0 0
+0 0 0 1 B
+T 0 0
+#56
+weapon random~
+%s~
+A random weapon makes the 'VNUM' for a random weapon.~
+bronze~
+weapon T AN
+sword 0 0 slash 0
+0 0 0 510 A
+T 0 0
+#57
+hold random~
+%s~
+A random trinket makes the 'VNUM' for a random trinket.~
+bronze~
+treasure T AO
+0 0 0 0 0
+0 0 0 510 A
+T 0 0
+#58
+floater random~
+%s~
+A random trinket makes the 'VNUM' for a random trinket.~
+bronze~
+treasure T AQ
+0 0 0 0 0
+0 0 0 510 A
+T 0 0
+#59
+scroll random ~
+random scroll~
+A random scroll makes the 'VNUM' for a random scroll.~
+тонкий пергамент~
+scroll GT AO
+0 '(null)' '(null)' '(null)' '(null)'
+0 0 0 110 D
+T 0 0
+#60
+wand random~
+random wand~
+A random wand makes the 'VNUM' for a random wand.~
+wood~
+wand GT AO
+0 0 0 '(null)' 0
+0 0 0 450 W
+T 0 0
+#61
+staff random~
+random staff~
+A random staff makes the 'VNUM' for a random staff.~
+oldstyle~
+staff T AO
+0 0 0 '(null)' 0
+0 0 0 1 B
+T 0 0
+#62
+potion random~
+random potion~
+A random potion makes the 'VNUM' for a random potion.~
+glass~
+potion GT AO
+0 '(null)' '(null)' '(null)' '(null)'
+0 0 0 100 B
+T 0 0
+#63
+pill random~
+random pill~
+A random pill makes the 'VNUM' for a random pill.~
+food~
+pill T A
+0 '(null)' '(null)' '(null)' '(null)'
+0 0 0 25 B
+T 0 0
+#64
+bag random~
+random bag~
+A random bag makes the 'VNUM' for a random bag.~
+leather~
+container 0 A
+0 0 0 0 0
+0 0 0 120 D
+T 0 0
+#70
+badge значок~
+{Mармейский значок{x~
+{Mјрмейский значок{x (badge).~
+metal~
+enchanter A A
+5 0 0 0 0
+101 0 0 500 W
+T 0 0
+#71
+vampire heart~
+—ердце {D¬ампира{x~
+—ердце {D¬ампира{x (heart).~
+none~
+enchanter E A
+12 0 0 0 0
+101 0 0 1 B
+T 0 0
+#77
+metka~
+{D„ерн|ая|ую|ой|ую|ой|ой|ые|ых мет|ка|ку|ке|ку|кой|ке|ки|ок {x~
+{D„ерная метка{x лежит на земле.~
+leather~
+trash 0 A
+0 0 0 0 0
+1 1 1 120 D
+T 0 0
+#78
+type potion~
+{Dпузырек напитка квестовых очков{x~
+ѕузырек напитка квестовых очков лежит тут.~
+glass~
+potion AX A
+110 'curse' 'poison' 'weaken' 'acid blast'
+15 1 10000 100 B
+T 0 0
+#79
+branch метла яги~
+{W–астрепанн|ая|ой|ой|ой|ую|ой|ых|ых {yметел|ка|ки|ке|ку|ой|ке|ки|ок {DЅабки {Y®жки{x~
+Ѕабка ®жка забила на свою метелку... тут...~
+wood~
+wand BGHZ AO
+15 50 50 'fly' 0
+5 5 -1000 450 W
+T 0 0
+#80
+веер fan~
+{WЅлестящий {Cголубой {Gвеер{x~
+Ћичный веер Ёлоены- удесницы.~
+none~
+weapon ABMZ AN
+exotic 8 10 pierce A
+35 0 0 1 B
+A
+18 25
+A
+19 25
+A
+17 -100
+T 0 0
+#81
+ring~
+{B ольцо темных ангелов{x~
+ ольцо Ёлоены мерцает в темноте.~
+gold~
+treasure ABMYZ AB
+0 0 0 0 0
+37 0 0 380 W
+A
+18 6
+A
+19 6
+T 0 0
+#82
+magic sphere магическая сфера~
+{Cћагическ|ая|ой|ой|ую|ой|ой сфер|а|ы|е|у|ой|е{x~
+ћагическая сфера окружает Ёлоену.~
+magic material~
+armor ABGI AJ
+33 33 33 33 0
+37 -100 0 710 A
+A
+20 -25
+A
+17 -100
+A
+18 33
+A
+19 33
+T 0 0
+#0
+
+#ROOMS
+#1
+{Y“усовальня{x~
+«десь тусуются иммы и особо приближенные к иммам.
+~
+0 8230 1
+S
+#2
+Limbo~
+You are floating in a formless void, detached from all sensation of physical
+matter, surrounded by swirling glowing light, which fades into the relative
+darkness around you without any trace of edges or shadow.
+   There is a "No Tipping" notice pinned to the darkness.
+~
+0 795688 1
+D4
+~
+~
+0 -1 3001
+S
+#3
+“юрьма~
+ расивые облезлые каменные стены, с нарисоваными розовыми слониками.
+ѕустая бутылка из-под пива (спрашивается - в чем(!) ее сюда пронесли...).
+“юрьма, родная... кажется, она ждала тебя всю жизнь... Ќу вот и дождалась :-≈
+¬ углу лежит поюзанный... Ѕ”Ћ» (?!?!?!) ох уж эти друиды...
+~
+0 2909223 0
+M 500 H 1000
+S
+#4
+~
+~
+0 4 0
+S
+#0
+
+
+
+#SPECIALS
+M 98 spec_breath_any Load to: {Yќхотник за {Wголовами{x
+S
+
+#RESETS
+O 0 70 0 4 {mармейский значок{x loaded to 
+M 1 99 1 4 1 Load {Y—траж {W«ј ќЌј{x
+G 0 70 0 {mармейский значок{x is given to {Y—траж {W«ј ќЌј{x
+O 0 28 0 4 {yбездонн|а€|ой|ой|ую|ой|ой|ых|ых фл€г|а|и|е|у|ой|е|и| loaded to 
+S
+
+
+
+#SHOPS
+0
+
+
+
+#$
