@@ -415,7 +415,7 @@ struct  cmd_type        cmd_table       [] =
  { "",             0,            0,              POS_DEAD,      0,  LOG_NEVER,  HIDE }
 };
 
-void interpret( CHAR_DATA *ch, unsigned const char *argument )
+void interpret( CHAR_DATA *ch, const char *argument )
 {
   unsigned char command[MAX_STRING_LENGTH];
   unsigned char logline[MAX_STRING_LENGTH];
@@ -722,7 +722,7 @@ bool check_social( CHAR_DATA *ch, char *command, const char *argument )
 }
 
 // Return true if an argument is completely numeric.
-bool is_number ( const unsigned char *arg )
+bool is_number ( const char *arg )
 {
  if ( *arg == '\0' ) return FALSE;
  if ( *arg == '+' || *arg == '-' ) arg++;

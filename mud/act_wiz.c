@@ -5696,7 +5696,7 @@ void cr_rep(CHAR_DATA *ch)
 {
 
 #if defined(unix)
- system("mail -s IStartAlert saboteur@saboteur.com.ua <../mud/mail.msg");
+  system("mail -s IStartAlert saboteur@saboteur.com.ua <../mud/mail.msg");
 #endif
 
 #if defined(unix)

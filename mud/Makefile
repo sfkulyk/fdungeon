@@ -2,15 +2,15 @@
 #
 # Don't forget to `make depend'.. 
 # or `make clean' if you have much time.
-
-WITH= -DWITH_UNICORN
-
 PROF	= -O -g
-C_FLAGS = $(PROF) -I../src/include -I/usr/include -I. $(WITH) -DOLD_RAND -Wall
+
+#-DWITH_UNICORN
+C_FLAGS = $(PROF) -I../src/include -I/usr/include -I. -DOLD_RAND -Wall -Werror=unused-but-set-variable -Werror=unused-variable -Wno-unused-result -Wno-address
 
 # fbsd variant
 #DDD DSO_FLG =  -Wl,-E -L../lib -R../lib -lrdso
-DSO_FLG =  -Wl,-E -L../lib -lrdso
+#DSO_FLG =  -Wl,-E -L../lib  -lrdso
+DSO_FLG = -Wl,-E -L../lib
 
 L_FLAGS =  $(DSO_FLG) -lcrypt
 
@@ -27,7 +27,7 @@ H_FILES = db.h fdweb.h files.h interp.h magic.h merc_def.h merc.h \
  
 rom: $(O_FILES)
 	rm -f rom
-	g++ -o rom $(O_FILES) $(L_FLAGS)
+	gcc -o rom $(O_FILES) $(L_FLAGS)
 	chmod 700 rom
         
 install: rom

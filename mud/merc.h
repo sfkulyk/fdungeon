@@ -10,17 +10,20 @@
 #define FreeBSD
 #if defined(TRADITIONAL)
 #define const
-#define args( list )              ( )
-#define DECLARE_DO_FUN( fun )     void fun( )
+//DDD #define args( list )              ( )
+//DDD #define DECLARE_DO_FUN( fun )     void fun( )
 #define DECLARE_SPEC_FUN( fun )   bool fun( )
 #define DECLARE_SPELL_FUN( fun )  void fun( )
 #else
 #define const
-#define args( list )              ( )
-#define DECLARE_DO_FUN( fun )     DO_FUN    fun
+//DDD #define args( list )              ( )
+//DDD #define DECLARE_DO_FUN( fun )     DO_FUN    fun
 #define DECLARE_SPEC_FUN( fun )   SPEC_FUN  fun
 #define DECLARE_SPELL_FUN( fun )  SPELL_FUN fun
 #endif
+
+#define args( list )  list
+#define DECLARE_DO_FUN( fun )   void fun( CHAR_DATA* ch, const char* argument )
 
 // Assume BSD compatible GCC - By Shiva
 #if defined (WIN32)
@@ -64,6 +67,9 @@ typedef int bool;
 typedef unsigned char   bool;
 #endif
 
+// Saboteur: fix for Linux - definition of ctime
+//char* ctime(const time_t* timer);
+
 // Structure types.
 typedef struct  gq_data          GQ_DATA;
 typedef struct  affect_data      AFFECT_DATA;
@@ -104,7 +110,8 @@ typedef struct  gquest_data      GQUEST_DATA;
 typedef struct  auction_data     AUCTION_DATA;
 
 // Our function prototypes. this is every function in Merc
-#define CD  CHAR_DATA
+//DDD #define CD  CHAR_DATA
+typedef struct char_data CD;
 #define MID MOB_INDEX_DATA
 #define OD  OBJ_DATA
 #define OID OBJ_INDEX_DATA
@@ -691,8 +698,8 @@ const char *  str_cut           args( (char *arg,int len));
 bool  check_clanspell(int sn, CLAN_DATA *clan);
 
 // interp.c
-void    interpret       args( ( unsigned CD *ch, const unsigned char *argument ) );
-bool    is_number       args( ( const unsigned char *arg ) );
+void    interpret       args( ( CD *ch, const char *argument ));
+bool    is_number       args( ( const char *arg ) );
 int     number_argument args( ( char *argument, char *arg ) );
 int     mult_argument   args( ( char *argument, char *arg) );
 const char *one_argument args(( const char *argument, char *arg_first ) );

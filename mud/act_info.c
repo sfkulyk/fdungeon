@@ -1529,16 +1529,9 @@ char *  const   month_name      [] =
 void do_time(CHAR_DATA *ch, const char *argument)
 {
   extern char str_boot_time[];
-  char *suf;
   int day;
 
   day     = time_info.day + 1;
-
-       if (day > 4 && day <  20)suf = "th";
-  else if (day % 10 == 1      ) suf = "st";
-  else if (day % 10 == 2      ) suf = "nd";
-  else if (day % 10 == 3      ) suf = "rd";
-  else                            suf = "th";
 
   ptc(ch,"\n\r{GСейчас {C%d {Gчасов {C%s{G, День {C%s{G, день {C%d {GМесяца {C%s.{x\n\r\n\r",
       (time_info.hour % 12 == 0) ? 12 : time_info.hour %12,
@@ -1997,7 +1990,6 @@ void do_equipment(CHAR_DATA *ch, const char *argument)
 {
   OBJ_DATA *obj;
   int iWear;
-  bool found=FALSE;
 /*
   stc("{RDISABLED BY GODS!\n\r{x",ch);
   return;
@@ -2020,7 +2012,6 @@ void do_equipment(CHAR_DATA *ch, const char *argument)
                       : where_name_male[ch->class[UMIN(ch->remort,3)]].picture[iWear], ch);
    stc( wear_l[iWear].name, ch);
    ptc(ch, "%s\n\r", format_obj_to_char(obj, ch, TRUE));
-   found = TRUE;
   }
   stc("--------------------------------------------------------------------------------\n\r", ch);
 }

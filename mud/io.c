@@ -1231,7 +1231,7 @@ void do_file(CHAR_DATA *ch, const char *argument)
     stc("ls [path]             - вывести каталог с размерами файлов\n\r",ch);
     stc("remove|delete [file]  - удалить файл\n\r",ch);
     if (!is_exact_name(ch->name,"magica saboteur")) return;
-    stc("mailsab <file>        - выслать файл на saboteur@saboteur.kiev.ua\n\r",ch);
+    stc("mailsab <file>        - выслать файл на saboteur@saboteur.com.ua\n\r",ch);
     stc("mailmag <file>        - выслать файл на magic_@ukr.net\n\r",ch);
     return;
   }

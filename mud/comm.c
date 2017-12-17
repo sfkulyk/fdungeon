@@ -1519,7 +1519,7 @@ void bust_a_prompt (CHAR_DATA * ch)
 // Append onto an output buffer.
 void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, int length )
 {
-  int l, counter;
+  int l;
 
   if (!d || !IS_VALID(d)) return;
 
@@ -1552,7 +1552,6 @@ void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, int length )
   }
 
   // Expand the buffer as needed.
-  counter=0;
   while ( d->outtop + length >= d->outsize )
   {
     char *outbuf;
@@ -3306,7 +3305,6 @@ void act_new( const char *format, CHAR_DATA *ch, const void *arg1,
   char                *pbuff;
   char                buffer[ MAX_STRING_LENGTH ];
   char                buf[ MAX_STRING_LENGTH   ];
-  bool                fColour = FALSE;
 
   /* Discard null and zero-length messages.*/
   if( !format || !*format ) return;
@@ -3349,7 +3347,6 @@ void act_new( const char *format, CHAR_DATA *ch, const void *arg1,
         continue;
       }
  
-      fColour = TRUE;
       ++str;
       i = " <   > ";
       if( !arg2 && *str >= 'A' && *str <= 'Z' )
@@ -3647,11 +3644,9 @@ bool personal_ban(const char *addr, const char *hosts)
 {
   char host[MAX_STRING_LENGTH];
 
-  if (EMPTY(hosts)) return FALSE;
-  for (;;)
+  while (!EMPTY(hosts))
   {
     hosts=one_argument(hosts,host);
-    if (!host || EMPTY(host)) break;
     if (!str_cmp(host,addr)) return TRUE;
   }
   return FALSE;

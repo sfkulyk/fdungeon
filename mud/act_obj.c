@@ -28,7 +28,7 @@ void  do_give    (CHAR_DATA *ch, const char *argument );
 void  sac_obj    (CHAR_DATA *ch, OBJ_DATA *obj);
 bool  give_one   (CHAR_DATA *ch,CHAR_DATA *victim,OBJ_DATA *obj);
 void  do_ear     (CHAR_DATA *victim,CHAR_DATA *ch);
-bool  is_number  (const unsigned char *arg );
+bool  is_number  (const char *arg );
 bool  is_same_obj(OBJ_DATA *obj, OBJ_DATA *nextobj);
 void  talk_auction   (char *argument);
 char * local_outtext ( int64 count, char *string_one, char *string_many);
