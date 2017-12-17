@@ -6,6 +6,8 @@
 #ifndef __merc_str
 #define __merc_str
 
+#include "merc.h"
+
 struct guild_type
 {
   int   guild;
@@ -69,13 +71,14 @@ struct keywords_type
 };
 
 // mobprograms
-extern struct mob_cmd_type **mob_cmd_table[];
 struct mob_cmd_type
 {
   char   *name;
   DO_FUN *do_fun;
   char   *help;
 };
+
+extern struct mob_cmd_type mob_cmd_table[];
 
 struct flag_type
 {

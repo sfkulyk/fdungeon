@@ -9,7 +9,8 @@ PROF	= -O -g
 C_FLAGS = $(PROF) -I../src/include -I/usr/include -I. $(WITH) -DOLD_RAND -Wall
 
 # fbsd variant
-DSO_FLG =  -Wl,-E -L../lib -R../lib -lrdso
+#DDD DSO_FLG =  -Wl,-E -L../lib -R../lib -lrdso
+DSO_FLG =  -Wl,-E -L../lib -lrdso
 
 L_FLAGS =  $(DSO_FLG) -lcrypt
 
