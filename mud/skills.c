@@ -1,5 +1,4 @@
-// $Id: skills.c,v 1.15 2003/03/12 14:41:48 magic Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
 #include <sys/types.h>

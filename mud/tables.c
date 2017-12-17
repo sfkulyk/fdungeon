@@ -1,6 +1,6 @@
-// $Id: tables.c,v 1.74 2003/12/01 02:07:24 ghost Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
+
 #include <sys/types.h>
 #include <stdio.h>
 #include <time.h>

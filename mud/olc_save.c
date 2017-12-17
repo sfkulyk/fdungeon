@@ -1,5 +1,4 @@
-// $Id: olc_save.c,v 1.19 2002/10/11 10:22:27 saboteur Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
  
 #include <sys/types.h>

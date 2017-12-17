@@ -1,5 +1,4 @@
-// $Id: mem.c,v 1.7 2002/08/11 16:52:41 black Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
 #include <ctype.h>

@@ -1,6 +1,6 @@
-// $Id: recycle.c,v 1.32 2003/10/29 08:40:53 wagner Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
+
 #include <sys/types.h>
 #ifndef WIN32
 #include <sys/time.h>

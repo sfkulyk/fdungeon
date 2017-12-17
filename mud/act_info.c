@@ -1,5 +1,4 @@
-// $Id: act_info.c,v 1.164 2004/07/29 06:39:13 mud Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
 #ifndef WIN32

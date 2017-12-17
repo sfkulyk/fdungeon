@@ -1,4 +1,3 @@
-# $Id: Makefile,v 1.11 2004/07/29 06:39:13 mud Exp $
 #
 # Don't forget to `make depend'.. 
 # or `make clean' if you have much time.

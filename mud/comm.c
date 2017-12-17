@@ -1,6 +1,6 @@
-// $Id: comm.c,v 1.115 2003/12/06 10:30:42 wagner Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
+
 // This file contains all of the OS-dependent stuff:
 // startup, signals, BSD sockets for tcp/ip, i/o, timing.
 

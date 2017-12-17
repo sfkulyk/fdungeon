@@ -1,5 +1,4 @@
-// Data and configuration file defines
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #define TEMP_FILE       "romtmp"
 #define NULL_FILE       "proto.are"            // To reserve one stream

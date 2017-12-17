@@ -1,5 +1,4 @@
-// $Id: social_edit.c,v 1.7 2002/10/11 10:22:27 saboteur Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
 // Online Social Editting Module, 

@@ -1,5 +1,4 @@
-// $Id: telnet.h,v 1.2 2001/10/18 05:58:41 saboteur Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
 // ------------------------------------------------------------------

@@ -1,5 +1,4 @@
-// $Id: act_wiz.c,v 1.136 2004/03/25 14:46:38 wagner Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
 #ifndef WIN32

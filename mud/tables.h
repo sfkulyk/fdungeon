@@ -1,5 +1,4 @@
-// $Id: tables.h,v 1.8 2002/08/19 02:28:28 black Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
  
 struct clan_rank_type

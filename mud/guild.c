@@ -1,5 +1,4 @@
-// $Id: guild.c,v 1.13 2003/11/21 14:27:37 wagner Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h> 
 #include <ctype.h> 

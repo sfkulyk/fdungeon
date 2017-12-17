@@ -1,5 +1,4 @@
-// $Id: const.c,v 1.89 2004/04/08 15:19:31 ghost Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
 #include <stdio.h>

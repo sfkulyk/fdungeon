@@ -1,5 +1,4 @@
-// $Id: saboteur.c,v 1.125 2003/12/06 10:30:49 wagner Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h> 
 #include <ctype.h> 

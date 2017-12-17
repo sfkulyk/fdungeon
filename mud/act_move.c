@@ -1,5 +1,4 @@
-// $Id: act_move.c,v 1.93 1999/04/01 18:37:13 ghost Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
 #ifndef WIN32

@@ -1,5 +1,4 @@
-// $Id: charset.c,v 1.5 2002/05/30 15:12:18 saboteur Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <stdio.h>
 #include <string.h>

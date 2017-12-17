@@ -1,5 +1,4 @@
-// $Id: printf.c,v 1.5 2004/07/29 06:39:14 mud Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
 //  This file used by do_printf , do_fprintf,  printf_to_char functions

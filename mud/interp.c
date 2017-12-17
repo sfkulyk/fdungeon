@@ -1,5 +1,4 @@
-// $Id: interp.c,v 1.132 2004/03/25 14:46:39 wagner Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
 #include <sys/types.h>

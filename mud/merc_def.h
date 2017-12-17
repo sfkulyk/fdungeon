@@ -1,6 +1,4 @@
-// $Id: merc_def.h,v 1.79 2003/12/16 19:01:26 ghost Exp $
-// Defines in FD.
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
 #ifndef __merc_def

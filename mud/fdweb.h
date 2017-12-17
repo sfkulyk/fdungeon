@@ -1,5 +1,4 @@
-// $Id$
-// Copyrights (C) 2006, Saboteur.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
 const char *fname_online;

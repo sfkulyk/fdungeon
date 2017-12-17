@@ -1,5 +1,4 @@
-// $Id: db.h,v 1.6 2002/08/26 20:01:32 black Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
 // vals from db.c

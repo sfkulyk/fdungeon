@@ -1,5 +1,4 @@
-// $Id: interp.h,v 1.53 2003/12/18 13:55:19 wagner Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
 // wrapper function for safe command execution

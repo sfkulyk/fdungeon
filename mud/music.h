@@ -1,5 +1,4 @@
-// $Id: music.h,v 1.3 2001/10/18 05:58:42 saboteur Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #define MAX_SONGS       30
 #define MAX_LINES       100 // this boils down to about 1k per song

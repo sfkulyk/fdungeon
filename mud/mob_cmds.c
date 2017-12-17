@@ -1,5 +1,4 @@
-// $Id: mob_cmds.c,v 1.11 2002/10/09 03:32:47 black Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
 #include <stdio.h>

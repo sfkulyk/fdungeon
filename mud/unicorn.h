@@ -1,7 +1,5 @@
-/* $Id: unicorn.h,v 1.4 2001/01/28 19:37:41 cvsuser Exp $
- *
- * 2000, unicorn
- */
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
+// Read ours copyrights and license terms in 'license.fd'
 
 #ifndef __UNICORN_H__
 #define __UNICORN_H__

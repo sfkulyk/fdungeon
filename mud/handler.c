@@ -1,5 +1,4 @@
-// $Id: handler.c,v 1.123 2004/01/16 21:29:04 ghost Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
 #include <ctype.h>

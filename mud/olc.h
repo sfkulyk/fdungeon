@@ -1,5 +1,4 @@
-// $Id: olc.h,v 1.12 2002/08/11 16:52:42 black Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
 // The version info.  Please use this info when reporting bugs.

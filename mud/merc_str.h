@@ -1,6 +1,4 @@
-// $Id: merc_str.h,v 1.44 2003/10/29 08:40:52 wagner Exp $
-// Structures in FD.
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
 #ifndef __merc_str

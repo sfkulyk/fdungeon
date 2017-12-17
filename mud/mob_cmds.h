@@ -1,6 +1,6 @@
-// $Id: mob_cmds.h,v 1.4 2002/07/22 13:28:13 saboteur Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
+
 // Based on MERC 2.2 MOBprograms by N'Atas-ha.
 // Written and adapted to ROM 2.4 by
 // Markku Nylander (markku.nylanderuta.fi)

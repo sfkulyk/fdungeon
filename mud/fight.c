@@ -1,5 +1,4 @@
-// $Id: fight.c,v 1.209 2004/04/29 14:47:45 ghost Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h> 
 #include <stdio.h> 

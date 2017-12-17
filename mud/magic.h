@@ -1,6 +1,6 @@
-// $Id: magic.h,v 1.17 2004/07/29 06:39:13 mud Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
+
 // Spell functions. Defined in magic.c and magic2.c
 DECLARE_SPELL_FUN( spell_null              ); 
 DECLARE_SPELL_FUN( spell_acid_blast        ); // improved by Saboteur

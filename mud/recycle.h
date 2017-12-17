@@ -1,5 +1,4 @@
-// $Id: recycle.h,v 1.4 2001/10/19 14:39:44 apc Exp $
-// Copyrights (C) 1998-2001, Forgotten Dungeon team.
+// Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
 // externs
