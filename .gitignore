@@ -2,10 +2,12 @@ player/
 areas/full.log
 areas/null.log
 areas/rom
+areas/fdungeon.exe
 areas/romtell
 areas/romreboot
 areas/who.htm
 mud/*.o
+mud/*.obj
 mud/rom
 nohup.out
 areas/shutdown.txt
