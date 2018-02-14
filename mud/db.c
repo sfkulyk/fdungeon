@@ -2883,7 +2883,7 @@ void *alloc_mem( int sMem )
 #ifdef MAGIC_CHECKING
     MAGIC(pMem)->cookie = MAGIC_COOKIE;
     MAGIC(pMem)->size = sMem - sizeof(struct magic);
-    pMem += sizeof(struct magic);  //MAGIC(pMem)++;
+    MAGIC(pMem)++; // pMem += sizeof(struct magic);
 #endif
 
     allocated+=sMem;
@@ -2899,7 +2899,7 @@ void free_mem( void *pMem, int sMem )
   int iList;
 
 #ifdef MAGIC_CHECKING
-  pMem -= sizeof(struct magic);  //MAGIC (pMem)--;
+  MAGIC (pMem)--; // pMem -= sizeof(struct magic);
   
   if (MAGIC (pMem)->cookie != MAGIC_COOKIE)
     {
