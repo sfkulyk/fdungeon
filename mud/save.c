@@ -1,4 +1,5 @@
-// Copyrights (C) 1998-2003, Forgotten Dungeon team.
+// $Id: save.c,v 1.86 2003/12/18 13:55:22 wagner Exp $
+// Copyrights (C) 1998-2001, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
 #include <ctype.h>
@@ -705,15 +706,12 @@ bool load_char_obj (DESCRIPTOR_DATA * d, const char * name, int status)
 void fread_char (CHAR_DATA * ch, FILE * fp)
 {
   const char * word;
-  const char * tmp ;
   bool fMatch;
   int count = 0;
   int lastlogoff = current_time;
   int percent;
   int i;
 //  int hp_per_lvl, diff;
-
-  tmp = str_dup ("");
 
   log_printf("Loading %s.", ch->name);
 

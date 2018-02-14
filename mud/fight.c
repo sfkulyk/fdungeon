@@ -1,4 +1,5 @@
-// Copyrights (C) 1998-2003, Forgotten Dungeon team.
+// $Id: fight.c,v 1.209 2004/04/29 14:47:45 ghost Exp $
+// Copyrights (C) 1998-2001, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h> 
 #include <stdio.h> 
@@ -189,13 +190,10 @@ void damage_eq_char ( CHAR_DATA *ch)
 void violence_update( void ) 
 { 
   CHAR_DATA *ch; 
-  CHAR_DATA *ch_next; 
   CHAR_DATA *victim; 
  
   for ( ch = char_list;ch; ch = ch->next ) 
   { 
-    ch_next = ch->next; 
- 
     if ( ( victim = ch->fighting ) == NULL || ch->in_room == NULL ) continue; 
     if ( IS_AWAKE(ch) && ch->in_room == victim->in_room ) multi_hit( ch, victim);
     else stop_fighting( ch, FALSE ); 
@@ -290,7 +288,6 @@ void multi_hit( CHAR_DATA *ch, CHAR_DATA *victim)
 { 
   int chance; 
   OBJ_DATA *wield; 
-  int is_victim_asleep;
  
   // decrement the wait
   if (ch->desc == NULL) ch->wait = UMAX(0,ch->wait - PULSE_VIOLENCE); 
@@ -306,8 +303,6 @@ void multi_hit( CHAR_DATA *ch, CHAR_DATA *victim)
   } 
  
   wield=get_eq_char(ch,WEAR_RHAND);
-  is_victim_asleep=(!IS_AWAKE(victim));
-
 
 //shans prohojdeniya spella, unikal'nogo dlya kajdogo deity
   if (IS_DEVOTED_ANY(ch))
@@ -839,7 +834,6 @@ bool damage(CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,int dt,bool sh
   bool dam_hit=FALSE;
   int number;
   int dam_temp=dam,str_bonus;
-  int is_asleep;
 
  if (dam >=0)
  {
@@ -883,7 +877,6 @@ bool damage(CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,int dt,bool sh
    }
   }
  }  
-  if (!IS_AWAKE(victim)) is_asleep=1; else is_asleep=0;
  
   if (victim && ch && victim!=ch && !IS_NPC(victim) && !IS_NPC(ch))
   {
@@ -2046,7 +2039,6 @@ void raw_kill( CHAR_DATA *victim )
 void group_gain( CHAR_DATA *ch, CHAR_DATA *victim ) 
 { 
   CHAR_DATA *gch; 
-  CHAR_DATA *lch; 
   int i;
   int xp; 
   int members, members_pkrange; 
@@ -2130,8 +2122,6 @@ void group_gain( CHAR_DATA *ch, CHAR_DATA *victim )
     bug( "Group : 0 pkrange members.", members_pkrange ); 
     members_pkrange = 1; 
   } 
- 
-  lch = (ch->leader != NULL) ? ch->leader : ch; 
  
   for ( gch = ch->in_room->people; gch != NULL; gch = gch->next_in_room ) 
   { 
@@ -3280,7 +3270,6 @@ void do_kill( CHAR_DATA *ch, const char *argument )
 { 
   char arg[MAX_STRING_LENGTH]; 
   CHAR_DATA *victim; 
-  OBJ_DATA *wield=NULL;
  
   one_argument( argument, arg ); 
  
@@ -3335,7 +3324,6 @@ void do_kill( CHAR_DATA *ch, const char *argument )
  
   WAIT_STATE( ch, 1 * PULSE_VIOLENCE ); 
   check_criminal( ch, victim ,60); 
-  wield = get_eq_char(ch, WEAR_RHAND);
   
 
   multi_hit( ch, victim); 
@@ -3348,7 +3336,6 @@ void do_murder( CHAR_DATA *ch, const char *argument )
   char buf[MAX_STRING_LENGTH]; 
   char arg[MAX_INPUT_LENGTH]; 
   CHAR_DATA *victim; 
-  OBJ_DATA *wield;
  
   one_argument( argument, arg ); 
  
@@ -3389,7 +3376,6 @@ void do_murder( CHAR_DATA *ch, const char *argument )
   } 
  
   WAIT_STATE( ch, 1 * PULSE_VIOLENCE ); 
-  wield = get_eq_char(ch, WEAR_RHAND);
   
   if (IS_NPC(ch)) 
      do_printf(buf, "{mПомогите!{x На меня напал%s %s!",(ch->sex == 2) ? "a" : "",get_char_desc(ch,'1')); 
@@ -3917,7 +3903,6 @@ void do_cleave( CHAR_DATA *ch, const char *argument )
    CHAR_DATA *victim;
    int chance,koef;
    OBJ_DATA *weapon,*shield;
-   bool pos=TRUE;
 
    if (IS_NPC(ch)) return;
 
@@ -3939,7 +3924,6 @@ void do_cleave( CHAR_DATA *ch, const char *argument )
   || ( weapon->value[0]!=WEAPON_AXE && weapon->value[0]!=WEAPON_MACE) )
   { 
     weapon = get_eq_char( ch, WEAR_LHAND );
-    pos = FALSE;
  
     if( weapon==NULL || weapon->item_type!=ITEM_WEAPON 
     || ( weapon->value[0]!=WEAPON_AXE && weapon->value[0]!=WEAPON_MACE) )
@@ -3983,7 +3967,6 @@ void do_cleave( CHAR_DATA *ch, const char *argument )
     return;
   } 
 
-//  ch_weapon = get_weapon_skill(ch,get_weapon_sn(ch,pos));
   chance = get_curr_stat(ch,STAT_STR) - 23;
   if (weapon->value[0] == WEAPON_AXE)
    chance += race_table[ch->race].weapon_bonus[WEAPON_AXE]*2;
@@ -4177,12 +4160,9 @@ void do_tail( CHAR_DATA *ch, const char *argument )
   char arg[MAX_INPUT_LENGTH]; 
   CHAR_DATA *victim; 
   int chance, wait; 
-  bool FightingCheck=FALSE; 
   int damage_tail; 
  
   if (!can_attack(ch,1)) return; 
- 
-  if (ch->fighting) FightingCheck = TRUE; 
  
   if (!IS_SET(race_table[ch->race].spec,SPEC_TAIL)
     || (IS_NPC(ch) && !IS_SET(ch->off_flags,OFF_TAIL))) 

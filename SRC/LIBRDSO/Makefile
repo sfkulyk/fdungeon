@@ -23,4 +23,4 @@ beforeinstall: $(LIBDIR)
 $(LIBDIR):
 	mkdir $@
 
-.include <bsd.lib.mk>
+#DDD .include <bsd.lib.mk>

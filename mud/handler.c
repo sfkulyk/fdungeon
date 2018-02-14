@@ -1,4 +1,5 @@
-// Copyrights (C) 1998-2003, Forgotten Dungeon team.
+// $Id: handler.c,v 1.123 2004/01/16 21:29:04 ghost Exp $
+// Copyrights (C) 1998-2001, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
 #include <ctype.h>
@@ -994,9 +995,7 @@ bool is_affected( CHAR_DATA *ch, int sn )
 void affect_join( CHAR_DATA *ch, AFFECT_DATA *paf )
 {
   AFFECT_DATA *paf_old;
-  bool found;
 
-  found = FALSE;
   for ( paf_old = ch->affected; paf_old != NULL; paf_old = paf_old->next )
   {
     if ( paf_old->type == paf->type )

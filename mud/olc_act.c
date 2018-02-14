@@ -1,4 +1,5 @@
-// Copyrights (C) 1998-2003, Forgotten Dungeon team.
+// $Id: olc_act.c,v 1.26 2003/10/29 08:40:52 wagner Exp $
+// Copyrights (C) 1998-2001, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
 #include <ctype.h>
@@ -3036,8 +3037,6 @@ OEDIT( oedit_ed )
 
   if ( !str_cmp( command, "format" ) )
   {
-      EXTRA_DESCR_DATA *ped = NULL;
-
       if ( keyword[0] == '\0' )
       {
           stc( "Syntax:  ed format [keyword]\n\r", ch );
@@ -3048,7 +3047,6 @@ OEDIT( oedit_ed )
       {
           if ( is_name( keyword, ed->keyword ) )
               break;
-          ped = ed;
       }
 
       if ( !ed )

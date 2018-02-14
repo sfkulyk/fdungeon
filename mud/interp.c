@@ -1,4 +1,5 @@
-// Copyrights (C) 1998-2003, Forgotten Dungeon team.
+// $Id: interp.c,v 1.132 2004/03/25 14:46:39 wagner Exp $
+// Copyrights (C) 1998-2001, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
 #include <sys/types.h>
@@ -896,15 +897,12 @@ void do_stopfoll( CHAR_DATA *ch, const char *argument )
 
 void do_ahelp(CHAR_DATA *ch, const char *argument)
 {
-  char buf1[MAX_STRING_LENGTH];
   char arg1[MAX_INPUT_LENGTH], arg2[MAX_INPUT_LENGTH];
   bool found=FALSE;
 
   argument=one_argument(argument,arg1);
   argument=one_argument(argument,arg2);
 
-  buf1[0]='\0';
-  
   if (arg1[0]=='\0')
   {
     stc("{C Advanced Help показывает информацию, извлекая ее из текущего кода.\n\r",ch);

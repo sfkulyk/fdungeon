@@ -1,0 +1,9 @@
+areas/full.log
+areas/null.log
+areas/rom
+areas/romtell
+areas/romreboot
+areas/who.htm
+mud/*.o
+mud/rom
+nohup.out

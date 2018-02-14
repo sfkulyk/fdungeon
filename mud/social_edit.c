@@ -1,4 +1,5 @@
-// Copyrights (C) 1998-2003, Forgotten Dungeon team.
+// $Id: social_edit.c,v 1.7 2002/10/11 10:22:27 saboteur Exp $
+// Copyrights (C) 1998-2001, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
 // Online Social Editting Module, 
@@ -35,7 +36,6 @@ void load_social_table ()
 {
   FILE *fp;
   int i;
-  const char *word;
   bool new=FALSE;
         
   if ((fp=fopen(SOCIAL_FILE,"r"))==NULL)
@@ -43,7 +43,6 @@ void load_social_table ()
     log_string("BUG:Could not open " SOCIAL_FILE " for reading.");
     exit(1);
   }
-  word=fread_word(fp);
   maxsocial=fread_number(fp);
 
   // IMPORTANT to use malloc so we can realloc later on

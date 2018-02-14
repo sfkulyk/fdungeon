@@ -5,4 +5,5 @@
 
 SUBDIR = librdso modules tools
 
-.include <bsd.subdir.mk>
+	.include <bsd.subdir.mk>
+

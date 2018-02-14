@@ -1,0 +1,30 @@
+#!/bin/sh
+
+cd ..
+#CVSROOT=$cvsroot; export CVSROOT
+
+LIBOWN=`id -un`; export LIBOWN
+LIBGRP=`id -gn`; export LIBGRP
+
+
+# build unicorn's things.
+(
+  cvs -z9t co src; wait
+  cd src
+  make depend;    wait
+  make;           wait
+  make install;   wait
+) > src.co-log 2>&1
+	  
+# build base FD things.
+(
+  cvs -z9t co mud; wait
+  cd mud
+  make clean;     wait
+  make;           wait
+) > mud.co-log 2>&1
+		  
+cat src.co-log | mail -s 'Offline make logs - SRC' -c magic@budmax.com.ua saboteur@biocon.kiev.ua
+cat mud.co-log | mail -s 'Offline make logs - MUD' -c dragon@nest.ntu-kpi.kiev.ua -c magic@budmax.com.ua -c black@astral.ntu-kpi.kiev.ua -c apc@ptf.ntu-kpi.kiev.ua -c diamond@astral.ntu-kpi.kiev.ua -c mephistofel@astral.ntu-kpi.kiev.ua -c wagner@ptf.ntu-kpi.kiev.ua saboteur@biocon.kiev.ua
+echo {RThe Compilation of MUD sources Finished!{*{x | areas/romtell imms
+		   

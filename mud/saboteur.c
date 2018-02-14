@@ -1,4 +1,5 @@
-// Copyrights (C) 1998-2003, Forgotten Dungeon team.
+// $Id: saboteur.c,v 1.125 2003/12/06 10:30:49 wagner Exp $
+// Copyrights (C) 1998-2001, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h> 
 #include <ctype.h> 
@@ -1044,11 +1045,10 @@ int64 sell_gem(CHAR_DATA *ch, int64 amount, int64 vnum)
 {
   OBJ_DATA *obj, *obj_next;
   OBJ_INDEX_DATA *gem;
-  int64 cost, count=0;
+  int64 count=0;
 
   gem=get_obj_index(vnum);
   if (!gem) return 0;
-  cost=gem->cost;
   
   for(obj=ch->carrying;obj!=NULL;obj=obj_next)
   {

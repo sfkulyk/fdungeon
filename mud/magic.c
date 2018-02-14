@@ -1,4 +1,5 @@
-// Copyrights (C) 1998-2003, Forgotten Dungeon team.
+// $Id: magic.c,v 1.130 2004/05/28 16:30:49 ghost Exp $
+// Copyrights (C) 1998-2001, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h> 
 #include <stdio.h> 
@@ -2986,10 +2987,9 @@ void spell_holy_word(int sn, int level, CHAR_DATA *ch, void *vo,int target)
   CHAR_DATA *vch;
   CHAR_DATA *vch_next;
   int dam;
-  int bless_num, curse_num, frenzy_num;
+  int bless_num, frenzy_num;
     
   bless_num = skill_lookup("bless");
-  curse_num = gsn_curse; 
   frenzy_num = skill_lookup("frenzy");
 
   if (ch->hit < ch->level * 2)

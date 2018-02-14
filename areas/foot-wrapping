@@ -5,8 +5,8 @@
 # 2000, unicorn
 #
 
-$goddies='admin@localhost';
-$myaddress='admin@localhost';
+$goddies='saboteur@saboteur.com.ua';
+$myaddress='saboteur@saboteur.com.ua';
 
 unlink "install.txt", "recommit.txt", "shutdown.txt";
 
@@ -109,8 +109,8 @@ sub restart {
 			make install;	wait
 		) > mud.co-log 2>&1
 
-		cat src.co-log | mail -s 'Auto make - Reboot and reinstall SRC' -c admin\@localhost
-		cat mud.co-log | mail -s 'Auto make - Reboot and reinstall MUD' -c admin\@localhost
+		cat src.co-log | mail -s 'Auto make - Reboot and reinstall SRC' -c saboteur\@saboteur.com.ua
+		cat mud.co-log | mail -s 'Auto make - Reboot and reinstall MUD' -c saboteur\@saboteur.com.ua
 EOF
 ;
 		close SH;

@@ -1,4 +1,5 @@
-// Copyrights (C) 1998-2003, Forgotten Dungeon team.
+// $Id: olc_mpcode.c,v 1.12 2004/07/29 06:39:14 mud Exp $
+// Copyrights (C) 1998-2001, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
 #include <ctype.h>
@@ -43,7 +44,6 @@ char *mprog_type_to_name( int64 type )
  
 void mpedit( CHAR_DATA *ch, const char *argument)
 {
-  MPROG_CODE *pMcode;
   char arg[MAX_INPUT_LENGTH];
   char command[MAX_INPUT_LENGTH];
   int cmd;
@@ -51,7 +51,6 @@ void mpedit( CHAR_DATA *ch, const char *argument)
   strcpy(arg, argument);
   argument=one_argument(argument, command);
 
-  EDIT_MPCODE(ch, pMcode);
   if (ch->pcdata->security < 2)
   {
     stc("MPEdit: Insufficient security to modify code\n\r",ch); edit_done(ch);
@@ -164,7 +163,7 @@ MPEDIT( mpedit_show)
 {
   MPROG_CODE *pMcode;
 
-  EDIT_MPCODE(ch,pMcode);
+  EDIT_MPCODE(ch, pMcode);
   ptc(ch,"Vnum: {Y%u{x\n\rCode:\n\r{G%s{x\n\r",
     pMcode->vnum, pMcode->code?pMcode->code:"{RПустой код{x");
   return FALSE;
