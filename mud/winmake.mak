@@ -8,7 +8,7 @@ CFLAGS= /nologo /ML /W3 /Od /Zi /Yd /D "WIN32" /c /I$(LNKDIR)\include
 LINK32= link.exe
 
 LFLAGS= /LIBPATH:$(LNKDIR)\lib wsock32.lib  /subsystem:console /incremental:no\
-        /DEBUG /machine:I386 /out:"../areas/fdungeon.exe"
+        /DEBUG /machine:I386 /out:"fdungeon.exe"
 ########
 
 ALL : fdungeon.exe
