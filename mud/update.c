@@ -90,10 +90,10 @@ void advance_level( CHAR_DATA *ch, bool hide )
    add_mana=number_range(add_mana/3, add_mana/5*3);
   }
   else
- {
-  add_mana=(get_curr_stat(ch, STAT_INT)*2+get_curr_stat(ch, STAT_WIS))/3;
-  add_mana=number_range(add_mana/4, add_mana/2);
- }
+  {
+   add_mana=(get_curr_stat(ch, STAT_INT)*2+get_curr_stat(ch, STAT_WIS))/3;
+   add_mana=number_range(add_mana/4, add_mana/2);
+  }
 
   add_move = (get_curr_stat(ch,STAT_CON) + get_curr_stat(ch,STAT_DEX)*3)/4;
   add_move = number_range(add_move/4, add_move/2);
@@ -115,10 +115,6 @@ void advance_level( CHAR_DATA *ch, bool hide )
   ch->pcdata->perm_mana += add_mana;
   ch->pcdata->perm_move += add_move;
 
-  if (!hide) 
-    ptc(ch,"Ты получаешь %d здоровья, %d маны, %d движений, и %d практик.\n\r",
-    add_hp,  add_mana, add_move, add_prac);
-
   ch->qcomplete[1]=0;
 
   if (!ch->clan && !IS_SET(ch->act,PLR_LASTREMORT) && ch->level>=PK_LEVEL)
@@ -131,11 +127,13 @@ void advance_level( CHAR_DATA *ch, bool hide )
 
   if (!hide)
   {
+    ptc(ch,"Ты получаешь %d здоровья, %d маны, %d движений, и %d практик.\n\r", add_hp,  add_mana, add_move, add_prac);
     stc("Тебе теперь доступны такие навыки:",ch);
     do_printf(buf, "%d %d",ch->level,ch->level);
     do_skills(ch,buf);
     stc("Тебе теперь доступны такие заклинания:",ch);
-    do_printf(buf, "%d %d",ch->level,ch->level);    do_spells(ch,buf);  }
+    do_printf(buf, "%d %d",ch->level,ch->level);    do_spells(ch,buf);
+  }
 }   
 
 void gain_exp( CHAR_DATA *ch, int gain )
@@ -163,7 +161,7 @@ void gain_exp( CHAR_DATA *ch, int gain )
     {
                  stc("\n\r/~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/~~\\",ch);      
       do_printf( buf,"\n\r|   Теперь ты стал%1s старше и перед тобой открываются новые|__/",ch->sex==1?"":"a");
-      stc(buf,ch);
+                 stc(buf,ch);
                  stc("\n\r| горизонты. Школа останется приятным воспоминанием,      |",ch);
                  stc("\n\r| которое ты пронесешь в своем сердце на протяжении долгих|",ch);
                  stc("\n\r| лет своей славной жизни.                                |",ch);
@@ -179,23 +177,23 @@ void gain_exp( CHAR_DATA *ch, int gain )
     // character gains 17 level
     if (ch->level == 17)
     {
-      stc("\n\r/~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/~~\\",ch);      
-      stc("\n\r|                       {RПОВЕСТКА{x                         | __/",ch);
-      stc("\n\r|      {Yоб обязательной явке на призывной участок{x         |",ch);
-      stc("\n\r|            {Yдля выполнения воинского долга{x              |",ch);
-      stc("\n\r|________________________________________________________|",ch);
-      stc("\n\r|                                                        |",ch);
+         stc("\n\r/~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/~~\\",ch);      
+         stc("\n\r|                       {RПОВЕСТКА{x                         | __/",ch);
+         stc("\n\r|      {Yоб обязательной явке на призывной участок{x         |",ch);
+         stc("\n\r|            {Yдля выполнения воинского долга{x              |",ch);
+         stc("\n\r|________________________________________________________|",ch);
+         stc("\n\r|                                                        |",ch);
       ptc(ch,"\n\r|  {YПризывни%2s  {W%-18s{Y, вы обязаны явиться на{x |",ch->sex==1?"к":"ца",ch->name);
-      stc("\n\r|  {Yпризывной участок по достижении вами 18 уровня.{x       |",ch);
-      stc("\n\r|  {YПри себе иметь : голый торс. Все что останется от{x     |",ch);
-      stc("\n\r|  {Yголого торса, оставить дома. Примите во внимание,{x     |",ch);
-      stc("\n\r|  {Yчто вещи, найденые у вас при поступлении на военную {x  |",ch);
-      stc("\n\r|  {Yслужбу, будут конфискованы и уничтожены для{x           |",ch);
-      stc("\n\r|  {Yвоспрепятствования размножению вредных насекомых{x      |",ch);
-      stc("\n\r|                                                        |",ch);
-      stc("\n\r|                                        {CМайор {rМолчанов{x  |",ch);
-      stc("\n\r|                                                        | ",ch);
-      stc("\n\r\\_________________________________________________________\\__/\n\r",ch);
+         stc("\n\r|  {Yпризывной участок по достижении вами 18 уровня.{x       |",ch);
+         stc("\n\r|  {YПри себе иметь : голый торс. Все что останется от{x     |",ch);
+         stc("\n\r|  {Yголого торса, оставить дома. Примите во внимание,{x     |",ch);
+         stc("\n\r|  {Yчто вещи, найденые у вас при поступлении на военную {x  |",ch);
+         stc("\n\r|  {Yслужбу, будут конфискованы и уничтожены для{x           |",ch);
+         stc("\n\r|  {Yвоспрепятствования размножению вредных насекомых{x      |",ch);
+         stc("\n\r|                                                        |",ch);
+         stc("\n\r|                                        {CМайор {rМолчанов{x  |",ch);
+         stc("\n\r|                                                        | ",ch);
+         stc("\n\r\\_________________________________________________________\\__/\n\r",ch);
     }
 
     // character gains 17 level and not army
@@ -207,28 +205,28 @@ void gain_exp( CHAR_DATA *ch, int gain )
       /* exclude char from Auction and sell his objects */
       if (auction->buyer==ch)
       {
-       do_printf (buf, "Текущий покупатель уходит в армию, аукцион проводится заново.");
-       talk_auction(buf);
-       auction->going=0;
-       auction->bet=0;
-       auction->buyer->gold += auction->bet;
-       stc ("Ваши деньги возвpащены.\n\r",auction->buyer);
+        do_printf (buf, "Текущий покупатель уходит в армию, аукцион проводится заново.");
+        talk_auction(buf);
+        auction->going=0;
+        auction->bet=0;
+        auction->buyer->gold += auction->bet;
+        stc ("Ваши деньги возвpащены.\n\r",auction->buyer);
       }
       if (auction->seller==ch)
       {
-       do_printf (buf, "Аукционер уходит в армию, лот %s снЯт с аукциона.",get_obj_desc(auction->item,'1'));
-       talk_auction(buf);
-       act ("Аукционеp поЯвлЯется пеpед тобой и возвpащает тебе $i4.{/"
-            "Толстый прапорщик незаметно подкрадывается, выхватывает $i4{/"
-            "и со злобной ухмылкой распихивает ништяки по карманам.",
-             auction->seller,auction->item,NULL,TO_CHAR);
-       act ("Аукционеp поЯвлЯется пеpед $c5 и возвpащает $u $i4.{/"
-            "Толстый прапорщик незаметно подкрадывается, выхватывает $i4{/"
-            "и со злобной ухмылкой распихивает ништяки по карманам.",
+        do_printf (buf, "Аукционер уходит в армию, лот %s снЯт с аукциона.",get_obj_desc(auction->item,'1'));
+        talk_auction(buf);
+        act ("Аукционеp поЯвлЯется пеpед тобой и возвpащает тебе $i4.{/"
+             "Толстый прапорщик незаметно подкрадывается, выхватывает $i4{/"
+             "и со злобной ухмылкой распихивает ништяки по карманам.",
+              auction->seller,auction->item,NULL,TO_CHAR);
+        act ("Аукционеp поЯвлЯется пеpед $c5 и возвpащает $u $i4.{/"
+             "Толстый прапорщик незаметно подкрадывается, выхватывает $i4{/"
+             "и со злобной ухмылкой распихивает ништяки по карманам.",
              auction->seller,auction->item,NULL,TO_ROOM);
-       extract_obj(auction->item);
-       auction->item = NULL; /* clear auction */
-       }
+        extract_obj(auction->item);
+        auction->item = NULL; /* clear auction */
+      }
       if (( ch->gold > 0 )||(ch->silver > 0))
       {
         ch->gold=0;
@@ -250,50 +248,50 @@ void gain_exp( CHAR_DATA *ch, int gain )
       do_function (ch, &do_look, "");
       do_function (ch, &do_outfit,"");
     }
-   // character gains 22 level (Army's end)
-   if ( (ch->level>21) && IS_SET(ch->act,PLR_ARMY))
-   {
-    stc("\n\rВходит майор {rМолчанов{x.\n\r", ch);
-    stc("Чем-то это лицо тебе знакомо... Аааа! Это тот тип, который тебя сюда определил!\n\r",ch);
-    ptc(ch,"Майор {rМолчанов{x произосит: '{G%s! Ваш срок службы истек. Можете быть свободны.{x\n\r",ch->name);
-    stc("Майор {rМолчанов{x уводит тебя.\n\r",ch);
+    // character gains 22 level (Army's end)
+    if ( (ch->level>21) && IS_SET(ch->act,PLR_ARMY))
+    {
+      stc("\n\rВходит майор {rМолчанов{x.\n\r", ch);
+      stc("Чем-то это лицо тебе знакомо... Аааа! Это тот тип, который тебя сюда определил!\n\r",ch);
+      ptc(ch,"Майор {rМолчанов{x произосит: '{G%s! Ваш срок службы истек. Можете быть свободны.{x\n\r",ch->name);
+      stc("Майор {rМолчанов{x уводит тебя.\n\r",ch);
 
-    act("\n\rВходит майор {rМолчанов{x.", ch,NULL,NULL,TO_ROOM);
-    act("Майор {rМолчанов{x произосит: '{G$n! Ваш срок службы истек. Можете быть свободны.", ch,NULL,NULL,TO_ROOM);
-    act("Майор {rМолчанов{x уводит $n.", ch,NULL,NULL,TO_NOTVICT);
+      act("\n\rВходит майор {rМолчанов{x.", ch,NULL,NULL,TO_ROOM);
+      act("Майор {rМолчанов{x произосит: '{G$n! Ваш срок службы истек. Можете быть свободны.", ch,NULL,NULL,TO_ROOM);
+      act("Майор {rМолчанов{x уводит $n.", ch,NULL,NULL,TO_NOTVICT);
     
-    WAIT_STATE(ch, 5*PULSE_VIOLENCE);
+      WAIT_STATE(ch, 5*PULSE_VIOLENCE);
  
-    ch->position= POS_RESTING;
-    char_from_room(ch);
-    char_to_room(ch,get_room_index(12482));
-    do_function (ch, &do_look, "");
-   } 
+      ch->position= POS_RESTING;
+      char_from_room(ch);
+      char_to_room(ch,get_room_index(12482));
+      do_function (ch, &do_look, "");
+    } 
 
-   // character gains 101 level (Superhero)
-   if (ch->level==101)
-   {
-     DESCRIPTOR_DATA *d;
-     CHAR_DATA *victim;
+    // character gains 101 level (Superhero)
+    if (ch->level==101)
+    {
+      DESCRIPTOR_DATA *d;
+      CHAR_DATA *victim;
 
-     for (d = descriptor_list; d != NULL; d = d->next)
-     {
-       if (d->connected!=CON_PLAYING) continue;
-       victim = d->character;
-       if (victim == NULL || IS_NPC(victim)) continue;
-       affect_strip(victim,gsn_plague);
-       affect_strip(victim,gsn_poison);
-       affect_strip(victim,gsn_blindness);
-       affect_strip(victim,gsn_sleep);
-       affect_strip(victim,gsn_curse);
+      for (d = descriptor_list; d != NULL; d = d->next)
+      {
+        if (d->connected!=CON_PLAYING) continue;
+        victim = d->character;
+        if (victim == NULL || IS_NPC(victim)) continue;
+        affect_strip(victim,gsn_plague);
+        affect_strip(victim,gsn_poison);
+        affect_strip(victim,gsn_blindness);
+        affect_strip(victim,gsn_sleep);
+        affect_strip(victim,gsn_curse);
            
-       victim->hit  = victim->max_hit;
-       victim->mana = victim->max_mana;
-       victim->move = victim->max_move;
-       update_pos( victim);
-     }
-     gecho("{/{DГром и вспышки {Cмолний{D возвещают о рождении {CSUPERHERO{D!{*{/{x");
-   }
+        victim->hit  = victim->max_hit;
+        victim->mana = victim->max_mana;
+        victim->move = victim->max_move;
+        update_pos( victim);
+      }
+      gecho("{/{DГром и вспышки {Cмолний{D возвещают о рождении {CSUPERHERO{D!{*{/{x");
+    }
 
     if (ch->in_room == NULL)
     {
@@ -306,62 +304,59 @@ void gain_exp( CHAR_DATA *ch, int gain )
 
 void sifilis_update(CHAR_DATA *ch)
 {
- int64 vnum=0;
+  int64 vnum=0;
  
- switch(number_range(1,10))
- {
-  case  2:                                                    
-   if (IS_SET(race_table[ch->race].parts,PART_GUTS))
-   {
-    act("Кишки {y$c2{x pасплескиваются во все стоpоны.",ch,NULL,NULL,TO_ROOM);
-    act("Кишки вываливаются из твоего прогнившего живота прямо тебе под ноги.",ch,NULL,NULL,TO_CHAR);
-    vnum = OBJ_VNUM_GUTS;
-   }
-   break;
-  case  6: 
-   if (IS_SET(race_table[ch->race].parts,PART_ARMS))
-   {
-    act("Рука {y$c2{x отваливается от $g гниющего тела.",ch,NULL,NULL,TO_ROOM);
-    act("Твоя рука сгнивает и отваливается от тела.",ch,NULL,NULL,TO_CHAR);
-    vnum = OBJ_VNUM_SLICED_ARM;                         
-   }
-   break;
-  case  9: 
-   if (IS_SET(race_table[ch->race].parts,PART_LEGS))
-   {         
-    act("Нога {y$c2{x отваливается от $g гниющего тела.",ch,NULL,NULL,TO_ROOM);
-    act("Кусок твоей сгнившей ноги отваливается от тела.",ch,NULL,NULL,TO_CHAR);
-    vnum = OBJ_VNUM_SLICED_LEG;                         
-   }
-   break;
- }
-
- if ( vnum != 0 )
- {
-  char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *obj;
-  const char *name;
-
-  name            = IS_NPC(ch) ? get_char_desc(ch,'2'): ch->name;
-  obj             = create_object( get_obj_index( vnum ), 0 );
-  obj->timer      = number_range( 4, 7 );
-  do_printf( buf, obj->short_descr, name );
-  free_string( obj->short_descr );
-  obj->short_descr = str_dup( buf );
-  do_printf( buf, obj->description, name );
-  free_string( obj->description );
-  obj->description = str_dup( buf );
-  if (obj->item_type == ITEM_FOOD)
+  switch(number_range(1,10))
   {
-   if (IS_SET(ch->form,FORM_POISON)) obj->value[3] = 1;
-   else if (!IS_SET(ch->form,FORM_EDIBLE)) obj->item_type = ITEM_TRASH;
+    case  2:                                                    
+      if (IS_SET(race_table[ch->race].parts,PART_GUTS))
+      {
+        act("Кишки {y$c2{x pасплескиваются во все стоpоны.",ch,NULL,NULL,TO_ROOM);
+        act("Кишки вываливаются из твоего прогнившего живота прямо тебе под ноги.",ch,NULL,NULL,TO_CHAR);
+        vnum = OBJ_VNUM_GUTS;
+      }
+      break;
+    case  6: 
+      if (IS_SET(race_table[ch->race].parts,PART_ARMS))
+      {
+        act("Рука {y$c2{x отваливается от $g гниющего тела.",ch,NULL,NULL,TO_ROOM);
+        act("Твоя рука сгнивает и отваливается от тела.",ch,NULL,NULL,TO_CHAR);
+        vnum = OBJ_VNUM_SLICED_ARM;                         
+      }
+      break;
+    case  9: 
+      if (IS_SET(race_table[ch->race].parts,PART_LEGS))
+      {         
+        act("Нога {y$c2{x отваливается от $g гниющего тела.",ch,NULL,NULL,TO_ROOM);
+        act("Кусок твоей сгнившей ноги отваливается от тела.",ch,NULL,NULL,TO_CHAR);
+        vnum = OBJ_VNUM_SLICED_LEG;                         
+      }
+    break;
   }
-  obj_to_room( obj, ch->in_room );
- }
+
+  if ( vnum != 0 ) {
+    char buf[MAX_STRING_LENGTH];
+    OBJ_DATA *obj;
+    const char *name;
+
+    name = IS_NPC(ch) ? get_char_desc(ch,'2'): ch->name;
+    obj = create_object( get_obj_index( vnum ), 0 );
+    obj->timer = number_range( 4, 7 );
+    do_printf( buf, obj->short_descr, name );
+    free_string( obj->short_descr );
+    obj->short_descr = str_dup( buf );
+    do_printf( buf, obj->description, name );
+    free_string( obj->description );
+    obj->description = str_dup( buf );
+    if (obj->item_type == ITEM_FOOD) {
+      if (IS_SET(ch->form,FORM_POISON)) obj->value[3] = 1;
+      else if (!IS_SET(ch->form,FORM_EDIBLE)) obj->item_type = ITEM_TRASH;
+    }
+    obj_to_room( obj, ch->in_room );
+  }
 }
 
 //----------
-
 void drent_update (CHAR_DATA *ch)
 {
 CHAR_DATA *vch,*vch_next;
