@@ -2213,7 +2213,6 @@ void do_reboot(CHAR_DATA *ch, const char *argument)
     if (rebootcount==0) stc("{RSystem status: NO REBOOT{x\n\r",ch);
     else ptc(ch,"{RSystem status: REBOOT in %d ticks{x\n\r",rebootcount);
     if (!IS_IMMORTAL(ch)) return;
-    ptc(ch, "Rebootcounter: %d\n\r", reboot_counter);
     fclose(fpReserve);
     if ((fp=fopen("recommit.txt","r"))!=NULL) 
     {
@@ -2265,13 +2264,6 @@ void do_reboot(CHAR_DATA *ch, const char *argument)
     ID_FILE="recommit.txt";
     stf("Checkout",ch);
     stc("[{Rrecommit.txt{x] file created\n\r",ch);
-    return;
-  }
-
-  if (!str_prefix(argument,"rebootcounter"))
-  {
-    reboot_counter=0;
-    stc("{RRebootcounter is 0. type 'global save; to save config.{x\n\r", ch);
     return;
   }
 

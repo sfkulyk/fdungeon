@@ -334,20 +334,10 @@ void boot_db( void )
   autologin_pass=0;
 
   load_config();
-
-  // shotdown mud if crashes very often. (C) Saboteur
-  reboot_counter+=REBOOTCOUNTER_STEP;
-  if (reboot_counter>=REBOOTCOUNTER_MAX)
-  {
-    ID_FILE="shutdown.txt";
-    stf("Shutdown by crash overlock!!!",NULL);
-    reboot_counter=0;
-  }
   save_config();
   load_races();
   load_vote();
   load_newspaper();
-// LOADING_DEITIES !!!
   load_deities();
   load_clans();
   // Loading areas

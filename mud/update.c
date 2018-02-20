@@ -1490,17 +1490,6 @@ void update_handler( void )
     clan_update   ();             // clans update
     web_update    ();             // update web pages
 
-    if (reboot_counter>0)
-    {
-      int temp;
-
-      reboot_counter--; // Every tick rebootcounter down
-      for (temp=0;temp<REBOOTCOUNTER_MAX+10;temp+=10)
-      { 
-        if (reboot_counter==temp) save_config();
-      }
-    }
-
     if (rebootcount>0)
     {
       DESCRIPTOR_DATA *d;

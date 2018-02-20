@@ -3419,3 +3419,8 @@ P.S. Люди, когда пишете что-то в test.c старайтесь уложиться в 80 столбцов, не
         * do_equipment disabled - waiting for fixing crashing bug
 4.83.46 (C) Saboteur
 	* Fixed critical bug with description. ~ character was not masked.
+4.84.00 (C) Saboteur
+        * All code moved to git
+        * Code modified for Linux (Thanks to Zdreni AKA Stanislav Oles)
+        * A lot of small workarounds, cleaning warnings, etc.
+        * Please read git log for the future changes
