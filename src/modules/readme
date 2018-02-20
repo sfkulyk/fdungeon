@@ -1,0 +1,11 @@
+$Id: README,v 1.1.1.1 2001/01/22 12:41:47 cvsuser Exp $
+
+2000, unicorn
+
+This is source root for loadable modules.
+
+Current targets:
+ - rfs: NFS server for synthetic filesystem.
+ - testing: testing stuff...
+ - example: example well-commented module for writers
+

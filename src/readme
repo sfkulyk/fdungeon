@@ -1,0 +1,10 @@
+$Id: README,v 1.2 2001/01/28 07:17:22 cvsuser Exp $
+
+2001, unicorn
+
+Here is source root located.
+
+Current targets:
+ - librdso: library main program linked with (for support pluggable
+   functionality)
+ - modules: root directory pluggable modules to be located.
