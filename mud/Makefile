@@ -4,7 +4,8 @@
 PROF	= -O -g
 
 #-DWITH_UNICORN
-C_FLAGS = $(PROF) -I../src/include -I/usr/include -I. -DOLD_RAND -Wall -Werror=unused-but-set-variable -Werror=unused-variable -Wno-unused-result -Wno-address
+#--Werror=unused-but-set-variable -Werror=unused-variable
+C_FLAGS = $(PROF) -I../src/include -I/usr/include -I. -DOLD_RAND -Wall -Wno-unused-result -Wno-address
 
 # fbsd variant
 #DDD DSO_FLG =  -Wl,-E -L../lib -R../lib -lrdso
