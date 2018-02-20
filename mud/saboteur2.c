@@ -367,10 +367,11 @@ void pban( CHAR_DATA *ch, CHAR_DATA *victim, const char *argument )
     one_argument(argument,arg1);
 
     if (EMPTY(victim->pcdata->deny_addr))
-      sprintf(temp,arg1);
+      strcat(temp,arg1);
     else
     {
-      sprintf(temp,victim->pcdata->deny_addr);
+//    sprintf(temp,victim->pcdata->deny_addr);
+      strcat(temp,victim->pcdata->deny_addr);
       strcat(temp," ");
       strcat(temp,arg1);
     }
