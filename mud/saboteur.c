@@ -34,8 +34,8 @@ char *newspaper_subject(int type);
 void travel(int room, int cost, CHAR_DATA *ch, CHAR_DATA *summoner);
 CHAR_DATA * find_summoner       args( ( CHAR_DATA *ch ) );
 
-DECLARE_DO_FUN( do_say  );
-DECLARE_DO_FUN( do_look );
+DECLARE_DO_FUN2( do_say  );
+DECLARE_DO_FUN2( do_look );
 
 char * const vote_table[] =
 {
@@ -535,7 +535,7 @@ void do_blacksmith (CHAR_DATA *ch, const char *argument)
   stc("Набери blacksmith без параметров для справки.\n\r", ch);
 } 
  
-void do_suicide(CHAR_DATA *ch, const char *argument) 
+void do_suicide(CHAR_DATA *ch) 
 { 
   char buf[MAX_STRING_LENGTH];
 
@@ -2666,7 +2666,7 @@ int get_material_modifier(CHAR_DATA *ch, OBJ_DATA *obj)
   return 0;
 } 
 
-void do_fly(CHAR_DATA *ch, const char *argument)
+void do_fly(CHAR_DATA *ch)
 {
 
   if ( !IS_SET(race_table[ch->race].spec,SPEC_FLY)
@@ -2685,7 +2685,7 @@ void do_fly(CHAR_DATA *ch, const char *argument)
   }
 }
 
-void do_walk(CHAR_DATA *ch, const char *argument)
+void do_walk(CHAR_DATA *ch)
 {
   if ( !IS_AFFECTED(ch, AFF_FLYING) ) stc("Ты уже стоишь на земле.\n\r",ch);
   else
@@ -2792,7 +2792,7 @@ int get_skill_bonus(CHAR_DATA *ch,int sn)
   return bonus;
 }
 
-void do_smoke(CHAR_DATA *ch, const char *argument) 
+void do_smoke(CHAR_DATA *ch) 
 { 
   OBJ_DATA *obj;
   bool found=FALSE;
@@ -2840,7 +2840,7 @@ const char *create_word()
   char buf[20];
 
   length=number_range(4,8);
-  for (i=0;i<length;i++) buf[i]=number_range(97,122);
+  for (i=0;i<length;i++) buf[i]=(char)number_range(97,122);
   buf[i]='\0';
   return str_dup(buf);
 }
@@ -2981,7 +2981,7 @@ char *newspaper_subject(int type)
   return (buf[0]!= '\0')? buf : "unknown";
 }
 
-void do_russian(CHAR_DATA *ch, const char *argument)
+void do_russian(CHAR_DATA *ch)
 {
   ch->comm=toggle_int64(ch->comm,COMM_RUSSIAN);
   ptc(ch,"Поддержка русского языка %s{x.\n\r",IS_SET(ch->comm,COMM_RUSSIAN)?"{Gвкл":"{Rвыкл");
@@ -3403,7 +3403,7 @@ void bust_arg( CHAR_DATA *ch, const char *argument)
    if (ch->prefix[0] != '\0') write_to_buffer(ch->desc,ch->prefix,0);
 }
 
-void do_dig( CHAR_DATA *ch, const char *argument )
+void do_dig( CHAR_DATA *ch)
 {
   if (ch->race!=RACE_SKELETON)
   {
@@ -3413,7 +3413,7 @@ void do_dig( CHAR_DATA *ch, const char *argument )
   stc("Но у тебя нет лопаты!\n\r",ch);
 }
 
-void do_guards( CHAR_DATA *ch, const char *argument )
+void do_guards( CHAR_DATA *ch)
 {
   CHAR_DATA *vch,*vch_next,*guard;
   char *message;

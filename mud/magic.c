@@ -12,8 +12,8 @@
 #include "recycle.h" 
  
 // command procedures needed
-DECLARE_DO_FUN(do_look          );
-DECLARE_DO_FUN(do_say           );
+DECLARE_DO_FUN2(do_look          );
+DECLARE_DO_FUN2(do_say           );
  
 // Local functions.
 void say_spell   args( ( CHAR_DATA *ch, int sn ) );
@@ -175,7 +175,7 @@ bool saves_spell( int level, CHAR_DATA *victim, int dam_type )
 { 
   int save = calc_saves(victim) + UMIN((victim->level - level)*2 ,50);
  
-  switch(check_immune(victim,dam_type,NULL))
+  switch(check_immune(victim,dam_type))
   { 
     case IS_IMMUNE:     return TRUE;
     case IS_RESISTANT:  save += 15;     break;
@@ -190,7 +190,7 @@ bool saves_spell( int level, CHAR_DATA *victim, int dam_type )
   } 
   save = URANGE( 5, save, 95 );
 
-  switch(check_immune(victim,dam_type,NULL)) 
+  switch(check_immune(victim,dam_type)) 
   { 
     case IS_RESISTANT:  save += 3;     break;
     case IS_VULNERABLE: save -= 3;     break;
@@ -1977,7 +1977,7 @@ void spell_curse( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   } 
  
   if ( IS_AFFECTED(victim,AFF_CURSE)
-    || check_immune(victim,DAM_NEGATIVE,NULL)==IS_IMMUNE)
+    || check_immune(victim,DAM_NEGATIVE)==IS_IMMUNE)
   { 
     stc("Неудача.\n\r",ch);
     return;
@@ -3350,7 +3350,7 @@ void spell_plague( int sn, int level, CHAR_DATA *ch, void *vo, int target )
 
   if ((ch!=victim && saves_spell(level,victim,DAM_DISEASE)) ||
       (IS_NPC(victim) && IS_SET(victim->act,ACT_UNDEAD)) ||
-      check_immune(victim,DAM_DISEASE,NULL)==IS_IMMUNE) 
+      check_immune(victim,DAM_DISEASE)==IS_IMMUNE) 
   { 
     if (ch == victim) 
       stc("Ты чувствуешь себя на мгновение плохо, но это проходит.\n\r",ch);

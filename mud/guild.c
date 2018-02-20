@@ -19,7 +19,7 @@ struct guild_type guild_table[] =
  { 255,           NULL,            0,                     0 }
 };
 
-DECLARE_DO_FUN( do_say  );
+DECLARE_DO_FUN2( do_say  );
 
 void save_guild(FILE *fp)
 {

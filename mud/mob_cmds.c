@@ -10,7 +10,7 @@
 
 void program_flow( int64, const char *, CHAR_DATA *, CHAR_DATA *, const void *, const void * );
 
-DECLARE_DO_FUN( do_look         );
+DECLARE_DO_FUN2( do_look         );
 extern ROOM_INDEX_DATA *find_location( CHAR_DATA *, char * );
 char * mprog_type_to_name ( int64 type );
 

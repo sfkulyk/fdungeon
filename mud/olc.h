@@ -21,7 +21,7 @@
 typedef bool OLC_FUN            args( ( CHAR_DATA *ch, const char *argument ) );
 #define DECLARE_OLC_FUN( fun )  OLC_FUN    fun
 
-DECLARE_DO_FUN(    do_help    );
+DECLARE_DO_FUN2(    do_help    );
 DECLARE_SPELL_FUN( spell_null );
 DECLARE_OLC_FUN( redit_mpshow   );
 
@@ -57,11 +57,11 @@ extern const struct olc_cmd_type oedit_table[];
 extern const struct olc_cmd_type medit_table[];
 extern const struct olc_cmd_type mpedit_table[];
                                         
-DECLARE_DO_FUN( do_aedit  );
-DECLARE_DO_FUN( do_redit  );
-DECLARE_DO_FUN( do_oedit  );
-DECLARE_DO_FUN( do_medit  );
-DECLARE_DO_FUN( do_mpedit );
+DECLARE_DO_FUN2( do_aedit  );
+DECLARE_DO_FUN2( do_redit  );
+DECLARE_DO_FUN2( do_oedit  );
+DECLARE_DO_FUN2( do_medit  );
+DECLARE_DO_FUN2( do_mpedit );
 
 bool show_commands args ( ( CHAR_DATA *ch, const char *argument ) );
 bool show_help     args ( ( CHAR_DATA *ch, const char *argument ) );

@@ -3,7 +3,7 @@
 # 2001, unicorn
 
 XOBJS = remote_xdr.o remote_clnt.o
-XFILE = $(.CURDIR)/../include/remote.x
+XFILE = ./../include/remote.x
 TARGETS = romtell romreboot
 CLEANFILES = *.o remote.h remote_xdr.c remote_clnt.c $(TARGETS)
 

@@ -14,7 +14,7 @@
 #include "interp.h" 
 
 void load_races();
-void write_skill_table( CHAR_DATA *ch, const char *argument );
+void write_skill_table( CHAR_DATA *ch);
 void pban( CHAR_DATA *ch, CHAR_DATA *victim, const char *argument );
 char *flag_string( const struct flag_type *flag_table, int64 bits );
 int64 flag_value( const struct flag_type *flag_table, const char *argument);
@@ -105,10 +105,10 @@ void do_srcwrite( CHAR_DATA *ch, const char *argument )
     return;
   }
   
-  if (!str_prefix(argument,"skilltable")) write_skill_table(ch,"test");
+  if (!str_prefix(argument,"skilltable")) write_skill_table(ch);
 }
 
-void write_skill_table( CHAR_DATA *ch, const char *argument )
+void write_skill_table( CHAR_DATA *ch)
 {
   int i;
   char buf[MAX_STRING_LENGTH];
@@ -251,7 +251,7 @@ void do_family(CHAR_DATA *ch, const char *argument)
       ptc(ch,"Поле {Yмама {xочищено у  {Y%s{x{x.\n\r",tch->name);
       return;
     }
-    ((char*)argument)[0] = UPPER(argument[0]);
+    ((char*)argument)[0] = (char)UPPER(argument[0]);
     tch->pcdata->mother=str_dup(argument);
     ptc(ch,"Теперь {Y%s{x является мамой {Y%s{x.\n\r",argument,tch->name);
     return;
@@ -266,7 +266,7 @@ void do_family(CHAR_DATA *ch, const char *argument)
       ptc(ch,"Поле {YРодственники {xочищено у  {Y%s{x{x.\n\r",tch->name);
       return;
     }
-    ((char*)argument)[0] = UPPER(argument[0]);
+    ((char*)argument)[0] = (char)UPPER(argument[0]);
     tch->pcdata->kins=str_dup(argument);
     ptc(ch,"Теперь у {Y%s{x есть:\n\r{Y%s{x.\n\r",tch->name,argument);
     return;
@@ -281,7 +281,7 @@ void do_family(CHAR_DATA *ch, const char *argument)
       ptc(ch,"Поле {Yпапа {xочищено у  {Y%s{x{x.\n\r",tch->name);
       return;
     }
-    ((char*)argument)[0] = UPPER(argument[0]);
+    ((char*)argument)[0] = (char)UPPER(argument[0]);
     tch->pcdata->father=str_dup(argument);
     ptc(ch,"Теперь {Y%s{x является папой {Y%s{x.\n\r",argument,tch->name);
     return;
@@ -296,7 +296,7 @@ void do_family(CHAR_DATA *ch, const char *argument)
       ptc(ch,"Поле {Yсупруг {xочищено у  {Y%s{x{x.\n\r",tch->name);
       return;
     }
-    ((char*)argument)[0] = UPPER(argument[0]);
+    ((char*)argument)[0] = (char)UPPER(argument[0]);
     tch->pcdata->marry=str_dup(argument);
     ptc(ch,"Теперь {Y%s{x %s {Y%s{x.\n\r",tch->name,
      tch->sex==2?"замужем за":"женат на",argument);
@@ -312,7 +312,7 @@ void do_family(CHAR_DATA *ch, const char *argument)
       ptc(ch,"Поле {Yлюбовники {xочищено у  {Y%s{x{x.\n\r",tch->name);
       return;
     }
-    ((char*)argument)[0] = UPPER(argument[0]);
+    ((char*)argument)[0] = (char)UPPER(argument[0]);
     tch->pcdata->lovers=str_dup(argument);
     ptc(ch,"Теперь {Y%s{x обвенчан на%s {Y%s{x.\n\r",tch->name,
      tch->sex==2?"а":"",argument);
@@ -328,7 +328,7 @@ void do_family(CHAR_DATA *ch, const char *argument)
       ptc(ch,"Поле {Yпредложение брака{xочищено у  {Y%s{x{x.\n\r",tch->name);
       return;
     }
-    ((char*)argument)[0] = UPPER(argument[0]);
+    ((char*)argument)[0] = (char)UPPER(argument[0]);
     tch->pcdata->propose_marry=str_dup(argument);
     ptc(ch,"Теперь {Y%s{x предлагает руку и сердце {Y%s{x.\n\r",tch->name);
     return;
@@ -893,9 +893,9 @@ void do_backup2( CHAR_DATA *ch, const char *argument )
 
   if (!str_cmp(arg1, "restore") && IS_IMMORTAL(ch))
   {
-    CHAR_DATA *wch;
+    CHAR_DATA *wch=get_pchar_world(ch, arg2);
 
-    if ((wch=get_pchar_world(ch, arg2)))
+    if (wch)
     {
       ptc(ch, "Персонаж %s сейчас в мире.\n\r",wch->name);
       return;

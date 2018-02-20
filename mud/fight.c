@@ -944,7 +944,7 @@ bool damage(CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,int dt,bool sh
   //some immune check. 
   //didn't place returns only 'cause immune is needed later (c) Apc
   immune = FALSE; 
-  if ( check_immune(victim,dt,obj) == IS_IMMUNE ) immune=TRUE;
+  if ( check_immune(victim,dt) == IS_IMMUNE ) immune=TRUE;
   if (IS_NPC(victim) 
    && (
          victim->pIndexData->pShop 

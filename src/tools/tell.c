@@ -47,4 +47,3 @@ main(argc, argv)
 	clnt_destroy(clnt);
 	return 0;
 }
-

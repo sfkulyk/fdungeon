@@ -448,9 +448,9 @@ void light_update (CHAR_DATA *ch)
 {
  if (!IS_NPC(ch)) 
  {
-  OBJ_DATA *obj;
+  OBJ_DATA *obj=get_eq_char(ch,WEAR_LIGHT);
  
-  if ( (obj = get_eq_char(ch,WEAR_LIGHT)) && obj->item_type == ITEM_LIGHT)
+  if ( obj && obj->item_type == ITEM_LIGHT)
   {
    if ((obj->value[2]==-1 || obj->value[2]>998)) obj->value[2]=300;
    if (obj->value[2] == 0)
@@ -541,7 +541,7 @@ void plague_update (CHAR_DATA *ch)
   if (!saves_spell(plague.level - 2,vch,DAM_DISEASE) 
   &&  !IS_IMMORTAL(vch)
 // a esli y tebya immunitet - ne zarazishsya (c) Wagner
-  &&  check_immune(vch,DAM_DISEASE,NULL)!=IS_IMMUNE
+  &&  check_immune(vch,DAM_DISEASE)!=IS_IMMUNE
   &&  !IS_AFFECTED(vch,AFF_PLAGUE) && number_bits(4) == 0)
   {
    stc("Ты чувствуешь жар по всему телу.\n\r",vch);
@@ -553,7 +553,7 @@ void plague_update (CHAR_DATA *ch)
  dam = UMAX(ch->level*2,af->level/5+1);
  if (IS_AFFECTED(ch,AFF_HASTE)) dam*=2;
  if (IS_AFFECTED(ch,AFF_SLOW)) dam/=2;
- if ( check_immune(ch,DAM_DISEASE,NULL)!=IS_IMMUNE)
+ if ( check_immune(ch,DAM_DISEASE)!=IS_IMMUNE)
  {
    ch->mana -= dam;
    ch->move -= dam;
@@ -773,10 +773,11 @@ void mobile_update( void )
    }
 
    // Wander
+   door=number_range(0,15);
+   pexit=ch->in_room->exit[door];
    if (   !IS_SET(ch->act, ACT_SENTINEL)
-       && (door=number_range(0,15))<=5
-       && (pexit=ch->in_room->exit[door])
-       && pexit->u1.to_room
+       && door<=5
+       && pexit && pexit->u1.to_room
        && !IS_SET(pexit->exit_info,EX_CLOSED)
        && !IS_SET(pexit->u1.to_room->room_flags,ROOM_NO_MOB)
        && (!IS_SET(ch->act,ACT_STAY_AREA) 

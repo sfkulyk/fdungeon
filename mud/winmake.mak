@@ -7,7 +7,7 @@
 CC=cl.exe
 
 #CFLAGS= /nologo /ML /W3 /O2g /D "WIN32" /YX /c
-CFLAGS= /nologo /ML /W3 /Od /Zi /Yd /D "WIN32" /c /I$(LNKDIR)\include
+CFLAGS= /nologo /ML /W4 /Od /Zi /Yd /D "WIN32" /c /I$(LNKDIR)\include
 LINK32= link.exe
 
 #LFLAGS= /LIBPATH:$(LNKDIR)/lib wsock32.lib /subsystem:console /DEBUG /incremental:no /machine:I386 /out:"fdungeon.exe"

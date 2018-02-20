@@ -460,7 +460,7 @@ const char * string_format (const char * oldstring)
       if ( cap )
         {
           cap = FALSE;
-          xbuf[i] = UPPER( xbuf[i] );
+          xbuf[i] = (char)UPPER( xbuf[i] );
         }
       i++;
     }

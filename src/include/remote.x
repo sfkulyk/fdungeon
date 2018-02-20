@@ -1,8 +1,3 @@
-/* $Id: remote.x,v 1.1 2001/01/28 19:32:57 cvsuser Exp $
- *
- * 2001, unicorn
- */
-%
 %/* $Id: remote.x,v 1.1 2001/01/28 19:32:57 cvsuser Exp $
 % * 
 % * 2001, unicorn

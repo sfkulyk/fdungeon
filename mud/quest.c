@@ -13,7 +13,7 @@
 #include "tables.h"
 #include "interp.h"
 
-DECLARE_DO_FUN( do_say );
+DECLARE_DO_FUN2( do_say );
 void create_gquest(int min,int max, int mobs);
 void quest_update       args(( void ));
 void gquest_update      args(( void ));
@@ -233,7 +233,8 @@ void do_quest(CHAR_DATA *ch, const char *argument)
         case 3: objvnum = QUEST_OBJQUEST4;break;
         case 4: objvnum = QUEST_OBJQUEST5;break;
        }
-       if((questitem = create_object( get_obj_index(objvnum), ch->level )))
+       questitem = create_object( get_obj_index(objvnum), ch->level );
+       if(questitem)
        {
         obj_to_room(questitem, victim->in_room);
         do_printf(buf, "Подлый воpишка укpал {Y%s{x из коpолевской казны!",get_obj_desc(questitem,'4'));
@@ -285,7 +286,8 @@ void do_quest(CHAR_DATA *ch, const char *argument)
         case 3: objvnum = QUEST_OBJQUEST4;break;
         case 4: objvnum = QUEST_OBJQUEST5;break;
        }
-       if((questitem = create_object( get_obj_index(objvnum), ch->level )))
+       questitem = create_object( get_obj_index(objvnum), ch->level );
+       if(questitem)
        {
        obj_to_room(questitem, ch->questroom);
        ch->questmob=NULL;
@@ -556,18 +558,19 @@ void do_quest(CHAR_DATA *ch, const char *argument)
         break;
       default:
         if (quest_table[item].vnum!=-1)
-         {
-          if((obj = create_object(get_obj_index(quest_table[item].vnum),1)))
+        {
+          obj = create_object(get_obj_index(quest_table[item].vnum),1);
+          if(obj)
           {
-           if (quest_table[item].level==-1) obj->level=ch->level;
-           else obj->level=quest_table[item].level;
+            if (quest_table[item].level==-1) obj->level=ch->level;
+            else obj->level=quest_table[item].level;
           }
           else 
           {
-          do_say(questman,"Сорри, не могу создать нужную тебе вешь.. Беги к Иммам!");
-          ch->questpoints+= quest_table[item].cost;
+            do_say(questman,"Сорри, не могу создать нужную тебе вешь.. Беги к Иммам!");
+            ch->questpoints+= quest_table[item].cost;
           }
-         } 
+        } 
         break;
     }
 

@@ -10,20 +10,17 @@
 #define FreeBSD
 #if defined(TRADITIONAL)
 #define const
-//DDD #define args( list )              ( )
-//DDD #define DECLARE_DO_FUN( fun )     void fun( )
 #define DECLARE_SPEC_FUN( fun )   bool fun( )
 #define DECLARE_SPELL_FUN( fun )  void fun( )
 #else
 #define const
-//DDD #define args( list )              ( )
-//DDD #define DECLARE_DO_FUN( fun )     DO_FUN    fun
 #define DECLARE_SPEC_FUN( fun )   SPEC_FUN  fun
 #define DECLARE_SPELL_FUN( fun )  SPELL_FUN fun
 #endif
 
 #define args( list )  list
-#define DECLARE_DO_FUN( fun )   void fun( CHAR_DATA* ch, const char* argument )
+#define DECLARE_DO_FUN2( fun )   void fun( CHAR_DATA* ch, const char* argument )
+#define DECLARE_DO_FUN1( fun )  void fun( CHAR_DATA* ch)
 
 // Assume BSD compatible GCC - By Shiva
 #if defined (WIN32)
@@ -583,7 +580,7 @@ void    affect_check    args( (CD *ch, int where, int64 vector) );
 int     count_users     args( (OD *obj) );
 void    deduct_cost     args( (CD *ch, int64 cost) );
 void    affect_enchant  args( (OD *obj) );
-int     check_immune    args( (CD *ch, int dt, OD *obj) );
+int     check_immune    args( (CD *ch, int dt) );
 int64   flag_lookup         ( const char *name, const struct flag_type *flag_table);
 int     position_lookup args( ( const char *name) );
 int     sex_lookup      args( ( const char *name) );

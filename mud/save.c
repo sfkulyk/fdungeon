@@ -35,8 +35,8 @@ char * print_flags(int flag)
   {
     if (IS_SET(flag,1<<count))
     {
-      if (count < 26)  buf[pos] = 'A' + count;
-      else             buf[pos] = 'a' + (count - 26);
+      if (count < 26)  buf[pos] = (char)('A' + count);
+      else             buf[pos] = (char)('a' + (count - 26));
       pos++;
     }
   }
@@ -845,10 +845,10 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
 
       if (!str_cmp (word, "Class"))
       {
-        ch->classmag = fread_number (fp);
-        ch->classcle = fread_number (fp);
-        ch->classthi = fread_number (fp);
-        ch->classwar = fread_number (fp);
+        ch->classmag = (char)fread_number (fp);
+        ch->classcle = (char)fread_number (fp);
+        ch->classthi = (char)fread_number (fp);
+        ch->classwar = (char)fread_number (fp);
         fMatch = TRUE;
         break;
       }

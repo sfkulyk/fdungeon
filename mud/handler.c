@@ -115,7 +115,7 @@ const char *weapon_name( int weapon_type)
 // for immunity, vulnerabiltiy, and resistant
 // the 'globals' (magic and weapons) may be overriden
 // three other cases -- wood, silver, and iron -- are checked in fight.c */
-int check_immune(CHAR_DATA *ch, int dt, OBJ_DATA *obj)
+int check_immune(CHAR_DATA *ch, int dt)
 {
   //bool immune=FALSE;
   int  bit=0;

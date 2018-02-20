@@ -15,11 +15,11 @@
 #include "recycle.h"
 
 // command procedures needed
-DECLARE_DO_FUN(do_groups        );
-DECLARE_DO_FUN(do_help          );
-DECLARE_DO_FUN(do_showskill     );
-DECLARE_DO_FUN(do_say           );
-DECLARE_DO_FUN(do_ahelp         );
+DECLARE_DO_FUN2(do_groups        );
+DECLARE_DO_FUN2(do_help          );
+DECLARE_DO_FUN2(do_showskill     );
+DECLARE_DO_FUN2(do_say           );
+DECLARE_DO_FUN2(do_ahelp         );
 int min_level(CHAR_DATA *ch,int sn);
 int skill_cost(CHAR_DATA *ch,int sn);
 int group_cost(CHAR_DATA *ch,int gn);
