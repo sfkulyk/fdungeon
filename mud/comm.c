@@ -31,7 +31,6 @@
 #include "telnet.h"
 const char echo_off_str[]={(char)IAC,(char)WILL,(char)TELOPT_ECHO,'\0'};
 const char echo_on_str []={(char)IAC,(char)WONT,(char)TELOPT_ECHO,'\0'};
-const char go_ahead_str[]={(char)IAC,(char)GA,'\0'};
 #endif
 
 #include "merc.h"
@@ -83,7 +82,6 @@ extern  int     malloc_verify   args( ( void ) );
 #include "telnet.h"
 const   char    echo_off_str    [] = { IAC, WILL, TELOPT_ECHO, '\0' };
 const   char    echo_on_str     [] = { IAC, WONT, TELOPT_ECHO, '\0' };
-const   char    go_ahead_str    [] = { IAC, GA, '\0' };
 int     select          args( ( int width, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout ) );  
 #endif
 
@@ -1234,8 +1232,10 @@ bool process_output (DESCRIPTOR_DATA * d, bool fPrompt)
         write_to_buffer (d,"\n\r", 2) ;
         bust_a_prompt   (d->character) ;
       }
-      if (IS_SET(ch->comm, COMM_TELNET_GA))
-        write_to_buffer (d, go_ahead_str, 0) ;
+
+      if (IS_SET(ch->comm, COMM_TELNET_GA)) {
+        write_to_buffer (d, "\xff\xff\0", 0); // 
+      }
     }
   }
   
