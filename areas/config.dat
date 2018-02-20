@@ -1,5 +1,4 @@
 ; Configuration file
-Rebootcounter 0
 Global_config GIO
 Autologin 0 0
 FILE_WHO who.htm~

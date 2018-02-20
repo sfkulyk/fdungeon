@@ -661,12 +661,6 @@ void do_global( CHAR_DATA *ch, const char *argument )
    ptc (ch,"Ignorecrash  :%s\n\r",(IS_SET(global_cfg,CFG_IGNORECRASH)) ? "{Gon{x" : "{Doff{x");
    ptc (ch,"Bugtrace     :%s\n\r",(IS_SET(global_cfg,CFG_BUGTRACE)) ? "{Gon{x" : "{Doff{x");
 #endif
-   ptc (ch,"RebootCounter:%d\n\r",reboot_counter);
-#ifdef WITH_DSO
-          /*
-           * So, how do I disable commands, which not loaded (yet)
-           */
-#endif
    for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ )
     if (IS_SET(cmd_table[cmd].flag, DENY)) ptc (ch, "Deny  :{R%s{x\n\r", cmd_table[cmd].name);
    return;
@@ -1407,5 +1401,5 @@ void do_player(CHAR_DATA *ch, const char *argument)
 void do_version( CHAR_DATA *ch, const char *argument )
 {
   stc("\n\r{CForgotten Dungeon {c(Initial version Rom24b4a)\n\r"
-      "{YCurrent version {G4.83.46 (Saboteur){x\n\r",ch);
+      "{YCurrent version {G4.84.00 (Saboteur){x\n\r",ch);
 }

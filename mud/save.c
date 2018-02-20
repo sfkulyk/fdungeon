@@ -1808,7 +1808,6 @@ void save_config ()
   }
   // Saving configuration
   do_fprintf(fp,"; Configuration file\n");
-  do_fprintf(fp,"Rebootcounter %d\n", reboot_counter);
 
   if (IS_SET(global_cfg,CFG_LOCAL))
   {

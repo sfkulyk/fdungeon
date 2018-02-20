@@ -959,9 +959,6 @@ void load_config()
           offers++;
         }
         break;
-      case 'R':
-        KEY( "Rebootcounter", reboot_counter,fread_number(fp));
-        break;
 #ifdef WITH_DSO
       case 'M':
         if (!strcmp(word, "Module")) {

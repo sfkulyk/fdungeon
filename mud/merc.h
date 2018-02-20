@@ -288,7 +288,6 @@ extern int cnt_buff;
 int64          global_cfg;  // Configuration
 int            max_skill;  // was max_skill definition. Now variable
 char         * assasin_targets;
-int            reboot_counter;    // Counter of Reboots
 int            rebootcount;       // Time-counter to reboot
 int            PULSE_PER_SECOND;
 int            PULSE_UPDCHAR;

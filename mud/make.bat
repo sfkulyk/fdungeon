@@ -1,4 +1,4 @@
 @echo off
-SET PATH=C:\!Work\link;%PATH%
 SET LNKDIR=c:\!work\link
-C:\!Work\link\nmake /f winmake.mak /S %1
+SET PATH=%LNKDIR%;%PATH%
+nmake.exe /f winmake.mak /S %1

@@ -23,10 +23,6 @@
 #define  MAX_PERM_BLOCK  131072
 #define  MAX_MEM_LIST    11
 
-#define REBOOTCOUNTER_STEP   6 // every reboot add 6 ticks
-#define REBOOTCOUNTER_MAX   60 // if reboot_counter>60 - create shutdown file
-
-
 #define FILE_NORMAL 0x00 // Normal file - No read/write restrictions
 #define FILE_RO     0x01 // Read only file
 #define FILE_HID    0x02 // Hidden file
