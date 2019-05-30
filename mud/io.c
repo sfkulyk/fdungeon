@@ -1077,7 +1077,7 @@ void dlog(const char *fmt,...)
 
   if (!IS_SET(global_cfg,CFG_DLOG)) return;
 
-  strftime(ttime,19,"%d%m %a %H:%M:%S:",localtime(&current_time));
+  strftime(ttime,19,"%y%m%d %a %H:%M:%S:",localtime(&current_time));
   strtime=ttime;
 
 #include "printf.c"
@@ -1088,17 +1088,13 @@ void dlog(const char *fmt,...)
   strcpy(log_buf, buff); /* @#$... (unicorn) */
   strcat(strtime,"\n");
 
-#if defined(WIN32)
-  fprintf( stdout, strtime);
-#else
-  fprintf( stderr, strtime);
-#endif
+  fprintf( stdout,"%s", strtime);
 
   fclose(logReserve);
   fp = fopen ("full.log", "a+b");
   if (fp != NULL)
   {
-    fprintf(fp, strtime);
+    fprintf(fp,"%s", strtime);
     fclose(fp);
   }
   logReserve = fopen (LOGR_FILE, "r");
@@ -1122,7 +1118,7 @@ void log_printf(const char *fmt,...)
   memset (buff, 0, MAX_STRING_LENGTH) ;
   buf = buff ;
 
-  strftime(ttime,19,"%d%m %a %H:%M:%S:",localtime(&current_time));
+  strftime(ttime,19,"%y%m%d %a %H:%M:%S:",localtime(&current_time));
   strtime=ttime;
 
 #include "printf.c"
@@ -1133,17 +1129,13 @@ void log_printf(const char *fmt,...)
   strcpy(log_buf, buff); /* @#$... (unicorn) */
   strcat(strtime,"\n");
 
-#if defined(WIN32)
-  fprintf( stdout, strtime);
-#else
-  fprintf( stderr, strtime);
-#endif
+  fprintf(stdout, "%s",strtime);
 
   fclose(logReserve);
   fp = fopen ("full.log", "a+b");
   if (fp != NULL)
   {
-    fprintf(fp, strtime);
+    fprintf(fp,"%s", strtime);
     fclose(fp);
   }
   logReserve = fopen (LOGR_FILE, "r");

@@ -8,7 +8,7 @@
 $goddies='saboteur@saboteur.com.ua';
 $myaddress='saboteur@saboteur.com.ua';
 
-unlink "install.txt", "recommit.txt", "shutdown.txt";
+unlink "install.txt", "shutdown.txt";
 
 use IO::Handle;
 use POSIX qw(strftime);
@@ -41,80 +41,13 @@ sub restart {
 	open SL, ">>start.log";
 
 	$now=localtime;
-	system strftime "gzip < full.log > %d%m%y_%H-%M.tgz", localtime;
+	system strftime "gzip < full.log > %y%m%d_%H%M.tgz", localtime;
 	unlink '/tmp/mud.core', 'full.log';
-
-	if (-f 'execute.txt') {
-		chmod 755, 'execute.txt';
-		system './execute.txt';
-		unlink 'execute.txt';
-	}
 
 	if (-f 'shutdown.txt') {
 		unlink 'shutdown.txt';
 		print SL " *** Shutdown *** \n$now\n";
                 exit;
-	}
-
-	if (-f 'install.txt') {
-		unlink 'install.txt';
-		open SH,"|/bin/sh";
-		print SH <<EOF
-		cd ..
-		cd mud
-		make install; wait
-		close SH;
-	}
-
-	if (-f 'recommit.txt') {
-		unlink 'recommit.txt';
-		print SL " *** Shutdown *** \n$now\n";
-		
-		# Hope, this is realy needed \=
-		system strftime "gzip < rom > rom.+%d%m-%Y_%HH-%MM.gz", localtime;
-
-		open SH, "|/bin/sh";
-		print SH <<EOF
-		cd ..
-		
-		#CVSROOT=$cvsroot; export CVSROOT
-		
-		LIBOWN=`id -un`; export LIBOWN
-		LIBGRP=`id -gn`; export LIBGRP
-
-		cvs co src;	wait
-		cvs co mud;	wait
-
-		# build unicorn's things.
-		(
-			cd src
-
-			# Following fine to keep dev. copy clean,
-			# but we have exported code, so don't care.
-			#make obj;	wait
-
-			make depend;	wait
-			make;		wait
-			make install;	wait
-		) > src.co-log 2>&1
-
-		# build base FD things.
-		(
-			cd mud
-			
-			# Following will save a lot of time...
-			#make depend; wait
-			make clean;	wait
-			make;		wait
-			make install;	wait
-		) > mud.co-log 2>&1
-
-		cat src.co-log | mail -s 'Auto make - Reboot and reinstall SRC' -c saboteur\@saboteur.com.ua
-		cat mud.co-log | mail -s 'Auto make - Reboot and reinstall MUD' -c saboteur\@saboteur.com.ua
-EOF
-;
-		close SH;
-		unlink 'reboot.txt';
 	}
 
 	print SL "****************************** Started\n$now\n";
@@ -217,7 +150,7 @@ while(<FROMGDB>) {
 	s/^\(gdb\) //;
 	print "<gdb> $_\n";
 
-	attach if /^GNU gdb 5.2.1/;
+	attach if /Ubuntu 7.11.1-0ubuntu1~16.5/;
 	crash if s/^Program received signal .*, (.*)$/\1/;
 	restart if /^The program no longer exists/;
 	restart if /^Program exited/;
