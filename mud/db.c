@@ -3684,14 +3684,10 @@ void log_string( const char *str )
   FILE *fp;
   char tmp[MAX_STRING_LENGTH];
 
-  strftime(tmp,19,"%d%m %a %H:%M:%S:",localtime(&current_time));
+  strftime(tmp,21,"%y%m%d %a %H:%M:%S:",localtime(&current_time));
   strcat(tmp,str);
   strcat(tmp,"\n");
-#if defined(WIN32)
-  do_fprintf(stdout,tmp);
-#else
-  do_fprintf(stderr,tmp);
-#endif
+  do_fprintf(stdout,"%s",tmp);
   fclose (logReserve);
   fp = fopen ("full.log", "a+b");
   if (fp != NULL)

@@ -1077,7 +1077,7 @@ void dlog(const char *fmt,...)
 
   if (!IS_SET(global_cfg,CFG_DLOG)) return;
 
-  strftime(ttime,19,"%y%m%d %a %H:%M:%S:",localtime(&current_time));
+  strftime(ttime,21,"%y%m%d %a %H:%M:%S:",localtime(&current_time));
   strtime=ttime;
 
 #include "printf.c"
@@ -1118,7 +1118,7 @@ void log_printf(const char *fmt,...)
   memset (buff, 0, MAX_STRING_LENGTH) ;
   buf = buff ;
 
-  strftime(ttime,19,"%y%m%d %a %H:%M:%S:",localtime(&current_time));
+  strftime(ttime,21,"%y%m%d %a %H:%M:%S:",localtime(&current_time));
   strtime=ttime;
 
 #include "printf.c"
