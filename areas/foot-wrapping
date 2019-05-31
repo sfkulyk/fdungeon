@@ -5,7 +5,7 @@
 # 2000, unicorn
 #
 
-$goddies='saboteur@saboteur.com.ua';
+$goddies='saboteur@saboteur.com.ua;fd@localhost';
 $myaddress='saboteur@saboteur.com.ua';
 
 unlink "install.txt", "shutdown.txt";
@@ -41,8 +41,6 @@ sub restart {
 	open SL, ">>start.log";
 
 	$now=localtime;
-	system strftime "gzip < full.log > %y%m%d_%H%M.tgz", localtime;
-	unlink '/tmp/mud.core', 'full.log';
 
 	if (-f 'shutdown.txt') {
 		unlink 'shutdown.txt';

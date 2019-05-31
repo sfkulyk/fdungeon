@@ -80,7 +80,6 @@ void web_update()
   if (fname_who)
   {
     write_who();
-    log_printf("Updated who file on web [%s].", fname_who);
+//    log_printf("Updated who file on web [%s].", fname_who);
   }
-
 }
