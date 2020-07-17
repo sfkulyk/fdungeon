@@ -40,16 +40,9 @@ Ours license terms are:
  -- If you use any area file from Forgotten Dungeon Mud, it must contain name 
     of the area author and name of area translator, if existing.
  -- The 'credits' command must report ALL original authors.
- -- You must notify the Forgotten Dungeon creators that you are operating
-    an free-released Forgotten Dungeon Mud version.
  -- Copyrights must remain in original source.
- -- do not change files that contain only license or copyright text. Like test.c,
+ -- do not change files that contain only license or copyright text.
     license.fd and other.
-
-If you do not follow these license terms, we will ask you to comply.  If that
-doesn't work, then we will talk to your system administrators (not about your
-running a mud, but on the grounds that you're using our copyrighted software
-without permission).
 
 These are very generous terms for any software.  If you don't want to accept
 them, feel free to run some other software, or write your own.
