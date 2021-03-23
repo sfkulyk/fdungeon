@@ -45,48 +45,58 @@ Forgotten Dungeon CREDITS:
 * Forgotten Dungeon MUD has been established for the first time at         *
 * hosix.ntu-kpi.kiev.ua:9000 (02/Oct/1998)                                 *
 * in Kiev Politechnical Institute (KPI), Ukraine                           *
-*   Admins: Saboteur, Adron, Kapitan                                       *
+*   Creators: Saboteur, Adron, Kapitan                                     *
 *                                                                          *
-* Main implementors:                                                       *
-*  Saboteur (1997-2004)                                                    *
-*   - coding, bugfixing, maintainer, administering, event manager, etc.    *
-*  Andron  (1998-2000)                                                     *
+* Head developers:                                                         *
+*  Sergii Kulyk aka Saboteur (1997-2004)                                   *
+*   - coding, bugfixing, maintainer, manager, etc.                         *
+*  Taras Phizer aka Adron  (1998-2000)                                     *
 *   - common coding, features, ideas etc and etc :)                        *
-*  Invader:                                                                *
+*                                                                          *
+* Other developers:                                                        *
+*  Oleg Grodzevich aka Invader:                                            *
 *   - engine refactoring, specificied unix questions                       *
-*  Magica:                                                                 *
+*  Ruslan Kovtun aka Magica:                                               *
 *   - common coding, ideas.                                                *
+*  Dragon:                                                                 *
+*   - common coding, late maintainer                                       * 
+*  Wagner:                                                                 *
+*   - areafixing, coding                                                   *
 *  Kapitan:                                                                *
 *   - some beer, idea and COOL translations :)                             *
+*  Vitaliy Bogdanov aka Chase:                                             *
+*   - coding, ideas                                                        *
+*  Apc:                                                                    *
+*   - common coding                                                        *
+*  Cortney                                                                 *
+*   - common codingm bugfixing                                             *
+*                                                                          *
 * Immortals:                                                               *
-*  Apc, Udun, Lina, Chase: coding, ideas                                   *
-*  Cortney: some bugs and specificied questions                            *
+*  Udun, Lina: coding, ideas                                               *
 *  Astellar: coding, areafixing, ideas                                     *
-*  Dragon: coding                                                          *
-*  Wagner: areafixing, coding                                              *
 *  Eric, Sirius, Antarex, Snaker, Eliot: areafixing, ideas                 *
 *                                                                          *
 * Coders:                                                                  *
 *  Dinger: implementing TIPSY command, game formulas,bugs,ideas            *
 *  Jasana: game formulas, fixes, areafixes, ideas                          *
 *                                                                          *
-* Special Thanks:                                                          *
-* Dron aka Merlin: Codepage code, some ideas                               *
-* Tim Yunaev aka Ayaks: pack code, ideas                                   *
+* Special Thanks to:                                                       *
+*   Dron aka Merlin: Codepage code, some ideas                             *
+*   Tim Yunaev aka Ayaks: pack code, ideas                                 *
 *                                                                          *
-* Area Builders:                                                           *
+* Top area Builders:                                                       *
+*  Saboteur: arena, immortal castle, checking and balancing incoming areas *
 *  Alw     : Dark Castle                                                   *
 *  Sable   : Delta                                                         *
-*  Eric    : Улей, Антарийский Зоопарк                                     *
-*  Astellar: Дворец Пророков, Тьма                                         *
-*  Saboteur: arena, immortal castle                                        *
+*  Eric    : РЈР»РµР№, РђРЅС‚Р°СЂРёР№СЃРєРёР№ Р—РѕРѕРїР°СЂРє                                     *
+*  Astellar: Р”РІРѕСЂРµС† РџСЂРѕСЂРѕРєРѕРІ, РўСЊРјР°                                         *
 *  Adron   : army, immortal castle                                         *
 *  Fulcrum : Earthsea                                                      *
 *  Snaker  : Tolkien                                                       *
-*  Jakumoto: Храм Древнего Бога                                            *
+*  Jakumoto: РҐСЂР°Рј Р”СЂРµРІРЅРµРіРѕ Р‘РѕРіР°                                            *
 *  Slayer  : DoomStar                                                      *
 *  Imperror: KPI                                                           *
 *  Priori  : Lost City                                                     *
-*  Gendalf : Козацька Сич                                                  *
-*  Cortney : Зал славы Рок-Музыки                                          *
+*  Gendalf : РљРѕР·Р°С†СЊРєР° РЎРёС‡                                                  *
+*  Cortney : Р—Р°Р» СЃР»Р°РІС‹ Р РѕРє-РњСѓР·С‹РєРё                                          *
 ****************************************************************************

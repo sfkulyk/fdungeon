@@ -190,6 +190,7 @@ while (*fmt)
       p = va_arg(data,char*);
       if (p!=NULL)
       {
+
         while (*p && *p!='\0')
         {
           if (*p=='{' || *p=='`')

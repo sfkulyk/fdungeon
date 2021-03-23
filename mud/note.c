@@ -1,11 +1,7 @@
 // Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
-#ifndef WIN32
-#include <sys/time.h>
-#else
 #include <time.h>
-#endif
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
@@ -576,6 +572,7 @@ void parse_note( CHAR_DATA *ch, const char *argument, int type )
   BUFFER *buffer;
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
+  char time_buf[25];
   NOTE_DATA *pnote;
   NOTE_DATA **list;
   char *list_name;
@@ -1085,11 +1082,9 @@ void parse_note( CHAR_DATA *ch, const char *argument, int type )
       return;
     }
     ch->pnote->next                 = NULL;
-    strtime                         = ctime( &current_time );
-    strtime[strlen(strtime)-1]      = '\0';
-    ch->pnote->date                 = str_dup( strtime );
+    strftime(time_buf,25,"%y%m%d %a %H:%M:%S:",localtime(&current_time));
+    ch->pnote->date                 = str_dup( time_buf );
     ch->pnote->date_stamp           = current_time;
-
     append_note(ch->pnote);
     ch->pnote = NULL;
     stc("Сообщение послано.\n\r",ch);

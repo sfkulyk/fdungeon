@@ -1,7 +1,7 @@
 // Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
-#ifndef WIN32
+#if defined (WIN32)
 #include <sys/time.h>
 #else
 #include <time.h>
@@ -1399,12 +1399,16 @@ void do_backup( CHAR_DATA *ch, const char *argument )
 
   if (!str_cmp(arg1, "show"))
   {
+    char time_buf[25];
     do_printf( buf, "%s%s", PLAYER_DIR2, capitalize( arg2 ) );
 
     if (load_char_obj(&d, arg2, SAVE_BACKUP))
     {
       ptc(ch, "В архиве найден следующий персонаж: %s\n\r", d.character->name);
-      ptc(ch, "{WВ последний раз этот персонаж заходил {Y%s{W{x\n\r",ctime(&d.character->lastlogin));
+
+      strftime(time_buf,25,"%y%m%d %a %H:%M:%S:",localtime(&d.character->lastlogin));
+
+      ptc(ch, "{WВ последний раз этот персонаж заходил {Y%s{W{x\n\r",time_buf);
       ptc(ch, "Уровень %d,  QuestPoints: %d\n\r",d.character->level, d.character->questpoints);
       extract_char(d.character, TRUE);
       return;
