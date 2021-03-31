@@ -12,10 +12,12 @@
 // -- Furey  26 Jan 1993
 
 #include <sys/types.h>
+
 #if defined( WIN32 )
 #include <sys/timeb.h> // for _ftime(), uses _timeb struct
-#else
 #include <sys/time.h>
+#else
+#include <time.h>
 #endif
 
 #include <ctype.h>
@@ -23,7 +25,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <time.h>
 #include <stdarg.h>
 
 #if defined( WIN32 )

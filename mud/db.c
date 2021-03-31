@@ -31,10 +31,8 @@ struct magic {
 #include <sys/types.h>
 #else
 #include <sys/types.h>
-#include <sys/time.h>
 #include <sys/resource.h>
 #endif
-
 #include "merc.h"
 #include "db.h"
 #include "recycle.h"

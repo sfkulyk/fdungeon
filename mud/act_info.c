@@ -1,11 +1,7 @@
 // Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
-#ifndef WIN32
-#include <sys/time.h>
-#else
 #include <time.h>
-#endif
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -1236,9 +1232,11 @@ void do_oscore(CHAR_DATA *ch, const char *argument)
   }
   if (ch->level >= 10) ptc(ch, "Состояние души: %d.  ", ch->alignment);
   ptc(ch,"Ты %s {x", get_align(ch));
+
   ptc(ch,"Ты помнишь:%s\n\r",(ch->pcdata->pkillers==NULL) ? "никого" : ch->pcdata->pkillers);
   if (ch->godcurse > 0)
     ptc(ch,"Божественное проклятье: %d%%\n\r", ch->godcurse);
+
   if (ch->host != NULL)
     ptc(ch, "\n\r{WВ последний раз этот персонаж заходил {Y%s{W с {G%s{x.\n\r\n\r",ctime(&ch->lastlogin),ch->host);
 }
