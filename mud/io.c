@@ -1392,6 +1392,5 @@ void do_player(CHAR_DATA *ch, const char *argument)
 
 void do_version( CHAR_DATA *ch, const char *argument )
 {
-  stc("\n\r{CForgotten Dungeon {c(Initial version Rom24b4a)\n\r"
-      "{YCurrent version {G4.84.00 (Saboteur){x\n\r",ch);
+  stc("\n\r{CForgotten Dungeon. {YCurrent version: {G4.86.00 (Saboteur){x\n\r",ch);
 }

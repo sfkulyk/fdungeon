@@ -31,27 +31,15 @@ fully rewritten. Untouched files left only license.txt and license.doc :)
 
 Ours license terms are:
 
- -- No resale or operation for profit.
- -- Names of Diku, Merc and ROM author's must appear in mud, 
-    as them with in their license terms.
- -- Names of Saboteur and Adron, Creators of FD must appear in login sequence.
- -- Text "Based on Forgotten Dungeon MUD version x.xx" in your license or
-    copyright files with version, that you use as starting sourcebase.
- -- If you use any area file from Forgotten Dungeon Mud, it must contain name 
-    of the area author and name of area translator, if existing.
- -- The 'credits' command must report ALL original authors.
- -- You must notify the Forgotten Dungeon creators that you are operating
-    an free-released Forgotten Dungeon Mud version.
+ -- Names of FD, Diku, Merc and ROM author's must appear in mud, 
+    as them with in their license terms - check 'credits' command.
  -- Copyrights must remain in original source.
- -- do not change files that contain only license or copyright text. Like test.c,
-    license.fd and other.
-
-If you do not follow these license terms, we will ask you to comply.  If that
-doesn't work, then we will talk to your system administrators (not about your
-running a mud, but on the grounds that you're using our copyrighted software
-without permission).
+ -- If you use any area file from Forgotten Dungeon Mud, it must contain name 
+    of the area creator / area translator, if existing.
+ -- do not change files that contain only license or copyright text.
+    license.fd and other - add your own new files.
 
 These are very generous terms for any software.  If you don't want to accept
 them, feel free to run some other software, or write your own.
 
-						Forgotten Dungeon Immortals team.
+						Forgotten Dungeon team.
