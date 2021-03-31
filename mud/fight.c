@@ -4725,7 +4725,7 @@ void do_shock_hit( CHAR_DATA *ch, const char *argument )
   { 
     damage(ch,victim,0,gsn_shock_hit,DAM_BASH, TRUE, FALSE, NULL); 
     act("“ы промахиваешьс€ мимо $C4...",ch,NULL,victim,TO_CHAR); 
-    act("$c1 промахиваетс€ мимо $C4.",ch,NULL,victim,TO_NOTVICT); 
+    act("$c1 промахиваетс€ мимо $C6.",ch,NULL,victim,TO_NOTVICT); 
     act("“ы уклон€ешьс€ от удара $n.",ch,NULL,victim,TO_VICT); 
     WAIT_STATE(ch, 2*PULSE_VIOLENCE);
     check_improve(ch,gsn_shock_hit,FALSE,1);
