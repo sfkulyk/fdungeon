@@ -14,7 +14,7 @@
 #include "recycle.h"
 
 // stuff for recyling notes
-NOTE_DATA *note_free;
+extern NOTE_DATA *note_free; // prool
 
 NOTE_DATA *new_note()
 {
@@ -155,7 +155,7 @@ void free_gen_data(GEN_DATA *gen)
 } 
 
 /* stuff for recycling extended descs */
-EXTRA_DESCR_DATA *extra_descr_free;
+extern EXTRA_DESCR_DATA *extra_descr_free; // prool
 
 EXTRA_DESCR_DATA *new_extra_descr(void)
 {
@@ -723,7 +723,7 @@ void free_penalty(PENALTY_DATA *penalty)
   penalty_free = penalty;
 }
 
-VOTE_DATA *vote_free;
+extern VOTE_DATA *vote_free; // prool
 
 VOTE_DATA *new_vote(void)
 {
@@ -888,7 +888,7 @@ void free_raffect(RAFFECT *raffect)
   cnt_raff--;
 }
 
-NEWS_DATA *news_free;
+extern NEWS_DATA *news_free; // prool
 
 NEWS_DATA *new_news()
 {

@@ -73,6 +73,27 @@ void load_races();
 void load_vote();
 void load_newspaper(void);
 
+// prool'a add globals (for cygwin)
+int64          global_cfg;  // Configuration
+int            max_skill;  // was max_skill definition. Now variable
+char         * assasin_targets;
+int            rebootcount;       // Time-counter to reboot
+int            PULSE_PER_SECOND;
+int            PULSE_UPDCHAR;
+int            PULSE_VIOLENCE;
+int            PULSE_MOBILE;
+int            PULSE_MUSIC;
+int            PULSE_TICK;
+int            PULSE_AREA;
+const char   * bdmsg[10];
+AUCTION_DATA * auction;
+char         * ID_FILE;
+int            autologin_code;
+int            autologin_pass;
+
+int		maxsocial;
+// end prool
+
 // Globals
 HELP_DATA *       help_first;
 HELP_DATA *       help_last;

@@ -282,22 +282,23 @@ extern int cnt_aff;
 extern int cnt_raff;
 extern int cnt_buff;
 
-int64          global_cfg;  // Configuration
-int            max_skill;  // was max_skill definition. Now variable
-char         * assasin_targets;
-int            rebootcount;       // Time-counter to reboot
-int            PULSE_PER_SECOND;
-int            PULSE_UPDCHAR;
-int            PULSE_VIOLENCE;
-int            PULSE_MOBILE;
-int            PULSE_MUSIC;
-int            PULSE_TICK;
-int            PULSE_AREA;
-const char   * bdmsg[10];
-AUCTION_DATA * auction;
-char         * ID_FILE;
-int            autologin_code;
-int            autologin_pass;
+// prool: add extern keyword
+extern int64          global_cfg;  // Configuration
+extern int            max_skill;  // was max_skill definition. Now variable
+extern char         * assasin_targets;
+extern int            rebootcount;       // Time-counter to reboot
+extern int            PULSE_PER_SECOND;
+extern int            PULSE_UPDCHAR;
+extern int            PULSE_VIOLENCE;
+extern int            PULSE_MOBILE;
+extern int            PULSE_MUSIC;
+extern int            PULSE_TICK;
+extern int            PULSE_AREA;
+extern const char   * bdmsg[10];
+extern AUCTION_DATA * auction;
+extern char         * ID_FILE;
+extern int            autologin_code;
+extern int            autologin_pass;
 
 // OS-dependent declarations.
 // These are all very standard library functions,

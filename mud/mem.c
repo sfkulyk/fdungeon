@@ -24,7 +24,7 @@ SHOP_DATA        * shop_free;
 MOB_INDEX_DATA   * mob_index_free;
 RESET_DATA       * reset_free;
 HELP_DATA        * help_free;
-HELP_DATA        * help_last;
+extern HELP_DATA        * help_last; // prool
 MPROG_CODE       * mpcode_free;
 
 void free_extra_descr( EXTRA_DESCR_DATA *pExtra );

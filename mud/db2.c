@@ -21,6 +21,10 @@
 #include "unicorn.h"
 #endif
 
+// prool:
+const char *fname_online;
+const char *fname_who;
+
 CLAN_DATA *new_clan();
 void load_one_news(FILE *fp);
 

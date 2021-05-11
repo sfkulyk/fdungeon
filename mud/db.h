@@ -58,7 +58,7 @@ extern void assign_area_vnum( int64 vnum );
 void convert_mobile( MOB_INDEX_DATA *pMobIndex );
 void convert_objects( void );
 void convert_object( OBJ_INDEX_DATA *pObjIndex );
-int  maxsocial;
+extern int  maxsocial; // prool
 
 // deities and races from db2.c
 void load_deities(void);
