@@ -1683,7 +1683,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
       return;
     }
 
-    write_to_buffer (d, "\n\rНазови свое имя, странник:  ", 0) ;
+    write_to_buffer (d, "\n\rНазови свое имя, странник (латинскими буквами):  ", 0) ;
     d->connected = CON_GET_NAME ;
     return ;
 
