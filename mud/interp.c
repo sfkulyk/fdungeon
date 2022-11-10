@@ -443,6 +443,7 @@ void interpret( CHAR_DATA *ch, const char *argument )
   // Look for command in command table
 
   trust = get_trust( ch );
+  //printf("Name %s\n", ch->name); // prool
   if (IS_NPC(ch)) trust=UMIN(101,trust);
   command[0]=LOWER(command[0]);
   for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ )

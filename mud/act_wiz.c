@@ -2846,11 +2846,13 @@ void do_advance(CHAR_DATA *ch, const char *argument)
     return;
   }
 
+#if 0 // prool fool
   if (level > get_trust(ch))
   {
     stc("Это выше твоего уровня.\n\r", ch);
     return;
   }
+#endif
 
   if (ch!=victim && get_trust(ch)<110)
   {

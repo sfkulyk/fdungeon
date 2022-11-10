@@ -1565,7 +1565,7 @@ void load_one_deity(FILE *fp, int deity)
       case 'E':
         if ( !strcmp(word,"END") )
         {
-          log_printf("Loading deity: %s...",dtab.name);
+          //log_printf("Loading deity: %s...",dtab.name); // prool
           fread_to_eol(fp);
           return;
         }

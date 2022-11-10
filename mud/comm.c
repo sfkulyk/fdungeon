@@ -352,7 +352,7 @@ int main( int argc, char **argv )
   control = init_socket( port );
   boot_db( );
 //  if( IS_SET(global_cfg,CFG_GTFIX) ) REM_BIT(global_cfg, CFG_GTFIX);
-  log_printf("ROM is ready to rock on port %d.", port );
+  log_printf("Forgotted Dungeon is ready to rock on port %d.", port );
   game_loop_unix( control );
 #if !defined( WIN32 )
   close( control );
@@ -1019,7 +1019,7 @@ bool read_from_descriptor( DESCRIPTOR_DATA *d )
     }
     else if ( nRead == 0 )
     {
-      log_string( "BUG:EOF encountered on read." );
+      //log_string( "BUG:EOF encountered on read." ); // prool
       return FALSE;
     }
 #if !defined( WIN32 )
@@ -1030,7 +1030,7 @@ bool read_from_descriptor( DESCRIPTOR_DATA *d )
 #endif
     else
     {
-      perror( "Read_from_descriptor" );
+      //perror( "Read_from_descriptor" ); // prool
       return FALSE;
     }
   }

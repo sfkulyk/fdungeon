@@ -380,7 +380,7 @@ void boot_db( void )
           log_printf("Failed to load %s", strArea);
           continue;
         }
-        else log_printf("Loading area %s...", strArea);
+        else /*log_printf("Loading area %s...", strArea)*/; // prool
       }
       for ( ; ; )
       {
