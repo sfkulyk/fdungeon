@@ -951,7 +951,7 @@ void close_socket( DESCRIPTOR_DATA *dclose )
             break;
           }
         }
-        if (!prev) bug( "Close_socket: dclose->character in char_list not found.", 0 );
+        //if (!prev) bug( "Close_socket: dclose->character in char_list not found.", 0 ); // prool
       }
       dclose->character=NULL;
       ch->desc=NULL;

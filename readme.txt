@@ -5,7 +5,7 @@ One of the first MMORPG server in Ukraine
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 It uses telnet protocol to play, and by default runs on 4000 port.
 As game client you can use any telnet client,
-or try to find special MUD clients like JMC, Tortilla, Mudlet, Zmud, tinymud, etc.
+or try to find special MUD clients like Zmud, tinimud, etc.
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 based on Diku Mud (see creds.txt for all contributors and codebases)
@@ -15,7 +15,7 @@ Forgotten Dungeon active time: 1998-2005
 First address: hosix.ntu-kpi.kiev.ua:9000
 Public address: mud.ntu-kpi.kiev.ua:4000
 
-Current address: mud.saboteur.com.ua:4001
+Current address: mud.saboteur.com.ua:4000
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 Programming language: Ansi C.
 In Active time it could be compiled and run under FreeBSD, DOS and Windows-32.
@@ -34,3 +34,12 @@ file which contains some history notes.
 
                                                 Sergii Kulyk aka Saboteur
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+From Prool:
+
+I'm running this code in my server
+
+mud.kharkov.org
+
+port 8000
+
