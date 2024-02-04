@@ -1579,15 +1579,14 @@ void remort_update(void)
 
   for ( d = descriptor_list; d != NULL; d = d->next )
   {
-    if ( !d->character || d->connected!=CON_PLAYING || IS_NPC(d->character)
-    || d->character->pcdata->confirm_remort!=2) continue;
-    found=TRUE;
-    ch=d->character;
-    break;
+    if ( d->character && 
+         d->connected==CON_PLAYING &&
+         !IS_NPC(d->character) &&
+         d->character->pcdata->confirm_remort==2) ch=d->character;;
   }
-  if (!ch) return;
+  if (ch == NULL) return;
   stc( "Начинаем процесс перерождения!\n\r", ch);
-  log_printf("Remort process is started for %s",ch->name);
+  log_printf("Remort process is started for %s",(ch->name) ? ch->name : "BUG: unknown name");
 
   d->connected=CON_REMORT;
 /*buggy*/
