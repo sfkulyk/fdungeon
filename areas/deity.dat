@@ -32,7 +32,7 @@ Russian Кецалькоатл|ь|Я|ю|Я|ем|е|Я|ей~
 MinAlign -1000
 MaxAlign -360
 Descr Бог Злобы и Ненависти ко всему {GЖивому{x~
-Worship 3
+Worship 4
 App 4 1 0 0 8 1 7 2 0 0 0 0 0 0 0 0 0 0 0 0
 END
 #Deity
@@ -86,7 +86,7 @@ Russian Саботер||а|у|а|ом|е|а|ов~
 MinAlign -1000
 MaxAlign 1000
 Descr Бог ПознаниЯ, Мудрости и РавновесиЯ~
-Worship 15
+Worship 18
 App 3 1 0 0 12 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 END
 #Deity
@@ -113,7 +113,7 @@ Russian Ксетарекс||а|у|а|ом|е|а|ов~
 MinAlign -1000
 MaxAlign 500
 Descr Бог {rГнева{x, {DМести{x и Безудержной {RЯрости{x~
-Worship 1
+Worship 2
 App 0 0 5 1 13 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 END
 #Deity
@@ -140,7 +140,7 @@ Russian Урз|а|ы|е|у|ой|е|ы|ов~
 MinAlign -1000
 MaxAlign 1000
 Descr Бог {CВоздуха{x, {YМолний{x, {cВетров{x и {yУраганов{x~
-Worship 1
+Worship 2
 App 0 0 0 0 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 END
 #Deity
