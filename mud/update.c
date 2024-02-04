@@ -1585,21 +1585,25 @@ void remort_update(void)
     ch=d->character;
     break;
   }
-
-  if (found==FALSE) return;
+  if (!ch) return;
   stc( "Начинаем процесс перерождения!\n\r", ch);
+  log_printf("Remort process is started for %s",ch->name);
+
   d->connected=CON_REMORT;
 /*buggy*/
 //  cancel_quest(ch,TRUE,20,30);
   if (ch->questmob!=NULL)
   {
+    log_printf("Quest is detected, cancelling");
     cancel_quest(ch,TRUE,20,30);
   }
   ch->nextquest=number_range(10,20);
 
   stop_fighting( ch, TRUE );
   save_one_char( ch, SAVE_BACKUP );
+  log_printf("Backing up character before remort");
   save_char_obj( ch );
+  log_printf("Saving character before remort");
 
   // After extract_char the ch is no longer valid!
   chname=ch->name;
@@ -1607,8 +1611,8 @@ void remort_update(void)
   chcarma=ch->pcdata->carma;
   chfavour=ch->pcdata->favour;
   extract_char( ch, TRUE );
+  log_printf("Remorted character has bee extracted. Loading clean data for %s",chname);
   load_char_obj( d, chname, SAVE_NORMAL );
-
   ch->desc=d;
   ch=d->character;
   ch->level=0;
