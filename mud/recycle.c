@@ -366,9 +366,9 @@ PC_DATA *pcdata_free;
 PC_DATA *new_pcdata(void)
 {
   int a;
-
   static PC_DATA pcdata_zero;
   PC_DATA *pcdata;
+
   if (pcdata_free == NULL) pcdata = alloc_perm(sizeof(*pcdata));
   else
   {

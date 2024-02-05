@@ -4792,7 +4792,7 @@ void do_vbite( CHAR_DATA *ch, const char *argument )
   }
   check_criminal(ch,victim,60); 
  
-  if (number_percent() > ELDER(ch,VAMPIRE_GUILD) ? 90:45)
+  if (ELDER(ch,VAMPIRE_GUILD) || number_percent() > 45)
   { 
     act("$c1 кусает тебя в шею. Ты чувствуешь легкое головокружение!",ch,NULL,victim,TO_VICT); 
     act("Ты кусаешь $C4 в шею!",ch,NULL,victim,TO_CHAR); 

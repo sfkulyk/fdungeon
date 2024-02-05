@@ -519,31 +519,43 @@ int64 cmd_eval( int64 vnum, const char *line, int check,CHAR_DATA *mob,
           }
           break;
       case CHK_HPCNT:
-          if ( lval_char != NULL ) lval = (lval_char->hit * 100)/(UMAX(1,lval_char->max_hit)); break;
+          if ( lval_char != NULL ) lval = (lval_char->hit * 100)/(UMAX(1,lval_char->max_hit));
+          break;
       case CHK_ROOM:
           if ( lval_char != NULL && lval_char->in_room != NULL )
-              lval = lval_char->in_room->vnum; break;
+              lval = lval_char->in_room->vnum;
+          break;
       case CHK_SEX:
-          if ( lval_char != NULL ) lval = lval_char->sex; break;
+          if ( lval_char != NULL ) lval = lval_char->sex;
+          break;
       case CHK_LEVEL:
-          if ( lval_char != NULL ) lval = lval_char->level; break;
+          if ( lval_char != NULL ) lval = lval_char->level;
+          break;
       case CHK_ALIGN:
-          if ( lval_char != NULL ) lval = lval_char->alignment; break;
+          if ( lval_char != NULL ) lval = lval_char->alignment;
+          break;
       case CHK_MONEY:  /* Money is converted to silver... */
           if ( lval_char != NULL ) 
-              lval = lval_char->gold + (lval_char->silver * 100); break;
+              lval = lval_char->gold + (lval_char->silver * 100);
+          break;
       case CHK_OBJVAL0:
-          if ( lval_obj != NULL ) lval = lval_obj->value[0]; break;
+          if ( lval_obj != NULL ) lval = lval_obj->value[0];
+          break;
       case CHK_OBJVAL1:
-          if ( lval_obj != NULL ) lval = lval_obj->value[1]; break;
+          if ( lval_obj != NULL ) lval = lval_obj->value[1];
+          break;
       case CHK_OBJVAL2: 
-          if ( lval_obj != NULL ) lval = lval_obj->value[2]; break;
+          if ( lval_obj != NULL ) lval = lval_obj->value[2];
+          break;
       case CHK_OBJVAL3:
-          if ( lval_obj != NULL ) lval = lval_obj->value[3]; break;
+          if ( lval_obj != NULL ) lval = lval_obj->value[3];
+          break;
       case CHK_OBJVAL4:
-          if ( lval_obj != NULL ) lval = lval_obj->value[4]; break;
+          if ( lval_obj != NULL ) lval = lval_obj->value[4];
+          break;
       case CHK_GRPSIZE:
-          if( lval_char != NULL ) lval = count_people_room( lval_char, 4 ); break;
+          if( lval_char != NULL ) lval = count_people_room( lval_char, 4 );
+          break;
       default:
           return FALSE;
   }

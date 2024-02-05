@@ -1575,42 +1575,38 @@ void remort_update(void)
   int               chfavour;
   CHAR_DATA *       ch=NULL;
   DESCRIPTOR_DATA * d;
-  bool found=FALSE;
 
   for ( d = descriptor_list; d != NULL; d = d->next )
   {
-    if ( d->character && 
-         d->connected==CON_PLAYING &&
-         !IS_NPC(d->character) &&
-         d->character->pcdata->confirm_remort==2) ch=d->character;;
+    if ( d->character && d->connected==CON_PLAYING && !IS_NPC(d->character) &&
+         d->character->pcdata->confirm_remort==2) {
+      ch=d->character;
+      break;
+    }
   }
   if (ch == NULL) return;
   stc( "Начинаем процесс перерождения!\n\r", ch);
   log_printf("Remort process is started for %s",(ch->name) ? ch->name : "BUG: unknown name");
-
   d->connected=CON_REMORT;
+
 /*buggy*/
 //  cancel_quest(ch,TRUE,20,30);
   if (ch->questmob!=NULL)
   {
-    log_printf("Quest is detected, cancelling");
     cancel_quest(ch,TRUE,20,30);
   }
   ch->nextquest=number_range(10,20);
 
   stop_fighting( ch, TRUE );
   save_one_char( ch, SAVE_BACKUP );
-  log_printf("Backing up character before remort");
   save_char_obj( ch );
-  log_printf("Saving character before remort");
 
   // After extract_char the ch is no longer valid!
-  chname=ch->name;
-  chdeity=ch->deity;
+  chname=str_dup(ch->name);
+  chdeity=str_dup(ch->deity);
   chcarma=ch->pcdata->carma;
   chfavour=ch->pcdata->favour;
   extract_char( ch, TRUE );
-  log_printf("Remorted character has bee extracted. Loading clean data for %s",chname);
   load_char_obj( d, chname, SAVE_NORMAL );
   ch->desc=d;
   ch=d->character;
@@ -1672,7 +1668,6 @@ void remort_update(void)
   ch->hit=ch->max_hit;
   ch->mana=ch->max_mana;
   ch->move=ch->max_move;
-
 
   // removes all obj from char
   for ( obj = ch->carrying; obj != NULL; obj = obj_next )

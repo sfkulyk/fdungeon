@@ -179,8 +179,8 @@ void do_offer(CHAR_DATA *ch, const char *argument)
     stc("Syntax:offer request  <char_name>    - сделать заказ\n\r",ch);
     stc("       offer cancel  [<char_name>]   - отменить заказ\n\r",ch);
     stc("       offer list                    - просмотреть список заказов\n\r",ch);
-   if (GUILD(ch,ASSASIN_GUILD))
-    stc("       offer complete <char_name>    - выполнить заказ (сдать ухо)\n\r",ch);
+    if (GUILD(ch,ASSASIN_GUILD))
+      stc("       offer complete <char_name>    - выполнить заказ (сдать ухо)\n\r",ch);
     return;
   }
 

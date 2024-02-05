@@ -1828,7 +1828,7 @@ void spell_cure_disease( int sn, int level, CHAR_DATA *ch,void *vo,int target)
 ///    if( IS_NATURE_DEITY(ch) ) change_favour(ch, 2);
 ///    if( IS_LIGHTMAGIC_DEITY(ch) ) change_favour(ch, 1);
   } 
-  else if (!IS_NPC(victim) && IS_SET(victim->act,PLR_SIFILIS) && number_percent()<(IS_IMMORTAL(ch))?25:5)
+  else if (!IS_NPC(victim) && IS_SET(victim->act,PLR_SIFILIS) && IS_IMMORTAL(ch))
   {
     REM_BIT(victim->act,PLR_SIFILIS);
     stc("Ты волшебным образом исцелился от сифилиса.\n\r",victim);
@@ -4928,7 +4928,7 @@ int cast_rate (int value)
  if (value <= 28) return  3;
  if (value <= 29) return  3;
  if (value <= 30) return  4;
-                  return  5;
+ return  5;
 }
 
 void do_charge( CHAR_DATA *ch, const char *argument )

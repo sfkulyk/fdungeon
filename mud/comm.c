@@ -94,7 +94,8 @@ int     bind            args( ( int s, struct sockaddr *name, int namelen ) );
 void    bzero           args( ( char *b, int length ) );
 int     getpeername     args( ( int s, struct sockaddr *name, int *namelen ) );
 int     getsockname     args( ( int s, struct sockaddr *name, int *namelen ) );
-int     gettimeofday    args( ( struct timeval *tp, struct timezone *tzp ) );
+// int     gettimeofday    args( ( struct timeval *tp, struct timezone *tzp ) );
+int     gettimeofday    args( ( struct timeval *tp, void *tzp ) );
 int     listen          args( ( int s, int backlog ) );
 int     setsockopt      args( ( int s, int level, int optname, void *optval,
                             int optlen ) );
@@ -112,7 +113,8 @@ int     bind            args( ( int s, const void *addr, int addrlen ) );
 void    bzero           args( ( char *b, int length ) );
 int     getpeername     args( ( int s, void *addr, int *addrlen ) );
 int     getsockname     args( ( int s, void *name, int *addrlen ) );
-int     gettimeofday    args( ( struct timeval *tp, struct timezone *tzp ) );
+// int     gettimeofday    args( ( struct timeval *tp, struct timezone *tzp ) );
+int     gettimeofday    args( ( struct timeval *tp, void *tzp ) );
 int     listen          args( ( int s, int backlog ) );
 int     setsockopt      args( ( int s, int level, int optname,
                                 const void *optval, int optlen ) );
@@ -136,7 +138,8 @@ int     listen          args( ( int s, int backlog ) );
 */
 
 int     close           args( ( int fd ) );
-int     gettimeofday    args( ( struct timeval *tp, struct timezone *tzp ) );
+// int     gettimeofday    args( ( struct timeval *tp, struct timezone *tzp ) );
+int     gettimeofday    args( ( struct timeval *tp, void *tzp ) );
 int     read            args( ( int fd, char *buf, int nbyte ) );
 int     select          args( ( int width, fd_set *readfds, fd_set *writefds,
                             fd_set *exceptfds, struct timeval *timeout ) );
@@ -802,7 +805,7 @@ void init_descriptor( int control )
   struct sockaddr_in sock;
   struct hostent *from;
   int desc;
-  int size;
+  unsigned int size;
 
   size = sizeof(sock);
   getsockname( control, (struct sockaddr *) &sock, &size );
@@ -2996,15 +2999,13 @@ void show_string(struct descriptor_data *d, char *input)
   int show_lines;
 
   one_argument(input,buf);
-  if (buf[0] != '\0')
-  {
-    if (d->showstr_head)
-    {
+  if (buf[0] != '\0') {
+    if (d->showstr_head) {
       free_mem(d->showstr_head,strlen(d->showstr_head) + 1);
       d->showstr_head = 0;
     }
     d->showstr_point  = 0;
-  return;
+    return;
   }
 
   if (d->character) show_lines = d->character->lines;
@@ -3013,31 +3014,25 @@ void show_string(struct descriptor_data *d, char *input)
   /* Second BoF checking. (unicorn) */
   for (scan = buffer; scan - buffer < sizeof(buffer) - 5; scan++, d->showstr_point++)
   {
-    if (((*scan = *d->showstr_point) == '\n' || *scan == '\r')
-      && (toggle = -toggle) < 0) lines++;
-
-    else if (!*scan || (show_lines > 0 && lines >= show_lines))
-    {
+    if (((*scan = *d->showstr_point) == '\n' || *scan == '\r') && (toggle = -toggle) < 0) {
+      lines++;
+    }
+    else if (!*scan || (show_lines > 0 && lines >= show_lines)) {
       *scan = '\0';
       write_to_buffer(d,buffer,strlen(buffer));
       for (chk = d->showstr_point; isspace(*chk); chk++);
-      {
-        if (!*chk)
-        {
-          if (d->showstr_head)
-          {
-            free_mem(d->showstr_head,strlen(d->showstr_head) + 1);
-            d->showstr_head = 0;
-          }
-          d->showstr_point  = 0;
+      if (!*chk) {
+        if (d->showstr_head) {
+          free_mem(d->showstr_head,strlen(d->showstr_head) + 1);
+          d->showstr_head = 0;
         }
+        d->showstr_point  = 0;
       }
       return;
     }
   }
   
-  if(d->character)
-        log_printf("%s tries to overflow buffer!..", d->character->name);
+  if(d->character) log_printf("%s tries to overflow buffer!..", d->character->name);
 
   if(d->showstr_head) {
     free_mem(d->showstr_head,strlen(d->showstr_head) + 1);

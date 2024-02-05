@@ -1323,9 +1323,9 @@ void do_score(CHAR_DATA *ch, const char *argument)
  
   if (!IS_NPC(ch))
   {
-   if(ch->pcdata->condition[COND_DRUNK] > 10 )stc("\n\r   | {RТы пьян{G                                                                  |",   ch);
-   if (ch->pcdata->condition[COND_THIRST] == 0)stc("\n\r   | {CТы хочешь пить.{G                                                          |", ch);
-   if (ch->pcdata->condition[COND_HUNGER] == 0)stc("\n\r   | {DТы голоден.{G                                                              |",  ch);
+    if(ch->pcdata->condition[COND_DRUNK] > 10 )stc("\n\r   | {RТы пьян{G                                                                  |",   ch);
+    if (ch->pcdata->condition[COND_THIRST] == 0)stc("\n\r   | {CТы хочешь пить.{G                                                          |", ch);
+    if (ch->pcdata->condition[COND_HUNGER] == 0)stc("\n\r   | {DТы голоден.{G                                                              |",  ch);
   }
   switch (ch->position)
   {
@@ -1998,15 +1998,15 @@ void do_equipment(CHAR_DATA *ch, const char *argument)
    if( ( obj = get_eq_char(ch, wear_l[iWear].wear_num)) == NULL )
    {
     if (!IS_NPC(ch))
-     stc((ch->sex==2) ? where_name_female[ch->class[UMIN(ch->remort,3)]].picture[iWear]
-                      : where_name_male[ch->class[UMIN(ch->remort,3)]].picture[iWear], ch);
-     stc( wear_l[iWear].name, ch);
-     stc("\n\r", ch);
-     continue;
+      stc((ch->sex==2) ? where_name_female[ch->class[UMIN(ch->remort,3)]].picture[iWear]
+        : where_name_male[ch->class[UMIN(ch->remort,3)]].picture[iWear], ch);
+    stc( wear_l[iWear].name, ch);
+    stc("\n\r", ch);
+    continue;
    }
    if (!IS_NPC(ch))
-    stc((ch->sex==2) ? where_name_female[ch->class[UMIN(ch->remort,3)]].picture[iWear]
-                      : where_name_male[ch->class[UMIN(ch->remort,3)]].picture[iWear], ch);
+     stc((ch->sex==2) ? where_name_female[ch->class[UMIN(ch->remort,3)]].picture[iWear]
+       : where_name_male[ch->class[UMIN(ch->remort,3)]].picture[iWear], ch);
    stc( wear_l[iWear].name, ch);
    ptc(ch, "%s\n\r", format_obj_to_char(obj, ch, TRUE));
   }
@@ -2380,10 +2380,9 @@ void do_practice(CHAR_DATA *ch, const char *argument)
           found=TRUE;
         }
         else stc("    ",ch);
-
-             if (ch->pcdata->learned[sn] <=   1) clr='R';
-             if (ch->pcdata->learned[sn] <=  30) clr='w';
-             if (ch->pcdata->learned[sn] <=  50) clr='y';
+        if (ch->pcdata->learned[sn] <=   1) clr='R';
+        if (ch->pcdata->learned[sn] <=  30) clr='w';
+        if (ch->pcdata->learned[sn] <=  50) clr='y';
         else if (ch->pcdata->learned[sn] <= class_table[ch->class[ch->remort]].skill_adept) clr='g';
         else if (ch->pcdata->learned[sn] <=  70) clr='G';
         else if (ch->pcdata->learned[sn] <=  80) clr='b';
@@ -2657,11 +2656,11 @@ void do_skillstat(CHAR_DATA *ch, const char *argument)
 
   buffer = new_buf();
   for (level = 0; level < MAX_LEVEL; level++)
-   if (skill_list[level][0] != '\0') add_buf(buffer,skill_list[level]);
+    if (skill_list[level][0] != '\0') add_buf(buffer,skill_list[level]);
 
-   add_buf(buffer,"\n\r");
-   page_to_char(buf_string(buffer),ch);
-   free_buf(buffer);
+  add_buf(buffer,"\n\r");
+  page_to_char(buf_string(buffer),ch);
+  free_buf(buffer);
 }
 
 void do_spellstat(CHAR_DATA *ch, const char *argument)

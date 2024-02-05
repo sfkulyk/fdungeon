@@ -1036,8 +1036,6 @@ void parse_note( CHAR_DATA *ch, const char *argument, int type )
 
   if ( !str_prefix( arg, "post" ) || !str_prefix(arg, "send"))
   {
-    char *strtime;
-
     if ( ch->pnote == NULL )
     {
       stc( "Ты не работаешь над сообщением.\n\r", ch );

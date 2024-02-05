@@ -3208,7 +3208,7 @@ OEDIT( oedit_material )
 
   if( str_cmp( get_obj_cond( (OBJ_DATA *)pObj, 0), SHOW_COND_ETERNAL) 
    || pObj->durability != -1 );
-        pObj->condition = pObj->durability = material_table[material_num(pObj->material)].d_dam;
+  pObj->condition = pObj->durability = material_table[material_num(pObj->material)].d_dam;
 
   if( pObj->condition > pObj->durability ) pObj->condition = pObj->durability;
 

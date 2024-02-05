@@ -2294,7 +2294,7 @@ void do_mist(CHAR_DATA *ch, const char *argument)
     REM_BIT(ch->affected_by,AFF_MIST);
     return;
   }
-  if (number_percent()> GUILD(ch,VAMPIRE_GUILD)?50:80)
+  if (GUILD(ch,VAMPIRE_GUILD) && number_percent() > 50)
   {
     stc("Твои очертания скрываются в желтоватом тумане.\n\r",ch);
     SET_BIT(ch->affected_by,AFF_MIST);

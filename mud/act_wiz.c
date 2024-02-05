@@ -4901,6 +4901,7 @@ void do_remort(CHAR_DATA *ch, const char *argument)
    wiznet("$C1 ожидает перерождения.",ch,NULL,0,get_trust(ch));
    ch->pcdata->confirm_remort=2;
    stc("Сядь и отдохни. Ты переродишься через несколько мгновений...\n\r",ch);
+   log_printf("%s has confirmed remort action",ch->name);
  }
 }
 

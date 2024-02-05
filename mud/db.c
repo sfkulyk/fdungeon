@@ -283,7 +283,7 @@ void boot_db( void )
     time_info.month = lmonth % 17;
     time_info.year  = lmonth / 17;
 
-         if ( time_info.hour <  5 ) weather_info.sunlight = SUN_DARK;
+    if ( time_info.hour <  5 ) weather_info.sunlight = SUN_DARK;
     else if ( time_info.hour <  6 ) weather_info.sunlight = SUN_RISE;
     else if ( time_info.hour < 19 ) weather_info.sunlight = SUN_LIGHT;
     else if ( time_info.hour < 20 ) weather_info.sunlight = SUN_SET;
@@ -295,7 +295,7 @@ void boot_db( void )
          weather_info.mmhg += number_range( 1, 50 );
     else weather_info.mmhg += number_range( 1, 80 );
 
-         if ( weather_info.mmhg <= 980 ) weather_info.sky = SKY_LIGHTNING;
+    if ( weather_info.mmhg <= 980 ) weather_info.sky = SKY_LIGHTNING;
     else if ( weather_info.mmhg <= 1000 ) weather_info.sky = SKY_RAINING;
     else if ( weather_info.mmhg <= 1020 ) weather_info.sky = SKY_CLOUDY;
     else                                  weather_info.sky = SKY_CLOUDLESS;
@@ -1877,57 +1877,57 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex )
       case (2): mob->dam_type = 7;  break;  /* pound */
       case (3): mob->dam_type = 11; break;  /* pierce */
     }
-    for (i = 0; i < 4; i++)
-     mob->armor[i]   = pMobIndex->ac[i]; 
-    mob->off_flags   = pMobIndex->off_flags;
-    mob->imm_flags   = pMobIndex->imm_flags;
-    mob->res_flags   = pMobIndex->res_flags;
-    mob->vuln_flags  = pMobIndex->vuln_flags;
-    mob->start_pos   = pMobIndex->start_pos;
-    mob->default_pos = pMobIndex->default_pos;
-    mob->sex         = pMobIndex->sex;
-    if (mob->sex == 3) mob->sex = number_range(1,2);
-    mob->race        = pMobIndex->race;
-    mob->form        = pMobIndex->form;
-    mob->size        = pMobIndex->size;
+  for (i = 0; i < 4; i++)
+    mob->armor[i]   = pMobIndex->ac[i]; 
+  mob->off_flags   = pMobIndex->off_flags;
+  mob->imm_flags   = pMobIndex->imm_flags;
+  mob->res_flags   = pMobIndex->res_flags;
+  mob->vuln_flags  = pMobIndex->vuln_flags;
+  mob->start_pos   = pMobIndex->start_pos;
+  mob->default_pos = pMobIndex->default_pos;
+  mob->sex         = pMobIndex->sex;
+  if (mob->sex == 3) mob->sex = number_range(1,2);
+  mob->race        = pMobIndex->race;
+  mob->form        = pMobIndex->form;
+  mob->size        = pMobIndex->size;
 
-    // computed on the spot
-    for (i = 0; i < MAX_STATS; i ++)
-          mob->perm_stat[i] = UMIN(25,11 + mob->level/4);
+  // computed on the spot
+  for (i = 0; i < MAX_STATS; i ++)
+    mob->perm_stat[i] = UMIN(25,11 + mob->level/4);
           
-    if (IS_SET(mob->act,ACT_WARRIOR))
-    {
-      mob->perm_stat[STAT_STR] += 3;
-      mob->perm_stat[STAT_INT] -= 1;
-      mob->perm_stat[STAT_CON] += 2;
-    }
+  if (IS_SET(mob->act,ACT_WARRIOR))
+  {
+    mob->perm_stat[STAT_STR] += 3;
+    mob->perm_stat[STAT_INT] -= 1;
+    mob->perm_stat[STAT_CON] += 2;
+  }
       
-    if (IS_SET(mob->act,ACT_THIEF))
-    {
-      mob->perm_stat[STAT_DEX] += 3;
-      mob->perm_stat[STAT_INT] += 1;
-      mob->perm_stat[STAT_WIS] -= 1;
-    }
+  if (IS_SET(mob->act,ACT_THIEF))
+  {
+    mob->perm_stat[STAT_DEX] += 3;
+    mob->perm_stat[STAT_INT] += 1;
+    mob->perm_stat[STAT_WIS] -= 1;
+  }
       
-    if (IS_SET(mob->act,ACT_CLERIC))
-    {
-      mob->perm_stat[STAT_WIS] += 3;
-      mob->perm_stat[STAT_DEX] -= 1;
-      mob->perm_stat[STAT_STR] += 1;
-    }
+  if (IS_SET(mob->act,ACT_CLERIC))
+  {
+    mob->perm_stat[STAT_WIS] += 3;
+    mob->perm_stat[STAT_DEX] -= 1;
+    mob->perm_stat[STAT_STR] += 1;
+  }
       
-    if (IS_SET(mob->act,ACT_MAGE))
-    {
-      mob->perm_stat[STAT_INT] += 3;
-      mob->perm_stat[STAT_STR] -= 1;
-      mob->perm_stat[STAT_DEX] += 1;
-    }
+  if (IS_SET(mob->act,ACT_MAGE))
+  {
+    mob->perm_stat[STAT_INT] += 3;
+    mob->perm_stat[STAT_STR] -= 1;
+    mob->perm_stat[STAT_DEX] += 1;
+  }
       
-    if (IS_SET(mob->off_flags,OFF_FAST))
-          mob->perm_stat[STAT_DEX] += 2;
+  if (IS_SET(mob->off_flags,OFF_FAST))
+    mob->perm_stat[STAT_DEX] += 2;
           
-    mob->perm_stat[STAT_STR] += mob->size - SIZE_MEDIUM;
-    mob->perm_stat[STAT_CON] += (mob->size - SIZE_MEDIUM) / 2;
+  mob->perm_stat[STAT_STR] += mob->size - SIZE_MEDIUM;
+  mob->perm_stat[STAT_CON] += (mob->size - SIZE_MEDIUM) / 2;
 /*
     mob->perm_stat[STAT_STR] = UMAX(mob->perm_stat[STAT_STR] + 3, 31);
     mob->perm_stat[STAT_DEX] = UMAX(mob->perm_stat[STAT_DEX] + 3, 31);
@@ -1935,55 +1935,55 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex )
     mob->perm_stat[STAT_WIS] = UMAX(mob->perm_stat[STAT_WIS] + 3, 31);
     mob->perm_stat[STAT_CON] = UMAX(mob->perm_stat[STAT_CON] + 3, 31);
 */
-    /* let's get some spell action */
-    if (IS_AFFECTED(mob,AFF_SANCTUARY))
-    {
-      af.where     = TO_AFFECTS;
-      af.type      = skill_lookup("sanctuary");
-      af.level     = mob->level;
-      af.duration  = -1;
-      af.location  = APPLY_NONE;
-      af.modifier  = 0;
-      af.bitvector = AFF_SANCTUARY;
-      affect_to_char( mob, &af );
-    }
+  /* let's get some spell action */
+  if (IS_AFFECTED(mob,AFF_SANCTUARY))
+  {
+    af.where     = TO_AFFECTS;
+    af.type      = skill_lookup("sanctuary");
+    af.level     = mob->level;
+    af.duration  = -1;
+    af.location  = APPLY_NONE;
+    af.modifier  = 0;
+    af.bitvector = AFF_SANCTUARY;
+    affect_to_char( mob, &af );
+  }
 
-    if (IS_AFFECTED(mob,AFF_HASTE))
-    {
-      af.where     = TO_AFFECTS;
-      af.type      = skill_lookup("haste");
-      af.level     = mob->level;
-      af.duration  = -1;
-      af.location  = APPLY_DEX;
-      af.modifier  = 1 + (mob->level >= 18) + (mob->level >= 25) + 
-                         (mob->level >= 32);
-      af.bitvector = AFF_HASTE;
-      affect_to_char( mob, &af );
-    }
+  if (IS_AFFECTED(mob,AFF_HASTE))
+  {
+    af.where     = TO_AFFECTS;
+    af.type      = skill_lookup("haste");
+    af.level     = mob->level;
+    af.duration  = -1;
+    af.location  = APPLY_DEX;
+    af.modifier  = 1 + (mob->level >= 18) + (mob->level >= 25) + 
+                       (mob->level >= 32);
+    af.bitvector = AFF_HASTE;
+    affect_to_char( mob, &af );
+  }
 
-    if (IS_AFFECTED(mob,AFF_PROTECT_EVIL))
-    {
-      af.where     = TO_AFFECTS;
-      af.type      = skill_lookup("protection evil");
-      af.level     = mob->level;
-      af.duration  = -1;
-      af.location  = APPLY_SAVES;
-      af.modifier  = -1;
-      af.bitvector = AFF_PROTECT_EVIL;
-      affect_to_char(mob,&af);
-    }
+  if (IS_AFFECTED(mob,AFF_PROTECT_EVIL))
+  {
+    af.where     = TO_AFFECTS;
+    af.type      = skill_lookup("protection evil");
+    af.level     = mob->level;
+    af.duration  = -1;
+    af.location  = APPLY_SAVES;
+    af.modifier  = -1;
+    af.bitvector = AFF_PROTECT_EVIL;
+    affect_to_char(mob,&af);
+  }
 
-    if (IS_AFFECTED(mob,AFF_PROTECT_GOOD))
-    {
-      af.where     = TO_AFFECTS;
-      af.type      = skill_lookup("protection good");
-      af.level     = mob->level;
-      af.duration  = -1;
-      af.location  = APPLY_SAVES;
-      af.modifier  = -1;
-      af.bitvector = AFF_PROTECT_GOOD;
-      affect_to_char(mob,&af);
-    }
+  if (IS_AFFECTED(mob,AFF_PROTECT_GOOD))
+  {
+    af.where     = TO_AFFECTS;
+    af.type      = skill_lookup("protection good");
+    af.level     = mob->level;
+    af.duration  = -1;
+    af.location  = APPLY_SAVES;
+    af.modifier  = -1;
+    af.bitvector = AFF_PROTECT_GOOD;
+    affect_to_char(mob,&af);
+  }
   mob->position = mob->start_pos;
   pMobIndex->count++;
   if (number_percent() <= 3) wield_random_magic( mob );
@@ -3253,78 +3253,78 @@ void do_dump( CHAR_DATA *ch, char *argument )
       for (af = pObjIndex->affected; af != NULL; af = af->next) aff_count++;
       nMatch++;
     }
-    do_fprintf(fp,"ObjProt %5u (%9u bytes)\n",
-        top_obj_index, top_obj_index * (sizeof(*pObjIndex)));
+  do_fprintf(fp,"ObjProt %5u (%9u bytes)\n",
+    top_obj_index, top_obj_index * (sizeof(*pObjIndex)));
     summary+=top_obj_index * (sizeof(*pObjIndex));
 
-    /* objects */
-    count = 0;  count2 = 0;
-    for (obj = object_list; obj != NULL; obj = obj->next)
+  /* objects */
+  count = 0;  count2 = 0;
+  for (obj = object_list; obj != NULL; obj = obj->next)
+  {
+    count++;
+    for (af = obj->affected; af != NULL; af = af->next) aff_count++;
+  }
+  for (obj = obj_free; obj != NULL; obj = obj->next) count2++;
+
+  do_fprintf(fp,"Objs    %5d (%9d bytes), %3d free (%d bytes)\n",
+    count, count * (sizeof(*obj)), count2, count2 * (sizeof(*obj)));
+  summary+=count * (sizeof(*obj));
+  summary+=count2 * (sizeof(*obj));
+
+  /* affects */
+  count = 0;
+  for (af = affect_free; af != NULL; af = af->next) count++;
+
+  do_fprintf(fp,"Affects %5d (%9d bytes), %3d free (%d bytes)\n",
+    aff_count, aff_count * (sizeof(*af)), count, count * (sizeof(*af)));
+  summary+=aff_count * (sizeof(*af));
+  summary+=count * (sizeof(*af));
+
+  /* rooms */
+  do_fprintf(fp,"Rooms   %5u (%9d bytes)\n",top_room,top_room *(sizeof(*room)));
+  summary+=top_room *(sizeof(*room));
+
+  /* exits */
+  do_fprintf(fp,"Exits   %5d (%9d bytes)\n",top_exit,top_exit *(sizeof(*exit)));
+  summary+=top_exit *(sizeof(*exit));
+  do_fprintf(fp, "--------------------------------\n");
+  do_fprintf(fp, "Summary: %u bytes.\n", summary);
+  fclose(fp);
+
+  /* start printing out mobile data */
+  fp = fopen("mob.dmp","w");
+
+  do_fprintf(fp,"\nMobile Analysis\n");
+  do_fprintf(fp,  "---------------\n");
+  nMatch = 0;
+  for (vnum = 0; nMatch < top_mob_index; vnum++)
+    if ((pMobIndex = get_mob_index(vnum)) != NULL)
     {
-      count++;
-      for (af = obj->affected; af != NULL; af = af->next) aff_count++;
+      nMatch++;
+      do_fprintf(fp,"#%-5u %3d active %3d killed     %s\n",
+        pMobIndex->vnum,pMobIndex->count,
+        pMobIndex->killed,pMobIndex->short_descr);
     }
-    for (obj = obj_free; obj != NULL; obj = obj->next) count2++;
+  fclose(fp);
 
-    do_fprintf(fp,"Objs    %5d (%9d bytes), %3d free (%d bytes)\n",
-        count, count * (sizeof(*obj)), count2, count2 * (sizeof(*obj)));
-    summary+=count * (sizeof(*obj));
-    summary+=count2 * (sizeof(*obj));
+  /* start printing out object data */
+  fp = fopen("obj.dmp","w");
 
-    /* affects */
-    count = 0;
-    for (af = affect_free; af != NULL; af = af->next) count++;
+  do_fprintf(fp,"\nObject Analysis\n");
+  do_fprintf(fp,  "---------------\n");
+  nMatch = 0;
+  for (vnum = 0; nMatch < top_obj_index; vnum++)
+    if ((pObjIndex = get_obj_index(vnum)) != NULL)
+    {
+      nMatch++;
+      do_fprintf(fp,"#%-5u %3d active %5d reset      %s\n",
+        pObjIndex->vnum,pObjIndex->count,
+        pObjIndex->reset_num,pObjIndex->short_descr);
+    }
 
-    do_fprintf(fp,"Affects %5d (%9d bytes), %3d free (%d bytes)\n",
-        aff_count, aff_count * (sizeof(*af)), count, count * (sizeof(*af)));
-    summary+=aff_count * (sizeof(*af));
-    summary+=count * (sizeof(*af));
-
-    /* rooms */
-    do_fprintf(fp,"Rooms   %5u (%9d bytes)\n",top_room,top_room *(sizeof(*room)));
-    summary+=top_room *(sizeof(*room));
-
-     /* exits */
-    do_fprintf(fp,"Exits   %5d (%9d bytes)\n",top_exit,top_exit *(sizeof(*exit)));
-    summary+=top_exit *(sizeof(*exit));
-    do_fprintf(fp, "--------------------------------\n");
-    do_fprintf(fp, "Summary: %u bytes.\n", summary);
-    fclose(fp);
-
-    /* start printing out mobile data */
-    fp = fopen("mob.dmp","w");
-
-    do_fprintf(fp,"\nMobile Analysis\n");
-    do_fprintf(fp,  "---------------\n");
-    nMatch = 0;
-    for (vnum = 0; nMatch < top_mob_index; vnum++)
-      if ((pMobIndex = get_mob_index(vnum)) != NULL)
-      {
-        nMatch++;
-        do_fprintf(fp,"#%-5u %3d active %3d killed     %s\n",
-         pMobIndex->vnum,pMobIndex->count,
-         pMobIndex->killed,pMobIndex->short_descr);
-      }
-    fclose(fp);
-
-    /* start printing out object data */
-    fp = fopen("obj.dmp","w");
-
-    do_fprintf(fp,"\nObject Analysis\n");
-    do_fprintf(fp,  "---------------\n");
-    nMatch = 0;
-    for (vnum = 0; nMatch < top_obj_index; vnum++)
-      if ((pObjIndex = get_obj_index(vnum)) != NULL)
-      {
-        nMatch++;
-        do_fprintf(fp,"#%-5u %3d active %5d reset      %s\n",
-          pObjIndex->vnum,pObjIndex->count,
-          pObjIndex->reset_num,pObjIndex->short_descr);
-      }
-
-    /* close file */
-    fclose(fp);
-    fpReserve = fopen( NULL_FILE, "r" );
+  /* close file */
+  fclose(fp);
+  fpReserve = fopen( NULL_FILE, "r" );
 }
 
 
@@ -4167,11 +4167,10 @@ OBJ_DATA *create_random_item( int lvl )
   {
     if ( dr > 0 && ( dr>=hr || dr > 30 ) )
     {
-    
       for ( i=0; rnd_suffix_names[i].name[0] &&
-           (  rnd_suffix_names[i+1].min_dr <= dr &&
+           ( rnd_suffix_names[i+1].min_dr <= dr &&
            !( !rnd_suffix_names[i+1].min_dr && rnd_suffix_names[i].min_dr )); i++ );
-             strcpy(suffix,rnd_suffix_names[i].name);
+      strcpy(suffix,rnd_suffix_names[i].name);
     }
     else
     {

@@ -91,14 +91,14 @@ char* can_get_obj (CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool fSelf
       && container->item_type != ITEM_CORPSE_PC)
       return "$I1 не контейнер.";
 
-  if (IS_SET(container->value[1],CONT_CLOSED)) 
-    return "Для начала открой $i4.";
+    if (IS_SET(container->value[1],CONT_CLOSED)) 
+      return "Для начала открой $i4.";
 
-  if (container->pIndexData->vnum == OBJ_VNUM_PIT && !IS_IMMORTAL(ch))
-    return "Не стоит жадничать!";
+    if (container->pIndexData->vnum == OBJ_VNUM_PIT && !IS_IMMORTAL(ch))
+      return "Не стоит жадничать!";
 
-  if (container->item_type == ITEM_CORPSE_PC && !can_loot(ch, container) )
-    return (fSelf ? "Тебе нельзя трогать этот труп." : "$C1 не может взять $i4." );
+    if (container->item_type == ITEM_CORPSE_PC && !can_loot(ch, container) )
+      return (fSelf ? "Тебе нельзя трогать этот труп." : "$C1 не может взять $i4." );
 
     return NULL;
   }

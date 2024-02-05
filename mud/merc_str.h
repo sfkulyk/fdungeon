@@ -24,7 +24,8 @@ struct  ban_data
 struct  cmd_type
 {
   const char * name;
-  unsigned char * const rname;
+  // unsigned char * const rname;
+  const char * const rname;
   DO_FUN *     do_fun;
   int          position;
   int          level;

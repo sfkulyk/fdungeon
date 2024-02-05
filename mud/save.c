@@ -97,7 +97,7 @@ void fwrite_char (CHAR_DATA * ch, FILE * fp)
   do_fprintf (fp, "DeityRank %d\n", ch->pcdata->dr);
   do_fprintf (fp, "Ldefend %d\n", ch->pcdata->protect);
 
-  if (ch->host != '\0') do_fprintf (fp, "Host %s~\n", ch->host);
+  if (ch->host != NULL) do_fprintf (fp, "Host %s~\n", ch->host);
   else                  do_fprintf (fp, "Host unknown~\n");
 
   do_fprintf (fp, "LastLogin %l\n", ch->lastlogin);
@@ -524,8 +524,8 @@ bool load_char_obj (DESCRIPTOR_DATA * d, const char * name, int status)
       do_printf (buf, " ");
   #endif
 
-  ch = new_char ();
-  ch->pcdata = new_pcdata ();
+  ch = new_char();
+  ch->pcdata = new_pcdata();
 
   d->character               = ch;
   ch->desc                   = d;
@@ -593,6 +593,7 @@ bool load_char_obj (DESCRIPTOR_DATA * d, const char * name, int status)
     do_printf (strsave, "%s%s", PLAYER_DIR3, capitalize (name));
   fp = fopen (strsave, "r");
   }
+
   if (fp)
   {
     int iNest;
@@ -669,6 +670,7 @@ bool load_char_obj (DESCRIPTOR_DATA * d, const char * name, int status)
 
     ch->form        = race_table[ch->race].form ;
   }
+
   // Checks on correct character data
   if (ch->level==0) found=FALSE;
   else if (!ch->name) found=FALSE;

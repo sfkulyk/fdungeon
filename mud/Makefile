@@ -5,7 +5,7 @@ PROF	= -O -g
 
 #-DWITH_UNICORN
 #--Werror=unused-but-set-variable -Werror=unused-variable
-C_FLAGS = $(PROF) -I../src/include -I/usr/include -I. -DOLD_RAND -Wall -Wno-unused-result -Wno-address
+C_FLAGS = $(PROF) -I../src/include -I/usr/include -I. -DOLD_RAND -Wall -Wno-unused-result -Wno-address -Wincompatible-pointer-types -Wpointer-sign
 
 # fbsd variant
 #DDD DSO_FLG =  -Wl,-E -L../lib -R../lib -lrdso
