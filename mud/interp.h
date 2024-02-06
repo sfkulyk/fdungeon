@@ -270,7 +270,6 @@ DECLARE_DO_FUN2( do_bounty       ); // bounty command (C) Saboteur
 DECLARE_DO_FUN2( do_itemlist     ); // itemlist command (C) Saboteur
 DECLARE_DO_FUN2( do_mpsave       ); // Save mobprograms (C) Saboteur
 DECLARE_DO_FUN2( do_mpedit       );
-DECLARE_DO_FUN2( do_file         );
 DECLARE_DO_FUN2( do_mplist       );
 DECLARE_DO_FUN2( do_vlist        ); // vlist command (C) Saboteur
 DECLARE_DO_FUN2( do_lore         ); // lore skill (C) Saboteur
@@ -295,7 +294,7 @@ DECLARE_DO_FUN2( do_clanwork     ); // clanwork for immortals (C) Saboteur
 DECLARE_DO_FUN2( do_leader       ); // offline leader command (C) Saboteur
 DECLARE_DO_FUN2( do_blacksmith   ); // Dwarves Blacksmith command (C) Saboteur
 DECLARE_DO_FUN2( do_ahelp        ); // Advanced help (C) Saboteur
-DECLARE_DO_FUN1( do_suicide      ); // Suicide command (C) Saboteur
+DECLARE_DO_FUN2( do_suicide      ); // Suicide command (C) Saboteur
 DECLARE_DO_FUN2( do_nodelete     ); // nodelete flag (C) Saboteur
 DECLARE_DO_FUN2( do_nogsocial    ); // nogsocial flag (C) Saboteur
 DECLARE_DO_FUN2( do_global       ); // global functions (C) Saboteur
@@ -328,12 +327,12 @@ DECLARE_DO_FUN2( do_censored     ); // Censored channel (C) Saboteur
 DECLARE_DO_FUN2( do_sprecall     ); // Recall for marryed (C) Saboteur
 DECLARE_DO_FUN2( do_nopost       ); // NOPOST (penalty) (C) Saboteur
 DECLARE_DO_FUN2( do_race         ); // RACE table work/edit (C) Saboteur
-DECLARE_DO_FUN1( do_walk         ); // to land (C) Saboteur
-DECLARE_DO_FUN1( do_fly          ); // to fly (race special) (C) Saboteur
-DECLARE_DO_FUN1( do_smoke        ); // a social (C) Saboteur
+DECLARE_DO_FUN2( do_walk         ); // to land (C) Saboteur
+DECLARE_DO_FUN2( do_fly          ); // to fly (race special) (C) Saboteur
+DECLARE_DO_FUN2( do_smoke        ); // a social (C) Saboteur
 DECLARE_DO_FUN2( do_dampool      ); // View Dampool (C) Saboteur
 DECLARE_DO_FUN2( do_newspaper    ); // Newspaper (C) Saboteur
-DECLARE_DO_FUN1( do_russian	 ); // Russian language (C) Saboteur
+DECLARE_DO_FUN2( do_russian	 ); // Russian language (C) Saboteur
 DECLARE_DO_FUN2( do_tournament   ); // Tournaments (C) Imperror
 DECLARE_DO_FUN2( do_talk         ); // save talks in lostlink (C) Saboteur
 DECLARE_DO_FUN2( do_deaf         ); // deaf mode (C) Saboteur (channels)
@@ -346,7 +345,7 @@ DECLARE_DO_FUN2( do_charge       ); // Spell charge (C) Imperror
 DECLARE_DO_FUN2( do_setcurse     ); // Set God Curse (C) Magic
 DECLARE_DO_FUN2( do_gquest       ); // Global Quest (C) Saboteur
 DECLARE_DO_FUN2( do_lash         ); // Lash skill (C) Saboteur
-DECLARE_DO_FUN1( do_dig          ); // fun action (C) Saboteur
+DECLARE_DO_FUN2( do_dig          ); // fun action (C) Saboteur
 DECLARE_DO_FUN2( do_strangle     ); // Thief skill (C) Gendalf
 DECLARE_DO_FUN2( do_resurrect    ); // Druids Guild Feature (C) Saboteur
 DECLARE_DO_FUN2( do_rlist        ); // Rooms list (C) Saboteur

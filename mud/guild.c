@@ -643,28 +643,28 @@ void do_guild( CHAR_DATA *ch, const char *argument )
     ptc(victim,"Ты теперь член клана %s.\n\r",capitalize(clan->name));
   }
 
-  if ( (victim->clan == NULL) && (clan->name !="loner") )
-   {
+  if ( (victim->clan == NULL) && !strcmp(clan->name,"loner") )
+  {
     gn_new=group_lookup(clan->name);
     if ( gn_new > -1) gn_add(victim,gn_new);
-   }
-  else if ( (victim->clan->name == "loner") && (clan->name !="loner") )
-   {    
+  }
+  else if ( strcmp(victim->clan->name,"loner") && !strcmp(clan->name,"loner") )
+  {    
     gn_new=group_lookup(clan->name);
     if ( gn_new > -1) gn_add(victim,gn_new);
-   }    
-  else if ( (victim->clan->name != "loner") && (clan->name != "loner") ) 
-   {
+  }    
+  else if ( !strcmp(victim->clan->name,"loner") && strcmp(clan->name,"loner") ) 
+  {
     gn_old=group_lookup(victim->clan->name);
     if (gn_old > -1) gn_remove(victim,gn_old);
     gn_new=group_lookup(clan->name);
     if (gn_new > -1) gn_add(victim,gn_new);
-   }
-  else if ( (victim->clan->name !="loner") && (clan->name == "loner") )
-   {
+  }
+  else if ( !strcmp(victim->clan->name,"loner") && strcmp(clan->name,"loner") )
+  {
     gn_old=group_lookup(victim->clan->name);
     if (gn_old > -1) gn_remove(victim,gn_old);
-   }
+  }
 
   victim->clan = clan;
   victim->clanrank = 0;

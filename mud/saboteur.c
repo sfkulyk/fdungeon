@@ -535,7 +535,7 @@ void do_blacksmith (CHAR_DATA *ch, const char *argument)
   stc("Набери blacksmith без параметров для справки.\n\r", ch);
 } 
  
-void do_suicide(CHAR_DATA *ch) 
+void do_suicide( CHAR_DATA *ch, const char *argument )
 { 
   char buf[MAX_STRING_LENGTH];
 
@@ -2666,7 +2666,7 @@ int get_material_modifier(CHAR_DATA *ch, OBJ_DATA *obj)
   return 0;
 } 
 
-void do_fly(CHAR_DATA *ch)
+void do_fly( CHAR_DATA *ch, const char *argument )
 {
 
   if ( !IS_SET(race_table[ch->race].spec,SPEC_FLY)
@@ -2685,7 +2685,7 @@ void do_fly(CHAR_DATA *ch)
   }
 }
 
-void do_walk(CHAR_DATA *ch)
+void do_walk( CHAR_DATA *ch, const char *argument )
 {
   if ( !IS_AFFECTED(ch, AFF_FLYING) ) stc("Ты уже стоишь на земле.\n\r",ch);
   else
@@ -2792,7 +2792,7 @@ int get_skill_bonus(CHAR_DATA *ch,int sn)
   return bonus;
 }
 
-void do_smoke(CHAR_DATA *ch) 
+void do_smoke( CHAR_DATA *ch, const char *argument )
 { 
   OBJ_DATA *obj;
   bool found=FALSE;
@@ -2981,7 +2981,7 @@ char *newspaper_subject(int type)
   return (buf[0]!= '\0')? buf : "unknown";
 }
 
-void do_russian(CHAR_DATA *ch)
+void do_russian( CHAR_DATA *ch, const char *argument )
 {
   ch->comm=toggle_int64(ch->comm,COMM_RUSSIAN);
   ptc(ch,"Поддержка русского языка %s{x.\n\r",IS_SET(ch->comm,COMM_RUSSIAN)?"{Gвкл":"{Rвыкл");
@@ -3403,7 +3403,7 @@ void bust_arg( CHAR_DATA *ch, const char *argument)
    if (ch->prefix[0] != '\0') write_to_buffer(ch->desc,ch->prefix,0);
 }
 
-void do_dig( CHAR_DATA *ch)
+void do_dig( CHAR_DATA *ch, const char *argument )
 {
   if (ch->race!=RACE_SKELETON)
   {

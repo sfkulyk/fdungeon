@@ -995,12 +995,12 @@ bool is_affected( CHAR_DATA *ch, int sn )
 void affect_join( CHAR_DATA *ch, AFFECT_DATA *paf )
 {
   AFFECT_DATA *paf_old;
-
+  if (!paf) return;
   for ( paf_old = ch->affected; paf_old != NULL; paf_old = paf_old->next )
   {
     if ( paf_old->type == paf->type )
     {
-      paf->level = (paf->level += paf_old->level) / 2;
+      paf->level = ( paf->level + paf_old->level ) / 2;
       paf->duration += paf_old->duration;
       paf->modifier += paf_old->modifier;
       affect_remove( ch, paf_old );

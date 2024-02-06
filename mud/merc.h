@@ -18,7 +18,7 @@
 #define DECLARE_SPELL_FUN( fun )  SPELL_FUN fun
 #endif
 
-#define args( list )  list
+#define args( list ) list
 #define DECLARE_DO_FUN2( fun )   void fun( CHAR_DATA* ch, const char* argument )
 #define DECLARE_DO_FUN1( fun )  void fun( CHAR_DATA* ch)
 

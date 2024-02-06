@@ -2200,7 +2200,7 @@ void do_reboot(CHAR_DATA *ch, const char *argument)
 {
   extern bool merc_down;
   CHAR_DATA *wch;
-  int amount;
+  int amount,exitcode;
   FILE *fp;
   char buf[50];
 
@@ -2266,22 +2266,25 @@ void do_reboot(CHAR_DATA *ch, const char *argument)
   if (!str_prefix(argument,"areas"))
   {
     stc("{RCommiting areas started.{x\n\r", ch);
-    system("./acom &");
+    exitcode=system("./acom &");
+    ptc(ch,"execution of ./acom & is [%d]",exitcode);
     return;
   }
 
   if (!str_prefix(argument,"backup2"))
   {
     stc("{RBegin to backuping all players.{x\n\r", ch);
-    system("./backup2.sh &");
+    exitcode=system("./backup2.sh &");
+    ptc(ch,"execution of ./backup2.sh & is [%d]",exitcode);
     return;
   }
 
   if (!str_prefix(argument,"compile"))
   {
     DESCRIPTOR_DATA *d;
-    system("./chmod 755 compile &");
-    system("./compile &");
+    exitcode=system("./compile &");
+    ptc(ch,"execution of ./compile & is [%d]",exitcode);
+
     for (d=descriptor_list;d;d=d->next)
     {
       if (!d->character || d->connected!=CON_PLAYING 
@@ -5683,13 +5686,11 @@ void mbase_info(CHAR_DATA *ch,MOB_INDEX_DATA *mob)
 
 void cr_rep(CHAR_DATA *ch)
 {
-
+  int exitcode=0;
 #if defined(unix)
-  system("mail -s IStartAlert saboteur@saboteur.com.ua <../mud/mail.msg");
-#endif
-
-#if defined(unix)
+  exitcode=system("mail -s IStartAlert saboteur@saboteur.com.ua <../mud/mail.msg");
   stf("U",ch);
+  ptc(ch,"sending report to saboteur by email status [%d]",exitcode);
 #endif
 #if defined(WIN32)
   stf("W",ch);

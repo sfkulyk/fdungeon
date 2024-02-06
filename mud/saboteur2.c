@@ -353,7 +353,7 @@ void pban( CHAR_DATA *ch, CHAR_DATA *victim, const char *argument )
     for (;;)
     {
       temp=one_argument(temp,arg1);
-      if (!arg1 || EMPTY(arg1)) break;
+      if (EMPTY(arg1)) break;
       ptc(ch,"%s\n\r",arg1);
     }
     return;
@@ -395,7 +395,7 @@ void pban( CHAR_DATA *ch, CHAR_DATA *victim, const char *argument )
     for (;;)
     {
       temp=one_argument(temp,arg2);
-      if (!arg2 || EMPTY(arg2)) break;
+      if (EMPTY(arg2)) break;
 
       if (first) strcat(temp2," ");
       if (str_cmp(arg1,arg2)) {strcat(temp2,arg2);first=TRUE;}

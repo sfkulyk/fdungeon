@@ -287,7 +287,6 @@ struct  cmd_type        cmd_table       [] =
  { "index",       "индекс",    do_index,       POS_DEAD,    109,  WIZ_SECURE, MORPH|NOMOB|OLC|NOORDER|NOFORCE },
  { "family",      "семья",     do_family,      POS_DEAD,    104,  LOG_NEVER,  MORPH|HIDE|NOMOB|NOORDER },
  { "srcwrite",    "код",       do_srcwrite,    POS_DEAD,    109,  LOG_NEVER,  MORPH|HIDE|NOMOB|NOPUB|NOORDER },
- { "file",        "файл",      do_file,        POS_DEAD,    109,  WIZ_SECURE, MORPH|NOMOB|OLC|NOORDER|NOFORCE },
  { "rename",      "ренейм",    do_rename,      POS_DEAD,    107,  WIZ_SECURE, SHOW|MORPH|OLC|NOMOB|NOPUB|NOORDER },
  { "advance",     "адванс",    do_advance,     POS_DEAD,    102,  WIZ_SECURE, SHOW|MORPH|OLC|NOMOB|NOFORCE|NOORDER },
  { "dump",        "дамп",      do_dump,        POS_DEAD,    109,  WIZ_SECURE, MORPH|NOPUB|NOMOB|NOFORCE },
@@ -417,8 +416,8 @@ struct  cmd_type        cmd_table       [] =
 
 void interpret( CHAR_DATA *ch, const char *argument )
 {
-  unsigned char command[MAX_STRING_LENGTH];
-  unsigned char logline[MAX_STRING_LENGTH];
+  char command[MAX_STRING_LENGTH];
+  char logline[MAX_STRING_LENGTH];
   struct cmd_type *cmd_ptr = NULL;
   int cmd, trust;
 
@@ -536,9 +535,15 @@ void interpret( CHAR_DATA *ch, const char *argument )
     };
   }
 
-  if ( (cmd_ptr->name == "east") || (cmd_ptr->name == "west")
-      || (cmd_ptr->name == "north") || (cmd_ptr->name == "south")
-      || (cmd_ptr->name == "up") || (cmd_ptr->name == "down") )
+//  if ( (cmd_ptr->name == "east") || (cmd_ptr->name == "west")
+//      || (cmd_ptr->name == "north") || (cmd_ptr->name == "south")
+//      || (cmd_ptr->name == "up") || (cmd_ptr->name == "down") )
+  if ( strcmp(cmd_ptr->name,"east") ||
+       strcmp(cmd_ptr->name,"west") ||
+       strcmp(cmd_ptr->name,"north")||
+       strcmp(cmd_ptr->name,"south")||
+       strcmp(cmd_ptr->name,"up")   ||
+       strcmp(cmd_ptr->name,"down") )
    {
      if ( (!IS_SET(cmd_ptr->flag, HIDE) )
        && ( ( !IS_AFFECTED(ch,AFF_HIDE) )
@@ -1070,7 +1075,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
         }
       }
       ptc( ch,"{C+------------------------------------------------------------------+{x\n\r");
-      if( material_table[mIndex].name == "NULL" )  return;
+      if( strcmp(material_table[mIndex].name,"NULL") )  return;
     }
 
     else if (!str_prefix(arg2,"durability"))

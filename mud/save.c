@@ -573,7 +573,7 @@ bool load_char_obj (DESCRIPTOR_DATA * d, const char * name, int status)
     {
       fclose  (fp);
       do_printf (buf, "tar -xvfz %s %s %s", strsave,name,status==SAVE_NORMAL?PLAYER_DIR:PLAYER_DIR2);
-      system  (buf);
+      // system  (buf); WHAT IS THIS? Saboteur
     }
   #else
     // decompress if players.rar exist
@@ -582,7 +582,7 @@ bool load_char_obj (DESCRIPTOR_DATA * d, const char * name, int status)
     {
       fclose  (fp);
       do_printf (buf, "rar e %s %s %s", strsave,name,status==SAVE_NORMAL?PLAYER_DIR:PLAYER_DIR2);
-      system  (buf);
+      // system  (buf); WHAT IS THIS? Saboteur
     }
   #endif
   if (status==SAVE_NORMAL)
