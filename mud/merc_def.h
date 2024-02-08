@@ -252,8 +252,8 @@
 #define C_DEMBEL   3
 
 // Colour stuff by Lope of Loping Through The MUD
-#define CLEAR       "[0m"    // Resets Colour        
-#define C_RED       "[0;31m" // Normal Colours       
+#define CLEAR       "[0m"    // Resets Colour
+#define C_RED       "[0;31m" // Normal Colours
 #define C_GREEN     "[0;32m"
 #define C_YELLOW    "[0;33m"
 #define C_BLUE      "[0;34m"
