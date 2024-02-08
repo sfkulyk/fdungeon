@@ -77,7 +77,7 @@ Russian Этэйрос||а|у|а|ом|е|а|ов~
 MinAlign -1000
 MaxAlign 1000
 Descr Бог {RВойны{x, {wУничтожениЯ{x, {DГорЯ{x и Безнадежности~
-Worship 3
+Worship 4
 App 0 0 3 1 13 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 END
 #Deity
@@ -86,7 +86,7 @@ Russian Саботер||а|у|а|ом|е|а|ов~
 MinAlign -1000
 MaxAlign 1000
 Descr Бог ПознаниЯ, Мудрости и РавновесиЯ~
-Worship 18
+Worship 19
 App 3 1 0 0 12 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 END
 #Deity

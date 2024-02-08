@@ -2,11 +2,14 @@ areas/fdungeon.exe
 areas/fdungeon.pdb
 areas/full.log
 areas/null.log
+areas/start.log
 areas/rom
 areas/romreboot
 areas/romtell
 areas/shutdown.txt
 areas/who.htm
+log/olc.log
+mud/null.log
 mud/*.o
 mud/*.obj
 mud/rom

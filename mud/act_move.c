@@ -50,7 +50,6 @@ const int movement_loss [SECT_MAX] =
    SECT_UNUSED       8  SECT_RUINS         18
                         SECT_UWATER        19*/
 
-
 // Local functions
 void scan(CHAR_DATA *ch,int door);
 bool scan_dir(CHAR_DATA *ch,const ROOM_INDEX_DATA *room,int dir,char *buf);

@@ -465,7 +465,7 @@ void do_polyanarecall( CHAR_DATA *ch, const char *argument)
   for( d = descriptor_list; d; d = d->next )
   {
     if ( !d->character || d->connected!=CON_PLAYING) continue;
-    ptc( d->character, "{Y%s{x без заднiх мыслiв предлагаiть товариству: %s\n\r", can_see( d->character, ch, CHECK_LVL)?ch->name:"Некто", buf);
+    ptc( d->character, "{Y%s{x без заднiх мыслiв предлагаiть товариству: %s\n\r",PERS(d->character,ch), buf);
   }
 
   if( !IS_ELDER(ch) ) WAIT_STATE( ch, 4);
@@ -1090,7 +1090,7 @@ void do_devote( CHAR_DATA *ch, const char *argument )
       if( victim->pcdata->carma < 0) victim->pcdata->carma = 0;
       if( victim->pcdata->favour < 0) victim->pcdata->favour = 0;
       ptc( ch, "Ты отпускаешь грехи %s.\n\r", victim->name);
-      ptc( victim, "%s отпускает твои грехи.\n\r", can_see( victim, ch, CHECK_LVL)?ch->name:"Некто");
+      ptc( victim, "%s отпускает твои грехи.\n\r", PERS(ch,victim));
       return;
      }
 
@@ -1101,7 +1101,7 @@ void do_devote( CHAR_DATA *ch, const char *argument )
        if( victim->godcurse >0 ) victim->godcurse = 0;
        else ptc( ch, "%s не проклят Богами.\n\r", victim->name);
        ptc( ch, "Ты прощаешь проступки %s.\n\r", victim->name);
-       if( can_see( victim, ch, CHECK_LVL) ) ptc( victim, "%s прощает твои проступки.\n\r", can_see( victim, ch, CHECK_LVL)?ch->name:"Некто");
+       if( can_see( victim, ch, CHECK_LVL) ) ptc( victim, "%s прощает твои проступки.\n\r", PERS(ch,victim));
        return;
      }
 

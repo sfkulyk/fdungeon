@@ -82,15 +82,9 @@ const struct talk_type talk_table[] =
   {"info",    CHAN_INFO,    FALSE,CBIT_INFO,     1,"{CИнформационный канал      ","",FALSE,""},
   {"emotes",  CHAN_EMOTE,   TRUE, CBIT_EMOTE,    1,"{DЭмоции                    ","",FALSE,""},
   {"gsocial", CHAN_GSOCIAL, TRUE, CBIT_GSOCIAL,  1,"{DГлобальные эмоции         ","",FALSE,""},
-//  {"game",    CHAN_FD,      TRUE ,CBIT_FD,       1,"{RКанал игровых разговоров  ","{D[{YGAME{D] {G%s{w: {M%s{x\n\r",  TRUE, "{D[{YGAME{D] {G%s{w: {y%s{x\n\r" },
   {NULL,      0,            TRUE, 0,             0,""                            ,"",FALSE,""}
 };              
-/*
-void do_game( CHAR_DATA *ch, const char *argument)
-{
-   talk(ch,argument,CHAN_FD);
-}
-*/
+
 void do_yell( CHAR_DATA *ch, const char *argument )
 {
   talk(ch,argument,CHAN_YELL);

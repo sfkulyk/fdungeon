@@ -1483,7 +1483,6 @@
 #define CHAN_INFO     19
 #define CHAN_GSOCIAL  20
 #define CHAN_EMOTE    21
-#define CHAN_FD       22
 
 // Full Class
 #define C_MAG         (A)  // M

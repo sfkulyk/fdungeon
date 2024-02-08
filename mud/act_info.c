@@ -78,7 +78,7 @@ char *format_obj_to_char(OBJ_DATA *obj, CHAR_DATA *ch, bool fShort)
   {
     strcat(buf, "нечто.");
     return buf;
-  };
+  }
 
   one_argument(obj->name,first_name);
   do_printf(buf2,"{g({y%s{g){x",first_name);
@@ -117,7 +117,7 @@ char *format_obj_to_char(OBJ_DATA *obj, CHAR_DATA *ch, bool fShort)
   return buf;
 }
 
-// Show a list to a character. Can coalesce duplicated items.
+// Show an item list to a character. Can coalesce duplicated items.
 void show_list_to_char(OBJ_DATA *list, CHAR_DATA *ch, bool fShort, bool fShowNothing)
 {
   char buf[MAX_STRING_LENGTH];
@@ -239,7 +239,7 @@ void show_char_to_char_0(CHAR_DATA *victim, CHAR_DATA *ch)
        if (IS_SET(victim->on->value[2],SLEEP_AT) || IS_SET(victim->on->value[2],SLEEP_ON))
             do_printf(message," спит на %s.", get_obj_desc(victim->on,'6'));
        else do_printf(message, " спит, устроившись внутри %s.", get_obj_desc(victim->on,'2'));
-     strcat(buf,message);
+       strcat(buf,message);
      }
      else strcat(buf," спит здесь.");
      break;
@@ -1606,7 +1606,10 @@ void do_help(CHAR_DATA *ch, const char *argument)
         break;
     }
   }                                   
-  if (!found) stc("Hет подсказки на это слово.\n\r", ch);
+  if (!found){
+    stc("Hет подсказки на это слово. Ищем в ahelp:\n\r", ch);
+    do_ahelp (ch, argall);
+  }
   else page_to_char(buf_string(output),ch);
   free_buf(output);
 }
@@ -1964,7 +1967,7 @@ void do_count (CHAR_DATA * ch, const char * argument)
       count++ ;
       count_vis++ ;
     }
-    else /*if (IS_IMMORTAL(d->character))*/ count++ ;
+    else count++ ;
   }
 
   max_on = UMAX (count, max_on) ;
@@ -1987,10 +1990,7 @@ void do_equipment(CHAR_DATA *ch, const char *argument)
 {
   OBJ_DATA *obj;
   int iWear;
-/*
-  stc("{RDISABLED BY GODS!\n\r{x",ch);
-  return;
-*/
+
   stc("Ты используешь:\n\r", ch);
   stc("--------------------------------------------------------------------------------\n\r", ch);
   for (iWear = 0; iWear < MAX_WEAR_L-1; iWear++)
@@ -2156,7 +2156,7 @@ void do_where(CHAR_DATA *ch, const char *argument)
    &&   can_see(ch, victim,CHECK_LVL)
    &&   is_name(arg, victim->name))
    {
-//     statui nevidimi po where
+     // statue is invisible for where command
      if (IS_STATUE(victim)) continue;
 
      found = TRUE;
@@ -2192,13 +2192,13 @@ void do_consider(CHAR_DATA *ch, const char *argument)
   }
 
   diff = victim->level - ch->level;
-       if (diff <= -10) msg = "Ты можешь убить $C4 одним пинком.";
+  if (diff <= -10) msg = "Ты можешь убить $C4 одним пинком.";
   else if (diff <= -5) msg = "$N не сопеpник тебе.";
   else if (diff <= -2) msg = "Похоже ты легко убьешь $C4.";
   else if (diff <=  1) msg = "Пpекpасный поединок!";
   else if (diff <=  4) msg = "$N говоpит 'Чувствуешь удачу, сопляк?'.";
   else if (diff <=  9) msg = "$N смеется над твоей беспомощностью.";
-  else                    msg = "Твоя смеpть будет быстpой, но болезненной.";
+  else                 msg = "Твоя смеpть будет быстpой, но болезненной.";
 
   act(msg, ch, NULL, victim, TO_CHAR);
 }
@@ -2698,7 +2698,6 @@ void do_spellstat(CHAR_DATA *ch, const char *argument)
   }
   if (col % 3 != 0) ptc(ch,"\n\r{GCreation points:{x%d\n\r",victim->pcdata->points);
 
-  // initialize data
   for (level = 0; level < LEVEL_HERO + 1; level++)
   {
     spell_columns[level] = 0;
@@ -2736,7 +2735,6 @@ void do_spellstat(CHAR_DATA *ch, const char *argument)
     }
   }
 
-  // return results
   if (!found)
   {
     stc("Заклинаний не найдено.\n\r",ch);
@@ -3001,7 +2999,6 @@ void do_config(CHAR_DATA *ch, const char *argument)
   int i;
   ROOM_INDEX_DATA *room;
 
-
   if (EMPTY(argument))
   {
     stc("{CВаша конфигурация:\n\r",ch);
@@ -3013,35 +3010,35 @@ void do_config(CHAR_DATA *ch, const char *argument)
     }
     ptc(ch,"{CВыход в limbo при лостлинке {x        (autologout): %d ticks\n\r",ch->settimer);
     if (ch->pcdata->auto_online) ptc(ch,"{YAutoOnline {x: %s\n\r",ch->pcdata->auto_online);
-     else stc("{YAutoOnline{x : {Rвыкл{x\n\r",ch);
+    else stc("{YAutoOnline{x : {Rвыкл{x\n\r",ch);
     if (ch->pcdata->tickstr) ptc(ch,"{YTickstring {x: %s\n\r",ch->pcdata->tickstr);
     ptc(ch,"{YMaxRun {x    : %d\n\r",ch->maxrun[0]);
-   return;
+    return;
   }
 
   argument=one_argument(argument,arg);
 
   room = (ch->in_room) ? ch->in_room : ch->was_in_room;
 
- if (!IS_SET(room->room_flags,ROOM_ARENA) || IS_IMMORTAL(ch))
+  if (!IS_SET(room->room_flags,ROOM_ARENA) || IS_IMMORTAL(ch))
   {
-   for (i=0;i<MAX_CFG;i++)
-   {
-    if (!str_prefix(arg,cfg_table[i].name))
+    for (i=0;i<MAX_CFG;i++)
     {
+      if (!str_prefix(arg,cfg_table[i].name))
+      {
         ch->pcdata->cfg=toggle_int64(ch->pcdata->cfg,cfg_table[i].bit);
         ptc(ch,"%s{x %s{x\n\r",cfg_table[i].showname,
-            IS_CFG(ch,cfg_table[i].bit)? (cfg_table[i].on ? "{Rвыкл":"{Gвкл"):(cfg_table[i].on?"{Gвкл":"{Rвыкл"));
-      return;
+          IS_CFG(ch,cfg_table[i].bit)? (cfg_table[i].on ? "{Rвыкл":"{Gвкл"):(cfg_table[i].on?"{Gвкл":"{Rвыкл"));
+        return;
+      }
     }
-   }
   }
   else
-   {
-      stc("{RНа арене люди сражаются, а не настройками балуются!{x\n\r",ch);
-      WAIT_STATE(ch,PULSE_VIOLENCE);
-      return;
-   } 
+  {
+    stc("{RНа арене люди сражаются, а не настройками балуются!{x\n\r",ch);
+    WAIT_STATE(ch,PULSE_VIOLENCE);
+    return;
+  } 
 
   if (!str_prefix(arg,"autoonline"))
   {
@@ -3056,14 +3053,12 @@ void do_config(CHAR_DATA *ch, const char *argument)
     ch->pcdata->auto_online=NULL;
     stc("Авто-онлайн выключен\n\r.",ch);
     return;
-
   }
  
   if (!str_prefix(arg,"autologout") || !str_prefix(arg,"logout"))
   {
     argument=one_argument(argument,arg);
-    if (!is_number(arg) || (i=atoi(arg))<2 || i>30)
-      stc("Укажите число в пределах 2 - 30.\n\r",ch);
+    if (!is_number(arg) || (i=atoi(arg))<2 || i>30) stc("Укажите число в пределах 2 - 30.\n\r",ch);
     else ch->settimer=i;
     ptc(ch,"Текущее значение autologout %d.\n\r",ch->settimer);
     return; 
@@ -3072,8 +3067,7 @@ void do_config(CHAR_DATA *ch, const char *argument)
   if (!str_prefix(arg,"maxrun"))
   {
     argument=one_argument(argument,arg);
-    if (!is_number(arg) || (i=atoi(arg))<5 || i>150)
-      stc("Укажите число в пределах 5 - 150.\n\r",ch);
+    if (!is_number(arg) || (i=atoi(arg))<5 || i>150) stc("Укажите число в пределах 5 - 150.\n\r",ch);
     else ch->maxrun[0]=i;
     ptc(ch,"Текущее значение для непреревной пробежки - %d.\n\r",ch->maxrun[0]);
     return; 
@@ -3397,154 +3391,141 @@ void whois_info(CHAR_DATA* ch, CHAR_DATA * victim)
 
 void mstat_info(CHAR_DATA *ch, CHAR_DATA *victim)
 {
-
   stc("{C/---------------------------{DCHAR/MOBStatistic{C-------------------------------/\n\r",ch);
 
   if (!IS_NPC(victim))
   {
-   ptc(ch, "{C|{GAge : {W%5d   {GName:{x%s %s{C\n\r| {GLevel:{W%5d  {GClass:{W%8s {GRace:{W%7s {GSex  : {W%5s {GSec   :{W%d{C\n\r",
-    get_age(victim), victim->name, victim->pcdata->title,
-    victim->level, class_table[victim->class[victim->remort]].name,
-    race_table[victim->race].name,
-    ch->sex == 0 ? "бесполый" : ch->sex == 1 ? "мужской" : "женский",
-    victim->pcdata->security);
+    ptc(ch, "{C|{GAge : {W%5d   {GName:{x%s %s{C\n\r| {GLevel:{W%5d  {GClass:{W%8s {GRace:{W%7s {GSex  : {W%5s {GSec   :{W%d{C\n\r",
+      get_age(victim), victim->name, victim->pcdata->title,
+      victim->level, class_table[victim->class[victim->remort]].name,
+      race_table[victim->race].name,
+      ch->sex == 0 ? "бесполый" : ch->sex == 1 ? "мужской" : "женский",
+      victim->pcdata->security);
 
-   ptc(ch, "|{GGroup: {W%7d {GRoom:{W%7d                                                   \n\r=---------------------------------------------------------------------------=\n\r",
-    (victim->group)?victim->group:0 , (victim->in_room) ? victim->in_room->vnum:0);
+    ptc(ch, "|{GGroup: {W%7d {GRoom:{W%7d                                                   \n\r=---------------------------------------------------------------------------=\n\r",
+      (victim->group)?victim->group:0 , (victim->in_room) ? victim->in_room->vnum:0);
 
-   ptc(ch, "|  {GStr: {Y%3d {C({Y%3d{C) | {GHeal :{W%7d {C/{W%7d {C| {YЗолото  :{W %u{C\n\r",
-    victim->perm_stat[STAT_STR],get_curr_stat(victim,STAT_STR),
-    victim->hit,victim->max_hit,victim->gold);
+    ptc(ch, "|  {GStr: {Y%3d {C({Y%3d{C) | {GHeal :{W%7d {C/{W%7d {C| {YЗолото  :{W %u{C\n\r",
+      victim->perm_stat[STAT_STR],get_curr_stat(victim,STAT_STR),
+      victim->hit,victim->max_hit,victim->gold);
 
-   ptc(ch, "|  {GInt: {Y%3d {C({Y%3d{C) | {GMana :{W%7d {C/{W%7d {C| {WCеребро :{W %u{C\n\r",
-    victim->perm_stat[STAT_INT],get_curr_stat(victim,STAT_INT),
-    victim->mana,victim->max_mana, victim->silver);
+    ptc(ch, "|  {GInt: {Y%3d {C({Y%3d{C) | {GMana :{W%7d {C/{W%7d {C| {WCеребро :{W %u{C\n\r",
+      victim->perm_stat[STAT_INT],get_curr_stat(victim,STAT_INT),
+      victim->mana,victim->max_mana, victim->silver);
 
-   ptc(ch, "|  {GWis: {Y%3d {C({Y%3d{C) | {GMoves:{W%7d {C/{W%7d {C| To level: {W%d{C\n\r",
-    victim->perm_stat[STAT_WIS],get_curr_stat(victim,STAT_WIS),
-    victim->move,victim->max_move, (victim->level+1)*exp_per_level(victim, victim->pcdata->points)-victim->exp);
+    ptc(ch, "|  {GWis: {Y%3d {C({Y%3d{C) | {GMoves:{W%7d {C/{W%7d {C| To level: {W%d{C\n\r",
+      victim->perm_stat[STAT_WIS],get_curr_stat(victim,STAT_WIS),
+      victim->move,victim->max_move, (victim->level+1)*exp_per_level(victim, victim->pcdata->points)-victim->exp);
 
-   ptc(ch, "|  {GDex: {Y%3d {C({Y%3d{C) | {YTr/Pr:{x%7d {C/{x%7d{C | {GAlign : {W%d{C\n\r",
-    victim->perm_stat[STAT_DEX],get_curr_stat(victim,STAT_DEX),victim->train,
-    victim->practice,victim->alignment);
+    ptc(ch, "|  {GDex: {Y%3d {C({Y%3d{C) | {YTr/Pr:{x%7d {C/{x%7d{C | {GAlign : {W%d{C\n\r",
+      victim->perm_stat[STAT_DEX],get_curr_stat(victim,STAT_DEX),victim->train,
+      victim->practice,victim->alignment);
 
-   ptc(ch, "|  {GCon: {Y%3d {C({Y%3d{C) | {YClan :{W%s {C| {YQuestpoint: {W%d{C\n\r",
-    victim->perm_stat[STAT_CON],get_curr_stat(victim,STAT_CON),
-    (victim->clan==NULL)? "{D    - none -   {x " : victim->clan->show_name,victim->questpoints);
+    ptc(ch, "|  {GCon: {Y%3d {C({Y%3d{C) | {YClan :{W%s {C| {YQuestpoint: {W%d{C\n\r",
+      victim->perm_stat[STAT_CON],get_curr_stat(victim,STAT_CON),
+     (victim->clan==NULL)? "{D    - none -   {x " : victim->clan->show_name,victim->questpoints);
 
   }
   else
   {
-   ptc(ch, "| {GVnum : {W%5u ",victim->pIndexData->vnum);
-   ptc(ch, "{GName:{x%s %s{C\n\r| {GLevel:{W%5d {GRace:{W%7s {GSex  : {W%5s                \n\r",
-    victim->name, victim->level, race_table[victim->race].name,
-    ch->sex == 0 ? "бесполый" : ch->sex == 1 ? "мужской" : "женский");
+    ptc(ch, "| {GVnum : {W%5u ",victim->pIndexData->vnum);
+    ptc(ch, "{GName:{x%s %s{C\n\r| {GLevel:{W%5d {GRace:{W%7s {GSex  : {W%5s                \n\r",
+      victim->name, victim->level, race_table[victim->race].name,
+      ch->sex == 0 ? "бесполый" : ch->sex == 1 ? "мужской" : "женский");
 
-   ptc(ch, "|{GGroup: {W%7d {GRoom:{W%7d {GCount: {W%d {GKilled:{W%d{C                     \n\r=---------------------------------------------------------------------------=\n\r",
-    (victim->group)?victim->group:0 , (victim->in_room) ? victim->in_room->vnum:0,
-    victim->pIndexData->count, victim->pIndexData->killed);
+    ptc(ch, "|{GGroup: {W%7d {GRoom:{W%7d {GCount: {W%d {GKilled:{W%d{C                     \n\r=---------------------------------------------------------------------------=\n\r",
+      (victim->group)?victim->group:0 , (victim->in_room) ? victim->in_room->vnum:0,
+      victim->pIndexData->count, victim->pIndexData->killed);
 
-   ptc(ch, "|  {GStr: {Y%3d {C({Y%3d{C) | {GHeal :{W%7d {C/{W%7d {C|            \n\r",
-    victim->perm_stat[STAT_STR],get_curr_stat(victim,STAT_STR),
-    victim->hit,victim->max_hit);
+    ptc(ch, "|  {GStr: {Y%3d {C({Y%3d{C) | {GHeal :{W%7d {C/{W%7d {C|            \n\r",
+      victim->perm_stat[STAT_STR],get_curr_stat(victim,STAT_STR),
+      victim->hit,victim->max_hit);
 
-   ptc(ch, "{GInt: {Y%3d {C({Y%3d{C) | {GMana :{W%7d {C/{W%7d {C|            \n\r",
-    victim->perm_stat[STAT_INT],get_curr_stat(victim,STAT_INT),
-    victim->mana,victim->max_mana);
+    ptc(ch, "{GInt: {Y%3d {C({Y%3d{C) | {GMana :{W%7d {C/{W%7d {C|            \n\r",
+      victim->perm_stat[STAT_INT],get_curr_stat(victim,STAT_INT),
+      victim->mana,victim->max_mana);
 
-   ptc(ch, "|  {GWis: {Y%3d {C({Y%3d {C) | {GMoves:{W%7d {C/{W%7d {C|         \n\r",
-    victim->perm_stat[STAT_WIS],get_curr_stat(victim,STAT_WIS),
-    victim->move,victim->max_move);
+    ptc(ch, "|  {GWis: {Y%3d {C({Y%3d {C) | {GMoves:{W%7d {C/{W%7d {C|         \n\r",
+      victim->perm_stat[STAT_WIS],get_curr_stat(victim,STAT_WIS),
+      victim->move,victim->max_move);
 
-   ptc(ch, "|  {GDex: {Y%3d {C({Y%3d {C) |                          | {GAlign : {W%d{C\n\r",
-    victim->perm_stat[STAT_DEX],get_curr_stat(victim,STAT_DEX),victim->alignment);
+    ptc(ch, "|  {GDex: {Y%3d {C({Y%3d {C) |                          | {GAlign : {W%d{C\n\r",
+      victim->perm_stat[STAT_DEX],get_curr_stat(victim,STAT_DEX),victim->alignment);
    
-   ptc(ch, "|  {GCon: {Y%3d {C({Y%3d {C) | {YClan :{W%s     {C|                \n\r",
-    victim->perm_stat[STAT_CON],get_curr_stat(victim,STAT_CON),
-    (victim->clan==NULL)? "{D   - none -  {x " : victim->clan->show_name);
+    ptc(ch, "|  {GCon: {Y%3d {C({Y%3d {C) | {YClan :{W%s     {C|                \n\r",
+      victim->perm_stat[STAT_CON],get_curr_stat(victim,STAT_CON),
+      (victim->clan==NULL)? "{D   - none -  {x " : victim->clan->show_name);
  
   }
 
   ptc(ch,"|{WAC:{Gpierce:{W%6d{C | {RHit  :{W%7d  {C        | Size      : {W%s{C\n\r",
-   GET_AC(victim,AC_PIERCE),GET_HITROLL(victim),size_table[victim->size].name);
+    GET_AC(victim,AC_PIERCE),GET_HITROLL(victim),size_table[victim->size].name);
 
   ptc(ch,"|   {Gbash  :{W%6d{C | {RDam  :{W%7d  {C        | Pos       : {W%s{C\n\r",
-   GET_AC(victim,AC_BASH),GET_DAMROLL(victim),position_table[victim->position].name);
+    GET_AC(victim,AC_BASH),GET_DAMROLL(victim),position_table[victim->position].name);
 
   ptc(ch,"|   {Gslash :{W%6d{C | {CSaves:{W%4d(%4d)  {C     | {RFightning : {W%s{C\n\r|   {Gmagic :{W%6d{C | {RWimpy:{W%6d  {C         | {GItems/Wght: {W%d/%d{C\n\r",
-   GET_AC(victim,AC_SLASH),-1*calc_saves(victim),victim->saving_throw,victim->fighting ?
-   victim->fighting->name : "(none)",
-   GET_AC(victim,AC_EXOTIC),victim->wimpy,victim->carry_number,
-   get_carry_weight(victim)/10);
+    GET_AC(victim,AC_SLASH),-1*calc_saves(victim),victim->saving_throw,victim->fighting ?
+    victim->fighting->name : "(none)",
+    GET_AC(victim,AC_EXOTIC),victim->wimpy,victim->carry_number,
+    get_carry_weight(victim)/10);
 
   ptc(ch,"{C=---------------------------------------------------------------------------={x\n\r");
 
   if (!IS_NPC(victim))
   {
     ptc(ch,"  {Gtoquest:{W%5d {Gqcount  :{W%5d",
-        victim->nextquest,victim->countdown);
+      victim->nextquest,victim->countdown);
 
     if (victim->questobj) 
-     ptc(ch,"{Gquestobj:{W%5d{x\n\r",victim->questobj);
+      ptc(ch,"{Gquestobj:{W%5d{x\n\r",victim->questobj);
     if (victim->questmob) 
-     ptc(ch,"{Gquestmob:{W%s\n\r{x",get_char_desc(victim->questmob,'1'));
+      ptc(ch,"{Gquestmob:{W%s\n\r{x",get_char_desc(victim->questmob,'1'));
   }
 
   if (IS_NPC(victim))
   {
-   ptc(ch,"  {GDamage: {W%5dd%5d{C  {GMessage:  {W%s{x\n\r",
-    victim->damage[DICE_NUMBER],victim->damage[DICE_TYPE],attack_table[victim->dam_type].noun);
-   if (victim->questmob) ptc(ch,"{CQuesmob for: {W%s\n\r",victim->questmob->name);
+    ptc(ch,"  {GDamage: {W%5dd%5d{C  {GMessage:  {W%s{x\n\r",
+      victim->damage[DICE_NUMBER],victim->damage[DICE_TYPE],attack_table[victim->dam_type].noun);
+    if (victim->questmob) ptc(ch,"{CQuesmob for: {W%s\n\r",victim->questmob->name);
   }
 
   ptc(ch, "  {GMaster: {W%10s {GLeader  : {W%10s {GPet  :{W%s{x\n\r",
-   victim->master      ? victim->master->name   : "(none)",
-   victim->leader      ? victim->leader->name   : "(none)",
-   victim->pet         ? victim->pet->name      : "(none)");
+    victim->master      ? victim->master->name   : "(none)",
+    victim->leader      ? victim->leader->name   : "(none)",
+    victim->pet         ? victim->pet->name      : "(none)");
 
   if (!IS_NPC(victim))
   {
-   ptc(ch,"  {GThirst: {W%10d {GHunger  : {W%10d {GFull : {W%10d {GDrunk: {W%d{x\n\r",
-    victim->pcdata->condition[COND_THIRST],victim->pcdata->condition[COND_HUNGER],
-    victim->pcdata->condition[COND_FULL],victim->pcdata->condition[COND_DRUNK]);
+    ptc(ch,"  {GThirst: {W%10d {GHunger  : {W%10d {GFull : {W%10d {GDrunk: {W%d{x\n\r",
+      victim->pcdata->condition[COND_THIRST],victim->pcdata->condition[COND_HUNGER],
+      victim->pcdata->condition[COND_FULL],victim->pcdata->condition[COND_DRUNK]);
 
-  ptc(ch,"  {GPlayed: {W%10d {GLast Lvl: {W%10d {GTimer: {W%d{x\n\r",
-    (int) (victim->played + current_time - victim->logon) / 3600, 
-     victim->pcdata->last_level, victim->timer);
-  ptc(ch,"{C=---------------------------------------------------------------------------={x\n\r");
+    ptc(ch,"  {GPlayed: {W%10d {GLast Lvl: {W%10d {GTimer: {W%d{x\n\r",
+      (int) (victim->played + current_time - victim->logon) / 3600, 
+      victim->pcdata->last_level, victim->timer);
+    ptc(ch,"{C=---------------------------------------------------------------------------={x\n\r");
   
-  if (IS_CFG(victim,CFG_GETEXP))
-  {
-   stc("GetExp: {GON{x\n\r",ch);
-  }
-  else
-  {
-   stc("GetExp: {ROFF{x\n\r",ch);
-  }
+    if (IS_CFG(victim,CFG_GETEXP)) stc("GetExp: {GON{x\n\r",ch);
+    else stc("GetExp: {ROFF{x\n\r",ch);
 
-  ptc(ch, "{RAdrenalin: {W%d{x",victim->pcdata->condition[COND_ADRENOLIN]);
+    ptc(ch, "{RAdrenalin: {W%d{x",victim->pcdata->condition[COND_ADRENOLIN]);
   }
 
   ptc(ch, "\n\r{YAct: {W%s{x",act_bit_name(victim->act));
        
   if (victim->comm) ptc(ch,"\n\r{CComm: {W%s{x",comm_bit_name(victim->comm));
-
   if (IS_NPC(victim) && victim->off_flags) ptc(ch, "\n\r{GOffense: {W%s{x",off_bit_name(victim->off_flags));
-
   if (victim->imm_flags) ptc(ch, "\n\r{MImmune:{W%s{x",imm_bit_name(victim->imm_flags));
- 
   if (victim->res_flags) ptc(ch, "\n\r{RResist: {W%s{x",imm_bit_name(victim->res_flags));
-
   if (victim->vuln_flags) ptc(ch, "\n\r{DVulnerable: {W%s{x",imm_bit_name(victim->vuln_flags));
-
   ptc(ch, "\n\r{GForm : {W%s{x", form_bit_name(victim->form));
-
   if (victim->affected_by) ptc(ch, "\n\r{CAffected by {W%s{x",affect_bit_name(victim->affected_by));
 
   if (IS_NPC(ch))
   {
-   ptc(ch, "\n\r{GShort description: {W%s\n\r{GLong  description: {W%s{x",
-   get_char_desc(victim, '1'),victim->long_descr[0] != '\0' ? victim->long_descr : "(none)");
+    ptc(ch, "\n\r{GShort description: {W%s\n\r{GLong  description: {W%s{x",
+    get_char_desc(victim, '1'),victim->long_descr[0] != '\0' ? victim->long_descr : "(none)");
   }
   if (IS_NPC(victim) && victim->spec_fun != 0)
     ptc(ch,"\n\r{MMobile has special procedure {W%s{x",spec_name(victim->spec_fun));
