@@ -3428,3 +3428,11 @@ P.S. Люди, когда пишете что-то в test.c старайтес�
         * fix for time.h - many crashes on new ubuntu, not sure what is wrong
         * updates to credits - fix typos, reformat
         * updated license, drop really old stuff... Our english was awful 20 years ago...
+4.86.00 (C) Saboteur
+        * remort fixed (causes crashes and issues)
+        * drop do_file and some other part of very-very local code that can be danger for public usage
+        * many simple formatting and code cleanup
+        * cleanup gcc warnings
+        * small performance optimization
+        * fixed guild chance percent (wrong C++ syntax)
+        * replaced == with strcmp for strings

@@ -513,7 +513,6 @@ void fwrite_obj (CHAR_DATA * ch, OBJ_DATA * obj, FILE * fp, int iNest, bool type
 bool load_char_obj (DESCRIPTOR_DATA * d, const char * name, int status)
 {
   char strsave [MAX_INPUT_LENGTH] ;
-  char buf     [MAX_STRING_LENGTH];
   CHAR_DATA * ch;
 
   FILE * fp ;
@@ -565,7 +564,7 @@ bool load_char_obj (DESCRIPTOR_DATA * d, const char * name, int status)
   if (status==SAVE_BACKUP2)
     do_printf (strsave, "%s%s", PLAYER_DIR3, capitalize (name));
 
-  fp = fopen (strsave, "r")
+  fp = fopen (strsave, "r");
   if (fp)
   {
     int iNest;
