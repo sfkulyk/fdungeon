@@ -1399,9 +1399,7 @@ void do_backup( CHAR_DATA *ch, const char *argument )
     if (load_char_obj(&d, arg2, SAVE_BACKUP))
     {
       ptc(ch, "В архиве найден следующий персонаж: %s\n\r", d.character->name);
-
       strftime(time_buf,25,"%y%m%d %a %H:%M:%S:",localtime(&d.character->lastlogin));
-
       ptc(ch, "{WВ последний раз этот персонаж заходил {Y%s{W{x\n\r",time_buf);
       ptc(ch, "Уровень %d,  QuestPoints: %d\n\r",d.character->level, d.character->questpoints);
       extract_char(d.character, TRUE);
@@ -1446,7 +1444,7 @@ void do_backup( CHAR_DATA *ch, const char *argument )
 
 void do_quit( CHAR_DATA *ch, const char *argument )
 {
-  AFFECT_DATA *paf; //, *paf_last=NULL;
+  AFFECT_DATA *paf;
   DESCRIPTOR_DATA *d,*d_next;
   int id;
   char buf[MAX_STRING_LENGTH];
@@ -1524,9 +1522,8 @@ void do_quit( CHAR_DATA *ch, const char *argument )
              ch->mana=UMAX(1,ch->mana - paf->modifier);
              affect_strip(ch,skill_lookup("aid"));
              break;
-          }               
-       // paf_last = paf;
-     }                    
+          }
+     }
 /* ----- */
 
   if (IS_SET(ch->act, PLR_QUESTOR)) 

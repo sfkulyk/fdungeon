@@ -564,36 +564,8 @@ bool load_char_obj (DESCRIPTOR_DATA * d, const char * name, int status)
     do_printf (strsave, "%s%s", PLAYER_DIR2, capitalize (name));
   if (status==SAVE_BACKUP2)
     do_printf (strsave, "%s%s", PLAYER_DIR3, capitalize (name));
-  if ((fp = fopen (strsave, "r")) == NULL)
-  {
-  #if defined(unix)
-    /* decompress if player.tgz file exists */
-    do_printf (strsave, "%splayer.tgz", status==SAVE_NORMAL?PLAYER_DIR:PLAYER_DIR2);
-    if ((fp = fopen (strsave, "r")) != NULL)
-    {
-      fclose  (fp);
-      do_printf (buf, "tar -xvfz %s %s %s", strsave,name,status==SAVE_NORMAL?PLAYER_DIR:PLAYER_DIR2);
-      // system  (buf); WHAT IS THIS? Saboteur
-    }
-  #else
-    // decompress if players.rar exist
-    do_printf (strsave, "%splayer.rar", status==SAVE_NORMAL?PLAYER_DIR:PLAYER_DIR2);
-    if ((fp = fopen (strsave, "r")) != NULL)
-    {
-      fclose  (fp);
-      do_printf (buf, "rar e %s %s %s", strsave,name,status==SAVE_NORMAL?PLAYER_DIR:PLAYER_DIR2);
-      // system  (buf); WHAT IS THIS? Saboteur
-    }
-  #endif
-  if (status==SAVE_NORMAL)
-    do_printf (strsave, "%s%s", PLAYER_DIR, capitalize (name));
-  if (status==SAVE_BACKUP)
-    do_printf (strsave, "%s%s", PLAYER_DIR2, capitalize (name));
-  if (status==SAVE_BACKUP2)
-    do_printf (strsave, "%s%s", PLAYER_DIR3, capitalize (name));
-  fp = fopen (strsave, "r");
-  }
 
+  fp = fopen (strsave, "r")
   if (fp)
   {
     int iNest;
