@@ -2200,33 +2200,13 @@ void do_reboot(CHAR_DATA *ch, const char *argument)
 {
   extern bool merc_down;
   CHAR_DATA *wch;
-  int amount,exitcode;
-  FILE *fp;
+  int amount;
   char buf[50];
 
   if (argument[0]=='\0' || !str_prefix(argument,"status"))
   {
     if (rebootcount==0) stc("{RSystem status: NO REBOOT{x\n\r",ch);
     else ptc(ch,"{RSystem status: REBOOT in %d ticks{x\n\r",rebootcount);
-    if (!IS_IMMORTAL(ch)) return;
-    fclose(fpReserve);
-    if ((fp=fopen("recommit.txt","r"))!=NULL) 
-    {
-      stc("Mud will be updated and compiled after reboot\n\r",ch);
-      fclose(fp);
-    }
-    if ((fp=fopen("shutdown.txt","r"))!=NULL)
-    {
-      stc("Mud will be shutdown after reboot\n\r",ch);
-      fclose(fp);
-    }
-    if ((fp=fopen("install.txt","r"))!=NULL)
-    {
-      stc("Executable rom will be updated after reboot\n\r",ch);
-      fclose(fp);
-    }
-    fpReserve = fopen(NULL_FILE, "r");
-
     return;
   }
 
@@ -2255,72 +2235,6 @@ void do_reboot(CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if (!str_prefix(argument,"checkout") || !str_cmp(argument,"co"))
-  {
-    ID_FILE="recommit.txt";
-    stf("Checkout",ch);
-    stc("[{Rrecommit.txt{x] file created\n\r",ch);
-    return;
-  }
-
-  if (!str_prefix(argument,"areas"))
-  {
-    stc("{RCommiting areas started.{x\n\r", ch);
-    exitcode=system("./acom &");
-    ptc(ch,"execution of ./acom & is [%d]",exitcode);
-    return;
-  }
-
-  if (!str_prefix(argument,"backup2"))
-  {
-    stc("{RBegin to backuping all players.{x\n\r", ch);
-    exitcode=system("./backup2.sh &");
-    ptc(ch,"execution of ./backup2.sh & is [%d]",exitcode);
-    return;
-  }
-
-  if (!str_prefix(argument,"compile"))
-  {
-    DESCRIPTOR_DATA *d;
-    exitcode=system("./compile &");
-    ptc(ch,"execution of ./compile & is [%d]",exitcode);
-
-    for (d=descriptor_list;d;d=d->next)
-    {
-      if (!d->character || d->connected!=CON_PLAYING 
-           || !IS_IMMORTAL(d->character)) continue;
-      stc("{RRecompiling of Mud sources started.{x\n\r",d->character);
-    }
-    return;
-  }
-
-  if (!str_prefix(argument,"install"))
-  {
-    ID_FILE="install.txt";
-    stf("install",ch);
-    stc("[{Rinstall.txt{x] file created\n\r",ch);
-    return;
-  }
-
-  if (!str_cmp(argument,"down") || !str_prefix(argument,"shutdown"))
-  {
-    ID_FILE="shutdown.txt";
-    stf("shutdown by immortal",ch);
-    stc("[{Rshutdown.txt{x] file created\n\r",ch);
-    return;
-  }
-
-  if (!str_cmp(argument,"remove"))
-  {
-    do_printf(buf, "shutdown.txt");
-    unlink (buf);
-    do_printf(buf, "recommit.txt");
-    unlink (buf);
-    do_printf(buf, "install.txt");
-    unlink (buf);
-    stc("{GAll flag files are cleared.{x\n\r", ch);
-  }
-
   if (!str_cmp(argument,"stop") || !str_cmp(argument,"cancel"))
   {                 
     rebootcount=0;
@@ -2339,7 +2253,6 @@ void do_reboot(CHAR_DATA *ch, const char *argument)
       stop_fighting(wch, TRUE);
       stc("{RSystem reboot: automatic saving, quit.{x\n\r",wch);
       save_one_char(wch,SAVE_NORMAL);
-//      if (wch->desc) close_socket(wch->desc);
     }
     log_string("Normal Reboot\n");
     merc_down = TRUE;
@@ -2352,12 +2265,6 @@ void do_reboot(CHAR_DATA *ch, const char *argument)
     stc("  [xx]       - reboot after xx ticks\n\r",ch);
     stc("  [stop] or  - stop reboot tick counter\n\r",ch);
     stc("  [now]      - reboot mud server now\n\r\n\r",ch);
-    stc("  [checkout] - create recommit.txt - checkout and remake after reboot\n\r",ch);
-    stc("  [install]  - create install.txt  - install new version of rom after reboot\n\r",ch);
-    stc("  [shutdown] - create shutdown.txt - exit autostart script after reboot\n\r",ch);
-    stc("  [clean]    - remove all flag files\n\r\n\r",ch);
-    stc("  [areas]    - run background process of commiting FD areas\n\r",ch);
-    stc("  [compile]  - run background process of checkout and remake of FD sources\n\r",ch);
   }
 }
 

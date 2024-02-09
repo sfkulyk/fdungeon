@@ -1334,8 +1334,9 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
        deity = deity_lookup(arg); 
 
        ptc( ch, "Удаляем божество {y%s{x...", deity_table[deity_lookup(arg)].name);
-       for( ; deity < MAX_DEITIES || !deity_table[deity+1].name; deity++)
+       for( ; deity < MAX_DEITIES; deity++)
        {
+         if (!deity_table[deity+1].name) break;
          dtab.name=deity_table[deity+1].name;
          dtab.russian   = deity_table[deity+1].russian;
          dtab.descr     = deity_table[deity+1].descr;

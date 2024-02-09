@@ -5,15 +5,15 @@
 #define __UNICORN_H__
 
 
-#ifdef unix
+//#ifdef unix
 
 #include <cmd.h>
 #include <mod.h>
 
 #define WITH_RPC
 #define WITH_DSO
-#define WITH_ANTICRASH
-#endif
+//#define WITH_ANTICRASH
+//#endif
 
 #ifdef WITH_ANTICRASH
 void death_hook();

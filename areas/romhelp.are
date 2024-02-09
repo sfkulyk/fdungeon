@@ -11,31 +11,8 @@
 набери {rHELP {y<команда>{x. Удачи тебе, странник. Да прибудут с тобой 
 {wБоги{x...
                                      
-Please type 'help rules' to see the Rules of ROM.
-~-1 LAG~
-Twas dial-up, and the failing mudders did toil and struggle in the fray
-All checksummed were the compressed files
-And the man pages, outdate
-Beware the Internet my son,
-The noise that hangs, the lag that kills
-Beware the Usenet news, and shun the frivolous mud with frills
-So took his his mudding client in hand
-Longtime the virtual foe he sought
-So rested he by the T1s three and paused a while in swap
-And as in disk-drive swap he stayed,
-The Internet, with lags of fame
-Came packetwise through the T1 line
-And error-checked as it came
-One two one two and through and through, the mudding client went kill -9
-He left it dead and with it's core he went a tracing back
-And hath thou slain the Internet?
-Come to my arms my disk-based bot!
-Oh lag-free day, callooh callay, he chortled in his joy
-Twas dial-up, and the failing mudders did toil and struggle in the fray
-All checksummed were the compressed files
-And the man pages, outdate.
-~
--1 WIZLIST~
+Набери 'help rules' посмотреть справку об игре.
+~-1 WIZLIST~
 .
 {w        ________                 {DИмплементоры{w                  ________
       /+_+_+_+_+_\         {g=-=-=-=-=-=--=-=-=-=-=-={w          /+_+_+_+_+_\
@@ -108,7 +85,7 @@ Also see "help ROM" for information about the Rivers of Mud code base.
  ||  Tom Madsen, Michael Seifert,and Sebastian Hammer  ||
  || Based on MERC 2.1 code by Hatchet, Furey, and Kahn ||         
  || Based ROM 2.4 copyright (c) 1993-1995 Russ Taylor. ||       
- || Forgotten Dungeon MUD (C) 1998-2021:               || 
+ || Forgotten Dungeon MUD (C) 1998-2024:               || 
   \\ Sergii Kulyk (Saboteur) & Taras Phizer (Adron)   //      [ ]_[ ]_[ ]_[ ]
    +--------------------------------------------------+        |_=_=_=_=_=_|   
    =-------------=           _+_    [ ]_[ ]_[ ]_[ ]   _______|  |=_= -    |    
@@ -128,16 +105,12 @@ Also see "help ROM" for information about the Rivers of Mud code base.
                      =-_|=_ =       | =_-_| |  | |     |   =_      | -_   |
 Select your codepage:   ^^^^^`^`^^`^`^`^^^""""""""^`^^``^^`^^`^^`^`^``^`^``^`
 ~
- 
 -1 MOTD~ 
 * Ты обязан знать правила, установленные бессмертными. Чтобы узнать их,
-  набери {w'RULES'{x. Помни - незнание законов не освобождает от
-  ответственности.
+  набери {w'RULES'{x. Незнание законов не освобождает от ответственности.
 * Важные команды: {whelp, commands, news, notes, changes{x.
 * Используй команду {rdelete{x для удаления неудавшегося персонажа.
-* Если вы хотите связаться с бессмертными - группа в телеграм: {wfdungeon{x
-  {Whttps://t.me/fdungeon{x
-  
+* Для связи с бессмертными - группа в телеграм: fdungeon({Whttps://t.me/fdungeon{x)
 [Нажми ENTER для продолжения]
 ~ 
 -1 JOBS~

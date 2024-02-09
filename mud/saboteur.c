@@ -248,9 +248,9 @@ void fix_keepers(MOB_INDEX_DATA *mob)
  SET_BIT(mob->imm_flags,IMM_MAGIC); 
  SET_BIT(mob->act,ACT_NOSTEAL);
  
- mob->damage[1]=mob->level/10; 
- mob->damage[2]=mob->level/5; 
- mob->damage[3]=number_range(mob->level/2,200); 
+ mob->damage[0]=mob->level/10; 
+ mob->damage[1]=mob->level/5; 
+ mob->damage[2]=number_range(mob->level/2,200); 
 } 
  
 void do_blacksmith (CHAR_DATA *ch, const char *argument) 

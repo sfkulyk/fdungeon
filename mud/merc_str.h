@@ -428,8 +428,8 @@ struct  clan_data
   int64        gold;       // clanbank gold
   int64        wear_loc;   // clanobj wear location
   int          qp;         // clanbank qp
-  int          clansn[20]; // clanskills
-  int64        clansnt[20];// clanskills timer
+  int          clansn[21]; // clanskills
+  int64        clansnt[21];// clanskills timer
 };
 
 // Prototype for a mob. This is the in-memory version of #MOBILES.

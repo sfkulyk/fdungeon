@@ -3680,14 +3680,15 @@ void bug( const char *str, int64 param )
 void log_string( const char *str )
 {
   FILE *fp;
+  char logname[32];
   char tmp[MAX_STRING_LENGTH];
-
   strftime(tmp,21,"%y%m%d %a %H:%M:%S:",localtime(&current_time));
   strcat(tmp,str);
   strcat(tmp,"\n");
-  do_fprintf(stdout,"%s",tmp);
+//  do_fprintf(stdout,"%s",tmp);
+  strftime(logname,28,"../log/full_log_%y%m%d.log",localtime(&current_time));
   fclose (logReserve);
-  fp = fopen ("full.log", "a+b");
+  fp = fopen (logname, "a+b");
   if (fp != NULL)
   {
     do_fprintf(fp,tmp);

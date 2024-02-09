@@ -1060,11 +1060,12 @@ void do_fprintf(FILE *fp, const char *fmt,...)
 void dlog(const char *fmt,...)
 {
   FILE *fp;
-  char buff [MAX_STRING_LENGTH];
+  char logname[32];
   char ttime[MAX_STRING_LENGTH];
-  char * buf;
+  char buff [MAX_STRING_LENGTH];
+  char *buf=buff;
+  char *strtime=ttime;
   bool left=FALSE;
-  char *strtime;
   bool fMatch=FALSE;
   bool fmtenable=FALSE;
   char *p;
@@ -1073,25 +1074,22 @@ void dlog(const char *fmt,...)
   va_list data;
   va_start(data,fmt);
   memset (buff, 0, MAX_STRING_LENGTH) ;
-  buf = buff ;
 
   if (!IS_SET(global_cfg,CFG_DLOG)) return;
 
+  strftime(logname,28,"../log/full_log_%y%m%d.log",localtime(&current_time));
   strftime(ttime,21,"%y%m%d %a %H:%M:%S:",localtime(&current_time));
-  strtime=ttime;
-
 #include "printf.c"
-
   *buf = 0;
   va_end (data);
   strcat(strtime,buff);
-  strcpy(log_buf, buff); /* @#$... (unicorn) */
+  strcpy(log_buf,buff); /* @#$... (unicorn) */
   strcat(strtime,"\n");
 
-  fprintf( stdout,"%s", strtime);
+//  fprintf( stdout,"%s", strtime);
 
   fclose(logReserve);
-  fp = fopen ("full.log", "a+b");
+  fp = fopen (logname, "a+b");
   if (fp != NULL)
   {
     fprintf(fp,"%s", strtime);
@@ -1103,11 +1101,12 @@ void dlog(const char *fmt,...)
 void log_printf(const char *fmt,...)
 {
   FILE *fp;
+  char logname[32];
   char buff [MAX_STRING_LENGTH];
   char ttime[MAX_STRING_LENGTH];
-  char * buf;
+  char *buf=buff;
+  char *strtime=ttime;
   bool left=FALSE;
-  char *strtime;
   bool fMatch=FALSE;
   bool fmtenable=FALSE;
   char *p;
@@ -1116,11 +1115,9 @@ void log_printf(const char *fmt,...)
   va_list data;
   va_start(data,fmt);
   memset (buff, 0, MAX_STRING_LENGTH) ;
-  buf = buff ;
 
+  strftime(logname,28,"../log/full_log_%y%m%d.log",localtime(&current_time));
   strftime(ttime,21,"%y%m%d %a %H:%M:%S:",localtime(&current_time));
-  strtime=ttime;
-
 #include "printf.c"
 
   *buf = 0;
@@ -1129,10 +1126,10 @@ void log_printf(const char *fmt,...)
   strcpy(log_buf, buff); /* @#$... (unicorn) */
   strcat(strtime,"\n");
 
-  fprintf(stdout, "%s",strtime);
+//  fprintf( stdout, "%s",strtime);
 
   fclose(logReserve);
-  fp = fopen ("full.log", "a+b");
+  fp = fopen (logname, "a+b");
   if (fp != NULL)
   {
     fprintf(fp,"%s", strtime);

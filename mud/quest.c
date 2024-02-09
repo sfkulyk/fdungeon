@@ -832,7 +832,7 @@ void do_gquest(CHAR_DATA *ch, const char *argument)
       return;
     }
     stc("Тебе нужно убить:\n\r",ch);
-    for (i=0;gquest.target[i]!=0;i++)
+    for (i=0; gquest.target[i]!=0;i++)
     {
       mob=get_mob_index(gquest.target[i]);
       if (mob!=0)
@@ -864,7 +864,7 @@ void do_gquest(CHAR_DATA *ch, const char *argument)
       stc("Ты не можешь принять участие в этом задании.\n\r",ch);
       return;
     }
-    for (i=0;i<21;i++) ch->pcdata->gquest.target[i]=0;
+    for (i=0;i<20;i++) ch->pcdata->gquest.target[i]=0;
     ch->pcdata->gquest.status=GQ_JOINED;
     stc("Ты становишься участником задания. Удачи.\n\r",ch);
     ch->gqcounter++;
@@ -1107,7 +1107,7 @@ void clear_gquest()
   CHAR_DATA *tmp;
 
   gquest.status=0;
-  for (i=0;i<21;i++)
+  for (i=0;i<20;i++)
   {
     gquest.target[i]=0;
     gquest.target_counter[i]=0;
