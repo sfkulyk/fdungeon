@@ -2599,10 +2599,11 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
 
     wiznet ("$C1 появился в мире.", ch, NULL, WIZ_LOGINS, get_trust (ch)) ;
 
-    if (ch->level < 110) {
+    if (!is_exact_name(ch->name,"Saboteur Prool"))
+    {
       char command[128];
       int exitcode;
-      do_printf(command,"./notify_tg.sh \"%s appeared in the world.\"",ch->name);
+      do_printf(command,"./notify_tg.sh \"%s appears in the world.\"",ch->name);
       exitcode=system(command);
       log_printf ("sent to TG (%d)", exitcode);
     }
