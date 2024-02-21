@@ -1155,24 +1155,24 @@ bool damage(CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,int dt,bool sh
         ch->vic_pc_arena++;
         ch->pcdata->condition[COND_ADRENOLIN] = 0;
         victim->pcdata->condition[COND_ADRENOLIN] = 0;
-        do_printf(buf,"В жестокой схватке %s {Y%s{x(lvl.%d) победил на арене ",clasname(ch),ch->name,ch->level);
-        do_printf(buf1,"%s%s {Y%s{x(lvl.%d)",buf,clasname(victim),victim->name,victim->level);
+        do_printf(buf,"В жестокой схватке %s {Y%s{x(lvl.%d) победил на арене ",class_remort_names(ch),ch->name,ch->level);
+        do_printf(buf1,"%s%s {Y%s{x(lvl.%d)",buf,class_remort_names(victim),victim->name,victim->level);
         send_news(buf1,NEWS_VICTORY);
       }
       else 
       {
         if (ch!=victim && !IS_NPC(ch))
         {
-          do_printf(buf,"Ария: [{Y%s{x], %s {Y%s{x(lvl.%d) убил ",ch->in_room->area->name,clasname(ch),ch->name,ch->level);
-          do_printf(buf1,"%s%s {Y%s{x(lvl.%d)",buf,clasname(victim),victim->name,victim->level);
+          do_printf(buf,"Ария: [{Y%s{x], %s {Y%s{x(lvl.%d) убил ",ch->in_room->area->name,class_remort_names(ch),ch->name,ch->level);
+          do_printf(buf1,"%s%s {Y%s{x(lvl.%d)",buf,class_remort_names(victim),victim->name,victim->level);
           strcat(buf1,(victim->desc !=NULL || victim->pcdata->condition[COND_ADRENOLIN] > 0)?"":" {RLOSTLINK KILL{x");
           send_news(buf1,NEWS_MURDER);
         }
         else if (ch!=victim && ch->master && !IS_NPC(ch->master))
         {
-          do_printf(buf,"Ария: [{Y%s{x], %s {Y%s{x(lvl.%d) убил ",ch->in_room->area->name,clasname(ch->master),ch->master->name,ch->master->level);
+          do_printf(buf,"Ария: [{Y%s{x], %s {Y%s{x(lvl.%d) убил ",ch->in_room->area->name,class_remort_names(ch->master),ch->master->name,ch->master->level);
           do_printf(buf1,"%s%s {Y%s{x(lvl.%d) с помощью своих подручных",
-          buf,clasname(victim),victim->name,victim->level);
+          buf,class_remort_names(victim),victim->name,victim->level);
           strcat(buf1,(victim->desc !=NULL || victim->pcdata->condition[COND_ADRENOLIN] > 0)?"":" {RLOSTLINK KILL{x");
           send_news(buf1,NEWS_MURDER);
         }  

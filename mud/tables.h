@@ -82,4 +82,3 @@ extern  const   struct  flag_type room_flags[];
 extern  const   struct  flag_type exit_flags[];
 extern  const   struct  flag_type mprog_flags[];
 extern  const   struct  flag_type raff_flags[];
-

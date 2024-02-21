@@ -922,12 +922,6 @@ void close_socket( DESCRIPTOR_DATA *dclose )
     return;
   }
 
-//  if (dclose->snoop_by && dclose->snoop_by->character)
-//  {
-//    ch=dclose->snoop_by->character;
-//    stc("¬аша жертва покинула игру.\n\r",ch);
-//  }
-
   for (d=descriptor_list;d;d=d->next)
     if (d->snoop_by==dclose) d->snoop_by=NULL;
 
@@ -965,15 +959,6 @@ void close_socket( DESCRIPTOR_DATA *dclose )
   }
   if ( d_next == dclose ) d_next = d_next->next;   
 
-/* this procedure executes in free_descriptor
-  if ( dclose == descriptor_list ) descriptor_list = descriptor_list->next;
-  else
-  {
-    for (d=descriptor_list;d && d->next!= dclose; d=d->next);
-    if (d) d->next = dclose->next;
-    else bug( "Close_socket: dclose not found.", 0 );
-  }
-*/
 #if !defined( WIN32 )
   close( dclose->descriptor );
 #else
@@ -2547,7 +2532,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
           obj_to_char (create_object (get_obj_index(OBJ_VNUM_VAMPIREARTEFACT) ,101), ch) ;
         }
 
-        do_printf (buf, "¬еликий %s переродилс€ в %s\n\r", ch->name, clasname (ch)) ;
+        do_printf (buf, "¬еликий %s переродилс€ в %s\n\r", ch->name, class_remort_names(ch)) ;
         send_news (buf, NEWS_REMORT) ;
       }
 
@@ -2613,6 +2598,14 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
     else info (ch, ch->level, 1, ch->name, "по€вилс€, осматрива€ измененный мир...") ;
 
     wiznet ("$C1 по€вилс€ в мире.", ch, NULL, WIZ_LOGINS, get_trust (ch)) ;
+
+    if (ch->level < 110) {
+      char command[128];
+      int exitcode;
+      do_printf(command,"./notify_tg.sh \"%s appeared in the world.\"",ch->name);
+      exitcode=system(command);
+      log_printf ("sent to TG (%d)", exitcode);
+    }
 
     // load pet
     if (ch->pet != NULL)

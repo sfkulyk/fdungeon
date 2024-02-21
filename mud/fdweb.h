@@ -4,5 +4,4 @@
 const char *fname_online;
 const char *fname_who;
 
-void write_who();
 void web_update();

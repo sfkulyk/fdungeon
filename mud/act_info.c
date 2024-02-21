@@ -1653,18 +1653,6 @@ void do_whois (CHAR_DATA *ch, const char *argument)
     {
       found = TRUE;
       class = classname(wch);
-      switch(wch->level)
-      {
-        case MAX_LEVEL - 0 : class = "{DImplementor{x";     break;
-        case MAX_LEVEL - 1 : class = "{D  Creator  {x";     break;
-        case MAX_LEVEL - 2 : class = "{C   Deity   {x";     break;
-        case MAX_LEVEL - 3 : class = "{C Elder God {x";     break;
-        case MAX_LEVEL - 4 : class = "{c    God    {x";     break;
-        case MAX_LEVEL - 5 : class = "{r  DemiGod  {x";     break;
-        case MAX_LEVEL - 6 : class = "{r Immortal  {x";     break;
-        case MAX_LEVEL - 7 : class = "{W ArchAngel {x";     break;
-        case MAX_LEVEL - 8 : class = "{w   Angel   {x";     break;
-      }
 
       do_printf(buf,"\n\r{C /~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/{x\n\r{C| {x%12s %s %-54s {C|{x\n\r{C| Óðîâåíü: {Y%3d  {CÐàñà: {Y%s {CÊëàññ: {Y%15s  {CÏîë: {Y%s         {C|{x\n\r{C| Êëàí:{x%s        {CÊðèìèíàë:%s %s             {C|\n\r{x",
       wch->name, IS_SET(wch->comm, COMM_AFK) ? "{c[AFK]{x" : "     ",
@@ -1912,21 +1900,7 @@ void do_who (CHAR_DATA * ch, const char * argument)
         ((showflag & SHOW_PK) && (!PK_RANGE(ch, wch) || !PK_RANGE(wch, ch))) ||
         (!EMPTY (clans) && (wch->clan == NULL || !is_name (wch->clan->name,
                                                            clans)))) continue ;
-
-    // figure out what to print for class
-    switch (wch->level)
-    {
-      default:            class = classname(wch) ; break ;
-      case MAX_LEVEL - 0: class = "{D ÒÂÎÐÅÖ {x" ; break ;
-      case MAX_LEVEL - 1: class = "{RCREATOR {x" ; break ;
-      case MAX_LEVEL - 2: class = "{MSUPERIOR{x" ; break ;
-      case MAX_LEVEL - 3: class = "{GGOD     {x" ; break ;
-      case MAX_LEVEL - 4: class = "{GDemiGod {x" ; break ;
-      case MAX_LEVEL - 5: class = "{cImmortal{x" ; break ;
-      case MAX_LEVEL - 6: class = "{CArhAngel{x" ; break ;
-      case MAX_LEVEL - 7: class = "{CAngel   {x" ; break ;
-      case MAX_LEVEL - 8: class = "{CAvatar  {x" ; break ;
-    }
+    class = classname(wch);
 
     do_printf (buf, "[%3d %s %10s{x] %s%s%s%s",
                wch->level, race_wname (wch), class,
@@ -3319,18 +3293,6 @@ void whois_info(CHAR_DATA* ch, CHAR_DATA * victim)
   output = new_buf();
 
   class = classname(victim);
-  switch(victim->level)
-  {
-    case MAX_LEVEL - 0 : class = "{DIMPLEM. {x";     break;
-    case MAX_LEVEL - 1 : class = "{CCREATOR {x";     break;
-    case MAX_LEVEL - 2 : class = "{CSUPERIOR{x";     break;
-    case MAX_LEVEL - 3 : class = "{C DEITY  {x";     break;
-    case MAX_LEVEL - 4 : class = "{c  ÁÎÃ   {x";     break;
-    case MAX_LEVEL - 5 : class = "{rImmortal{x";     break;
-    case MAX_LEVEL - 6 : class = "{rDemi God{x";     break;
-    case MAX_LEVEL - 7 : class = "{rArhAngel{x";     break;
-    case MAX_LEVEL - 8 : class = "{r Angel  {x";     break;
-  }
 
   do_printf(buf,"\n\r{C /~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/{x\n\r{C| {x%12s %s %-54s {C|{x\n\r{C| Óðîâåíü: {Y%3d  {CÐàñà: {Y%8s {CÊëàññ: {Y%15s  {CÏîë: {Y%s         {C|{x\n\r{C| Êëàí:{x%s        {CÊðèìèíàë:%s %s             {C|\n\r{x",
   victim->name, IS_SET(victim->comm, COMM_AFK) ? "{c[AFK]{x" : "     ",

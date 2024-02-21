@@ -3685,7 +3685,6 @@ void log_string( const char *str )
   strftime(tmp,21,"%y%m%d %a %H:%M:%S:",localtime(&current_time));
   strcat(tmp,str);
   strcat(tmp,"\n");
-//  do_fprintf(stdout,"%s",tmp);
   strftime(logname,28,"../log/full_log_%y%m%d.log",localtime(&current_time));
   fclose (logReserve);
   fp = fopen (logname, "a+b");

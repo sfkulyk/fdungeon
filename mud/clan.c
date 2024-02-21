@@ -522,8 +522,8 @@ void do_ear( CHAR_DATA *victim, CHAR_DATA *ch)
   free_string( obj->short_descr );
   obj->short_descr = str_dup( buf );
                   
-  do_printf( buf1, "”хо %s (%s %d уровень), отрезанное ",victim->name ,clasname(victim),victim->level);
-  do_printf( buf,"%s %s (%s %d уровень).",buf1,ch->name, clasname(ch),ch->level);
+  do_printf( buf1, "”хо %s (%s %d уровень), отрезанное ",victim->name ,class_remort_names(victim),victim->level);
+  do_printf( buf,"%s %s (%s %d уровень).",buf1,ch->name, class_remort_names(ch),ch->level);
 
   free_string( obj->description );
   obj->description = str_dup( buf );

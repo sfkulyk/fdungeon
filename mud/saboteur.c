@@ -606,23 +606,8 @@ void do_online (CHAR_DATA *ch, const char *argument)
   if (!is_name(wch->name, argument) && (!wch->clan || str_cmp(wch->clan->name,argument))) continue;
  
   class = classname(wch);
-  switch ( wch->level ) 
-   { 
-    default: break; 
-     { 
-      case MAX_LEVEL - 0 : class = "{DIMPLEMENT {x"; break; 
-      case MAX_LEVEL - 1 : class = "{DCREATOR   {x"; break; 
-      case MAX_LEVEL - 2 : class = "{CSUPERIOR  {x"; break; 
-      case MAX_LEVEL - 3 : class = "{CDEITY     {x"; break; 
-      case MAX_LEVEL - 4 : class = "{CGOD       {x"; break; 
-      case MAX_LEVEL - 5 : class = "{rIMMORTAL  {x"; break; 
-      case MAX_LEVEL - 6 : class = "{rDEMIGOD   {x"; break; 
-      case MAX_LEVEL - 7 : class = "{rANGEL     {x"; break; 
-      case MAX_LEVEL - 8 : class = "{rAVATAR    {x"; break; 
-     } 
-  } 
- 
-  ptc(ch,"{C[{Y%3d {x%5s %s{C]{x %s%s%s %s {Y%s {x%s{x\n\r", 
+
+   ptc(ch,"{C[{Y%3d {x%7s %s{C]{x %s%s%s %s {Y%s {x%s{x\n\r", 
    wch->level, race_wname(wch),
    class, (wch->clan==NULL) ? "" :wch->clan->show_name, 
    IS_SET(wch->comm, COMM_AFK) ? "{c[A]{x" : "", 
@@ -1973,20 +1958,35 @@ char *classname( CHAR_DATA *ch)
 {
   static char buf[32];
   int i;
+  char class_names[10][13] = {
+    "{CHero    {x\0",
+    "{CAvatar  {x\0",
+    "{CAngel   {x\0",
+    "{CArhAngel{x\0",
+    "{cImmortal{x\0",
+    "{GDemiGod {x\0",
+    "{GGOD     {x\0",
+    "{MSUPERIOR{x\0",
+    "{RCREATOR {x\0",
+    "{D ÒÂÎÐÅÖ {x\0"};
 
   buf[0]='\0';
-  if (!ch) strcat(buf,"BUG   ");
-  else
-  if (IS_NPC(ch)) strcat(buf,"mobile");
+  if (!ch) {
+    strcat(buf,"BUG   ");
+  }
+  else if (IS_NPC(ch)) {
+    strcat(buf,"mobile");
+  }
+  else if (ch->level > 101) {
+    strcat(buf,class_names[ch->level - 101]);
+  }
   else if (IS_SET(ch->act, PLR_LASTREMORT))
   {
     strcat(buf,"{CAvatar{x    ");
-    return buf;
   }
   else if (IS_SET(ch->act, PLR_5REMORT))
   {
     strcat(buf,"{wH{WE{wR{WO{x      ");
-    return buf;
   }
   else
   {
@@ -1997,12 +1997,12 @@ char *classname( CHAR_DATA *ch)
         class_ntab[i].thi == ch->classthi &&
         class_ntab[i].mag == ch->classmag) break;
     }
-  strcat(buf,class_ntab[i].name);
+    strcat(buf,class_ntab[i].name);
   }
   return buf;
 }
 
-char *clasname( CHAR_DATA *ch)
+char *class_remort_names( CHAR_DATA *ch)
 {
   static char buf[32];
   int i;
