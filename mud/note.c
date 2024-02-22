@@ -365,6 +365,15 @@ void append_note(NOTE_DATA *pnote)
     do_fprintf( fp, "Text\n%s~\n", pnote->text);
     fclose( fp );
   }
+  // send to tg
+  if ( (fp=fopen("send+note.txt","a") ) == NULL ) perror(name);
+  else  {
+    int exitcode;
+    do_fprintf( fp, "From:%s\nTo: %s\nSubject:[%d] %s\n\n%s", pnote->sender,pnote->to_list,pnote->type,pnote->subject,pnote->text);
+    fclose(fp);
+    exitcode=system("./send_note.sh");
+    log_printf ("sent to TG (%d)", exitcode);
+  }
   fpReserve = fopen( NULL_FILE, "r" );
 }
 
