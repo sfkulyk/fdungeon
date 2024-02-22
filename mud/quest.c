@@ -710,8 +710,36 @@ void do_gquest(CHAR_DATA *ch, const char *argument)
   char arg1[MAX_INPUT_LENGTH];
   int i;
   MOB_INDEX_DATA *mob;
-
   argument = one_argument(argument, arg1);
+
+  if (!*arg1 || !str_prefix(arg1,"info")) {
+    if (gquest.status==0) stc("Сейчас нет задания.\n\r",ch);
+    else if (gquest.status==GQ_STARTING) {
+      ptc(ch,"Задание для уровней {Y%d-%d{x начнется через {Y%d{x тиков\n\r",
+        gquest.min_level,gquest.max_level,gquest.counter);
+      ptc(ch,"Нужно убить %d монстров за %d тиков.\n\r",gquest.mobs,gquest.tmp_counter);
+      ptc(ch,"Ты {Y%s{x подал заявку для участия", ch->pcdata->gquest.status==GQ_JOINED?"уже":"еще не");
+    }
+    else {
+      ptc(ch,"Идет задание для уровней %d-%d. Нужно убить %d монстров за %d тиков.\n\r",
+        gquest.min_level,gquest.max_level,gquest.mobs,gquest.counter);
+
+      if (ch->pcdata->gquest.status == GQ_JOINED) {
+        stc("Тебе нужно убить:\n\r",ch);
+        for (i=0; gquest.target[i]!=0;i++) {
+          mob=get_mob_index(gquest.target[i]);
+          if (mob!=0) {
+            if (IS_IMMORTAL(ch))
+              ptc(ch,"[%2d из %2d] %20s (%s) %s\n\r",ch->pcdata->gquest.target[i],gquest.target_counter[i],get_mobindex_desc(mob,'1'),mob->area->name,mob->player_name);
+            else
+              ptc(ch,"[%2d из %2d] %20s (%s)\n\r",ch->pcdata->gquest.target[i],gquest.target_counter[i],get_mobindex_desc(mob,'1'),mob->area->name);
+          }
+        }
+      }
+      else stc("Ты не подавал заявку на участие в задании.",ch);
+    }
+    return;
+  }
 
   if (!str_prefix(arg1,"join")) {
     if (gquest.status==0) {
@@ -746,7 +774,7 @@ void do_gquest(CHAR_DATA *ch, const char *argument)
       return;
     }
     if (ch->pcdata->gquest.status!=GQ_JOINED) {
-      stc("Ты не учавствуешь в задании.\n\r",ch);
+      stc("Ты не участвуешь в задании.\n\r",ch);
       return;
     }
     for (i=0;gquest.target[i]!=0;i++) {
@@ -778,7 +806,7 @@ void do_gquest(CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if (str_cmp(arg1,"help")) {
+  if (!str_prefix(arg1,"help")) {
     stc ("? or help - эта справка\n\r",ch);
     stc ("join      - принять участие в текущем задании\n\r",ch);
     stc ("progress  - просмотр состояния и процент выполнения текущего задания\n\r",ch);
@@ -872,32 +900,6 @@ void do_gquest(CHAR_DATA *ch, const char *argument)
       ptc(ch,"Осталось {Y%d{x тиков на выполнение\n\r",gquest.counter);
     return;
   }
-
-  if (!*argument) stc("Напиши '{Ygquest help{x' для справки по командам.\n\r",ch);
-
-  if (gquest.status==0) stc("Сейчас нет задания.\n\r",ch);
-  else if (gquest.status==GQ_STARTING) {
-    ptc(ch,"Задание для уровней {Y%d-%d{x начнется через {Y%d{x тиков\n\r",
-      gquest.min_level,gquest.max_level,gquest.counter);
-    ptc(ch,"Нужно убить %d монстров за %d тиков.\n\r",gquest.mobs,gquest.tmp_counter);
-    ptc(ch,"Ты {Y%s{x подал заявку для участия", ch->pcdata->gquest.status==GQ_JOINED?"уже":"еще не");
-  }
-
-  ptc(ch,"Идет задание для уровней %d-%d. Нужно убить %d монстров за %d тиков.\n\r",
-    gquest.min_level,gquest.max_level,gquest.mobs,gquest.counter);
-  if (ch->pcdata->gquest.status!=GQ_JOINED) {
-    stc("Тебе нужно убить:\n\r",ch);
-    for (i=0; gquest.target[i]!=0;i++) {
-      mob=get_mob_index(gquest.target[i]);
-      if (mob!=0) {
-        if (IS_IMMORTAL(ch))
-          ptc(ch,"[%2d из %2d] %20s (%s) %s\n\r",ch->pcdata->gquest.target[i],gquest.target_counter[i],get_mobindex_desc(mob,'1'),mob->area->name,mob->player_name);
-        else
-          ptc(ch,"[%2d из %2d] %20s (%s)\n\r",ch->pcdata->gquest.target[i],gquest.target_counter[i],get_mobindex_desc(mob,'1'),mob->area->name);
-      }
-    }
-  }
-  else stc("Ты не подавал заявку на участие в задании.",ch);
 }
 
 void gquest_update(void)

@@ -343,3 +343,14 @@ Text
 
 Saboteur
 ~
+Sender  Saboteur~
+Host    _gateway~
+Date    240222 Thu 02:55:23:~
+Stamp   1708563323
+To      all~
+Subject patches~
+Text
+fixed crash related to global quests
+gquest syntax optimized a bit
+Saboteur
+~
