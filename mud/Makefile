@@ -10,7 +10,7 @@
 #           take a great deal of compilation time.
 #-O0 no optimization
 
-C_FLAGS = -O1  -I../src/include -I/usr/include -I. -DOLD_RAND -Wall
+C_FLAGS = -O1  -I../src/include -I/usr/include -I. -DOLD_RAND -Wall 
 
 L_FLAGS = -Wl,-E -L../lib -lcrypt
 

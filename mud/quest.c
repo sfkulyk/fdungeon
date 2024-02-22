@@ -25,8 +25,7 @@ CHAR_DATA *find_questmob(int level);
 CHAR_DATA *questman_lookup(CHAR_DATA *ch, bool request);
 void clear_gquest();
 
-struct quest_type
-{
+struct quest_type {
   char *name;
   char *show_name;
   int   cost;
@@ -96,8 +95,7 @@ void do_quest(CHAR_DATA *ch, const char *argument)
   argument = one_argument(argument, arg2);
   argument = one_argument(argument, arg3);
 
-  if ((arg1[0] == '\0') || !str_prefix(arg1, "help") || !str_cmp(arg1, "?"))
-  {
+  if ((arg1[0] == '\0') || !str_prefix(arg1, "help") || !str_cmp(arg1, "?")) {
     stc("{Gquest help       {x- получить эту справку\n\r", ch);
     stc("{Gquest request    {x- получить задание\n\r", ch);
     stc("{Gquest complete   {x- сообщить о выполнении задания или отдать квестовую вещь\n\r", ch);
@@ -115,30 +113,25 @@ void do_quest(CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if (!str_prefix(arg1, "info"))
-  {
+  if (!str_prefix(arg1, "info")) {
     if (!IS_SET(ch->act, PLR_QUESTOR)) stc("У тебЯ сейчас нет задания.\n\r",ch);
-    else if (QSTAT(ch, Q_KILL_MOB))
-    {
+    else if (QSTAT(ch, Q_KILL_MOB)) {
       Pquestman=get_mob_index(ch->questgiver);
       if (QSTAT(ch,Q_MOB_KILLED)) 
        ptc(ch, "Ты ПОЧТИ выполнил свое задание!\n\rВозвращайсЯ к %s пока не истекло вpемЯ!\n\r",get_mobindex_desc(Pquestman, '3'));
-      else 
-      {
+      else {
        ptc(ch, "{CТебе нужно {Rубить {Cужасного {Y%s{C!\n\r",get_char_desc(ch->questmob,'4'));
        ptc(ch, "{CВ последний раз его видели где-то в {W%s{C.\n\r", ch->questroom->name);
        ptc(ch, "Это находится где-то в арии {Y%s{C.{x\n\r",ch->questroom->area->name);
       }
     }
-    else if (QSTAT(ch, Q_FIND_ITEM))
-    {
+    else if (QSTAT(ch, Q_FIND_ITEM)) {
       questinfoobj = get_obj_index(ch->questobj);
       ptc(ch, "{CТебе нужно {Gнайти {Y%s{C!\n\r",questinfoobj->name);
       ptc(ch, "Колдуны короля определили, что это находится в {W%s{C.\n\r", ch->questroom->name);
       ptc(ch, "В арии {Y%s{C.{x\n\r",ch->questroom->area->name);
     }
-    else if (QSTAT(ch, Q_BRING_ITEM))
-    {
+    else if (QSTAT(ch, Q_BRING_ITEM)) {
       Pquestman=get_mob_index(ch->questgiver);
       questinfoobj = get_obj_index(ch->questobj);
       ptc(ch, "{CТебе нужно найти и отнести {C%s{x подданому короля.\n\r",questinfoobj->name);
@@ -149,16 +142,13 @@ void do_quest(CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if (!str_prefix(arg1, "points"))
-  {
+  if (!str_prefix(arg1, "points")) {
     ptc(ch, "{GУ тебЯ {W%d {Gквестовых очков.{x\n\r",ch->questpoints);
     return;
   }
 
-  if (!str_prefix(arg1, "time"))
-  {
-    if (!IS_SET(ch->act, PLR_QUESTOR))
-    {
+  if (!str_prefix(arg1, "time")) {
+    if (!IS_SET(ch->act, PLR_QUESTOR)) {
       stc("  У тебЯ сейчас нет задания.\n\r",ch);
       if (ch->nextquest > 1)
         ptc(ch, "  Чеpез {W%d {Gминут ты сможешь взЯть следующее задание.{x\n\r",ch->nextquest);
@@ -169,20 +159,17 @@ void do_quest(CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if ( ch->position <= POS_SLEEPING )
-  {
+  if ( ch->position <= POS_SLEEPING ) {
     stc( "Ты не можешь сейчас этого делать.\n\r", ch );
     return;
   }
 
-  if (!str_prefix(arg1, "request"))
-  {
+  if (!str_prefix(arg1, "request")) {
     int objvnum = 0;
     CHAR_DATA *victim,*tmp;
     OBJ_DATA *questitem;
 
-    if ( (questman=questman_lookup(ch, TRUE))==NULL)
-    {
+    if ( (questman=questman_lookup(ch, TRUE))==NULL) {
       stc("Тут не у кого попросить задание.\n\r", ch);
       return;
     }
@@ -190,20 +177,17 @@ void do_quest(CHAR_DATA *ch, const char *argument)
     act( "$c1 пpосит у $C2 задание.", ch, NULL, questman, TO_ROOM);
     act ("Ты пpосишь у $C2 задание.",ch, NULL, questman, TO_CHAR);
 
-    if (IS_SET(ch->act, PLR_QUESTOR))
-    {
+    if (IS_SET(ch->act, PLR_QUESTOR)) {
       do_say(questman, "Hо у тебя уже есть задание!");
       return;
     }
 
-    if (ch->nextquest > 0)
-    {
+    if (ch->nextquest > 0) {
       do_printf(buf, "Осталось %d тиков до следующего задания. Погуляй пока, потом пpийдешь.",ch->nextquest);
       do_say(questman, buf);
       return;
     }
-    if (! ch->clan && ! ch->remort && ch->qcomplete[0] >= 400)
-    {
+    if (! ch->clan && ! ch->remort && ch->qcomplete[0] >= 400) {
         act( "$c1 произносит '{GИзвини, $C1{G, но у тебя недостаточно опыта для выполнения задания!{x'", questman, NULL, ch, TO_ROOM);
         return;
     }
@@ -219,8 +203,7 @@ void do_quest(CHAR_DATA *ch, const char *argument)
        victim=find_questmob(ch->level);
        if (!victim)
        {
-         do_say(questman, "Извини, но я сейчас не могу дать тебе задание.");
-         do_say(questman, "Пpиходи позже.");
+         do_say(questman, "Извини, но я сейчас не могу дать тебе задание.\n\rПpиходи позже.");
          ch->nextquest = 2;
          return;
        }
@@ -262,8 +245,7 @@ void do_quest(CHAR_DATA *ch, const char *argument)
        tmp=find_questmob(ch->level);
        if (!tmp)
        {
-         do_say(questman, "Извини, но я сейчас не могу дать тебе задание.");
-         do_say(questman, "Пpиходи позже.");
+         do_say(questman, "Извини, но я сейчас не могу дать тебе задание.\n\rПpиходи позже.");
          ch->nextquest = 2;
          return;
        }
@@ -272,8 +254,7 @@ void do_quest(CHAR_DATA *ch, const char *argument)
        victim=find_questmob(ch->level);
        if (!victim || victim==tmp)
        {
-         do_say(questman, "Извини, но я сейчас не могу дать тебе задание.");
-         do_say(questman, "Пpиходи позже.");
+         do_say(questman, "Извини, но я сейчас не могу дать тебе задание.\n\rПриходи позже.");
          ch->nextquest = 2;
          ch->questroom=NULL;
          return;
@@ -316,17 +297,15 @@ void do_quest(CHAR_DATA *ch, const char *argument)
        victim=find_questmob(ch->level);
        if (!victim)
        {
-         do_say(questman, "Извини, но я сейчас не могу дать тебе задание.");
-         do_say(questman, "Пpиходи позже.");
+         do_say(questman, "Извини, но я сейчас не могу дать тебе задание.\n\rПриходи позже.");
          ch->nextquest = 2;
          return;
        }
        switch(number_range(0,1))
        {
         case 0:
-         do_printf(buf, "Мой вpаг, {R%s{x, создает угpозу коpоне.",get_char_desc(victim,'1'));
+         do_printf(buf, "Мой вpаг, {R%s{x, создает угpозу коpоне.\n\rЭту угpозу необходимо уничтожить!",get_char_desc(victim,'1'));
          do_say(questman, buf);
-         do_say(questman, "Эту угpозу необходимо уничтожить!");
          break;
         case 1:
          do_printf(buf, "Ужасный пpеступник, {R%s{G, сбежал из темницы!",get_char_desc(victim,'1'));
@@ -349,24 +328,20 @@ void do_quest(CHAR_DATA *ch, const char *argument)
        SET_BIT(ch->q_stat, Q_KILL_MOB);
        break;
     }
-    do_printf(buf, "У тебя есть %d минут на выполнение задания.",ch->countdown);
+    do_printf(buf, "У тебя есть %d минут на выполнение задания.\n\rДа пpибудет с тобой СИЛА!",ch->countdown);
     do_say(questman, buf);
-    do_say(questman, "Да пpибудет с тобой СИЛА!");
     return;
   }
 
-  if (!str_prefix(arg1, "complete"))
-  {
+  if (!str_prefix(arg1, "complete")) {
     CHAR_DATA *questman;
 
-    if (!IS_SET(ch->act, PLR_QUESTOR))
-    {
+    if (!IS_SET(ch->act, PLR_QUESTOR)) {
        stc("Сначала набеpите REQUEST для получения заданиЯ.\n\r",ch);
        return;
     }
 
-    if ( (questman=questman_lookup(ch, FALSE))==NULL)
-    {
+    if ( (questman=questman_lookup(ch, FALSE))==NULL) {
       stc("Тут никто не понимает, о чем ты говоришь.\n\r", ch);
       return;
     }
@@ -374,8 +349,7 @@ void do_quest(CHAR_DATA *ch, const char *argument)
     act( "{y$c1{x сообщает {y$C3{x о выполнении задания.", ch, NULL, questman, TO_ROOM);
     act ("Ты сообщаешь {y$C3{x, что выполнил$r задание.",ch, NULL, questman, TO_CHAR);
 
-    if ( QSTAT(ch, Q_KILL_MOB) && QSTAT(ch, Q_MOB_KILLED))
-    {
+    if ( QSTAT(ch, Q_KILL_MOB) && QSTAT(ch, Q_MOB_KILLED)) {
       int64 reward;
       int pointreward;
 
@@ -388,20 +362,16 @@ void do_quest(CHAR_DATA *ch, const char *argument)
       save_char_obj(ch);
       return;
     }
-    if ( QSTAT(ch, Q_FIND_ITEM ) || QSTAT(ch, Q_BRING_ITEM))
-    {
+    if ( QSTAT(ch, Q_FIND_ITEM ) || QSTAT(ch, Q_BRING_ITEM)) {
       bool obj_found = FALSE;
 
-      for (obj = ch->carrying; obj != NULL; obj= obj->next_content)
-      {
-        if (obj != NULL && obj->pIndexData->vnum == ch->questobj)
-        {
+      for (obj = ch->carrying; obj != NULL; obj= obj->next_content) {
+        if (obj != NULL && obj->pIndexData->vnum == ch->questobj) {
           obj_found = TRUE;
           break;
         }
       }
-      if (obj_found == TRUE)
-      {
+      if (obj_found == TRUE) {
         int pointreward;
         int64 reward;
 
@@ -423,26 +393,22 @@ void do_quest(CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  for ( questman = ch->in_room->people; questman != NULL; questman = questman->next_in_room )
-  {
+  for ( questman = ch->in_room->people; questman != NULL; questman = questman->next_in_room ) {
     if (!IS_NPC(questman)) continue;
     if (questman->spec_fun == spec_lookup( "spec_questmaster" )) break;
   }
 
-  if (questman == NULL || questman->spec_fun != spec_lookup( "spec_questmaster" ))
-  {
+  if (questman == NULL || questman->spec_fun != spec_lookup( "spec_questmaster" )) {
     stc("Ты не можешь этого сделать здесь.\n\r",ch);
     return;
   }
 
-  if ( questman->fighting != NULL)
-  {
+  if ( questman->fighting != NULL) {
     stc("Подожди пока окончитсЯ битва.\n\r",ch);
     return;
   }
 
-  if (!str_prefix(arg1, "list"))
-  {
+  if (!str_prefix(arg1, "list")) {
     int i;
     act( "$c1 спpашивает у $C2 список артефактов.", ch, NULL, questman, TO_ROOM);
     act ("Ты спpашиваешь у $C2 список артефактов на продажу.",ch, NULL, questman, TO_CHAR);
@@ -453,10 +419,8 @@ void do_quest(CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if (!str_prefix(arg1, "cancel"))
-  {
-    if (!IS_SET(ch->act,PLR_QUESTOR))
-    {
+  if (!str_prefix(arg1, "cancel")) {
+    if (!IS_SET(ch->act,PLR_QUESTOR)) {
       stc("У тебя нет задания.\n\r",ch);
       return;
     }
@@ -469,16 +433,13 @@ void do_quest(CHAR_DATA *ch, const char *argument)
   }
 
 
-  if (!str_prefix(arg1, "convert"))
-  {
-    if (ch->level < 100)
-    {
+  if (!str_prefix(arg1, "convert")) {
+    if (ch->level < 100) {
      stc("Ты слишком мал, чтобы пользоваться этой возможностью.\n\r", ch);
      return;
     } 
     
-    if (ch->practice >= 10)
-    {
+    if (ch->practice >= 10) {
       ch->practice -= 10;
       ch->questpoints += (15*150)/UMAX(ch->perm_stat[STAT_WIS],15);
       act( "$C1 меняет практики $c2 на QP.", ch, NULL, questman, TO_ROOM );
@@ -491,41 +452,33 @@ void do_quest(CHAR_DATA *ch, const char *argument)
   }
 
 
-  else if (!str_prefix(arg1, "buy"))
-  {
+  else if (!str_prefix(arg1, "buy")) {
     int item=-1, i, ttmp=0, qtmp=0;
    
-    if (EMPTY(arg2))
-    {
+    if (EMPTY(arg2)) {
         stc("Для покупки предмета, набеpи 'QUEST BUY <item>'.\n\r",ch);
         return;
     }
 
-    for (i=0;quest_table[i].level!=0;i++)
-    {
-      if (is_name(arg2, quest_table[i].name))
-      {
+    for (i=0;quest_table[i].level!=0;i++) {
+      if (is_name(arg2, quest_table[i].name)) {
         item=i;
         break;
       }
     }
 
-    if (item==-1)
-    {
+    if (item==-1) {
       stc("Извини, но этого нет в списке.\n\r",ch);
       return;
     }
 
-    if (!str_cmp(arg3,"train"))
-    {
-      if (ch->level<100)
-      {
+    if (!str_cmp(arg3,"train")) {
+      if (ch->level<100) {
         stc("Ты слишком мал, чтобы пользоваться этой возможностью.\n\r", ch);
         return;
       }
 
-      if (ch->train*165<quest_table[item].cost)
-      {
+      if (ch->train*165<quest_table[item].cost) {
         stc("У тебя нет столько тренировок.\n\r", ch);
         return;
       }
@@ -537,8 +490,7 @@ void do_quest(CHAR_DATA *ch, const char *argument)
     }
     else
     {
-      if (ch->questpoints<quest_table[item].cost)
-      {
+      if (ch->questpoints<quest_table[item].cost) {
         stc("У тебя нет столько квестовых очков.\n\r", ch);
         return;
       }
@@ -557,16 +509,13 @@ void do_quest(CHAR_DATA *ch, const char *argument)
         act( "$C1 дает тебе 20,000 золотых монет.",ch, NULL, questman, TO_CHAR );
         break;
       default:
-        if (quest_table[item].vnum!=-1)
-        {
+        if (quest_table[item].vnum!=-1) {
           obj = create_object(get_obj_index(quest_table[item].vnum),1);
-          if(obj)
-          {
+          if(obj) {
             if (quest_table[item].level==-1) obj->level=ch->level;
             else obj->level=quest_table[item].level;
           }
-          else 
-          {
+          else {
             do_say(questman,"Сорри, не могу создать нужную тебе вешь.. Беги к Иммам!");
             ch->questpoints+= quest_table[item].cost;
           }
@@ -574,8 +523,7 @@ void do_quest(CHAR_DATA *ch, const char *argument)
         break;
     }
 
-    if (obj != NULL)
-    {
+    if (obj) {
       act( "$C1 дает {w$p{x $c3.", ch, obj, questman, TO_ROOM );
       act( "$C1 дает тебе {w$i4{x.",   ch, obj, questman, TO_CHAR );
       obj_to_char(obj, ch);
@@ -589,7 +537,7 @@ void do_quest(CHAR_DATA *ch, const char *argument)
 
 bool quest_level_diff(int clevel, int mlevel)
 {
-   if (clevel < 5   && (mlevel>5))              return FALSE;
+   if      (clevel < 5   && (mlevel>5))              return FALSE;
    else if (clevel < 10  && (abs(mlevel-clevel)>4))  return FALSE;
    else if (clevel < 15  && (abs(mlevel-clevel)>6))  return FALSE;
    else if (clevel < 35  && (abs(mlevel-clevel)>7))  return FALSE;
@@ -605,15 +553,12 @@ void quest_update(void)
   DESCRIPTOR_DATA *d;
   CHAR_DATA *ch;
 
-  for ( d = descriptor_list; d != NULL; d = d->next )
-  {
+  for ( d = descriptor_list; d != NULL; d = d->next ) {
     if (!d->character || d->connected != CON_PLAYING) continue;
     
     ch = d->character;
-    if (IS_SET(ch->act,PLR_QUESTOR))
-    {
-      if (--ch->countdown <= 0)
-      {
+    if (IS_SET(ch->act,PLR_QUESTOR)) {
+      if (--ch->countdown <= 0) {
         ch->nextquest=number_range(7,23);
         ptc(ch, "Вpемя отведенное на выполнение задания закончилось!\n\rСнова ты сможешь взять задание чеpез %d минут.\n\r",ch->nextquest);
         REM_BIT(ch->act, PLR_QUESTOR);
@@ -627,14 +572,12 @@ void quest_update(void)
         continue;
       }
 
-      if (ch->countdown > 0 && ch->countdown < 6)
-      {
+      if (ch->countdown > 0 && ch->countdown < 6) {
         stc("Лучше потоpопись, у тебя почти не осталось вpемени на выполнение задания!\n\r",ch);
         continue;
       }
     }
-    if (ch->nextquest > 0)
-    {
+    if (ch->nextquest > 0) {
       ch->nextquest--;
       if (ch->nextquest == 0) stc("Ты снова можешь взять задание.\n\r",ch);
     }
@@ -648,8 +591,7 @@ int cancel_quest(CHAR_DATA *ch, bool reward, int from,int to)
   if (!ch || IS_NPC(ch)) return 0;
   if (reward) pointreward = number_range(1,5);
   ch->questpoints=UMAX(0, ch->questpoints-pointreward);
-  if (ch->questmob!=NULL)
-  {
+  if (ch->questmob!=NULL) {
     ch->questmob->questmob=NULL;
     ch->questmob=NULL;
   }
@@ -668,26 +610,22 @@ void complete_quest(CHAR_DATA *ch, CHAR_DATA *questman, char *buf)
   do_say(questman,"Поздpавляю с выполнением задания!");
   do_say(questman,buf);
 
-  if (number_percent()<15 || IS_SET(global_cfg,CFG_NEWYEAR))
-  {
+  if (number_percent()<15 || IS_SET(global_cfg,CFG_NEWYEAR)) {
     int pracreward = number_range(1,6);
     ptc(ch, "Ты получаешь %d практик!\n\r",pracreward);
     ch->practice += pracreward;
   }
-  else if (number_percent()<15)
-  {
+  else if (number_percent()<15) {
     int movereward = number_range(1,3);
     ptc(ch,"Ты получаешь %d движений!\n\r",movereward);
     ch->max_move += movereward;
     ch->pcdata->perm_move += movereward;
   }
-  else if (number_percent()<5)
-  {
+  else if (number_percent()<5) {
     stc("Ты получаешь 1 тренировку!\n\r",ch);
     ch->train+=1;
   }
-  else if (number_percent()<5)
-  {
+  else if (number_percent()<5) {
     int count;
     int qword;
 
@@ -714,15 +652,13 @@ CHAR_DATA *find_questmob(int level)
   int count;
 
   count=number_range(0,310)*15;
-  for (victim=char_list;;victim=victim->next)
-  {
+  for (victim=char_list;;victim=victim->next) {
     if (!victim) victim=char_list;
     count--;
     if (count<1) break;
   }
 
-  for (;;)
-  {
+  for (;;) {
     victim=victim->next;
     if (!victim) victim=char_list;
     if (++count > 4621) break;
@@ -772,123 +708,49 @@ void do_gquest(CHAR_DATA *ch, const char *argument)
 {
   OBJ_DATA *obj;
   char arg1[MAX_INPUT_LENGTH];
+  int i;
+  MOB_INDEX_DATA *mob;
 
-  if (!*argument)
-  {
-    stc("type 'gquest ?' for help.\n\r",ch);
-    return;
-  }
   argument = one_argument(argument, arg1);
 
-  if (!str_prefix(arg1,"progress"))
-  {
-    CHAR_DATA *tmp;
-    int i,progress;
-    if (gquest.status==0)
-    {
+  if (!str_prefix(arg1,"join")) {
+    if (gquest.status==0) {
       stc("Сейчас нет заданий.\n\r",ch);
       return;
     }
-    if(gquest.status==GQ_STARTING)
-         ptc(ch,"Задание для уровней %d-%d начнется через %d тиков\n\r",
-           gquest.min_level,gquest.max_level,gquest.counter);
-    else ptc(ch,"Идет квест для уровней %d-%d\n\r",gquest.min_level,gquest.max_level);
-    for (tmp=char_list;tmp;tmp=tmp->next)
-    {
-      if (IS_NPC(tmp) || tmp->pcdata->gquest.status!=GQ_JOINED) continue;
-      if (gquest.status==GQ_STARTING) ptc(ch,"%12s  0\n\r",tmp->name);
-      else
-      {
-        progress=0;
-        for(i=0;gquest.target[i]!=0;i++) progress+=tmp->pcdata->gquest.target[i];
-        ptc(ch,"%12s %3d%%\n\r",tmp->name,progress==gquest.mobs?100:100/gquest.mobs*progress);
-      }
-    }
-    if (gquest.status==GQ_STARTED)
-      ptc(ch,"Осталось %d тиков на выполнение\n\r",gquest.counter);
-    return;
-  }
-  if (!str_prefix(arg1,"info"))
-  {
-    int i;
-    MOB_INDEX_DATA *mob;
-    if (gquest.status==0)
-    {
-      stc("Сейчас нет задания.\n\r",ch);
+    if (ch->pcdata->gquest.status==GQ_JOINED) {
+      stc("Ты уже участник и выполняешь задание.\n\r",ch);
       return;
     }
-    if(gquest.status==GQ_STARTING)
-    {
-      ptc(ch,"Задание для уровней %d-%d начнется через %d тиков.\n\r",
-         gquest.min_level,gquest.max_level,gquest.counter);
-      ptc(ch,"Нужно убить %d монстров за %d тиков.\n\r",gquest.mobs,gquest.tmp_counter);
-      return;
-    }
-    if (ch->pcdata->gquest.status!=GQ_JOINED)
-    {
-      ptc(ch,"Идет задание для уровней %d-%d осталось %d тиков.\n\r",
-         gquest.min_level,gquest.max_level,gquest.counter);
-      ptc(ch,"Нужно убить %d монстров за %d тиков.\n\r",gquest.mobs,gquest.tmp_counter);
-      return;
-    }
-    stc("Тебе нужно убить:\n\r",ch);
-    for (i=0; gquest.target[i]!=0;i++)
-    {
-      mob=get_mob_index(gquest.target[i]);
-      if (mob!=0)
-      {
-        if (IS_IMMORTAL(ch))
-          ptc(ch,"[%2d из %2d] %20s (%s) %s\n\r",ch->pcdata->gquest.target[i],gquest.target_counter[i],get_mobindex_desc(mob,'1'),mob->area->name,mob->player_name);
-        else
-          ptc(ch,"[%2d из %2d] %20s (%s)\n\r",ch->pcdata->gquest.target[i],gquest.target_counter[i],get_mobindex_desc(mob,'1'),mob->area->name);
-      }
-    }
-    ptc(ch,"Осталось %d тиков\n\r",gquest.counter);
-    return;
-  }
-  if (!str_prefix(arg1,"join"))
-  {
-    int i;
-    if (gquest.status==0)
-    {
-      stc("Сейчас нет заданий.\n\r",ch);
-      return;
-    }
-    if (ch->pcdata->gquest.status==GQ_JOINED)
-    {
-      stc("Ты уже выполняешь задание.\n\r",ch);
-      return;
-    }
-    if (ch->level>gquest.max_level || ch->level<gquest.min_level)
-    {
+    if (ch->level>gquest.max_level || ch->level<gquest.min_level) {
       stc("Ты не можешь принять участие в этом задании.\n\r",ch);
       return;
     }
     for (i=0;i<20;i++) ch->pcdata->gquest.target[i]=0;
     ch->pcdata->gquest.status=GQ_JOINED;
-    stc("Ты становишься участником задания. Удачи.\n\r",ch);
+    if (gquest.status==GQ_STARTING)
+      ptc(ch,"Ты подал заявку на участие. Задание начнется через {Y%d{x тиков\n\r",gquest.counter);
+    else if (gquest.status==GQ_STARTED)
+      ptc(ch,"Ты становишься участником задания. Осталось {%Y%d{x тиков. Удачи!\n\r",gquest.counter);
     ch->gqcounter++;
     return;
   }
+
   if (!str_prefix(arg1,"complete"))
   {
-    int i,reward,prac,train;
+    int reward,prac,train;
     char buf[MAX_INPUT_LENGTH];
 
-    if (gquest.status!=GQ_STARTED)
-    {
+    if (gquest.status!=GQ_STARTED) {
       stc ("Сейчас нет задания.\n\r",ch);
       return;
     }
-    if (ch->pcdata->gquest.status!=GQ_JOINED)
-    {
+    if (ch->pcdata->gquest.status!=GQ_JOINED) {
       stc("Ты не учавствуешь в задании.\n\r",ch);
       return;
     }
-    for (i=0;gquest.target[i]!=0;i++)
-    {
-      if (ch->pcdata->gquest.target[i]<gquest.target_counter[i])
-      {
+    for (i=0;gquest.target[i]!=0;i++) {
+      if (ch->pcdata->gquest.target[i]<gquest.target_counter[i]) {
         stc("Ты еще не убил всех монстров.\n\r",ch);
         return;
       }
@@ -902,10 +764,6 @@ void do_gquest(CHAR_DATA *ch, const char *argument)
     if (prac>0) ptc(ch,"Ты получаешь %d практик.\n\r",prac);
     if (train>0) ptc(ch,"Ты получаешь 1 тренировку.\n\r");
 
-/* Original variant. From now participant will recive price with certain level 
-   (c) Wagner        
-    obj = create_random_item(number_range(gquest.min_level, gquest.max_level));
-*/
     obj = create_random_item(ch->level);
     obj_to_char(obj, ch);
     ptc(ch, "Ты получаешь в качестве награды %s.\n\r", get_obj_desc(obj, '4'));
@@ -919,103 +777,150 @@ void do_gquest(CHAR_DATA *ch, const char *argument)
     clear_gquest();
     return;
   }
-  if (!str_prefix(arg1,"stop") && IS_IMMORTAL(ch))
-  {
-   clear_gquest();
-   gecho("Задание остановлено богами.");
-   return;
-  }
-  if (!str_prefix(arg1,"show") && IS_IMMORTAL(ch))
-  {
-   int i;
 
-   ptc(ch,"Gquest status: %d (levels %d-%d)\n\r",gquest.status,gquest.min_level,gquest.max_level);
-   ptc(ch,"Counter: %d/%d\n\r",gquest.counter,gquest.tmp_counter);
-   ptc(ch,"Mobiles: %d\n\r",gquest.mobs);
-   for (i=0;i<20;i+=2)
-   {
-     ptc(ch,"{YMob:{x %20s %6u(%2d)  ",get_mobindex_desc(get_mob_index(gquest.target[i]),'1'),gquest.target[i],gquest.target_counter[i]);
-     ptc(ch,"{YMob:{x %20s %6u(%2d)\n\r",get_mobindex_desc(get_mob_index(gquest.target[i+1]),'1'),gquest.target[i+1],gquest.target_counter[i+1]);
-   }
-   for (i=0;i<=90;i+=10) ptc(ch,"Rooms:%6u %6u %6u %6u %6u %6u %6u %6u %6u %6u\n\r",gquest.room[i],gquest.room[i+1],gquest.room[i+2],gquest.room[i+3],gquest.room[i+4],gquest.room[i+5],gquest.room[i+6],gquest.room[i+7],gquest.room[i+8],gquest.room[i+9]);
-   return;
+  if (str_cmp(arg1,"help")) {
+    stc ("? or help - эта справка\n\r",ch);
+    stc ("join      - принять участие в текущем задании\n\r",ch);
+    stc ("progress  - просмотр состояния и процент выполнения текущего задания\n\r",ch);
+    stc ("info      - информация о задании (для участников - список целей)\n\r",ch);
+    stc ("complete  - сообщить о выполнении задания\n\r",ch);
+    if (IS_IMMORTAL(ch)) {
+      stc ("stop      - остановить текущее задание\n\r",ch);
+      stc ("create    - объявить задание ('gq create ?' для справки)\n\r",ch);
+      stc ("show      - посмотреть детальную информацию про задание\n\r",ch);
+    }
+    return;
   }
-  if (!str_prefix(arg1,"create") && IS_IMMORTAL(ch))
+
+  if (IS_IMMORTAL(ch) && !str_prefix(arg1,"stop")) {
+    clear_gquest();
+    gecho("Задание остановлено богами.");
+    return;
+  }
+
+  if (IS_IMMORTAL(ch) && !str_prefix(arg1,"show")) {
+    ptc(ch,"Gquest status: %d (levels %d-%d)\n\r",gquest.status,gquest.min_level,gquest.max_level);
+    ptc(ch,"Counter: %d/%d\n\r",gquest.counter,gquest.tmp_counter);
+    ptc(ch,"Mobiles: %d\n\r",gquest.mobs);
+    for (i=0;i<20;i+=2)
+    {
+      ptc(ch,"{YMob:{x %20s %6u(%2d)  ",get_mobindex_desc(get_mob_index(gquest.target[i]),'1'),gquest.target[i],gquest.target_counter[i]);
+      ptc(ch,"{YMob:{x %20s %6u(%2d)\n\r",get_mobindex_desc(get_mob_index(gquest.target[i+1]),'1'),gquest.target[i+1],gquest.target_counter[i+1]);
+    }
+    for (i=0;i<=90;i+=10) ptc(ch,"Rooms:%6u %6u %6u %6u %6u %6u %6u %6u %6u %6u\n\r",gquest.room[i],gquest.room[i+1],gquest.room[i+2],gquest.room[i+3],gquest.room[i+4],gquest.room[i+5],gquest.room[i+6],gquest.room[i+7],gquest.room[i+8],gquest.room[i+9]);
+    return;
+  }
+
+  if (IS_IMMORTAL(ch) && !str_prefix(arg1,"create"))
   {
     int min, max, mobs;
-    if (gquest.status!=0)
-    {
+    if (gquest.status!=0) {
       stc("Задание уже есть!\n\r",ch);
       return;
     }
     argument = one_argument(argument, arg1);
-    if (!str_prefix(arg1,"help") || *arg1=='?')
-    {
-      stc("type: gquest create <min_level> <max_level> <mobiles count>\n\r",ch);
+    if (!str_prefix(arg1,"help") || *arg1=='?') {
+      stc("type: gquest create <min_level> <max_level> <mob count>\n\r",ch);
       return;
     }
-    if (!is_number(arg1))
-    {
-      stc("type: gquest create help\n\r",ch);
+    if (!is_number(arg1)) {
+      stc("Нужно указать число\n\r",ch);
       return;
     }
     min=URANGE(1,atoi(arg1),101);
 
     argument = one_argument(argument, arg1);
-    if (!is_number(arg1))
-    {
-      stc("type: gquest create help\n\r",ch);
+    if (!is_number(arg1)) {
+      stc("Нужно указать число\n\r",ch);
       return;
     }
     max=URANGE(1,atoi(arg1),101);
     argument = one_argument(argument, arg1);
-    if (!is_number(arg1))
-    {
-      stc("type: gquest create help\n\r",ch);
+    if (!is_number(arg1)) {
+      stc("Нужно указаьт число\n\r",ch);
       return;
     }
     mobs=atoi(arg1);
     create_gquest(min,max,mobs);
     return;
   }
-  stc ("? or help - эта справка\n\r",ch);
-  stc ("join      - принять участие в текущем задании\n\r",ch);
-  stc ("progress  - просмотр состояния и процент выполнения текущего задания\n\r",ch);
-  stc ("info      - информация о задании (для участников - список целей)\n\r",ch);
-  stc ("complete  - сообщить о выполнении задания\n\r",ch);
-  if (IS_IMMORTAL(ch))
-  {
-    stc ("stop      - остановить текущее задание\n\r",ch);
-    stc ("create    - объявить задание ('gq create ?' для справки)\n\r",ch);
-    stc ("show      - посмотреть детальную информацию про задание\n\r",ch);
+
+  if (!str_prefix(arg1,"progress")) {
+    CHAR_DATA *tmp;
+    int progress;
+
+    if (gquest.status==0) {
+      stc("Сейчас нет заданий.\n\r",ch);
+      return;
+    }
+
+    if(gquest.status==GQ_STARTING)
+         ptc(ch,"Задание для уровней {Y%d-%d{x начнется через {Y%d{x тиков\n\r",
+           gquest.min_level,gquest.max_level,gquest.counter);
+    else ptc(ch,"Идет квест для уровней {Y%d-%d{x\n\r",gquest.min_level,gquest.max_level);
+
+    for (tmp=char_list;tmp;tmp=tmp->next) {
+      if (IS_NPC(tmp) || tmp->pcdata->gquest.status!=GQ_JOINED) continue;
+      if (gquest.status==GQ_STARTING) ptc(ch,"%12s  0\n\r",tmp->name);
+      else {
+        progress=0;
+        for(i=0;gquest.target[i]!=0;i++) progress+=tmp->pcdata->gquest.target[i];
+        ptc(ch,"%12s %3d%%\n\r",tmp->name,progress==gquest.mobs?100:100/gquest.mobs*progress);
+      }
+    }
+    if (gquest.status==GQ_STARTED)
+      ptc(ch,"Осталось {Y%d{x тиков на выполнение\n\r",gquest.counter);
+    return;
   }
+
+  if (!*argument) stc("Напиши '{Ygquest help{x' для справки по командам.\n\r",ch);
+
+  if (gquest.status==0) stc("Сейчас нет задания.\n\r",ch);
+  else if (gquest.status==GQ_STARTING) {
+    ptc(ch,"Задание для уровней {Y%d-%d{x начнется через {Y%d{x тиков\n\r",
+      gquest.min_level,gquest.max_level,gquest.counter);
+    ptc(ch,"Нужно убить %d монстров за %d тиков.\n\r",gquest.mobs,gquest.tmp_counter);
+    ptc(ch,"Ты {Y%s{x подал заявку для участия", ch->pcdata->gquest.status==GQ_JOINED?"уже":"еще не");
+  }
+
+  ptc(ch,"Идет задание для уровней %d-%d. Нужно убить %d монстров за %d тиков.\n\r",
+    gquest.min_level,gquest.max_level,gquest.mobs,gquest.counter);
+  if (ch->pcdata->gquest.status!=GQ_JOINED) {
+    stc("Тебе нужно убить:\n\r",ch);
+    for (i=0; gquest.target[i]!=0;i++) {
+      mob=get_mob_index(gquest.target[i]);
+      if (mob!=0) {
+        if (IS_IMMORTAL(ch))
+          ptc(ch,"[%2d из %2d] %20s (%s) %s\n\r",ch->pcdata->gquest.target[i],gquest.target_counter[i],get_mobindex_desc(mob,'1'),mob->area->name,mob->player_name);
+        else
+          ptc(ch,"[%2d из %2d] %20s (%s)\n\r",ch->pcdata->gquest.target[i],gquest.target_counter[i],get_mobindex_desc(mob,'1'),mob->area->name);
+      }
+    }
+  }
+  else stc("Ты не подавал заявку на участие в задании.",ch);
 }
 
 void gquest_update(void)
 {
   gquest.counter--;
   if (gquest.counter>0) return;
-  if (gquest.status==GQ_STARTED)
-  {
+  if (gquest.status==GQ_STARTED) {
     clear_gquest();
     gecho("Время выделенное на выполнение задания вышло.");
     return;
   }
-  if (gquest.status==GQ_STARTING)
-  {
+  if (gquest.status==GQ_STARTING) {
     char buf[MAX_INPUT_LENGTH];
     CHAR_DATA *tmp;
     bool found=FALSE;
 
-    for (tmp=char_list;tmp;tmp=tmp->next)
-    {
+    for (tmp=char_list;tmp;tmp=tmp->next) {
       if (IS_NPC(tmp)) continue;
       if (tmp->pcdata->gquest.status!=GQ_JOINED) continue;
       found=TRUE;
       break;
     }
-    if (!found)
-    {
+    if (!found) {
       gecho("Никто не согласился принять участие, Задание отменяется");
       clear_gquest();
       return;
@@ -1052,28 +957,23 @@ void create_gquest(int min,int max, int mobs)
     if (!mob) mob=find_questmob(min+1);
     if (!mob) return;
     found=FALSE;
-    for (t=0;t<=i;t++)
-    {
-      if(gquest.target[t]==mob->pIndexData->vnum)
-      {
+    for (t=0;t<=i;t++) {
+      if(gquest.target[t]==mob->pIndexData->vnum) {
         found=TRUE;
         gquest.target_counter[t]++;
         break;
       }
     }
-    if (!found)
-    {
+    if (!found) {
       gquest.target[i]=mob->pIndexData->vnum;
       gquest.target_counter[i]=1;
       i++;
     }
   }
   t=0;
-  for (i=0;i<21;i++)
-  {
+  for (i=0;i<21;i++) {
     if (gquest.target[i]==0) break;
-    for (mob=char_list;mob;mob=mob->next)
-    {
+    for (mob=char_list;mob;mob=mob->next) {
       if (!IS_NPC(mob) || gquest.target[i]!=mob->pIndexData->vnum || !mob->in_room) continue;
       gquest.room[t]=mob->in_room->vnum;
       /* 
@@ -1107,8 +1007,7 @@ void clear_gquest()
   CHAR_DATA *tmp;
 
   gquest.status=0;
-  for (i=0;i<20;i++)
-  {
+  for (i=0;i<20;i++) {
     gquest.target[i]=0;
     gquest.target_counter[i]=0;
   }
@@ -1116,8 +1015,7 @@ void clear_gquest()
   gquest.max_level=0;
   gquest.tmp_counter=0;
   gquest.mobs=0;
-  for (tmp=char_list;tmp;tmp=tmp->next)
-  {
+  for (tmp=char_list;tmp;tmp=tmp->next) {
     if (IS_NPC(tmp)) continue;
     tmp->pcdata->gquest.status=0;
     for (i=0;i<21;i++) tmp->pcdata->gquest.target[i]=0;

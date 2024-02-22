@@ -2075,7 +2075,7 @@ void group_gain( CHAR_DATA *ch, CHAR_DATA *victim )
     int i;
     for (i=0;i<21;i++)
     {
-      if(victim->pIndexData->vnum==gquest.target[i]
+      if(victim->pIndexData && victim->pIndexData->vnum==gquest.target[i]
        && ch->pcdata->gquest.target[i]<gquest.target_counter[i])
        {
          int reward=number_range(1,5);

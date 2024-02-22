@@ -1,4 +1,5 @@
 cd $(dirname $0)
+ulimit -c unlimited
 echo $$ > start.pid
 while true; do
   [ -e ../mud/rom ] && cp ../mud/rom .

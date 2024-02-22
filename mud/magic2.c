@@ -192,38 +192,40 @@ void spell_gate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   bool gate_pet;
   char buf[MAX_INPUT_LENGTH];
 
-  if ( ( victim = get_char_world( ch, target_name ) ) == NULL
-  || victim == ch
-  || ch->fighting != NULL
-  || victim->in_room == NULL
-  || !can_see_room(ch,victim->in_room) 
-  || IS_SET(victim->in_room->room_flags, ROOM_SAFE)
-  || IS_SET(victim->in_room->ra, RAFF_SAFE_PLC)
-  || IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
-  || IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
-  || (IS_SET(victim->in_room->room_flags, ROOM_NO_RECALL)
-      && !IS_SET(victim->in_room->ra, RAFF_LIFE_STR))
-  || (IS_SET(ch->in_room->room_flags, ROOM_NO_RECALL)
-      && !IS_SET(ch->in_room->ra, RAFF_LIFE_STR))
-  || IS_SET(ch->act, PLR_ARMY)
-  || (!IS_NPC(victim) && (IS_SET(victim->act, PLR_ARMY)))
-  || (!IS_NPC(victim) &&  (victim->level>LEVEL_HERO))
-  || (IS_NPC(victim) && (IS_SET(victim->imm_flags,IMM_SUMMON)
-  || is_gqmob(victim->pIndexData->vnum)))
-  || (IS_NPC(victim) && victim->level>=level+3)
-  || IS_AFFECTED(ch, AFF_CURSE)
-  || IS_SET(ch->in_room->ra, RAFF_EVIL_PR)
-  || IS_SET(victim->in_room->ra, RAFF_EVIL_PR)
-  || (IS_NPC(victim) && victim->fighting != NULL)
-  || ((!IS_NPC(victim) || IS_SET(victim->act, ACT_PET)) && !is_same_clan(ch,victim)))
-  {
+  victim = get_char_world(ch, target_name);
+  if (!victim) {
+    stc( "Неудача.\n\r", ch );
+    return;
+  }   
+  if (ch->fighting || victim == ch || !victim->in_room
+    || IS_SET(ch->act, PLR_ARMY)
+    || IS_SET(victim->in_room->room_flags, ROOM_SAFE)
+    || IS_SET(victim->in_room->ra, RAFF_SAFE_PLC)
+    || IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
+    || IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
+    || !can_see_room(ch,victim->in_room) 
+    || (IS_SET(victim->in_room->room_flags, ROOM_NO_RECALL) && !IS_SET(victim->in_room->ra, RAFF_LIFE_STR))
+    || (IS_SET(ch->in_room->room_flags, ROOM_NO_RECALL) && !IS_SET(ch->in_room->ra, RAFF_LIFE_STR))
+    || IS_AFFECTED(ch, AFF_CURSE)
+    || IS_SET(ch->in_room->ra, RAFF_EVIL_PR)
+    || IS_SET(victim->in_room->ra, RAFF_EVIL_PR)  
+    || (!IS_NPC(victim) && (IS_SET(victim->act, PLR_ARMY) || (victim->level>LEVEL_HERO)))
+    || ((!IS_NPC(victim) || IS_SET(victim->act, ACT_PET)) && !is_same_clan(ch,victim))) {
+    stc( "Неудача.\n\r", ch );
+    return;
+  }   
+  
+  if (IS_NPC(victim) &&
+    (   IS_SET(victim->imm_flags,IMM_SUMMON)
+    || victim->level>=level+3
+    || victim->fighting != NULL
+    || (victim->pIndexData && is_gqmob(victim->pIndexData->vnum)))) {
     stc( "Неудача.\n\r", ch );
     return;
   }   
 
   if (!IS_NPC(victim) && !IS_MARRY(ch,victim) && 
-   (
-   victim->fighting != NULL
+   (  victim->fighting != NULL
    || victim->level>=level+3
    || saves_spell(level,victim,DAM_OTHER)
    || (victim->clan && ch->clan && !is_same_clan(ch,victim) && IS_SET(victim->act,PLR_NOSUMMON) && !is_exact_name(victim->clan->name, ch->clan->alli))))

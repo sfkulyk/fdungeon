@@ -188,7 +188,7 @@ struct  help_data
 struct  shop_data
 {
   SHOP_DATA * next;                 // Next shop in list              
-  int64       keeper;               // Vnum of shop keeper mob        
+  int64       keeper;               // Vnum of shop keeper mob
   int         buy_type [MAX_TRADE]; // Item types shop will buy       
   int         profit_buy;           // Cost multiplier for buying     
   int         profit_sell;          // Cost multiplier for selling
