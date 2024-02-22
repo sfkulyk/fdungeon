@@ -305,7 +305,7 @@ void do_get( CHAR_DATA *ch, const char *argument )
 
   if (IS_SET(ch->act,PLR_TIPSY) && tipsy(ch,"get")) return; 
  
-  if ( arg2[0] == '\0' )
+  if (EMPTY(arg2))
   {
     if ( str_cmp( arg1, "all" ) && str_prefix( "all.", arg1 ) && number==MAX_OBJS_VALUE )
     {
@@ -607,7 +607,7 @@ void do_drop( CHAR_DATA *ch, const char *argument )
 
   if (number==1) number=MAX_OBJS_VALUE;
 
-  if ( arg[0] == '\0' )
+  if (EMPTY(arg))
   {
     stc( "Бросить что?\n\r", ch );
     return;
@@ -795,13 +795,13 @@ void do_give( CHAR_DATA *ch, const char *argument )
 
   if (number==1) number=MAX_OBJS_VALUE;
 
-  if ( arg1[0] == '\0' )
+  if (EMPTY(arg1))
   {
     stc( "Что дать?\n\r", ch );
     return;
   }
 
-  if ( arg2[0] == '\0' )
+  if (EMPTY(arg2))
   {
     stc( "Кому дать?\n\r", ch );
     return;
@@ -828,7 +828,7 @@ void do_give( CHAR_DATA *ch, const char *argument )
     silver = str_cmp(arg2, "gold");
 
     argument = one_argument( argument, arg2 );
-    if ( arg2[0] == '\0' )
+    if (EMPTY(arg2))
     {
       stc( "Кому дать?\n\r", ch );
       return;
@@ -1106,7 +1106,7 @@ void do_fill( CHAR_DATA *ch, const char *argument )
 
   argument = one_argument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if (EMPTY(arg))
   {
     stc( "Наполнить что?\n\r", ch );
     return;
@@ -1118,18 +1118,15 @@ void do_fill( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  if (argument[0]!='\0') one_argument(argument,arg2);
+  if (!EMPTY(argument)) one_argument(argument,arg2);
   else arg2[0]='\0';
   found = FALSE;
-  for ( fountain = ch->in_room->contents; fountain != NULL; fountain = fountain->next_content )
-  {
-    if ( fountain->item_type == ITEM_FOUNTAIN )
-    {
-     if ((arg2[0]!='\0' && is_name(argument,fountain->name)) || arg2[0]=='\0')
-     {
-      found = TRUE;
-      break;
-     }
+  for ( fountain = ch->in_room->contents; fountain != NULL; fountain = fountain->next_content ) {
+    if ( fountain->item_type == ITEM_FOUNTAIN ) {
+      if (EMPTY(arg2) || (!EMPTY(arg2) && is_name(argument,fountain->name))) {
+        found = TRUE;
+        break;
+      }
     }
   }
 
@@ -1181,7 +1178,7 @@ void do_pour (CHAR_DATA *ch, const char *argument)
 
   argument = one_argument(argument,arg);
     
-  if (arg[0] == '\0' || argument[0] == '\0')
+  if (EMPTY(arg) || EMPTY(argument))
   {
     stc("Опорожнить что куда?\n\r",ch);
     return;
@@ -1338,7 +1335,7 @@ void do_drink( CHAR_DATA *ch, const char *argument )
     return; 
   } 
 
-  if ( arg[0] == '\0' )
+  if (EMPTY(arg))
   {
     for ( obj = ch->in_room->contents; obj; obj = obj->next_content )
     {
@@ -1487,7 +1484,7 @@ void do_eat( CHAR_DATA *ch, const char *argument )
     return; 
   } 
 
-  if ( arg[0] == '\0' ) 
+  if (EMPTY(arg))
   {
     stc( "Съесть что?\n\r", ch );
     return;
@@ -2121,7 +2118,7 @@ void do_wear( CHAR_DATA *ch, const char *argument )
   argument = one_argument( argument, arg1 ); 
   one_argument(argument,arg2); 
   
-  if ( arg1[0] == '\0' )
+  if (EMPTY(arg1))
   {
     stc( "Одеть что?\n\r", ch );
     return;
@@ -2196,7 +2193,7 @@ void do_remove( CHAR_DATA *ch, const char *argument )
 
   one_argument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if (EMPTY(arg))
   {
     stc( "Снять что?\n\r", ch );
     return;
@@ -2247,7 +2244,7 @@ void do_sacrifice( CHAR_DATA *ch, const char *argument)
 
   one_argument( argument, arg );
 
-  if ( (arg[0] == '\0') || (!str_cmp( arg, ch->name )) )
+  if (EMPTY(arg) || !str_cmp(arg, ch->name ))
   {
     act( "$c1 предлагает себя богам, но они отказываются.",ch, NULL, NULL, TO_ROOM );
     stc( "После смерти...\n\r", ch );
@@ -2407,7 +2404,7 @@ void do_quaff( CHAR_DATA *ch, const char *argument )
 
   one_argument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if (EMPTY(arg))
   {
     stc( "Осушить что?\n\r", ch );
     return;
@@ -2540,7 +2537,7 @@ void do_recite( CHAR_DATA *ch, const char *argument )
    if (tipsy(ch,"recite")) return; 
  
   obj = NULL;
-  if ( arg2[0] == '\0' )
+  if (EMPTY(arg2))
   {
     victim = ch;
   }
@@ -2674,7 +2671,7 @@ void do_zap( CHAR_DATA *ch, const char *argument )
   OBJ_DATA *obj;
 
   one_argument( argument, arg );
-  if ( arg[0] == '\0' && ch->fighting == NULL )
+  if (EMPTY(arg) && ch->fighting == NULL )
   {
     stc( "Взмахнуть чем?\n\r", ch );
     return;
@@ -2694,7 +2691,7 @@ void do_zap( CHAR_DATA *ch, const char *argument )
   }
 
   obj = NULL;
-  if ( arg[0] == '\0' )
+  if (EMPTY(arg))
   {
     if ( ch->fighting != NULL ) victim = ch->fighting;
     else
@@ -2776,7 +2773,7 @@ void do_steal( CHAR_DATA *ch, const char *argument )
 
   argument = one_argument( argument, arg1 );argument = one_argument( argument, arg2 );
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' )
+  if (EMPTY(arg1) || EMPTY(arg2))
   {
     stc( "Украсть что у кого?\n\r", ch );
     return;
@@ -3106,7 +3103,7 @@ void do_buy( CHAR_DATA *ch, const char *argument )
   int64 cost; 
   int roll;
 
-  if ( argument[0] == '\0' )
+  if (EMPTY(argument))
   {
       stc( "Что купить?\n\r", ch );
       return;
@@ -3409,8 +3406,7 @@ void do_list( CHAR_DATA *ch, const char *argument )
       if ( obj->wear_loc == WEAR_NONE
         &&   can_see_obj( ch, obj )
         &&   ( cost = get_cost( keeper, obj, TRUE ) ) > 0 
-        &&   ( arg[0] == '\0'  
-        ||  is_name(arg,obj->name) ))
+        &&   ( EMPTY(arg) || is_name(arg,obj->name) ))
       {
         if ( !found )
         {
@@ -3462,7 +3458,7 @@ void do_sell( CHAR_DATA *ch, const char *argument )
 
   one_argument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if (EMPTY(arg))
   {
     stc( "Продать что?\n\r", ch );
     return;
@@ -3544,7 +3540,7 @@ void do_value( CHAR_DATA *ch, const char *argument )
 
   one_argument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if (EMPTY(arg))
   {
     stc( "Оценить что?\n\r", ch );
     return;
@@ -3755,7 +3751,7 @@ void do_auction (CHAR_DATA *ch, const char *argument)
 
   argument = one_argument (argument, arg1);
 
-  if (arg1[0] == '\0' )
+  if (EMPTY(arg1))
   {
     stc("Auction info|bet|stop|<item> ?\n\r",ch);
     return;
@@ -3833,7 +3829,7 @@ void do_auction (CHAR_DATA *ch, const char *argument)
       int64 newbet;
 
       /* make - perhaps - a bet now */
-      if (argument[0] == '\0'|| !is_number(argument))
+      if (EMPTY(argument)|| !is_number(argument))
       {
         stc ("Сколько вы хотите поставить на аукцион?\n\r",ch);
         return;
@@ -3934,7 +3930,7 @@ void do_auction (CHAR_DATA *ch, const char *argument)
       case ITEM_WARP_STONE:
       case ITEM_WEAPON:
  
-      if (argument[0] == '\0'|| !is_number(argument))
+      if (EMPTY(argument)|| !is_number(argument))
         startbet = 0;
       else
         startbet = atoi64 (argument);
@@ -4206,7 +4202,7 @@ void do_send( CHAR_DATA *ch, const char *argument )
     }
 
     if ( !found ) {
-    if ( all && (arg1[3] == '\0') )
+    if ( all && arg1[3] == '\0')
       act( "Ты ничего не несешь.", ch, NULL, arg1, TO_CHAR );
     else
       act( "Ты не несешь $T.", ch, NULL, all?&arg1[4]:arg1, TO_CHAR );
@@ -4242,7 +4238,7 @@ void do_clanfit(CHAR_DATA *ch, const char *argument)
  char buff[MAX_STRING_LENGTH]; 
  long cost;
 
- if (argument[0]=='\0') 
+ if (EMPTY(argument)) 
  { 
   stc("Переделать что?\n\r",ch); 
   return; 
@@ -4322,13 +4318,13 @@ void do_clanfit(CHAR_DATA *ch, const char *argument)
  free_string(obj->name);
  obj->name = str_dup(buff);
 
- if (ch->clan->short_desc[0]!='\0')
+ if (!EMPTY(ch->clan->short_desc))
  {
   free_string(obj->short_descr);
   obj->short_descr = str_dup(ch->clan->short_desc);
  }
 
- if (ch->clan->long_desc[0]!='\0')
+ if (!EMPTY(ch->clan->long_desc))
  {
   free_string(obj->description);
   obj->description = str_dup(ch->clan->long_desc);
@@ -4366,7 +4362,7 @@ void do_split( CHAR_DATA *ch, const char *argument )
   argument = one_argument( argument, arg1 );
              one_argument( argument, arg2 );
 
-  if ( arg1[0] == '\0' )
+  if (EMPTY(arg1))
   {
     stc( "Сколько разделить?\n\r", ch );
     return;

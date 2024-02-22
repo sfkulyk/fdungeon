@@ -908,7 +908,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
   argument=one_argument(argument,arg1);
   argument=one_argument(argument,arg2);
 
-  if (arg1[0]=='\0')
+  if (EMPTY(arg1))
   {
     stc("{C Advanced Help показывает информацию, извлекая ее из текущего кода.\n\r",ch);
     stc("Эта информация является корректной и не требует ручного обновления.\n\r",ch);
@@ -927,7 +927,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
   {
     int race;
     int64 spec;
-    if (arg2[0]=='\0')
+    if (EMPTY(arg2))
     {
       stc("Syntax: ahelp race <имя расы>\n\r\n\r",ch);
       stc("Список доступных рас:\n\r",ch);
@@ -1217,7 +1217,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
 
   if (!str_prefix(arg1,"class"))
   {
-    if (arg2[0]=='\0')
+    if (EMPTY(arg2))
     {
       stc("Syntax: ahelp class bonus\n\r\n\r",ch);
       stc("Syntax: ahelp class list\n\r\n\r",ch);
@@ -1264,7 +1264,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
   {
     int sn;
 
-    if (arg2[0]=='\0')
+    if (EMPTY(arg2))
     {
       stc("Syntax: ahelp <skill> <имя навыка или заклинания>\n\r",ch);
       stc("        ahelp <skill> list\n\r",ch);

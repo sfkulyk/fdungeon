@@ -699,7 +699,7 @@ void do_clanwork(CHAR_DATA *ch, const char *argument)
  }
  else if (!str_cmp(arg2,"showname"))
  {
-   if (argument[0]=='\0') return;
+   if (EMPTY(argument)) return;
    free_string(clan->show_name);
    clan->show_name=str_dup(argument);
    found=TRUE;
@@ -1055,7 +1055,7 @@ void do_leader( CHAR_DATA *ch, const char *argument )
     if (victim->clan==ch->clan)
     {
 
-      if (arg2[0]=='\0' || !str_prefix(arg2,"member")) victim->clanrank=0;
+      if (EMPTY(arg2) || !str_prefix(arg2,"member")) victim->clanrank=0;
       else if (!str_prefix(arg2,"junior")) victim->clanrank=1;
       else if (!str_prefix(arg2,"senior")) victim->clanrank=2;
       else if (!str_prefix(arg2,"deputy")) victim->clanrank=3;
@@ -1089,7 +1089,7 @@ void do_diplomacy( CHAR_DATA *ch, const char *argument )
  argument = one_argument( argument, arg1 );
  argument = one_argument( argument, arg2 );
 
- if (arg1[0]=='\0' || !str_cmp(arg1, "show"))
+ if (EMPTY(arg1) || !str_cmp(arg1, "show"))
  {
    stc("{GCurrent Status:{x\n\r", ch);
    if (IS_SET(ch->clan->flag,CLAN_LONER))
@@ -1147,7 +1147,7 @@ void do_diplomacy( CHAR_DATA *ch, const char *argument )
       return;
     }
 
-   if (arg2[0]=='\0' || (clan=clan_lookup(arg2))==NULL)
+   if (EMPTY(arg2) || (clan=clan_lookup(arg2))==NULL)
    {
      stc("Такого клана нет.\n\r", ch);
      return;
@@ -1186,7 +1186,7 @@ void do_diplomacy( CHAR_DATA *ch, const char *argument )
       return;
     }
 
-   if (arg2[0]=='\0' || (clan=clan_lookup(arg2))==NULL)
+   if (EMPTY(arg2) || (clan=clan_lookup(arg2))==NULL)
    {
      stc("Такого клана нет.\n\r", ch);
      return;

@@ -69,7 +69,7 @@ char *pflag64(int64 flag)
     tbit*=2;
   }
   buf[pos]='\0';
-  if (buf[0]=='\0')
+  if (EMPTY(buf))
   {
     buf[0]='0';
     buf[1]='\0';
@@ -129,7 +129,7 @@ void do_offline( CHAR_DATA *ch, const char *argument )
   argument = one_argument(argument, arg1);
   argument = one_argument(argument, arg2);
 
-  if (name[0] == '\0' || arg1[0]=='\0')
+  if (EMPTY(name) || EMPTY(arg1))
   {
     stc("syntax: OFFLINE <name> <command>\n\r", ch);
     stc("Commands avaible:\n\r", ch);
@@ -579,7 +579,7 @@ void remove_pkiller(CHAR_DATA *ch, char *name)
  for (;;)
  {
   arg=one_argument(arg, arg1);
-  if (arg1[0]=='\0') break;
+  if (EMPTY(arg1)) break;
   if (str_cmp(arg1,name))
   {
     strcat(arg2,arg1);
@@ -643,7 +643,7 @@ void do_global( CHAR_DATA *ch, const char *argument )
  char arg[MAX_INPUT_LENGTH];
  register int cmd;
 
- if (argument[0]=='\0')
+ if (EMPTY(argument))
  {
    ptc (ch,"Wizlock      :%s\n\r",IS_SET(global_cfg,CFG_WIZLOCK)? "{RYes{x":"{GNo{x");
    ptc (ch,"Newlock      :%s\n\r",IS_SET(global_cfg,CFG_NEWLOCK)? "{RYes{x":"{GNo{x");
@@ -918,7 +918,7 @@ void do_global( CHAR_DATA *ch, const char *argument )
            * So, how do I disable commands, which not loaded (yet)
            */
 #endif
-    if (command[0]=='\0')
+    if (EMPTY(command))
     {
        for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ )
          REM_BIT(cmd_table[cmd].flag, DENY);

@@ -230,7 +230,7 @@ void do_nochannels(CHAR_DATA *ch, const char *argument)
  
   one_argument(argument, arg);
  
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Отключить от каналов кого?", ch);
     return;
@@ -269,7 +269,7 @@ void do_nogsocial(CHAR_DATA *ch, const char *argument)
  
   one_argument(argument, arg);
 
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Отключить gsocials кому?", ch);
     return;
@@ -303,7 +303,7 @@ void do_smote(CHAR_DATA *ch, const char *argument)
     return;
   }
  
-  if (argument[0] == '\0')
+  if (EMPTY(argument))
   {
     stc("С параметром.\n\r", ch);
     return;
@@ -379,7 +379,7 @@ void do_smote(CHAR_DATA *ch, const char *argument)
 
 void do_bamfin(CHAR_DATA *ch, const char *argument)
 {
-  if (argument[0] == '\0')
+  if (EMPTY(argument))
   {
     ptc(ch, "Эффект твоего появления: %s\n\r",ch->pcdata->bamfin);
     return;
@@ -411,7 +411,7 @@ void do_pseudoname(CHAR_DATA *ch, const char *argument)
 
 void do_bamfout(CHAR_DATA *ch, const char *argument)
 {
-  if (argument[0] == '\0')
+  if (EMPTY(argument))
   {
     ptc(ch,"Эффект твоего исчезновения: %s\n\r",ch->pcdata->bamfout);
     return;
@@ -428,7 +428,7 @@ void do_deny(CHAR_DATA *ch, const char *argument)
   CHAR_DATA *victim;
 
   one_argument(argument, arg);
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Запретить вход кому?\n\r", ch);
     return;
@@ -464,7 +464,7 @@ void do_tipsy(CHAR_DATA *ch, const char *argument) // tipsy by Dinger
  CHAR_DATA *victim;
 
  one_argument(argument,arg);
- if (arg[0]=='\0')
+ if (EMPTY(arg))
  {
   stc("Напоить кого?\n\r",ch);
   return;
@@ -837,7 +837,7 @@ void do_disconnect(CHAR_DATA *ch, const char *argument)
   DESCRIPTOR_DATA *d;
 
   one_argument(argument, arg);
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Отключить кого?\n\r", ch);
     return;
@@ -887,7 +887,7 @@ void do_pardon(CHAR_DATA *ch, const char *argument)
   argument = one_argument(argument, arg1);
   argument = one_argument(argument, arg2);
 
-  if (arg1[0] == '\0' || arg2[0] == '\0')
+  if (EMPTY(arg1) || EMPTY(arg2))
   {
     stc("Синтаксис: pardon <имя игрока> <wanted|raper>.\n\r", ch);
     return;
@@ -947,7 +947,7 @@ void do_echo(CHAR_DATA *ch, const char *argument)
 {
   DESCRIPTOR_DATA *d;
     
-  if (argument[0] == '\0')
+  if (EMPTY(argument))
   {
     stc("Сказать по global что?\n\r", ch);
     return;
@@ -965,7 +965,7 @@ void do_recho(CHAR_DATA *ch, const char *argument)
 {
   DESCRIPTOR_DATA *d;
     
-  if (argument[0] == '\0')
+  if (EMPTY(argument))
   {
     stc("Сказать по local что?\n\r", ch);
     return;
@@ -986,7 +986,7 @@ void do_zecho(CHAR_DATA *ch, const char *argument)
 {
   DESCRIPTOR_DATA *d;
 
-  if (argument[0] == '\0')
+  if (EMPTY(argument))
   {
     stc("Сказать по zone что?\n\r",ch);
     return;
@@ -1010,7 +1010,7 @@ void do_pecho(CHAR_DATA *ch, const char *argument)
   CHAR_DATA *victim;
 
   argument = one_argument(argument, arg);
-  if (argument[0] == '\0' || arg[0] == '\0')
+  if (EMPTY(argument) || EMPTY(arg))
   {
     stc("Кому вы хотите послать сообщение?\n\r", ch); 
     return;
@@ -1157,7 +1157,7 @@ void do_at(CHAR_DATA *ch, const char *argument)
     
   argument = one_argument(argument, arg);
 
-  if (arg[0] == '\0' || argument[0] == '\0')
+  if (EMPTY(arg) || EMPTY(argument))
   {
     stc("Возле кого и что сделать?\n\r", ch);
     return;
@@ -1201,7 +1201,7 @@ void do_goto(CHAR_DATA *ch, const char *argument)
   ROOM_INDEX_DATA *location;
   CHAR_DATA *rch;
 
-  if (argument[0] == '\0')
+  if (EMPTY(argument))
   {
     stc("Перейти куда?\n\r", ch);
     return;
@@ -1252,7 +1252,7 @@ void do_stat (CHAR_DATA *ch, const char *argument)
   CHAR_DATA *victim;
 
   string = one_argument(argument, arg);
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Синтаксис:\n\r",ch);
     stc("  stat <имя>\n\r",ch);
@@ -1348,7 +1348,7 @@ void do_rstat(CHAR_DATA *ch, const char *argument)
   int                 door;
 
   one_argument(argument, arg);
-  pRoom = (arg[0] == '\0') ? ch->in_room : find_location(ch, arg);
+  pRoom = (EMPTY(arg)) ? ch->in_room : find_location(ch, arg);
   if (pRoom == NULL)
   {
     stc("Такого места нет.\n\r", ch);
@@ -1487,7 +1487,7 @@ void do_ostat(CHAR_DATA *ch, const char *argument)
   OBJ_DATA *obj;
 
   one_argument(argument, arg);
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Посмотреть Stat чего?\n\r", ch);
     return;
@@ -1779,7 +1779,7 @@ void do_mstat(CHAR_DATA *ch, const char *argument)
 
   one_argument(argument, arg);
 
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Посмотреть Stat кого?\n\r", ch);
     return;
@@ -1936,7 +1936,7 @@ void do_affstat(CHAR_DATA *ch, const char *argument)
 
   one_argument(argument, arg);
 
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Посмотреть AffStat кого?\n\r", ch);
     return;
@@ -1972,7 +1972,7 @@ void do_vnum(CHAR_DATA *ch, const char *argument)
 
   string = one_argument(argument,arg);
  
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Синтаксис:\n\r",ch);
     stc("  vnum obj <имя>\n\r",ch);
@@ -2013,7 +2013,7 @@ void do_mfind(CHAR_DATA *ch, const char *argument)
   bool found;
 
   one_argument(argument, arg);
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Найти кого?\n\r", ch);
     return;
@@ -2055,7 +2055,7 @@ void do_ofind(CHAR_DATA *ch, const char *argument)
   bool found;
 
   one_argument(argument, arg);
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Найти что?\n\r", ch);
     return;
@@ -2149,7 +2149,7 @@ void do_mwhere(CHAR_DATA *ch, const char *argument)
   bool found;
   int count = 0;
 
-  if (argument[0] == '\0')
+  if (EMPTY(argument))
   {
     DESCRIPTOR_DATA *d;
 
@@ -2203,7 +2203,7 @@ void do_reboot(CHAR_DATA *ch, const char *argument)
   int amount;
   char buf[50];
 
-  if (argument[0]=='\0' || !str_prefix(argument,"status"))
+  if (EMPTY(argument) || !str_prefix(argument,"status"))
   {
     if (rebootcount==0) stc("{RSystem status: NO REBOOT{x\n\r",ch);
     else ptc(ch,"{RSystem status: REBOOT in %d ticks{x\n\r",rebootcount);
@@ -2272,7 +2272,7 @@ void do_protect(CHAR_DATA *ch, const char *argument)
 {
   CHAR_DATA *victim;
 
-  if (argument[0] == '\0')
+  if (EMPTY(argument))
   {
     stc("Защитить от подсматривания кого?\n\r",ch);
     return;
@@ -2307,7 +2307,7 @@ void do_snoop(CHAR_DATA *ch, const char *argument)
 
   one_argument(argument, arg);
   
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Просмотреть кого?\n\r", ch);
     return;
@@ -2418,7 +2418,7 @@ void do_clone(CHAR_DATA *ch, const char *argument)
 
   rest = one_argument(argument,arg);
 
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Клонировать что?\n\r",ch);
     return;
@@ -2538,7 +2538,7 @@ void do_load(CHAR_DATA *ch, const char *argument)
 
   argument = one_argument(argument,arg);
   
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Синтаксис:\n\r",ch);
     stc("  load mob <vnum>\n\r",ch);
@@ -2601,7 +2601,7 @@ void do_mload(CHAR_DATA *ch, const char *argument)
     
   one_argument(argument, arg);
 
-  if (arg[0] == '\0' || !is_number(arg))
+  if (EMPTY(arg) || !is_number(arg))
   {
     stc("Синтаксис: load mob <vnum>.\n\r", ch);
     return;
@@ -2634,7 +2634,7 @@ void do_oload(CHAR_DATA *ch, const char *argument)
   argument = one_argument(argument, arg1);
   one_argument(argument, arg2);
 
-  if (arg1[0] == '\0' || !is_number(arg1))
+  if (EMPTY(arg1) || !is_number(arg1))
   {
     stc("Синтаксис: load obj <vnum> <уровень>.\n\r", ch);
     return;
@@ -2683,7 +2683,7 @@ void do_purge(CHAR_DATA *ch, const char *argument)
 
   one_argument(argument, arg);
 
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("{RSyntax: purge mob|obj|all|<name>\n\r{x", ch);
     stc("If name is given,  NOPURGE flag will be ignored.\n\r", ch);
@@ -2693,7 +2693,7 @@ void do_purge(CHAR_DATA *ch, const char *argument)
   else if (!str_cmp(arg, "obj")) purge=3;
   else if (!str_cmp(arg, "all")) purge=4;
   one_argument(argument, arg);
-  if (purge==0 && arg[0]=='\0')
+  if (purge==0 && EMPTY(arg))
   {
     stc("{RSyntax:{x purge mob | obj | all | <name>\n\r", ch);
     return;
@@ -2738,7 +2738,7 @@ void do_advance(CHAR_DATA *ch, const char *argument)
 
   argument = one_argument(argument, arg1);
 
-  if (arg1[0] == '\0' || argument[0] == '\0' || !is_number(argument))
+  if (EMPTY(arg1) || EMPTY(argument) || !is_number(argument))
   {
     stc("Синтаксис: advance <char> <level>.\n\r", ch);
     return;
@@ -2832,7 +2832,7 @@ void do_trust(CHAR_DATA *ch, const char *argument)
 
   argument = one_argument(argument, arg1);
 
-  if (arg1[0] == '\0' || argument[0] == '\0' || !is_number(argument))
+  if (EMPTY(arg1) || EMPTY(argument) || !is_number(argument))
   {
     stc("Синтаксис: trust <имя игрока> <уровень>.\n\r", ch);
     return;
@@ -2863,7 +2863,7 @@ void do_restore(CHAR_DATA *ch, const char *argument)
   CHAR_DATA *victim, *vch;
   DESCRIPTOR_DATA *d;
 
-  if (argument[0] == '\0' || !str_cmp(argument,"room"))
+  if (EMPTY(argument) || !str_cmp(argument,"room"))
   {
     for (vch = ch->in_room->people; vch != NULL; vch = vch->next_in_room)
     {
@@ -2931,7 +2931,7 @@ void do_freeze(CHAR_DATA *ch, const char *argument)
 
   one_argument(argument, arg);
 
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Заморозить кого?\n\r", ch);
     return;
@@ -2970,7 +2970,7 @@ void do_log(CHAR_DATA *ch, const char *argument)
   CHAR_DATA *victim;
 
   one_argument(argument, arg);
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Вести лог кого?\n\r", ch);
     return;
@@ -3021,7 +3021,7 @@ void do_noemote(CHAR_DATA *ch, const char *argument)
   CHAR_DATA *victim;
 
   one_argument(argument, arg);
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Чьи эмоции отключить?\n\r", ch);
     return;
@@ -3060,7 +3060,7 @@ void do_notell(CHAR_DATA *ch, const char *argument)
 
   one_argument(argument, arg);
 
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Чьи разговоры запретить?", ch);
     return;
@@ -3111,7 +3111,7 @@ void do_slookup(CHAR_DATA *ch, const char *argument)
   int sn;
 
   one_argument(argument, arg);
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Просмотреть какое умение или заклинание?\n\r", ch);
     return;
@@ -3145,7 +3145,7 @@ void do_set(CHAR_DATA *ch, const char *argument)
 
   argument = one_argument(argument,arg);
 
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Синтаксис:\n\r",ch);
     stc("  set char  <имя> <поле> <значение>\n\r",ch);
@@ -3307,7 +3307,7 @@ void do_mset(CHAR_DATA *ch, const char *argument)
   argument = one_argument(argument, arg2);
   strcpy(arg3, argument);
 
-  if (arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0')
+  if (EMPTY(arg1) || EMPTY(arg2) || EMPTY(arg3))
   {
     stc("Синтаксис:\n\r",ch);
     stc(" set mob <имя> <поле> <значение>\n\r",ch); 
@@ -3513,7 +3513,7 @@ void do_cset(CHAR_DATA *ch, const char *argument)
   argument = one_argument(argument, arg2);
   strcpy(arg3, argument);
 
-  if (arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0')
+  if (EMPTY(arg1) || EMPTY(arg2) || EMPTY(arg3))
   {
     stc("Синтаксис:\n\r",ch);
     stc(" set char <имя> <поле> <значение>\n\r",ch); 
@@ -3977,7 +3977,7 @@ void do_string(CHAR_DATA *ch, const char *argument)
   argument = one_argument(argument, arg2);
   strcpy(arg3, argument);
 
-  if (type[0] == '\0' || arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0')
+  if (type[0] == '\0' || EMPTY(arg1) || EMPTY(arg2) || EMPTY(arg3))
   {
     stc("Синтаксис:\n\r",ch);
     stc("  string char <имя> <поле> <строка>\n\r",ch);
@@ -4129,7 +4129,7 @@ void do_oset(CHAR_DATA *ch, const char *argument)
   argument = one_argument(argument, arg2);
   strcpy(arg3, argument);
 
-  if (arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0')
+  if (EMPTY(arg1) || EMPTY(arg2) || EMPTY(arg3))
   {
     stc("Синтаксис:\n\r",ch);
     stc("  set obj <предмет> <поле> <значение>\n\r",ch);
@@ -4263,7 +4263,7 @@ void do_rset(CHAR_DATA *ch, const char *argument)
   argument = one_argument(argument, arg2);
   strcpy(arg3, argument);
 
-  if (arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0')
+  if (EMPTY(arg1) || EMPTY(arg2) || EMPTY(arg3))
   {
     stc("Синтаксис:\n\r",ch);
     stc("  set room <расположение> <поле> <значение>\n\r",ch);
@@ -4430,7 +4430,7 @@ void do_force(CHAR_DATA *ch, const char *argument)
 
   argument = one_argument(argument, arg);
 
-  if (arg[0] == '\0' || argument[0] == '\0')
+  if (EMPTY(arg) || EMPTY(argument))
   {
     stc("Принудить кого сделать что?\n\r", ch);
     return;
@@ -4607,7 +4607,7 @@ void do_invis(CHAR_DATA *ch, const char *argument)
   /* RT code for taking a level argument */
   one_argument(argument, arg);
 
-  if (arg[0] == '\0') 
+  if (EMPTY(arg)) 
   /* take the default path */
 
   if (ch->invis_level)
@@ -4649,7 +4649,7 @@ void do_incognito(CHAR_DATA *ch, const char *argument)
   /* RT code for taking a level argument */
   one_argument(argument, arg);
  
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   /* take the default path */
  
   if (ch->incog_level)
@@ -4703,7 +4703,7 @@ void do_prefix (CHAR_DATA *ch, const char *argument)
 {
   char buf[MAX_STRING_LENGTH];
 
-  if (argument[0] == '\0')
+  if (EMPTY(argument))
   {
     if (ch->prefix[0] == '\0')
     {
@@ -4737,7 +4737,7 @@ void do_addlag(CHAR_DATA *ch, const char *argument)
   int x;
   argument = one_argument(argument, arg1);
 
-  if (arg1[0] == '\0')
+  if (EMPTY(arg1))
   {
     stc("Добавить тормозов кому?", ch);
     return;
@@ -5230,7 +5230,7 @@ void do_rename(CHAR_DATA *ch, const char *argument)
  argument = one_argument(argument, arg1);
  argument = one_argument(argument, arg2);
 
- if (arg1[0]=='\0' || arg2[0]=='\0')
+ if (EMPTY(arg1) || EMPTY(arg2))
  {
   stc (" Синтаксис: rename <старое имя> <новое имя>\n\r" ,ch);
   return;
@@ -5287,7 +5287,7 @@ void do_nomlove(CHAR_DATA *ch, const char *argument)
  
   one_argument(argument, arg);
  
-  if (arg[0] == '\0')
+  if (EMPTY(arg))
   {
     stc("Кому установить/убрать NO_MLOVE?", ch);
     return;
@@ -5323,7 +5323,7 @@ void gecho(const char *argument)
 {
   DESCRIPTOR_DATA *d;
 
-  if (argument[0] == '\0') return;
+  if (EMPTY(argument)) return;
   for (d = descriptor_list; d; d = d->next)
   {
     if (!d->character || d->connected!=CON_PLAYING) continue;
@@ -5335,7 +5335,7 @@ void do_nodelete(CHAR_DATA *ch, const char *argument)
 {
   CHAR_DATA *victim;
  
-  if (argument[0] == '\0')
+  if (EMPTY(argument))
   {
     stc("Отключить delete у кого?", ch);
     return;

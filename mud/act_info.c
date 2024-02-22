@@ -1505,7 +1505,7 @@ void do_affects(CHAR_DATA *ch, const char *argument)
      ptc(ch, "{CCharged spell: {R\'%s\' {Y(%d){x\n\r",skill_table[ch->pcdata->charged_spell].name,ch->pcdata->charged_num);
  }
 
- if (argument[0]!='\0' && !str_cmp(argument,"all"))
+ if (!EMPTY(argument) && !str_cmp(argument,"all"))
    ptc(ch, "{CAffected by {W%s{x\n\r",affect_bit_name(ch->affected_by));
 }
 
@@ -2241,7 +2241,7 @@ void do_description(CHAR_DATA *ch, const char *argument)
       int len;
       bool found = FALSE;
 
-      if (!ch->description || ch->description[0] == '\0')
+      if (!ch->description || EMPTY(ch->description))
       {
         stc("Описание отсутствует.\n\r",ch);
         return;
@@ -2529,7 +2529,7 @@ void do_password(CHAR_DATA *ch, const char *argument)
   }
   *pArg = '\0';
 
-  if (arg1[0] == '\0' || arg2[0] == '\0')
+  if (EMPTY(arg1) || EMPTY(arg2))
   {
     stc("Cинтаксис: password <старый пароль> <новый пароль>.\n\r", ch);
     return;
@@ -2698,7 +2698,7 @@ void do_spellstat(CHAR_DATA *ch, const char *argument)
         do_printf(buf,"{Y%-18s {y%3d{x/{C%3d{x ",skill_table[sn].name,victim->pcdata->learned[sn],mana_cost(victim,sn));
       }
 
-      if (spell_list[level][0] == '\0')
+      if (EMPTY(spell_list[level]))
         do_printf(spell_list[level],"\n\r{GLevel {x%3d: %s",level,buf);
       else /* append */
       {
@@ -3016,7 +3016,7 @@ void do_config(CHAR_DATA *ch, const char *argument)
 
   if (!str_prefix(arg,"autoonline"))
   {
-    if (argument[0]!='\0')
+    if (!EMPTY(argument))
     {
       free_string(ch->pcdata->auto_online);
       ch->pcdata->auto_online=str_dup(argument);

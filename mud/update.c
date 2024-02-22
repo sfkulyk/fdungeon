@@ -715,7 +715,7 @@ void mobile_update( void )
        ch->silver += ch->pIndexData->wealth * number_range(1,20)/50000;
      }
      stealer_update++;
-     if (ch->stealer!=NULL && ch->stealer[0]!='\0' && stealer_update>3000)
+     if (ch->stealer!=NULL && !EMPTY(ch->stealer) && stealer_update>3000)
      {
        stealer_update=0;
        remove_one_stealer(ch);

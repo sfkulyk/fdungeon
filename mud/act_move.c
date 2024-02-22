@@ -175,7 +175,7 @@ void do_pick( CHAR_DATA *ch, const char *argument )
   }
   one_argument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if (EMPTY(arg))
   {
     stc( "Взломать что?\n\r", ch );
     return;
@@ -1316,7 +1316,7 @@ void do_rape( CHAR_DATA *ch, const char *argument )
 
   one_argument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if (EMPTY(arg))
   {
     stc("Ты гоняешься с похотливым взглядом за каждым, кого видишь!\n\r", ch);
     act("$c1 гоняется за всеми с похотливым взглядом. Берегись!",ch,NULL,NULL,TO_ROOM);
@@ -1527,7 +1527,7 @@ void open_close( CHAR_DATA *ch, const char *argument,int action )
 
   one_argument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if (EMPTY(arg))
   {
     ptc(ch,"%sкрыть что?\n\r",action==1?"От":"За");
     return;
@@ -1989,7 +1989,7 @@ void do_enter( CHAR_DATA *ch, const char *argument)
   }
 
   // nifty portal stuff
-  if (argument[0] == '\0')
+  if (EMPTY(argument))
   {
     stc("Куда войти?\n\r",ch);
     return;
@@ -2140,7 +2140,7 @@ void do_scan(CHAR_DATA *ch, const char *argument)
   if (!str_prefix(arg1, "west"))  dir=3;
   if (!str_prefix(arg1, "up" ))   dir=4;
   if (!str_prefix(arg1, "down"))  dir=5;
-  if (arg1[0] == '\0') dir=100;
+  if (EMPTY(arg1)) dir=100;
 
   if (ch->invis_level < LEVEL_HERO)
   {

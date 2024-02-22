@@ -29,7 +29,7 @@ void do_rlist( CHAR_DATA *ch, const char *argument )
  argument = one_argument( argument, arg1 );
  argument = one_argument( argument, arg2 );
 
- if (arg1[0]=='\0' || !is_number(arg1) || arg2[0] == '\0' || !is_number(arg2))
+ if (EMPTY(arg1) || !is_number(arg1) || arg2[0] == '\0' || !is_number(arg2))
  {
    stc( " {RСинтаксис: rlist нач_Vnum кол-во.\n\r                {CПример:{x rlist 1 100\n\r", ch );
    return;
@@ -68,7 +68,7 @@ void do_vlist( CHAR_DATA *ch, const char *argument )
  argument = one_argument( argument, arg1 );
  argument = one_argument( argument, arg2 );
 
- if (arg1[0]=='\0' || !is_number(arg1) || arg2[0] == '\0' || !is_number(arg2))
+ if (EMPTY(arg1) || !is_number(arg1) || arg2[0] == '\0' || !is_number(arg2))
   {
    stc( " {RСинтаксис: vlist нач_Vnum кол-во.\n\r                {CПример:{x vlist 1 100\n\r", ch );
    return;

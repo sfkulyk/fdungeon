@@ -123,8 +123,7 @@ void do_quote( CHAR_DATA *ch, const char *argument )
 }
 void do_censored(CHAR_DATA *ch, const char *argument)
 {
-  if(ch->level<3 && ch->remort<1 && !IS_IMMORTAL(ch))
-  {
+  if(ch->level<3 && ch->remort<1 && !IS_IMMORTAL(ch)) {
     stc("Тебе еще рано использовать этот канал.\n\r",ch);
     return;
   }
@@ -167,8 +166,7 @@ void do_spam(CHAR_DATA *ch, const char *argument)
 {
   int i, item=-1;
 
-  if ( argument[0] == '\0' )
-  {
+  if ( EMPTY(argument) ) {
    stc(   "Конфигурация подавления SPAM :\n\r",ch);
    stc(   "------------------------------\n\r",ch);
    for (i=0;i<MAX_SPAM_TYPE;i++)
@@ -178,14 +176,12 @@ void do_spam(CHAR_DATA *ch, const char *argument)
   }
 
   for (i=0;i<MAX_SPAM_TYPE;i++)
-   if (!str_prefix(argument,spam_table[i].name))
-   {
+   if (!str_prefix(argument,spam_table[i].name)) {
      item=i;
      break;
    }
 
-  if (item==-1)
-  {
+  if (item==-1) {
     stc("Нет такой опции.",ch);
     return;
   }
@@ -199,40 +195,34 @@ void do_talk(CHAR_DATA *ch, const char *argument)
 {
   int i,item=-1;
 
-  if (!*argument)
-  {
+  if (!*argument) {
    stc(   "Конфигурация сохранения разговоров при дисконнекте:\n\r",ch);
    stc(   "---------------------------------------------------\n\r",ch);
    for (i=0;talk_table[i].channel!=CHAN_INFO;i++)
-     ptc(ch,"%s [%10s] %s\n\r",talk_table[i].showname,talk_table[i].name,
-       IS_SET(ch->pcdata->comm_save,talk_table[i].bit)?"Нет":"Да");
+     ptc(ch,"%s [%10s] %s\n\r",talk_table[i].showname,talk_table[i].name, IS_SET(ch->pcdata->comm_save,talk_table[i].bit)?"Нет":"Да");
    return;
   }
 
   for (i=0;talk_table[i].channel!=CHAN_INFO;i++)
-   if (!str_prefix(argument,talk_table[i].name))
-   {
+   if (!str_prefix(argument,talk_table[i].name)) {
      item=i;
      break;
    }
 
-  if (item==-1)
-  {
+  if (item==-1) {
     stc("Нет такой опции.",ch);
     return;
   }
 
   ch->pcdata->comm_save=toggle_int64(ch->pcdata->comm_save,talk_table[item].bit);
-  ptc(ch,"Запись канала {Y%s{x теперь в%sключена.{x\n\r",talk_table[item].name,
-    (IS_SET(ch->pcdata->comm_save,talk_table[item].bit) ? "ы":""));
+  ptc(ch,"Запись канала {Y%s{x теперь в%sключена.{x\n\r",talk_table[item].name, (IS_SET(ch->pcdata->comm_save,talk_table[item].bit) ? "ы":""));
 }
 
 void do_channels( CHAR_DATA *ch, const char *argument)
 {
   register int i=0;
 
-  if (EMPTY(argument))
-  {
+  if (EMPTY(argument)) {
     for (i=0;talk_table[i].name;i++)
     {
       if (talk_table[i].channel==CHAN_KAZAD && !GUILD(ch,DWARVES_GUILD)) continue;
@@ -245,30 +235,26 @@ void do_channels( CHAR_DATA *ch, const char *argument)
     if (IS_SET(ch->comm,COMM_AFK))  stc("Режим AFK включен.\n\r",ch);
     if (IS_SET(ch->comm,COMM_DEAF)) stc("Каналы выключены (deaf mode).\n\r",ch);
     if (IS_SET(ch->comm,COMM_QUIET))stc("Режим тишины включен (quiet mode).\n\r",ch);
-    if (ch->lines != PAGELEN)
-    {
-     if (ch->lines) ptc(ch," Вывод %d строк на экран.\n\r",ch->lines+2);
-     else stc(" Буферизация вывода отключена.\n\r",ch);
+    if (ch->lines != PAGELEN) {
+      if (ch->lines) ptc(ch," Вывод %d строк на экран.\n\r",ch->lines+2);
+      else stc(" Буферизация вывода отключена.\n\r",ch);
     }
     if (ch->prompt != NULL) ptc(ch," Ваша строка состояния: %s\n\r",ch->prompt);
     return;
   }
 
-  if (!str_cmp(argument,"help"))
-  {
+  if (!str_cmp(argument,"help")) {
     stc("Для того, чтобы включить или выключить канал. наберите его название.\n\r",ch);
     stc("Для вывода списка каналов и опций наберите channel без аргументов.\n\r",ch);
     stc("Пример: {Cchannel newbie{x\n\r",ch);
     return;
   }
 
-  for (i=0;talk_table[i].name;i++)
-  {
+  for (i=0;talk_table[i].name;i++) {
     if (talk_table[i].channel==CHAN_KAZAD && !GUILD(ch,DWARVES_GUILD)) continue;
     if (talk_table[i].channel==CHAN_AVENGE && !GUILD(ch,ASSASIN_GUILD)) continue;
     if (talk_table[i].channel==CHAN_CENSORED && ch->level<5) continue;
-    if (!str_prefix(argument,talk_table[i].name))
-    {
+    if (!str_prefix(argument,talk_table[i].name)) {
       ch->talk=toggle_int64(ch->talk,talk_table[i].bit);
       ptc(ch,"%s{x %s.{x\n\r",talk_table[i].showname,
         IS_SET(ch->talk,talk_table[i].bit)? "{Gвключ":"{Rвыключ");
@@ -304,8 +290,7 @@ void do_quiet( CHAR_DATA *ch, const char * argument)
 
 void do_replay (CHAR_DATA *ch, const char *argument)
 {
-  if (buf_string(ch->pcdata->buffer)[0] == '\0')
-  {
+  if (EMPTY(buf_string(ch->pcdata->buffer))) {
     stc("Нечего повторять.\n\r",ch);
     return;
   }
@@ -320,20 +305,17 @@ void do_immtalk( CHAR_DATA *ch, const char *argument )
 
   if (EMPTY(argument)) return;
 
-  if (!IS_SET(ch->talk,CBIT_IMMTALK))
-  {
+  if (!IS_SET(ch->talk,CBIT_IMMTALK)) {
     stc("Этот канал у тебя выключен.\n\r",ch);
     return;
   }
-  if (!IS_IMMORTAL(ch))
-  {
+  if (!IS_IMMORTAL(ch)) {
     ptc(ch,"{MТы говоришь богам {x'%s{x'\n\r",argument);
     do_printf(buf,"{Y%s {Mговорит богам '%s'{x\n\r",ch->name, argument);
   }
   else do_printf( buf, "{c[{y%s{c]:{M %s{x\n\r",ch->name, argument );
 
-  for ( vch= char_list; vch != NULL; vch = vch->next )
-  {
+  for ( vch= char_list; vch != NULL; vch = vch->next ) {
     if (IS_NPC(vch) || !IS_IMMORTAL(vch) || !IS_SET(vch->talk,CBIT_IMMTALK)) continue;
     if (!IS_IMMORTAL(ch) && IS_CFG(vch,CFG_NOIMMS)) continue;
     if (is_exact_name(ch->name,vch->pcdata->ignorelist)) continue;
@@ -347,8 +329,7 @@ void do_say( CHAR_DATA *ch, const char *argument )
   CHAR_DATA *wch;
   char buf[MAX_STRING_LENGTH];
 
-  if (EMPTY(argument))
-  {
+  if (EMPTY(argument)) {
     stc( "Сказать что?\n\r", ch );
     return;
   }
@@ -359,14 +340,12 @@ void do_say( CHAR_DATA *ch, const char *argument )
     if (wch==ch || (IS_IMMORTAL(wch) && is_exact_name(ch->name,wch->pcdata->ignorelist)) || (is_affected(wch,skill_lookup("deaf")) && !IS_IMMORTAL(wch))) continue;
     if (!IS_NPC(wch) && wch->desc == NULL)
     {
-      // Replace Imm's name with it's pseuodname when say something
-      if ( IS_IMMORTAL(ch) && !IS_IMMORTAL(wch) && ch->pcdata->pseudoname)
-      { 
+      // Replace Imm's name with it's alias when say something
+      if ( IS_IMMORTAL(ch) && !IS_IMMORTAL(wch) && ch->pcdata->pseudoname) { 
         do_printf(buf,"%s произносит '{G%s{x'\n\r",ch->pcdata->pseudoname,argument);
         add_buf(wch->pcdata->buffer,buf);
       } 
-      else
-      {
+      else {
         do_printf(buf,"%s произносит '{G%s{x'\n\r",can_see(wch,ch,CHECK_LVL)?get_char_desc(ch,'1'):"Некто",argument);
         add_buf(wch->pcdata->buffer,buf);
       }
@@ -382,24 +361,20 @@ void do_tell( CHAR_DATA *ch, const char *argument )
   char arg[MAX_STRING_LENGTH];
   CHAR_DATA *victim;
 
-  if (!IS_NPC(ch) && IS_SET(ch->comm,COMM_QUIET))
-  {
+  if (!IS_NPC(ch) && IS_SET(ch->comm,COMM_QUIET)) {
     stc( "Ты выключил разговоры.\n\r", ch );
     return;
   } 
 
   argument = one_argument( argument, arg );
 
-  if ( arg[0] == '\0' || argument[0] == '\0' )
-  {
+  if (EMPTY(arg) || EMPTY(argument)) {
     stc( "Сказать кому и что?\n\r", ch );
     return;
   }
 
-  if ( (victim=get_char_room(ch,arg))==NULL)
-  {
-    if ((victim=get_pchar_world(ch,arg))==NULL)
-    {
+  if ( (victim=get_char_room(ch,arg))==NULL) {
+    if ((victim=get_pchar_world(ch,arg))==NULL) {
       stc( "Таких здесь нет.\n\r", ch );
       return;
     }
@@ -411,8 +386,7 @@ void do_reply( CHAR_DATA *ch, const char *argument )
 {
   CHAR_DATA *victim;
 
-  if ( ( victim = ch->reply ) == NULL )
-  {
+  if ( ( victim = ch->reply ) == NULL ) {
     stc( "Некому отвечать.\n\r", ch );
     return;
   }
@@ -421,13 +395,11 @@ void do_reply( CHAR_DATA *ch, const char *argument )
 
 void do_emote( CHAR_DATA *ch, const char *argument )
 {
-  if (!IS_NPC(ch) && !IS_SET(ch->talk, CBIT_EMOTE))
-  {
+  if (!IS_NPC(ch) && !IS_SET(ch->talk, CBIT_EMOTE)) {
     stc( "Ты выключил эмоции.\n\r", ch );
     return;
   }
-  if (IS_SET(ch->comm,COMM_NOEMOTE))
-  {
+  if (IS_SET(ch->comm,COMM_NOEMOTE)) {
     stc( "Боги запрещают тебе волноваться.\n\r", ch );
     return;
   }
@@ -591,7 +563,7 @@ void do_quenia( CHAR_DATA *ch, const char *argument)
     return; 
   }
 
-  if(argument[0] == '\0')
+  if(EMPTY(argument))
   {
     stc("Что произнести?\n\r",ch);
     return; 
@@ -894,7 +866,7 @@ void check_gsocial( CHAR_DATA *ch, char *command, const char *argument )
   }
 
   victim = NULL;
-  if ( argument[0] == '\0' )
+  if (EMPTY(argument))
   {
     do_printf(buf,"{cGlobal:{x%s",social_table[cmd].others_no_arg);
     act( buf, ch, NULL, victim, TO_ALL );
@@ -1062,9 +1034,8 @@ void do_act( const char *format, CHAR_DATA *ch, const void *arg1,
           case '$': strcpy (temp, "$"); i = temp; break;
           case 'p': i = act_parse_obj (temp, to, obj1, '1'); break;
           case 'P': i = act_parse_obj (temp, to, obj2, '1'); break;
-          case 'd': if ( arg2 == NULL || ((char *) arg2)[0] == '\0' ) i = "дверь";
-                    else
-                    {
+          case 'd': if (arg2==NULL||((char *) arg2)[0] == '\0' ) i = "дверь";
+                    else {
                       one_argument( (char *) arg2, temp );
                       i = temp;
                     }
@@ -1295,7 +1266,7 @@ void do_delete( CHAR_DATA *ch, const char *argument)
    CHAR_DATA *victim;
 
     one_argument(argument,arg);
-    if( arg[0]=='\0' )
+    if(EMPTY(arg))
     {
       stc("Кого ты собираешься удалить?...\n\r",ch);
       return;
@@ -1370,12 +1341,9 @@ void do_backup( CHAR_DATA *ch, const char *argument )
   CHAR_DATA *keeper;
   DESCRIPTOR_DATA d;
 
-  if ( EMPTY(argument) || !IS_IMMORTAL(ch))
-  {
-    for ( keeper=ch->in_room->people; keeper; keeper=keeper->next_in_room )
-    {
-      if (IS_NPC(keeper) && IS_SET(keeper->act,ACT_IS_KEEPER))
-      {
+  if ( EMPTY(argument) || !IS_IMMORTAL(ch)) {
+    for ( keeper=ch->in_room->people; keeper; keeper=keeper->next_in_room ) {
+      if (IS_NPC(keeper) && IS_SET(keeper->act,ACT_IS_KEEPER)) {
         save_one_char( ch, SAVE_BACKUP );
         do_function(keeper, &do_emote, "открывает один из толстых томов, лежащих на столе.");
         do_function(keeper, &do_emote, "долго водит пером, записывая всю информацию.");
@@ -1396,8 +1364,7 @@ void do_backup( CHAR_DATA *ch, const char *argument )
     char time_buf[25];
     do_printf( buf, "%s%s", PLAYER_DIR2, capitalize( arg2 ) );
 
-    if (load_char_obj(&d, arg2, SAVE_BACKUP))
-    {
+    if (load_char_obj(&d, arg2, SAVE_BACKUP)) {
       ptc(ch, "В архиве найден следующий персонаж: %s\n\r", d.character->name);
       strftime(time_buf,25,"%y%m%d %a %H:%M:%S:",localtime(&d.character->lastlogin));
       ptc(ch, "{WВ последний раз этот персонаж заходил {Y%s{W{x\n\r",time_buf);
@@ -1409,22 +1376,18 @@ void do_backup( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  if (!str_cmp(arg1, "restore"))
-  {
+  if (!str_cmp(arg1, "restore")) {
     CHAR_DATA *wch;
 
-    if ((wch=get_pchar_world(ch, arg2)))
-    {
+    if ((wch=get_pchar_world(ch, arg2))) {
       ptc(ch, "Персонаж %s сейчас в мире.\n\r",wch->name);
       return;
     }
 
     do_printf( buf, "%s%s", PLAYER_DIR2, capitalize( arg2 ) );
 
-    if (load_char_obj(&d, arg2, SAVE_BACKUP))
-    {
-      if (get_trust(d.character)>109 && get_trust(ch)<110)
-      {
+    if (load_char_obj(&d, arg2, SAVE_BACKUP)) {
+      if (get_trust(d.character)>109 && get_trust(ch)<110) {
         ptc(ch,"{RAccess Denied.{x\n\r");
         extract_char(d.character, TRUE);
         return;
@@ -1455,76 +1418,62 @@ void do_quit( CHAR_DATA *ch, const char *argument )
   
   room = (ch->in_room) ? ch->in_room : ch->was_in_room;
   
-  if (room==NULL)
-  {
+  if (room==NULL) {
     bug("Char in NULL room",0);
     room = get_room_index(ROOM_VNUM_ALTAR);
     char_to_room(ch,room);
   }
 
-  if (room!=NULL && IS_SET(room->room_flags,ROOM_ARENA))
-  {
+  if (room!=NULL && IS_SET(room->room_flags,ROOM_ARENA)) {
    stc( "Боги не позволяют тебе покидать игру в этой комнате.\n\r", ch );
    return;
   }
   
-  if ( ch->pcdata->tournament )
-  {
+  if ( ch->pcdata->tournament ) {
       stc("Сначала турнир должен закончиться.\n\r",ch);
       return;
   }
 
-  if ( ch->position == POS_FIGHTING )
-  {
+  if ( ch->position == POS_FIGHTING ) {
     stc( "Сначала битва должна закончиться.\n\r", ch );
     return;
   }
 
-  if (ch->pcdata->condition[COND_ADRENOLIN]!=0 && ch->level<102)
-  {
+  if (ch->pcdata->condition[COND_ADRENOLIN]!=0 && ch->level<102) {
     stc( "{rТы слишком взволнован.{x\n\r", ch );
     return;
   }
 
-  if ( ch->position  < POS_STUNNED  )
-  {
+  if (ch->position < POS_STUNNED) {
     stc( "Ты еще не ТРУП.\n\r", ch );
     return;
   }
 
-  if ( auction->item != NULL && ((ch == auction->buyer) || (ch == auction->seller)) )
-  {
+  if ( auction->item != NULL && ((ch == auction->buyer) || (ch == auction->seller)) ) {
     stc ("Сначала аукцион должен закончиться.\n\r",ch);
     return;
   }
-
   
-  if (is_affected(ch,gsn_sleep))
-  {
+  if (is_affected(ch,gsn_sleep)) {
     stc ("Ты спишь нездоровым сном...\n\r",ch);
     return;
   }
 
-  if (IS_AFFECTED(ch,AFF_CHARM))
-  {
+  if (IS_AFFECTED(ch,AFF_CHARM)) {
     stc ("Ты не хочешь покидать своего лучшего друга...\n\r",ch);
     return;
   }
 
   if (IS_SET(ch->act,PLR_TIPSY) && tipsy(ch,"quit")) return;
    
-/* ----- */
-     for (paf = ch->affected; paf != NULL; paf = paf->next)
-     {                       
-       if ( !str_cmp(skill_table[paf->type].name, "aid"))
-          {
-             ch->hit=UMAX(1,ch->hit - paf->modifier);
-             ch->mana=UMAX(1,ch->mana - paf->modifier);
-             affect_strip(ch,skill_lookup("aid"));
-             break;
-          }
-     }
-/* ----- */
+  for (paf = ch->affected; paf != NULL; paf = paf->next) {                       
+    if ( !str_cmp(skill_table[paf->type].name, "aid")) {
+          ch->hit=UMAX(1,ch->hit - paf->modifier);
+          ch->mana=UMAX(1,ch->mana - paf->modifier);
+          affect_strip(ch,skill_lookup("aid"));
+          break;
+       }
+  }
 
   if (IS_SET(ch->act, PLR_QUESTOR)) 
     ptc(ch, "Вы прерываете ваш квест и теряете {R%d{x quest points.\n\r", cancel_quest(ch, TRUE, 16,25));
@@ -1534,16 +1483,14 @@ void do_quit( CHAR_DATA *ch, const char *argument )
   wiznet("$N покинул$R игру.",ch,NULL,WIZ_LOGINS,get_trust(ch));
 
   if (ch->level>101) info (ch,ch->level,1,ch->name,"покинул игру.");
-  else
-  {
+  else {
     do_printf(buf,"Весь мир скорбит об уходе {y$c2{x.");
     if (ch->level<90 ) do_printf(buf,"Протяжный звон возвещает об уходе {y$c2{x." );
     if (ch->level<60 ) do_printf(buf,"Протяжный звон возвещает об уходе {y$c2{x." );
     if (ch->level<40 ) do_printf(buf,"Могущественн$y {y$n{x неспеша покидает этот мир.");
     if (ch->level<25 ) do_printf(buf,"{y$n{x покинул$r этот мир.");
 
-    for ( d = descriptor_list; d != NULL; d = d->next )
-    {
+    for ( d = descriptor_list; d != NULL; d = d->next ) {
        if ( d->character && d->connected == CON_PLAYING
          && d->character != ch && ch->invis_level <= get_trust(d->character))
          act_new(buf,ch,argument,d->character,TO_VICT,POS_SLEEPING);
@@ -1552,18 +1499,15 @@ void do_quit( CHAR_DATA *ch, const char *argument )
 
   // After extract_char the ch is no longer valid!
   if (ch->pcdata->confirm_delete) ch->pcdata->confirm_delete=FALSE;
-  if (!ch->in_room || ch->in_room==get_room_index(ROOM_VNUM_LIMBO))
-  {
+  if (!ch->in_room || ch->in_room==get_room_index(ROOM_VNUM_LIMBO)) {
     char_from_room( ch );
     if (!ch->was_in_room || ch->was_in_room == get_room_index(ROOM_VNUM_LIMBO))
          char_to_room( ch, get_room_index(ROOM_VNUM_ALTAR));
     else char_to_room( ch, ch->was_in_room);
     ch->was_in_room=NULL;
   }
-  if (room->area->clan && strcmp(room->area->clan,"none"))
-  {
-    if (ch->clan==NULL || str_cmp(ch->clan->name,room->area->clan))
-    {
+  if (room->area->clan && strcmp(room->area->clan,"none")) {
+    if (ch->clan==NULL || str_cmp(ch->clan->name,room->area->clan)) {
       char_from_room(ch);
       char_to_room(ch,get_room_index( ROOM_VNUM_TEMPLE ));
     }
@@ -1573,11 +1517,9 @@ void do_quit( CHAR_DATA *ch, const char *argument )
   extract_char( ch, TRUE );
   if (ch->desc) close_socket( ch->desc );
 
-  for (d = descriptor_list; d != NULL; d = d_next)
-  {
+  for (d = descriptor_list; d != NULL; d = d_next) {
     d_next = d->next;
-    if (d->character && d->character->id == id)
-    {
+    if (d->character && d->character->id == id) {
       close_socket(d);
       extract_char(d->character,TRUE);
     } 
@@ -1598,18 +1540,15 @@ void do_follow( CHAR_DATA *ch, const char *argument )
 
   one_argument( argument, arg );
 
-  if (EMPTY(arg))
-  {
+  if (EMPTY(arg)) {
     stc( "Следовать за кем?\n\r", ch );
     return;
   }
-  if ( ( victim=get_char_room(ch,arg) ) == NULL )
-  {
+  if ( ( victim=get_char_room(ch,arg) ) == NULL ) {
     stc( "Tут таких нет.\n\r", ch );
     return;
   }
-  if ( IS_AFFECTED(ch, AFF_CHARM) && ch->master != NULL )
-  {
+  if ( IS_AFFECTED(ch, AFF_CHARM) && ch->master != NULL ) {
     act( "Но ведь ты уже следуешь за $N!", ch, NULL, ch->master, TO_CHAR );
     return;
   }
@@ -1623,8 +1562,7 @@ void do_follow( CHAR_DATA *ch, const char *argument )
     stop_follower(ch);
     return;
   }
-  if (!IS_NPC(victim) && IS_SET(victim->act,PLR_NOFOLLOW) && !IS_IMMORTAL(ch))
-  {
+  if (!IS_NPC(victim) && IS_SET(victim->act,PLR_NOFOLLOW) && !IS_IMMORTAL(ch)) {
     act("$N запрещает следовать за собой.\n\r",ch,NULL,victim, TO_CHAR);
     return;
   }
@@ -1634,41 +1572,32 @@ void do_follow( CHAR_DATA *ch, const char *argument )
 
 void add_follower( CHAR_DATA *ch, CHAR_DATA *master )
 {
-  if ( ch->master != NULL )
-  {
+  if ( ch->master != NULL ) {
     bug( "Add_follower: non-null master.", 0 );
     return;
   }
   ch->master        = master;
   ch->leader        = NULL;
 
-  if (can_see(master,ch,NOCHECK_LVL))
-    act( "$n теперь следует за тобой.", ch, NULL, master, TO_VICT );
+  if (can_see(master,ch,NOCHECK_LVL)) act( "$n теперь следует за тобой.", ch, NULL, master, TO_VICT );
   act( "Теперь ты следуешь за $N.",  ch, NULL, master, TO_CHAR );
 }
 
 void stop_follower( CHAR_DATA *ch )
 {
-  if ( ch->master == NULL )
-  {
+  if ( ch->master == NULL ) {
     bug( "Stop_follower: null master.", 0 );
     return;
   }
 
-  if ( can_see( ch->master, ch,NOCHECK_LVL ) && ch->in_room != NULL)
-  {
-    act( "$n больше не следует за тобой.", ch, NULL, ch->master, TO_VICT    );
-    act( "Ты больше не следуешь за $N.", ch, NULL, ch->master, TO_CHAR    );
+  if ( can_see( ch->master, ch,NOCHECK_LVL ) && ch->in_room != NULL) {
+    act("$n больше не следует за тобой.", ch, NULL, ch->master, TO_VICT);
+    act("Ты больше не следуешь за $N.", ch, NULL, ch->master, TO_CHAR);
   }
-  if (ch->master->pet == ch) 
-     ch->master->pet = NULL;
+  if (ch->master->pet == ch) ch->master->pet = NULL;
   ch->master = NULL;
   ch->leader = NULL;
-  if ( IS_SET(ch->affected_by, AFF_CHARM))
-  {
-      REM_BIT(ch->affected_by, AFF_CHARM);
-  }
-
+  if ( IS_SET(ch->affected_by, AFF_CHARM)) REM_BIT(ch->affected_by, AFF_CHARM);
 }
 
 void do_nuke( CHAR_DATA *ch, const char *argument )
@@ -1680,11 +1609,9 @@ void nuke_pets( CHAR_DATA *ch )
 {    
   CHAR_DATA *pet;
 
-  if ((pet = ch->pet) != NULL)
-  {
+  if ((pet = ch->pet) != NULL) {
     stop_follower(pet);
-    if (pet->in_room != NULL) 
-       act("$N медленно уходит прочь.",ch,NULL,pet,TO_NOTVICT);
+    if (pet->in_room != NULL) act("$N медленно уходит прочь.",ch,NULL,pet,TO_NOTVICT);
     extract_char(pet,TRUE);
   }
   ch->pet = NULL;
@@ -1694,20 +1621,15 @@ void die_follower( CHAR_DATA *ch )
 {
   CHAR_DATA *fch;
 
-  if ( ch->master != NULL )
-  {
+  if ( ch->master != NULL ) {
     if (ch->master->pet == ch) ch->master->pet = NULL;
     stop_follower( ch );
   }
 
   ch->leader = NULL;
-  for ( fch = char_list; fch != NULL; fch = fch->next )
-  {
-    if ( fch->master == ch ) 
-       stop_follower( fch );
-
-    if ( fch->leader == ch ) 
-       fch->leader = fch;
+  for ( fch = char_list; fch != NULL; fch = fch->next ) {
+    if ( fch->master == ch ) stop_follower( fch );
+    if ( fch->leader == ch ) fch->leader = fch;
   }
 }
 
@@ -1728,97 +1650,78 @@ void do_order( CHAR_DATA *ch, const char *argument )
 
   trust=ch->trust; // I think so (c) Jasana
 
-  for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ )
-  {
-    if ( arg2[0] == cmd_table[cmd].name[0] &&
-        (  ( !IS_SET(cmd_table[cmd].flag, FULL)
-        && !str_prefix( arg2, cmd_table[cmd].name) )
-      || ( IS_SET(cmd_table[cmd].flag, FULL)
-        && !str_cmp( arg2, cmd_table[cmd].name) ) )
-        &&   cmd_table[cmd].level <= trust )
-    {
+  for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ ) {
+    if ( arg2[0] == cmd_table[cmd].name[0]
+      && (( !IS_SET(cmd_table[cmd].flag, FULL) && !str_prefix(arg2, cmd_table[cmd].name))
+      || ( IS_SET(cmd_table[cmd].flag, FULL) && !str_cmp( arg2, cmd_table[cmd].name)))
+      && cmd_table[cmd].level <= trust ) {
      cmd_ptr=&cmd_table[cmd];
      break;
     }
   }
   
 #ifdef WITH_DSO
-  if (!cmd_ptr)
-    {
-      struct command *c;
-      CMDS_FOREACH (c)
-        if (arg2[0] == c->cmd.name[0] && c->cmd.level <= trust &&
-          ((c->cm_nice < 100 && !str_prefix (arg2, c->cmd.name))
-           || !str_cmp (arg2, c->cmd.name)))
-        {
-          cmd_ptr = &c->cmd;
-          break;
-        }
+  if (!cmd_ptr) {
+    struct command *c;
+    CMDS_FOREACH (c)
+      if (arg2[0] == c->cmd.name[0] && c->cmd.level <= trust &&
+        ((c->cm_nice < 100 && !str_prefix (arg2, c->cmd.name))
+           || !str_cmp (arg2, c->cmd.name))) {
+        cmd_ptr = &c->cmd;
+        break;
+      }
     }
 #endif
   
-  if (cmd_ptr && (IS_SET(cmd_ptr->flag,NOORDER) || IS_SET(cmd_ptr->flag,NOFORCE)))
-  {
+  if (cmd_ptr && (IS_SET(cmd_ptr->flag,NOORDER) || IS_SET(cmd_ptr->flag,NOFORCE))) {
     stc("Это НЕ БУДЕТ выполнено.\n\r",ch);
     return;
   }
 
-  if ( arg[0] == '\0' || argument[0] == '\0' )
-  {
+  if ( EMPTY(arg) || EMPTY(argument)) {
     stc( "Скомандовать кому? Что?\n\r", ch );
     return;
   }
 
-  if ( IS_AFFECTED( ch, AFF_CHARM ) )
-  {
+  if (IS_AFFECTED( ch, AFF_CHARM )) {
     stc( "Ты чувствуешь себя способным только выполнять приказы.\n\r", ch );
     return;
   }
 
-  if (IS_SET(ch->act,PLR_TIPSY)) if (tipsy(ch,"order")) return;
+  if (IS_SET(ch->act,PLR_TIPSY) && tipsy(ch,"order")) return;
 
-  if ( !str_cmp( arg, "all" ) )
-  {
-    if (cmd_ptr && IS_SET(cmd_ptr->flag,NOALL))
-    {
+  if ( !str_cmp( arg, "all" ) ) {
+    if (cmd_ptr && IS_SET(cmd_ptr->flag,NOALL)) {
       stc("Это нельзя командовать всем сразу.\n\r",ch);
       return;
     }
     fAll   = TRUE;
     victim = NULL;
   }
-  else
-  {
+  else {
     fAll   = FALSE;
-    if ( ( victim = get_char_room( ch, arg ) ) == NULL )
-    {
+    if ((victim = get_char_room(ch,arg)) == NULL) {
       stc( "Тут таких нет.\n\r", ch );
       return;
     }
 
-    if ( victim == ch )
-    {
+    if (victim == ch) {
       stc( "Да, да...прямо сейчас!\n\r", ch );
       return;
     }
 
     if (!IS_AFFECTED(victim, AFF_CHARM) || victim->master != ch 
-      ||  (IS_IMMORTAL(victim) && victim->trust >= ch->trust))
-    {
+      ||  (IS_IMMORTAL(victim) && victim->trust >= ch->trust)) {
       stc( "Сделай это сам!\n\r", ch );
       return;
     }
   }
 
   found = FALSE;
-  for ( och = ch->in_room->people; och != NULL; och = och_next )
-  {
+  for (och = ch->in_room->people; och != NULL; och = och_next) {
     och_next = och->next_in_room;
 
-    if ( IS_AFFECTED(och, AFF_CHARM)
-      &&   och->master == ch
-      && ( fAll || och == victim ) )
-    {
+    if (IS_AFFECTED(och, AFF_CHARM) && och->master == ch && ( fAll || och == victim )) {
       found = TRUE;
       smash_dollar((char*)argument); // may be wrong. Sab.
       do_printf( buf, "$n командует '%s'.", argument );
@@ -1838,7 +1741,7 @@ void do_group( CHAR_DATA *ch, const char *argument )
 
   one_argument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if (EMPTY(arg))
   {
     CHAR_DATA *gch;
     CHAR_DATA *leader;
@@ -1846,10 +1749,8 @@ void do_group( CHAR_DATA *ch, const char *argument )
     leader = (ch->leader != NULL) ? ch->leader : ch;
     ptc(ch,"Группа %s:\n\r", PERS(leader, ch) );
 
-    for ( gch = char_list; gch != NULL; gch = gch->next )
-    {
-      if ( is_same_group( gch, ch ) )
-      {
+    for ( gch = char_list; gch != NULL; gch = gch->next ) {
+      if ( is_same_group( gch, ch ) ) {
         ptc(ch,"[%3d %s] %-16s %6d/%6d здоровья %6d/%6d маны %6d/%6d движений %6d опыта\n\r",
           gch->level,IS_NPC(gch) ? "Моб" : (gch->remort>0)? "MLT":class_table[gch->class[gch->remort]].who_name,
           capitalize( PERS(gch, ch) ),
@@ -1860,32 +1761,27 @@ void do_group( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  if ( ( victim = get_char_room( ch, arg ) ) == NULL )
-  {
+  if ( ( victim = get_char_room( ch, arg ) ) == NULL ) {
     stc( "Тут таких нет.\n\r", ch );
     return;
   }
 
-  if ( ch->master != NULL || ( ch->leader != NULL && ch->leader != ch ) )
-  {
+  if ( ch->master != NULL || ( ch->leader != NULL && ch->leader != ch ) ) {
     stc( "Но ты уже следуешь за кем-то другим!\n\r", ch );
     return;
   }
 
-  if ( victim->master != ch && ch != victim )
-  {
+  if ( victim->master != ch && ch != victim ) {
     act_new("$N не следует за тобой.",ch,NULL,victim,TO_CHAR,POS_SLEEPING);
     return;
   }
     
-  if (IS_AFFECTED(victim,AFF_CHARM))
-  {
+  if (IS_AFFECTED(victim,AFF_CHARM)) {
     stc("Ты не можешь убрать очарованных монстров из группы.\n\r",ch);
     return;
   }
     
-  if (IS_AFFECTED(ch,AFF_CHARM))
-  {
+  if (IS_AFFECTED(ch,AFF_CHARM)) {
     act_new("Ты слишком любишь своего хозяина, чтобы покинуть его!",
             ch,NULL,victim,TO_VICT,POS_SLEEPING);
     return;
@@ -1903,13 +1799,6 @@ void do_group( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-/*
-  if (!PK_RANGE(ch,victim) || !PK_RANGE(victim,ch))
-  {
-    stc("Нельзя присоединять слишком маленьких или слишком больших чаров.\n\r",ch);
-    return;
-  }
-*/
   victim->leader = ch;
   act_new("$N присоединяется к группе $c2.",ch,NULL,victim,TO_NOTVICT,POS_RESTING);
   act_new("Ты присоединяешься к группе $c2.",ch,NULL,victim,TO_VICT,POS_SLEEPING);

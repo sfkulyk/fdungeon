@@ -51,7 +51,7 @@ void do_account( CHAR_DATA *ch, const char *argument )
   int64 amount; 
   int tmp=0;
  
-  if (argument[0]=='\0') 
+  if (EMPTY(argument))
   { 
     ptc(ch,"{CУ тебя на счету: {Y%u {Cзолота{x\n\r", ch->pcdata->account); 
     return; 
@@ -266,7 +266,7 @@ void do_blacksmith (CHAR_DATA *ch, const char *argument)
 
   argument=one_argument(argument, arg1);
 
-  if (arg1[0]=='\0')
+  if (EMPTY(arg1))
   {
     stc ("{CКузнец {xможет перековать любой предмет, если у тебя есть\n\r",ch);
     stc ("один из {Cмагических предметов{x.\n\r",ch);
@@ -646,7 +646,7 @@ void do_room(CHAR_DATA *ch, const char *argument)
    
   argument=one_argument(argument, arg); 
  
-  if (arg[0]=='\0') 
+  if (EMPTY(arg))
   { 
     stc("Usage: room reset    - reload resets in this room.\n\r",ch); 
     stc("       room raffect  - show roomaffects.\n\r",ch);
@@ -703,7 +703,7 @@ void do_spec(CHAR_DATA *ch, const char *argument)
 { 
  char arg[MAX_INPUT_LENGTH];
  
- if (argument[0]=='\0') 
+ if (EMPTY(argument))
  { 
    stc("Special commands for raceskills.\n\r",ch); 
    stc("Usage:\n\r",ch); 
@@ -788,7 +788,7 @@ void do_referi(CHAR_DATA *ch, const char *argument)
   CHAR_DATA *referi; 
   char buf[MAX_INPUT_LENGTH]; 
  
-  if (argument[0]=='\0') 
+  if (EMPTY(argument))
   { 
     stc("{RSyntax:{x referi affects\n\r", ch); 
     return; 
@@ -916,7 +916,7 @@ void run(CHAR_DATA *ch)
   int door=0;
   bool permanent=FALSE;
 
-  if (ch->runbuf[0]=='\0' || ch->fighting!=NULL)
+  if (EMPTY(ch->runbuf) || ch->fighting!=NULL)
   {
     free_string(ch->runbuf);
     ch->runbuf=&str_empty[0];

@@ -71,7 +71,7 @@ void do_gaccount( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  if (argument[0]=='\0')
+  if (EMPTY(argument))
   {
     ptc(ch,"{CÍà ñ÷åòó â ãèëüäèè {G'%s'{x: {Y%u {Cçîëîòà{x\n\r", guild_table[ch->pcdata->guild].name,guild_table[ch->pcdata->guild].gold);
     return;

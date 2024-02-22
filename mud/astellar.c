@@ -446,7 +446,7 @@ void do_polyanarecall( CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if (arg[0] == '\0') return;
+  if (EMPTY(arg)) return;
   else if( !str_prefix(arg,"beer") )
     do_printf(buf, "{RP{Wo{RL{Wy{RA{Wn{RA{Wr{RE{Wc{RA{Wl{RL {B!{G!{B! {DPiFfO {BBeEr {mCeRvEsA {RBiEr {G!{Y!{W!{x");
   else if( !str_prefix(arg,"pepsi") )
@@ -489,7 +489,7 @@ void do_repair( CHAR_DATA *ch, const char *argument )
   argument=one_argument( argument, arg1 );
   argument=one_argument( argument, arg2 );
 
-  if( arg1[0]=='\0' || !str_prefix( arg1, "help" ) )
+  if( EMPTY(arg1) || !str_prefix( arg1, "help" ) )
   {
     stc("{cКоманда починки предметов вооружения и брони.", ch);
     stc("{cЧинить могут только мастера в комнате-кузнице.\n\r", ch);
@@ -508,7 +508,7 @@ void do_repair( CHAR_DATA *ch, const char *argument )
     stc("Сначала зайди в кузницу.\n\r", ch);
     return;
   }
-  if( (arg2[0]=='\0') || !str_cmp(arg2,"self") ) victim=ch; 
+  if( EMPTY(arg2) || !str_cmp(arg2,"self") ) victim=ch; 
   else victim=get_char_room(ch, arg2);
   if (!victim)
   {
@@ -672,7 +672,7 @@ void do_reward( CHAR_DATA *ch, const char *argument )
  argument=one_argument( argument, arg2);
  argument=one_argument( argument, arg3);
 
- if( arg1[0]=='\0' || !str_prefix(arg1,"help") )
+ if( EMPTY(arg1) || !str_prefix(arg1,"help") )
  {
    stc("{cВыплачивание награды чарам.\n\r",ch);
    stc("{cСинтаксис:{x\n\r",ch);
@@ -688,7 +688,7 @@ void do_reward( CHAR_DATA *ch, const char *argument )
    return;
  }
 
-   if(arg3[0]=='\0')
+   if(EMPTY(arg3))
    {
      stc("Отсутствует параметр размера награды.\n\r",ch);
      return;
@@ -760,7 +760,7 @@ void do_damage( CHAR_DATA *ch, const char *argument)
   argument=one_argument( argument, arg1);
   argument=one_argument( argument, arg2);
 
-  if(arg1[0]=='\0' || !str_cmp( arg1,"help") )
+  if(EMPTY(arg1) || !str_cmp( arg1,"help") )
   {
     stc("{cУхудшает состояния вещи.{x\n\r", ch);
     stc("{cПоиск вещи проводится у чара, если параметр [character] пуст,{x\n\r", ch);
@@ -771,7 +771,7 @@ void do_damage( CHAR_DATA *ch, const char *argument)
   }
   if ( get_trust(ch) < 109) return;
 
-  if ( argument[0]=='\0' ) victim=ch;
+  if ( EMPTY(argument) ) victim=ch;
   else victim = get_char_world( ch, argument);
 
   if(!victim)
@@ -817,7 +817,7 @@ void do_seize( CHAR_DATA *ch, const char *argument)
   argument = one_argument( argument, arg1);
   argument = one_argument( argument, arg2);
 
-  if(arg1[0]=='\0' || !str_cmp( arg1,"help") )
+  if(EMPTY(arg1) || !str_cmp( arg1,"help") )
   {
     stc("{cЗабрать указаный предмет у персонажа.{x\n\r", ch);
     stc("{cУдобно использовать для конфискации ништяков.{x\n\r", ch);
