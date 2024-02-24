@@ -48,7 +48,7 @@ Forgotten Dungeon CREDITS:
 *   Creators: Saboteur, Adron, Kapitan                                     *
 *                                                                          *
 * Head developers:                                                         *
-*  Sergii Kulyk aka Saboteur (1997-2004)                                   *
+*  Sergii Kulyk aka Saboteur (1997-2025)                                   *
 *   - coding, bugfixing, maintainer, manager, etc.                         *
 *  Taras Phizer aka Adron  (1998-2000)                                     *
 *   - common coding, features, ideas etc and etc :)                        *

@@ -27,7 +27,7 @@ license terms. Their license agreements is in the files 'license.txt', 'license.
 You also can download them from ftp.game.org
 
 Forgotten Dungeon Mud is greatly improved from Rom24b4a and sources has been at most
-fully rewritten. Untouched files left only license.txt and license.doc :)
+fully rewritten. So just licence files were untouched :)
 
 Ours license terms are:
 
@@ -38,8 +38,13 @@ Ours license terms are:
     of the area creator / area translator, if existing.
  -- do not change files that contain only license or copyright text.
     license.fd and other - add your own new files.
-
-These are very generous terms for any software.  If you don't want to accept
-them, feel free to run some other software, or write your own.
+ -- Actually a lot of time passed from the moment when we taken the original sources,
+    and diku/merc licenses was changed a bit from this time. In additional, I am not
+    sure that original authors will respond to you if you email them...
+    I would like to change the license to MIT license as the most free with minimum
+    limitation, but I am blocked by original source code which I can't drop from the code.
+    So...
+    Just don't be evil.
+    Saboteur aka Sergii Kulyk.
 
 						Forgotten Dungeon team.
