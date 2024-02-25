@@ -69,6 +69,7 @@ extern  int     malloc_verify   args( ( void ) );
 
 #if defined(unix)
 #include <signal.h>
+#include <execinfo.h>
 #endif
 
 #if defined(apollo)
@@ -289,6 +290,17 @@ void    stop_idling             args( ( CHAR_DATA *ch ) );
 #include "rpc.h"
 #endif /* WITH_RPC */
 
+void handler(int sig) { // Crash handler, generate backtrace to stderr
+  void *array[10];
+  size_t size;
+
+  size = backtrace(array, 10);
+
+  do_fprintf(stderr, "CRITICAL Error: received signal: %d\n", sig );
+  backtrace_symbols_fd(array, size, 2); // 2 is stderr
+  exit(1);
+}
+
 int main( int argc, char **argv )
 {
   struct timeval now_time;
@@ -300,8 +312,10 @@ int main( int argc, char **argv )
 
   /* Memory debugging if needed. */
 #if defined(MALLOC_DEBUG)
-  malloc_debug( 2 );
+  malloc_debug(2);
 #endif
+
+  signal(SIGSEGV, handler);
 
   PULSE_PER_SECOND=4;
   PULSE_VIOLENCE = ( 3 * PULSE_PER_SECOND);

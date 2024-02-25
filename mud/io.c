@@ -1086,8 +1086,6 @@ void dlog(const char *fmt,...)
   strcpy(log_buf,buff); /* @#$... (unicorn) */
   strcat(strtime,"\n");
 
-//  fprintf( stdout,"%s", strtime);
-
   fclose(logReserve);
   fp = fopen (logname, "a+b");
   if (fp != NULL)
@@ -1125,8 +1123,6 @@ void log_printf(const char *fmt,...)
   strcat(strtime,buff);
   strcpy(log_buf, buff); /* @#$... (unicorn) */
   strcat(strtime,"\n");
-
-//  fprintf( stdout, "%s",strtime);
 
   fclose(logReserve);
   fp = fopen (logname, "a+b");
