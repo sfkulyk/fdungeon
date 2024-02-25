@@ -66,7 +66,6 @@ extern CHAR_DATA       *char_free;
 extern DESCRIPTOR_DATA *descriptor_free;
 extern PC_DATA         *pcdata_free;
 extern AFFECT_DATA     *affect_free;
-extern GQUEST_DATA     *gquest_data;
 void fix_keepers(MOB_INDEX_DATA *mIndex);
 void load_config();
 void load_races();

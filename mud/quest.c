@@ -726,7 +726,7 @@ void do_gquest(CHAR_DATA *ch, const char *argument)
 
       if (ch->pcdata->gquest.status == GQ_JOINED) {
         stc("Тебе нужно убить:\n\r",ch);
-        for (i=0; gquest.target[i]!=0;i++) {
+        for (i=0; gquest.target[i]!=0 && i<20;i++) {
           mob=get_mob_index(gquest.target[i]);
           if (mob!=0) {
             if (IS_IMMORTAL(ch))
@@ -777,7 +777,7 @@ void do_gquest(CHAR_DATA *ch, const char *argument)
       stc("Ты не участвуешь в задании.\n\r",ch);
       return;
     }
-    for (i=0;gquest.target[i]!=0;i++) {
+    for (i=0;gquest.target[i]!=0 && i<20;i++) {
       if (ch->pcdata->gquest.target[i]<gquest.target_counter[i]) {
         stc("Ты еще не убил всех монстров.\n\r",ch);
         return;
@@ -892,7 +892,7 @@ void do_gquest(CHAR_DATA *ch, const char *argument)
       if (gquest.status==GQ_STARTING) ptc(ch,"%12s  0\n\r",tmp->name);
       else {
         progress=0;
-        for(i=0;gquest.target[i]!=0;i++) progress+=tmp->pcdata->gquest.target[i];
+        for(i=0;gquest.target[i]!=0 && i<20;i++) progress+=tmp->pcdata->gquest.target[i];
         ptc(ch,"%12s %3d%%\n\r",tmp->name,progress==gquest.mobs?100:100/gquest.mobs*progress);
       }
     }
@@ -973,7 +973,7 @@ void create_gquest(int min,int max, int mobs)
     }
   }
   t=0;
-  for (i=0;i<21;i++) {
+  for (i=0;i<20;i++) {
     if (gquest.target[i]==0) break;
     for (mob=char_list;mob;mob=mob->next) {
       if (!IS_NPC(mob) || gquest.target[i]!=mob->pIndexData->vnum || !mob->in_room) continue;
@@ -1020,7 +1020,7 @@ void clear_gquest()
   for (tmp=char_list;tmp;tmp=tmp->next) {
     if (IS_NPC(tmp)) continue;
     tmp->pcdata->gquest.status=0;
-    for (i=0;i<21;i++) tmp->pcdata->gquest.target[i]=0;
+    for (i=0;i<20;i++) tmp->pcdata->gquest.target[i]=0;
   }
   for (i=0;i<100;i++) gquest.room[i]=0;
   gquest.counter=number_range(10,20);
@@ -1031,6 +1031,6 @@ bool is_gqmob(int64 vnum)
   int i;
   if (gquest.status!=GQ_STARTED) return FALSE;
 
-  for (i=0;i<21;i++) if (gquest.target[i]==vnum) return TRUE;
+  for (i=0;i<20;i++) if (gquest.target[i]==vnum) return TRUE;
   return FALSE;
 }

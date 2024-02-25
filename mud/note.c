@@ -366,7 +366,7 @@ void append_note(NOTE_DATA *pnote)
     fclose( fp );
   }
   // send to tg
-  if ( (fp=fopen("send+note.txt","a") ) == NULL ) perror(name);
+  if ( (fp=fopen("send_note.txt","w") ) == NULL ) perror(name);
   else  {
     int exitcode;
     do_fprintf( fp, "From:%s\nTo: %s\nSubject:[%d] %s\n\n%s", pnote->sender,pnote->to_list,pnote->type,pnote->subject,pnote->text);

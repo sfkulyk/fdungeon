@@ -354,3 +354,13 @@ fixed crash related to global quests
 gquest syntax optimized a bit
 Saboteur
 ~
+Sender  Saboteur~
+Host    _gateway~
+Date    240225 Sun 02:29:28:~
+Stamp   1708820968
+To      all~
+Subject fixed another crash bug~
+Text
+fixed crash during "cast gate" related to global quests
+Saboteur
+~
