@@ -25,6 +25,7 @@ struct  cmd_type
 {
   const char * name;
   const char * const rname;
+  const char * const uname;
   DO_FUN *     do_fun;
   int          position;
   int          level;

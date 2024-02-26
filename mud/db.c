@@ -5,12 +5,9 @@
 // comment out to turn "magic number" debugging of memory allocation/recycling off
 #define MAGIC_CHECKING
 
-
 #ifdef MAGIC_CHECKING
-
 #define MAGIC(x) ((struct magic*)x)
 #define MAGIC_COOKIE 0x1118
-
 /* MCB. Sizeof is still == 4 */
 struct magic {
         unsigned short cookie;  /* This is for identification. Should be MAGIC_COOKIE */
@@ -19,10 +16,8 @@ struct magic {
 };
 #endif
 
-
 // #define OLD_RAND
 // comment out to use the CRTL pseudorandom number generator
-
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -239,17 +234,17 @@ int   get_random_exotic_message();
 
 random_armor random_armors[]=
 {
- {"random armor", 3703 ,"Доспех "},
- {"random shield", 3704 ,"Щит "},
- {"random amulet", 3705 ,"Амулет "},
- {"random helm", 3706 ,"Шлем "},
+ {"random armor",   3703 ,"Доспех "},
+ {"random shield",  3704 ,"Щит "},
+ {"random amulet",  3705 ,"Амулет "},
+ {"random helm",    3706 ,"Шлем "},
  {"random leggins", 3707 ,"Поножи "},
- {"random boots", 3708 ,"Ботинки "},
- {"random gloves", 3709 ,"Перчатки "},
+ {"random boots",   3708 ,"Ботинки "},
+ {"random gloves",  3709 ,"Перчатки "},
  {"random sleeves", 3710 ,"Рукава "},
- {"random cape", 3711 ,"Плащ "},
- {"random belt", 3712 ,"Ремень "},
- {"random bracer", 3713 ,"Браслет "},
+ {"random cape",    3711 ,"Плащ "},
+ {"random belt",    3712 ,"Ремень "},
+ {"random bracer",  3713 ,"Браслет "},
  {"", 0 ,""}
 };
 
@@ -308,8 +303,6 @@ void boot_db( void )
   }
                 
   auction->item = NULL; /* nothing is being sold */
-
-  //  prepare max_string variable
   {
     int i;
     for (i=0;skill_table[i].name;i++);
@@ -653,7 +646,6 @@ static char *weapon_names[] =
     "pole random weapon", 
     "trident random weapon"};
 
-
 static int weapon_classes[] =
   { WEAPON_SWORD, WEAPON_EXOTIC, WEAPON_EXOTIC, WEAPON_AXE, 
     WEAPON_DAGGER, WEAPON_DAGGER, WEAPON_AXE, WEAPON_DAGGER, 
@@ -661,9 +653,7 @@ static int weapon_classes[] =
     WEAPON_SWORD, WEAPON_AXE, WEAPON_SWORD, WEAPON_DAGGER, 
     WEAPON_SWORD, WEAPON_SPEAR, WEAPON_POLEARM};
 
-
 static char *noun[] = { "жезл", "божок", "идол", "череп" };
-
 
 // Returns a clerical or magical spell of the appropriate (masked) type
 int random_spell( int level, int mask, int *type )
@@ -783,7 +773,6 @@ void wield_random_magic( CHAR_DATA *mob )
   };
 
   // Generate the description strings
-
   free_string( obj->short_descr );
   obj->short_descr = str_dup( buffer );
 
@@ -801,7 +790,6 @@ void wield_random_armor( CHAR_DATA *mob )
   int item_type = number_range(0, MAX_WEAR - 1); /* template from LIMBO.ARE */
   OBJ_INDEX_DATA *pObjIndex = get_obj_index( item_type + 40 );
   OBJ_DATA *obj = create_object( pObjIndex, 0 );
-
 
   static int armor_mul[] = { 1, 3, 2, 5, 6, 6, 10, 10, 12};
   static int armor_div[] = { 1, 2, 1, 1, 1, 3, 2,  1,  2 };
@@ -875,8 +863,6 @@ void wield_random_armor( CHAR_DATA *mob )
                     field = fread_string( fp );     \
                     break;                          \
                                 }
-
-
 /* OLC
  * Snarf an 'area' header line.   Check this format.  MUCH better.  Add fields
  * too.
@@ -1296,7 +1282,6 @@ void load_rooms( FILE *fp )
     top_room++;
     top_vnum_room = top_vnum_room < vnum ? vnum : top_vnum_room; /* OLC */
     assign_area_vnum( vnum );                                    /* OLC */
-
   }
 }
 
@@ -1424,7 +1409,6 @@ void fix_exits( void )
            pRoomIndex->vnum, door,to_room->vnum, rev_dir[door],
            (pexit_rev->u1.to_room == NULL) ? 0 : pexit_rev->u1.to_room->vnum );
           bug( buf, 0 );
-  
         }
       }
     }

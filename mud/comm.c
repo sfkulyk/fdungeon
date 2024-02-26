@@ -290,7 +290,7 @@ void    stop_idling             args( ( CHAR_DATA *ch ) );
 #include "rpc.h"
 #endif /* WITH_RPC */
 
-void handler(int sig) { // Crash handler, generate backtrace to stderr
+void segmentation_handler(int sig) { // Crash handler, generate backtrace to stderr
   void *array[10];
   size_t size;
 
@@ -315,7 +315,7 @@ int main( int argc, char **argv )
   malloc_debug(2);
 #endif
 
-  signal(SIGSEGV, handler);
+  signal(SIGSEGV, segmentation_handler);
 
   PULSE_PER_SECOND=4;
   PULSE_VIOLENCE = ( 3 * PULSE_PER_SECOND);
@@ -736,8 +736,7 @@ void game_loop_unix( int control )
         if ( (rc=select(FD_SETSIZE, &fds, NULL, NULL, &stall_time )) < 0 ) {
                 perror( "Game_loop: select: stall" );
                 exit( 1 );
-        } else if(rc)
-                svc_getreqset(&fds);
+        } else if(rc) svc_getreqset(&fds);
       } else break;
     }
 #elif !defined(WIN32)

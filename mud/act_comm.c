@@ -1659,6 +1659,15 @@ void do_order( CHAR_DATA *ch, const char *argument )
      break;
     }
   }
+  for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ ) {
+    if ( arg2[0] == cmd_table[cmd].uname[0]
+      && (( !IS_SET(cmd_table[cmd].flag, FULL) && !str_prefix(arg2, cmd_table[cmd].uname))
+      || ( IS_SET(cmd_table[cmd].flag, FULL) && !str_cmp( arg2, cmd_table[cmd].uname)))
+      && cmd_table[cmd].level <= trust ) {
+     cmd_ptr=&cmd_table[cmd];
+     break;
+    }
+  }
   
 #ifdef WITH_DSO
   if (!cmd_ptr) {
