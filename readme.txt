@@ -12,10 +12,13 @@ based on Diku Mud (see creds.txt for all contributors and codebases)
 
 Forgotten Dungeon active time: 1998-2005
 
-First address: hosix.ntu-kpi.kiev.ua:9000
-Public address: mud.ntu-kpi.kiev.ua:4000
+Current address: mud.saboteur.com.ua:4001
 
-Current address: mud.saboteur.com.ua:4000
+Archived addresses (not used anymore):
+  First address: hosix.ntu-kpi.kiev.ua:9000
+  Public address: mud.ntu-kpi.kiev.ua:4000
+
+
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 Programming language: Ansi C.
 In Active time it could be compiled and run under FreeBSD, DOS and Windows-32.
