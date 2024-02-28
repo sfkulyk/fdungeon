@@ -1,11 +1,11 @@
 // Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
-#include <time.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <time.h>
 #include "merc.h"
 #include "interp.h"
 #include "magic.h"
@@ -13,7 +13,6 @@
 #include "tables.h"
 
 extern  int     _filbuf         args((FILE *));
-int             favour_string   ( CHAR_DATA *ch);
 int max_on = 0;
 
 // Local functions.

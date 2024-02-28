@@ -407,30 +407,28 @@ void  smash_percent ( char *str );
 void  smash_tilde   ( char *str );
 void  smash_newline ( char *str );
 long  flag_convert  ( char letter );
-//int64 flag_convert64( char letter );
-char  * pflag64     ( int64 flag );
-
-char *  print_flags     args( ( int flag ));
-char *  pflag64         args( ( int64 flag));     // Sab: 64bit Flag output
-void    boot_db         ();
-void    area_update     ();
-CD *    create_mobile   args( ( MID *pMobIndex ) );
-void    clone_mobile    args( ( CD *parent, CD *clone) );
-OD *    create_object   args( ( OID *pObjIndex, int level ) );
-void    clone_object    args( ( OD *parent, OD *clone ) );
-void    clear_char      args( ( CD *ch ) );
-MID *   get_mob_index   args( ( int64 vnum ) );
-OID *   get_obj_index   args( ( int64 vnum ) );
-RID *   get_room_index  args( ( int64 vnum ) );
-char    fread_letter    args( ( FILE *fp ) );
-int     fread_number    args( ( FILE *fp ) );
-int64   fread_number64  args( ( FILE *fp ) );
-long    fread_flag      args( ( FILE *fp ) );
-void    fread_to_eol    args( ( FILE *fp ) );
-int64   flag_convert64  args( ( char letter) );
-void *  alloc_mem       args( ( int sMem ) );
-void *  alloc_perm      args( ( int sMem ) );
-void    free_mem        args( ( void *pMem, int sMem ) );
+char * pflag64      ( int64 flag );
+char * print_flags     args( ( int flag ));
+char * pflag64         args( ( int64 flag));     // Sab: 64bit Flag output
+void   boot_db         ();
+void   area_update     ();
+CD *   create_mobile   args( ( MID *pMobIndex ) );
+void   clone_mobile    args( ( CD *parent, CD *clone) );
+OD *   create_object   args( ( OID *pObjIndex, int level ) );
+void   clone_object    args( ( OD *parent, OD *clone ) );
+void   clear_char      args( ( CD *ch ) );
+MID *  get_mob_index   args( ( int64 vnum ) );
+OID *  get_obj_index   args( ( int64 vnum ) );
+RID *  get_room_index  args( ( int64 vnum ) );
+char   fread_letter    args( ( FILE *fp ) );
+int    fread_number    args( ( FILE *fp ) );
+int64  fread_number64  args( ( FILE *fp ) );
+long   fread_flag      args( ( FILE *fp ) );
+void   fread_to_eol    args( ( FILE *fp ) );
+int64  flag_convert64  args( ( char letter) );
+void * alloc_mem       args( ( int sMem ) );
+void * alloc_perm      args( ( int sMem ) );
+void   free_mem        args( ( void *pMem, int sMem ) );
 
 // Sure, it have to be `const' (; (unicorn)
 const   char * str_dup  args( ( const char *str ) ); 
@@ -443,6 +441,7 @@ int     number_bits     args( ( int width ) );
 long    number_mm       args( ( void ) );
 int     dice            args( ( int number, int size ) );
 int     interpolate     args( ( int level, int value_00, int value_32 ) );
+void    load_races      ();
 void    smash_tilde     args( ( char *str ) );
 void    smash_dollar    args( ( char *str ) );
 bool    str_cmp         args( ( const char *astr, const char *bstr ) );
@@ -463,8 +462,11 @@ MPROG_CODE * get_mprog_index args( ( int vnum ) );
 const char * fread_string    args( ( FILE *fp ) );
 const char * fread_string_eol args(( FILE *fp ) );
 
+
 // astellar.c
 void damage_obj args( ( CHAR_DATA *victim, OBJ_DATA *obj, int dam_v, bool inf_char ) );
+int deity_char_power    ( CHAR_DATA *ch, int type, int subtype);
+int  favour_string      ( CHAR_DATA *ch);
 
 // io.c
 int64 fread_flag64   args( ( FILE *fp ) );
@@ -476,6 +478,7 @@ void  dlog               (const char *fmt,...);  //(C)Sab log_printf w/debuglog
 
 
 // saboteur.c
+void  write_skill_table ( CHAR_DATA *ch);
 char  *get_logchar      ( int flag );
 void  bust_arg          ( CD *ch, const char *argument );
 char  *get_clan_rank    ( CD *ch );
@@ -529,6 +532,7 @@ void update_pos      args( ( CD *victim ) );
 void stop_fighting   args( ( CD *ch, bool fBoth ) );
 void check_criminal  args( ( CD *ch, CD *victim, int level) );
 bool can_attack      args( ( CD *ch, int type) );
+void raw_kill           args( ( CHAR_DATA *victim ) ); 
 
 // handler.c
 RAFFECT *get_raffect        ( ROOM_INDEX_DATA *room, int bit);
@@ -681,6 +685,7 @@ void save_one_char       (CD *ch, int action) ;
 void save_config();
 void save_races();
 void save_newspaper();
+void save_vote();
 
 // skills.c
 bool parse_gen_groups args(( CD *ch, const char *argument ) );
@@ -794,6 +799,7 @@ extern const struct flag_type wear_loc_flags[];
 extern const struct flag_type weapon_flags[];
 extern const struct flag_type container_flags[];
 extern const struct flag_type penalty_flags[];
+char *flag_string( const struct flag_type *flag_table, int64 bits );
 
 // social edit
 void load_social_table();

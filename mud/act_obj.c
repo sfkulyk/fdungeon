@@ -1,11 +1,7 @@
 // Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
-#ifndef WIN32
-#include <sys/time.h>
-#else
 #include <time.h>
-#endif
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -15,7 +11,6 @@
 #include "recycle.h" 
 
 // Local functions.
-void  raw_kill      args((CHAR_DATA *victim));
 bool  remove_obj    args((CHAR_DATA *ch, int iWear, bool fReplace));
 void  wear_obj      args((CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool w_left));
 void  obj_to_keeper args((OBJ_DATA *obj, CHAR_DATA *ch ));

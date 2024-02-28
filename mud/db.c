@@ -55,7 +55,6 @@ extern PC_DATA         *pcdata_free;
 extern AFFECT_DATA     *affect_free;
 void fix_keepers(MOB_INDEX_DATA *mIndex);
 void load_config();
-void load_races();
 void load_vote();
 void load_newspaper(void);
 

@@ -1,11 +1,7 @@
 // Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
-#ifndef WIN32
-#include <sys/time.h>
-#else
-#include <sys/time.h>
-#endif
+#include <time.h>
 #include <ctype.h> 
 #include <stdio.h>
 #include <string.h> 
@@ -19,9 +15,7 @@ void load_deities       ( );
 void save_deities       ( );
 void panish_effect      ( CHAR_DATA *ch);
 void dec_worship        ( CHAR_DATA *ch);
-int  favour_string      ( CHAR_DATA *ch);
 void show_deity_applies ( CHAR_DATA *ch, int deity);
-int deity_char_power    ( CHAR_DATA *ch, int type, int subtype);
 
 void save_deities()
 {
@@ -209,7 +203,7 @@ int favour_string( CHAR_DATA *ch)
 };
 
 #define dtab deity_table[ch->pcdata->dn]
-int deity_char_power( CHAR_DATA *ch, int type, int st)
+int deity_char_power( CHAR_DATA *ch, int type, int subtype)
 {
   int sum=0;
 
@@ -217,12 +211,12 @@ int deity_char_power( CHAR_DATA *ch, int type, int st)
   switch(type)
   {
     case 1:
-      if( dtab.d_apply[0] == st ) sum += dtab.d_apply[1];
-      if( dtab.d_apply[2] == st ) sum -= dtab.d_apply[3];
+      if( dtab.d_apply[0] == subtype ) sum += dtab.d_apply[1];
+      if( dtab.d_apply[2] == subtype ) sum -= dtab.d_apply[3];
       break;
     case 2:
-      if( dtab.d_apply[4] == st ) sum += dtab.d_apply[5];
-      if( dtab.d_apply[6] == st ) sum -= dtab.d_apply[7];
+      if( dtab.d_apply[4] == subtype ) sum += dtab.d_apply[5];
+      if( dtab.d_apply[6] == subtype ) sum -= dtab.d_apply[7];
       break;
     case 3:
 /*

@@ -12,14 +12,7 @@
 // -- Furey  26 Jan 1993
 
 #include <sys/types.h>
-
-#if defined( WIN32 )
-#include <sys/timeb.h> // for _ftime(), uses _timeb struct
-#include <sys/time.h>
-#else
 #include <time.h>
-#endif
-
 #include <ctype.h>
 #include <errno.h>
 #include <stdio.h>

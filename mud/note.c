@@ -1141,3 +1141,27 @@ void unread_update(void)
                            "Была добавлена новая штрафная санкция(penalty)");
   }
 }
+
+/* Saboteur:
+ Note types: NOTE 0     IDEA    1  PENALTY    2
+             NEWS 3     CHANGES 4  BUGREPORT  5 OFFTOPIC 6
+*/
+void send_note( const char *from, const char *to, const char *subject, const char *text, int type)
+{
+  NOTE_DATA *note;
+  char *buf;
+
+  note = new_note();
+  note->next         = NULL;
+  note->sender       = str_dup(from);
+  note->host         = str_dup("{GSystem{x");
+  buf                = ctime( &current_time );
+  buf[strlen(buf)-1] = '\0';
+  note->date         = str_dup( buf );
+  note->date_stamp   = current_time;
+  note->to_list      = str_dup(to);
+  note->subject      = str_dup(subject);
+  note->text         = str_dup(text);
+  note->type         = type;
+  append_note(note);
+}

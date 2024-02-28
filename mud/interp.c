@@ -17,7 +17,6 @@ DECLARE_SPELL_FUN( spell_null              );
 CHAR_DATA *find_questmob(int level);
 void    smash_tilde     args( ( char *str ) );
 
-char *flag_string args((const struct flag_type *flag_table,int64 bits));
 void complete_quest(CHAR_DATA *ch, CHAR_DATA *questman, char *buf);
 int group_cost(CHAR_DATA *ch,int gn);
 int64 flag_convert64(char letter );

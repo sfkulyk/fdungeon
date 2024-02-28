@@ -11,7 +11,6 @@
 #include "magic.h"
 
 // The following special functions are available for mobiles.
-void raw_kill        args( ( CHAR_DATA *victim ) );
 DECLARE_SPEC_FUN(       spec_breath_any         );
 DECLARE_SPEC_FUN(       spec_breath_acid        );
 DECLARE_SPEC_FUN(       spec_breath_fire        );

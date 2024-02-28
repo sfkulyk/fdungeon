@@ -12,7 +12,6 @@
 #include "fdweb.h"
 
 // Imported functions
-void raw_kill        args( ( CHAR_DATA *victim ) );
 void remove_penalty(CHAR_DATA *ch, PENALTY_DATA *penalty);
 CLAN_DATA *clan_lookup  args( (const char *name) );
 void remove_one_stealer(CHAR_DATA *ch);

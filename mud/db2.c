@@ -5,12 +5,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <sys/types.h>
-#ifndef WIN32
-#include <sys/time.h>
-#else
 #include <time.h>
-#endif
-
 #include "merc.h"
 #include "db.h"
 #include "tables.h"

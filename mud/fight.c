@@ -5,7 +5,7 @@
 #include <stdio.h> 
 #include <string.h> 
 #include <stdlib.h> 
-#include <time.h> 
+#include <time.h>
 #include "merc.h" 
 #include "interp.h" 
 #include "tables.h"
@@ -36,7 +36,6 @@ void make_corpse        args( ( CHAR_DATA *ch ) );
 void one_hit            args( ( CHAR_DATA *ch, CHAR_DATA *victim, int dt, OBJ_DATA *obj, bool rgh) ); 
 void new_one_hit        args( ( CHAR_DATA *ch, CHAR_DATA *victim, int dt, OBJ_DATA *obj, bool rgh) );
 void mob_hit            args( ( CHAR_DATA *ch, CHAR_DATA *victim ) ); 
-void raw_kill           args( ( CHAR_DATA *victim ) ); 
 void set_fighting       args( ( CHAR_DATA *ch, CHAR_DATA *victim ) ); 
 void disarm             args( ( CHAR_DATA *ch, CHAR_DATA *victim, bool fLeft ) ); 
 bool check_skill        args( ( CHAR_DATA *ch, int gsn_skill) ); 

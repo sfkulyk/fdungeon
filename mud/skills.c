@@ -2,11 +2,7 @@
 // Read ours copyrights and license terms in 'license.fd'
 
 #include <sys/types.h>
-#ifndef WIN32
-#include <sys/time.h>
-#else
 #include <time.h>
-#endif
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

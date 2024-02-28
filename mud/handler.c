@@ -13,13 +13,10 @@
 #include "tables.h"
 
 // Local functions.
-void    raw_kill        args( ( CHAR_DATA *victim ) );
-
 void    affect_modify   args( ( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd ) );
 int min_level(CHAR_DATA *ch,int sn);
 int get_detect_level   (CHAR_DATA *ch, int cast_type, int sn);
 int get_undetect_level (CHAR_DATA *victim, int cast_type, int sn);
-int deity_char_power   ( CHAR_DATA *ch, int type, int subtype);
 
 // friend stuff -- for NPC's mostly
 bool is_friend(CHAR_DATA *ch,CHAR_DATA *victim)
