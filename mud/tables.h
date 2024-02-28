@@ -1,5 +1,6 @@
 // Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
+#include "merc.h"
  
 struct clan_rank_type
 {

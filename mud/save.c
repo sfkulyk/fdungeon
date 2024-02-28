@@ -13,10 +13,6 @@
 #include "interp.h"
 #include "fdweb.h"
 
-#ifdef WITH_UNICORN
-#include "unicorn.h"
-#endif
-
 extern  int     _filbuf         args( (FILE *) );
 
 int64  flag_convert64 (char letter);

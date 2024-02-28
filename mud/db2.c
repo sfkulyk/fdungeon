@@ -17,10 +17,6 @@
 #include "recycle.h"
 #include "fdweb.h"
 
-#ifdef WITH_UNICORN
-#include "unicorn.h"
-#endif
-
 CLAN_DATA *new_clan();
 void load_one_news(FILE *fp);
 

@@ -1642,12 +1642,12 @@ void do_supplicate ( CHAR_DATA *ch, const char *argument)
     return;
   }
   if (ch->pcdata->condition[COND_ADRENOLIN]!=0 && ch->level<102)
- {
-   stc( "{rТы слишком взволнован для молитвы.{x\n\r", ch );
-   return;
- }
+  {
+    stc( "{rТы слишком взволнован для молитвы.{x\n\r", ch );
+    return;
+  }
 
- if( is_affected(ch,skill_lookup("pray")) )
+  if( is_affected(ch,skill_lookup("pray")) )
   {
     ptc( ch, "{C%s{x устал от твоих молитв...\n\r",
          get_rdeity( deity_table[ch->pcdata->dn].russian, '0') );
@@ -1788,8 +1788,9 @@ void do_supplicate ( CHAR_DATA *ch, const char *argument)
     act( buf,ch,NULL,NULL,TO_ALL_IN_ROOM);
     return;
   }
- if( !str_prefix( argument, "protect" ) && ch->pcdata->condition[COND_ADRENOLIN] == 0 
-      && ch->fighting == NULL )
+
+  if (!str_prefix(argument,"protect") && ch->pcdata->condition[COND_ADRENOLIN] == 0 && !ch->fighting)
+  {
     if( favour( ch, -50) )
     {
       AFFECT_DATA caff;
@@ -1812,8 +1813,8 @@ void do_supplicate ( CHAR_DATA *ch, const char *argument)
       stc( "Ты чувствуешь как воздух начинает проходить сквозь твое тело.\n\r", ch);
       return;
     }
-    ptc( ch, "{C%s{x отказывается от тебя...\n\r", 
-         get_rdeity( deity_table[ch->pcdata->dn].russian,'1') );
+    ptc( ch, "{C%s{x отказывается от тебя...\n\r", get_rdeity( deity_table[ch->pcdata->dn].russian,'1') );
+  }
 #undef rdeity
 }
 

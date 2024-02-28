@@ -64,8 +64,6 @@ typedef int bool;
 typedef unsigned char   bool;
 #endif
 
-// Saboteur: fix for Linux - definition of ctime
-//char* ctime(const time_t* timer);
 
 // Structure types.
 typedef struct  gq_data          GQ_DATA;
@@ -302,20 +300,6 @@ int            autologin_pass;
 // OS-dependent declarations.
 // These are all very standard library functions,
 // but some systems have incomplete or non-ansi header files.
-#if     defined(_AIX)
-char *  crypt          args( ( const char *key, const char *salt ) );
-#endif
-
-#if     defined(apollo)
-int     atoi           args( ( const char *string ) );
-void *  calloc         args( ( unsigned nelem, size_t size ) );
-char *  crypt          args( ( const char *key, const char *salt ) );
-#endif
-
-#if     defined(hpux)
-char *  crypt          args( ( const char *key, const char *salt ) );
-#endif
-
 #if     defined(linux)
 char *  crypt          args( ( const char *key, const char *salt ) );
 #endif
@@ -327,14 +311,6 @@ char *  crypt          args( ( const char *key, const char *salt ) );
 #endif
 #endif
 
-#if     defined(MIPS_OS)
-char *  crypt          args( ( const char *key, const char *salt ) );
-#endif
-
-#if     defined(NeXT)
-char *  crypt          args( ( const char *key, const char *salt ) );
-#endif
-
 #if     defined(sequent)
 char *  crypt          args( ( const char *key, const char *salt ) );
 int     fclose         args( ( FILE *stream ) );
@@ -343,24 +319,6 @@ int     fread          args( ( void *ptr, int size, int n, FILE *stream ) );
 int     fseek          args( ( FILE *stream, long offset, int ptrname ) );
 void    perror         args( ( const char *s ) );
 int     ungetc         args( ( int c, FILE *stream ) );
-#endif
-
-#if     defined(sun)
-char *  crypt          args( ( const char *key, const char *salt ) );
-int     fclose         args( ( FILE *stream ) );
-int     fprintf        args( ( FILE *stream, const char *format, ... ) );
-#if     defined(SYSV)
-siz_t   fread          args( ( void *ptr, size_t size, size_t n,FILE *stream) );
-#elif !defined(__SVR4)
-int     fread          args( ( void *ptr, int size, int n, FILE *stream ) );
-#endif
-int     fseek          args( ( FILE *stream, long offset, int ptrname ) );
-void    perror         args( ( const char *s ) );
-int     ungetc         args( ( int c, FILE *stream ) );
-#endif
-
-#if     defined(ultrix)
-char *  crypt          args( ( const char *key, const char *salt ) );
 #endif
 
 // The crypt(3) function is not available on some operating systems.
@@ -868,3 +826,4 @@ void printf_to_char args( ( CD *ch, char *fmt, ...) );
 #undef DSD
 
 #endif
+

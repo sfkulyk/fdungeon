@@ -19,10 +19,6 @@
 #include "tables.h"
 #include "interp.h"
 
-#ifdef WITH_UNICORN
-#include "unicorn.h"
-#endif
-
 void raffect_update();
 void quest_update  ();
 void gquest_update ();
@@ -1121,7 +1117,7 @@ void log_printf(const char *fmt,...)
   *buf = 0;
   va_end (data);
   strcat(strtime,buff);
-  strcpy(log_buf, buff); /* @#$... (unicorn) */
+  strcpy(log_buf,buff); /* @#$... (unicorn) */
   strcat(strtime,"\n");
 
   fclose(logReserve);

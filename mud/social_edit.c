@@ -60,14 +60,14 @@ void save_social (const struct social_type *s, FILE *fp)
 {
   // get rid of (null)
   do_fprintf (fp, "%s~\n%s~\n%s~\n%s~\n%s~\n%s~\n%s~\n%s~\n%s\n%s~\n\n",
-    s->name          ? s->name          : "" , 
-    s->char_no_arg   ? s->char_no_arg   : "" , 
-    s->others_no_arg ? s->others_no_arg : "" ,
-    s->char_found    ? s->char_found    : "" , 
-    s->others_found  ? s->others_found  : "" , 
-    s->vict_found    ? s->vict_found    : "" ,
-    s->char_auto     ? s->char_auto     : "" , 
-    s->others_auto   ? s->others_auto   : "" ,
+    s->name, 
+    s->char_no_arg  ? s->char_no_arg  :"", 
+    s->others_no_arg? s->others_no_arg:"",
+    s->char_found   ? s->char_found   :"", 
+    s->others_found ? s->others_found :"", 
+    s->vict_found   ? s->vict_found   :"",
+    s->char_auto    ? s->char_auto    :"", 
+    s->others_auto  ? s->others_auto  :"",
     pflag64(s->flag),s->help);
 }
 

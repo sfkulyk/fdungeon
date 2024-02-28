@@ -1,6 +1,7 @@
 // Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
+
 // The version info.  Please use this info when reporting bugs.
 // It is displayed in the game by typing 'version' while editing.
 // Do not remove these from the code - by request of Jason Dinkel

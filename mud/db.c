@@ -33,14 +33,6 @@ struct magic {
 #include "recycle.h"
 #include "music.h"
 
-#ifdef WITH_UNICORN
-#include "unicorn.h"
-#ifdef WITH_ANTICRASH
-#include <signal.h>
-#include <unistd.h>
-#endif
-#endif
-
 extern  int     _filbuf         args( (FILE *) );
 
 #if !defined(OLD_RAND)

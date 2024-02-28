@@ -13,10 +13,6 @@
 #include "tables.h"
 #include "magic.h"
 
-#ifdef WITH_UNICORN
-#include "unicorn.h"
-#endif
-
 DECLARE_SPELL_FUN( spell_null              );
 CHAR_DATA *find_questmob(int level);
 void    smash_tilde     args( ( char *str ) );
@@ -27,9 +23,7 @@ int group_cost(CHAR_DATA *ch,int gn);
 int64 flag_convert64(char letter );
 char        *pflag64(int64 flag);
 int64 fread_flag64( FILE *fp);
-bool        check_social    args( ( CHAR_DATA *ch, char *command,
-                            const char *argument ) );
-
+bool        check_social    args( ( CHAR_DATA *ch, char *command, const char *argument ) );
 bool fLogAll = FALSE;
 
 struct  cmd_type        cmd_table       [] =

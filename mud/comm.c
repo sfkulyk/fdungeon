@@ -41,10 +41,6 @@ const char go_ahead_str[]={(char)IAC,(char)GA,'\0'};
 #include "tables.h"
 #include "olc.h"
 
-#ifdef WITH_UNICORN
-#include "unicorn.h"
-#endif
-
 #if     defined( WIN32 )
 void    gettimeofday    args( ( struct timeval *tp, void *tzp ) );
 #endif
@@ -2683,7 +2679,7 @@ bool check_parse_name (const char * name, bool new)
   // "short" forms or keywords
   if (is_exact_name (name,
      "hassan all auto immortal self someone something the you loner imm mud" \
-     "unicorn sab saboter sabot ")) return FALSE ;
+     "sab saboter sabot ")) return FALSE ;
 
   // "prefixes" of elders
   if( !str_prefix( name, "astel") || !str_prefix(name, "sabot") ) return FALSE;
@@ -2699,8 +2695,7 @@ bool check_parse_name (const char * name, bool new)
       "lenin urod pidar pidor gopnik debil idiot suka padla")) return FALSE ;
 
   // closed names for newbies
-  if (new && is_exact_name (name,
-      "illinar invader adron saboteur astellar")) return FALSE ;
+  if (new && is_exact_name (name,"illinar invader adron saboteur astellar")) return FALSE ;
 
   // no naming after clans
   for (clan = clan_list ; clan != NULL ; clan = clan->next)

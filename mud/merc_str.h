@@ -972,7 +972,7 @@ struct  group_type
 // Structure for a social in the socials table.
 struct  social_type
 {
-  char         name[20];
+  const char name[20];
   const char * char_no_arg;
   const char * others_no_arg;
   const char * char_found;
