@@ -15,17 +15,6 @@
 DECLARE_DO_FUN2(do_look          );
 DECLARE_DO_FUN2(do_say           );
  
-// Local functions.
-void say_spell   args( ( CHAR_DATA *ch, int sn ) );
-int  cast_rate   args( ( int value) );
-void add_pkiller (CHAR_DATA *ch, CHAR_DATA *killer);
-bool remove_obj  args( ( CHAR_DATA *ch, int iWear, bool fReplace ) );
-void wear_obj    args( (CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool w_left ) );
-int  min_level   (CHAR_DATA *ch,int sn);
-int  get_int_modifier args( ( CHAR_DATA *ch, CHAR_DATA *victim, int sn, int dt ) );
-int calc_saves (CHAR_DATA *victim);
-bool check_dispel( int dis_level, CHAR_DATA *victim, int sn) ;
- 
 int skill_lookup( const char *name ) 
 { 
   int sn;
@@ -235,6 +224,21 @@ bool check_dispel( int dis_level, CHAR_DATA *victim, int sn)
   return FALSE;
 } 
  
+int cast_rate (int value)
+{
+ if (value <= 21) return -4;
+ if (value <= 22) return -3;
+ if (value <= 23) return -2;
+ if (value <= 24) return -1;
+ if (value <= 25) return  0;
+ if (value <= 26) return  1;
+ if (value <= 27) return  2;
+ if (value <= 28) return  3;
+ if (value <= 29) return  3;
+ if (value <= 30) return  4;
+ return  5;
+}
+
 // for finding mana costs -- temporary version
 int mana_cost (CHAR_DATA *ch, int sn) 
 { 
@@ -4915,21 +4919,6 @@ void do_heal(CHAR_DATA *ch, const char *argument)
  }
  if (sn == -1) return;
  spell(sn,mob->level,mob,ch,targ);
-}
-
-int cast_rate (int value)
-{
- if (value <= 21) return -4;
- if (value <= 22) return -3;
- if (value <= 23) return -2;
- if (value <= 24) return -1;
- if (value <= 25) return  0;
- if (value <= 26) return  1;
- if (value <= 27) return  2;
- if (value <= 28) return  3;
- if (value <= 29) return  3;
- if (value <= 30) return  4;
- return  5;
 }
 
 void do_charge( CHAR_DATA *ch, const char *argument )

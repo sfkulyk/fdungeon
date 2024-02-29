@@ -10,30 +10,6 @@
 #include "interp.h"
 #include "recycle.h" 
 
-// Local functions.
-bool  remove_obj    args((CHAR_DATA *ch, int iWear, bool fReplace));
-void  wear_obj      args((CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool w_left));
-void  obj_to_keeper args((OBJ_DATA *obj, CHAR_DATA *ch ));
-bool  check_skill   args((CHAR_DATA *ch, int gsn_skill));
-int64 get_cost      args((CHAR_DATA *keeper, OBJ_DATA *obj, bool fBuy ));
-void  add_stealer(CHAR_DATA *ch, CHAR_DATA *stealer);
-void  add_pkiller(CHAR_DATA *ch, CHAR_DATA *killer);
-void  do_give    (CHAR_DATA *ch, const char *argument );
-void  sac_obj    (CHAR_DATA *ch, OBJ_DATA *obj);
-bool  give_one   (CHAR_DATA *ch,CHAR_DATA *victim,OBJ_DATA *obj);
-void  do_ear     (CHAR_DATA *victim,CHAR_DATA *ch);
-bool  is_number  (const char *arg );
-bool  is_same_obj(OBJ_DATA *obj, OBJ_DATA *nextobj);
-void  talk_auction   (char *argument);
-char * local_outtext ( int64 count, char *string_one, char *string_many);
-void  show_list_to_char   args((OBJ_DATA *list, CHAR_DATA *ch,bool fShort, bool fShowNothing));
-CHAR_DATA * find_keeper   args((CHAR_DATA *ch ));
-OBJ_DATA * get_obj_keeper args((CHAR_DATA *ch,CHAR_DATA *keeper, const char *argument));
-static void do_sacrifice1 args((CHAR_DATA *ch, OBJ_DATA *obj, bool isOne, int count));
-bool add_clanskill(CLAN_DATA *clan, int sn, int64 time);
-int64 iObjCount;
-bool  bFlushText;
-
 // RT part of the corpse looting code
 bool can_loot(CHAR_DATA *ch, OBJ_DATA *obj)
 {
@@ -118,12 +94,34 @@ char* can_get_obj (CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool fSelf
   return NULL;
 }
 
+bool is_same_obj (OBJ_DATA *obj, OBJ_DATA *next)
+{
+  if (next==NULL || obj==NULL) return FALSE;
+  if (strcmp (next->short_descr, obj->short_descr)) return FALSE;
+  if (strcmp (next->description, obj->description)) return FALSE;
+  if (next->pIndexData->vnum != obj->pIndexData->vnum) return FALSE;
+        
+  return TRUE;
+}
+
+char * local_outtext (int64 count, char *string_one, char *string_many)
+{ 
+ static char     textbuf [MAX_STRING_LENGTH]; 
+ 
+ if (count==1) return string_one; 
+ 
+ do_printf (textbuf, string_many, count); 
+ return textbuf; 
+} 
+
 int local_get_obj ( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool IsOne )
 {
   CHAR_DATA *gch;
   char temp[MAX_STRING_LENGTH];
   int members;
+  int64 iObjCount=0;
   char buffer[100];
+  bool bFlushText;
 
   if ( !CAN_WEAR(obj, ITEM_TAKE) )
   {
@@ -157,7 +155,7 @@ int local_get_obj ( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool IsOn
   {
     if (bFlushText)
     {
-      act (local_outtext (iObjCount, "$d: ты не можешь нести так много вещей.",
+      act (local_outtext(iObjCount, "$d: ты не можешь нести так много вещей.",
            "$d {C[%d]{x: ты не можешь нести так много вещей."), 
            ch, NULL, obj->name, TO_CHAR); iObjCount=1; }
       return 0;
@@ -280,8 +278,6 @@ void do_get( CHAR_DATA *ch, const char *argument )
   OBJ_DATA *container;
   bool found;
   int number, count=0;
-    
-  iObjCount=1; /* Init object counter */
     
   number = mult_argument((char *)argument, arg);
   if (number==1) number=MAX_OBJS_VALUE;
@@ -2221,61 +2217,7 @@ void do_remove( CHAR_DATA *ch, const char *argument )
   }
 }
 
-void do_sacrifice( CHAR_DATA *ch, const char *argument)
-{
-  char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
-  bool found, isOne=TRUE;
-  char objname[50];
-  OBJ_DATA *tobj;
-  int position = 0, count = 0;
-  int same = 1; 
-
-  if (ch->in_room->contents == NULL)
-  {
-    stc( "“ы не можешь это найти.\n\r", ch );
-    return;
-  }
-
-  one_argument( argument, arg );
-
-  if (EMPTY(arg) || !str_cmp(arg, ch->name ))
-  {
-    act( "$c1 предлагает себ€ богам, но они отказываютс€.",ch, NULL, NULL, TO_ROOM );
-    stc( "ѕосле смерти...\n\r", ch );
-    return;
-  }
-
-  memset(objname,0,50);
-
-  if (!str_cmp(arg, "all")) strcpy(objname, "all");
-  else if (!str_prefix("all.", arg)) strncpy(objname, &arg[4], 49);
-  else position = number_argument(arg, objname);
-
-  objname[49] = '\0';
-
-  found = 0;
-
-  for (obj = ch->in_room->contents; obj != NULL; obj = tobj)
-  {
-    tobj = obj->next_content;
- 
-    if (can_see_obj(ch, obj) && ((is_name(objname, obj->name)
-     && (!position || ++count == position)) || !str_cmp(objname, "all")))
-    {
-      found++; 
-      if (isOne) same=1; 
-      if (is_same_obj(obj,tobj)) { same++; isOne=FALSE;} 
-      else isOne=TRUE; 
-      do_sacrifice1(ch, obj,isOne,same);
-      if (position && count == position) break;
-    }
-  }
-
-  if (!found) stc( "“ы не можешь найти это.\n\r", ch );    
-}
-
-static void do_sacrifice1 (CHAR_DATA *ch, OBJ_DATA *obj, bool isOne, int count )
+static void do_sacrifice1(CHAR_DATA *ch, OBJ_DATA *obj, bool isOne, int count )
 {
   CHAR_DATA *gch;
   int members;
@@ -2390,6 +2332,60 @@ static void do_sacrifice1 (CHAR_DATA *ch, OBJ_DATA *obj, bool isOne, int count )
   }
   else
     extract_obj( obj );
+}
+
+void do_sacrifice( CHAR_DATA *ch, const char *argument)
+{
+  char arg[MAX_INPUT_LENGTH];
+  OBJ_DATA *obj;
+  bool found, isOne=TRUE;
+  char objname[50];
+  OBJ_DATA *tobj;
+  int position = 0, count = 0;
+  int same = 1; 
+
+  if (ch->in_room->contents == NULL)
+  {
+    stc( "“ы не можешь это найти.\n\r", ch );
+    return;
+  }
+
+  one_argument( argument, arg );
+
+  if (EMPTY(arg) || !str_cmp(arg, ch->name ))
+  {
+    act( "$c1 предлагает себ€ богам, но они отказываютс€.",ch, NULL, NULL, TO_ROOM );
+    stc( "ѕосле смерти...\n\r", ch );
+    return;
+  }
+
+  memset(objname,0,50);
+
+  if (!str_cmp(arg, "all")) strcpy(objname, "all");
+  else if (!str_prefix("all.", arg)) strncpy(objname, &arg[4], 49);
+  else position = number_argument(arg, objname);
+
+  objname[49] = '\0';
+
+  found = 0;
+
+  for (obj = ch->in_room->contents; obj != NULL; obj = tobj)
+  {
+    tobj = obj->next_content;
+ 
+    if (can_see_obj(ch, obj) && ((is_name(objname, obj->name)
+     && (!position || ++count == position)) || !str_cmp(objname, "all")))
+    {
+      found++; 
+      if (isOne) same=1; 
+      if (is_same_obj(obj,tobj)) { same++; isOne=FALSE;} 
+      else isOne=TRUE; 
+      do_sacrifice1(ch, obj,isOne,same);
+      if (position && count == position) break;
+    }
+  }
+
+  if (!found) stc( "“ы не можешь найти это.\n\r", ch );    
 }
 
 void do_quaff( CHAR_DATA *ch, const char *argument )
@@ -4204,26 +4200,7 @@ void do_send( CHAR_DATA *ch, const char *argument )
    }
 }
 
-bool is_same_obj (OBJ_DATA *obj, OBJ_DATA *next)
-{
-  if (next==NULL || obj==NULL) return FALSE;
-  if (strcmp (next->short_descr, obj->short_descr)) return FALSE;
-  if (strcmp (next->description, obj->description)) return FALSE;
-  if (next->pIndexData->vnum != obj->pIndexData->vnum) return FALSE;
-        
-  return TRUE;
-}
 
-char *  local_outtext ( int64 count, char *string_one, char *string_many) 
-{ 
- static char     textbuf [MAX_STRING_LENGTH]; 
- 
- if (count==1) return string_one; 
- 
- do_printf (textbuf, string_many, count); 
- return textbuf; 
-} 
- 
 void do_clanfit(CHAR_DATA *ch, const char *argument) 
 { 
  CHAR_DATA *keeper; 

@@ -11,12 +11,6 @@
 #include "interp.h"
 #include "recycle.h"
 
-void load_deities       ( );
-void save_deities       ( );
-void panish_effect      ( CHAR_DATA *ch);
-void dec_worship        ( CHAR_DATA *ch);
-void show_deity_applies ( CHAR_DATA *ch, int deity);
-
 void save_deities()
 {
   FILE * fp;

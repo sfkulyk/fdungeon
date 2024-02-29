@@ -14,15 +14,7 @@
 #include "magic.h"
 
 DECLARE_SPELL_FUN( spell_null              );
-CHAR_DATA *find_questmob(int level);
-void    smash_tilde     args( ( char *str ) );
 
-void complete_quest(CHAR_DATA *ch, CHAR_DATA *questman, char *buf);
-int group_cost(CHAR_DATA *ch,int gn);
-int64 flag_convert64(char letter );
-char        *pflag64(int64 flag);
-int64 fread_flag64( FILE *fp);
-bool        check_social    args( ( CHAR_DATA *ch, char *command, const char *argument ) );
 bool fLogAll = FALSE;
 
 struct  cmd_type        cmd_table       [] =

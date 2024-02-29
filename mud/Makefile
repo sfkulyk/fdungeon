@@ -23,8 +23,8 @@ rom: $(O_FILES)
 	@echo -e "\nLinking: "
 	gcc --pipe -o rom $(O_FILES) $(L_FLAGS) 
 	@chmod 755 rom
-	@echo -n "Result: "
-	@ls -lsFa rom
+	@echo "Result: "
+	@ls -lsFa rom ../areas/rom
         
 install: rom
 	rm -f ../areas/rom

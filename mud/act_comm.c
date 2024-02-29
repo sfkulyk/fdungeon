@@ -12,12 +12,6 @@
 #include "tables.h"
 #include "magic.h"
 
-void check_gsocial args( ( CHAR_DATA *ch, char *command, const char *argument ) );
-char *comm_name(int64 comm_flags);
-void talk( CHAR_DATA *ch, const char *argument, int channel );
-void tell(CHAR_DATA *ch,CHAR_DATA *victim, const char *argument);
-void dec_worship( CHAR_DATA *ch);
-
 struct pose_table_type
 {
   char * message[2*MAX_CLASS];
@@ -80,6 +74,118 @@ const struct talk_type talk_table[] =
   {"gsocial", CHAN_GSOCIAL, TRUE, CBIT_GSOCIAL,  1,"{DГлобальные эмоции         ","",FALSE,""},
   {NULL,      0,            TRUE, 0,             0,""                            ,"",FALSE,""}
 };              
+
+void talk( CHAR_DATA *ch, const char *argument, int channel )
+{
+  CHAR_DATA *victim;
+  char buf[MAX_STRING_LENGTH];
+
+  if (EMPTY(argument)) return;
+  if (!talk_table[channel].npc && IS_NPC(ch)) return;
+  if (IS_SET(ch->act,PLR_TIPSY)) tipsy2(ch,"chat", (char*)argument); 
+
+  if (ch->level < talk_table[channel].level && ch->remort==0)
+  {
+    stc("Ты слишком мал. Используй комманду {WNEWBIECHAT{x.\n\r",ch);
+    return;
+  }
+  if ( channel!=CHAN_CLAN && IS_SET(ch->comm,COMM_NOCHANNELS))
+  {
+    stc("Боги запрещают тебе пользоваться каналами.\n\r",ch);
+    return;
+  }
+  if (IS_SET(ch->comm,COMM_QUIET))
+  {
+    stc("Сперва выключи режим тишины(quiet).\n\r",ch);
+    return;
+  }
+  if (!IS_SET(ch->talk,talk_table[channel].bit))
+  {
+    stc("Этот канал у тебя выключен.\n\r",ch);
+    return;
+  }
+  if (channel!=CHAN_PTALK && channel!=CHAN_YELL && channel!=CHAN_GTELL && !IS_NPC(ch) && IS_SET(ch->act,PLR_ARMY))
+  {
+    stc("Разговорчики в строю!\n\r",ch);
+    return;
+  }
+  if (channel==CHAN_ALLI && (!ch->clan || IS_SET(ch->clan->flag, CLAN_LONER)))
+  {
+    stc("У тебя нет союзников.\n\r",ch);
+    return;
+  }
+  if (channel==CHAN_CLAN && (!ch->clan || IS_SET(ch->clan->flag, CLAN_LONER)))
+  {
+    stc("Ты не в клане.\n\r",ch);
+    return;
+  }
+  if (channel==CHAN_KAZAD && !GUILD(ch,DWARVES_GUILD))
+  {
+    stc("Ась?\n\r",ch);
+    return;
+  }
+  if (channel==CHAN_AVENGE && !GUILD(ch,ASSASIN_GUILD))
+  {
+    stc("Ась?\n\r",ch);
+    return;
+  }
+
+  ptc(ch,talk_table[channel].sstring,talk_table[channel].yourname ? get_char_desc(ch,'1'):"Ты",argument);
+  for ( victim=char_list;victim; victim=victim->next)
+  {
+    if (!victim->desc || victim->desc->connected!=CON_PLAYING) continue;
+    if (ch==victim) continue;
+    if (!IS_SET(victim->talk,talk_table[channel].bit)) continue;
+    if (is_affected(victim,skill_lookup("deaf"))) continue;
+    if (!IS_NPC(victim) && is_exact_name(ch->name,victim->pcdata->ignorelist)) continue;
+    switch (channel)
+    {
+      case CHAN_GTELL:
+       if (!is_same_group( ch, victim )) continue;
+       break;
+      case CHAN_YELL:
+       if (!ch->in_room || ch->in_room->area!=victim->in_room->area) continue;
+       break;
+      case CHAN_PTALK:
+       if (IS_NPC(victim) || !ch->pcdata->marry || str_cmp(ch->pcdata->marry,victim->name)) continue;
+       break;
+      case CHAN_ALLI:
+       if (!victim->clan || (!is_exact_name(ch->clan->name, victim->clan->alli)
+           && !is_same_clan(ch,victim))) continue;
+       break;
+      case CHAN_CLAN:
+       if (!is_same_clan(ch,victim) || ch==victim) continue;
+       break;
+      case CHAN_KAZAD:
+       if (!GUILD(victim,DWARVES_GUILD)) continue;
+       break;
+      case CHAN_AVENGE:
+       if (!GUILD(victim,ASSASIN_GUILD)) continue;
+       break;
+    }
+    smash_beep( (char*)argument,0 );
+    if (!victim->desc && (!IS_NPC(victim) && !IS_SET(victim->pcdata->comm_save,talk_table[channel].bit)))
+    {
+       //Replace Imm's name with it's pseudoname when use channels
+       if ( IS_IMMORTAL(ch) && !IS_IMMORTAL(victim) && ch->pcdata->pseudoname[0] != '\0' 
+            && channel != CHAN_CHAT )
+        {
+          do_printf(buf,talk_table[channel].string,ch->pcdata->pseudoname,argument);
+          add_buf(victim->pcdata->buffer,buf);
+        }
+       else
+       { 
+         do_printf(buf,talk_table[channel].string,get_char_desc(ch,'1'),argument);
+         add_buf(victim->pcdata->buffer,buf);
+       }
+    }
+     else if ( IS_IMMORTAL(ch) && !IS_IMMORTAL(victim)
+       && ch->pcdata->pseudoname && channel != CHAN_CHAT )
+       ptc(victim,talk_table[channel].string,ch->pcdata->pseudoname,argument);
+     else
+       ptc(victim,talk_table[channel].string,get_char_desc(ch,'1'),argument);
+  }
+}
 
 void do_yell( CHAR_DATA *ch, const char *argument )
 {
@@ -349,6 +455,80 @@ void do_say( CHAR_DATA *ch, const char *argument )
     else if (IS_IMMORTAL(ch) && !IS_IMMORTAL(wch) && !EMPTY(ch->pcdata->pseudoname))
          ptc(wch,"%s произносит '{G%s{x'\n\r",can_see(ch, wch, CHECK_LVL)?ch->pcdata->pseudoname:"Некто",argument);
     else act_new("$n произносит '{G$t{x'",ch,argument,wch,TO_VICT,POS_RESTING);
+  }
+}
+
+void tell(CHAR_DATA *ch,CHAR_DATA *victim, const char *argument)
+{
+  char buf[MAX_STRING_LENGTH];
+
+  if (!IS_IMMORTAL(ch) && ch->in_room->area!=victim->in_room->area &&
+     (IS_SET(victim->act,PLR_ARMY) || IS_SET(ch->act,PLR_ARMY)))
+  {
+    stc( "Гражданские могут общаться с солдатами только в комнате свиданий.\n\r",ch);
+    return;
+  }
+
+  if (IS_SET(ch->act,PLR_TIPSY)) tipsy2(ch,"chat", (char*)argument);
+  smash_beep( (char*)argument,0 );
+
+  if ( victim->desc == NULL && !IS_NPC(victim))
+  {
+    act("{y$N{x, похоже, потерял$R связь...попробуй позже.",ch,NULL,victim,TO_CHAR);
+    do_printf(buf,"{y%s{x говоpит тебе '{G%s{x'\n\r",PERS(ch,victim),argument);
+    buf[0] = UPPER(buf[0]);
+    add_buf(victim->pcdata->buffer,buf);
+    return;
+  }
+
+  if (!IS_AWAKE(victim) && !IS_IMMORTAL(ch) && !IS_IMMORTAL(victim))
+  {
+    act( "$O не слышит тебя.", ch, 0, victim, TO_CHAR );
+    return;
+  }
+
+  if (is_affected(victim,skill_lookup("deaf")) && !IS_IMMORTAL(ch))
+  {
+    act( "$O не слышит тебя.", ch, 0, victim, TO_CHAR );
+    return;
+  }
+  
+  if (IS_SET(victim->comm,COMM_QUIET) && !IS_IMMORTAL(ch))
+  {
+    act( "$O не слышит разговоров.", ch, 0, victim, TO_CHAR );
+    return;
+  }
+
+  if (IS_SET(victim->comm,COMM_AFK))
+  {
+    if (IS_NPC(victim))
+    {
+      act("$O в AFK режиме, и не слышит разговоров.",ch,NULL,victim,TO_CHAR);
+      return;
+    }
+    act("$O в AFK режиме, но $O прочитает твое сообщение, когда вернется.",
+            ch,NULL,victim,TO_CHAR);
+    do_printf(buf,"%s говоpит тебе '{G%s{x'\n\r",PERS(ch,victim),argument);
+    buf[0] = UPPER(buf[0]);
+    add_buf(victim->pcdata->buffer,buf);
+    return;
+  }
+  act_new("Ты говоpишь $N '{G$t{x'", ch,argument,victim,TO_CHAR,POS_DEAD);
+
+  if (IS_IMMORTAL(victim) && is_exact_name(ch->name,victim->pcdata->ignorelist)) return;
+  else
+  {
+    //Replace Imm's name with it's pseudoname when tell
+    if (IS_IMMORTAL(ch) && !IS_IMMORTAL(victim) && ch->pcdata->pseudoname)
+    { 
+      ptc(victim,"%s говоpит тебе '{G%s{x'\n\r",ch->pcdata->pseudoname,argument);
+      victim->reply = ch;
+    }
+    else 
+    {
+      act_new("$n говоpит тебе '{G$t{x'",ch,argument,victim,TO_VICT,POS_DEAD);
+      victim->reply       = ch;
+    }
   }
 }
 
@@ -778,31 +958,6 @@ void talk_auction (char *argument)
   }
 }
 
-void do_gsocial( CHAR_DATA *ch, const char *argument )
-{
-  char command[MAX_INPUT_LENGTH];
-
-  if (!*argument)
-  {
-    stc("{YСинтаксис:{x gsocial <social>\n\r",ch);
-    return;
-  }
-  if(!IS_SET(ch->talk,CBIT_GSOCIAL))
-  {
-    stc("Глобальные социалы выключены.\n\r",ch);
-    return;
-  }
-  if(IS_SET(ch->comm,COMM_NOGSOC))
-  {
-    stc("{RБоги запретили тебе глобально выражаться и сувать магические дули. :)).\n\r",ch);
-    return;
-  }
-  if (IS_SET(ch->act,PLR_TIPSY)) if (tipsy(ch,"social")) return;
-
-  argument=one_argument( argument, command );
-  check_gsocial( ch,command,argument );
-}
-
 void check_gsocial( CHAR_DATA *ch, char *command, const char *argument )
 {
   char buf[MAX_STRING_LENGTH];
@@ -899,6 +1054,32 @@ void check_gsocial( CHAR_DATA *ch, char *command, const char *argument )
     }
   }
 }
+
+void do_gsocial( CHAR_DATA *ch, const char *argument )
+{
+  char command[MAX_INPUT_LENGTH];
+
+  if (!*argument)
+  {
+    stc("{YСинтаксис:{x gsocial <social>\n\r",ch);
+    return;
+  }
+  if(!IS_SET(ch->talk,CBIT_GSOCIAL))
+  {
+    stc("Глобальные социалы выключены.\n\r",ch);
+    return;
+  }
+  if(IS_SET(ch->comm,COMM_NOGSOC))
+  {
+    stc("{RБоги запретили тебе глобально выражаться и сувать магические дули. :)).\n\r",ch);
+    return;
+  }
+  if (IS_SET(ch->act,PLR_TIPSY)) if (tipsy(ch,"social")) return;
+
+  argument=one_argument( argument, command );
+  check_gsocial( ch,command,argument );
+}
+
 
 // New version of act with Spam protection. (C) Saboteur
 void do_act( const char *format, CHAR_DATA *ch, const void *arg1,
@@ -1065,191 +1246,7 @@ void do_act( const char *format, CHAR_DATA *ch, const void *arg1,
 }
 
 
-void talk( CHAR_DATA *ch, const char *argument, int channel )
-{
-  CHAR_DATA *victim;
-  char buf[MAX_STRING_LENGTH];
 
-  if (EMPTY(argument)) return;
-  if (!talk_table[channel].npc && IS_NPC(ch)) return;
-  if (IS_SET(ch->act,PLR_TIPSY)) tipsy2(ch,"chat", (char*)argument); 
-
-  if (ch->level < talk_table[channel].level && ch->remort==0)
-  {
-    stc("Ты слишком мал. Используй комманду {WNEWBIECHAT{x.\n\r",ch);
-    return;
-  }
-  if ( channel!=CHAN_CLAN && IS_SET(ch->comm,COMM_NOCHANNELS))
-  {
-    stc("Боги запрещают тебе пользоваться каналами.\n\r",ch);
-    return;
-  }
-  if (IS_SET(ch->comm,COMM_QUIET))
-  {
-    stc("Сперва выключи режим тишины(quiet).\n\r",ch);
-    return;
-  }
-  if (!IS_SET(ch->talk,talk_table[channel].bit))
-  {
-    stc("Этот канал у тебя выключен.\n\r",ch);
-    return;
-  }
-  if (channel!=CHAN_PTALK && channel!=CHAN_YELL && channel!=CHAN_GTELL && !IS_NPC(ch) && IS_SET(ch->act,PLR_ARMY))
-  {
-    stc("Разговорчики в строю!\n\r",ch);
-    return;
-  }
-  if (channel==CHAN_ALLI && (!ch->clan || IS_SET(ch->clan->flag, CLAN_LONER)))
-  {
-    stc("У тебя нет союзников.\n\r",ch);
-    return;
-  }
-  if (channel==CHAN_CLAN && (!ch->clan || IS_SET(ch->clan->flag, CLAN_LONER)))
-  {
-    stc("Ты не в клане.\n\r",ch);
-    return;
-  }
-  if (channel==CHAN_KAZAD && !GUILD(ch,DWARVES_GUILD))
-  {
-    stc("Ась?\n\r",ch);
-    return;
-  }
-  if (channel==CHAN_AVENGE && !GUILD(ch,ASSASIN_GUILD))
-  {
-    stc("Ась?\n\r",ch);
-    return;
-  }
-
-  ptc(ch,talk_table[channel].sstring,talk_table[channel].yourname ? get_char_desc(ch,'1'):"Ты",argument);
-  for ( victim=char_list;victim; victim=victim->next)
-  {
-    if (!victim->desc || victim->desc->connected!=CON_PLAYING) continue;
-    if (ch==victim) continue;
-    if (!IS_SET(victim->talk,talk_table[channel].bit)) continue;
-    if (is_affected(victim,skill_lookup("deaf"))) continue;
-    if (!IS_NPC(victim) && is_exact_name(ch->name,victim->pcdata->ignorelist)) continue;
-    switch (channel)
-    {
-      case CHAN_GTELL:
-       if (!is_same_group( ch, victim )) continue;
-       break;
-      case CHAN_YELL:
-       if (!ch->in_room || ch->in_room->area!=victim->in_room->area) continue;
-       break;
-      case CHAN_PTALK:
-       if (IS_NPC(victim) || !ch->pcdata->marry || str_cmp(ch->pcdata->marry,victim->name)) continue;
-       break;
-      case CHAN_ALLI:
-       if (!victim->clan || (!is_exact_name(ch->clan->name, victim->clan->alli)
-           && !is_same_clan(ch,victim))) continue;
-       break;
-      case CHAN_CLAN:
-       if (!is_same_clan(ch,victim) || ch==victim) continue;
-       break;
-      case CHAN_KAZAD:
-       if (!GUILD(victim,DWARVES_GUILD)) continue;
-       break;
-      case CHAN_AVENGE:
-       if (!GUILD(victim,ASSASIN_GUILD)) continue;
-       break;
-    }
-    smash_beep( (char*)argument,0 );
-    if (!victim->desc && (!IS_NPC(victim) && !IS_SET(victim->pcdata->comm_save,talk_table[channel].bit)))
-    {
-       //Replace Imm's name with it's pseudoname when use channels
-       if ( IS_IMMORTAL(ch) && !IS_IMMORTAL(victim) && ch->pcdata->pseudoname[0] != '\0' 
-            && channel != CHAN_CHAT )
-        {
-          do_printf(buf,talk_table[channel].string,ch->pcdata->pseudoname,argument);
-          add_buf(victim->pcdata->buffer,buf);
-        }
-       else
-       { 
-         do_printf(buf,talk_table[channel].string,get_char_desc(ch,'1'),argument);
-         add_buf(victim->pcdata->buffer,buf);
-       }
-    }
-     else if ( IS_IMMORTAL(ch) && !IS_IMMORTAL(victim)
-       && ch->pcdata->pseudoname && channel != CHAN_CHAT )
-       ptc(victim,talk_table[channel].string,ch->pcdata->pseudoname,argument);
-     else
-       ptc(victim,talk_table[channel].string,get_char_desc(ch,'1'),argument);
-  }
-}
-
-void tell(CHAR_DATA *ch,CHAR_DATA *victim, const char *argument)
-{
-  char buf[MAX_STRING_LENGTH];
-
-  if (!IS_IMMORTAL(ch) && ch->in_room->area!=victim->in_room->area &&
-     (IS_SET(victim->act,PLR_ARMY) || IS_SET(ch->act,PLR_ARMY)))
-  {
-    stc( "Гражданские могут общаться с солдатами только в комнате свиданий.\n\r",ch);
-    return;
-  }
-
-  if (IS_SET(ch->act,PLR_TIPSY)) tipsy2(ch,"chat", (char*)argument);
-  smash_beep( (char*)argument,0 );
-
-  if ( victim->desc == NULL && !IS_NPC(victim))
-  {
-    act("{y$N{x, похоже, потерял$R связь...попробуй позже.",ch,NULL,victim,TO_CHAR);
-    do_printf(buf,"{y%s{x говоpит тебе '{G%s{x'\n\r",PERS(ch,victim),argument);
-    buf[0] = UPPER(buf[0]);
-    add_buf(victim->pcdata->buffer,buf);
-    return;
-  }
-
-  if (!IS_AWAKE(victim) && !IS_IMMORTAL(ch) && !IS_IMMORTAL(victim))
-  {
-    act( "$O не слышит тебя.", ch, 0, victim, TO_CHAR );
-    return;
-  }
-
-  if (is_affected(victim,skill_lookup("deaf")) && !IS_IMMORTAL(ch))
-  {
-    act( "$O не слышит тебя.", ch, 0, victim, TO_CHAR );
-    return;
-  }
-  
-  if (IS_SET(victim->comm,COMM_QUIET) && !IS_IMMORTAL(ch))
-  {
-    act( "$O не слышит разговоров.", ch, 0, victim, TO_CHAR );
-    return;
-  }
-
-  if (IS_SET(victim->comm,COMM_AFK))
-  {
-    if (IS_NPC(victim))
-    {
-      act("$O в AFK режиме, и не слышит разговоров.",ch,NULL,victim,TO_CHAR);
-      return;
-    }
-    act("$O в AFK режиме, но $O прочитает твое сообщение, когда вернется.",
-            ch,NULL,victim,TO_CHAR);
-    do_printf(buf,"%s говоpит тебе '{G%s{x'\n\r",PERS(ch,victim),argument);
-    buf[0] = UPPER(buf[0]);
-    add_buf(victim->pcdata->buffer,buf);
-    return;
-  }
-  act_new("Ты говоpишь $N '{G$t{x'", ch,argument,victim,TO_CHAR,POS_DEAD);
-
-  if (IS_IMMORTAL(victim) && is_exact_name(ch->name,victim->pcdata->ignorelist)) return;
-  else
-  {
-    //Replace Imm's name with it's pseudoname when tell
-    if (IS_IMMORTAL(ch) && !IS_IMMORTAL(victim) && ch->pcdata->pseudoname)
-    { 
-      ptc(victim,"%s говоpит тебе '{G%s{x'\n\r",ch->pcdata->pseudoname,argument);
-      victim->reply = ch;
-    }
-    else 
-    {
-      act_new("$n говоpит тебе '{G$t{x'",ch,argument,victim,TO_VICT,POS_DEAD);
-      victim->reply       = ch;
-    }
-  }
-}
 
 void do_delete( CHAR_DATA *ch, const char *argument)
 {

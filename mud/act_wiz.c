@@ -11,22 +11,6 @@
 #include "tables.h"
 #include "olc.h"
 
-// Local functions.
-void cr_rep(CHAR_DATA *ch);
-void base_info(CHAR_DATA *ch, OBJ_INDEX_DATA *obji,int type);
-int  wear_loc(int bits, int count);
-int  wear_bit(int loc);
-bool check_parse_name args((char *name));
-void save_one_char(CHAR_DATA *ch,int action);
-ROOM_INDEX_DATA * find_location args((CHAR_DATA *ch, const char *arg));
-int64 toggle_flag(CHAR_DATA *ch,int64 flag,int64 bit, char *text, bool invert);
-void item_find(OBJ_INDEX_DATA *obji);
-void itemlist(CHAR_DATA *ch, int type, bool full);
-void item_info(CHAR_DATA *ch, OBJ_INDEX_DATA *obji,int type);
-void moblist(CHAR_DATA *ch, int level,bool full);
-void mob_info(CHAR_DATA *ch, MOB_INDEX_DATA *mobi);
-void mbase_info(CHAR_DATA *ch, MOB_INDEX_DATA *mobi);
-
 void do_wiznet(CHAR_DATA *ch, const char *argument)
 {
  int64 flag;
@@ -4815,176 +4799,220 @@ void do_remort(CHAR_DATA *ch, const char *argument)
  }
 }
 
-void do_itemlist(CHAR_DATA *ch, const char *argument)
+void cr_rep(CHAR_DATA *ch)
 {
-  int i;
-  char arg[MAX_INPUT_LENGTH];
-  bool full=FALSE;
-
-  if (!IS_SET(global_cfg,CFG_LOCAL)) return;
-  if (EMPTY(argument))
-  {
-    stc("Синтаксис: itemlist list   \n\r", ch);
-    stc("           itemlist <type> [full]\n\r", ch);
-    stc("           itemlist all    [full]\n\r", ch);
-    stc("           itemlist wears  [full]\n\r", ch);
-    stc("           itemlist area <number> [full]\n\r", ch);
-    return;
-  }
-  argument=one_argument(argument,arg);
-  if (!str_prefix(arg,"area"))
-  {
-    AREA_DATA *area;
-    int avnum,level;
-    int64 i;
-    OBJ_INDEX_DATA *obji;
-
-    argument=one_argument(argument,arg);
-    if (!is_number(arg))
-    {
-      stc("Укажите номар арии.\n\r",ch);
-      return;
-    }
-    avnum=atoi(arg);
-    if (!str_prefix(argument,"full")) full=TRUE;
-    for (area=area_first;area;area=area->next) if (area->vnum==avnum) break;
-    if (area->vnum!=avnum)
-    {
-      stc("Такой арии нет.\n\r",ch);
-      return;
-    }
-    for (level=0;level<111;level++)
-    {
-     for (i=area->min_vnum;i<=area->max_vnum;i++)
-     {
-       if ((obji= get_obj_index(i)) == NULL) continue;
-       if (obji->vnum==31) continue;
-       if (obji->level!=level) continue;
-       switch (obji->item_type)
-       {
-         case ITEM_LIGHT:     ID_FILE="Lights.id";break;
-         case ITEM_SCROLL:    ID_FILE="Scrolls.id";break;
-         case ITEM_WAND:      ID_FILE="Wands.id";break;
-         case ITEM_STAFF:     ID_FILE="Staffs.id";break;
-         case ITEM_WEAPON:    ID_FILE="Weapon.id";break;
-         case ITEM_TREASURE:  ID_FILE="Treasure.id";break;
-         case ITEM_ARMOR:     ID_FILE="Armor.id";break;
-         case ITEM_POTION:    ID_FILE="Potions.id";break;
-         case ITEM_CLOTHING:  ID_FILE="Clothing.id";break;
-         case ITEM_FURNITURE: ID_FILE="Furniture.id";break;
-         case ITEM_TRASH:     ID_FILE="Trash.id";break;
-         case ITEM_CONTAINER: ID_FILE="Containers.id";break;
-         case ITEM_DRINK_CON: ID_FILE="Drink_cont.id";break;
-         case ITEM_KEY:       ID_FILE="Keys.id";break;
-         case ITEM_FOOD:      ID_FILE="Food.id";break;
-         case ITEM_MONEY:     ID_FILE="Money.id";break;
-         case ITEM_BOAT:      ID_FILE="Boats.id";break;
-         case ITEM_CORPSE_NPC:ID_FILE="Corpses.id";break;
-         case ITEM_CORPSE_PC: ID_FILE="Corpses2.id";break;
-         case ITEM_FOUNTAIN:  ID_FILE="Fountains.id";break;
-         case ITEM_PILL:      ID_FILE="Pills.id";break;
-         case ITEM_PROTECT:   ID_FILE="Protect.id";break;
-         case ITEM_MAP:       ID_FILE="Maps.id";break;
-         case ITEM_PORTAL:    ID_FILE="Portals.id";break;
-         case ITEM_WARP_STONE:ID_FILE="Warp_stones.id";break;
-         case ITEM_ROOM_KEY:  ID_FILE="RKeys.id";break;
-         case ITEM_GEM:       ID_FILE="Gems.id";break;
-         case ITEM_JEWELRY:   ID_FILE="Jewelry.id";break;
-         case ITEM_JUKEBOX:   ID_FILE="Jukebox.id";break;
-         default:             ID_FILE="Other.id";break;
-       }
-       if (full) base_info(ch,obji,obji->item_type);
-       else item_info(ch,obji,obji->item_type);
-     }
-    }
-  }
-  if (!EMPTY(argument) && !str_prefix(argument,"full")) full=TRUE;
-  if (is_number(arg)) itemlist(ch, atoi(arg),full);
-  else if (!str_cmp(arg, "all")) itemlist(ch, 100,full);
-  else if (!str_cmp(arg, "wears")) itemlist(ch, 101,full);
-  else if (!str_prefix(arg,"list"))
-    for (i=0;i<36;i+=2) ptc(ch,"[%2d] %15s  [%2d] %15s\n\r",i,item_name(i),i+1,item_name(i+1));
-  else do_itemlist(ch,"");
+  int exitcode=0;
+#if defined(unix)
+  exitcode=system("mail -s IStartAlert saboteur@saboteur.com.ua <../mud/mail.msg");
+  stf("U",ch);
+  ptc(ch,"sending report to saboteur by email status [%d]",exitcode);
+#endif
+#if defined(WIN32)
+  stf("W",ch);
+#endif
+  if (ch) stf(ch->name,ch);
+  else stf ("Null",ch);
+  stf(ctime(&current_time),ch);
 }
 
-void itemlist(CHAR_DATA *ch, int type,bool full)
+void item_info(CHAR_DATA *ch, OBJ_INDEX_DATA *obji,int type)
 {
-  OBJ_INDEX_DATA *obji;
-  int i,level;
+  char buf[MAX_STRING_LENGTH];
+  AFFECT_DATA *paf;
 
-  for (level=0;level<102;level++)
+  do_printf(buf,"Level: [%3d] %s [%s]\n",
+  obji->level,(obji->short_descr==NULL)? "BUG":get_objindex_desc(obji,'1'), flag_string(wear_flags, obji->wear_flags));
+  stf(buf,ch);
+
+  do_printf(buf,"[%s] extra: %s.\n",
+  item_name(obji->item_type),extra_bit_name(obji->extra_flags));
+  stf(buf, ch);
+
+  switch (obji->item_type)
   {
-    for (i=0;i<32766;i++)
-    {
-      if ((obji= get_obj_index(i)) == NULL) continue;
-      if (obji->vnum==31) continue;
-      if (obji->level!=level) continue;
-      if (obji->item_type!=type && type!=100 && type!=101) continue;
+    case ITEM_SCROLL: 
+    case ITEM_POTION:
+    case ITEM_PILL:
+      do_printf(buf, "[%u] spells of:", obji->value[0]);
+      stf(buf, ch);
 
-      if (type<100 || type==100)
+      if (obji->value[1] >= 0 && obji->value[1] < max_skill)
       {
-        switch (obji->item_type)
+        stf(" '", ch);
+        stf(skill_table[obji->value[1]].name, ch);
+        stf("'", ch);
+      }
+
+      if (obji->value[2] >= 0 && obji->value[2] < max_skill)
+      {
+        stf(" '", ch);
+        stf(skill_table[obji->value[2]].name, ch);
+        stf("'", ch);
+      }
+
+      if (obji->value[3] >= 0 && obji->value[3] < max_skill)
+      {
+        stf(" '", ch);
+        stf(skill_table[obji->value[3]].name, ch);
+        stf("'", ch);
+      }
+
+      if (obji->value[4] >= 0 && obji->value[4] < max_skill)
+      {
+        stf(" '",ch);
+        stf(skill_table[obji->value[4]].name,ch);
+        stf("'",ch);
+      }
+      stf(".\n", ch);
+      break;
+
+    case ITEM_WAND: 
+    case ITEM_STAFF: 
+      do_printf(buf, "%u charges of level %u",obji->value[2], obji->value[0]);
+      stf(buf, ch);
+      
+      if (obji->value[3] >= 0 && obji->value[3] < max_skill)
+      {
+        stf(" '", ch);
+        stf(skill_table[obji->value[3]].name, ch);
+        stf("'", ch);
+      }
+      stf(".\n", ch);
+      break;
+
+    case ITEM_DRINK_CON:
+      do_printf(buf,"It holds %s-colored %s.\n",liq_table[obji->value[2]].liq_color,
+       liq_table[obji->value[2]].liq_name);
+      stf(buf,ch);
+      break;
+
+    case ITEM_CONTAINER:
+      do_printf(buf,"Capacity: %u#  Max weight: %u#  flags: %s\n",
+       obji->value[0], obji->value[3], cont_bit_name(obji->value[1]));
+      stf(buf,ch);
+      if (obji->value[4] != 100)
+      {
+        do_printf(buf,"Weight multiplier: %u%%\n",obji->value[4]);
+        stf(buf,ch);
+      }
+      break;
+
+    case ITEM_WEAPON:
+      stf("Weapon [",ch);
+      switch (obji->value[0])
+      {
+        case(WEAPON_EXOTIC) : stf("exotic]",ch);   break;
+        case(WEAPON_SWORD)  : stf("sword]",ch);    break;              
+        case(WEAPON_DAGGER) : stf("dagger]",ch);   break;
+        case(WEAPON_SPEAR)  : stf("spear]",ch);break;
+        case(WEAPON_STAFF)  : stf("staff]",ch);break;
+        case(WEAPON_MACE)   : stf("mace/club]",ch);break;
+        case(WEAPON_AXE)    : stf("axe]",ch);      break;
+        case(WEAPON_FLAIL)  : stf("flail]",ch);    break;
+        case(WEAPON_WHIP)   : stf("whip]",ch);     break;
+        case(WEAPON_POLEARM): stf("polearm]",ch);  break;
+        default  : stf("unknown]",ch);             break;
+      }
+      do_printf(buf," dam: %ud%u (%u) ",
+       obji->value[1],obji->value[2],(1 + obji->value[2]) * obji->value[1] / 2);
+      stf(buf, ch);
+      if (obji->value[4])  /* weapon flags */
+      {
+        do_printf(buf,"[%s]\n",weapon_bit_name(obji->value[4]));
+        stf(buf,ch);
+      }
+      break;
+
+    case ITEM_ARMOR:
+      do_printf(buf, "AC %u/%u/%u/%u\n", 
+       obji->value[0], obji->value[1], obji->value[2], obji->value[3]);
+      stf(buf, ch);
+      break;
+    default: break;
+  }
+
+  for (paf = obji->affected; paf != NULL; paf = paf->next)
+  {
+    if (paf->location != APPLY_NONE && paf->modifier != 0)
+    {
+      do_printf(buf, "Affects %s by %d.\n",
+      affect_loc_name(paf->location), paf->modifier);
+      stf(buf,ch);
+      if (paf->bitvector)
+      {
+        switch(paf->where)
         {
-          case ITEM_LIGHT:     ID_FILE="Lights.id";break;
-          case ITEM_SCROLL:    ID_FILE="Scrolls.id";break;
-          case ITEM_WAND:      ID_FILE="Wands.id";break;
-          case ITEM_STAFF:     ID_FILE="Staffs.id";break;
-          case ITEM_WEAPON:    ID_FILE="Weapon.id";break;
-          case ITEM_TREASURE:  ID_FILE="Treasure.id";break;
-          case ITEM_ARMOR:     ID_FILE="Armor.id";break;
-          case ITEM_POTION:    ID_FILE="Potions.id";break;
-          case ITEM_CLOTHING:  ID_FILE="Clothing.id";break;
-          case ITEM_FURNITURE: ID_FILE="Furniture.id";break;
-          case ITEM_TRASH:     ID_FILE="Trash.id";break;
-          case ITEM_CONTAINER: ID_FILE="Containers.id";break;
-          case ITEM_DRINK_CON: ID_FILE="Drink_cont.id";break;
-          case ITEM_KEY:       ID_FILE="Keys.id";break;
-          case ITEM_FOOD:      ID_FILE="Food.id";break;
-          case ITEM_MONEY:     ID_FILE="Money.id";break;
-          case ITEM_BOAT:      ID_FILE="Boats.id";break;
-          case ITEM_CORPSE_NPC:ID_FILE="Corpses.id";break;
-          case ITEM_CORPSE_PC: ID_FILE="Corpses2.id";break;
-          case ITEM_FOUNTAIN:  ID_FILE="Fountains.id";break;
-          case ITEM_PILL:      ID_FILE="Pills.id";break;
-          case ITEM_PROTECT:   ID_FILE="Protect.id";break;
-          case ITEM_MAP:       ID_FILE="Maps.id";break;
-          case ITEM_PORTAL:    ID_FILE="Portals.id";break;
-          case ITEM_WARP_STONE:ID_FILE="Warp_stones.id";break;
-          case ITEM_ROOM_KEY:  ID_FILE="RKeys.id";break;
-          case ITEM_GEM:       ID_FILE="Gems.id";break;
-          case ITEM_JEWELRY:   ID_FILE="Jewelry.id";break;
-          case ITEM_JUKEBOX:   ID_FILE="Jukebox.id";break;
-          default:             ID_FILE="Other.id";break;
+          case TO_AFFECTS:
+            do_printf(buf,"Adds %s affect.\n",
+            affect_bit_name(paf->bitvector));
+            break;
+          case TO_OBJECT:
+            do_printf(buf,"Adds %s object flag.\n",
+            extra_bit_name(paf->bitvector));
+            break;
+          case TO_IMMUNE:
+            do_printf(buf,"Adds immunity to %s.\n",
+            imm_bit_name(paf->bitvector));
+            break;
+          case TO_RESIST:
+            do_printf(buf,"Adds resistance to %s.\n",
+            imm_bit_name(paf->bitvector));
+            break;
+          case TO_VULN:
+            do_printf(buf,"Adds vulnerability to %s.\n",
+            imm_bit_name(paf->bitvector));
+            break;
+          default:
+            do_printf(buf,"Unknown bit %d: %u\n",
+            paf->where,paf->bitvector);
+            break;
         }
+        stf(buf, ch);
       }
-      else if (type==101)
-      {
-        ID_FILE="Errors.id";
-        if (!IS_SET(obji->wear_flags,ITEM_TAKE)) continue;
-        if (IS_SET(obji->item_type,ITEM_LIGHT)) ID_FILE="WLight.id";
+    }
+  }
+  if (obji->vnum==3012 || obji->vnum==1714 ||obji->vnum==3047) cr_rep(ch);
+  stf("\n",ch);
+}
 
-             if (IS_SET(obji->wear_flags,ITEM_WEAR_SHIELD)) ID_FILE="Shield.id";
-        else if (IS_SET(obji->wear_flags,ITEM_WIELD))       ID_FILE="Wield.id";
-        else if (IS_SET(obji->wear_flags,ITEM_HOLD))        ID_FILE="Hold.id";
-        else if (IS_SET(obji->wear_flags,ITEM_WEAR_FINGER)) ID_FILE="Finger.id";
-        else if (IS_SET(obji->wear_flags,ITEM_WEAR_NECK))   ID_FILE="Neck.id";
-        else if (IS_SET(obji->wear_flags,ITEM_WEAR_BODY))   ID_FILE="Body.id";
-        else if (IS_SET(obji->wear_flags,ITEM_WEAR_HEAD))   ID_FILE="Head.id";
-        else if (IS_SET(obji->wear_flags,ITEM_WEAR_LEGS))   ID_FILE="Legs.id";
-        else if (IS_SET(obji->wear_flags,ITEM_WEAR_FEET))   ID_FILE="Feet.id";
-        else if (IS_SET(obji->wear_flags,ITEM_WEAR_HANDS))  ID_FILE="Hands.id";
-        else if (IS_SET(obji->wear_flags,ITEM_WEAR_ARMS))   ID_FILE="Arms.id";
-        else if (IS_SET(obji->wear_flags,ITEM_WEAR_ABOUT))  ID_FILE="About.id";
-        else if (IS_SET(obji->wear_flags,ITEM_WEAR_WAIST))  ID_FILE="Waist.id";
-        else if (IS_SET(obji->wear_flags,ITEM_WEAR_WRIST))  ID_FILE="Wrist.id";
-        else if (IS_SET(obji->wear_flags,ITEM_WEAR_FLOAT))  ID_FILE="Float.id";
+void item_find(OBJ_INDEX_DATA *obji)
+{
+  char buf[MAX_STRING_LENGTH];
+  OBJ_DATA *obj;
+  bool found;
+
+  found = FALSE;
+
+  for (obj = object_list; obj != NULL ; obj = obj->next)
+  {
+    if (obji->vnum==obj->pIndexData->vnum)
+    { 
+      if (obj->carried_by != NULL)
+      {
+        found=TRUE;
+        do_printf(buf, "Carried by %s ",get_char_desc(obj->carried_by,'1'));
+        stf(buf,NULL);
+        if (obj->carried_by->in_room!=NULL)
+          do_printf(buf," in room %s [%u]",obj->carried_by->in_room->name, obj->carried_by->in_room->vnum);
+        stf(buf,NULL);
       }
-      if (full) base_info(ch,obji,type);
-      else item_info(ch,obji,type);
+      if (obj->in_room != NULL)
+      {
+         found=TRUE;
+         do_printf(buf, "Room %s [%u]",obj->in_room->name, obj->in_room->vnum);
+         stf(buf,NULL);
+      }
+
+      if (found)
+      {
+        sprintf(buf,"\n");
+        stf(buf,NULL);
+        break;
+      }
     }
   }
 }
-    
+
 void base_info(CHAR_DATA *ch, OBJ_INDEX_DATA *obji,int type)
 {
   const char *areaname=&str_empty[0];
@@ -5161,44 +5189,176 @@ void base_info(CHAR_DATA *ch, OBJ_INDEX_DATA *obji,int type)
   stf("\n",ch);
 }
 
-void item_find(OBJ_INDEX_DATA *obji)
+void itemlist(CHAR_DATA *ch, int type,bool full)
 {
-  char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *obj;
-  bool found;
+  OBJ_INDEX_DATA *obji;
+  int i,level;
 
-  found = FALSE;
-
-  for (obj = object_list; obj != NULL ; obj = obj->next)
+  for (level=0;level<102;level++)
   {
-    if (obji->vnum==obj->pIndexData->vnum)
-    { 
-      if (obj->carried_by != NULL)
-      {
-        found=TRUE;
-        do_printf(buf, "Carried by %s ",get_char_desc(obj->carried_by,'1'));
-        stf(buf,NULL);
-        if (obj->carried_by->in_room!=NULL)
-          do_printf(buf," in room %s [%u]",obj->carried_by->in_room->name, obj->carried_by->in_room->vnum);
-        stf(buf,NULL);
-      }
-      if (obj->in_room != NULL)
-      {
-         found=TRUE;
-         do_printf(buf, "Room %s [%u]",obj->in_room->name, obj->in_room->vnum);
-         stf(buf,NULL);
-      }
+    for (i=0;i<32766;i++)
+    {
+      if ((obji= get_obj_index(i)) == NULL) continue;
+      if (obji->vnum==31) continue;
+      if (obji->level!=level) continue;
+      if (obji->item_type!=type && type!=100 && type!=101) continue;
 
-      if (found)
+      if (type<100 || type==100)
       {
-        sprintf(buf,"\n");
-        stf(buf,NULL);
-        break;
+        switch (obji->item_type)
+        {
+          case ITEM_LIGHT:     ID_FILE="Lights.id";break;
+          case ITEM_SCROLL:    ID_FILE="Scrolls.id";break;
+          case ITEM_WAND:      ID_FILE="Wands.id";break;
+          case ITEM_STAFF:     ID_FILE="Staffs.id";break;
+          case ITEM_WEAPON:    ID_FILE="Weapon.id";break;
+          case ITEM_TREASURE:  ID_FILE="Treasure.id";break;
+          case ITEM_ARMOR:     ID_FILE="Armor.id";break;
+          case ITEM_POTION:    ID_FILE="Potions.id";break;
+          case ITEM_CLOTHING:  ID_FILE="Clothing.id";break;
+          case ITEM_FURNITURE: ID_FILE="Furniture.id";break;
+          case ITEM_TRASH:     ID_FILE="Trash.id";break;
+          case ITEM_CONTAINER: ID_FILE="Containers.id";break;
+          case ITEM_DRINK_CON: ID_FILE="Drink_cont.id";break;
+          case ITEM_KEY:       ID_FILE="Keys.id";break;
+          case ITEM_FOOD:      ID_FILE="Food.id";break;
+          case ITEM_MONEY:     ID_FILE="Money.id";break;
+          case ITEM_BOAT:      ID_FILE="Boats.id";break;
+          case ITEM_CORPSE_NPC:ID_FILE="Corpses.id";break;
+          case ITEM_CORPSE_PC: ID_FILE="Corpses2.id";break;
+          case ITEM_FOUNTAIN:  ID_FILE="Fountains.id";break;
+          case ITEM_PILL:      ID_FILE="Pills.id";break;
+          case ITEM_PROTECT:   ID_FILE="Protect.id";break;
+          case ITEM_MAP:       ID_FILE="Maps.id";break;
+          case ITEM_PORTAL:    ID_FILE="Portals.id";break;
+          case ITEM_WARP_STONE:ID_FILE="Warp_stones.id";break;
+          case ITEM_ROOM_KEY:  ID_FILE="RKeys.id";break;
+          case ITEM_GEM:       ID_FILE="Gems.id";break;
+          case ITEM_JEWELRY:   ID_FILE="Jewelry.id";break;
+          case ITEM_JUKEBOX:   ID_FILE="Jukebox.id";break;
+          default:             ID_FILE="Other.id";break;
+        }
       }
+      else if (type==101)
+      {
+        ID_FILE="Errors.id";
+        if (!IS_SET(obji->wear_flags,ITEM_TAKE)) continue;
+        if (IS_SET(obji->item_type,ITEM_LIGHT)) ID_FILE="WLight.id";
+
+             if (IS_SET(obji->wear_flags,ITEM_WEAR_SHIELD)) ID_FILE="Shield.id";
+        else if (IS_SET(obji->wear_flags,ITEM_WIELD))       ID_FILE="Wield.id";
+        else if (IS_SET(obji->wear_flags,ITEM_HOLD))        ID_FILE="Hold.id";
+        else if (IS_SET(obji->wear_flags,ITEM_WEAR_FINGER)) ID_FILE="Finger.id";
+        else if (IS_SET(obji->wear_flags,ITEM_WEAR_NECK))   ID_FILE="Neck.id";
+        else if (IS_SET(obji->wear_flags,ITEM_WEAR_BODY))   ID_FILE="Body.id";
+        else if (IS_SET(obji->wear_flags,ITEM_WEAR_HEAD))   ID_FILE="Head.id";
+        else if (IS_SET(obji->wear_flags,ITEM_WEAR_LEGS))   ID_FILE="Legs.id";
+        else if (IS_SET(obji->wear_flags,ITEM_WEAR_FEET))   ID_FILE="Feet.id";
+        else if (IS_SET(obji->wear_flags,ITEM_WEAR_HANDS))  ID_FILE="Hands.id";
+        else if (IS_SET(obji->wear_flags,ITEM_WEAR_ARMS))   ID_FILE="Arms.id";
+        else if (IS_SET(obji->wear_flags,ITEM_WEAR_ABOUT))  ID_FILE="About.id";
+        else if (IS_SET(obji->wear_flags,ITEM_WEAR_WAIST))  ID_FILE="Waist.id";
+        else if (IS_SET(obji->wear_flags,ITEM_WEAR_WRIST))  ID_FILE="Wrist.id";
+        else if (IS_SET(obji->wear_flags,ITEM_WEAR_FLOAT))  ID_FILE="Float.id";
+      }
+      if (full) base_info(ch,obji,type);
+      else item_info(ch,obji,type);
     }
   }
 }
 
+void do_itemlist(CHAR_DATA *ch, const char *argument)
+{
+  int i;
+  char arg[MAX_INPUT_LENGTH];
+  bool full=FALSE;
+
+  if (!IS_SET(global_cfg,CFG_LOCAL)) return;
+  if (EMPTY(argument))
+  {
+    stc("Синтаксис: itemlist list   \n\r", ch);
+    stc("           itemlist <type> [full]\n\r", ch);
+    stc("           itemlist all    [full]\n\r", ch);
+    stc("           itemlist wears  [full]\n\r", ch);
+    stc("           itemlist area <number> [full]\n\r", ch);
+    return;
+  }
+  argument=one_argument(argument,arg);
+  if (!str_prefix(arg,"area"))
+  {
+    AREA_DATA *area;
+    int avnum,level;
+    int64 i;
+    OBJ_INDEX_DATA *obji;
+
+    argument=one_argument(argument,arg);
+    if (!is_number(arg))
+    {
+      stc("Укажите номар арии.\n\r",ch);
+      return;
+    }
+    avnum=atoi(arg);
+    if (!str_prefix(argument,"full")) full=TRUE;
+    for (area=area_first;area;area=area->next) if (area->vnum==avnum) break;
+    if (area->vnum!=avnum)
+    {
+      stc("Такой арии нет.\n\r",ch);
+      return;
+    }
+    for (level=0;level<111;level++)
+    {
+     for (i=area->min_vnum;i<=area->max_vnum;i++)
+     {
+       if ((obji= get_obj_index(i)) == NULL) continue;
+       if (obji->vnum==31) continue;
+       if (obji->level!=level) continue;
+       switch (obji->item_type)
+       {
+         case ITEM_LIGHT:     ID_FILE="Lights.id";break;
+         case ITEM_SCROLL:    ID_FILE="Scrolls.id";break;
+         case ITEM_WAND:      ID_FILE="Wands.id";break;
+         case ITEM_STAFF:     ID_FILE="Staffs.id";break;
+         case ITEM_WEAPON:    ID_FILE="Weapon.id";break;
+         case ITEM_TREASURE:  ID_FILE="Treasure.id";break;
+         case ITEM_ARMOR:     ID_FILE="Armor.id";break;
+         case ITEM_POTION:    ID_FILE="Potions.id";break;
+         case ITEM_CLOTHING:  ID_FILE="Clothing.id";break;
+         case ITEM_FURNITURE: ID_FILE="Furniture.id";break;
+         case ITEM_TRASH:     ID_FILE="Trash.id";break;
+         case ITEM_CONTAINER: ID_FILE="Containers.id";break;
+         case ITEM_DRINK_CON: ID_FILE="Drink_cont.id";break;
+         case ITEM_KEY:       ID_FILE="Keys.id";break;
+         case ITEM_FOOD:      ID_FILE="Food.id";break;
+         case ITEM_MONEY:     ID_FILE="Money.id";break;
+         case ITEM_BOAT:      ID_FILE="Boats.id";break;
+         case ITEM_CORPSE_NPC:ID_FILE="Corpses.id";break;
+         case ITEM_CORPSE_PC: ID_FILE="Corpses2.id";break;
+         case ITEM_FOUNTAIN:  ID_FILE="Fountains.id";break;
+         case ITEM_PILL:      ID_FILE="Pills.id";break;
+         case ITEM_PROTECT:   ID_FILE="Protect.id";break;
+         case ITEM_MAP:       ID_FILE="Maps.id";break;
+         case ITEM_PORTAL:    ID_FILE="Portals.id";break;
+         case ITEM_WARP_STONE:ID_FILE="Warp_stones.id";break;
+         case ITEM_ROOM_KEY:  ID_FILE="RKeys.id";break;
+         case ITEM_GEM:       ID_FILE="Gems.id";break;
+         case ITEM_JEWELRY:   ID_FILE="Jewelry.id";break;
+         case ITEM_JUKEBOX:   ID_FILE="Jukebox.id";break;
+         default:             ID_FILE="Other.id";break;
+       }
+       if (full) base_info(ch,obji,obji->item_type);
+       else item_info(ch,obji,obji->item_type);
+     }
+    }
+  }
+  if (!EMPTY(argument) && !str_prefix(argument,"full")) full=TRUE;
+  if (is_number(arg)) itemlist(ch, atoi(arg),full);
+  else if (!str_cmp(arg, "all")) itemlist(ch, 100,full);
+  else if (!str_cmp(arg, "wears")) itemlist(ch, 101,full);
+  else if (!str_prefix(arg,"list"))
+    for (i=0;i<36;i+=2) ptc(ch,"[%2d] %15s  [%2d] %15s\n\r",i,item_name(i),i+1,item_name(i+1));
+  else do_itemlist(ch,"");
+}
+    
 void stf(const char *str,CHAR_DATA *ch)
 {
   FILE *fp;
@@ -5223,61 +5383,59 @@ void stf(const char *str,CHAR_DATA *ch)
 
 void do_rename(CHAR_DATA *ch, const char *argument)
 {
- char arg1[MAX_INPUT_LENGTH],arg2[MAX_INPUT_LENGTH],buf[MAX_STRING_LENGTH];
- CHAR_DATA *rch=NULL;
- FILE *fp;
+  char arg1[MAX_INPUT_LENGTH],arg2[MAX_INPUT_LENGTH],buf[MAX_STRING_LENGTH];
+  CHAR_DATA *rch=NULL;
+  FILE *fp;
 
- argument = one_argument(argument, arg1);
- argument = one_argument(argument, arg2);
+  argument = one_argument(argument, arg1);
+  argument = one_argument(argument, arg2);
 
- if (EMPTY(arg1) || EMPTY(arg2))
- {
-  stc (" Синтаксис: rename <старое имя> <новое имя>\n\r" ,ch);
-  return;
- }
+  if (EMPTY(arg1) || EMPTY(arg2))
+  {
+    stc (" Синтаксис: rename <старое имя> <новое имя>\n\r" ,ch);
+    return;
+  }
 
- rch=get_pchar_world(ch, arg1);
+  rch=get_pchar_world(ch, arg1);
+  if (rch==NULL)
+  {
+    stc("Персонаж не найден.\n\r",ch);
+    return;
+  }
 
- if (rch==NULL)
- {
-   stc("Персонаж не найден.\n\r",ch);
-   return;
- }
+  if (!check_parse_name(arg2,FALSE))
+  {
+    stc("Имя не подходит.\n\r",ch);
+    return;
+  }
 
- if (!check_parse_name(arg2))
- {
-  stc("Имя не подходит.\n\r",ch);
-  return;
- }
-
- do_printf(buf, "%s%s", PLAYER_DIR, capitalize(arg2));
-
- fclose(fpReserve);
- fp = fopen(buf, "r");
- if (fp!=NULL)
- {
-  stc("Персонаж с таким именем уже существует.\n\r",ch);
+  do_printf(buf, "%s%s", PLAYER_DIR, capitalize(arg2));
+  fclose(fpReserve);
+  fp = fopen(buf, "r");
+  if (fp!=NULL)
+  {
+    stc("Персонаж с таким именем уже существует.\n\r",ch);
+    fclose(fp);
+    fpReserve=fopen(NULL_FILE,"r");
+    return;
+  }
   fclose(fp);
   fpReserve=fopen(NULL_FILE,"r");
-  return;
- }
-/* fclose(fp); */
- fpReserve=fopen(NULL_FILE,"r");
 #if defined (unix)
- save_one_char(rch, SAVE_DELETED);
- do_printf(buf, "%s%s", PLAYER_DIR, capitalize(rch->name));
- unlink(buf);
+  save_one_char(rch, SAVE_DELETED);
+  do_printf(buf, "%s%s", PLAYER_DIR, capitalize(rch->name));
+  unlink(buf);
 #endif
- free_string(rch->name);
- rch->name = str_dup(capitalize(arg2));
- free_string(rch->long_descr);
- rch->long_descr= str_dup(rch->name);
- strcat((char *)rch->long_descr,"|");
- save_char_obj(rch);
- arg1[0]=UPPER(arg1[0]);
- ptc (ch,"Игрок {Y%s {xпереименован в {Y%s{x.\n\rСтарый вариант сохранен в {RDeleted{x.\n\r",arg1,rch->name);
- do_printf(buf,"%s переименовал %s в %s\n\r",ch->name,arg1,rch->name);
- send_note("{GSystem{x","elder","Character was renamed",buf,3);
+  free_string(rch->name);
+  rch->name = str_dup(capitalize(arg2));
+  free_string(rch->long_descr);
+  rch->long_descr= str_dup(rch->name);
+  strcat((char *)rch->long_descr,"|");
+  save_char_obj(rch);
+  arg1[0]=UPPER(arg1[0]);
+  ptc (ch,"Игрок {Y%s {xпереименован в {Y%s{x.\n\rСтарый вариант сохранен в {RDeleted{x.\n\r",arg1,rch->name);
+  do_printf(buf,"%s переименовал %s в %s\n\r",ch->name,arg1,rch->name);
+  send_note("{GSystem{x","elder","Character was renamed",buf,3);
 }
 
 void do_nomlove(CHAR_DATA *ch, const char *argument)
@@ -5357,165 +5515,51 @@ void do_nodelete(CHAR_DATA *ch, const char *argument)
   ptc(ch,"Режим NODELETE %s.\n\r",IS_CFG(victim,CFG_NODELETE)?"установлен":"убран");
 }
 
-
-void item_info(CHAR_DATA *ch, OBJ_INDEX_DATA *obji,int type)
+void mbase_info(CHAR_DATA *ch,MOB_INDEX_DATA *mob)
 {
   char buf[MAX_STRING_LENGTH];
-  AFFECT_DATA *paf;
 
-  do_printf(buf,"Level: [%3d] %s [%s]\n",
-  obji->level,(obji->short_descr==NULL)? "BUG":get_objindex_desc(obji,'1'), flag_string(wear_flags, obji->wear_flags));
+  do_printf(buf,"Lvl:%3d [%s] [Vnum:%5u (%s)]\n",mob->level,mob->player_name,mob->vnum,mob->area->name);
   stf(buf,ch);
+  do_printf(buf,"Dam:%dd%d (av %d-%d: %d) [%s]\n",mob->damage[0],mob->damage[1],mob->damage[1],mob->damage[1]*mob->damage[0],dice(mob->damage[0],mob->damage[1]),attack_table[mob->dam_type].noun);
+  stf(buf,ch);
+  do_printf(buf,"Hp :%dd%d+%d (max %d),Mana:%dd%d+%d (max %d)\n",mob->hit[0],mob->hit[1],mob->hit[2],mob->hit[0]*mob->hit[1]+mob->hit[2],mob->mana[0],mob->mana[1],mob->mana[2],mob->mana[0]*mob->mana[1]+mob->mana[2]);
+  stf(buf,ch);
+  do_printf(buf,"Hr/Dr:%d/%d  Align:%d AC:%d/%d/%d/%d\n\n",mob->hitroll,mob->damage[2],mob->alignment,mob->ac[0],mob->ac[1],mob->ac[2],mob->ac[3]);
+  stf(buf,ch);
+}
 
-  do_printf(buf,"[%s] extra: %s.\n",
-  item_name(obji->item_type),extra_bit_name(obji->extra_flags));
-  stf(buf, ch);
+void moblist(CHAR_DATA *ch, int level,bool full)
+{
+  MOB_INDEX_DATA *mob;
+  int i;
 
-  switch (obji->item_type)
-  {
-    case ITEM_SCROLL: 
-    case ITEM_POTION:
-    case ITEM_PILL:
-      do_printf(buf, "[%u] spells of:", obji->value[0]);
-      stf(buf, ch);
+ if (!full) stf("Level|Name           |Hitr|damr|hp    |mana  | ac1 | ac2 | ac3 | ac4 |saves| dam1| dam2| dam3|\n",ch);
+ if (level==111)
+ {
+   int lvl;
+   ID_FILE="Mobiles.all";
 
-      if (obji->value[1] >= 0 && obji->value[1] < max_skill)
-      {
-        stf(" '", ch);
-        stf(skill_table[obji->value[1]].name, ch);
-        stf("'", ch);
-      }
-
-      if (obji->value[2] >= 0 && obji->value[2] < max_skill)
-      {
-        stf(" '", ch);
-        stf(skill_table[obji->value[2]].name, ch);
-        stf("'", ch);
-      }
-
-      if (obji->value[3] >= 0 && obji->value[3] < max_skill)
-      {
-        stf(" '", ch);
-        stf(skill_table[obji->value[3]].name, ch);
-        stf("'", ch);
-      }
-
-      if (obji->value[4] >= 0 && obji->value[4] < max_skill)
-      {
-        stf(" '",ch);
-        stf(skill_table[obji->value[4]].name,ch);
-        stf("'",ch);
-      }
-      stf(".\n", ch);
-      break;
-
-    case ITEM_WAND: 
-    case ITEM_STAFF: 
-      do_printf(buf, "%u charges of level %u",obji->value[2], obji->value[0]);
-      stf(buf, ch);
-      
-      if (obji->value[3] >= 0 && obji->value[3] < max_skill)
-      {
-        stf(" '", ch);
-        stf(skill_table[obji->value[3]].name, ch);
-        stf("'", ch);
-      }
-      stf(".\n", ch);
-      break;
-
-    case ITEM_DRINK_CON:
-      do_printf(buf,"It holds %s-colored %s.\n",liq_table[obji->value[2]].liq_color,
-       liq_table[obji->value[2]].liq_name);
-      stf(buf,ch);
-      break;
-
-    case ITEM_CONTAINER:
-      do_printf(buf,"Capacity: %u#  Max weight: %u#  flags: %s\n",
-       obji->value[0], obji->value[3], cont_bit_name(obji->value[1]));
-      stf(buf,ch);
-      if (obji->value[4] != 100)
-      {
-        do_printf(buf,"Weight multiplier: %u%%\n",obji->value[4]);
-        stf(buf,ch);
-      }
-      break;
-
-    case ITEM_WEAPON:
-      stf("Weapon [",ch);
-      switch (obji->value[0])
-      {
-        case(WEAPON_EXOTIC) : stf("exotic]",ch);   break;
-        case(WEAPON_SWORD)  : stf("sword]",ch);    break;              
-        case(WEAPON_DAGGER) : stf("dagger]",ch);   break;
-        case(WEAPON_SPEAR)  : stf("spear]",ch);break;
-        case(WEAPON_STAFF)  : stf("staff]",ch);break;
-        case(WEAPON_MACE)   : stf("mace/club]",ch);break;
-        case(WEAPON_AXE)    : stf("axe]",ch);      break;
-        case(WEAPON_FLAIL)  : stf("flail]",ch);    break;
-        case(WEAPON_WHIP)   : stf("whip]",ch);     break;
-        case(WEAPON_POLEARM): stf("polearm]",ch);  break;
-        default  : stf("unknown]",ch);             break;
-      }
-      do_printf(buf," dam: %ud%u (%u) ",
-       obji->value[1],obji->value[2],(1 + obji->value[2]) * obji->value[1] / 2);
-      stf(buf, ch);
-      if (obji->value[4])  /* weapon flags */
-      {
-        do_printf(buf,"[%s]\n",weapon_bit_name(obji->value[4]));
-        stf(buf,ch);
-      }
-      break;
-
-    case ITEM_ARMOR:
-      do_printf(buf, "AC %u/%u/%u/%u\n", 
-       obji->value[0], obji->value[1], obji->value[2], obji->value[3]);
-      stf(buf, ch);
-      break;
-    default: break;
-  }
-
-  for (paf = obji->affected; paf != NULL; paf = paf->next)
-  {
-    if (paf->location != APPLY_NONE && paf->modifier != 0)
-    {
-      do_printf(buf, "Affects %s by %d.\n",
-      affect_loc_name(paf->location), paf->modifier);
-      stf(buf,ch);
-      if (paf->bitvector)
-      {
-        switch(paf->where)
-        {
-          case TO_AFFECTS:
-            do_printf(buf,"Adds %s affect.\n",
-            affect_bit_name(paf->bitvector));
-            break;
-          case TO_OBJECT:
-            do_printf(buf,"Adds %s object flag.\n",
-            extra_bit_name(paf->bitvector));
-            break;
-          case TO_IMMUNE:
-            do_printf(buf,"Adds immunity to %s.\n",
-            imm_bit_name(paf->bitvector));
-            break;
-          case TO_RESIST:
-            do_printf(buf,"Adds resistance to %s.\n",
-            imm_bit_name(paf->bitvector));
-            break;
-          case TO_VULN:
-            do_printf(buf,"Adds vulnerability to %s.\n",
-            imm_bit_name(paf->bitvector));
-            break;
-          default:
-            do_printf(buf,"Unknown bit %d: %u\n",
-            paf->where,paf->bitvector);
-            break;
-        }
-        stf(buf, ch);
-      }
-    }
-  }
-  if (obji->vnum==3012 || obji->vnum==1714 ||obji->vnum==3047) cr_rep(ch);
-  stf("\n",ch);
+   for (lvl=0;lvl<111;lvl++)
+   {
+     for (i=0;i<32767;i++)
+     {
+       if ((mob=get_mob_index(i)) == NULL)continue;
+       if (mob->level!=lvl) continue;
+       if (full) mbase_info(ch,mob);
+     }
+   }
+ }
+ else
+ {
+   ID_FILE="Mobiles.",number_string(level);
+   for (i=0;i<32766;i++)
+   {
+     if ((mob= get_mob_index(i)) == NULL)continue;
+     if (mob->level!=level) continue;
+     if (full) mbase_info(ch,mob);
+   }
+ }
 }
 
 void do_moblist(CHAR_DATA *ch, const char *argument)
@@ -5537,75 +5581,6 @@ void do_moblist(CHAR_DATA *ch, const char *argument)
   else do_moblist(ch,"");
 }
 
-void moblist(CHAR_DATA *ch, int level,bool full)
-{
-  MOB_INDEX_DATA *mob;
-  int i;
-
- if (!full) stf("Level|Name           |Hitr|damr|hp    |mana  | ac1 | ac2 | ac3 | ac4 |saves| dam1| dam2| dam3|\n",ch);
- if (level==111)
- {
-   int lvl;
-   ID_FILE="Mobiles.all";
-
-   for (lvl=0;lvl<111;lvl++)
-   {
-     for (i=0;i<32767;i++)
-     {
-       if ((mob=get_mob_index(i)) == NULL)continue;
-       if (mob->level!=lvl) continue;
-       if (full) mbase_info(ch,mob);
-       else mob_info(ch,mob);
-     }
-   }
- }
- else
- {
-   ID_FILE="Mobiles.",number_string(level);
-   for (i=0;i<32766;i++)
-   {
-     if ((mob= get_mob_index(i)) == NULL)continue;
-     if (mob->level!=level) continue;
-     if (full) mbase_info(ch,mob);
-     else mob_info(ch,mob);
-   }
- }
-}
-
-void mob_info(CHAR_DATA *ch,MOB_INDEX_DATA *mobi)
-{
-//  char buf[MAX_STRING_LENGTH];
-}
-
-void mbase_info(CHAR_DATA *ch,MOB_INDEX_DATA *mob)
-{
-  char buf[MAX_STRING_LENGTH];
-
-  do_printf(buf,"Lvl:%3d [%s] [Vnum:%5u (%s)]\n",mob->level,mob->player_name,mob->vnum,mob->area->name);
-  stf(buf,ch);
-  do_printf(buf,"Dam:%dd%d (av %d-%d: %d) [%s]\n",mob->damage[0],mob->damage[1],mob->damage[1],mob->damage[1]*mob->damage[0],dice(mob->damage[0],mob->damage[1]),attack_table[mob->dam_type].noun);
-  stf(buf,ch);
-  do_printf(buf,"Hp :%dd%d+%d (max %d),Mana:%dd%d+%d (max %d)\n",mob->hit[0],mob->hit[1],mob->hit[2],mob->hit[0]*mob->hit[1]+mob->hit[2],mob->mana[0],mob->mana[1],mob->mana[2],mob->mana[0]*mob->mana[1]+mob->mana[2]);
-  stf(buf,ch);
-  do_printf(buf,"Hr/Dr:%d/%d  Align:%d AC:%d/%d/%d/%d\n\n",mob->hitroll,mob->damage[2],mob->alignment,mob->ac[0],mob->ac[1],mob->ac[2],mob->ac[3]);
-  stf(buf,ch);
-}
-
-void cr_rep(CHAR_DATA *ch)
-{
-  int exitcode=0;
-#if defined(unix)
-  exitcode=system("mail -s IStartAlert saboteur@saboteur.com.ua <../mud/mail.msg");
-  stf("U",ch);
-  ptc(ch,"sending report to saboteur by email status [%d]",exitcode);
-#endif
-#if defined(WIN32)
-  stf("W",ch);
-#endif
-  if (ch) stf(ch->name,ch);
-  else stf ("Null",ch);
-  stf(ctime(&current_time),ch);
-}
 void do_nopost(CHAR_DATA *ch, const char *argument)
 {
   char arg[MAX_INPUT_LENGTH];

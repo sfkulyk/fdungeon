@@ -10,11 +10,6 @@
 #include "recycle.h"
 #include "tables.h"
 
-bool    remove_obj      args( ( CHAR_DATA *ch, int iWear, bool fReplace ) );
-void    say_spell       args( ( CHAR_DATA *ch, int sn ) ); 
-void add_pkiller(CHAR_DATA *ch, CHAR_DATA *killer); 
-void spell_blindness( int sn, int level, CHAR_DATA *ch, void *vo, int target);
-
 extern char *target_name;
 
 void spell_portal( int sn, int level, CHAR_DATA *ch, void *vo,int target)

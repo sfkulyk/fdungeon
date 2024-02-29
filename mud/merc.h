@@ -345,7 +345,9 @@ void  die_follower  args( ( CD *ch ) );
 bool  is_same_group args( ( CD *ach, CD *bch ) );
 int   toggle_int        ( int flag,int bit);
 int64 toggle_int64      ( int64 flag,int64 bit);
-void  info  (CD * ch, int level, int mes, const char *name, const char *fraze);
+void  info              (CD * ch, int level, int mes, const char *name, const char *fraze);
+void  talk_auction      (char *argument);
+bool  check_parse_name  (const char * name, bool new);
 
 // act_info.c
 void set_title  args( ( CD *ch, const char *title ) );
@@ -360,6 +362,7 @@ RID *get_random_room args ((CD *ch) );
 // act_obj.c
 bool can_loot      args( (CD *ch, OD *obj) );
 int  local_get_obj args( (CD *ch, OD *obj, OD *container, bool IsOne) );
+bool remove_obj( CHAR_DATA *ch, int iWear, bool fReplace );
 
 // act_wiz.c
 void wiznet  args( (char *string, CD *ch, OD *obj,int64 flag,int min_level ) );
@@ -372,7 +375,9 @@ void gecho       (const char *argument ); // system gecho
 void  substitute_alias args( (DSD *d, const char *input) );
 
 // clan.c
-bool clan_cfg(CLAN_DATA *clan, int64 flag);
+bool clan_cfg   (CLAN_DATA *clan, int64 flag);
+void do_ear     (CHAR_DATA *victim,CHAR_DATA *ch);
+bool add_clanskill(CLAN_DATA *clan, int sn, int64 time);
 
 // comm.c
 bool  check_ban        args( ( const char *site, int type) );
@@ -429,6 +434,7 @@ int64  flag_convert64  args( ( char letter) );
 void * alloc_mem       args( ( int sMem ) );
 void * alloc_perm      args( ( int sMem ) );
 void   free_mem        args( ( void *pMem, int sMem ) );
+void   load_deities(void);
 
 // Sure, it have to be `const' (; (unicorn)
 const   char * str_dup  args( ( const char *str ) ); 
@@ -464,46 +470,52 @@ const char * fread_string_eol args(( FILE *fp ) );
 
 
 // astellar.c
-void damage_obj args( ( CHAR_DATA *victim, OBJ_DATA *obj, int dam_v, bool inf_char ) );
-int deity_char_power    ( CHAR_DATA *ch, int type, int subtype);
-int  favour_string      ( CHAR_DATA *ch);
+void damage_obj       args( ( CHAR_DATA *victim, OBJ_DATA *obj, int dam_v, bool inf_char ) );
+int  deity_char_power ( CHAR_DATA *ch, int type, int subtype);
+int  favour_string    ( CHAR_DATA *ch);
+void dec_worship      ( CHAR_DATA *ch);
+
 
 // io.c
 int64 fread_flag64   args( ( FILE *fp ) );
-char  *number_string     ( int64 number);
-char  *do_printf         ( char *buf, const char *fmt,...);//(C)Saboteur printf
+char *number_string      ( int64 number);
+char *do_printf          ( char *buf, const char *fmt,...);//(C)Saboteur printf
 void  do_fprintf         ( FILE *fp, const char *fmt,...); //(C)Sab printf>file
 void  log_printf         ( const char *fmt,...); //(C)Sab printf to logfile
 void  dlog               (const char *fmt,...);  //(C)Sab log_printf w/debuglog
+void  add_stealer        (CHAR_DATA *ch, CHAR_DATA *stealer);
+void  add_pkiller        (CHAR_DATA *ch, CHAR_DATA *killer);
+void  remove_pkiller     (CHAR_DATA *ch, char *name);
+
 
 
 // saboteur.c
-void  write_skill_table ( CHAR_DATA *ch);
-char  *get_logchar      ( int flag );
-void  bust_arg          ( CD *ch, const char *argument );
-char  *get_clan_rank    ( CD *ch );
-char  *get_align        ( CD *ch );
-int   get_full_class    ( CD *ch );
-int   get_skill_bonus   ( CD *ch,int sn );
-void  send_news         ( char *text, int type );
-int   get_loglevel      ( int flag );
-char  *race_wname       ( CD *ch );
-char  *classname          ( CD *ch );
+bool  is_offered          ( CD *ch );
 char  *class_remort_names ( CD *ch );
-void  run               ( CD *ch );
-void  astat             ( CD *ch, const char *arg );
-void  assasin_echo      ( const char *argument );
-void  send_note         ( const char *from, const char *to,
-                          const char *subject, const char *text,int type);
-int64 sell_gem          ( CD *ch, int64 amount, int64 vnum );
-int   category_bonus    ( CD *ch,int category );
-const char *add_word    ( const char *argument, const char *word );
-const char *remove_word ( const char *argument, const char *word );
-char  *spell_group_name ( int64 group );
-int   abs               ( int a );
-bool  is_offered        ( CD *ch );
-const char *create_word();
+char  *classname          ( CD *ch );
+char  *get_align          ( CD *ch );
+char  *get_clan_rank      ( CD *ch );
+char  *get_logchar        ( int flag );
+char  *race_wname         ( CD *ch );
+char  *spell_group_name   ( int64 group );
+const char *add_word      ( const char *argument, const char *word );
+const char *create_word   ();
+const char *remove_word   ( const char *argument, const char *word );
+int   abs                 ( int a );
+int   category_bonus      ( CD *ch,int category );
+int   get_full_class      ( CD *ch );
+int   get_loglevel        ( int flag );
 int   get_material_modifier(CD *ch,OD *obj);
+int   get_skill_bonus     ( CD *ch,int sn );
+int64 sell_gem            ( CD *ch, int64 amount, int64 vnum );
+int64 toggle_flag         (CHAR_DATA *ch,int64 flag,int64 bit, char *text, bool invert);
+void  assasin_echo        ( const char *argument );
+void  astat               ( CD *ch, const char *arg );
+void  bust_arg            ( CD *ch, const char *argument );
+void  run                 ( CD *ch );
+void  send_news           ( char *text, int type );
+void  send_note           ( const char *from, const char *to,const char *subject, const char *text,int type);
+void  write_skill_table   ( CHAR_DATA *ch);
 
 // guild.c
 int  guild_lookup    (const char *name);
@@ -524,15 +536,14 @@ void cant_mes        args( (CD *c ) );
 bool is_safe_spell   args( (CD *ch, CD *victim, bool area ) );
 void violence_update ();
 void multi_hit       args( ( CD *ch, CD *victim) );
-bool damage          args( ( CD *ch, CD *victim, int dam,
-                                int dt, int class, bool show, bool breath, OD *obj ) );
-bool damage_old      args( ( CD *ch, CD *victim, int dam,
-                                int dt, int class, bool show ) );
+bool damage          args( ( CD *ch, CD *victim, int dam, int dt, int class, bool show, bool breath, OD *obj ) );
+bool damage_old      args( ( CD *ch, CD *victim, int dam,int dt, int class, bool show ) );
 void update_pos      args( ( CD *victim ) );
 void stop_fighting   args( ( CD *ch, bool fBoth ) );
 void check_criminal  args( ( CD *ch, CD *victim, int level) );
 bool can_attack      args( ( CD *ch, int type) );
-void raw_kill           args( ( CHAR_DATA *victim ) ); 
+void raw_kill        args( ( CHAR_DATA *victim ) ); 
+bool check_skill     args( ( CHAR_DATA *ch, int gsn_skill) ); 
 
 // handler.c
 RAFFECT *get_raffect        ( ROOM_INDEX_DATA *room, int bit);
@@ -682,22 +693,25 @@ bool is_gqmob    (int64 vnum);
 void save_char_obj   args( ( CD *ch ) );
 bool load_char_obj   args( ( DSD *d, const char *name, int status ) );
 void save_one_char       (CD *ch, int action) ;
-void save_config();
-void save_races();
+void save_config   ();
+void save_races    ();
 void save_newspaper();
-void save_vote();
+void save_vote     ();
+void save_clans    ();
 
 // skills.c
 bool parse_gen_groups args(( CD *ch, const char *argument ) );
 void list_group_costs args(( CD *ch ) );
 void list_group_known args(( CD *ch ) );
-int  exp_per_level   args( ( CD *ch, int points ) );
-void check_improve   args( ( CD *ch, int sn, bool success,int multiplier ) );
-int  group_lookup    args( (const char *name) );
-void gn_add          args( ( CD *ch, int gn) );
-void gn_remove       args( ( CD *ch, int gn) );
-void group_add       args( ( CD *ch, const char *name, bool deduct) );
-void group_remove    args( ( CD *ch, const char *name) );
+int  exp_per_level    args(( CD *ch, int points ) );
+void check_improve    args(( CD *ch, int sn, bool success,int multiplier ) );
+int  group_lookup     args((const char *name) );
+void gn_add           args(( CD *ch, int gn) );
+void gn_remove        args(( CD *ch, int gn) );
+void group_add        args(( CD *ch, const char *name, bool deduct) );
+void group_remove     args(( CD *ch, const char *name) );
+int  min_level            (CHAR_DATA *ch,int sn);
+int  group_cost           (CHAR_DATA *ch,int gn);
 
 // special.c
 SF   * spec_lookup  args( ( const char *name ) );
@@ -729,6 +743,18 @@ void  gain_exp       args( ( CD *ch, int gain ) );
 void  gain_condition args( ( CD *ch, int iCond, int64 value ) );
 void  update_handler ();
 void  statue_moving (CHAR_DATA *ch);
+void  penalty_update(CHAR_DATA *ch);
+void  auction_update();
+void  mobile_update ();
+void  song_update ();
+void  char_update ();
+void  obj_update ();
+void  quest_update ();
+void  clan_update ();
+void  area_update ();
+void  gquest_update ();
+void  weather_update();
+void raffect_update();
 
 // Global Constants
 extern  char *  const   dir_name  [];
@@ -804,6 +830,7 @@ char *flag_string( const struct flag_type *flag_table, int64 bits );
 // social edit
 void load_social_table();
 void save_social_table();
+char *soc_group_name(int64 group);
 
 // ROM OLC
 extern const struct flag_type material_type[];

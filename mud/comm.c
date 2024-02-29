@@ -266,7 +266,6 @@ bool    write_to_descriptor     args( ( int desc, const char *txt, int length ) 
 #endif
 
 /* Other local functions (OS-independent). */
-bool    check_parse_name        args( ( const char *name,bool new ) );
 bool    check_reconnect         args( ( DESCRIPTOR_DATA *d, const char *name ) );
 bool    check_playing           args( ( DESCRIPTOR_DATA *d, const char *name ) );
 int     main                    args( ( int argc, char **argv ) );
@@ -1610,6 +1609,93 @@ bool write_to_descriptor( int desc, const char *txt, int length )
 }
 
 // -----------------------------------------------------------------------
+// Parse a name for acceptability
+// -----------------------------------------------------------------------
+bool check_parse_name (const char * name, bool new)
+{
+  CLAN_DATA * clan ;
+  int deity;
+
+  // "short" forms or keywords
+  if (is_exact_name (name,
+     "hassan all auto immortal self someone something the you loner imm mud" \
+     "sab saboter sabot ")) return FALSE ;
+
+  // "prefixes" of elders
+  if( !str_prefix( name, "astel") || !str_prefix(name, "sabot") ) return FALSE;
+
+  // closed names of deities except elders' names
+  for( deity=0; deity_table[deity].name != NULL; deity++)
+    if( is_exact_name( name, deity_table[deity].name) 
+     && !is_exact_name( name, "astellar saboteur magica adron") ) return FALSE;
+
+  // "popular" words
+  if (is_name (name,
+      "fdungeon huy hyu gitler pizda mudak ssikota scikota jopa fuck sessia session" \
+      "lenin urod pidar pidor gopnik debil idiot suka padla")) return FALSE ;
+
+  // closed names for newbies
+  if (new && is_exact_name (name,"illinar invader adron saboteur astellar")) return FALSE ;
+
+  // no naming after clans
+  for (clan = clan_list ; clan != NULL ; clan = clan->next)
+  {
+    if (LOWER(name[0]) == LOWER(clan->name[0]) &&
+        !str_cmp (name, clan->name)) return FALSE ;
+  }
+
+  // short names and long are not supported
+  if (strlen (name) > 12 || strlen (name) < 3) return FALSE ;
+
+  // alphanumerics only, Lock out IllIll twits
+  {
+    const char * pc ;
+    bool fIll, adjcaps = FALSE, cleancaps = FALSE ;
+    unsigned int total_caps = 0 ;
+
+    fIll = TRUE ;
+    for (pc = name ; *pc != '\0' ; pc++ )
+    {
+      if (!isalpha(*pc)) return FALSE ;
+
+      if (isupper(*pc)) // ugly anti-caps hack 
+      {
+        if (adjcaps) cleancaps = TRUE ;
+        total_caps++ ;
+        adjcaps = TRUE ;
+      }
+      else adjcaps = FALSE ;
+
+      if (LOWER(*pc) != 'i' && LOWER(*pc) != 'l' ) fIll = FALSE ;
+    }
+
+    if (fIll) return FALSE ;
+
+    if (cleancaps || (total_caps > (strlen(name)) / 2 && strlen(name) < 3))
+      return FALSE ;
+  }
+
+  /*
+  // prevent players from naming themselves after mobs
+  // temporarily (or permanently) removed by Saboteur
+  {
+    extern MOB_INDEX_DATA * mob_index_hash [MAX_KEY_HASH] ;
+    MOB_INDEX_DATA * pMobIndex ;
+    int iHash ;
+
+    for (iHash = 0 ; iHash < MAX_KEY_HASH ; iHash++)
+    {
+      for (pMobIndex = mob_index_hash[iHash] ; pMobIndex != NULL ;
+           pMobIndex = pMobIndex->next)
+        if (is_name (name, pMobIndex->player_name)) return FALSE ;
+    }
+  }
+  */
+
+  return TRUE ;
+}
+
+// -----------------------------------------------------------------------
 // Function to deal with sockets that have no associated player within,
 // that is used for login and new character creation
 // -----------------------------------------------------------------------
@@ -2645,93 +2731,6 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
     tipsy (ch, "begin") ; // tipsy by Dinger
     break ;
   }
-}
-
-// -----------------------------------------------------------------------
-// Parse a name for acceptability
-// -----------------------------------------------------------------------
-bool check_parse_name (const char * name, bool new)
-{
-  CLAN_DATA * clan ;
-  int deity;
-
-  // "short" forms or keywords
-  if (is_exact_name (name,
-     "hassan all auto immortal self someone something the you loner imm mud" \
-     "sab saboter sabot ")) return FALSE ;
-
-  // "prefixes" of elders
-  if( !str_prefix( name, "astel") || !str_prefix(name, "sabot") ) return FALSE;
-
-  // closed names of deities except elders' names
-  for( deity=0; deity_table[deity].name != NULL; deity++)
-    if( is_exact_name( name, deity_table[deity].name) 
-     && !is_exact_name( name, "astellar saboteur magica adron") ) return FALSE;
-
-  // "popular" words
-  if (is_name (name,
-      "fdungeon huy hyu gitler pizda mudak ssikota scikota jopa fuck sessia session" \
-      "lenin urod pidar pidor gopnik debil idiot suka padla")) return FALSE ;
-
-  // closed names for newbies
-  if (new && is_exact_name (name,"illinar invader adron saboteur astellar")) return FALSE ;
-
-  // no naming after clans
-  for (clan = clan_list ; clan != NULL ; clan = clan->next)
-  {
-    if (LOWER(name[0]) == LOWER(clan->name[0]) &&
-        !str_cmp (name, clan->name)) return FALSE ;
-  }
-
-  // short names and long are not supported
-  if (strlen (name) > 12 || strlen (name) < 3) return FALSE ;
-
-  // alphanumerics only, Lock out IllIll twits
-  {
-    const char * pc ;
-    bool fIll, adjcaps = FALSE, cleancaps = FALSE ;
-    unsigned int total_caps = 0 ;
-
-    fIll = TRUE ;
-    for (pc = name ; *pc != '\0' ; pc++ )
-    {
-      if (!isalpha(*pc)) return FALSE ;
-
-      if (isupper(*pc)) // ugly anti-caps hack 
-      {
-        if (adjcaps) cleancaps = TRUE ;
-        total_caps++ ;
-        adjcaps = TRUE ;
-      }
-      else adjcaps = FALSE ;
-
-      if (LOWER(*pc) != 'i' && LOWER(*pc) != 'l' ) fIll = FALSE ;
-    }
-
-    if (fIll) return FALSE ;
-
-    if (cleancaps || (total_caps > (strlen(name)) / 2 && strlen(name) < 3))
-      return FALSE ;
-  }
-
-  /*
-  // prevent players from naming themselves after mobs
-  // temporarily (or permanently) removed by Saboteur
-  {
-    extern MOB_INDEX_DATA * mob_index_hash [MAX_KEY_HASH] ;
-    MOB_INDEX_DATA * pMobIndex ;
-    int iHash ;
-
-    for (iHash = 0 ; iHash < MAX_KEY_HASH ; iHash++)
-    {
-      for (pMobIndex = mob_index_hash[iHash] ; pMobIndex != NULL ;
-           pMobIndex = pMobIndex->next)
-        if (is_name (name, pMobIndex->player_name)) return FALSE ;
-    }
-  }
-  */
-
-  return TRUE ;
 }
 
 // -----------------------------------------------------------------------

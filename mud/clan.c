@@ -18,6 +18,7 @@ struct clan_opt
   bool on;
 };
 
+static CLAN_DATA *clan_free;
 #define MAX_CLAN_OPTIONS 15
 
 const struct clan_opt clanopt_table[] =
@@ -38,15 +39,6 @@ const struct clan_opt clanopt_table[] =
  { "Deputy может объ€вить войну.              ",  CLAN_DEP_WAR,    FALSE },
  { "Deputy может заключать мир и аль€нс.      ",  CLAN_DEP_ALLI,   FALSE }
 };
-
-void free_clan(CLAN_DATA *clan);
-CLAN_DATA *new_clan();
-void remove_pkiller(CHAR_DATA *ch, const char *name);
-void save_clans();
-char *clan_name(int64 comm_flags, bool turn);
-void clan_toggle(CHAR_DATA *ch,int64 comm_flag);
-bool rem_clanskill(CLAN_DATA *clan,int sn);
-bool add_clanskill(CLAN_DATA *clan, int sn, int64 time);
 
 void do_petition_list(CLAN_DATA *clan, CHAR_DATA *ch)
 {
@@ -398,119 +390,6 @@ void do_cleader( CHAR_DATA *ch, const char *argument )
    }
 }
 
-void make_corpse( CHAR_DATA *ch )
-{
-  char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *corpse;
-  OBJ_DATA *obj;
-  OBJ_DATA *obj_next;
-  DESCRIPTOR_DATA *d;
-
-  if ( IS_NPC(ch) )
-  {
-    if (IS_SET(ch->act, ACT_EXTRACT_CORPSE))
-    {
-      act( "ћертвое тело мгновенно рассыпаетс€ в прах.", ch, 0, 0,TO_ROOM);
-      return;
-    } 
-    corpse              = create_object(get_obj_index(OBJ_VNUM_CORPSE_NPC), 0);
-    corpse->timer       = number_range( 3, 6 );
-    if ( ch->gold > 0 )
-    {
-      obj_to_obj( create_money( ch->gold, ch->silver ), corpse );
-      ch->gold = 0;
-      ch->silver = 0;
-    }
-    corpse->cost = 0;
-  }
-  else
-  {
-    corpse          = create_object(get_obj_index(OBJ_VNUM_CORPSE_PC), 0);
-    corpse->timer   = number_range( 25, 40 );
-
-    corpse->owner = str_dup(ch->name);
-    if (ch->gold > 1 || ch->silver > 1)
-    {
-      obj_to_room(create_money(ch->gold, ch->silver), ch->in_room);
-      act( "—бережения {y$n{x вываливаются на землю", ch, 0, 0,TO_ROOM);
-      ch->gold  = 0;
-      ch->silver = 0;
-    }
-    corpse->cost = 0;
-  }
-
-  corpse->level = ch->level;
-  ptc(ch,"{R[{x%s{x]\n\r",ch->name);
-  do_printf( buf, corpse->short_descr, get_char_desc(ch,'2') );
-  free_string( corpse->short_descr );
-  corpse->short_descr = str_dup( buf );
-
-  do_printf( buf, corpse->description, get_char_desc(ch,'2') );
-  free_string( corpse->description );
-  corpse->description = str_dup( buf );
-
-  for ( obj = ch->carrying; obj != NULL; obj = obj_next )
-  {
-    bool floating = FALSE;
-
-    obj_next = obj->next_content;
-    if (obj->wear_loc == WEAR_FLOAT) floating = TRUE;
-    obj_from_char( obj );
-    if (obj->item_type == ITEM_POTION) obj->timer = number_range(500,1000);
-    if (obj->item_type == ITEM_SCROLL) obj->timer = number_range(1000,2500);
-    if (IS_SET(obj->extra_flags,ITEM_ROT_DEATH) && !floating)
-    {
-       obj->timer = number_range(5,10);
-       REM_BIT(obj->extra_flags,ITEM_ROT_DEATH);
-    }
-    REM_BIT(obj->extra_flags,ITEM_VIS_DEATH);
-
-    if ( IS_SET( obj->extra_flags, ITEM_INVENTORY ) ) extract_obj( obj );
-    else if (floating)
-    {
-      if (IS_OBJ_STAT(obj,ITEM_ROT_DEATH)) /* get rid of it! */
-      { 
-        if (obj->contains != NULL)
-        {
-          OBJ_DATA *in, *in_next;
-
-          act("{y$p{x pаствоp€етс€, его содеpжимое вываливаетс€.",ch,obj,NULL,TO_ROOM);
-          for (in = obj->contains; in != NULL; in = in_next)
-          {
-            in_next = in->next_content;
-            obj_from_obj(in);
-            obj_to_room(in,ch->in_room);
-          }
-        }
-        else act("{y$p{x pаствоp€етс€.", ch,obj,NULL,TO_ROOM);
-        extract_obj(obj);
-      }
-      else
-      {
-        act("{y$p{x падает на землю.",ch,obj,NULL,TO_ROOM);
-        obj_to_room(obj,ch->in_room);
-      }
-    }
-    else
-    obj_to_obj( obj, corpse );
-  }
-
-  if (IS_NPC(ch))   obj_to_room( corpse, ch->in_room );
-  else if (IS_SET(ch->act,PLR_ARMY)) obj_to_room( corpse, get_room_index(ROOM_VNUM_ARMY_BED));
-  else if (ch->clan==NULL) obj_to_room( corpse,get_room_index(ROOM_VNUM_ALTAR) );
-  else obj_to_room(corpse,get_room_index(ch->clan->clandeath) );
-
-  if (!IS_NPC(ch))
-  {
-    /* 
-     * So, if he/she dies when I was in disconnect, he/she left in my PK?
-     *  - heh: currently, only mob's can `forget' (:
-     */
-    for ( d = descriptor_list; d != NULL; d = d->next )
-    if (d->connected == CON_PLAYING) remove_pkiller(d->character,ch->name);
-  }
-}
-
 void do_ear( CHAR_DATA *victim, CHAR_DATA *ch)
 {
   OBJ_DATA *obj;
@@ -531,6 +410,104 @@ void do_ear( CHAR_DATA *victim, CHAR_DATA *ch)
   act( "$c1 с победным криком отрезает твое ухо.", ch, NULL,victim, TO_VICT );
   act( "“ы с победным криком отрезаешь ухо $C2.",  ch, NULL,victim, TO_CHAR);
   act( "$c1 с победным криком отрезает ухо $C2.",  ch, NULL,victim, TO_ROOM);
+}
+
+bool add_clanskill(CLAN_DATA *clan, int sn, int64 time)
+{
+  int i;
+  if (sn<1) return FALSE;
+  for (i=0;i<20;i++)
+  {
+    if (clan->clansn[i]==sn)
+    {
+      if (time==-1) clan->clansnt[i]=time;
+      else if (clan->clansnt[i]==-1) clan->clansnt[i]=time;
+      else clan->clansnt[i]+=time;
+      return TRUE;
+    }
+    if (clan->clansn[i]!=0) continue;
+    clan->clansn[i]=sn;
+    clan->clansnt[i]=time;
+    return TRUE;
+  }
+  return FALSE;
+}
+
+bool rem_clanskill(CLAN_DATA *clan,int sn)
+{
+  int i;
+
+  if (sn < 1) return FALSE;
+  for (i=0;i<20;i++)
+  {
+    if (clan->clansn[i]==0) break;
+    if (clan->clansn[i]==sn)
+    {
+      for (;i<20;i++)
+      {
+        clan->clansn[i]=clan->clansn[i+1];
+        clan->clansnt[i]=clan->clansnt[i+1];
+      }
+      clan->clansn[20]=0;
+      clan->clansnt[20]=0;
+      return TRUE;;
+    }
+  }
+  return FALSE;
+}
+
+void free_clan(CLAN_DATA *clan)
+{
+  AFFECT_DATA *af,*af_next;
+  int i;
+
+  if (!IS_VALID(clan)) return;
+
+  free_string( clan->short_desc);
+  free_string( clan->long_desc );
+  free_string( clan->name      );
+  free_string( clan->show_name );
+  free_string( clan->recalmsg1 );
+  free_string( clan->recalmsg2 );
+  free_string( clan->war       );
+  free_string( clan->alli      );
+  free_string( clan->acceptalli);
+  for (i=0;i<20;i++) clan->clansn[i]=0;
+  for (af=clan->mod;af;af=af_next)
+  {
+    af_next=af->next;
+    free_affect(af);
+  }
+  free_affect( clan->mod );
+  INVALIDATE(clan);
+  clan->next = clan_free;
+  clan_free   = clan;
+}
+
+CLAN_DATA *new_clan()
+{
+  CLAN_DATA *clan;
+
+  if (clan_free == NULL) clan = alloc_perm(sizeof(*clan));
+  else
+  { 
+    clan = clan_free;
+    clan_free = clan_free->next;
+  }
+  VALIDATE(clan);
+  clan->name      =&str_empty[0];
+  clan->show_name =&str_empty[0];
+  clan->recalmsg1 =&str_empty[0];
+  clan->recalmsg2 =&str_empty[0];
+  clan->war       =&str_empty[0];
+  clan->alli      =&str_empty[0];
+  clan->acceptalli=&str_empty[0];
+  clan->short_desc=&str_empty[0];
+  clan->long_desc =&str_empty[0];
+  clan->wear_loc  =-1;
+  clan->flag      =0;
+  clan->mod       =NULL;
+  return clan;
 }
 
 void do_clanwork(CHAR_DATA *ch, const char *argument)
@@ -1419,48 +1396,3 @@ bool clan_cfg(CLAN_DATA *clan, int64 flag)
   if (!IS_SET(clan->flag,flag)) return FALSE;
   return TRUE;
 }
-
-bool rem_clanskill(CLAN_DATA *clan,int sn)
-{
-  int i;
-
-  if (sn < 1) return FALSE;
-  for (i=0;i<20;i++)
-  {
-    if (clan->clansn[i]==0) break;
-    if (clan->clansn[i]==sn)
-    {
-      for (;i<20;i++)
-      {
-        clan->clansn[i]=clan->clansn[i+1];
-        clan->clansnt[i]=clan->clansnt[i+1];
-      }
-      clan->clansn[20]=0;
-      clan->clansnt[20]=0;
-      return TRUE;;
-    }
-  }
-  return FALSE;
-}
-
-bool add_clanskill(CLAN_DATA *clan, int sn, int64 time)
-{
-  int i;
-  if (sn<1) return FALSE;
-  for (i=0;i<20;i++)
-  {
-    if (clan->clansn[i]==sn)
-    {
-      if (time==-1) clan->clansnt[i]=time;
-      else if (clan->clansnt[i]==-1) clan->clansnt[i]=time;
-      else clan->clansnt[i]+=time;
-      return TRUE;
-    }
-    if (clan->clansn[i]!=0) continue;
-    clan->clansn[i]=sn;
-    clan->clansnt[i]=time;
-    return TRUE;
-  }
-  return FALSE;
-}
-

@@ -199,7 +199,6 @@ bool    fBootDb;
 FILE *  fpArea;
 char    strArea[MAX_STRING_LENGTH];
 
-void  init_mm         args( ( void ) );
 void  load_area       args( ( FILE *fp ) );
 void  load_helps      args( ( FILE *fp ) );
 void  load_mobiles    args( ( FILE *fp ) );
@@ -238,6 +237,34 @@ random_armor random_armors[]=
  {"random bracer",  3713 ,"Браслет "},
  {"", 0 ,""}
 };
+
+#if defined (OLD_RAND)
+static  int     rgiState[2+55];
+#endif
+
+void init_mm( )
+{
+#if defined (OLD_RAND)
+  int *piState;
+  int iState;
+ 
+  piState     = &rgiState[2];
+ 
+  piState[-2] = 55 - 55;
+  piState[-1] = 55 - 24;
+ 
+  piState[0]  = ((int) current_time) & ((1 << 30) - 1);
+  piState[1]  = 1;
+  for ( iState = 2; iState < 55; iState++ )
+  {
+    piState[iState] = (piState[iState-1] + piState[iState-2])
+      & ((1 << 30) - 1);
+  }
+#else
+  srandom(time(NULL)^getpid());
+#endif
+  return;
+}
 
 void boot_db( void )
 {
@@ -410,12 +437,12 @@ void boot_db( void )
 // Calculate a meaningful modifier and amount
 void random_apply( OBJ_DATA *obj, CHAR_DATA *mob )
 {
-  static int attrib_types[] = { APPLY_STR, APPLY_DEX, APPLY_DEX, APPLY_INT,
+  int attrib_types[] = { APPLY_STR, APPLY_DEX, APPLY_DEX, APPLY_INT,
       APPLY_INT, APPLY_WIS, APPLY_CON, APPLY_CON, APPLY_CON };
 
-  static int power_types[] = { APPLY_MANA, APPLY_HIT, APPLY_MOVE, APPLY_AC };
+  int power_types[] = { APPLY_MANA, APPLY_HIT, APPLY_MOVE, APPLY_AC };
 
-  static int combat_types[] = { APPLY_HITROLL, APPLY_HITROLL, APPLY_DAMROLL,
+  int combat_types[] = { APPLY_HITROLL, APPLY_HITROLL, APPLY_DAMROLL,
       APPLY_SAVING_SPELL, APPLY_SAVING_SPELL, APPLY_DAMROLL };
 
   AFFECT_DATA *paf = alloc_perm( sizeof(*paf) );
@@ -3374,34 +3401,6 @@ int number_bits( int width )
    back to the system srandom call.  If this doesn't work for you, 
    define OLD_RAND to use the old system -- Alander */
 
-#if defined (OLD_RAND)
-static  int     rgiState[2+55];
-#endif
- 
-void init_mm( )
-{
-#if defined (OLD_RAND)
-  int *piState;
-  int iState;
- 
-  piState     = &rgiState[2];
- 
-  piState[-2] = 55 - 55;
-  piState[-1] = 55 - 24;
- 
-  piState[0]  = ((int) current_time) & ((1 << 30) - 1);
-  piState[1]  = 1;
-  for ( iState = 2; iState < 55; iState++ )
-  {
-    piState[iState] = (piState[iState-1] + piState[iState-2])
-      & ((1 << 30) - 1);
-  }
-#else
-  srandom(time(NULL)^getpid());
-#endif
-  return;
-}
-  
 long number_mm( void )
 {
 #if defined (OLD_RAND)

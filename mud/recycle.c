@@ -634,62 +634,6 @@ void free_mprog(MPROG_LIST *mp)
   mp->next = mprog_free;
   mprog_free = mp;
 }
-    
-CLAN_DATA *clan_free;
-
-CLAN_DATA *new_clan()
-{
-  CLAN_DATA *clan;
-
-  if (clan_free == NULL) clan = alloc_perm(sizeof(*clan));
-  else
-  { 
-    clan = clan_free;
-    clan_free = clan_free->next;
-  }
-  VALIDATE(clan);
-  clan->name      =&str_empty[0];
-  clan->show_name =&str_empty[0];
-  clan->recalmsg1 =&str_empty[0];
-  clan->recalmsg2 =&str_empty[0];
-  clan->war       =&str_empty[0];
-  clan->alli      =&str_empty[0];
-  clan->acceptalli=&str_empty[0];
-  clan->short_desc=&str_empty[0];
-  clan->long_desc =&str_empty[0];
-  clan->wear_loc  =-1;
-  clan->flag      =0;
-  clan->mod       =NULL;
-  return clan;
-}
-
-void free_clan(CLAN_DATA *clan)
-{
-  AFFECT_DATA *af,*af_next;
-  int i;
-
-  if (!IS_VALID(clan)) return;
-
-  free_string( clan->short_desc);
-  free_string( clan->long_desc );
-  free_string( clan->name      );
-  free_string( clan->show_name );
-  free_string( clan->recalmsg1 );
-  free_string( clan->recalmsg2 );
-  free_string( clan->war       );
-  free_string( clan->alli      );
-  free_string( clan->acceptalli);
-  for (i=0;i<20;i++) clan->clansn[i]=0;
-  for (af=clan->mod;af;af=af_next)
-  {
-    af_next=af->next;
-    free_affect(af);
-  }
-  free_affect( clan->mod );
-  INVALIDATE(clan);
-  clan->next = clan_free;
-  clan_free   = clan;
-}
 
 PENALTY_DATA *penalty_free;
 

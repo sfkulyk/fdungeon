@@ -16,7 +16,6 @@ DECLARE_DO_FUN2(do_help          );
 DECLARE_DO_FUN2(do_showskill     );
 DECLARE_DO_FUN2(do_say           );
 DECLARE_DO_FUN2(do_ahelp         );
-int min_level(CHAR_DATA *ch,int sn);
 int skill_cost(CHAR_DATA *ch,int sn);
 int group_cost(CHAR_DATA *ch,int gn);
 int gain_skill_cost(CHAR_DATA *ch,int sn);
@@ -208,6 +207,22 @@ void do_gain(CHAR_DATA *ch, const char *argument)
   act("$C1 говорит тебе 'Я не понял...'",ch,NULL,trainer,TO_CHAR);
 }
     
+int min_level(CHAR_DATA *ch,int sn)
+{
+ int maglevel=102,thilevel=102,warlevel=102,clelevel=102,level;
+
+ if (ch->classmag) maglevel=skill_table[sn].skill_level[0];
+ if (ch->classcle) clelevel=skill_table[sn].skill_level[1];
+ if (ch->classthi) thilevel=skill_table[sn].skill_level[2];
+ if (ch->classwar) warlevel=skill_table[sn].skill_level[3];
+
+ level=maglevel;
+ if (level>clelevel) level=clelevel;
+ if (level>thilevel) level=thilevel;
+ if (level>warlevel) level=warlevel;
+ return level;
+}
+
 // RT spells and skills show the players spells (or skills)
 void do_spells(CHAR_DATA *ch, const char *argument)
 {
@@ -922,21 +937,6 @@ void group_remove(CHAR_DATA *ch, const char *name)
   }
 }
 
-int min_level(CHAR_DATA *ch,int sn)
-{
- int maglevel=102,thilevel=102,warlevel=102,clelevel=102,level;
-
- if (ch->classmag) maglevel=skill_table[sn].skill_level[0];
- if (ch->classcle) clelevel=skill_table[sn].skill_level[1];
- if (ch->classthi) thilevel=skill_table[sn].skill_level[2];
- if (ch->classwar) warlevel=skill_table[sn].skill_level[3];
-
- level=maglevel;
- if (level>clelevel) level=clelevel;
- if (level>thilevel) level=thilevel;
- if (level>warlevel) level=warlevel;
- return level;
-}
 
 /* 0 - group unavaible for this class*/
 int skill_cost(CHAR_DATA *ch,int sn)

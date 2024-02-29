@@ -19,19 +19,6 @@
 #include "tables.h"
 #include "interp.h"
 
-void raffect_update();
-void quest_update  ();
-void gquest_update ();
-void auction_update();
-void mobile_update ();
-void weather_update();
-void char_update   ();
-void obj_update    ();
-void song_update   ();
-void clan_update   ();
-void penalty_update(CHAR_DATA *ch);
-void dec_worship( CHAR_DATA *ch);
-
 #if defined(WIN32)
 typedef struct dirent
 {

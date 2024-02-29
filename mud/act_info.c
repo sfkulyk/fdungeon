@@ -12,26 +12,7 @@
 #include "recycle.h"
 #include "tables.h"
 
-extern  int     _filbuf         args((FILE *));
-int max_on = 0;
-
-// Local functions.
-bool  check_social( CHAR_DATA *ch, char *command, const char *argument );
-char *soc_group_name(int64 group);
-int   min_level(CHAR_DATA *ch,int sn);
-char *act_name(int64 act_flag);
-void  act_toggle(CHAR_DATA *ch,int64 act_flag);
-char *format_obj_to_char  args((OBJ_DATA *obj, CHAR_DATA *ch,bool fShort));
-void  show_list_to_char   args((OBJ_DATA *list, CHAR_DATA *ch,bool fShort, bool fShowNothing));
-void  show_char_to_char_0 args((CHAR_DATA *victim, CHAR_DATA *ch));
-void  show_char_to_char_1 args((CHAR_DATA *victim, CHAR_DATA *ch));
-void  show_char_to_char   args((CHAR_DATA *list, CHAR_DATA *ch));
-bool  check_blind         args((CHAR_DATA *ch));
-char *do_show_flag(CHAR_DATA *ch,CHAR_DATA *victim,bool fshort);
-char *do_show_iflag(CHAR_DATA *ch,OBJ_DATA *obj, bool fshort);
-
 #define MAX_CFG 19
-
 struct cfg_type
 {
   char *name;
@@ -64,6 +45,23 @@ const struct cfg_type cfg_table[] =
   { "autopeek  ","Смотреть имущество жертвы при look ",CFG_AUTOPEEK ,TRUE ,FALSE }
 };
 
+char *do_show_iflag(CHAR_DATA *ch,OBJ_DATA *obj, bool fshort)
+{
+  static char buf[4096];
+  buf[0] = '\0';
+
+  if (IS_OBJ_STAT(obj,ITEM_GLOW))   strcat(buf,(fshort)?"{M(Пыл){x":"{w({MПылает{w){x");
+  if (IS_OBJ_STAT(obj,ITEM_INVIS))  strcat(buf,(fshort)?"{D(Нев){x":"{D(Невидимо){x");
+  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_EVIL)) 
+  && IS_OBJ_STAT(obj,ITEM_EVIL))
+    strcat(buf,(fshort)?"{r(Кр){x":"{w({rКрасная{w Аура){x");
+  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_GOOD)) 
+   && IS_OBJ_STAT(obj,ITEM_BLESS))   strcat(buf,(fshort)?"{c(Гол){x":"{w({cГолубая{w Аура){x");
+  if (IS_AFFECTED(ch,AFF_DETECT_MAGIC)
+   && IS_OBJ_STAT(obj,ITEM_MAGIC))   strcat(buf,(fshort)?"{C(Маг){x":"{w({cМагическое{w){x");
+  if (IS_OBJ_STAT(obj,ITEM_HUM))    strcat(buf,(fshort)?"{C(Гуд){x":"{w({CГудит{w){x");
+  return (buf[0] != '\0') ? buf : "";
+}
 
 char *format_obj_to_char(OBJ_DATA *obj, CHAR_DATA *ch, bool fShort)
 {
@@ -194,6 +192,48 @@ void show_list_to_char(OBJ_DATA *list, CHAR_DATA *ch, bool fShort, bool fShowNot
   free_mem((void*)prgpstrShow, count * sizeof(char *));
   free_mem(prgnShow, count * sizeof(int));
 }
+
+char *do_show_flag(CHAR_DATA *ch,CHAR_DATA *victim,bool fshort)
+{
+  static char buf[4096];
+
+  buf[0] = '\0';
+
+  if (IS_CFG(victim,CFG_ZRITEL)) strcat(buf,(fshort)?"{B(З){x":"{B(Зритель){x");
+  if (IS_NPC(victim))
+  {
+    if (victim->max_hit > victim->hit) strcat(buf,(fshort)?"{r(Р){x":"{M(ранен){x");
+    if (ch->questmob==victim) strcat(buf,"{R[ЦЕЛЬ]{x");
+    if (victim->questmob!=NULL && IS_IMMORTAL(ch)) strcat(buf, "{G[qst]{x");
+  }
+  if (IS_SET(victim->comm,COMM_AFK    ) )strcat(buf,"[AFK]");
+  if (victim->invis_level >= LEVEL_HERO  )strcat(buf,"{w[Wiz]{x");
+  if (IS_AFFECTED(victim, AFF_INVISIBLE) )strcat(buf,(fshort)?"{D(H){x":"{w(Невидимо){x");
+  if (IS_AFFECTED(victim, AFF_HIDE)      )strcat(buf,(fshort)?"{D(C){x":"{w(Скрыто){x");
+  if (IS_AFFECTED(victim, AFF_CHARM)     )strcat(buf,(fshort)?"{G(О){x":"{w(Очаpовано){x");
+  if (IS_AFFECTED(victim, AFF_PASS_DOOR) )strcat(buf,(fshort)?"{D(П){x":"{w(Пpозрачно){x");
+  if (IS_AFFECTED(victim, AFF_FAERIE_FIRE))strcat(buf,(fshort)?"{M(Р){x":"{m(Розовая Аура){x");
+  if (is_affected(victim,skill_lookup("ensnare")))strcat(buf,(fshort)?"{G(C){x":"{g(Сеть){x");
+  if (IS_AFFECTED(victim, AFF_SANCTUARY) )strcat(buf,(fshort)?"{W(Б){x":"{W(Белая Аура){x");
+  if (IS_AFFECTED(victim, AFF_SHIELD)    )strcat(buf,(fshort)?"{C(M){x":"{C(Магический щит){x");
+
+  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_EVIL)) 
+     && IS_EVIL(victim))
+    strcat(buf,(fshort)?"{R(К){x":"{r(Красная Аура){x");
+
+  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_GOOD)) 
+     && IS_GOOD(victim))
+    strcat(buf,(fshort)?"{Y(З){x":"{y(Золотая Аура){x");
+
+  if (!IS_NPC(victim) && IS_SET(victim->act, PLR_WANTED))
+    strcat(buf,(fshort)?"{R[П]{x":"{r(ПРЕСТУПНИК){x");
+
+  if (!IS_NPC(victim) && IS_SET(victim->act, PLR_RAPER))
+    strcat(buf,(fshort)?"{R[Н]{x":"{r(НАСИЛЬНИК){x");
+
+  return (buf[0] != '\0') ? buf : "";
+}
+
 
 void show_char_to_char_0(CHAR_DATA *victim, CHAR_DATA *ch)
 {
@@ -563,6 +603,39 @@ void do_autolist(CHAR_DATA *ch, const char *argument)
 
   ptc(ch, "Ты %spазpешаешь следовать за тобой. (nofollow)\n\r",
    (IS_SET(ch->act,PLR_NOFOLLOW)) ? "не " : "");
+}
+
+char *act_name(int64 act_flags)
+{
+  static char buf[4096];
+
+  buf[0] = '\0';
+
+  if (act_flags & PLR_AUTOASSIST) strcat(buf, " Режим Автоматического вступления в битву (autoassist)");
+  if (act_flags & PLR_AUTOLOOT ) strcat(buf, " Автоматическое подбирание трофеев из трупа (autoloot)");
+  if (act_flags & PLR_AUTOSAC  ) strcat(buf, " Автоматическое принесения трупа в жертву (autosacrifice)");
+  if (act_flags & PLR_AUTOGOLD ) strcat(buf, " Автоматическое подбирание денег из трупов (autogold)");
+  if (act_flags & PLR_HOLYLIGHT) strcat(buf, " Святой свет");
+  if (act_flags & PLR_NOSUMMON ) strcat(buf, " Тебя нельзя призвать заклинанием SUMMON (nosummon)");
+  if (act_flags & PLR_NOCANCEL ) strcat(buf, " Ты не разрешаешь себя расколдовывать заклинанием CANCEL (nocancel)");
+  if (act_flags & PLR_NOFOLLOW ) strcat(buf, " Ты не разрешаешь следовать за тобой (nofollow)");
+  if (act_flags & PLR_COLOUR   ) strcat(buf, " Цвет");
+  if (act_flags & PLR_NOSEND   ) strcat(buf, " Ты не принимаешь посылки (nosend)");
+  if (act_flags & PLR_BLINK    ) strcat(buf, " Blink: ");
+
+  return (buf[0] != '\0') ? buf+1 : "none";
+}
+
+void act_toggle(CHAR_DATA *ch,int64 act_flag)
+{
+  if (IS_SET(ch->act,act_flag))
+  {
+    ptc(ch,"%s {Rвыключ.{x\n\r",act_name(act_flag));
+    REM_BIT(ch->act,act_flag);
+    return;
+  }
+  ptc(ch,"%s {Gвключ.{x\n\r",act_name(act_flag));
+  SET_BIT(ch->act,act_flag);
 }
 
 void do_autoassist(CHAR_DATA *ch, const char *argument)
@@ -1927,30 +2000,28 @@ void do_who (CHAR_DATA * ch, const char * argument)
 // into invisible count so players cant see if they're online
 void do_count (CHAR_DATA * ch, const char * argument)
 {
-  register int count     = 0 ;
-  register int count_vis = 0 ;
+  register int count=0,count_vis=0;
+  static   int max_online = 0;
   DESCRIPTOR_DATA * d ;
 
-  for (d = descriptor_list ; d != NULL ; d = d->next)
+  for (d=descriptor_list ; d!=NULL ; d=d->next)
   {
     if (!d->character || d->connected != CON_PLAYING) continue;
-
-    if (can_see (ch, d->character, CHECK_LVL))
+    if (can_see(ch, d->character, CHECK_LVL))
     {
-      count++ ;
-      count_vis++ ;
+      count++;
+      count_vis++;
     }
-    else count++ ;
+    else count++;
   }
 
-  max_on = UMAX (count, max_on) ;
-
-  if (max_on == count)
-    ptc (ch, "\n\rВсего игроков %d, видимых %d, максимум на сегодня.\n\r",
-         count, count_vis) ;
+  if (max_online <= count)
+    ptc (ch, "\n\rВсего игроков %d, видимых %d, максимум на сегодня.\n\r",count, count_vis);
   else
-    ptc (ch, "\n\rВсего игроков %d, видимых %d, максимум на сегодня было %d.\n\r",
-         count, count_vis, max_on) ;
+  {
+    ptc (ch, "\n\rВсего игроков %d, видимых %d, максимум с последнего рестарта было %d.\n\r", count, count_vis, max_online);
+    max_online = count;
+  }
 }
 
 void do_inventory(CHAR_DATA *ch, const char *argument)
@@ -3160,39 +3231,6 @@ void do_crimereport(CHAR_DATA *ch, const char *argument)
   }
 }
 
-void act_toggle(CHAR_DATA *ch,int64 act_flag)
-{
-  if (IS_SET(ch->act,act_flag))
-  {
-    ptc(ch,"%s {Rвыключ.{x\n\r",act_name(act_flag));
-    REM_BIT(ch->act,act_flag);
-    return;
-  }
-  ptc(ch,"%s {Gвключ.{x\n\r",act_name(act_flag));
-  SET_BIT(ch->act,act_flag);
-}
-
-char *act_name(int64 act_flags)
-{
-  static char buf[4096];
-
-  buf[0] = '\0';
-
-  if (act_flags & PLR_AUTOASSIST) strcat(buf, " Режим Автоматического вступления в битву (autoassist)");
-  if (act_flags & PLR_AUTOLOOT ) strcat(buf, " Автоматическое подбирание трофеев из трупа (autoloot)");
-  if (act_flags & PLR_AUTOSAC  ) strcat(buf, " Автоматическое принесения трупа в жертву (autosacrifice)");
-  if (act_flags & PLR_AUTOGOLD ) strcat(buf, " Автоматическое подбирание денег из трупов (autogold)");
-  if (act_flags & PLR_HOLYLIGHT) strcat(buf, " Святой свет");
-  if (act_flags & PLR_NOSUMMON ) strcat(buf, " Тебя нельзя призвать заклинанием SUMMON (nosummon)");
-  if (act_flags & PLR_NOCANCEL ) strcat(buf, " Ты не разрешаешь себя расколдовывать заклинанием CANCEL (nocancel)");
-  if (act_flags & PLR_NOFOLLOW ) strcat(buf, " Ты не разрешаешь следовать за тобой (nofollow)");
-  if (act_flags & PLR_COLOUR   ) strcat(buf, " Цвет");
-  if (act_flags & PLR_NOSEND   ) strcat(buf, " Ты не принимаешь посылки (nosend)");
-  if (act_flags & PLR_BLINK    ) strcat(buf, " Blink: ");
-
-  return (buf[0] != '\0') ? buf+1 : "none";
-}
-
 void do_showprac(CHAR_DATA *ch, const char *argument)
 {
   int sn=find_spell(ch,argument), rll=100;
@@ -3223,65 +3261,6 @@ void do_showprac(CHAR_DATA *ch, const char *argument)
   }
 }
 
-char *do_show_flag(CHAR_DATA *ch,CHAR_DATA *victim,bool fshort)
-{
-  static char buf[4096];
-
-  buf[0] = '\0';
-
-  if (IS_CFG(victim,CFG_ZRITEL)) strcat(buf,(fshort)?"{B(З){x":"{B(Зритель){x");
-  if (IS_NPC(victim))
-  {
-    if (victim->max_hit > victim->hit) strcat(buf,(fshort)?"{r(Р){x":"{M(ранен){x");
-    if (ch->questmob==victim) strcat(buf,"{R[ЦЕЛЬ]{x");
-    if (victim->questmob!=NULL && IS_IMMORTAL(ch)) strcat(buf, "{G[qst]{x");
-  }
-  if (IS_SET(victim->comm,COMM_AFK    ) )strcat(buf,"[AFK]");
-  if (victim->invis_level >= LEVEL_HERO  )strcat(buf,"{w[Wiz]{x");
-  if (IS_AFFECTED(victim, AFF_INVISIBLE) )strcat(buf,(fshort)?"{D(H){x":"{w(Невидимо){x");
-  if (IS_AFFECTED(victim, AFF_HIDE)      )strcat(buf,(fshort)?"{D(C){x":"{w(Скрыто){x");
-  if (IS_AFFECTED(victim, AFF_CHARM)     )strcat(buf,(fshort)?"{G(О){x":"{w(Очаpовано){x");
-  if (IS_AFFECTED(victim, AFF_PASS_DOOR) )strcat(buf,(fshort)?"{D(П){x":"{w(Пpозрачно){x");
-  if (IS_AFFECTED(victim, AFF_FAERIE_FIRE))strcat(buf,(fshort)?"{M(Р){x":"{m(Розовая Аура){x");
-  if (is_affected(victim,skill_lookup("ensnare")))strcat(buf,(fshort)?"{G(C){x":"{g(Сеть){x");
-  if (IS_AFFECTED(victim, AFF_SANCTUARY) )strcat(buf,(fshort)?"{W(Б){x":"{W(Белая Аура){x");
-  if (IS_AFFECTED(victim, AFF_SHIELD)    )strcat(buf,(fshort)?"{C(M){x":"{C(Магический щит){x");
-
-  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_EVIL)) 
-     && IS_EVIL(victim))
-    strcat(buf,(fshort)?"{R(К){x":"{r(Красная Аура){x");
-
-  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_GOOD)) 
-     && IS_GOOD(victim))
-    strcat(buf,(fshort)?"{Y(З){x":"{y(Золотая Аура){x");
-
-  if (!IS_NPC(victim) && IS_SET(victim->act, PLR_WANTED))
-    strcat(buf,(fshort)?"{R[П]{x":"{r(ПРЕСТУПНИК){x");
-
-  if (!IS_NPC(victim) && IS_SET(victim->act, PLR_RAPER))
-    strcat(buf,(fshort)?"{R[Н]{x":"{r(НАСИЛЬНИК){x");
-
-  return (buf[0] != '\0') ? buf : "";
-}
-
-char *do_show_iflag(CHAR_DATA *ch,OBJ_DATA *obj, bool fshort)
-{
-  static char buf[4096];
-
-  buf[0] = '\0';
-
-  if (IS_OBJ_STAT(obj,ITEM_GLOW))   strcat(buf,(fshort)?"{M(Пыл){x":"{w({MПылает{w){x");
-  if (IS_OBJ_STAT(obj,ITEM_INVIS))  strcat(buf,(fshort)?"{D(Нев){x":"{D(Невидимо){x");
-  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_EVIL)) 
-  && IS_OBJ_STAT(obj,ITEM_EVIL))
-    strcat(buf,(fshort)?"{r(Кр){x":"{w({rКрасная{w Аура){x");
-  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_GOOD)) 
-   && IS_OBJ_STAT(obj,ITEM_BLESS))   strcat(buf,(fshort)?"{c(Гол){x":"{w({cГолубая{w Аура){x");
-  if (IS_AFFECTED(ch,AFF_DETECT_MAGIC)
-   && IS_OBJ_STAT(obj,ITEM_MAGIC))   strcat(buf,(fshort)?"{C(Маг){x":"{w({cМагическое{w){x");
-  if (IS_OBJ_STAT(obj,ITEM_HUM))    strcat(buf,(fshort)?"{C(Гуд){x":"{w({CГудит{w){x");
-  return (buf[0] != '\0') ? buf : "";
-}
 
 void whois_info(CHAR_DATA* ch, CHAR_DATA * victim)
 {

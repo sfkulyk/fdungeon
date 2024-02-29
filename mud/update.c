@@ -19,7 +19,6 @@ void hungry_damage(CHAR_DATA *ch, int Cond);
 void talk_auction (char *argument);
 void do_reboot( CHAR_DATA *ch, const char *argument );
 bool rem_clanskill(CLAN_DATA *clan,int sn);
-bool add_clanskill(CLAN_DATA *clan, int sn, int time);
 
 // *** USED IN CHAR_UPDATE () предполагают !IS_NPC(ch)  ***
 void sifilis_update args( (CHAR_DATA *ch) );

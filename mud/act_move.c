@@ -46,14 +46,92 @@ const int movement_loss [SECT_MAX] =
    SECT_UNUSED       8  SECT_RUINS         18
                         SECT_UWATER        19*/
 
-// Local functions
-void scan(CHAR_DATA *ch,int door);
-bool scan_dir(CHAR_DATA *ch,const ROOM_INDEX_DATA *room,int dir,char *buf);
-bool scan_room (CHAR_DATA *ch, const ROOM_INDEX_DATA *room,char *buf);
-int  find_door  args( ( CHAR_DATA *ch, char *arg ) );
-bool has_key    args( ( CHAR_DATA *ch, int64 key ) );
-void lock_unlock( CHAR_DATA *ch, const char *argument, int action );
-void open_close( CHAR_DATA *ch, const char *argument,int action );
+bool scan_room(CHAR_DATA *ch, const ROOM_INDEX_DATA *room,char *buf)
+{
+  CHAR_DATA *target = room->people;
+  bool found=FALSE;
+
+  while (target != NULL)
+  {
+    if (can_see(ch,target,CHECK_LVL))
+    {
+      if (IS_NPC(target))
+      {
+        if (IS_STATUE(target))
+        {
+          target = target->next_in_room;
+          continue;
+        }
+        strcat(buf,"\n\r                {W");
+        strcat(buf,get_char_desc(target,'1'));
+      }
+      else
+      {
+        strcat(buf,"\n\r                {Y");
+        strcat(buf,target->name);
+      }
+      found=TRUE;
+    }
+    target = target->next_in_room;
+  }
+  strcat(buf,"{x\n\r");
+  return found;
+}
+
+bool scan_dir(CHAR_DATA *ch,const ROOM_INDEX_DATA *room,int dir,char *buf)
+{
+  EXIT_DATA * pexit=NULL;
+
+  pexit = room->exit[dir];
+  if (pexit == NULL) return TRUE;
+  if (IS_SET(pexit->exit_info,EX_CLOSED))
+  {
+    strcat(buf,"   {DЗакрытая дверь.{x\n\r");
+    stc(buf,ch);
+    return TRUE;
+  }
+  if (pexit->u1.to_room == NULL || !can_see_room(ch,pexit->u1.to_room)) return TRUE;
+  if (scan_room(ch,pexit->u1.to_room,buf)) stc(buf,ch);
+  return FALSE;
+}
+
+void scan(CHAR_DATA *ch,int door)
+{
+  extern char * const dname[];
+  char buf[MAX_STRING_LENGTH*3];
+  int dir=0;
+  const ROOM_INDEX_DATA *new_room;
+
+  do_printf (buf, "{CЗдесь :{x");
+  if (!scan_room(ch,ch->in_room,buf)) strcat (buf,"Никого\n\r");
+  stc(buf,ch);
+
+  if (door==100)
+  {
+    for (dir=0;dir<6;dir++)
+    {
+      do_printf(buf,"{CНа %s:{x",dname[dir]);
+      if (scan_dir(ch,ch->in_room,dir,buf)) continue;
+      if (!is_affected(ch,skill_lookup("farsight"))) continue;
+      new_room=ch->in_room->exit[dir]->u1.to_room;
+      do_printf(buf,"{CРядом на %s:{x",dname[dir]);
+      scan_dir(ch,new_room,dir,buf);
+    }
+    return;
+  }
+        
+  do_printf(buf,"{CНа %s:{x",dname[door]);
+  if(scan_dir(ch,ch->in_room,door,buf)) return;
+  new_room=ch->in_room->exit[door]->u1.to_room;
+  do_printf(buf,"{CРядом на %s:{x",dname[door]);
+  if (scan_dir(ch,new_room,door,buf)) return;
+  new_room=new_room->exit[door]->u1.to_room;
+  if (is_affected(ch,skill_lookup("farsight")))
+  {
+    do_printf(buf,"{CДалеко на %s:{x",dname[door]);
+    if (scan_dir(ch,new_room,door,buf)) return;
+  }
+}
 
 void do_north( CHAR_DATA *ch, const char *argument )
 {
@@ -128,6 +206,150 @@ int find_door( CHAR_DATA *ch, char *arg )
   return door;
 }
 
+void open_close( CHAR_DATA *ch, const char *argument,int action )
+{
+  // action: 1==open, else==close.
+  char arg[MAX_INPUT_LENGTH];
+  OBJ_DATA *obj;
+  int door;
+
+  one_argument( argument, arg );
+
+  if (EMPTY(arg))
+  {
+    ptc(ch,"%sкрыть что?\n\r",action==1?"От":"За");
+    return;
+  }
+
+  if ( ( door = find_door( ch, arg ) ) >= 0 )
+  {
+    // open door
+    ROOM_INDEX_DATA *to_room;
+    EXIT_DATA *pexit;
+    EXIT_DATA *pexit_rev;
+
+    pexit = ch->in_room->exit[door];
+    if ( action==1 && !IS_SET(pexit->exit_info, EX_CLOSED) )
+      { stc( "Тут уже открыто.\n\r",      ch ); return; }
+    if ( action!=1 && IS_SET(pexit->exit_info, EX_CLOSED) )
+      { stc( "Тут уже закрыто.\n\r",      ch ); return; }
+    if (  IS_SET(pexit->exit_info, EX_LOCKED) )
+      { stc( "Заперто.\n\r",            ch ); return; }
+    if (IS_SET(pexit->exit_info, EX_DWARVESGUILD) && !GUILD(ch,DWARVES_GUILD))
+      { stc( "Ты не можешь сдвинуть это даже на дюйм.\n\r",ch ); return; }
+
+    if (action==1)
+    {
+      REM_BIT(pexit->exit_info, EX_CLOSED);
+      act( "$c1 открывает $d.", ch, NULL, pexit->keyword, TO_ROOM );
+    }
+    else
+    {
+      SET_BIT(pexit->exit_info, EX_CLOSED);
+      act( "$c1 закрывает $d.", ch, NULL, pexit->keyword, TO_ROOM );
+    }
+    stc( "Ok.\n\r", ch );
+
+    // open the other side
+    if ( ( to_room   = pexit->u1.to_room            ) != NULL
+      &&   ( pexit_rev = to_room->exit[rev_dir[door]] ) != NULL
+      &&   pexit_rev->u1.to_room == ch->in_room )
+    {
+      CHAR_DATA *rch;
+      if (action==1)
+      {
+        REM_BIT( pexit_rev->exit_info, EX_CLOSED );
+        for ( rch = to_room->people; rch != NULL; rch = rch->next_in_room )
+        act( "$d открывается.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+      }
+      else
+      {
+        SET_BIT( pexit_rev->exit_info, EX_CLOSED );
+        for ( rch = to_room->people; rch != NULL; rch = rch->next_in_room )
+        act( "$d закрывается.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+      }
+    }
+    return;
+  }
+
+  if ( ( obj = get_obj_here( ch, arg ) ) != NULL )
+  {
+    // open portal
+    if (obj->item_type == ITEM_PORTAL)
+    {
+      if (!IS_SET(obj->value[1], EX_ISDOOR))
+      {
+        stc("Ты не можешь сделать этого.\n\r",ch);
+        return;
+      }
+
+      if (action==1 && !IS_SET(obj->value[1], EX_CLOSED))
+      {
+        stc("Тут уже открыто.\n\r",ch);
+        return;
+      }
+
+      if (action!=1 && IS_SET(obj->value[1], EX_CLOSED))
+      {
+        stc("Тут уже закрыто.\n\r",ch);
+        return;
+      }
+
+      if (IS_SET(obj->value[1], EX_LOCKED))
+      {
+        stc("Заперто.\n\r",ch);
+        return;
+      }
+
+      if (IS_SET(obj->value[1], EX_DWARVESGUILD) && !GUILD(ch,DWARVES_GUILD))
+      { stc( "Ты не можешь сдвинуть это даже на дюйм.\n\r",ch ); return; }
+
+      if (action==1)
+      {
+        REM_BIT(obj->value[1], EX_CLOSED);
+        act("Ты открываешь $i1.",ch,obj,NULL,TO_CHAR);
+        act("$c1 открывает $i1.",ch,obj,NULL,TO_ROOM);
+      }
+      else
+      {
+        SET_BIT(obj->value[1], EX_CLOSED);
+        act("Ты закрываешь $i1.",ch,obj,NULL,TO_CHAR);
+        act("$c1 закрывает $i1.",ch,obj,NULL,TO_ROOM);
+      }
+      return;
+    }
+
+    /* 'open object' */
+    if ( obj->item_type != ITEM_CONTAINER)
+       { stc( "Это не контейнер.\n\r", ch ); return; }
+    if ( action==1 && !IS_SET(obj->value[1], CONT_CLOSED) )
+       { stc( "Тут уже открыто.\n\r",      ch ); return; }
+    if ( action!=1 && IS_SET(obj->value[1], CONT_CLOSED) )
+       { stc( "Тут уже закрыто.\n\r",      ch ); return; }
+    if ( !IS_SET(obj->value[1], CONT_CLOSEABLE) )
+       { stc( "Ты не можешь этого сделать.\n\r",      ch ); return; }
+    if ( IS_SET(obj->value[1], CONT_LOCKED) )
+       { stc( "Заперто.\n\r",            ch ); return; }
+    if (IS_SET(obj->value[1], EX_DWARVESGUILD) && !GUILD(ch,DWARVES_GUILD))
+       { stc( "Ты не можешь сдвинуть это даже на дюйм.\n\r",ch ); return; }
+
+    if (action==1)
+    {
+      REM_BIT(obj->value[1], CONT_CLOSED);
+     act("Ты открываешь $i1.",ch,obj,NULL,TO_CHAR);
+     act( "$c1 открывает $i1.", ch, obj, NULL, TO_ROOM );
+    }
+    else
+    {
+      SET_BIT(obj->value[1], CONT_CLOSED);
+      act("Ты закрываешь $i1.",ch,obj,NULL,TO_CHAR);
+      act( "$c1 закрывает $i1.", ch, obj, NULL, TO_ROOM );
+    }
+    return;
+  }
+  act( "Тут нет $T.", ch, NULL, arg, TO_CHAR );
+}
+
 void do_open( CHAR_DATA *ch, const char *argument )
 {
   open_close(ch, argument, 1);
@@ -145,6 +367,151 @@ bool has_key( CHAR_DATA *ch, int64 key )
   for (obj=ch->carrying;obj;obj=obj->next_content)
     if (obj->pIndexData->vnum==key) return TRUE;
   return FALSE;
+}
+
+void lock_unlock( CHAR_DATA *ch, const char *argument, int action )
+{
+  /* action : 1==LOCK, else UNLOCK */
+  char arg[MAX_INPUT_LENGTH];
+  OBJ_DATA *obj;
+  int door;
+
+  one_argument( argument, arg );
+
+  if ( EMPTY(arg))
+  {
+    ptc(ch,"%sпереть что?\n\r",action==1?"За":"От");
+    return;
+  }
+
+  if ( ( obj = get_obj_here( ch, arg ) ) != NULL )
+  {
+    // portal stuff
+    if (obj->item_type == ITEM_PORTAL)
+    {
+      if (!IS_SET(obj->value[1],EX_ISDOOR)
+       ||  IS_SET(obj->value[1],EX_NOCLOSE))
+      {
+        stc("Ты не можешь сделать этого.\n\r",ch);
+        return;
+      }
+
+      if (!IS_SET(obj->value[1],EX_CLOSED))
+      {
+        stc("Дверь открыта нараспашку.\n\r",ch);
+        return;
+      }
+
+      if (obj->value[4] < 0 || IS_SET(obj->value[1],EX_NOLOCK))
+      {
+        stc("Это не может быть заперто.\n\r",ch);
+        return;
+      }
+
+      if (!has_key(ch,obj->value[4]))
+      {
+        stc("У тебя нет ключа.\n\r",ch);
+        return;
+      }
+
+      if (action==1 && IS_SET(obj->value[1],EX_LOCKED))
+      {
+        stc("Тут уже заперто.\n\r",ch);
+        return;
+      }
+
+      if (action!=1 && !IS_SET(obj->value[1],EX_LOCKED))
+      {
+        stc("Тут не заперто.\n\r",ch);
+        return;
+      }
+
+      if (action==1)
+      {
+        SET_BIT(obj->value[1],EX_LOCKED);
+        act("Ты запираешь $i1.",ch,obj,NULL,TO_CHAR);
+        act("$c1 запирает $i1.",ch,obj,NULL,TO_ROOM);
+        return;
+      }
+      else
+      {
+        REM_BIT(obj->value[1],EX_LOCKED);
+        act("Ты отпираешь $i1.",ch,obj,NULL,TO_CHAR);
+        act("$c1 отпирает $i1.",ch,obj,NULL,TO_ROOM);
+        return;
+      }
+    }
+
+    /* 'lock object' */
+    if ( obj->item_type != ITEM_CONTAINER )
+       { stc( "Это не контейнер.\n\r", ch ); return; }
+    if ( !IS_SET(obj->value[1], CONT_CLOSED) )
+       { stc( "Оно открыто.\n\r",        ch ); return; }
+    if ( obj->value[2] < 0 )
+       { stc( "Это не может быть закрыто.\n\r",     ch ); return; }
+    if ( !has_key( ch, obj->value[2] ) )
+       { stc( "У тебя нет ключа.\n\r",       ch ); return; }
+    if ( action==1 && IS_SET(obj->value[1], CONT_LOCKED) )
+       { stc( "Тут уже заперто.\n\r",    ch ); return; }
+    if ( action!=1 && !IS_SET(obj->value[1], CONT_LOCKED) )
+       { stc( "Тут уже не заперто.\n\r",    ch ); return; }
+  
+    if (action==1)
+    {
+       SET_BIT(obj->value[1], CONT_LOCKED);
+       act("Ты запираешь $i1.",ch,obj,NULL,TO_CHAR);
+       act( "$c1 запирает $i1.", ch, obj, NULL, TO_ROOM );
+       return;
+    }
+    else
+    {
+      REM_BIT(obj->value[1], CONT_LOCKED);
+      act("Ты отпираешь $i1.",ch,obj,NULL,TO_CHAR);
+      act( "$c1 отпирает $i1.", ch, obj, NULL, TO_ROOM );
+      return;
+    }
+  }
+
+  if ( ( door = find_door( ch, arg ) ) >= 0 )
+  {
+    /* 'lock door' */
+    ROOM_INDEX_DATA *to_room;
+    EXIT_DATA *pexit;
+    EXIT_DATA *pexit_rev;
+  
+    pexit   = ch->in_room->exit[door];
+    if ( !IS_SET(pexit->exit_info, EX_CLOSED) )
+       { stc( "Сначала закрой это.\n\r",        ch ); return; }
+    if ( pexit->key < 0 )
+       { stc( "Это не может быть закрыто.\n\r",     ch ); return; }
+    if ( !has_key( ch, pexit->key) )
+       { stc( "У тебя нет ключа.\n\r",       ch ); return; }
+    if ( action==1 && IS_SET(pexit->exit_info, EX_LOCKED) )
+       { stc( "Тут уже заперто.\n\r",    ch ); return; }
+    if ( action!=1 && !IS_SET(pexit->exit_info, EX_LOCKED) )
+       { stc( "Тут уже не заперто.\n\r",    ch ); return; }
+
+    if (action==1)
+    {
+      SET_BIT(pexit->exit_info, EX_LOCKED);
+      act( "$c1 запирает $d.", ch, NULL, pexit->keyword, TO_ROOM );
+    }
+    else
+    {
+      REM_BIT(pexit->exit_info, EX_LOCKED);
+      act( "$c1 отпирает $d.", ch, NULL, pexit->keyword, TO_ROOM );
+    }
+    stc( "*Щелк*\n\r", ch );
+
+    // lock the other side
+    if ( ( to_room   = pexit->u1.to_room            ) != NULL
+      && ( pexit_rev = to_room->exit[rev_dir[door]] ) != 0
+      && pexit_rev->u1.to_room == ch->in_room )
+    {
+      if (action==1) SET_BIT( pexit_rev->exit_info, EX_LOCKED );
+      else  REM_BIT( pexit_rev->exit_info, EX_LOCKED );
+    }
+  }
 }
 
 void do_lock( CHAR_DATA *ch, const char *argument )
@@ -1369,295 +1736,6 @@ void do_rape( CHAR_DATA *ch, const char *argument )
   }
 }
 
-void lock_unlock( CHAR_DATA *ch, const char *argument, int action )
-{
-  /* action : 1==LOCK, else UNLOCK */
-  char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
-  int door;
-
-  one_argument( argument, arg );
-
-  if ( EMPTY(arg))
-  {
-    ptc(ch,"%sпереть что?\n\r",action==1?"За":"От");
-    return;
-  }
-
-  if ( ( obj = get_obj_here( ch, arg ) ) != NULL )
-  {
-    // portal stuff
-    if (obj->item_type == ITEM_PORTAL)
-    {
-      if (!IS_SET(obj->value[1],EX_ISDOOR)
-       ||  IS_SET(obj->value[1],EX_NOCLOSE))
-      {
-        stc("Ты не можешь сделать этого.\n\r",ch);
-        return;
-      }
-
-      if (!IS_SET(obj->value[1],EX_CLOSED))
-      {
-        stc("Дверь открыта нараспашку.\n\r",ch);
-        return;
-      }
-
-      if (obj->value[4] < 0 || IS_SET(obj->value[1],EX_NOLOCK))
-      {
-        stc("Это не может быть заперто.\n\r",ch);
-        return;
-      }
-
-      if (!has_key(ch,obj->value[4]))
-      {
-        stc("У тебя нет ключа.\n\r",ch);
-        return;
-      }
-
-      if (action==1 && IS_SET(obj->value[1],EX_LOCKED))
-      {
-        stc("Тут уже заперто.\n\r",ch);
-        return;
-      }
-
-      if (action!=1 && !IS_SET(obj->value[1],EX_LOCKED))
-      {
-        stc("Тут не заперто.\n\r",ch);
-        return;
-      }
-
-      if (action==1)
-      {
-        SET_BIT(obj->value[1],EX_LOCKED);
-        act("Ты запираешь $i1.",ch,obj,NULL,TO_CHAR);
-        act("$c1 запирает $i1.",ch,obj,NULL,TO_ROOM);
-        return;
-      }
-      else
-      {
-        REM_BIT(obj->value[1],EX_LOCKED);
-        act("Ты отпираешь $i1.",ch,obj,NULL,TO_CHAR);
-        act("$c1 отпирает $i1.",ch,obj,NULL,TO_ROOM);
-        return;
-      }
-    }
-
-    /* 'lock object' */
-    if ( obj->item_type != ITEM_CONTAINER )
-       { stc( "Это не контейнер.\n\r", ch ); return; }
-    if ( !IS_SET(obj->value[1], CONT_CLOSED) )
-       { stc( "Оно открыто.\n\r",        ch ); return; }
-    if ( obj->value[2] < 0 )
-       { stc( "Это не может быть закрыто.\n\r",     ch ); return; }
-    if ( !has_key( ch, obj->value[2] ) )
-       { stc( "У тебя нет ключа.\n\r",       ch ); return; }
-    if ( action==1 && IS_SET(obj->value[1], CONT_LOCKED) )
-       { stc( "Тут уже заперто.\n\r",    ch ); return; }
-    if ( action!=1 && !IS_SET(obj->value[1], CONT_LOCKED) )
-       { stc( "Тут уже не заперто.\n\r",    ch ); return; }
-  
-    if (action==1)
-    {
-       SET_BIT(obj->value[1], CONT_LOCKED);
-       act("Ты запираешь $i1.",ch,obj,NULL,TO_CHAR);
-       act( "$c1 запирает $i1.", ch, obj, NULL, TO_ROOM );
-       return;
-    }
-    else
-    {
-      REM_BIT(obj->value[1], CONT_LOCKED);
-      act("Ты отпираешь $i1.",ch,obj,NULL,TO_CHAR);
-      act( "$c1 отпирает $i1.", ch, obj, NULL, TO_ROOM );
-      return;
-    }
-  }
-
-  if ( ( door = find_door( ch, arg ) ) >= 0 )
-  {
-    /* 'lock door' */
-    ROOM_INDEX_DATA *to_room;
-    EXIT_DATA *pexit;
-    EXIT_DATA *pexit_rev;
-  
-    pexit   = ch->in_room->exit[door];
-    if ( !IS_SET(pexit->exit_info, EX_CLOSED) )
-       { stc( "Сначала закрой это.\n\r",        ch ); return; }
-    if ( pexit->key < 0 )
-       { stc( "Это не может быть закрыто.\n\r",     ch ); return; }
-    if ( !has_key( ch, pexit->key) )
-       { stc( "У тебя нет ключа.\n\r",       ch ); return; }
-    if ( action==1 && IS_SET(pexit->exit_info, EX_LOCKED) )
-       { stc( "Тут уже заперто.\n\r",    ch ); return; }
-    if ( action!=1 && !IS_SET(pexit->exit_info, EX_LOCKED) )
-       { stc( "Тут уже не заперто.\n\r",    ch ); return; }
-
-    if (action==1)
-    {
-      SET_BIT(pexit->exit_info, EX_LOCKED);
-      act( "$c1 запирает $d.", ch, NULL, pexit->keyword, TO_ROOM );
-    }
-    else
-    {
-      REM_BIT(pexit->exit_info, EX_LOCKED);
-      act( "$c1 отпирает $d.", ch, NULL, pexit->keyword, TO_ROOM );
-    }
-    stc( "*Щелк*\n\r", ch );
-
-    // lock the other side
-    if ( ( to_room   = pexit->u1.to_room            ) != NULL
-      && ( pexit_rev = to_room->exit[rev_dir[door]] ) != 0
-      && pexit_rev->u1.to_room == ch->in_room )
-    {
-      if (action==1) SET_BIT( pexit_rev->exit_info, EX_LOCKED );
-      else  REM_BIT( pexit_rev->exit_info, EX_LOCKED );
-    }
-  }
-}
-
-void open_close( CHAR_DATA *ch, const char *argument,int action )
-{
-  // action: 1==open, else==close.
-  char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
-  int door;
-
-  one_argument( argument, arg );
-
-  if (EMPTY(arg))
-  {
-    ptc(ch,"%sкрыть что?\n\r",action==1?"От":"За");
-    return;
-  }
-
-  if ( ( door = find_door( ch, arg ) ) >= 0 )
-  {
-    // open door
-    ROOM_INDEX_DATA *to_room;
-    EXIT_DATA *pexit;
-    EXIT_DATA *pexit_rev;
-
-    pexit = ch->in_room->exit[door];
-    if ( action==1 && !IS_SET(pexit->exit_info, EX_CLOSED) )
-      { stc( "Тут уже открыто.\n\r",      ch ); return; }
-    if ( action!=1 && IS_SET(pexit->exit_info, EX_CLOSED) )
-      { stc( "Тут уже закрыто.\n\r",      ch ); return; }
-    if (  IS_SET(pexit->exit_info, EX_LOCKED) )
-      { stc( "Заперто.\n\r",            ch ); return; }
-    if (IS_SET(pexit->exit_info, EX_DWARVESGUILD) && !GUILD(ch,DWARVES_GUILD))
-      { stc( "Ты не можешь сдвинуть это даже на дюйм.\n\r",ch ); return; }
-
-    if (action==1)
-    {
-      REM_BIT(pexit->exit_info, EX_CLOSED);
-      act( "$c1 открывает $d.", ch, NULL, pexit->keyword, TO_ROOM );
-    }
-    else
-    {
-      SET_BIT(pexit->exit_info, EX_CLOSED);
-      act( "$c1 закрывает $d.", ch, NULL, pexit->keyword, TO_ROOM );
-    }
-    stc( "Ok.\n\r", ch );
-
-    // open the other side
-    if ( ( to_room   = pexit->u1.to_room            ) != NULL
-      &&   ( pexit_rev = to_room->exit[rev_dir[door]] ) != NULL
-      &&   pexit_rev->u1.to_room == ch->in_room )
-    {
-      CHAR_DATA *rch;
-      if (action==1)
-      {
-        REM_BIT( pexit_rev->exit_info, EX_CLOSED );
-        for ( rch = to_room->people; rch != NULL; rch = rch->next_in_room )
-        act( "$d открывается.", rch, NULL, pexit_rev->keyword, TO_CHAR );
-      }
-      else
-      {
-        SET_BIT( pexit_rev->exit_info, EX_CLOSED );
-        for ( rch = to_room->people; rch != NULL; rch = rch->next_in_room )
-        act( "$d закрывается.", rch, NULL, pexit_rev->keyword, TO_CHAR );
-      }
-    }
-    return;
-  }
-
-  if ( ( obj = get_obj_here( ch, arg ) ) != NULL )
-  {
-    // open portal
-    if (obj->item_type == ITEM_PORTAL)
-    {
-      if (!IS_SET(obj->value[1], EX_ISDOOR))
-      {
-        stc("Ты не можешь сделать этого.\n\r",ch);
-        return;
-      }
-
-      if (action==1 && !IS_SET(obj->value[1], EX_CLOSED))
-      {
-        stc("Тут уже открыто.\n\r",ch);
-        return;
-      }
-
-      if (action!=1 && IS_SET(obj->value[1], EX_CLOSED))
-      {
-        stc("Тут уже закрыто.\n\r",ch);
-        return;
-      }
-
-      if (IS_SET(obj->value[1], EX_LOCKED))
-      {
-        stc("Заперто.\n\r",ch);
-        return;
-      }
-
-      if (IS_SET(obj->value[1], EX_DWARVESGUILD) && !GUILD(ch,DWARVES_GUILD))
-      { stc( "Ты не можешь сдвинуть это даже на дюйм.\n\r",ch ); return; }
-
-      if (action==1)
-      {
-        REM_BIT(obj->value[1], EX_CLOSED);
-        act("Ты открываешь $i1.",ch,obj,NULL,TO_CHAR);
-        act("$c1 открывает $i1.",ch,obj,NULL,TO_ROOM);
-      }
-      else
-      {
-        SET_BIT(obj->value[1], EX_CLOSED);
-        act("Ты закрываешь $i1.",ch,obj,NULL,TO_CHAR);
-        act("$c1 закрывает $i1.",ch,obj,NULL,TO_ROOM);
-      }
-      return;
-    }
-
-    /* 'open object' */
-    if ( obj->item_type != ITEM_CONTAINER)
-       { stc( "Это не контейнер.\n\r", ch ); return; }
-    if ( action==1 && !IS_SET(obj->value[1], CONT_CLOSED) )
-       { stc( "Тут уже открыто.\n\r",      ch ); return; }
-    if ( action!=1 && IS_SET(obj->value[1], CONT_CLOSED) )
-       { stc( "Тут уже закрыто.\n\r",      ch ); return; }
-    if ( !IS_SET(obj->value[1], CONT_CLOSEABLE) )
-       { stc( "Ты не можешь этого сделать.\n\r",      ch ); return; }
-    if ( IS_SET(obj->value[1], CONT_LOCKED) )
-       { stc( "Заперто.\n\r",            ch ); return; }
-    if (IS_SET(obj->value[1], EX_DWARVESGUILD) && !GUILD(ch,DWARVES_GUILD))
-       { stc( "Ты не можешь сдвинуть это даже на дюйм.\n\r",ch ); return; }
-
-    if (action==1)
-    {
-      REM_BIT(obj->value[1], CONT_CLOSED);
-     act("Ты открываешь $i1.",ch,obj,NULL,TO_CHAR);
-     act( "$c1 открывает $i1.", ch, obj, NULL, TO_ROOM );
-    }
-    else
-    {
-      SET_BIT(obj->value[1], CONT_CLOSED);
-      act("Ты закрываешь $i1.",ch,obj,NULL,TO_CHAR);
-      act( "$c1 закрывает $i1.", ch, obj, NULL, TO_ROOM );
-    }
-    return;
-  }
-  act( "Тут нет $T.", ch, NULL, arg, TO_CHAR );
-}
-
 bool do_move_char( CHAR_DATA *ch, int door, bool follow, bool run )
 {
   CHAR_DATA *fch;
@@ -2153,97 +2231,6 @@ void do_scan(CHAR_DATA *ch, const char *argument)
     }
   }
   scan(ch, dir);
-}
-
-bool scan_room (CHAR_DATA *ch, const ROOM_INDEX_DATA *room,char *buf)
-{
-  CHAR_DATA *target = room->people;
-  bool found=FALSE;
-
-  while (target != NULL)
-  {
-    if (can_see(ch,target,CHECK_LVL))
-    {
-//      found=TRUE;
-      if (IS_NPC(target))
-      {
-//statui nevidimi po scanu
-//        if ((target->pIndexData->vnum)>23079 && (target->pIndexData->vnum)<23098) 
-        if (IS_STATUE(target))
-        {
-          target = target->next_in_room;
-          continue;
-        }
-        strcat(buf,"\n\r                {W");
-        strcat(buf,get_char_desc(target,'1'));
-      }
-      else
-      {
-        strcat(buf,"\n\r                {Y");
-        strcat(buf,target->name);
-      }
-      found=TRUE;
-    }
-    target = target->next_in_room;
-  }
-  strcat(buf,"{x\n\r");
-  return found;
-}
-
-bool scan_dir(CHAR_DATA *ch,const ROOM_INDEX_DATA *room,int dir,char *buf)
-{
-  EXIT_DATA * pexit=NULL;
-  //extern char * const dname[];
-
-  pexit = room->exit[dir];
-  if (pexit == NULL) return TRUE;
-  if (IS_SET(pexit->exit_info,EX_CLOSED))
-  {
-    strcat(buf,"   {DЗакрытая дверь.{x\n\r");
-    stc(buf,ch);
-    return TRUE;
-  }
-  if (pexit->u1.to_room == NULL || !can_see_room(ch,pexit->u1.to_room)) return TRUE;
-  if (scan_room(ch,pexit->u1.to_room,buf)) stc(buf,ch);
-  return FALSE;
-}
-
-void scan(CHAR_DATA *ch,int door)
-{
- extern char * const dname[];
- char buf[MAX_STRING_LENGTH*3];
- int dir=0;
- const ROOM_INDEX_DATA *new_room;
-
- do_printf (buf, "{CЗдесь :{x");
- if (!scan_room(ch,ch->in_room,buf)) strcat (buf,"Никого\n\r");
- stc(buf,ch);
-
- if (door==100)
- {
-   for (dir=0;dir<6;dir++)
-   {
-     do_printf(buf,"{CНа %s:{x",dname[dir]);
-     if (scan_dir(ch,ch->in_room,dir,buf)) continue;
-     if (!is_affected(ch,skill_lookup("farsight"))) continue;
-     new_room=ch->in_room->exit[dir]->u1.to_room;
-     do_printf(buf,"{CРядом на %s:{x",dname[dir]);
-     scan_dir(ch,new_room,dir,buf);
-   }
-   return;
- }
-        
- do_printf(buf,"{CНа %s:{x",dname[door]);
- if(scan_dir(ch,ch->in_room,door,buf)) return;
- new_room=ch->in_room->exit[door]->u1.to_room;
- do_printf(buf,"{CРядом на %s:{x",dname[door]);
- if (scan_dir(ch,new_room,door,buf)) return;
- new_room=new_room->exit[door]->u1.to_room;
- if (is_affected(ch,skill_lookup("farsight")))
- {
-   do_printf(buf,"{CДалеко на %s:{x",dname[door]);
-   if (scan_dir(ch,new_room,door,buf)) return;
- }
 }
 
 void do_sprecall( CHAR_DATA *ch, const char *argument )
