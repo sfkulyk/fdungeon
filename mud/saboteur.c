@@ -2074,7 +2074,7 @@ void do_inform(CHAR_DATA *ch, const char *argument)
   {
     ptc(ch, "Ты являешься %s %s.\n\r",
   (ch->sex==2)?t_favour[favour_string(ch)].fav_afstr:t_favour[favour_string(ch)].fav_amstr,
-  get_rdeity(deity_table[ch->pcdata->dn].russian,'2') );
+  get_rdeity(deity_table[ch->pcdata->dn].rname,'2') );
   }
   stc("{cТвои пристрастия к группам {Cмагии{c:\n\r",ch);
   ptc(ch,"{CWater     :{x%3d    ",category_bonus(ch,WATER));
@@ -2935,12 +2935,6 @@ void do_newspaper(CHAR_DATA *ch, const char *argument)
   }
 }
 
-
-void do_russian( CHAR_DATA *ch, const char *argument )
-{
-  ch->comm=toggle_int64(ch->comm,COMM_RUSSIAN);
-  ptc(ch,"Поддержка русского языка %s{x.\n\r",IS_SET(ch->comm,COMM_RUSSIAN)?"{Gвкл":"{Rвыкл");
-}
 
 int get_full_class(CHAR_DATA *ch)
 {

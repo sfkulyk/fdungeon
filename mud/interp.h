@@ -332,7 +332,6 @@ DECLARE_DO_FUN2( do_fly          ); // to fly (race special) (C) Saboteur
 DECLARE_DO_FUN2( do_smoke        ); // a social (C) Saboteur
 DECLARE_DO_FUN2( do_dampool      ); // View Dampool (C) Saboteur
 DECLARE_DO_FUN2( do_newspaper    ); // Newspaper (C) Saboteur
-DECLARE_DO_FUN2( do_russian	 ); // Russian language (C) Saboteur
 DECLARE_DO_FUN2( do_tournament   ); // Tournaments (C) Imperror
 DECLARE_DO_FUN2( do_talk         ); // save talks in lostlink (C) Saboteur
 DECLARE_DO_FUN2( do_deaf         ); // deaf mode (C) Saboteur (channels)

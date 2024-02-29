@@ -233,7 +233,7 @@ struct  race_type  race_table [] =
 // Deity table.
 struct  deity_choice  deity_table [MAX_DEITIES] =
 {
-//  Name,         Russian,  min_align, max_align, Descr, App[MAX_DEITY_APP]
+//  Name,         r_name,  min_align, max_align, Descr, App[MAX_DEITY_APP]
   { "base deity", "base r_name!", 0, 0, "no description", 0, { 0 } },
   { NULL,         NULL,           0, 0, NULL,             0, { 0 } },
   { NULL,         NULL,           0, 0, NULL,             0, { 0 } },

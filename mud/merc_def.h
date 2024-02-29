@@ -1168,7 +1168,6 @@
 #define COMM_NOGSOC     (E)
 #define COMM_NODELETE   (F)
 #define COMM_NOTELL     (G)
-#define COMM_RUSSIAN    (H)
 #define COMM_BRIEF      (I)
 #define COMM_PROMPT     (J)
 #define COMM_TELNET_GA  (K)

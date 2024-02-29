@@ -397,7 +397,6 @@ struct  cmd_type        cmd_table       [] =
  { "fly",         "взлететь",    "злетіти",     do_fly,         POS_FIGHTING,  1,  WIZ_SKILLS, SHOW|FREEZE|NOLOG},
  { "walk",        "приземлится", "приземлитися",do_walk,        POS_FIGHTING,  1,  WIZ_SKILLS, SHOW|FREEZE|NOLOG},
  { "smoke",       "курить",      "курити",      do_smoke,       POS_RESTING,   1,  WIZ_SPEAKS, HIDE|NOMOB|NOORDER|NOPUB|FREEZE },
- { "russian",     "русский",     "російський",  do_russian,     POS_DEAD,      1,  WIZ_SECURE, SHOW|MORPH|NOORDER|NOMOB|FREEZE },
  { "mist",        "туман",       "туман",       do_mist,        POS_STANDING,  1,  WIZ_SKILLS, SHOW|FREEZE|NOLOG },
  { "howl",        "вой",         "вой",         do_howl,        POS_STANDING,  1,  WIZ_SKILLS, SHOW|MORPH|NOMOB|FREEZE|NOLOG },
  { "gquest",      "гквест",      "гквест",      do_gquest,      POS_DEAD,      1,  WIZ_SKILLS, HIDE|MORPH|NOMOB|FREEZE|NOARMY|NOORDER },
@@ -479,20 +478,6 @@ void interpret( CHAR_DATA *ch, const char *argument )
       }
     }
   }
-#ifdef WITH_DSO
-  if (!cmd_ptr)
-    {
-      struct command *c;
-      CMDS_FOREACH (c)
-        if (command[0] == c->cmd.name[0] && c->cmd.level <= trust &&
-          ((c->cm_nice < 100 && !str_prefix (command, c->cmd.name))
-           || !str_cmp (command, c->cmd.name)))
-        {
-          cmd_ptr = &c->cmd;
-          break;
-        }
-    }
-#endif
 
   if ( !cmd_ptr )
   {
@@ -818,30 +803,18 @@ void do_commands( CHAR_DATA *ch, const char *argument )
   int cmd=0, col=0;
  
 
-  ptc(ch, "{G[{Y%-12s %12s{G] [{Y%-12s %12s{G] [{Y%-12s %12s{G]\n\r",
-     "English","Русский","English","Русский","English","Русский");
+  stc("Список доступных команд:\n",ch);
   for (;cmd_table[cmd].name[0]!= '\0'; cmd++ )
   {
     if (cmd_table[cmd].level<LEVEL_HERO
       && cmd_table[cmd].level<=get_trust(ch)
       && IS_SET(cmd_table[cmd].flag,SHOW))
     {
-     ptc(ch,"{G[{Y%-12s %12s{G] ",cmd_table[cmd].name,cmd_table[cmd].rname);
-     if (++col % 3==0) stc( "{x\n\r", ch );
+     ptc(ch,"{G[{Y%-12s %12s %12s{G] ",cmd_table[cmd].name,cmd_table[cmd].rname,cmd_table[cmd].uname);
+     if (++col % 2==0) stc( "{x\n\r", ch );
     }
   }
-#ifdef WITH_DSO
-  {
-  struct command *c;
-  CMDS_FOREACH(c)
-        if (c->cmd.level < LEVEL_HERO
-          && c->cmd.level <= get_trust(ch)
-          && IS_SET(c->cmd.flag,SHOW)) {
-             ptc(ch,"{G[{Y%-12s %12s{G] ",c->cmd.name,c->cmd.rname);
-             if (++col % 3==0) stc( "{x\n\r", ch );
-        }
-  }
-#endif
+
   if (col % 3!=0) stc("{x\n\r",ch);
   return;
 }
@@ -871,21 +844,6 @@ void do_wizhelp( CHAR_DATA *ch, const char *argument )
     }                                      
     if (col % 6 != 0) stc("{x\n\r", ch);
   }
-
-#ifdef WITH_DSO
-  {
-  struct command *c;
-  CMDS_FOREACH(c)
-    if (c->cmd.level >= LEVEL_HERO
-      && c->cmd.level <= get_trust(ch)
-      && IS_SET(c->cmd.flag,SHOW)) 
-    {
-      ptc(ch,"%-12s",c->cmd.name);
-      if (++col % 6 == 0) stc( "\n\r", ch );
-    }
-  }
-#endif
-//  if ( col % 6 != 0 ) stc( "\n\r", ch );
   return;
 }
 

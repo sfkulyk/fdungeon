@@ -4414,8 +4414,8 @@ void do_pray( CHAR_DATA *ch, const char* argument)
       ch->mana                = ch->max_mana;
       ch->move                = ch->max_move;
       update_pos(ch);
-      ptc( ch, "{C%s{x восстановил твои силы.\n\r", get_rdeity(deity_table[ch->pcdata->dn].russian,'2') );
-      ptc( ch, "“воя вера в {C%s{x сильна, как никогда!\n\r", get_rdeity(deity_table[ch->pcdata->dn].russian,'2') );
+      ptc( ch, "{C%s{x восстановил твои силы.\n\r", get_rdeity(deity_table[ch->pcdata->dn].rname,'2') );
+      ptc( ch, "“воя вера в {C%s{x сильна, как никогда!\n\r", get_rdeity(deity_table[ch->pcdata->dn].rname,'2') );
       statue_moving(vch);
       return;
     }
@@ -4432,8 +4432,8 @@ void do_pray( CHAR_DATA *ch, const char* argument)
   update_pos(ch);
   if( !IS_IMMORTAL(ch) ) WAIT_STATE(ch,PULSE_VIOLENCE);
 
-  ptc( ch, "“ы молишьс€ {C%s{x...\n\r", get_rdeity( deity_table[ch->pcdata->dn].russian,'3') );
-  do_printf( buf, "%s молитс€ {C%s{x...", ch->name, get_rdeity( deity_table[ch->pcdata->dn].russian,'3') );
+  ptc( ch, "“ы молишьс€ {C%s{x...\n\r", get_rdeity( deity_table[ch->pcdata->dn].rname,'3') );
+  do_printf( buf, "%s молитс€ {C%s{x...", ch->name, get_rdeity( deity_table[ch->pcdata->dn].rname,'3') );
   act( buf, ch, NULL, NULL, TO_ROOM);
 
   if ( is_affected(ch,skill_lookup("pray")) )
@@ -4444,7 +4444,7 @@ void do_pray( CHAR_DATA *ch, const char* argument)
     { 
       // bad 
       if (IS_IMMORTAL(ch)) return;
-      ptc( ch, "“ы разгневал {C%s{x своими молитвами!\n\r", get_rdeity(deity_table[ch->pcdata->dn].russian,'2') );
+      ptc( ch, "“ы разгневал {C%s{x своими молитвами!\n\r", get_rdeity(deity_table[ch->pcdata->dn].rname,'2') );
       if (!is_affected(ch,skill_lookup("weaken")))
       { 
         af.where     = TO_AFFECTS;
@@ -4508,7 +4508,7 @@ void do_pray( CHAR_DATA *ch, const char* argument)
     || (ordencheck && number_percent() > ch->alignment/10))
   { 
     // nothing 
-    ptc( ch, "%s не отвечает на твои молитвы...\n\r",get_rdeity(deity_table[ch->pcdata->dn].russian,'1') );
+    ptc( ch, "%s не отвечает на твои молитвы...\n\r",get_rdeity(deity_table[ch->pcdata->dn].rname,'1') );
     check_improve(ch,gsn_pray,FALSE,1);
     return;
   } 
@@ -4529,7 +4529,7 @@ void do_pray( CHAR_DATA *ch, const char* argument)
   if( ch->classcle!=1 && !IS_ELDER(ch) ) return;
 
   // additional random effects for clerics
-  ptc( ch, "Ѕлагословение %s снизошло на теб€!\n\r", get_rdeity(deity_table[ch->pcdata->dn].russian,'2') );
+  ptc( ch, "Ѕлагословение %s снизошло на теб€!\n\r", get_rdeity(deity_table[ch->pcdata->dn].rname,'2') );
  
   if (ch->position==POS_FIGHTING && ch->fighting!=NULL) 
   { 

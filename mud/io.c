@@ -909,11 +909,6 @@ void do_global( CHAR_DATA *ch, const char *argument )
 
     argument=one_argument(argument, command);
 
-#ifdef WITH_DSO
-          /*
-           * So, how do I disable commands, which not loaded (yet)
-           */
-#endif
     if (EMPTY(command))
     {
        for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ )
@@ -1205,5 +1200,5 @@ void do_player(CHAR_DATA *ch, const char *argument)
 
 void do_version( CHAR_DATA *ch, const char *argument )
 {
-  stc("\n\r{CForgotten Dungeon. {YCurrent version: {G4.88.00 (Saboteur){x\n\r",ch);
+  stc("\n\r{CForgotten Dungeon. {YCurrent version: {G4.89.00 (Saboteur){x\n\r",ch);
 }

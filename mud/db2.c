@@ -899,11 +899,6 @@ void load_config()
         {
           fMatch = TRUE;
           word = fread_word(fp);
-#ifdef WITH_DSO
-          /*
-           * So, how do I disable commands, which is not loaded (yet)?
-           */
-#endif
           for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ )
           {
             if (!str_cmp(cmd_table[cmd].name, word)) SET_BIT(cmd_table[cmd].flag, DENY);
@@ -950,15 +945,6 @@ void load_config()
           offers++;
         }
         break;
-#ifdef WITH_DSO
-      case 'M':
-        if (!strcmp(word, "Module")) {
-                const char *dname = fread_string(fp);
-                dl_load(dname, NULL);
-                fMatch = TRUE;
-        }
-        break;
-#endif
     }
 
     if ( !fMatch )
@@ -1565,7 +1551,7 @@ void load_one_deity(FILE *fp, int deity)
         KEY("Name",dtab.name, fread_string(fp));
         break;
       case 'R':
-        KEY("Russian",dtab.russian, fread_string(fp));
+        KEY("Rname",dtab.rname, fread_string(fp));
         break;
       case 'D':
         KEY("Descr",dtab.descr, fread_string(fp));

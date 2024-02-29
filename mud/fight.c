@@ -5339,9 +5339,9 @@ void tatoo_works(CHAR_DATA *ch, CHAR_DATA *victim)
   char buf[MAX_STRING_LENGTH];
   int dam=0;
 
-  do_printf( buf, "{C%s{x помогает $c1 в бою!", get_rdeity( deity_table[ch->pcdata->dn].russian,'1'));
+  do_printf( buf, "{C%s{x помогает $c1 в бою!", get_rdeity( deity_table[ch->pcdata->dn].rname,'1'));
   act( buf, ch, NULL, NULL, TO_ROOM);
-  ptc(ch,"{C%s{x помогает тебе в бою!\r\n", get_rdeity( deity_table[ch->pcdata->dn].russian,'1'));
+  ptc(ch,"{C%s{x помогает тебе в бою!\r\n", get_rdeity( deity_table[ch->pcdata->dn].rname,'1'));
 
 
   switch (ch->pcdata->dn)

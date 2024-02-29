@@ -292,7 +292,7 @@ struct race_type
 struct deity_choice
 {
   const char *name;
-  const char *russian;
+  const char *rname;
   int min_align;
   int max_align;
   const char *descr;

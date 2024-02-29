@@ -1790,28 +1790,11 @@ void save_config ()
   do_fprintf(fp,"Autologin %d %d\n", autologin_code, autologin_pass);
   do_fprintf(fp,"FILE_WHO %s~\n",fname_who);
   do_fprintf(fp,"FILE_ONLINE %s~\n",fname_online);
-
-#ifdef WITH_DSO
-  {
-        struct module *mod;
-//      store modules at the beginning
-        do_fprintf(fp, "; Load following modules at startup time.\n");
-        MODS_FOREACH(mod)
-                if(mod->md_fname)
-                        do_fprintf(fp, "Module %s~\n", mod->md_fname);
-  }
-#endif
-
   do_fprintf(fp,"; Birthday phrazes (emote)\n");
   for (cmd=0;cmd<10;cmd++) do_fprintf(fp,"BD%d %s~\n",cmd,bdmsg[cmd]);
 
   do_fprintf(fp,"; Disabled commands:\n");
   // Saving disabled commands
-#ifdef WITH_DSO
-          /*
-           * So, how do I disable commands, which not loaded (yet)?
-           */
-#endif
   for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ )
   {
     if (IS_SET(cmd_table[cmd].flag, DENY))

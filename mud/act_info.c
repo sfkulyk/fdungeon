@@ -1673,7 +1673,7 @@ void do_whois (CHAR_DATA *ch, const char *argument)
          {
            do_printf(temp,"{c%s {R%s",
             (wch->sex==2)?t_favour[favour_string(wch)].fav_nfstr:t_favour[favour_string(wch)].fav_nmstr,
-            get_rdeity( deity_table[wch->pcdata->dn].russian, '2') );
+            get_rdeity( deity_table[wch->pcdata->dn].rname, '2') );
             do_printf(buf,"{C| %72s  {C|\n\r",temp);
          }
        add_buf(output,buf);

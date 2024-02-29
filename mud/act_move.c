@@ -915,7 +915,7 @@ void do_recall( CHAR_DATA *ch, const char *argument )
     char buf[MAX_STRING_LENGTH];
 
     do_printf( buf, "{y    $c1{x пpосит %s пеpенести его!", 
-       get_rdeity( deity_table[deity_lookup(ch->deity)].russian, '2') );
+       get_rdeity( deity_table[deity_lookup(ch->deity)].rname, '2') );
     act( buf, ch, 0, NULL, TO_ROOM );
   }
   else  

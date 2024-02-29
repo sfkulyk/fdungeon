@@ -2519,7 +2519,6 @@ char *comm_bit_name(int64 comm_flags)
   if (comm_flags & COMM_PROMPT       ) strcat(buf, " prompt");
   if (comm_flags & COMM_NOEMOTE      ) strcat(buf, " no_emote");
   if (comm_flags & COMM_NOTELL       ) strcat(buf, " no_tell");
-  if (comm_flags & COMM_RUSSIAN      ) strcat(buf, " russian");
   if (comm_flags & COMM_NOCHANNELS   ) strcat(buf, " no_channels");
   if (comm_flags & COMM_TELNET_GA    ) strcat(buf, " no_telnet_ga");
   if (comm_flags & COMM_AFK          ) strcat(buf, " afk");

@@ -331,7 +331,6 @@ const struct flag_type comm_flags[] =
   {   "telnet_ga",            COMM_TELNET_GA,         TRUE    },
   {   "notell",               COMM_NOTELL,            TRUE    },
   {   "nochannels",           COMM_NOCHANNELS,        TRUE    },
-  {   "russian",              COMM_RUSSIAN,           TRUE    },
   {   "prompt",               COMM_PROMPT,            TRUE    },
   {   "afk",                  COMM_AFK,               TRUE    },
   {   "coder",                COMM_CODER,             TRUE    },

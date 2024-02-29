@@ -1100,20 +1100,6 @@ void read_from_buffer( DESCRIPTOR_DATA *d )
             break;
           }
         }
-#ifdef WITH_DSO
-        if (!found) {
-                struct command *c;
-                CMDS_FOREACH (c)
-                        if (command[0] == c->cmd.name[0] &&
-                           (   (c->cm_nice < 100 && 
-                               !str_prefix (command, c->cmd.name))
-                            || !str_cmp (command, c->cmd.name))) {
-                                cmd_ptr = &c->cmd;
-                                found = TRUE;
-                                break;
-                        }
-        }
-#endif
         if (!found)
         {
           for ( cmd = 0; social_table[cmd].name[0] != '\0'; cmd++ )

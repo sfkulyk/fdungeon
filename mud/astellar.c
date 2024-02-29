@@ -36,7 +36,7 @@ void save_deities()
     if ( !deity_table[deity].name) break;
     do_fprintf(fp, "#Deity\n");
     do_fprintf(fp, "Name %s~\n", deity_table[deity].name);
-    do_fprintf(fp, "Russian %s~\n", deity_table[deity].russian);
+    do_fprintf(fp, "Rname %s~\n", deity_table[deity].rname);
     do_fprintf(fp, "MinAlign %d\n", deity_table[deity].min_align);
     do_fprintf(fp, "MaxAlign %d\n", deity_table[deity].max_align);
     do_fprintf(fp, "Descr %s~\n", deity_table[deity].descr);
@@ -178,7 +178,7 @@ bool favour( CHAR_DATA *ch, int dvalue )
     ch->pcdata->favour += dvalue;
     return TRUE;
   }
-  ptc( ch, "{C%s{x не слышит твоих молитв...\n\r", get_rdeity( deity_table[ch->pcdata->dn].russian, '1') );
+  ptc( ch, "{C%s{x не слышит твоих молитв...\n\r", get_rdeity( deity_table[ch->pcdata->dn].rname, '1') );
   return FALSE;
 }
 
@@ -902,10 +902,10 @@ void do_devote( CHAR_DATA *ch, const char *argument )
 
    if ( !str_prefix( argument, "list") )
    {
-     stc("{D Имя Божества {GРусское имя    {cОписание\n\r", ch);
+     stc("{D Имя Божества {GИмя на кириллице {cОписание\n\r", ch);
      for( deity = 0; dtab.name && deity<MAX_DEITIES; deity++)
      { 
-       ptc( ch, "{C %12s [{Y%12s{C] %s\n\r", dtab.name, get_rdeity( dtab.russian, '1' ), dtab.descr);
+       ptc( ch, "{C %12s [{Y%14s{C] %s\n\r", dtab.name, get_rdeity( dtab.rname, '1' ), dtab.descr);
      }
      return;
    }
@@ -920,39 +920,12 @@ void do_devote( CHAR_DATA *ch, const char *argument )
        return;
      }
      else ptc( ch, "Ты %sпосвящен%s %s.\n\r", (ch->deity)?"":"не ", (ch->sex==2)?"а":"",
-             (ch->deity)?get_rdeity(dtab.russian,'3'):"Божеству");
+             (ch->deity)?get_rdeity(dtab.rname,'3'):"Божеству");
      if( IS_DEVOTED_ANY(ch) ) ptc( ch, "Ты являешься {y%s{W {R%s{x.\n\r",
         ( ch->sex==2)?t_favour[favour_string(ch)].fav_afstr:t_favour[favour_string(ch)].fav_amstr,
-        get_rdeity( dtab.russian, '2') );
+        get_rdeity( dtab.rname, '2') );
      return;
    }
-/*
-   if( !str_cmp( argument, "disavow") && !IS_NPC(ch) )
-   {
-     if( ch->deity )
-     {
-       deity = deity_lookup(ch->deity);
-       dec_worship(ch);
-       if( get_trust(ch) < 102 )
-       {
-         ptc( ch, "Ты отрекаешься от поклонения %s...\n\r", get_rdeity(dtab.russian,'3') );
-         stc("{RТЫ ВЫБРАЛ ЭТО САМ, СМЕРТНЫЙ...{x\n\r", ch);
-         WAIT_STATE( ch, 2*PULSE_VIOLENCE);
-         ch->pcdata->carma -= 10;
-         ch->pcdata->favour = -50;
-         punish_effect( ch);
-       }
-       else ptc( ch, "Ты отрекаешься от покровительства %s...\n\r", get_rdeity(dtab.russian,'2') );
-       ch->pcdata->dn = 49;
-       free_string(ch->deity);
-       ch->deity = NULL;
-       save_deities();
-       return;
-     }
-     stc("У тебя нет покровителя!\n\r", ch);
-     return;
-   }
-*/
    argument = one_argument( argument, arg);
 
    if( !str_cmp(arg,"stat"))
@@ -961,11 +934,11 @@ void do_devote( CHAR_DATA *ch, const char *argument )
      if( !EMPTY(argument) )
        if( !str_cmp( argument, dtab.name) )
        {
-         ptc( ch, "{c%s{x, %s{x.\n\rПризнаваемый характер: от {D%d {xдо {W%d{x.\n\r", get_rdeity( dtab.russian, '1'),
+         ptc( ch, "{c%s{x, %s{x.\n\rПризнаваемый характер: от {D%d {xдо {W%d{x.\n\r", get_rdeity( dtab.rname, '1'),
            dtab.descr, dtab.min_align, dtab.max_align );
          show_deity_applies( ch, deity);
          ptc( ch,"{C%s %sсклонен{x принять твое поклонение.{x\n\r",
-             get_rdeity( dtab.russian,'1'),
+             get_rdeity( dtab.rname,'1'),
              may_devote(ch,deity)?"{G":"{Rне " );
          return;
        }
@@ -975,7 +948,7 @@ void do_devote( CHAR_DATA *ch, const char *argument )
 
    if( ch->deity && !IS_DEITY(ch) )
    {
-     ptc( ch, "Ты являешься последовател%s %s... Сначала отрекись от своего божества...\n\r", (ch->sex==2)?"ьницей":"ем", get_rdeity(deity_table[deity_lookup(ch->deity)].russian,'2'));
+     ptc( ch, "Ты являешься последовател%s %s... Сначала отрекись от своего божества...\n\r", (ch->sex==2)?"ьницей":"ем", get_rdeity(deity_table[deity_lookup(ch->deity)].rname,'2'));
      return;
    }
 
@@ -984,7 +957,7 @@ void do_devote( CHAR_DATA *ch, const char *argument )
       deity = deity_lookup(arg);
       if( !may_devote( ch, deity) )
       {
-        ptc( ch, "Ты не удовлетворяешь требованиям %s.\n\r", get_rdeity(dtab.russian,'2') );
+        ptc( ch, "Ты не удовлетворяешь требованиям %s.\n\r", get_rdeity(dtab.rname,'2') );
         return;
       }
 
@@ -1005,7 +978,7 @@ void do_devote( CHAR_DATA *ch, const char *argument )
         ch->pcdata->favour += 50;
         save_deities();
       }
-      ptc(ch, "Ты посвятил%s себя %s.\n\r", (ch->sex==2)?"а":"", get_rdeity(deity_table[deity_lookup(ch->deity)].russian,'3') );
+      ptc(ch, "Ты посвятил%s себя %s.\n\r", (ch->sex==2)?"а":"", get_rdeity(deity_table[deity_lookup(ch->deity)].rname,'3') );
       return;
     }
 
@@ -1056,8 +1029,8 @@ void do_devote( CHAR_DATA *ch, const char *argument )
          else
          {
            SET_BIT( victim->act, PLR_HIGHPRIEST );
-           ptc( ch, "%s теперь {W%s {R%s{x!\n\r", victim->name, (victim->sex==2)?t_favour[favour_string(victim)].fav_nfstr:t_favour[favour_string(victim)].fav_nmstr, get_rdeity( deity_table[victim->pcdata->dn].russian,'2'));
-           ptc( victim, "Ты теперь {W%s {R%s{x!\n\r", (victim->sex==2)?t_favour[favour_string(victim)].fav_nfstr:t_favour[favour_string(victim)].fav_nmstr, get_rdeity( deity_table[victim->pcdata->dn].russian,'2'));
+           ptc( ch, "%s теперь {W%s {R%s{x!\n\r", victim->name, (victim->sex==2)?t_favour[favour_string(victim)].fav_nfstr:t_favour[favour_string(victim)].fav_nmstr, get_rdeity( deity_table[victim->pcdata->dn].rname,'2'));
+           ptc( victim, "Ты теперь {W%s {R%s{x!\n\r", (victim->sex==2)?t_favour[favour_string(victim)].fav_nfstr:t_favour[favour_string(victim)].fav_nmstr, get_rdeity( deity_table[victim->pcdata->dn].rname,'2'));
          }
          return;
        }
@@ -1074,7 +1047,7 @@ void do_devote( CHAR_DATA *ch, const char *argument )
        }
        deity_table[deity_lookup(arg)].worship +=1;
        ptc( ch, "Теперь у %s %d посвященных.\n\r", 
-            get_rdeity( deity_table[deity_lookup(arg)].russian, '2'),
+            get_rdeity( deity_table[deity_lookup(arg)].rname, '2'),
             deity_table[deity_lookup(arg)].worship );
        return;
      }
@@ -1121,11 +1094,11 @@ void do_devote( CHAR_DATA *ch, const char *argument )
           ptc( ch, "{c| {GСтатистика Deity для {Y%s{G, %s\n\r", victim->name, IS_NPC(victim)?"none":victim->pcdata->title);
           stc( "{c+-------------------------------------------------------------+\n\r", ch);
           ptc( ch, "{c| {GПосвящен{W: {R%12s{x {GЛояльность %s{W: {Y%5d {GКарма{W: {w%d\n\r",
-             get_rdeity(dtab.russian, '3'), get_rdeity( dtab.russian,'2'),
+             get_rdeity(dtab.rname, '3'), get_rdeity( dtab.rname,'2'),
              IS_NPC(ch)?0:victim->pcdata->favour, IS_NPC(ch)?0:victim->pcdata->carma );
           ptc( ch, "{c| {GОписание Deity{W: {x%s{G\n\r", dtab.descr);
           ptc( ch, "{c| {GКоличество последователей у %s{W: {m%d\n\r",
-             get_rdeity( dtab.russian,'2'), dtab.worship );
+             get_rdeity( dtab.rname,'2'), dtab.worship );
           ptc( ch, "{c| {GРазрешенный характер{W: {D%5d{c/{W%5d{G, Характер персонажа{W: {R%5d{x\n\r",
              dtab.min_align, dtab.max_align, victim->alignment );
           ptc( ch, "{c| {YDeityNumber{w:{R%d {YDeityRank{w: {R%d {DDeityCurseCounter{w: {R%d{x\n\r",
@@ -1167,8 +1140,8 @@ void do_devote( CHAR_DATA *ch, const char *argument )
        victim->deity = str_dup(argument);
        victim->pcdata->dn = deity_lookup(argument);
        if( !IS_NPC(victim) ) deity_table[victim->pcdata->dn].worship++;
-       ptc( ch, "Ты посвящаешь %s %s.\n\r", victim->name, get_rdeity(dtab.russian,'3') );
-       ptc( victim, "Теперь твоя жизнь посвящена %s.\n\r", get_rdeity(dtab.russian,'3') );
+       ptc( ch, "Ты посвящаешь %s %s.\n\r", victim->name, get_rdeity(dtab.rname,'3') );
+       ptc( victim, "Теперь твоя жизнь посвящена %s.\n\r", get_rdeity(dtab.rname,'3') );
        if( !IS_NPC(victim) )
        {
          victim->pcdata->favour += 5;
@@ -1206,7 +1179,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
      stc("{G  deity <deity> create   - создать новое Божество{x\n\r", ch);
      stc("{G  deity <deity> delete   - удалить Божество{x\n\r", ch);
      stc("{G  deity <deity> <name>     <new_name>    - сменить имя Божества{x\n\r", ch);
-     stc("{G  deity <deity> <russian>  <new_russian> - сменить русское имя Божества{x\n\r", ch);
+     stc("{G  deity <deity> <rname>  <new_russian> - сменить имя Божества на кириллице{x\n\r", ch);
      stc("{G  deity <deity> <descr>    <new_descr>   - сменить описание Божества{x\n\r", ch);
      stc("{G  deity <deity> <alignmin> <value> - выставить минимальный требуемый характер{x\n\r", ch);
      stc("{G  deity <deity> <alignmax> <value> - выставить максимальный позволимый характер{x\n\r", ch);
@@ -1238,11 +1211,11 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
      if( EMPTY(argument) )
      {
        stc("{w ___   ____   ____________   ____________   ___________{x\n\r", ch);
-       stc("{w[{g#No{w] [{rWsh {w] [{CName        {w] [{yRussianName {w] [{DDescription{w]{x\n\r", ch);
+       stc("{w[{g#No{w] [{rWsh {w] [{CName        {w] [{yRName       {w] [{DDescription{w]{x\n\r", ch);
        stc("{w >-<   >--<   >----------<   >----------<   >---------<{x\n\r", ch);
        for( deity = 0; dtab.name && deity<MAX_DEITIES; deity++)
          ptc( ch, "{w[{G%3d{w] [{R%4d{w] [{c%12s{w] [{Y%12s{w] [{x%s{x\n\r", deity, dtab.worship, 
-             dtab.name, get_rdeity( dtab.russian,'1'), dtab.descr);
+             dtab.name, get_rdeity( dtab.rname,'1'), dtab.descr);
        return;
      }
      else 
@@ -1252,7 +1225,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
          ptc( ch, "{w[{w%3d{w] [{y%12s{w] [{Y%12s{w] [  {R%5d{w] [  {G%5d {w] [  {R%5d {w]\n\r{r >{w%s\n\r",
               deity_lookup(argument),
               deity_table[deity_lookup(argument)].name,
-              get_rdeity(deity_table[deity_lookup(argument)].russian,'1'),
+              get_rdeity(deity_table[deity_lookup(argument)].rname,'1'),
               deity_table[deity_lookup(argument)].worship,
               deity_table[deity_lookup(argument)].min_align,
               deity_table[deity_lookup(argument)].max_align,
@@ -1310,7 +1283,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
      }
      arg[0]=UPPER(arg[0]);
      dtab.name = str_dup(arg);
-     dtab.russian = "Божество";
+     dtab.rname = "Божество";
      dtab.min_align = -1000;
      dtab.max_align = 1000;
      dtab.descr = "Описание Нового Божества";
@@ -1332,7 +1305,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
        {
          if (!deity_table[deity+1].name) break;
          dtab.name=deity_table[deity+1].name;
-         dtab.russian   = deity_table[deity+1].russian;
+         dtab.rname   = deity_table[deity+1].rname;
          dtab.descr     = deity_table[deity+1].descr;
          dtab.min_align = deity_table[deity+1].min_align;
          dtab.max_align = deity_table[deity+1].max_align;
@@ -1341,7 +1314,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
            dtab.d_apply[i] = deity_table[deity+1].d_apply[i];
          if( deity < 0 ) return;
        }
-       free_string(dtab.russian);
+       free_string(dtab.rname);
        free_string(dtab.name);
        free_string(dtab.descr);
        dtab.name = NULL;
@@ -1357,7 +1330,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
 
      if ( !str_prefix( arg1, "name") && !EMPTY(argument) )
      {
-         ptc(ch,"Имя Божества {W%s{x изменено на '{Y%s{x'.\n\r",
+         ptc(ch,"Имя (name) Божества {W%s{x изменено на '{Y%s{x'.\n\r",
                deity_table[deity_lookup(arg)].name,
                str_dup( argument) );
          do_printf( buf, "%s", argument);
@@ -1367,22 +1340,22 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
          return;
      }
 
-     if ( !str_prefix( arg1, "russian") && !EMPTY(argument) )
+     if ( !str_prefix( arg1, "rname") && !EMPTY(argument) )
      {
-         ptc(ch,"Русское Имя {W%s{x изменено на '{Y%s{x'.\n\r",
-              get_rdeity( deity_table[deity_lookup(arg)].russian,'2'),
+         ptc(ch,"Имя (rname) Божества {W%s{x изменено на '{Y%s{x'.\n\r",
+              get_rdeity( deity_table[deity_lookup(arg)].rname,'2'),
               str_dup( argument) );
          do_printf( buf, "%s", argument);
          buf[0]=UPPER(buf[0]);
-         free_string( deity_table[deity_lookup(arg)].russian);
-         deity_table[deity_lookup(arg)].russian = (char *)str_dup(buf);
+         free_string( deity_table[deity_lookup(arg)].rname);
+         deity_table[deity_lookup(arg)].rname = (char *)str_dup(buf);
          return;
      }
 
      if ( !str_prefix( arg1, "descr") && !EMPTY(argument) )
      {
          ptc(ch,"Описание {W%s{x изменено на '{Y%s{x'.\n\r",
-             get_rdeity( deity_table[deity_lookup(arg)].russian, '2'), 
+             get_rdeity( deity_table[deity_lookup(arg)].rname, '2'), 
              str_dup( argument) );
          do_printf( buf, "%s", argument);
          buf[0]=UPPER(buf[0]);
@@ -1405,7 +1378,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
            return;
          }
          ptc(ch,"{GMinalign {W%s{x изменено с '{y%d{x' на '{Y%d{x'.\n\r",
-             get_rdeity( deity_table[deity_lookup(arg)].russian, '2'),
+             get_rdeity( deity_table[deity_lookup(arg)].rname, '2'),
              deity_table[deity_lookup(arg)].min_align, value);
          deity_table[deity_lookup(arg)].min_align = value;
          return;
@@ -1423,7 +1396,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
            return;
          }
          ptc(ch,"{GMaxalign {W%s{x изменено с '{y%d{x' на '{Y%d{x'.\n\r",
-             get_rdeity( deity_table[deity_lookup(arg)].russian, '2'), 
+             get_rdeity( deity_table[deity_lookup(arg)].rname, '2'), 
              deity_table[deity_lookup(arg)].max_align, value);
          deity_table[deity_lookup(arg)].max_align = value;
          return;
@@ -1485,7 +1458,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
              i += 0;
              if( iarg3 == 0 )
              {
-               ptc( ch, "Теперь {C%s{x не меняет {G%s{x.\n\r", get_rdeity( dtab.russian,'1'),
+               ptc( ch, "Теперь {C%s{x не меняет {G%s{x.\n\r", get_rdeity( dtab.rname,'1'),
                     deity_apply_table[value].param );
                dtab.d_apply[i]=0;
                dtab.d_apply[i+1]=0;
@@ -1494,7 +1467,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
              dtab.d_apply[i]=value;
              dtab.d_apply[i+1]=iarg3;
              ptc(ch,"Теперь поклонение {C%s{x %s {G%s{x на {R%d{x.\n\r",
-               get_rdeity(dtab.russian,'3'),isapply?"увеличивает":"уменьшает", deity_apply_table[value].param,iarg3);
+               get_rdeity(dtab.rname,'3'),isapply?"увеличивает":"уменьшает", deity_apply_table[value].param,iarg3);
              return;
            }
            if( (is_exact_name(arg2,"water air earth fire spirit mind light dark fortitude")
@@ -1504,7 +1477,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
              i += 4;
              if( iarg3 == 0 )
              {
-               ptc( ch, "Теперь {C%s{x не меняет бонус {G%s{x.\n\r", get_rdeity( dtab.russian,'1'),
+               ptc( ch, "Теперь {C%s{x не меняет бонус {G%s{x.\n\r", get_rdeity( dtab.rname,'1'),
                     deity_apply_table[value].inform );
                dtab.d_apply[i]=0;
                dtab.d_apply[i+1]=0;
@@ -1513,7 +1486,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
              dtab.d_apply[i]=value;
              dtab.d_apply[i+1]=iarg3;
              ptc(ch,"Теперь поклонение {C%s{x %s бонус {Y%s{x на {R%d{x.\n\r",
-               get_rdeity(dtab.russian,'3'),isapply?"увеличивает":"уменьшает",deity_apply_table[value].inform,iarg3);
+               get_rdeity(dtab.rname,'3'),isapply?"увеличивает":"уменьшает",deity_apply_table[value].inform,iarg3);
              return;
            }
            if( (is_exact_name(arg2,"rslash rpierce rbash rfire rpoison rmental")
@@ -1523,7 +1496,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
              i += 8;
              if( iarg3 == 0 )
              {
-               ptc( ch, "Теперь {C%s{x не меняет защиту от {D%s{x.\n\r", get_rdeity( dtab.russian,'1'),
+               ptc( ch, "Теперь {C%s{x не меняет защиту от {D%s{x.\n\r", get_rdeity( dtab.rname,'1'),
                     deity_apply_table[value].resist );
                dtab.d_apply[i]=0;
                dtab.d_apply[i+1]=0;
@@ -1532,7 +1505,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
              dtab.d_apply[i]=value;
              dtab.d_apply[i+1]=iarg3;
              ptc(ch,"Теперь поклонение {C%s{x %s защиту от {G%s{x на {R%d{x.\n\r",
-               get_rdeity(dtab.russian,'3'),isapply?"увеличивает":"уменьшает",deity_apply_table[value].resist,iarg3);
+               get_rdeity(dtab.rname,'3'),isapply?"увеличивает":"уменьшает",deity_apply_table[value].resist,iarg3);
              return;
            }
            return;
@@ -1596,7 +1569,7 @@ void do_pk ( CHAR_DATA *ch, const char *argument)
 {
 };
 
-#define rdeity deity_table[ch->pcdata->dn].russian
+#define rdeity deity_table[ch->pcdata->dn].rname
 void do_supplicate ( CHAR_DATA *ch, const char *argument)
 {
   char buf[MAX_INPUT_LENGTH];
@@ -1644,7 +1617,7 @@ void do_supplicate ( CHAR_DATA *ch, const char *argument)
   if( is_affected(ch,skill_lookup("pray")) )
   {
     ptc( ch, "{C%s{x устал от твоих молитв...\n\r",
-         get_rdeity( deity_table[ch->pcdata->dn].russian, '0') );
+         get_rdeity( deity_table[ch->pcdata->dn].rname, '0') );
     change_favour(ch, -20);
     return;
   }
@@ -1807,7 +1780,7 @@ void do_supplicate ( CHAR_DATA *ch, const char *argument)
       stc( "Ты чувствуешь как воздух начинает проходить сквозь твое тело.\n\r", ch);
       return;
     }
-    ptc( ch, "{C%s{x отказывается от тебя...\n\r", get_rdeity( deity_table[ch->pcdata->dn].russian,'1') );
+    ptc( ch, "{C%s{x отказывается от тебя...\n\r", get_rdeity( deity_table[ch->pcdata->dn].rname,'1') );
   }
 #undef rdeity
 }

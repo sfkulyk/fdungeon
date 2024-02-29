@@ -176,7 +176,7 @@ long EncodeTRANSLITERATION (char * pWindows, char * pTransliteration)
   {
     ch = *pWindows;
 
-    if (ch >= 192)  // Beginning of russian letters in CP1251
+    if (ch >= 192)  // Beginning of cyrillic letters in CP1251
     {
       *pTransliteration++ = transliterationEncodeArr [ch - 192];
       switch ( (unsigned int) ch )

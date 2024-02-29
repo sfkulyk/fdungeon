@@ -1665,19 +1665,6 @@ void do_order( CHAR_DATA *ch, const char *argument )
     }
   }
   
-#ifdef WITH_DSO
-  if (!cmd_ptr) {
-    struct command *c;
-    CMDS_FOREACH (c)
-      if (arg2[0] == c->cmd.name[0] && c->cmd.level <= trust &&
-        ((c->cm_nice < 100 && !str_prefix (arg2, c->cmd.name))
-           || !str_cmp (arg2, c->cmd.name))) {
-        cmd_ptr = &c->cmd;
-        break;
-      }
-    }
-#endif
-  
   if (cmd_ptr && (IS_SET(cmd_ptr->flag,NOORDER) || IS_SET(cmd_ptr->flag,NOFORCE))) {
     stc("Это НЕ БУДЕТ выполнено.\n\r",ch);
     return;
