@@ -14,7 +14,6 @@
 #include "magic.h"
 
 DECLARE_SPELL_FUN( spell_null              );
-
 bool fLogAll = FALSE;
 
 struct  cmd_type        cmd_table       [] =

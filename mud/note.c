@@ -15,12 +15,6 @@ extern  int     _filbuf         args( (FILE *) );
 extern FILE *                  fpArea;
 extern char                    strArea[MAX_INPUT_LENGTH];
 
-// local procedures
-void load_thread(char *name, NOTE_DATA **list, int type, time_t free_time);
-void parse_note(CHAR_DATA *ch, const char *argument, int type);
-bool hide_note(CHAR_DATA *ch, NOTE_DATA *pnote);
-void unread_update   args( ( void ) );
-
 NOTE_DATA *note_list;
 NOTE_DATA *idea_list;
 NOTE_DATA *penalty_list;
@@ -29,6 +23,66 @@ NOTE_DATA *changes_list;
 NOTE_DATA *bugreport_list;
 NOTE_DATA *offtopic_list;
 NOTE_DATA *complain_list;
+
+bool is_note_to( CHAR_DATA *ch, NOTE_DATA *pnote )
+{
+  if (pnote->type==NOTE_COMPLAIN && IS_IMMORTAL(ch) ) return TRUE;
+  if (pnote->type==NOTE_BUGREPORT && (IS_SET(ch->comm,COMM_CODER) || IS_IMMORTAL(ch)) ) return TRUE; // Now immortals will receive bugreports (c) Wagner.
+  if ( !str_cmp( ch->name, pnote->sender ) ) return TRUE;
+  if ( is_exact_name( "all", pnote->to_list ) ) return TRUE;
+  if (IS_IMMORTAL(ch) && is_exact_name("imm",pnote->to_list)) return TRUE;
+  if ((IS_SET(ch->comm,COMM_CODER) || IS_IMMORTAL(ch)) && is_exact_name("coder",pnote->to_list)) return TRUE; // (c) Wagner
+  if (IS_IMMORTAL(ch) && is_exact_name("immortal",pnote->to_list)) return TRUE;
+  if (is_exact_name(ch->name,"Saboteur Magica Astellar Dragon") && is_exact_name("elder",pnote->to_list)) return TRUE;
+  if (ch->clan!=NULL && is_exact_name("clan",pnote->to_list)) return TRUE;
+  if (ch->clanrank==LEADER && is_exact_name("leader",pnote->to_list)) return TRUE;
+  if (ch->clan==NULL && is_exact_name("noclan",pnote->to_list)) return TRUE;
+  if (ch->clan && is_exact_name(ch->clan->name,pnote->to_list)) return TRUE;
+  if (is_exact_name(ch->name, pnote->to_list ) ) return TRUE;
+  if (is_exact_name(race_table[ch->race].name,pnote->to_list)) return TRUE;
+  return FALSE;
+}
+
+bool hide_note (CHAR_DATA *ch, NOTE_DATA *pnote)
+{
+  time_t last_read;
+
+  if (IS_NPC(ch)) return TRUE;
+
+  switch (pnote->type)
+  {
+    default:
+      return TRUE;
+    case NOTE_NOTE:
+      last_read = ch->pcdata->last_note;
+      break;
+    case NOTE_OFFTOPIC:
+      last_read = ch->pcdata->last_offtopic;
+      break;
+    case NOTE_COMPLAIN:
+      last_read = ch->pcdata->last_complain;
+      break;
+    case NOTE_IDEA:
+      last_read = ch->pcdata->last_idea;
+      break;
+    case NOTE_PENALTY:
+      last_read = ch->pcdata->last_penalty;
+      break;
+    case NOTE_BUGREPORT:
+      last_read = ch->pcdata->last_bugreport;
+      break;
+    case NOTE_NEWS:
+      last_read = ch->pcdata->last_news;
+      break;
+    case NOTE_CHANGES:
+      last_read = ch->pcdata->last_changes;
+      break;
+  }
+  if (pnote->date_stamp <= last_read) return TRUE;
+  if (!str_cmp(ch->name,pnote->sender)) return TRUE;
+  if (!is_note_to(ch,pnote)) return TRUE;
+  return FALSE;
+}
 
 int count_spool(CHAR_DATA *ch, NOTE_DATA *spool)
 {
@@ -113,37 +167,43 @@ void do_unread(CHAR_DATA *ch,char *argument)
                        
 }
 
-void do_note(CHAR_DATA *ch,char *argument)
+void update_read(CHAR_DATA *ch, NOTE_DATA *pnote)
 {
-  parse_note(ch,argument,NOTE_NOTE);
-}
-void do_idea(CHAR_DATA *ch,char *argument)
-{
-  parse_note(ch,argument,NOTE_IDEA);
-}
-void do_bugreport(CHAR_DATA *ch,char *argument)
-{
-  parse_note(ch,argument,NOTE_BUGREPORT);
-}
-void do_penalty(CHAR_DATA *ch,char *argument)
-{
-  parse_note(ch,argument,NOTE_PENALTY);
-}
-void do_news(CHAR_DATA *ch,char *argument)
-{
-  parse_note(ch,argument,NOTE_NEWS);
-}
-void do_changes(CHAR_DATA *ch,char *argument)
-{
-  parse_note(ch,argument,NOTE_CHANGES);
-}
-void do_offtopic(CHAR_DATA *ch,char *argument)
-{
-  parse_note(ch,argument,NOTE_OFFTOPIC);
-}
-void do_complain(CHAR_DATA *ch,char *argument)
-{
-  parse_note(ch,argument,NOTE_COMPLAIN);
+  time_t stamp;
+
+  if (IS_NPC(ch)) return;
+
+  stamp = pnote->date_stamp;
+
+  switch (pnote->type)
+  {
+    default:
+      return;
+    case NOTE_NOTE:
+      ch->pcdata->last_note = UMAX(ch->pcdata->last_note,stamp);
+      break;
+    case NOTE_OFFTOPIC:
+      ch->pcdata->last_offtopic = UMAX(ch->pcdata->last_offtopic,stamp);
+      break;
+    case NOTE_COMPLAIN:
+      ch->pcdata->last_complain = UMAX(ch->pcdata->last_complain,stamp);
+      break;
+    case NOTE_IDEA:
+      ch->pcdata->last_idea = UMAX(ch->pcdata->last_idea,stamp);
+      break;
+    case NOTE_PENALTY:
+      ch->pcdata->last_penalty = UMAX(ch->pcdata->last_penalty,stamp);
+      break;
+    case NOTE_BUGREPORT:
+      ch->pcdata->last_bugreport = UMAX(ch->pcdata->last_bugreport,stamp);
+      break;
+    case NOTE_NEWS:
+      ch->pcdata->last_news = UMAX(ch->pcdata->last_news,stamp);
+      break;
+    case NOTE_CHANGES:
+      ch->pcdata->last_changes = UMAX(ch->pcdata->last_changes,stamp);
+      break;
+  }
 }
 
 void save_notes(int type)
@@ -210,210 +270,6 @@ void save_notes(int type)
     fclose( fp );
   }
   fpReserve = fopen( NULL_FILE, "r" );
-}
-
-void load_notes(void)
-{
-  load_thread(NOTE_FILE,&note_list, NOTE_NOTE, 14*24*60*60);
-  load_thread(OFFTOPIC_FILE,&offtopic_list, NOTE_OFFTOPIC, 14*24*60*60);
-  load_thread(COMPLAIN_FILE,&complain_list, NOTE_COMPLAIN, 14*24*60*60);
-  load_thread(IDEA_FILE,&idea_list, NOTE_IDEA, 28*24*60*60);
-  load_thread(BUGREPORT_FILE,&bugreport_list, NOTE_BUGREPORT, 28*24*60*60);
-  load_thread(PENALTY_FILE,&penalty_list, NOTE_PENALTY, 0);
-  load_thread(NEWS_FILE,&news_list, NOTE_NEWS, 0);
-  load_thread(CHANGES_FILE,&changes_list,NOTE_CHANGES, 0);
-  log_printf("Note data loaded");
-}
-
-void load_thread(char *name, NOTE_DATA **list, int type, time_t free_time)
-{
-  FILE *fp;
-  NOTE_DATA *pnotelast;
-  const char *buf;
- 
-  if ( ( fp = fopen( name, "r" ) ) == NULL ) return;
-         
-  pnotelast = NULL;
-  for ( ; ; )
-  {
-    NOTE_DATA *pnote;
-    char letter;
-         
-    do
-    {
-      letter = getc( fp );
-      if ( feof(fp) )
-      {
-        fclose( fp );
-        return;
-      }
-    }
-    while ( isspace(letter) );
-    ungetc( letter, fp );
- 
-    pnote = alloc_perm( sizeof(*pnote) );
- 
-    if (str_cmp(fread_word(fp),"sender")) break;
-    pnote->sender = fread_string(fp);
- 
-    buf = fread_word(fp);
-    if (str_cmp(buf,"host")) pnote->host = str_dup("");
-    else
-    {
-      pnote->host = fread_string(fp);
-      buf = fread_word(fp);
-    }
-
-    if (str_cmp(buf,"date")) break;
-    pnote->date = fread_string(fp);
- 
-    if (str_cmp(fread_word(fp),"stamp")) break;
-    pnote->date_stamp = fread_number(fp);
- 
-    if (str_cmp(fread_word(fp),"to")) break;
-    pnote->to_list = fread_string(fp);
- 
-    if (str_cmp(fread_word(fp),"subject")) break;
-    pnote->subject = fread_string(fp);
- 
-    if (str_cmp(fread_word(fp),"text")) break;
-    pnote->text = fread_string(fp);
- 
-    if (free_time && pnote->date_stamp < current_time - free_time)
-    {
-      free_note(pnote);
-      continue;
-    }
-    pnote->type = type;
- 
-    if (*list == NULL) *list = pnote;
-    else pnotelast->next     = pnote;
-    pnotelast       = pnote;
-  }
- 
-  strcpy( strArea, NOTE_FILE );
-  fpArea = fp;
-  bug( "Load_notes: bad key word.", 0 );
-  exit( 1 );
-}
-
-void append_note(NOTE_DATA *pnote)
-{
-  FILE *fp;
-  char *name;
-  NOTE_DATA **list;
-  NOTE_DATA *last;
-
-  switch(pnote->type)
-  {
-    default:
-      return;
-    case NOTE_NOTE:
-      name = NOTE_FILE;
-      list = &note_list;
-      break;
-    case NOTE_OFFTOPIC:
-      name = OFFTOPIC_FILE;
-      list = &offtopic_list;
-      break;
-    case NOTE_COMPLAIN:
-      name = COMPLAIN_FILE;
-      list = &complain_list;
-      break;
-    case NOTE_IDEA:
-      name = IDEA_FILE;
-      list = &idea_list;
-      break;
-    case NOTE_BUGREPORT:
-      name = BUGREPORT_FILE;
-      list = &bugreport_list;
-      break;
-    case NOTE_PENALTY:
-      name = PENALTY_FILE;
-      list = &penalty_list;
-      break;
-    case NOTE_NEWS:
-      name = NEWS_FILE;
-      list = &news_list;
-      break;
-    case NOTE_CHANGES:
-      name = CHANGES_FILE;
-      list = &changes_list;
-      break;
-  }
-
-  if (*list == NULL) *list = pnote;
-  else
-  {
-    for ( last = *list; last->next != NULL; last = last->next);
-    last->next = pnote;
-  }
-
-  fclose(fpReserve);
-  if ( ( fp = fopen(name, "a" ) ) == NULL )
-  {
-    perror(name);
-  }
-  else
-  {
-    do_fprintf( fp, "Sender  %s~\n", pnote->sender);
-    do_fprintf( fp, "Host    %s~\n", pnote->host);
-    do_fprintf( fp, "Date    %s~\n", pnote->date);
-    do_fprintf( fp, "Stamp   %ld\n", pnote->date_stamp);
-    do_fprintf( fp, "To      %s~\n", pnote->to_list);
-    do_fprintf( fp, "Subject %s~\n", pnote->subject);
-    do_fprintf( fp, "Text\n%s~\n", pnote->text);
-    fclose( fp );
-  }
-  // send to tg
-  if ( (fp=fopen("send_note.txt","w") ) == NULL ) perror(name);
-  else  {
-    int exitcode;
-    do_fprintf( fp, "From:%s\nTo: %s\nSubject:[%d] %s\n\n%s", pnote->sender,pnote->to_list,pnote->type,pnote->subject,pnote->text);
-    fclose(fp);
-    exitcode=system("./send_note.sh");
-    log_printf ("sent to TG (%d)", exitcode);
-  }
-  fpReserve = fopen( NULL_FILE, "r" );
-}
-
-bool is_note_to( CHAR_DATA *ch, NOTE_DATA *pnote )
-{
-  if (pnote->type==NOTE_COMPLAIN && IS_IMMORTAL(ch) ) return TRUE;
-  if (pnote->type==NOTE_BUGREPORT && (IS_SET(ch->comm,COMM_CODER) || IS_IMMORTAL(ch)) ) return TRUE; // Now immortals will receive bugreports (c) Wagner.
-  if ( !str_cmp( ch->name, pnote->sender ) ) return TRUE;
-  if ( is_exact_name( "all", pnote->to_list ) ) return TRUE;
-  if (IS_IMMORTAL(ch) && is_exact_name("imm",pnote->to_list)) return TRUE;
-  if ((IS_SET(ch->comm,COMM_CODER) || IS_IMMORTAL(ch)) && is_exact_name("coder",pnote->to_list)) return TRUE; // (c) Wagner
-  if (IS_IMMORTAL(ch) && is_exact_name("immortal",pnote->to_list)) return TRUE;
-  if (is_exact_name(ch->name,"Saboteur Magica Astellar Dragon") && is_exact_name("elder",pnote->to_list)) return TRUE;
-  if (ch->clan!=NULL && is_exact_name("clan",pnote->to_list)) return TRUE;
-  if (ch->clanrank==LEADER && is_exact_name("leader",pnote->to_list)) return TRUE;
-  if (ch->clan==NULL && is_exact_name("noclan",pnote->to_list)) return TRUE;
-  if (ch->clan && is_exact_name(ch->clan->name,pnote->to_list)) return TRUE;
-  if (is_exact_name(ch->name, pnote->to_list ) ) return TRUE;
-  if (is_exact_name(race_table[ch->race].name,pnote->to_list)) return TRUE;
-  return FALSE;
-}
-
-void note_attach( CHAR_DATA *ch, int type )
-{
-  NOTE_DATA *pnote;
-
-  if ( ch->pnote != NULL ) return;
-  pnote = new_note();
-
-  pnote->next         = NULL;
-  pnote->sender       = str_dup(ch->name);
-  /* fixed APAR for `order lostlink_player note to all' (unicorn) */
-  pnote->host         = (IS_SET(ch->act,PLR_AUTOSPIT) || !ch->desc) ? 
-          str_dup(ch->host) : str_dup(ch->desc->host);
-  pnote->date         = str_dup("");
-  pnote->to_list      = str_dup("");
-  pnote->subject      = str_dup("");
-  pnote->text         = str_dup("");
-  pnote->type         = type;
-  ch->pnote           = pnote;
 }
 
 void note_remove( CHAR_DATA *ch, NOTE_DATA *pnote, bool delete)
@@ -496,84 +352,104 @@ void note_remove( CHAR_DATA *ch, NOTE_DATA *pnote, bool delete)
   free_note(pnote);
 }
 
-bool hide_note (CHAR_DATA *ch, NOTE_DATA *pnote)
+void note_attach( CHAR_DATA *ch, int type )
 {
-  time_t last_read;
+  NOTE_DATA *pnote;
 
-  if (IS_NPC(ch)) return TRUE;
+  if ( ch->pnote != NULL ) return;
+  pnote = new_note();
 
-  switch (pnote->type)
-  {
-    default:
-      return TRUE;
-    case NOTE_NOTE:
-      last_read = ch->pcdata->last_note;
-      break;
-    case NOTE_OFFTOPIC:
-      last_read = ch->pcdata->last_offtopic;
-      break;
-    case NOTE_COMPLAIN:
-      last_read = ch->pcdata->last_complain;
-      break;
-    case NOTE_IDEA:
-      last_read = ch->pcdata->last_idea;
-      break;
-    case NOTE_PENALTY:
-      last_read = ch->pcdata->last_penalty;
-      break;
-    case NOTE_BUGREPORT:
-      last_read = ch->pcdata->last_bugreport;
-      break;
-    case NOTE_NEWS:
-      last_read = ch->pcdata->last_news;
-      break;
-    case NOTE_CHANGES:
-      last_read = ch->pcdata->last_changes;
-      break;
-  }
-  if (pnote->date_stamp <= last_read) return TRUE;
-  if (!str_cmp(ch->name,pnote->sender)) return TRUE;
-  if (!is_note_to(ch,pnote)) return TRUE;
-  return FALSE;
+  pnote->next         = NULL;
+  pnote->sender       = str_dup(ch->name);
+  /* fixed APAR for `order lostlink_player note to all' (unicorn) */
+  pnote->host         = (IS_SET(ch->act,PLR_AUTOSPIT) || !ch->desc) ? 
+          str_dup(ch->host) : str_dup(ch->desc->host);
+  pnote->date         = str_dup("");
+  pnote->to_list      = str_dup("");
+  pnote->subject      = str_dup("");
+  pnote->text         = str_dup("");
+  pnote->type         = type;
+  ch->pnote           = pnote;
 }
 
-void update_read(CHAR_DATA *ch, NOTE_DATA *pnote)
+void append_note(NOTE_DATA *pnote)
 {
-  time_t stamp;
+  FILE *fp;
+  char *name;
+  NOTE_DATA **list;
+  NOTE_DATA *last;
 
-  if (IS_NPC(ch)) return;
-
-  stamp = pnote->date_stamp;
-
-  switch (pnote->type)
+  switch(pnote->type)
   {
     default:
       return;
     case NOTE_NOTE:
-      ch->pcdata->last_note = UMAX(ch->pcdata->last_note,stamp);
+      name = NOTE_FILE;
+      list = &note_list;
       break;
     case NOTE_OFFTOPIC:
-      ch->pcdata->last_offtopic = UMAX(ch->pcdata->last_offtopic,stamp);
+      name = OFFTOPIC_FILE;
+      list = &offtopic_list;
       break;
     case NOTE_COMPLAIN:
-      ch->pcdata->last_complain = UMAX(ch->pcdata->last_complain,stamp);
+      name = COMPLAIN_FILE;
+      list = &complain_list;
       break;
     case NOTE_IDEA:
-      ch->pcdata->last_idea = UMAX(ch->pcdata->last_idea,stamp);
-      break;
-    case NOTE_PENALTY:
-      ch->pcdata->last_penalty = UMAX(ch->pcdata->last_penalty,stamp);
+      name = IDEA_FILE;
+      list = &idea_list;
       break;
     case NOTE_BUGREPORT:
-      ch->pcdata->last_bugreport = UMAX(ch->pcdata->last_bugreport,stamp);
+      name = BUGREPORT_FILE;
+      list = &bugreport_list;
+      break;
+    case NOTE_PENALTY:
+      name = PENALTY_FILE;
+      list = &penalty_list;
       break;
     case NOTE_NEWS:
-      ch->pcdata->last_news = UMAX(ch->pcdata->last_news,stamp);
+      name = NEWS_FILE;
+      list = &news_list;
       break;
     case NOTE_CHANGES:
-      ch->pcdata->last_changes = UMAX(ch->pcdata->last_changes,stamp);
+      name = CHANGES_FILE;
+      list = &changes_list;
       break;
   }
+
+  if (*list == NULL) *list = pnote;
+  else
+  {
+    for ( last = *list; last->next != NULL; last = last->next);
+    last->next = pnote;
+  }
+
+  fclose(fpReserve);
+  if ( ( fp = fopen(name, "a" ) ) == NULL )
+  {
+    perror(name);
+  }
+  else
+  {
+    do_fprintf( fp, "Sender  %s~\n", pnote->sender);
+    do_fprintf( fp, "Host    %s~\n", pnote->host);
+    do_fprintf( fp, "Date    %s~\n", pnote->date);
+    do_fprintf( fp, "Stamp   %ld\n", pnote->date_stamp);
+    do_fprintf( fp, "To      %s~\n", pnote->to_list);
+    do_fprintf( fp, "Subject %s~\n", pnote->subject);
+    do_fprintf( fp, "Text\n%s~\n", pnote->text);
+    fclose( fp );
+  }
+  // send to tg
+  if ( (fp=fopen("send_note.txt","w") ) == NULL ) perror(name);
+  else  {
+    int exitcode;
+    do_fprintf( fp, "From:%s\nTo: %s\nSubject:[%d] %s\n\n%s", pnote->sender,pnote->to_list,pnote->type,pnote->subject,pnote->text);
+    fclose(fp);
+    exitcode=system("./send_note.sh");
+    log_printf ("sent to TG (%d)", exitcode);
+  }
+  fpReserve = fopen( NULL_FILE, "r" );
 }
 
 void parse_note( CHAR_DATA *ch, const char *argument, int type )
@@ -1099,6 +975,124 @@ void parse_note( CHAR_DATA *ch, const char *argument, int type )
     return;
   }
   stc( "Ты не можешь этого сделать.\n\r", ch );
+}
+
+void do_note(CHAR_DATA *ch,char *argument)
+{
+  parse_note(ch,argument,NOTE_NOTE);
+}
+void do_idea(CHAR_DATA *ch,char *argument)
+{
+  parse_note(ch,argument,NOTE_IDEA);
+}
+void do_bugreport(CHAR_DATA *ch,char *argument)
+{
+  parse_note(ch,argument,NOTE_BUGREPORT);
+}
+void do_penalty(CHAR_DATA *ch,char *argument)
+{
+  parse_note(ch,argument,NOTE_PENALTY);
+}
+void do_news(CHAR_DATA *ch,char *argument)
+{
+  parse_note(ch,argument,NOTE_NEWS);
+}
+void do_changes(CHAR_DATA *ch,char *argument)
+{
+  parse_note(ch,argument,NOTE_CHANGES);
+}
+void do_offtopic(CHAR_DATA *ch,char *argument)
+{
+  parse_note(ch,argument,NOTE_OFFTOPIC);
+}
+void do_complain(CHAR_DATA *ch,char *argument)
+{
+  parse_note(ch,argument,NOTE_COMPLAIN);
+}
+
+void load_thread(char *name, NOTE_DATA **list, int type, time_t free_time)
+{
+  FILE *fp;
+  NOTE_DATA *pnotelast;
+  const char *buf;
+ 
+  if ( ( fp = fopen( name, "r" ) ) == NULL ) return;
+         
+  pnotelast = NULL;
+  for ( ; ; )
+  {
+    NOTE_DATA *pnote;
+    char letter;
+         
+    do
+    {
+      letter = getc( fp );
+      if ( feof(fp) )
+      {
+        fclose( fp );
+        return;
+      }
+    }
+    while ( isspace(letter) );
+    ungetc( letter, fp );
+ 
+    pnote = alloc_perm( sizeof(*pnote) );
+ 
+    if (str_cmp(fread_word(fp),"sender")) break;
+    pnote->sender = fread_string(fp);
+ 
+    buf = fread_word(fp);
+    if (str_cmp(buf,"host")) pnote->host = str_dup("");
+    else
+    {
+      pnote->host = fread_string(fp);
+      buf = fread_word(fp);
+    }
+
+    if (str_cmp(buf,"date")) break;
+    pnote->date = fread_string(fp);
+ 
+    if (str_cmp(fread_word(fp),"stamp")) break;
+    pnote->date_stamp = fread_number(fp);
+ 
+    if (str_cmp(fread_word(fp),"to")) break;
+    pnote->to_list = fread_string(fp);
+ 
+    if (str_cmp(fread_word(fp),"subject")) break;
+    pnote->subject = fread_string(fp);
+ 
+    if (str_cmp(fread_word(fp),"text")) break;
+    pnote->text = fread_string(fp);
+ 
+    if (free_time && pnote->date_stamp < current_time - free_time)
+    {
+      free_note(pnote);
+      continue;
+    }
+    pnote->type = type;
+ 
+    if (*list == NULL) *list = pnote;
+    else pnotelast->next     = pnote;
+    pnotelast       = pnote;
+  }
+ 
+  strcpy( strArea, NOTE_FILE );
+  fpArea = fp;
+  bug( "Load_notes: bad key word.", 0 );
+  exit( 1 );
+}
+
+void load_notes(void)
+{
+  load_thread(NOTE_FILE,&note_list, NOTE_NOTE, 14*24*60*60);
+  load_thread(OFFTOPIC_FILE,&offtopic_list, NOTE_OFFTOPIC, 14*24*60*60);
+  load_thread(COMPLAIN_FILE,&complain_list, NOTE_COMPLAIN, 14*24*60*60);
+  load_thread(IDEA_FILE,&idea_list, NOTE_IDEA, 28*24*60*60);
+  load_thread(BUGREPORT_FILE,&bugreport_list, NOTE_BUGREPORT, 28*24*60*60);
+  load_thread(PENALTY_FILE,&penalty_list, NOTE_PENALTY, 0);
+  load_thread(NEWS_FILE,&news_list, NOTE_NEWS, 0);
+  load_thread(CHANGES_FILE,&changes_list,NOTE_CHANGES, 0);
+  log_printf("Note data loaded");
 }
 
 void unread_update(void)

@@ -9,12 +9,12 @@
 #include "merc.h"
 #include "recycle.h"
 
-// stuff for recyling notes
-NOTE_DATA *note_free;
+static NOTE_DATA *note_free;
 
 NOTE_DATA *new_note()
 {
   NOTE_DATA *note;
+
 
   if (note_free == NULL) note = alloc_perm(sizeof(*note));
   else

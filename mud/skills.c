@@ -16,10 +16,63 @@ DECLARE_DO_FUN2(do_help          );
 DECLARE_DO_FUN2(do_showskill     );
 DECLARE_DO_FUN2(do_say           );
 DECLARE_DO_FUN2(do_ahelp         );
-int skill_cost(CHAR_DATA *ch,int sn);
-int group_cost(CHAR_DATA *ch,int gn);
-int gain_skill_cost(CHAR_DATA *ch,int sn);
-int gain_group_cost(CHAR_DATA *ch,int gn);
+
+/* 0 - group unavaible for this class*/
+int skill_cost(CHAR_DATA *ch,int sn)
+{
+  int cost=100,cost1=skill_table[sn].rating[ch->class[ch->remort]];
+
+  if (ch->remort==0) return cost1;
+  cost1=skill_table[sn].rating[0];
+  if (ch->classmag && (cost>cost1 && cost1!=0)) cost=cost1;
+  cost1=skill_table[sn].rating[1];
+  if (ch->classcle && (cost>cost1 && cost1!=0)) cost=cost1;
+  cost1=skill_table[sn].rating[2];
+  if (ch->classthi && (cost>cost1 && cost1!=0)) cost=cost1;
+  cost1=skill_table[sn].rating[3];
+  if (ch->classwar && (cost>cost1 && cost1!=0)) cost=cost1;
+
+  if (cost==100) return 0;
+  return cost;
+}
+
+int gain_skill_cost(CHAR_DATA *ch,int sn)
+{
+  int cost=100,cost1=skill_table[sn].rating[ch->class[ch->remort]];
+
+  if (ch->remort==0) return cost1;
+  cost1=skill_table[sn].rating[0];
+  if (ch->classmag==1 && (cost>cost1 && cost1!=0)) cost=cost1;
+  cost1=skill_table[sn].rating[1];
+  if (ch->classcle==1 && (cost>cost1 && cost1!=0)) cost=cost1;
+  cost1=skill_table[sn].rating[2];
+  if (ch->classthi==1 && (cost>cost1 && cost1!=0)) cost=cost1;
+  cost1=skill_table[sn].rating[3];
+  if (ch->classwar==1 && (cost>cost1 && cost1!=0)) cost=cost1;
+
+  if (cost==100) return 0;
+  return cost;
+}
+
+int gain_group_cost(CHAR_DATA *ch,int gn)
+{
+  int cost,cost1=group_table[gn].rating[ch->class[ch->remort]];
+  if (cost1==-1) cost1=0;
+  if ( ch->remort==0 ) return cost1;
+
+  cost=100;
+  cost1=group_table[gn].rating[0];
+  if (ch->classmag && (cost>cost1 && cost1!=-1)) cost=cost1;
+  cost1=group_table[gn].rating[1];
+  if (ch->classcle && (cost>cost1 && cost1!=-1)) cost=cost1;
+  cost1=group_table[gn].rating[2];
+  if (ch->classthi && (cost>cost1 && cost1!=-1)) cost=cost1;
+  cost1=group_table[gn].rating[3];
+  if (ch->classwar && (cost>cost1 && cost1!=-1)) cost=cost1;
+
+  if (cost==100) return 0;
+  return cost;
+}
 
 // used to Gain new skills
 void do_gain(CHAR_DATA *ch, const char *argument)
@@ -937,29 +990,6 @@ void group_remove(CHAR_DATA *ch, const char *name)
   }
 }
 
-
-/* 0 - group unavaible for this class*/
-int skill_cost(CHAR_DATA *ch,int sn)
-{
- int cost,cost1;
-
- cost1=skill_table[sn].rating[ch->class[ch->remort]];
- if (ch->remort==0) return cost1;
-
- cost=100;
- cost1=skill_table[sn].rating[0];
- if (ch->classmag && (cost>cost1 && cost1!=0)) cost=cost1;
- cost1=skill_table[sn].rating[1];
- if (ch->classcle && (cost>cost1 && cost1!=0)) cost=cost1;
- cost1=skill_table[sn].rating[2];
- if (ch->classthi && (cost>cost1 && cost1!=0)) cost=cost1;
- cost1=skill_table[sn].rating[3];
- if (ch->classwar && (cost>cost1 && cost1!=0)) cost=cost1;
-
- if (cost==100) return 0;
- return cost;
-}
-
 int group_cost(CHAR_DATA *ch,int gn)
 {
  int cost,cost1;
@@ -977,49 +1007,6 @@ int group_cost(CHAR_DATA *ch,int gn)
  if (ch->classthi && (cost>cost1 && cost1!=-1)) cost=cost1;
  cost1=group_table[gn].rating[3];
  if (ch->classwar && (cost>cost1 && cost1!=-1)) cost=cost1;
-
- if (cost==100) return 0;
- return cost;
-}
-
-int gain_group_cost(CHAR_DATA *ch,int gn)
-{
- int cost,cost1;
-
- cost1=group_table[gn].rating[ch->class[ch->remort]];
- if (cost1==-1) cost1=0;
- if ( ch->remort==0 ) return cost1;
-
- cost=100;
- cost1=group_table[gn].rating[0];
- if (ch->classmag && (cost>cost1 && cost1!=-1)) cost=cost1;
- cost1=group_table[gn].rating[1];
- if (ch->classcle && (cost>cost1 && cost1!=-1)) cost=cost1;
- cost1=group_table[gn].rating[2];
- if (ch->classthi && (cost>cost1 && cost1!=-1)) cost=cost1;
- cost1=group_table[gn].rating[3];
- if (ch->classwar && (cost>cost1 && cost1!=-1)) cost=cost1;
-
- if (cost==100) return 0;
- return cost;
-}
-
-int gain_skill_cost(CHAR_DATA *ch,int sn)
-{
- int cost,cost1;
-
- cost1=skill_table[sn].rating[ch->class[ch->remort]];
- if (ch->remort==0) return cost1;
- cost=100;
-
- cost1=skill_table[sn].rating[0];
- if (ch->classmag==1 && (cost>cost1 && cost1!=0)) cost=cost1;
- cost1=skill_table[sn].rating[1];
- if (ch->classcle==1 && (cost>cost1 && cost1!=0)) cost=cost1;
- cost1=skill_table[sn].rating[2];
- if (ch->classthi==1 && (cost>cost1 && cost1!=0)) cost=cost1;
- cost1=skill_table[sn].rating[3];
- if (ch->classwar==1 && (cost>cost1 && cost1!=0)) cost=cost1;
 
  if (cost==100) return 0;
  return cost;

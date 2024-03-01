@@ -378,6 +378,7 @@ void  substitute_alias args( (DSD *d, const char *input) );
 bool clan_cfg   (CLAN_DATA *clan, int64 flag);
 void do_ear     (CHAR_DATA *victim,CHAR_DATA *ch);
 bool add_clanskill(CLAN_DATA *clan, int sn, int64 time);
+bool rem_clanskill(CLAN_DATA *clan,int sn);
 
 // comm.c
 bool  check_ban        args( ( const char *site, int type) );
@@ -486,6 +487,7 @@ void  dlog               (const char *fmt,...);  //(C)Sab log_printf w/debuglog
 void  add_stealer        (CHAR_DATA *ch, CHAR_DATA *stealer);
 void  add_pkiller        (CHAR_DATA *ch, CHAR_DATA *killer);
 void  remove_pkiller     (CHAR_DATA *ch, char *name);
+void  remove_one_stealer (CHAR_DATA *ch);
 
 
 
@@ -516,6 +518,7 @@ void  run                 ( CD *ch );
 void  send_news           ( char *text, int type );
 void  send_note           ( const char *from, const char *to,const char *subject, const char *text,int type);
 void  write_skill_table   ( CHAR_DATA *ch);
+void remove_penalty(CHAR_DATA *ch, PENALTY_DATA *penalty);
 
 // guild.c
 int  guild_lookup    (const char *name);
@@ -685,6 +688,9 @@ void    free_raffect          (RAFFECT *raffect);
 int     get_int_modifier args(( CD *ch, CD *victim, int sn, int dt ) );
 bool check_dispel( int dis_level, CHAR_DATA *victim, int sn) ;
 
+// note.c
+void unread_update(void);
+
 // quest.c
 int  cancel_quest(CD *ch, bool reward, int from,int to);
 bool is_gqmob    (int64 vnum);
@@ -806,6 +812,9 @@ const char * string_format (const char *) ;
 bool  run_olc_editor args( ( DSD *d ) );
 char  *olc_ed_name   args( ( CD *ch ) );
 char  *olc_ed_vnum   args( ( CD *ch ) );
+
+// olc_mpcode.c
+char *mprog_type_to_name( int64 type );
 
 // bit.c
 extern const struct flag_type area_flags[];

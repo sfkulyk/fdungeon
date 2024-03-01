@@ -11,42 +11,6 @@
 #include "tables.h"
 #include "fdweb.h"
 
-// Imported functions
-void remove_penalty(CHAR_DATA *ch, PENALTY_DATA *penalty);
-CLAN_DATA *clan_lookup  args( (const char *name) );
-void remove_one_stealer(CHAR_DATA *ch);
-void hungry_damage(CHAR_DATA *ch, int Cond);
-void talk_auction (char *argument);
-void do_reboot( CHAR_DATA *ch, const char *argument );
-bool rem_clanskill(CLAN_DATA *clan,int sn);
-
-// *** USED IN CHAR_UPDATE () предполагают !IS_NPC(ch)  ***
-void sifilis_update args( (CHAR_DATA *ch) );
-void drent_update args( (CHAR_DATA *ch) );
-void sect_water_noswim_update args ( (CHAR_DATA *ch) );
-void sect_uwater_update args ( (CHAR_DATA *ch) );
-void light_update args ( (CHAR_DATA *ch) );
-void nostalgia_update args ( (CHAR_DATA *ch) );
-void plague_update args ( (CHAR_DATA *ch) );
-void poison_update args ( (CHAR_DATA *ch) );
-
-void penalty_update(CHAR_DATA *ch);
-void gain_stats    (CHAR_DATA *ch);
-void gain_update   ();
-void unread_update ();
-void aggr_update   ();
-void remort_update ();
-void raffect_update();
-void quest_update  ();
-void gquest_update ();
-void auction_update();
-void mobile_update ();
-void weather_update();
-void char_update   ();
-void obj_update    ();
-void clan_update   ();
-void fix_dc        ();
-void statue_moving(CHAR_DATA *ch);
 // used for saving
 int save_number = 0;
 int stealer_update=0;
@@ -357,42 +321,41 @@ void sifilis_update(CHAR_DATA *ch)
 //----------
 void drent_update (CHAR_DATA *ch)
 {
-CHAR_DATA *vch,*vch_next;
+  CHAR_DATA *vch,*vch_next;
 
- if (ch->pcdata->account<1)
- {
-  if (ch->gold<1)
+  if (ch->pcdata->account<1)
   {
-   vch_next = ch->next_in_room;
-   for (vch = ch->in_room->people; vch != NULL; vch = vch_next)
-   {
-    vch_next = vch->next_in_room;
-    if(!IS_AWAKE(vch))
-     {
-      act("Ты просыпаешься от страшного рева",ch,NULL,NULL,TO_ALL_IN_ROOM);
-      do_function(vch,&do_wake,"");
-     }
-   }
-   act("{DПризрак Фрамина{x с криком '{MБарук Казад!{x' выбрасывает {Y$c1{x в окно спальни.{/Потом он разворачивается и говорит:'{GНет денег - спи в храме!'{x ",ch,NULL,NULL,TO_ROOM); 
-   act("В который раз вылетая из окна, ты снова убеждаешься в справедливости одной простой истины:{/{YДварфы любят за деньги...{x.",ch,NULL,ch,TO_CHAR);
-   char_from_room( ch );
-   char_to_room( ch, get_room_index(ROOM_VNUM_KOZEL));
-   act("Из окна {yтаверны{x вылетает очередной заспанный клиент.",ch,NULL,NULL,TO_ROOM);
+    if (ch->gold<1)
+    {
+      vch_next = ch->next_in_room;
+      for (vch = ch->in_room->people; vch != NULL; vch = vch_next)
+      {
+        vch_next = vch->next_in_room;
+        if(!IS_AWAKE(vch))
+        {
+          act("Ты просыпаешься от страшного рева",ch,NULL,NULL,TO_ALL_IN_ROOM);
+          do_function(vch,&do_wake,"");
+        }
+      }
+      act("{DПризрак Фрамина{x с криком '{MБарук Казад!{x' выбрасывает {Y$c1{x в окно спальни.{/Потом он разворачивается и говорит:'{GНет денег - спи в храме!'{x ",ch,NULL,NULL,TO_ROOM); 
+      act("В который раз вылетая из окна, ты снова убеждаешься в справедливости одной простой истины:{/{YДварфы любят за деньги...{x.",ch,NULL,ch,TO_CHAR);
+      char_from_room( ch );
+      char_to_room( ch, get_room_index(ROOM_VNUM_KOZEL));
+      act("Из окна {yтаверны{x вылетает очередной заспанный клиент.",ch,NULL,NULL,TO_ROOM);
+    }
+    else
+    {
+      ch->gold--;
+      guild_table[guild_lookup("dwarves guild")].gold++;
+    }
   }
   else
   {
-   ch->gold--;
-   guild_table[guild_lookup("dwarves guild")].gold++;
+    guild_table[guild_lookup("dwarves guild")].gold++;
+    ch->pcdata->account--;
   }
- }
- else
- {
-  guild_table[guild_lookup("dwarves guild")].gold++;
-  ch->pcdata->account--;
- }
 }
 
-//----------
 void sect_water_noswim_update (CHAR_DATA *ch)
 {
  OBJ_DATA *obj;
@@ -588,7 +551,22 @@ void poison_update(CHAR_DATA *ch)
  }
 }
 
-//----
+void hungry_damage(CHAR_DATA *ch, int Cond)
+{
+  int condition;
+
+  if( is_affected( ch, gsn_sleep) ) return;
+  condition=ch->pcdata->condition[Cond];
+  if (Cond==COND_HUNGER) stc("У тебя кружится голова от голода.\n\r",ch);
+  else stc("У тебя кружится голова от жажды.\n\r",ch);
+
+  if (ch->level<5) condition/=2;
+  if (Cond==COND_HUNGER) condition*=2;
+
+  if (!ch->in_room) return;
+  if (ch->in_room->vnum == 3 || ch->in_room->vnum==2) return;
+  damage(ch,ch,abs(condition*(1+ch->level/10)),TYPE_UNDEFINED,DAM_NONE,FALSE, FALSE, NULL);
+}
 
 void gain_condition( CHAR_DATA *ch, int iCond, int64 value )
 {
@@ -1421,356 +1399,6 @@ void aggr_update( void )
   }
 }
 
-// Handle all kinds of updates. Called once per pulse from game loop.
-// Random times to defeat tick-timing clients and players.
-void update_handler( void )
-{
-  static  int     pulse_area;
-  static  int     pulse_mobile;
-  static  int     pulse_violence;
-  static  int     pulse_point;
-  static  int     pulse_music;
-  static  int     pulse_updchar;
-
-  if ( --pulse_area     <= 0 )
-  {
-    pulse_area        = PULSE_AREA;
-//    dlog("area_update");
-    area_update        ( );
-//    dlog("area_update finished");
-  }
-
-  if ( --pulse_updchar <= 0 )
-  {
-    pulse_updchar  = PULSE_UPDCHAR;
-    gain_update();
-//    dlog("gain_update finished");
-  }
-
-  if ( --pulse_music          <= 0 )
-  {
-    pulse_music        = PULSE_MUSIC;
-    song_update();
-//    dlog("song_update finished");
-  }
-
-  if ( --pulse_mobile   <= 0 )
-  {
-    pulse_mobile        = PULSE_MOBILE;
-    mobile_update        ( );
-//    dlog("mobile_update finished");
-  }
-
-  if ( --pulse_violence <= 0 )
-  {
-    pulse_violence        = PULSE_VIOLENCE;
-    violence_update        ( );
-//    dlog("violence_update finished");
-  }
-
-  if (--auction->pulse <=0)
-  {
-    auction->pulse = PULSE_AUCTION;
-    auction_update();
-//    dlog("auction_update finished");
-  }
-
-  if ( --pulse_point    <= 0 )
-  {
-    pulse_point     = PULSE_TICK; // Updating tick
-    weather_update();             // Weather
-    char_update   ();             // characters, affects
-    obj_update    ();             // objects
-    quest_update  ();             // quests
-    gquest_update ();             // Global Quests
-    unread_update ();             // auto unread
-    raffect_update();             // room affects
-    remort_update ();             // remort
-    clan_update   ();             // clans update
-    web_update    ();             // update web pages
-
-    if (rebootcount>0)
-    {
-      DESCRIPTOR_DATA *d;
-
-      rebootcount--;
-      if (rebootcount==0) do_reboot(NULL,"now") ;
-      if (rebootcount<6 || rebootcount==10 || rebootcount ==15 ||rebootcount==20)
-      for ( d = descriptor_list; d; d = d->next )
-      {
-        if ( d->connected != CON_PLAYING ) continue;
-        if (rebootcount>0) ptc (d->character,"{RSystem: REBOOT in %d ticks!{x\n\r",rebootcount);
-        if (rebootcount<6) stc("{*",d->character);
-      }
-    }
-  }
-//  dlog("update.c - Updating Aggressive mobiles");
-  aggr_update();
-//  dlog("update.c - Updating complete");
-  tail_chain();
-}
-
-void auction_update (void)
-{
-  char buf[MAX_STRING_LENGTH];
-
-  if (!auction->item) return;
-
-  switch (++auction->going)
-  {
-    case 1 :// going once
-    case 2 :// going twice
-      if (auction->bet > 0)
-        if (auction->buyer)
-          do_printf (buf, "%s: %s (текущая ставка %u).",get_obj_desc(auction->item,'1'),((auction->going == 1) ? "pаз" : "два"), auction->bet);
-        else do_printf (buf, "%s: %s (начальная ставка %u).",get_obj_desc(auction->item,'1'),((auction->going == 1) ? "pаз" : "два"), auction->bet);
-      else do_printf (buf, "%s: %s (ставок еще не было).",get_obj_desc(auction->item,'1'),((auction->going == 1) ? "pаз" : "два"));
-      talk_auction (buf);
-      break;
-    case 3 :// SOLD!
-      if (auction->bet > 0 && auction->buyer)
-      {
-        do_printf (buf, "Лот %s пpодан %s за %u золота.",get_obj_desc(auction->item,'1'),          IS_NPC(auction->buyer) ? get_char_desc(auction->buyer,'2') : auction->buyer->name,
-          auction->bet);
-        talk_auction(buf);
-        obj_to_char (auction->item,auction->buyer);
-        act ("Аукционеp появляется пеpед тобой и вpучает тебе $i4.",
-          auction->buyer,auction->item,NULL,TO_CHAR);
-        act ("Аукционеp появляется пеpед $c5, и вpучает $u $i4",
-          auction->buyer,auction->item,NULL,TO_ROOM);
-
-        auction->seller->gold += auction->bet; // give him the money 
-        auction->item = NULL; // reset item 
-        auction->seller = NULL;
-        auction->buyer  = NULL;
-      }
-      else // not sold
-      {
-        do_printf (buf, "Ставок не получено - лот %s снЯт с аукциона.",get_obj_desc(auction->item,'1'));
-        talk_auction(buf);
-        act ("Аукционеp поЯвлЯется пеpед тобой и возвpащает тебе $i4.",
-                 auction->seller,auction->item,NULL,TO_CHAR);
-        act ("Аукционеp поЯвлЯется пеpед $c5 и возвpащает $u $i4.",
-                 auction->seller,auction->item,NULL,TO_ROOM);
-        obj_to_char (auction->item,auction->seller);
-        auction->bet = 0;
-        auction->item = NULL; /* clear auction */
-      }
-   default:
-     if (auction->going>3) auction->going=3;
-     else auction->going=2;
-  }
-} 
-
-void remort_update(void)
-{
-  OBJ_DATA *        obj;
-  OBJ_DATA *        obj_next;
-  int               i,sn;
-  const char *      chname;
-  const char *      chdeity;
-  int               chcarma;
-  int               chfavour;
-  CHAR_DATA *       ch=NULL;
-  DESCRIPTOR_DATA * d;
-
-  for ( d = descriptor_list; d != NULL; d = d->next )
-  {
-    if ( d->character && d->connected==CON_PLAYING && !IS_NPC(d->character) &&
-         d->character->pcdata->confirm_remort==2) {
-      ch=d->character;
-      break;
-    }
-  }
-  if (ch == NULL) return;
-  stc( "Начинаем процесс перерождения!\n\r", ch);
-  log_printf("Remort process is started for %s",(ch->name) ? ch->name : "BUG: unknown name");
-  d->connected=CON_REMORT;
-
-/*buggy*/
-//  cancel_quest(ch,TRUE,20,30);
-  if (ch->questmob!=NULL)
-  {
-    cancel_quest(ch,TRUE,20,30);
-  }
-  ch->nextquest=number_range(10,20);
-
-  stop_fighting( ch, TRUE );
-  save_one_char( ch, SAVE_BACKUP );
-  save_char_obj( ch );
-
-  // After extract_char the ch is no longer valid!
-  chname=str_dup(ch->name);
-  chdeity=str_dup(ch->deity);
-  chcarma=ch->pcdata->carma;
-  chfavour=ch->pcdata->favour;
-  extract_char( ch, TRUE );
-  load_char_obj( d, chname, SAVE_NORMAL );
-  ch->desc=d;
-  ch=d->character;
-  ch->level=0;
-  ch->gold=ch->silver=0;
-  ch->sex=ch->pcdata->true_sex;
-  ch->reply=NULL;
-  ch->version=2;
-  ch->pet=NULL;
-  ch->group=0;
-  ch->clanpet=NULL;
-  ch->remort++;
-  ch->exp=0;
-  ch->practice=UMIN(ch->practice,20); // prac - maximum 20.
-  ch->train=UMIN(ch->train,20);       // train - maximum 20.
-  ch->deity=str_dup(chdeity);
-  ch->pcdata->carma=chcarma;
-  ch->pcdata->favour=chfavour;
-  ch->pcdata->confirm_delete=FALSE;
-  ch->pcdata->confirm_remort=0;
-  ch->pcdata->hptrained=0;
-  ch->pcdata->manatrained=0;
-
-  // reassign race parameters
-  for (i = 0; i < MAX_STATS; i++)
-  {
-    ch->perm_stat[i] = race_table[ch->race].stats[i];
-    ch->mod_stat[i] = 0;
-  }
-
-  ch->affected_by = ch->affected_by|race_table[ch->race].aff;
-  ch->imm_flags = ch->imm_flags|race_table[ch->race].imm;
-  ch->res_flags = ch->res_flags|race_table[ch->race].res;
-  ch->vuln_flags = ch->vuln_flags|race_table[ch->race].vuln;
-  ch->form  = race_table[ch->race].form;
-
-  // add race skills   
-  for (i = 0; i < 5; i++)
-  {
-    if (race_table[ch->race].skills[i] == NULL) break;
-    group_add(ch,race_table[ch->race].skills[i],FALSE);
-  }
-
-  ch->pcdata->points = race_table[ch->race].points;
-
-  //All learned skills set to 1%   
-  for (sn = 0; sn < max_skill; sn++)
-  {
-    if (skill_table[sn].name == NULL ) break;
-    if ( ch->pcdata->learned[sn] > 0) ch->pcdata->learned[sn] = 1;
-  }
-
-  ch->max_mana=100;
-  ch->max_move=100;
-  ch->max_hit=20;
-  ch->pcdata->perm_hit=20;
-  ch->pcdata->perm_mana=100;
-  ch->pcdata->perm_move=100;
-  ch->hit=ch->max_hit;
-  ch->mana=ch->max_mana;
-  ch->move=ch->max_move;
-
-  // removes all obj from char
-  for ( obj = ch->carrying; obj != NULL; obj = obj_next )
-  {
-    obj_next = obj->next_content;
-    obj_from_char( obj );
-    extract_obj(obj);
-  }
- 
-  // drop extra classes
-  REM_BIT(ch->act,PLR_5REMORT);
-  REM_BIT(ch->act,PLR_LASTREMORT);  
-  if (ch->remort > 2) 
-  {
-    stc ("Выбери какой класс выкинуть: \n\r",ch);
-    if (ch->classmag) stc("mage ",ch);
-    if (ch->classwar) stc("warrior ",ch);
-    if (ch->classcle) stc("cleric ",ch);
-    if (ch->classthi) stc("thief ",ch);
-    stc("\n\r",ch);
-   
-    d->connected=CON_DROP_CLASS;
-  }                 
-  else
-  {
-  // end of Remort process, and go to select new class
-    if (!ch->classmag) stc("mage ",ch);
-    if (!ch->classwar) stc("warrior ",ch);
-    if (!ch->classcle) stc("cleric ",ch);
-    if (!ch->classthi) stc("thief ",ch);
-    stc("\n\r",ch);
-
-    d->connected=CON_GET_NEW_CLASS;
-  }
-}
-
-void hungry_damage(CHAR_DATA *ch, int Cond)
-{
-  int condition;
-
-  if( is_affected( ch, gsn_sleep) ) return;
-  condition=ch->pcdata->condition[Cond];
-  if (Cond==COND_HUNGER) stc("У тебя кружится голова от голода.\n\r",ch);
-  else stc("У тебя кружится голова от жажды.\n\r",ch);
-
-  if (ch->level<5) condition/=2;
-  if (Cond==COND_HUNGER) condition*=2;
-
-  if (!ch->in_room) return;
-  if (ch->in_room->vnum == 3 || ch->in_room->vnum==2) return;
-  damage(ch,ch,abs(condition*(1+ch->level/10)),TYPE_UNDEFINED,DAM_NONE,FALSE, FALSE, NULL);
-}
-
-void penalty_update(CHAR_DATA *ch)
-{
-  PENALTY_DATA *penalty,*penalty_next;
-
-  if (!ch->penalty) return;
-
-  for(penalty=ch->penalty;penalty!=NULL;penalty=penalty_next)
-  {
-    penalty_next=penalty->next;
-
-    switch (penalty->type)
-    {
-      case PENALTY_TICK:
-        penalty->ticks--;
-        if (penalty->ticks<=0) remove_penalty(ch, penalty);
-        break;
-      case PENALTY_DATE:
-        break;
-      case PENALTY_PERMANENT:
-      default:
-        break;
-    }
-  }
-}
-
-void raffect_update(void)
-{
-  RAFFECT *ra, *ra_next;
-
-  for (ra=raffect_list;ra;ra=ra_next)
-  {
-    ra_next=ra->next;
-    if (ra->duration==-1) continue;
-    ra->duration--;
-    if (ra->duration<0) free_raffect(ra);
-    if (ra->level>1 && number_percent()>60) ra->level--;
-  }
-}
-
-void gain_update()
-{
-  CHAR_DATA *ch;
-
-  for ( ch = char_list; ch != NULL; ch = ch->next )
-  {
-    if (!ch->in_room) continue;
-    if (ch->in_room == get_room_index(ROOM_VNUM_LIMBO)) continue;
-    if (is_affected(ch,skill_lookup("mummy"))) continue;
-    gain_stats(ch);
-  }
-}
-
 // Gain hp,mana,moves 
 void gain_stats(CHAR_DATA *ch )
 {
@@ -1950,6 +1578,339 @@ void gain_stats(CHAR_DATA *ch )
         ch->mana=UMIN(ch->mana,ch->max_mana);
         ch->move=UMIN(ch->move,ch->max_move);
      }
+  }
+}
+
+void gain_update()
+{
+  CHAR_DATA *ch;
+
+  for ( ch = char_list; ch != NULL; ch = ch->next )
+  {
+    if (!ch->in_room) continue;
+    if (ch->in_room == get_room_index(ROOM_VNUM_LIMBO)) continue;
+    if (is_affected(ch,skill_lookup("mummy"))) continue;
+    gain_stats(ch);
+  }
+}
+
+void remort_update(void)
+{
+  OBJ_DATA *        obj;
+  OBJ_DATA *        obj_next;
+  int               i,sn;
+  const char *      chname;
+  const char *      chdeity;
+  int               chcarma;
+  int               chfavour;
+  CHAR_DATA *       ch=NULL;
+  DESCRIPTOR_DATA * d;
+
+  for ( d = descriptor_list; d != NULL; d = d->next )
+  {
+    if ( d->character && d->connected==CON_PLAYING && !IS_NPC(d->character) &&
+         d->character->pcdata->confirm_remort==2) {
+      ch=d->character;
+      break;
+    }
+  }
+  if (ch == NULL) return;
+  stc( "Начинаем процесс перерождения!\n\r", ch);
+  log_printf("Remort process is started for %s",(ch->name) ? ch->name : "BUG: unknown name");
+  d->connected=CON_REMORT;
+
+/*buggy*/
+//  cancel_quest(ch,TRUE,20,30);
+  if (ch->questmob!=NULL)
+  {
+    cancel_quest(ch,TRUE,20,30);
+  }
+  ch->nextquest=number_range(10,20);
+
+  stop_fighting( ch, TRUE );
+  save_one_char( ch, SAVE_BACKUP );
+  save_char_obj( ch );
+
+  // After extract_char the ch is no longer valid!
+  chname=str_dup(ch->name);
+  chdeity=str_dup(ch->deity);
+  chcarma=ch->pcdata->carma;
+  chfavour=ch->pcdata->favour;
+  extract_char( ch, TRUE );
+  load_char_obj( d, chname, SAVE_NORMAL );
+  ch->desc=d;
+  ch=d->character;
+  ch->level=0;
+  ch->gold=ch->silver=0;
+  ch->sex=ch->pcdata->true_sex;
+  ch->reply=NULL;
+  ch->version=2;
+  ch->pet=NULL;
+  ch->group=0;
+  ch->clanpet=NULL;
+  ch->remort++;
+  ch->exp=0;
+  ch->practice=UMIN(ch->practice,20); // prac - maximum 20.
+  ch->train=UMIN(ch->train,20);       // train - maximum 20.
+  ch->deity=str_dup(chdeity);
+  ch->pcdata->carma=chcarma;
+  ch->pcdata->favour=chfavour;
+  ch->pcdata->confirm_delete=FALSE;
+  ch->pcdata->confirm_remort=0;
+  ch->pcdata->hptrained=0;
+  ch->pcdata->manatrained=0;
+
+  // reassign race parameters
+  for (i = 0; i < MAX_STATS; i++)
+  {
+    ch->perm_stat[i] = race_table[ch->race].stats[i];
+    ch->mod_stat[i] = 0;
+  }
+
+  ch->affected_by = ch->affected_by|race_table[ch->race].aff;
+  ch->imm_flags = ch->imm_flags|race_table[ch->race].imm;
+  ch->res_flags = ch->res_flags|race_table[ch->race].res;
+  ch->vuln_flags = ch->vuln_flags|race_table[ch->race].vuln;
+  ch->form  = race_table[ch->race].form;
+
+  // add race skills   
+  for (i = 0; i < 5; i++)
+  {
+    if (race_table[ch->race].skills[i] == NULL) break;
+    group_add(ch,race_table[ch->race].skills[i],FALSE);
+  }
+
+  ch->pcdata->points = race_table[ch->race].points;
+
+  //All learned skills set to 1%   
+  for (sn = 0; sn < max_skill; sn++)
+  {
+    if (skill_table[sn].name == NULL ) break;
+    if ( ch->pcdata->learned[sn] > 0) ch->pcdata->learned[sn] = 1;
+  }
+
+  ch->max_mana=100;
+  ch->max_move=100;
+  ch->max_hit=20;
+  ch->pcdata->perm_hit=20;
+  ch->pcdata->perm_mana=100;
+  ch->pcdata->perm_move=100;
+  ch->hit=ch->max_hit;
+  ch->mana=ch->max_mana;
+  ch->move=ch->max_move;
+
+  // removes all obj from char
+  for ( obj = ch->carrying; obj != NULL; obj = obj_next )
+  {
+    obj_next = obj->next_content;
+    obj_from_char( obj );
+    extract_obj(obj);
+  }
+ 
+  // drop extra classes
+  REM_BIT(ch->act,PLR_5REMORT);
+  REM_BIT(ch->act,PLR_LASTREMORT);  
+  if (ch->remort > 2) 
+  {
+    stc ("Выбери какой класс выкинуть: \n\r",ch);
+    if (ch->classmag) stc("mage ",ch);
+    if (ch->classwar) stc("warrior ",ch);
+    if (ch->classcle) stc("cleric ",ch);
+    if (ch->classthi) stc("thief ",ch);
+    stc("\n\r",ch);
+   
+    d->connected=CON_DROP_CLASS;
+  }                 
+  else
+  {
+  // end of Remort process, and go to select new class
+    if (!ch->classmag) stc("mage ",ch);
+    if (!ch->classwar) stc("warrior ",ch);
+    if (!ch->classcle) stc("cleric ",ch);
+    if (!ch->classthi) stc("thief ",ch);
+    stc("\n\r",ch);
+
+    d->connected=CON_GET_NEW_CLASS;
+  }
+}
+
+// Handle all kinds of updates. Called once per pulse from game loop.
+// Random times to defeat tick-timing clients and players.
+void update_handler( void )
+{
+  static  int     pulse_area;
+  static  int     pulse_mobile;
+  static  int     pulse_violence;
+  static  int     pulse_point;
+  static  int     pulse_music;
+  static  int     pulse_updchar;
+
+  if ( --pulse_area     <= 0 )
+  {
+    pulse_area        = PULSE_AREA;
+//    dlog("area_update");
+    area_update        ( );
+//    dlog("area_update finished");
+  }
+
+  if ( --pulse_updchar <= 0 )
+  {
+    pulse_updchar  = PULSE_UPDCHAR;
+    gain_update();
+//    dlog("gain_update finished");
+  }
+
+  if ( --pulse_music          <= 0 )
+  {
+    pulse_music        = PULSE_MUSIC;
+    song_update();
+//    dlog("song_update finished");
+  }
+
+  if ( --pulse_mobile   <= 0 )
+  {
+    pulse_mobile        = PULSE_MOBILE;
+    mobile_update        ( );
+//    dlog("mobile_update finished");
+  }
+
+  if ( --pulse_violence <= 0 )
+  {
+    pulse_violence        = PULSE_VIOLENCE;
+    violence_update        ( );
+//    dlog("violence_update finished");
+  }
+
+  if (--auction->pulse <=0)
+  {
+    auction->pulse = PULSE_AUCTION;
+    auction_update();
+//    dlog("auction_update finished");
+  }
+
+  if ( --pulse_point    <= 0 )
+  {
+    pulse_point     = PULSE_TICK; // Updating tick
+    weather_update();             // Weather
+    char_update   ();             // characters, affects
+    obj_update    ();             // objects
+    quest_update  ();             // quests
+    gquest_update ();             // Global Quests
+    unread_update ();             // auto unread
+    raffect_update();             // room affects
+    remort_update ();             // remort
+    clan_update   ();             // clans update
+    web_update    ();             // update web pages
+
+    if (rebootcount>0)
+    {
+      DESCRIPTOR_DATA *d;
+
+      rebootcount--;
+      if (rebootcount==0) do_reboot(NULL,"now") ;
+      if (rebootcount<6 || rebootcount==10 || rebootcount ==15 ||rebootcount==20)
+      for ( d = descriptor_list; d; d = d->next )
+      {
+        if ( d->connected != CON_PLAYING ) continue;
+        if (rebootcount>0) ptc (d->character,"{RSystem: REBOOT in %d ticks!{x\n\r",rebootcount);
+        if (rebootcount<6) stc("{*",d->character);
+      }
+    }
+  }
+//  dlog("update.c - Updating Aggressive mobiles");
+  aggr_update();
+//  dlog("update.c - Updating complete");
+  tail_chain();
+}
+
+void auction_update (void)
+{
+  char buf[MAX_STRING_LENGTH];
+
+  if (!auction->item) return;
+
+  switch (++auction->going)
+  {
+    case 1 :// going once
+    case 2 :// going twice
+      if (auction->bet > 0)
+        if (auction->buyer)
+          do_printf (buf, "%s: %s (текущая ставка %u).",get_obj_desc(auction->item,'1'),((auction->going == 1) ? "pаз" : "два"), auction->bet);
+        else do_printf (buf, "%s: %s (начальная ставка %u).",get_obj_desc(auction->item,'1'),((auction->going == 1) ? "pаз" : "два"), auction->bet);
+      else do_printf (buf, "%s: %s (ставок еще не было).",get_obj_desc(auction->item,'1'),((auction->going == 1) ? "pаз" : "два"));
+      talk_auction (buf);
+      break;
+    case 3 :// SOLD!
+      if (auction->bet > 0 && auction->buyer)
+      {
+        do_printf (buf, "Лот %s пpодан %s за %u золота.",get_obj_desc(auction->item,'1'),          IS_NPC(auction->buyer) ? get_char_desc(auction->buyer,'2') : auction->buyer->name,
+          auction->bet);
+        talk_auction(buf);
+        obj_to_char (auction->item,auction->buyer);
+        act ("Аукционеp появляется пеpед тобой и вpучает тебе $i4.",
+          auction->buyer,auction->item,NULL,TO_CHAR);
+        act ("Аукционеp появляется пеpед $c5, и вpучает $u $i4",
+          auction->buyer,auction->item,NULL,TO_ROOM);
+
+        auction->seller->gold += auction->bet; // give him the money 
+        auction->item = NULL; // reset item 
+        auction->seller = NULL;
+        auction->buyer  = NULL;
+      }
+      else // not sold
+      {
+        do_printf (buf, "Ставок не получено - лот %s снЯт с аукциона.",get_obj_desc(auction->item,'1'));
+        talk_auction(buf);
+        act ("Аукционеp поЯвлЯется пеpед тобой и возвpащает тебе $i4.",
+                 auction->seller,auction->item,NULL,TO_CHAR);
+        act ("Аукционеp поЯвлЯется пеpед $c5 и возвpащает $u $i4.",
+                 auction->seller,auction->item,NULL,TO_ROOM);
+        obj_to_char (auction->item,auction->seller);
+        auction->bet = 0;
+        auction->item = NULL; /* clear auction */
+      }
+   default:
+     if (auction->going>3) auction->going=3;
+     else auction->going=2;
+  }
+} 
+
+void penalty_update(CHAR_DATA *ch)
+{
+  PENALTY_DATA *penalty,*penalty_next;
+
+  if (!ch->penalty) return;
+
+  for(penalty=ch->penalty;penalty!=NULL;penalty=penalty_next)
+  {
+    penalty_next=penalty->next;
+
+    switch (penalty->type)
+    {
+      case PENALTY_TICK:
+        penalty->ticks--;
+        if (penalty->ticks<=0) remove_penalty(ch, penalty);
+        break;
+      case PENALTY_DATE:
+        break;
+      case PENALTY_PERMANENT:
+      default:
+        break;
+    }
+  }
+}
+
+void raffect_update(void)
+{
+  RAFFECT *ra, *ra_next;
+
+  for (ra=raffect_list;ra;ra=ra_next)
+  {
+    ra_next=ra->next;
+    if (ra->duration==-1) continue;
+    ra->duration--;
+    if (ra->duration<0) free_raffect(ra);
+    if (ra->level>1 && number_percent()>60) ra->level--;
   }
 }
 

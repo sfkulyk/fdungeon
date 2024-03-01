@@ -14,16 +14,6 @@
 #include "interp.h"
 
 DECLARE_DO_FUN2( do_say );
-void create_gquest(int min,int max, int mobs);
-void quest_update       args(( void ));
-void gquest_update      args(( void ));
-bool quest_level_diff   args(( int clevel, int mlevel));
-ROOM_INDEX_DATA  *find_location( CHAR_DATA *ch, char *arg );
-void complete_quest(CHAR_DATA *ch, CHAR_DATA *questman, char *buf);
-void set_quest_time(CHAR_DATA *ch, int q_type);
-CHAR_DATA *find_questmob(int level);
-CHAR_DATA *questman_lookup(CHAR_DATA *ch, bool request);
-void clear_gquest();
 
 struct quest_type {
   char *name;
@@ -79,6 +69,118 @@ const struct quest_type quest_table[] =
    { "flaming",     "{RFlaming{x artefact",                15000,   143,   -1 },
 */
 };
+
+void set_quest_time(CHAR_DATA *ch, int q_type)
+{
+  if (ch->level > 50) ch->countdown = number_range(10,25);
+  else ch->countdown = number_range(10,20);
+  if (q_type==Q_KILL_MOB || q_type==Q_BRING_ITEM) ch->countdown+=5;
+}
+
+CHAR_DATA *questman_lookup(CHAR_DATA *ch, bool request)
+{
+  CHAR_DATA *questman=NULL;
+
+  for (questman=ch->in_room->people;questman!=NULL;questman=questman->next_in_room)
+  {
+    if (!IS_NPC(questman)) continue;
+    if (request && questman->spec_fun==spec_lookup( "spec_questmaster" )) return questman;
+    if (!request && ch->questgiver==questman->pIndexData->vnum) return questman;
+  }
+  return NULL;
+}
+
+void complete_quest(CHAR_DATA *ch, CHAR_DATA *questman, char *buf)
+{
+  do_say(questman,"Поздpавляю с выполнением задания!");
+  do_say(questman,buf);
+
+  if (number_percent()<15 || IS_SET(global_cfg,CFG_NEWYEAR)) {
+    int pracreward = number_range(1,6);
+    ptc(ch, "Ты получаешь %d практик!\n\r",pracreward);
+    ch->practice += pracreward;
+  }
+  else if (number_percent()<15) {
+    int movereward = number_range(1,3);
+    ptc(ch,"Ты получаешь %d движений!\n\r",movereward);
+    ch->max_move += movereward;
+    ch->pcdata->perm_move += movereward;
+  }
+  else if (number_percent()<5) {
+    stc("Ты получаешь 1 тренировку!\n\r",ch);
+    ch->train+=1;
+  }
+  else if (number_percent()<5) {
+    int count;
+    int qword;
+
+    for(count=0;quenia_table[count].name!=Q_END;count++);
+    qword=number_range(0,count-1);
+    ptc(ch,"%s говорит тебе '{GЯ слышал, что {C%s{G на quenia звучит как '{C%s{x'\n\r",get_char_desc(questman,'1'),
+      quenia_table[qword].descr,quenia_table[qword].word);
+  }
+  REM_BIT(ch->act, PLR_QUESTOR);
+  ch->questgiver = 0;
+  ch->countdown = 0;
+  ch->qcomplete[0]++;
+  ch->qcomplete[1]++;
+  ch->qcounter++;
+  ch->questobj = 0;
+  ch->q_stat=0;
+  ch->nextquest = number_range(3,10);
+}
+
+bool quest_level_diff(int clevel, int mlevel)
+{
+   if      (clevel < 5   && (mlevel>5))              return FALSE;
+   else if (clevel < 10  && (abs(mlevel-clevel)>4))  return FALSE;
+   else if (clevel < 15  && (abs(mlevel-clevel)>6))  return FALSE;
+   else if (clevel < 35  && (abs(mlevel-clevel)>7))  return FALSE;
+   else if (clevel < 65  && (abs(mlevel-clevel)>9))  return FALSE;
+   else if (clevel < 90  && (abs(mlevel-clevel)>10)) return FALSE;
+   else if (clevel < 95  && (abs(mlevel-clevel)>12)) return FALSE;
+   else if                  (abs(mlevel-clevel)>15)  return FALSE;
+   return TRUE;
+}
+
+// Select mob as quest target
+CHAR_DATA *find_questmob(int level)
+{
+  CHAR_DATA *victim=NULL;
+  int count;
+
+  count=number_range(0,310)*15;
+  for (victim=char_list;;victim=victim->next) {
+    if (!victim) victim=char_list;
+    count--;
+    if (count<1) break;
+  }
+
+  for (;;) {
+    victim=victim->next;
+    if (!victim) victim=char_list;
+    if (++count > 4621) break;
+
+    if (!IS_NPC(victim) || !victim->in_room) continue;
+    if (IS_SET(victim->act,ACT_IS_HEALER|ACT_TRAIN|ACT_PRACTICE|ACT_IS_CHANGER|ACT_PET|ACT_NOQUEST)) continue;
+    if (IS_SET(victim->affected_by, AFF_CHARM)) continue;
+    if (victim->questmob!=NULL) continue;
+    if (IS_SET(victim->in_room->room_flags, ROOM_SAFE)) continue;
+    if (victim->in_room->area!=victim->pIndexData->area) continue;
+    if (IS_SET(victim->in_room->area->area_flags, AREA_NOQUEST)) continue;
+    if (victim->hit<victim->max_hit/2) continue;
+    if (victim->fighting) continue;
+    if (victim->pIndexData->pShop) continue;
+    if (quest_level_diff(level, victim->level) != TRUE) continue;
+    if (IS_SET(victim->in_room->room_flags,ROOM_MAG_ONLY)
+     || IS_SET(victim->in_room->room_flags,ROOM_CLE_ONLY)
+     || IS_SET(victim->in_room->room_flags,ROOM_THI_ONLY)
+     || IS_SET(victim->in_room->room_flags,ROOM_WAR_ONLY))  continue;
+
+    if (number_range(1,10)>7) return victim;
+  }
+  return NULL;
+}
 
 void do_quest(CHAR_DATA *ch, const char *argument)
 {
@@ -535,19 +637,6 @@ void do_quest(CHAR_DATA *ch, const char *argument)
   stc("Для большей инфоpмации, набеpите 'QUEST HELP'.\n\r",ch);
 }
 
-bool quest_level_diff(int clevel, int mlevel)
-{
-   if      (clevel < 5   && (mlevel>5))              return FALSE;
-   else if (clevel < 10  && (abs(mlevel-clevel)>4))  return FALSE;
-   else if (clevel < 15  && (abs(mlevel-clevel)>6))  return FALSE;
-   else if (clevel < 35  && (abs(mlevel-clevel)>7))  return FALSE;
-   else if (clevel < 65  && (abs(mlevel-clevel)>9))  return FALSE;
-   else if (clevel < 90  && (abs(mlevel-clevel)>10)) return FALSE;
-   else if (clevel < 95  && (abs(mlevel-clevel)>12)) return FALSE;
-   else if                  (abs(mlevel-clevel)>15)  return FALSE;
-   return TRUE;
-}
-                
 void quest_update(void)
 {
   DESCRIPTOR_DATA *d;
@@ -605,103 +694,95 @@ int cancel_quest(CHAR_DATA *ch, bool reward, int from,int to)
   return pointreward;
 }
 
-void complete_quest(CHAR_DATA *ch, CHAR_DATA *questman, char *buf)
+void clear_gquest()
 {
-  do_say(questman,"Поздpавляю с выполнением задания!");
-  do_say(questman,buf);
+  int i;
+  CHAR_DATA *tmp;
 
-  if (number_percent()<15 || IS_SET(global_cfg,CFG_NEWYEAR)) {
-    int pracreward = number_range(1,6);
-    ptc(ch, "Ты получаешь %d практик!\n\r",pracreward);
-    ch->practice += pracreward;
+  gquest.status=0;
+  for (i=0;i<20;i++) {
+    gquest.target[i]=0;
+    gquest.target_counter[i]=0;
   }
-  else if (number_percent()<15) {
-    int movereward = number_range(1,3);
-    ptc(ch,"Ты получаешь %d движений!\n\r",movereward);
-    ch->max_move += movereward;
-    ch->pcdata->perm_move += movereward;
+  gquest.min_level=0;
+  gquest.max_level=0;
+  gquest.tmp_counter=0;
+  gquest.mobs=0;
+  for (tmp=char_list;tmp;tmp=tmp->next) {
+    if (IS_NPC(tmp)) continue;
+    tmp->pcdata->gquest.status=0;
+    for (i=0;i<20;i++) tmp->pcdata->gquest.target[i]=0;
   }
-  else if (number_percent()<5) {
-    stc("Ты получаешь 1 тренировку!\n\r",ch);
-    ch->train+=1;
-  }
-  else if (number_percent()<5) {
-    int count;
-    int qword;
-
-    for(count=0;quenia_table[count].name!=Q_END;count++);
-    qword=number_range(0,count-1);
-    ptc(ch,"%s говорит тебе '{GЯ слышал, что {C%s{G на quenia звучит как '{C%s{x'\n\r",get_char_desc(questman,'1'),
-      quenia_table[qword].descr,quenia_table[qword].word);
-  }
-  REM_BIT(ch->act, PLR_QUESTOR);
-  ch->questgiver = 0;
-  ch->countdown = 0;
-  ch->qcomplete[0]++;
-  ch->qcomplete[1]++;
-  ch->qcounter++;
-  ch->questobj = 0;
-  ch->q_stat=0;
-  ch->nextquest = number_range(3,10);
+  for (i=0;i<100;i++) gquest.room[i]=0;
+  gquest.counter=number_range(10,20);
 }
 
-// Select mob as quest target
-CHAR_DATA *find_questmob(int level)
+
+void create_gquest(int min,int max, int mobs)
 {
-  CHAR_DATA *victim=NULL;
-  int count;
+  int i=0,t;
+  CHAR_DATA *mob;
+  bool found;
+  char buf[MAX_INPUT_LENGTH];
 
-  count=number_range(0,310)*15;
-  for (victim=char_list;;victim=victim->next) {
-    if (!victim) victim=char_list;
-    count--;
-    if (count<1) break;
-  }
-
-  for (;;) {
-    victim=victim->next;
-    if (!victim) victim=char_list;
-    if (++count > 4621) break;
-
-    if (!IS_NPC(victim) || !victim->in_room) continue;
-    if (IS_SET(victim->act,ACT_IS_HEALER|ACT_TRAIN|ACT_PRACTICE|ACT_IS_CHANGER|ACT_PET|ACT_NOQUEST)) continue;
-    if (IS_SET(victim->affected_by, AFF_CHARM)) continue;
-    if (victim->questmob!=NULL) continue;
-    if (IS_SET(victim->in_room->room_flags, ROOM_SAFE)) continue;
-    if (victim->in_room->area!=victim->pIndexData->area) continue;
-    if (IS_SET(victim->in_room->area->area_flags, AREA_NOQUEST)) continue;
-    if (victim->hit<victim->max_hit/2) continue;
-    if (victim->fighting) continue;
-    if (victim->pIndexData->pShop) continue;
-    if (quest_level_diff(level, victim->level) != TRUE) continue;
-    if (IS_SET(victim->in_room->room_flags,ROOM_MAG_ONLY)
-     || IS_SET(victim->in_room->room_flags,ROOM_CLE_ONLY)
-     || IS_SET(victim->in_room->room_flags,ROOM_THI_ONLY)
-     || IS_SET(victim->in_room->room_flags,ROOM_WAR_ONLY))  continue;
-
-    if (number_range(1,10)>7) return victim;
-  }
-  return NULL;
-}
-
-void set_quest_time(CHAR_DATA *ch, int q_type)
-{
-  if (ch->level > 50) ch->countdown = number_range(10,25);
-  else ch->countdown = number_range(10,20);
-  if (q_type==Q_KILL_MOB || q_type==Q_BRING_ITEM) ch->countdown+=5;
-}
-
-CHAR_DATA *questman_lookup(CHAR_DATA *ch, bool request)
-{
-  CHAR_DATA *questman=NULL;
-
-  for (questman=ch->in_room->people;questman!=NULL;questman=questman->next_in_room)
+  if (mobs<=0 || mobs>20) mobs=number_range(3,12);
+  gquest.mobs=mobs;
+  if (min<=0 || max<min)
   {
-    if (!IS_NPC(questman)) continue;
-    if (request && questman->spec_fun==spec_lookup( "spec_questmaster" )) return questman;
-    if (!request && ch->questgiver==questman->pIndexData->vnum) return questman;
+    min=number_range(1,95);
+    max=URANGE(8,min+8,101);
   }
-  return NULL;
+  gquest.min_level=min;
+  gquest.max_level=max;
+
+  for (;mobs>0;mobs--)
+  {
+    mob=find_questmob(min);
+    if (!mob) mob=find_questmob(min+1);
+    if (!mob) return;
+    found=FALSE;
+    for (t=0;t<=i;t++) {
+      if(gquest.target[t]==mob->pIndexData->vnum) {
+        found=TRUE;
+        gquest.target_counter[t]++;
+        break;
+      }
+    }
+    if (!found) {
+      gquest.target[i]=mob->pIndexData->vnum;
+      gquest.target_counter[i]=1;
+      i++;
+    }
+  }
+  t=0;
+  for (i=0;i<20;i++) {
+    if (gquest.target[i]==0) break;
+    for (mob=char_list;mob;mob=mob->next) {
+      if (!IS_NPC(mob) || gquest.target[i]!=mob->pIndexData->vnum || !mob->in_room) continue;
+      gquest.room[t]=mob->in_room->vnum;
+      /* 
+       * `break' breaks only current `for' 
+       *
+       * (unicorn)
+       */
+      if (++t>=99) break;
+    }
+    /* 
+     * Ugly fix for gquest.room[] overflow.
+     * APAR: [*****] BUG: Bad sn 10 in get_skill. 9515
+     *       (gsn_dodge follows the gquest static info and was rewritten by
+     *       room number 9515 (somewhere in New Thalos), thus that skills 
+     *       doesn't work properly)
+     * TODO: increase enthrophy in rooms election.
+     * (uni)
+     */
+    if (t >= 99) break;
+  }
+  gquest.status=GQ_STARTING;
+  gquest.counter=3;
+  gquest.tmp_counter=gquest.mobs*(3+(min>5)+(min>15)+(min>25)+(min>45)+(min>60)+(min>75)+(min>90)+(min>95))+2;
+  do_printf(buf,"Объявляется новое задание для уровней %d-%d.Задание начнется через 3 тика",min,max);
+  gecho(buf);
 }
 
 void do_gquest(CHAR_DATA *ch, const char *argument)
@@ -934,96 +1015,6 @@ void gquest_update(void)
     return;
   }
   if (IS_SET(global_cfg,CFG_GQUEST)) create_gquest(0,0,0);
-}
-
-void create_gquest(int min,int max, int mobs)
-{
-  int i=0,t;
-  CHAR_DATA *mob;
-  bool found;
-  char buf[MAX_INPUT_LENGTH];
-
-  if (mobs<=0 || mobs>20) mobs=number_range(3,12);
-  gquest.mobs=mobs;
-  if (min<=0 || max<min)
-  {
-    min=number_range(1,95);
-    max=URANGE(8,min+8,101);
-  }
-  gquest.min_level=min;
-  gquest.max_level=max;
-
-  for (;mobs>0;mobs--)
-  {
-    mob=find_questmob(min);
-    if (!mob) mob=find_questmob(min+1);
-    if (!mob) return;
-    found=FALSE;
-    for (t=0;t<=i;t++) {
-      if(gquest.target[t]==mob->pIndexData->vnum) {
-        found=TRUE;
-        gquest.target_counter[t]++;
-        break;
-      }
-    }
-    if (!found) {
-      gquest.target[i]=mob->pIndexData->vnum;
-      gquest.target_counter[i]=1;
-      i++;
-    }
-  }
-  t=0;
-  for (i=0;i<20;i++) {
-    if (gquest.target[i]==0) break;
-    for (mob=char_list;mob;mob=mob->next) {
-      if (!IS_NPC(mob) || gquest.target[i]!=mob->pIndexData->vnum || !mob->in_room) continue;
-      gquest.room[t]=mob->in_room->vnum;
-      /* 
-       * `break' breaks only current `for' 
-       *
-       * (unicorn)
-       */
-      if (++t>=99) break;
-    }
-    /* 
-     * Ugly fix for gquest.room[] overflow.
-     * APAR: [*****] BUG: Bad sn 10 in get_skill. 9515
-     *       (gsn_dodge follows the gquest static info and was rewritten by
-     *       room number 9515 (somewhere in New Thalos), thus that skills 
-     *       doesn't work properly)
-     * TODO: increase enthrophy in rooms election.
-     * (uni)
-     */
-    if (t >= 99) break;
-  }
-  gquest.status=GQ_STARTING;
-  gquest.counter=3;
-  gquest.tmp_counter=gquest.mobs*(3+(min>5)+(min>15)+(min>25)+(min>45)+(min>60)+(min>75)+(min>90)+(min>95))+2;
-  do_printf(buf,"Объявляется новое задание для уровней %d-%d.Задание начнется через 3 тика",min,max);
-  gecho(buf);
-}
-
-void clear_gquest()
-{
-  int i;
-  CHAR_DATA *tmp;
-
-  gquest.status=0;
-  for (i=0;i<20;i++) {
-    gquest.target[i]=0;
-    gquest.target_counter[i]=0;
-  }
-  gquest.min_level=0;
-  gquest.max_level=0;
-  gquest.tmp_counter=0;
-  gquest.mobs=0;
-  for (tmp=char_list;tmp;tmp=tmp->next) {
-    if (IS_NPC(tmp)) continue;
-    tmp->pcdata->gquest.status=0;
-    for (i=0;i<20;i++) tmp->pcdata->gquest.target[i]=0;
-  }
-  for (i=0;i<100;i++) gquest.room[i]=0;
-  gquest.counter=number_range(10,20);
 }
 
 bool is_gqmob(int64 vnum)

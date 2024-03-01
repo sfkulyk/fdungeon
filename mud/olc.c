@@ -11,8 +11,6 @@
 #include "olc.h"
 #include "db.h"
 
-AREA_DATA *get_area_data        args( ( int vnum ) );
-
 bool run_olc_editor( DESCRIPTOR_DATA *d )
 {
   switch ( d->editor )

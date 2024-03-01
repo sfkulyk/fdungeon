@@ -13,15 +13,6 @@
 #include "interp.h"
 #include "fdweb.h"
 
-extern  int     _filbuf         args( (FILE *) );
-
-int64  flag_convert64 (char letter);
-int64  fread_flag64   (FILE * fp);
-char * pflag64        (int64 flag);
-void save_clans    ();
-//DDD int  rename (const char * oldfname, const char * newfname);
-void save_guild (FILE *fp);
-
 char * print_flags(int flag)
 {
   int count, pos = 0;

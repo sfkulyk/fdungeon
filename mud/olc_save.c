@@ -16,7 +16,6 @@
 // section of the resets.  It makes areas considerably larger but
 // may aid in debugging.
 #define VERBOSE
-char * mprog_type_to_name ( int64 type );
 
 // Returns a string without \r and ~.
 char *fix_string( const char *str )

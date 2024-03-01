@@ -18,8 +18,6 @@
 #include "merc.h"
 #include "tables.h"
 
-extern int64 flag_lookup( const char *word, const struct flag_type *flag_table );
-
 // These defines correspond to the entries in fn_keyword[] table.
 // If you add a new if_check, you must also add a #define here.
 #define CHK_RAND        (0)

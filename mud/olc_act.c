@@ -12,7 +12,6 @@
 #include "tables.h"
 #include "recycle.h"
 
-char * mprog_type_to_name ( int64 type );
 void  fix_local     args( ( void ) );
 
 /* Return TRUE if area changed, FALSE if not. */
