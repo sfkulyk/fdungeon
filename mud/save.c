@@ -11,7 +11,6 @@
 #include "recycle.h"
 #include "tables.h"
 #include "interp.h"
-#include "fdweb.h"
 
 char * print_flags(int flag)
 {

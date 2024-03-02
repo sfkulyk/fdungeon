@@ -379,6 +379,7 @@ bool clan_cfg   (CLAN_DATA *clan, int64 flag);
 void do_ear     (CHAR_DATA *victim,CHAR_DATA *ch);
 bool add_clanskill(CLAN_DATA *clan, int sn, int64 time);
 bool rem_clanskill(CLAN_DATA *clan,int sn);
+CLAN_DATA *new_clan();
 
 // comm.c
 bool  check_ban        args( ( const char *site, int type) );
@@ -518,7 +519,8 @@ void  run                 ( CD *ch );
 void  send_news           ( char *text, int type );
 void  send_note           ( const char *from, const char *to,const char *subject, const char *text,int type);
 void  write_skill_table   ( CHAR_DATA *ch);
-void remove_penalty(CHAR_DATA *ch, PENALTY_DATA *penalty);
+void  remove_penalty(CHAR_DATA *ch, PENALTY_DATA *penalty);
+void  fix_keepers(MOB_INDEX_DATA *mob);
 
 // guild.c
 int  guild_lookup    (const char *name);
@@ -690,6 +692,7 @@ bool check_dispel( int dis_level, CHAR_DATA *victim, int sn) ;
 
 // note.c
 void unread_update(void);
+void load_notes(void);
 
 // quest.c
 int  cancel_quest(CD *ch, bool reward, int from,int to);
@@ -760,7 +763,10 @@ void  clan_update ();
 void  area_update ();
 void  gquest_update ();
 void  weather_update();
-void raffect_update();
+void  raffect_update();
+
+extern const char *fname_online;
+extern const char *fname_who;
 
 // Global Constants
 extern  char *  const   dir_name  [];

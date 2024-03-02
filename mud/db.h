@@ -21,31 +21,31 @@ void load_clans();
 
 typedef struct
 {
-    char *names[10];
-    int   s[10];     // rod imeni 1=male, 2=female, 3=it
+  char *names[10];
+  int   s[10];     // rod imeni 1=male, 2=female, 3=it
 } random_weapon_name;
 
 typedef struct
 {
-    char *names[10];
-    int flag;
-    int s;
+  char *names[10];
+  int flag;
+  int s;
 } random_flag_name;
 
 typedef struct
 {
-    char *name;
-    int min_hr;
-    int min_dr;
-    int min_str;
-    int min_dex;
+  char *name;
+  int min_hr;
+  int min_dr;
+  int min_str;
+  int min_dex;
 } random_suffix_name;
 
 typedef struct
 {
-    char *name;
-    int min_value;
-    int max_value;
+  char *name;
+  int min_value;
+  int max_value;
 } random_asuffix_name;
 
 // macro for flag swapping
@@ -68,7 +68,7 @@ void load_one_race( FILE *fp, int race);
 
 typedef struct
 {
-    char *name;
-    int  vnum;
-    char *rushian;
+  char *name;
+  int  vnum;
+  char *rushian;
 } random_armor;

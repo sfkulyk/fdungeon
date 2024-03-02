@@ -11,9 +11,8 @@
 #include "tables.h"
 
 // globals from db.c for load_notes
-extern  int     _filbuf         args( (FILE *) );
-extern FILE *                  fpArea;
-extern char                    strArea[MAX_INPUT_LENGTH];
+extern FILE * fpArea;
+extern char   strArea[MAX_INPUT_LENGTH];
 
 NOTE_DATA *note_list;
 NOTE_DATA *idea_list;

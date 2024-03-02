@@ -5,8 +5,6 @@ areas/null.log
 areas/start.log
 areas/stdout.log
 areas/stderr.log
-areas/notify_tg.sh
-areas/send_note.sh
 areas/send_note.txt
 areas/rom
 areas/who.htm

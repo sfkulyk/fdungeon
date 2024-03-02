@@ -3436,3 +3436,12 @@ P.S. Люди, когда пишете что-то в test.c старайтес�
         * small performance optimization
         * fixed guild chance percent (wrong C++ syntax)
         * replaced == with strcmp for strings
+4.90.00 (C) Saboteur
+        * fixed crash related to global quest (killing, casting gate invoces crashes)
+        * drop a lot of unused code - unicorn module stuff which was written for unix (WITH_DSO)
+        * reworked multiple definitions, global things defined in merc.h
+        * added ukrainian version of commands (execute 'commands' to see list)
+        * add generate backtrace in case of crash
+        * changed path to log files, removed local notes from git (only changes and news are stored in repo)
+        * license updated (just small clarifications)
+        * added telegram notification. Just invoce external shell scripts
