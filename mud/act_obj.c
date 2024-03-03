@@ -10,6 +10,9 @@
 #include "interp.h"
 #include "recycle.h" 
 
+int64 iObjCount; // for count objects between functions
+bool  bFlushText;
+
 // RT part of the corpse looting code
 bool can_loot(CHAR_DATA *ch, OBJ_DATA *obj)
 {
@@ -106,12 +109,11 @@ bool is_same_obj (OBJ_DATA *obj, OBJ_DATA *next)
 
 char * local_outtext (int64 count, char *string_one, char *string_many)
 { 
- static char     textbuf [MAX_STRING_LENGTH]; 
- 
- if (count==1) return string_one; 
- 
- do_printf (textbuf, string_many, count); 
- return textbuf; 
+  static char textbuf [MAX_STRING_LENGTH];
+
+  if (count==1) do_printf(textbuf,string_one);
+  else do_printf (textbuf, string_many, count);
+  return textbuf;
 } 
 
 int local_get_obj ( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool IsOne )
@@ -119,9 +121,7 @@ int local_get_obj ( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool IsOn
   CHAR_DATA *gch;
   char temp[MAX_STRING_LENGTH];
   int members;
-  int64 iObjCount=0;
   char buffer[100];
-  bool bFlushText;
 
   if ( !CAN_WEAR(obj, ITEM_TAKE) )
   {
@@ -155,7 +155,7 @@ int local_get_obj ( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool IsOn
   {
     if (bFlushText)
     {
-      act (local_outtext(iObjCount, "$d: ты не можешь нести так много вещей.",
+      act (local_outtext (iObjCount, "$d: ты не можешь нести так много вещей.",
            "$d {C[%d]{x: ты не можешь нести так много вещей."), 
            ch, NULL, obj->name, TO_CHAR); iObjCount=1; }
       return 0;
@@ -278,6 +278,8 @@ void do_get( CHAR_DATA *ch, const char *argument )
   OBJ_DATA *container;
   bool found;
   int number, count=0;
+    
+  iObjCount=1; /* Init object counter */
     
   number = mult_argument((char *)argument, arg);
   if (number==1) number=MAX_OBJS_VALUE;
@@ -995,7 +997,7 @@ void do_envenom(CHAR_DATA *ch, const char *argument)
 
   obj = get_obj_list(ch,argument,ch->carrying);
 
-  if (obj== NULL)
+  if (obj==NULL)
   {
     stc("У тебя нет этой вещи.\n\r",ch);
     return;
@@ -4430,4 +4432,3 @@ void do_split( CHAR_DATA *ch, const char *argument )
     }
   }
 }
-
