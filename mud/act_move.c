@@ -35,14 +35,14 @@ const int movement_loss [SECT_MAX] =
    1, 7, 9,10, 1, 1,10, 5, 4, 2
 };
 
-/* SECT_INSIDE       0  SECT_AIR            9 
-   SECT_CITY         1  SECT_DESERT        10 
-   SECT_FIELD        2  SECT_ROCK_MOUNTAIN 12 
-   SECT_FOREST       3  SECT_SNOW_MOUNTAIN 13 
-   SECT_HILLS        4  SECT_ENTER         14 
-   SECT_MOUNTAIN     5  SECT_ROAD          15 
-   SECT_WATER_SWIM   6  SECT_SWAMP         16 
-   SECT_WATER_NOSWIM 7  SECT_JUNGLE        17 
+/* SECT_INSIDE       0  SECT_AIR            9
+   SECT_CITY         1  SECT_DESERT        10
+   SECT_FIELD        2  SECT_ROCK_MOUNTAIN 12
+   SECT_FOREST       3  SECT_SNOW_MOUNTAIN 13
+   SECT_HILLS        4  SECT_ENTER         14
+   SECT_MOUNTAIN     5  SECT_ROAD          15
+   SECT_WATER_SWIM   6  SECT_SWAMP         16
+   SECT_WATER_NOSWIM 7  SECT_JUNGLE        17
    SECT_UNUSED       8  SECT_RUINS         18
                         SECT_UWATER        19*/
 
@@ -119,7 +119,7 @@ void scan(CHAR_DATA *ch,int door)
     }
     return;
   }
-        
+
   do_printf(buf,"{CНа %s:{x",dname[door]);
   if(scan_dir(ch,ch->in_room,door,buf)) return;
   new_room=ch->in_room->exit[door]->u1.to_room;
@@ -455,7 +455,7 @@ void lock_unlock( CHAR_DATA *ch, const char *argument, int action )
        { stc( "Тут уже заперто.\n\r",    ch ); return; }
     if ( action!=1 && !IS_SET(obj->value[1], CONT_LOCKED) )
        { stc( "Тут уже не заперто.\n\r",    ch ); return; }
-  
+
     if (action==1)
     {
        SET_BIT(obj->value[1], CONT_LOCKED);
@@ -478,7 +478,7 @@ void lock_unlock( CHAR_DATA *ch, const char *argument, int action )
     ROOM_INDEX_DATA *to_room;
     EXIT_DATA *pexit;
     EXIT_DATA *pexit_rev;
-  
+
     pexit   = ch->in_room->exit[door];
     if ( !IS_SET(pexit->exit_info, EX_CLOSED) )
        { stc( "Сначала закрой это.\n\r",        ch ); return; }
@@ -713,13 +713,13 @@ void do_stand( CHAR_DATA *ch, const char *argument )
     }
     ch->on = obj;
   }
-    
+
   switch ( ch->position )
   {
     case POS_SLEEPING:
       if (is_affected(ch,gsn_sleep))
       { stc( "Ты не можешь проснуться!\n\r", ch ); return; }
-        
+
       if (IS_SET(ch->act,PLR_TIPSY)) if (tipsy(ch,"stand_sleep")) return;
 
       if (!obj)
@@ -743,7 +743,7 @@ void do_stand( CHAR_DATA *ch, const char *argument )
         act_new("Ты просыпаешься и встаешь на $i1.",ch,obj,NULL,TO_CHAR,POS_DEAD);
         act("$c1 просыпается и встает на $i1.",ch,obj,NULL,TO_ROOM);
       }
-      else 
+      else
       {
         act_new("Ты просыпаешься и становишься в $i1.",ch,obj,NULL,TO_CHAR,POS_DEAD);
         act("$c1 просыпается и становится в $i1.",ch,obj,NULL,TO_ROOM);
@@ -752,7 +752,7 @@ void do_stand( CHAR_DATA *ch, const char *argument )
       do_function(ch, &do_look, "auto");
       break;
 
-    case POS_RESTING: 
+    case POS_RESTING:
     case POS_SITTING:
       if (IS_SET(ch->act,PLR_TIPSY)) if (tipsy(ch,"stand_rest")) return;
 
@@ -1064,7 +1064,7 @@ void do_sleep( CHAR_DATA *ch, const char *argument )
 
   case POS_RESTING:
   case POS_SITTING:
-  case POS_STANDING: 
+  case POS_STANDING:
     if (EMPTY(argument) && !ch->on)
     {
       stc( "Ты засыпаешь.\n\r", ch );
@@ -1082,7 +1082,7 @@ void do_sleep( CHAR_DATA *ch, const char *argument )
         return;
       }
       if (obj->item_type != ITEM_FURNITURE
-       ||  (!IS_SET(obj->value[2],SLEEP_ON) 
+       ||  (!IS_SET(obj->value[2],SLEEP_ON)
        &&   !IS_SET(obj->value[2],SLEEP_IN)
        &&   !IS_SET(obj->value[2],SLEEP_AT)))
       {
@@ -1102,7 +1102,7 @@ void do_sleep( CHAR_DATA *ch, const char *argument )
       return;
      }
      ch->on = obj;
-  
+
      if (IS_SET(obj->value[2],SLEEP_AT))
       {
         act("Ты ложишься спать на $i4.",ch,obj,NULL,TO_CHAR);
@@ -1180,7 +1180,7 @@ void do_sneak( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  if ( !IS_AFFECTED(ch, AFF_SNEAK) 
+  if ( !IS_AFFECTED(ch, AFF_SNEAK)
     && IS_SET(race_table[ch->race].spec,SPEC_SNEAK))
   {
     SET_BIT(ch->affected_by,AFF_SNEAK);
@@ -1189,16 +1189,16 @@ void do_sneak( CHAR_DATA *ch, const char *argument )
   }
 
   affect_strip( ch, gsn_sneak );
-  
+
   chance = number_percent ();
   if (!IS_NPC(ch) && ch->pcdata->condition[COND_ADRENOLIN]!=0 ) chance *= 4;
-  
+
   if ( chance < get_skill(ch,gsn_sneak) )
   {
     check_improve(ch,gsn_sneak,TRUE,3);
     af.where     = TO_AFFECTS;
     af.type      = gsn_sneak;
-    af.level     = ch->level; 
+    af.level     = ch->level;
     af.duration  = ch->level;
     af.location  = APPLY_NONE;
     af.modifier  = 0;
@@ -1214,7 +1214,7 @@ void do_sneak( CHAR_DATA *ch, const char *argument )
 void do_hide( CHAR_DATA *ch, const char *argument )
 {
   int chance;
-  
+
   if (IS_NPC(ch))
   {
     cant_mes(ch);
@@ -1222,20 +1222,20 @@ void do_hide( CHAR_DATA *ch, const char *argument )
   }
 
   if (!IS_AFFECTED(ch, AFF_HIDE)
-   && IS_SET(race_table[ch->race].spec,SPEC_HIDE)) 
-  { 
-    SET_BIT(ch->affected_by,AFF_HIDE); 
-    stc( "Ты спрятался.\n\r", ch ); 
-    return; 
-  } 
+   && IS_SET(race_table[ch->race].spec,SPEC_HIDE))
+  {
+    SET_BIT(ch->affected_by,AFF_HIDE);
+    stc( "Ты спрятался.\n\r", ch );
+    return;
+  }
 
   if ( IS_AFFECTED(ch, AFF_HIDE) && ch->race!=RACE_SPRITE)
        REM_BIT(ch->affected_by, AFF_HIDE);
-  WAIT_STATE(ch,skill_table[gsn_hide].beats); 
-  
+  WAIT_STATE(ch,skill_table[gsn_hide].beats);
+
   chance = number_percent ();
   if (!IS_NPC(ch) && ch->pcdata->condition[COND_ADRENOLIN]!=0 ) chance *= 4;
-  
+
   if ((chance < get_skill(ch,gsn_hide))
   &&  (ch->position == POS_STANDING))
   {
@@ -1281,11 +1281,11 @@ void do_recall( CHAR_DATA *ch, const char *argument )
   {
     char buf[MAX_STRING_LENGTH];
 
-    do_printf( buf, "{y    $c1{x пpосит %s пеpенести его!", 
+    do_printf( buf, "{y    $c1{x пpосит %s пеpенести его!",
        get_rdeity( deity_table[deity_lookup(ch->deity)].rname, '2') );
     act( buf, ch, 0, NULL, TO_ROOM );
   }
-  else  
+  else
   {
     act( "{y   $c1{x пpосит Богов пеpенести его!", ch, 0, 0, TO_ROOM );
     if (!IS_IMMORTAL(ch) && (ch->level>5 || ch->remort>0) )
@@ -1294,7 +1294,7 @@ void do_recall( CHAR_DATA *ch, const char *argument )
       if (!IS_NPC(ch)) act( "Боги отказываются от {Y$c1{x...", ch, 0, 0, TO_ROOM );
       if ( ( number_range(1,2) == 2) && (!IS_IMMORTAL(ch) || !IS_NPC(ch)) ) return;
     }
-  }   
+  }
 
   if ( ( location = get_room_index( ROOM_VNUM_TEMPLE ) ) == NULL )
   {
@@ -1308,7 +1308,7 @@ void do_recall( CHAR_DATA *ch, const char *argument )
   if ( ch->in_room == location ) return;
 
   if ( !IS_IMMORTAL(ch) && !IS_SET(ch->in_room->ra, RAFF_LIFE_STR)
-      && (IS_SET(ch->in_room->room_flags, ROOM_NO_RECALL) 
+      && (IS_SET(ch->in_room->room_flags, ROOM_NO_RECALL)
       ||  IS_AFFECTED(ch, AFF_CURSE)
       ||  IS_SET(ch->in_room->ra,RAFF_EVIL_PR)
       ||  (!IS_NPC(ch) && IS_SET(ch->act, PLR_ARMY))))
@@ -1324,10 +1324,10 @@ void do_recall( CHAR_DATA *ch, const char *argument )
   }
      chance = get_skill(ch, skill_lookup("recall"));
 
-  if( !IS_DEVOTED_ANY(ch) && ch->level > 20 && !IS_NPC(ch)) 
+  if( !IS_DEVOTED_ANY(ch) && ch->level > 20 && !IS_NPC(ch))
      chance /= 4;
 
-  if ( !IS_IMMORTAL(ch) && (number_percent() > chance) && !IS_NPC(ch) 
+  if ( !IS_IMMORTAL(ch) && (number_percent() > chance) && !IS_NPC(ch)
 /**/    && ((ch->level < 5) && (ch->remort < 1))
      )
   {
@@ -1359,12 +1359,12 @@ void do_recall( CHAR_DATA *ch, const char *argument )
   do_function(ch, &do_look, "auto" );
   check_improve(ch,gsn_recall,TRUE,1);
   WAIT_STATE( ch, skill_table[gsn_recall].beats );
-    
-  if (ch->pet)  
+
+  if (ch->pet)
    {
      act( "{y   $c1{x пpосит Богов пеpенести его!", ch->pet, 0, 0, TO_ROOM );
      char_from_room( ch->pet );
-     char_to_room( ch->pet, location );    
+     char_to_room( ch->pet, location );
      act( "{y$c1{x появляется в комнате.", ch->pet, NULL, NULL, TO_ROOM );
    }
 //    do_function(ch->pet,&do_recall,(EMPTY(argument))?"":"auto");
@@ -1533,7 +1533,7 @@ void do_clan_recall( CHAR_DATA *ch, const char *argument )
   }
 
   if ( !IS_IMMORTAL(ch) && !IS_SET(ch->in_room->ra, RAFF_LIFE_STR)
-      && (IS_SET(ch->in_room->room_flags, ROOM_NO_RECALL) 
+      && (IS_SET(ch->in_room->room_flags, ROOM_NO_RECALL)
       ||  IS_AFFECTED(ch, AFF_CURSE)
       ||  IS_SET(ch->in_room->ra,RAFF_EVIL_PR)
       ||  (!IS_NPC(ch) && IS_SET(ch->act, PLR_ARMY))))
@@ -1583,7 +1583,7 @@ void do_clan_recall( CHAR_DATA *ch, const char *argument )
   char_to_room( ch, location );
   act( "$c1 внезапно появляется в комнате.", ch, NULL, NULL, TO_ROOM );
   do_look( ch, "auto" );
- 
+
   if (ch->pet) do_clan_recall(ch->pet,"");
 }
 
@@ -1598,7 +1598,7 @@ void do_arecall( CHAR_DATA *ch, const char *argument )
     stc("Только игpоки могут делать recall.\n\r",ch);
     return;
   }
-  
+
   act( "{y$c1{x пpосит Богов пеpенести его на Арену!", ch, 0, 0, TO_ROOM );
 
   if ( ( location = get_room_index( ROOM_VNUM_ARENA ) ) == NULL )
@@ -1649,7 +1649,7 @@ void do_arecall( CHAR_DATA *ch, const char *argument )
   char_to_room( ch, location );
   act( "{y$c1{x появляется в комнате.", ch, NULL, NULL, TO_ROOM );
   do_function(ch, &do_look, "auto" );
-    
+
   if (ch->pet != NULL)
   do_function(ch->pet, &do_arecall, "");
 }
@@ -1715,7 +1715,7 @@ void do_rape( CHAR_DATA *ch, const char *argument )
   act("$n срывает с тебЯ одежду...Да! Еще! Ахх...",ch,NULL,victim,TO_VICT);
 
   // заражение / самовозникающий сифилис - юзайте презики :)
-  if (!IS_MARRY(ch,victim) && !IS_LOVER(ch,victim) 
+  if (!IS_MARRY(ch,victim) && !IS_LOVER(ch,victim)
      && !is_exact_name(ch->pcdata->lovers,"ALL") &&
      ((!IS_NPC(victim) && IS_SET(victim->act,PLR_SIFILIS)
      && number_percent()>30) || number_percent()<95))
@@ -1727,7 +1727,7 @@ void do_rape( CHAR_DATA *ch, const char *argument )
       unequip_char(ch,condom);
       extract_obj(condom);
     }
-    else 
+    else
     {
       SET_BIT(ch->act, PLR_SIFILIS);
       stc("Ты чувствуешь себя нехорошо...похоже, ты начинаешь гнить заживо.",ch);
@@ -1751,14 +1751,14 @@ bool do_move_char( CHAR_DATA *ch, int door, bool follow, bool run )
   if ( door < 0 || door > 5 ) return FALSE;
   in_room = ch->in_room;
   if (( pexit   = in_room->exit[door] ) == NULL
-   || ( to_room = pexit->u1.to_room   ) == NULL 
+   || ( to_room = pexit->u1.to_room   ) == NULL
    || !can_see_room(ch,pexit->u1.to_room))
   {
     stc( "К сожалению, ты не можешь туда идти.\n\r", ch );
     return FALSE;
   }
 
-  if (IS_SET(in_room->ra,RAFF_WEB) && !IS_IMMORTAL(ch) 
+  if (IS_SET(in_room->ra,RAFF_WEB) && !IS_IMMORTAL(ch)
        && raffect_level(in_room,RAFF_WEB) > ch->level)
   {
     stc("Магическая паутина оплела все выходы вокруг.\n\r",ch);
@@ -1823,7 +1823,7 @@ bool do_move_char( CHAR_DATA *ch, int door, bool follow, bool run )
          )
      )
   return FALSE;
-  
+
 
   if ( !IS_NPC(ch) )
   {
@@ -1842,14 +1842,14 @@ bool do_move_char( CHAR_DATA *ch, int door, bool follow, bool run )
       return FALSE;
     }
   }
- 
-  if (ch->on) 
+
+  if (ch->on)
   {
    stc ("Сначала сойди на землю.\n\r",ch);
    return FALSE;
   }
- 
-  if ( !IS_NPC(ch) && ch->gold < 1 && ch->pcdata->account < 1 && 
+
+  if ( !IS_NPC(ch) && ch->gold < 1 && ch->pcdata->account < 1 &&
       IS_SET(to_room -> room_flags,ROOM_DWARVES_RENT))
   {
     stc("{yГном-охранник{x на входе пристально смотрит на твои карманы...",ch);
@@ -1915,10 +1915,10 @@ bool do_move_char( CHAR_DATA *ch, int door, bool follow, bool run )
     move = movement_loss[UMIN(SECT_MAX-1, in_room->sector_type)]
        + movement_loss[UMIN(SECT_MAX-1, to_room->sector_type)];
     move /= 2;
-  
+
     if (IS_AFFECTED(ch,AFF_SLOW)) move *= 2;
     if (IS_AFFECTED(ch,AFF_FLYING) || IS_AFFECTED(ch,AFF_HASTE)) move /= 2;
-  
+
     if (ch->move < move )
     {
       stc( "Ты слишком устал.\n\r", ch );
@@ -1968,9 +1968,9 @@ bool do_move_char( CHAR_DATA *ch, int door, bool follow, bool run )
   for ( fch = in_room->people; fch != NULL; fch = fch_next )
   {
     fch_next = fch->next_in_room;
-    if ( fch->master == ch && IS_AFFECTED(fch,AFF_CHARM) 
+    if ( fch->master == ch && IS_AFFECTED(fch,AFF_CHARM)
      && fch->position < POS_STANDING) do_function(fch, &do_stand, "");
-    if ( fch->master == ch && fch->position == POS_STANDING 
+    if ( fch->master == ch && fch->position == POS_STANDING
      && can_see_room(fch,to_room))
     {
       if (IS_SET(ch->in_room->room_flags,ROOM_LAW)
@@ -1987,7 +1987,7 @@ bool do_move_char( CHAR_DATA *ch, int door, bool follow, bool run )
         act("Тебе туда нельзя.", fch,NULL,NULL,TO_CHAR);
         continue;
       }
-      
+
       act( "Ты следуешь за $C5.", fch, NULL, ch, TO_CHAR );
       do_move_char( fch, door, TRUE, FALSE );
 
@@ -2006,7 +2006,7 @@ bool do_move_char( CHAR_DATA *ch, int door, bool follow, bool run )
         }
       }
 
-      if (found==TRUE && !IS_NPC(ch) && fch->stealer!=NULL 
+      if (found==TRUE && !IS_NPC(ch) && fch->stealer!=NULL
           && is_exact_name(ch->name,fch->stealer))
       {
         do_printf(buf,"{Y%s{m грязный {RВОР{m! ДЕРЖИТЕ ВОРА!{x\n\r",ch->name);
@@ -2091,7 +2091,7 @@ void do_enter( CHAR_DATA *ch, const char *argument)
   }
 
   if (!IS_TRUSTED(ch,ANGEL) && !IS_SET(portal->value[2],GATE_NOCURSE)
-   && (IS_AFFECTED(ch,AFF_CURSE) || IS_SET(ch->in_room->ra,RAFF_EVIL_PR) 
+   && (IS_AFFECTED(ch,AFF_CURSE) || IS_SET(ch->in_room->ra,RAFF_EVIL_PR)
    || (IS_SET(old_room->room_flags,ROOM_NO_RECALL)
    && !IS_SET(ch->in_room->ra, RAFF_LIFE_STR))))
   {
@@ -2115,9 +2115,9 @@ void do_enter( CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if (IS_NPC(ch) && (IS_SET(location->room_flags,ROOM_NO_MOB) 
-      || (IS_SET(ch->act,ACT_AGGRESSIVE) 
-      && IS_SET(location->room_flags,ROOM_LAW)))) 
+  if (IS_NPC(ch) && (IS_SET(location->room_flags,ROOM_NO_MOB)
+      || (IS_SET(ch->act,ACT_AGGRESSIVE)
+      && IS_SET(location->room_flags,ROOM_LAW))))
   {
     stc("Что-то не пускает тебя...\n\r",ch);
     return;
@@ -2130,43 +2130,43 @@ void do_enter( CHAR_DATA *ch, const char *argument)
 
   char_from_room(ch);
   char_to_room(ch, location);
- 
+
   if (IS_SET(portal->value[2],GATE_GOWITH) && !local)
   {
    obj_from_room(portal);
    obj_to_room(portal,location);
   }
- 
+
   if (IS_SET(portal->value[2],GATE_NORMAL_EXIT))
         act("$n появляется в комнате.",ch,portal,NULL,TO_ROOM);
   else   act("$n проходит через $i1 и оказывается в комнате.",ch,portal,NULL,TO_ROOM);
- 
+
   do_function(ch, &do_look, "auto");
   // If someone is following the char, these triggers get activated
   // for the followers before the char, but it's safer this way...
   if ( IS_NPC( ch ) && HAS_TRIGGER( ch, TRIG_ENTRY ) )
     mp_percent_trigger( ch, NULL, NULL, NULL, TRIG_ENTRY );
   if ( !IS_NPC( ch ) ) mp_greet_trigger( ch );
- 
+
   // charges (-1 - no charges) (0 = unlimited!)
   if (portal->value[0] > 0)
   {
     portal->value[0]--;
     if (portal->value[0] == 0) portal->value[0]--;
   }
- 
+
   // protect against circular follows
   if (old_room == location) return;
- 
+
   for ( fch = old_room->people; fch != NULL; fch = fch_next )
   {
    fch_next = fch->next_in_room;
- 
+
    if (portal == NULL || portal->value[0] == -1) continue;
- 
+
    if ( fch->master == ch && IS_AFFECTED(fch,AFF_CHARM)
      && fch->position < POS_STANDING) do_function(fch, &do_stand, "");
- 
+
    if ( fch->master == ch && fch->position == POS_STANDING)
    {
     if (IS_SET(ch->in_room->room_flags,ROOM_NO_MOB) && IS_NPC(fch))
@@ -2186,7 +2186,7 @@ void do_enter( CHAR_DATA *ch, const char *argument)
     do_function(fch, &do_enter, argument);
    }
   }
- 
+
   if (portal != NULL && portal->value[0] == -1)
   {
     act("$i1{Y исчезает в {Dмежизмеренческом вихре.{x",ch,portal,NULL,TO_CHAR);
@@ -2261,7 +2261,7 @@ void do_sprecall( CHAR_DATA *ch, const char *argument )
  }
 
   if ( !IS_IMMORTAL(ch) && !IS_SET(ch->in_room->ra, RAFF_LIFE_STR)
-      && (IS_SET(ch->in_room->room_flags, ROOM_NO_RECALL) 
+      && (IS_SET(ch->in_room->room_flags, ROOM_NO_RECALL)
       ||  IS_AFFECTED(ch, AFF_CURSE)
       ||  IS_SET(ch->in_room->ra,RAFF_EVIL_PR)
       ||  (!IS_NPC(ch) && IS_SET(ch->act, PLR_ARMY))))
@@ -2302,7 +2302,7 @@ void do_sprecall( CHAR_DATA *ch, const char *argument )
   char_to_room( ch, get_room_index(ch->pcdata->proom));
   act( "{y$c1{x появляется в комнате.", ch, NULL, NULL, TO_ROOM );
   do_function(ch, &do_look, "auto" );
-    
+
   if (ch->pet) do_function(ch->pet,&do_recall,(EMPTY(argument))?"":"auto");
 }
 
@@ -2376,11 +2376,11 @@ void do_push( CHAR_DATA *ch, const char *argument )
 
   if (weight > str_ap*10) hard=TRUE;
 
-  moves=URANGE(5,obj->level - ch->level,100);       // object level 
+  moves=URANGE(5,obj->level - ch->level,100);       // object level
   moves+=movement_loss[ch->in_room->sector_type]*2; // sector_type
   if (hard) moves+=weight-str_ap;                   // weight
   if (dir==DIR_UP)   moves*=2;                      // direction up
-  if (dir==DIR_DOWN) moves/=2;                      // direction down 
+  if (dir==DIR_DOWN) moves/=2;                      // direction down
 
   if (ch->move < moves)
   {

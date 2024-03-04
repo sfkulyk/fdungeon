@@ -1,17 +1,17 @@
 // $Id: saboteur.c,v 1.125 2003/12/06 10:30:49 wagner Exp $
 // Copyrights (C) 1998-2001, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
-#include <sys/types.h> 
-#include <ctype.h> 
-#include <stdio.h> 
-#include <string.h> 
+#include <sys/types.h>
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
 #include <time.h>
-#include <stdlib.h> 
-#include "merc.h" 
-#include "recycle.h" 
-#include "tables.h" 
-#include "interp.h" 
- 
+#include <stdlib.h>
+#include "merc.h"
+#include "recycle.h"
+#include "tables.h"
+#include "interp.h"
+
 char * const vote_table[] =
 {
   "{xне голосовал","{Gза{x", "{Rпротив{x", "{Dвоздержался{x"
@@ -31,7 +31,7 @@ char *newspaper_subject(int type)
   if (type==NEWS_MARRY   ) strcat(buf, " {YСвадьба{x");
   if (type==NEWS_GQUEST  ) strcat(buf, " {YПобеда{x");
   if (type==NEWS_REWARD  ) strcat(buf, " {WНаграда{x");
-  
+
   return (buf[0]!= '\0')? buf : "unknown";
 }
 
@@ -90,69 +90,69 @@ void char_voting(CHAR_DATA *ch,VOTE_DATA *vote,int type)
   ptc(ch,"Ты проголосовал %s.\n\r",vote_table[type]);
 }
 
-void do_account( CHAR_DATA *ch, const char *argument ) 
-{ 
+void do_account( CHAR_DATA *ch, const char *argument )
+{
   CHAR_DATA *keeper;
-  CHAR_DATA *victim; 
-  char arg1[MAX_INPUT_LENGTH]; 
-  char arg2[MAX_INPUT_LENGTH]; 
-  int64 amount; 
+  CHAR_DATA *victim;
+  char arg1[MAX_INPUT_LENGTH];
+  char arg2[MAX_INPUT_LENGTH];
+  int64 amount;
   int tmp=0;
- 
-  if (EMPTY(argument))
-  { 
-    ptc(ch,"{CУ тебя на счету: {Y%u {Cзолота{x\n\r", ch->pcdata->account); 
-    return; 
-  } 
- 
-  if (IS_SET(ch->act,PLR_TIPSY)) if (tipsy(ch,"account")) return;
- 
-  for ( keeper=ch->in_room->people; keeper; keeper=keeper->next_in_room ) 
-  { 
-    if (IS_NPC(keeper) && IS_SET(keeper->act,ACT_ACCOUNTER)) break; 
-  } 
 
-  if (keeper==NULL || !IS_NPC(keeper) || !IS_SET(keeper->act,ACT_ACCOUNTER)) 
-  { 
-    stc("{RСначала зайди в банк.\n\r{x",ch); 
-    return; 
-  } 
- 
-  argument = one_argument(argument, arg1); 
-  argument = one_argument(argument, arg2); 
- 
-  if (is_number(arg2)) 
-     amount=atoi(arg2); 
+  if (EMPTY(argument))
+  {
+    ptc(ch,"{CУ тебя на счету: {Y%u {Cзолота{x\n\r", ch->pcdata->account);
+    return;
+  }
+
+  if (IS_SET(ch->act,PLR_TIPSY)) if (tipsy(ch,"account")) return;
+
+  for ( keeper=ch->in_room->people; keeper; keeper=keeper->next_in_room )
+  {
+    if (IS_NPC(keeper) && IS_SET(keeper->act,ACT_ACCOUNTER)) break;
+  }
+
+  if (keeper==NULL || !IS_NPC(keeper) || !IS_SET(keeper->act,ACT_ACCOUNTER))
+  {
+    stc("{RСначала зайди в банк.\n\r{x",ch);
+    return;
+  }
+
+  argument = one_argument(argument, arg1);
+  argument = one_argument(argument, arg2);
+
+  if (is_number(arg2))
+     amount=atoi(arg2);
   else
-  { 
+  {
     stc("{GACCOUNT{x - комманда управления счетом.\n\r",ch);
     stc("{CСинтаксис: {x\n\r",ch);
-    stc("{G account get ХХХ [gold] - снять ХХХ золота со счета.{x\n\r",ch); 
-    if (IS_IMMORTAL(ch)) 
-        stc("{c      account get ХХХ <charname> - снять ХХХ золота со счета <charname>.{x\n\r",ch); 
-    stc("{G account put ХХХ [gold] - положить ХХХ золота на счет.{x\n\r",ch); 
-    stc("{G account put ХХХ silver - положить ХХХ серебра на счет.{x\n\r",ch); 
-    stc("{G account put ХХХ diamonds - положить ХХХ бриллиантов на счет.{x\n\r",ch); 
-    stc("{G account put ХХХ crystals - положить ХХХ кристаллов на счет.{x\n\r",ch); 
-    stc("{G account transfer XXX <имя получателя> - перевести ХХХ золота на счет <имя получателя>.{x\n\r",ch); 
-    return; 
-  } 
- 
+    stc("{G account get ХХХ [gold] - снять ХХХ золота со счета.{x\n\r",ch);
+    if (IS_IMMORTAL(ch))
+        stc("{c      account get ХХХ <charname> - снять ХХХ золота со счета <charname>.{x\n\r",ch);
+    stc("{G account put ХХХ [gold] - положить ХХХ золота на счет.{x\n\r",ch);
+    stc("{G account put ХХХ silver - положить ХХХ серебра на счет.{x\n\r",ch);
+    stc("{G account put ХХХ diamonds - положить ХХХ бриллиантов на счет.{x\n\r",ch);
+    stc("{G account put ХХХ crystals - положить ХХХ кристаллов на счет.{x\n\r",ch);
+    stc("{G account transfer XXX <имя получателя> - перевести ХХХ золота на счет <имя получателя>.{x\n\r",ch);
+    return;
+  }
+
   if (!str_prefix(arg1,"help"))
-  { 
+  {
     stc("{GACCOUNT{x - комманда управления счетом.\n\r",ch);
     stc("{CСинтаксис: {x\n\r",ch);
-    stc("{G account get ХХХ [gold] - снять ХХХ золота со счета.{x\n\r",ch); 
-    if (IS_IMMORTAL(ch)) 
-        stc("{c      account get ХХХ [gold] <charname> - снять ХХХ золота со счета <charname>.{x\n\r",ch); 
-    stc("{G account put ХХХ [gold] - положить ХХХ золота на счет.{x\n\r",ch); 
-    stc("{G account put ХХХ silver - положить ХХХ серебра на счет.{x\n\r",ch); 
-    stc("{G account put ХХХ diamonds - положить ХХХ бриллиантов на счет.{x\n\r",ch); 
-    stc("{G account put ХХХ crystals - положить ХХХ кристаллов на счет.{x\n\r",ch); 
-    stc("{G account transfer XXX <имя получателя> - перевести ХХХ золота на счет <имя получателя>.{x\n\r",ch); 
-    stc("{G ACCOUNT help - эта справка.{x\n\r",ch); 
-    return; 
-  } 
+    stc("{G account get ХХХ [gold] - снять ХХХ золота со счета.{x\n\r",ch);
+    if (IS_IMMORTAL(ch))
+        stc("{c      account get ХХХ [gold] <charname> - снять ХХХ золота со счета <charname>.{x\n\r",ch);
+    stc("{G account put ХХХ [gold] - положить ХХХ золота на счет.{x\n\r",ch);
+    stc("{G account put ХХХ silver - положить ХХХ серебра на счет.{x\n\r",ch);
+    stc("{G account put ХХХ diamonds - положить ХХХ бриллиантов на счет.{x\n\r",ch);
+    stc("{G account put ХХХ crystals - положить ХХХ кристаллов на счет.{x\n\r",ch);
+    stc("{G account transfer XXX <имя получателя> - перевести ХХХ золота на счет <имя получателя>.{x\n\r",ch);
+    stc("{G ACCOUNT help - эта справка.{x\n\r",ch);
+    return;
+  }
 
   if (!str_prefix(arg1,"put"))
   {
@@ -166,7 +166,7 @@ void do_account( CHAR_DATA *ch, const char *argument )
         return;
       }
       ch->gold-=amount;
-      if (amount%10!=0) 
+      if (amount%10!=0)
          tmp=1;
       ptc(ch,"\n\r{CТы кладешь на счет {Y%u {Cзолота. Высчитано {Y%u {C(10%).{x\n\r",amount,amount/10+tmp);
       amount-=amount/10+tmp;
@@ -175,7 +175,7 @@ void do_account( CHAR_DATA *ch, const char *argument )
       WILLSAVE(ch);
       return;
     }
-    
+
     if (!str_prefix(argument, "silver"))
     {
       if (amount<110 || amount>ch->silver)
@@ -193,7 +193,7 @@ void do_account( CHAR_DATA *ch, const char *argument )
       WILLSAVE(ch);
       return;
     }
-    
+
     if (!str_prefix(argument, "diamonds"))
     {
       count=sell_gem(ch,amount,OBJ_VNUM_DIAMOND);
@@ -203,7 +203,7 @@ void do_account( CHAR_DATA *ch, const char *argument )
       WILLSAVE(ch);
       return;
     }
-    
+
     if (!str_prefix(argument, "crystals"))
     {
       count=sell_gem(ch,amount,OBJ_VNUM_CRYSTAL);
@@ -214,14 +214,14 @@ void do_account( CHAR_DATA *ch, const char *argument )
       return;
     }
   }
- 
-  if (!str_prefix(arg1,"get")) 
-  { 
-    if (amount<10 || amount>ch->pcdata->account) 
-    { 
-      stc("{RТы не можешь снять меньше 10 или больше, чем у тебя на счету.{x",ch); 
-      return; 
-    } 
+
+  if (!str_prefix(arg1,"get"))
+  {
+    if (amount<10 || amount>ch->pcdata->account)
+    {
+      stc("{RТы не можешь снять меньше 10 или больше, чем у тебя на счету.{x",ch);
+      return;
+    }
     if (IS_IMMORTAL(ch))
     {
       if (!EMPTY(argument))
@@ -233,34 +233,34 @@ void do_account( CHAR_DATA *ch, const char *argument )
         }
         else
         {
-          victim->pcdata->account-=amount; 
-          ptc(ch,"\n\r{CТы снимаешь со счета {R%s{x {Y%u {Cзолота. Осталось {Y%u.{x\n\r",victim->name,amount,victim->pcdata->account); 
+          victim->pcdata->account-=amount;
+          ptc(ch,"\n\r{CТы снимаешь со счета {R%s{x {Y%u {Cзолота. Осталось {Y%u.{x\n\r",victim->name,amount,victim->pcdata->account);
           WILLSAVE(victim);
           return;
         }
       }
     }
-    ch->pcdata->account-=amount; 
-    ch->gold+=amount; 
-    ptc(ch,"\n\r{CТы снимаешь со счета {Y%u {Cзолота. Осталось {Y%u.{x\n\r",amount,ch->pcdata->account); 
+    ch->pcdata->account-=amount;
+    ch->gold+=amount;
+    ptc(ch,"\n\r{CТы снимаешь со счета {Y%u {Cзолота. Осталось {Y%u.{x\n\r",amount,ch->pcdata->account);
     WILLSAVE(ch);
       return;
-  } 
+  }
 
 /* Transfers money from one char to another. (c) Wagner */
-  if (!str_prefix(arg1,"transfer")) 
-  { 
+  if (!str_prefix(arg1,"transfer"))
+  {
     if ((victim = get_pchar_world(ch, argument)) == NULL)
     {
       stc("Тут таких нет.\n\r", ch);
       return;
     }
 
-    if (amount<5 || (21*amount/20+1)>ch->pcdata->account) 
-    { 
-      stc("{RТы не можешь перевести меньше 5 или больше, чем у тебя на счету.{x",ch); 
-      return; 
-    } 
+    if (amount<5 || (21*amount/20+1)>ch->pcdata->account)
+    {
+      stc("{RТы не можешь перевести меньше 5 или больше, чем у тебя на счету.{x",ch);
+      return;
+    }
     if (amount%20!=0) tmp=1;
 
     ptc(ch,"\n\r{CТы переводишь {Y%u {Cзолота на счет {G%s{C.\n\r",amount,victim->name);
@@ -270,40 +270,40 @@ void do_account( CHAR_DATA *ch, const char *argument )
     ptc(ch,"На счету теперь {Y%u{C.{x\n\r", ch->pcdata->account);
     WILLSAVE(ch);
     return;
-  } 
-} 
- 
-int64 toggle_flag(CHAR_DATA *ch,int64 flag,int64 bit, char *text, bool invert) 
-{ 
-  if(IS_SET(flag,bit)) 
-  { 
-    ptc(ch,"%s {G%s{x.\n\r",text,(!invert) ? "включ":"выключ" ); 
-    REM_BIT(flag,bit); 
-    return flag; 
-  } 
-  SET_BIT(flag,bit); 
-  ptc(ch,"%s {R%s{x.\n\r",text,(!invert) ? "выключ":"включ"); 
-  return flag; 
-} 
- 
-void fix_keepers(MOB_INDEX_DATA *mob) 
-{ 
- mob->level=number_range(99,109); 
- mob->hitroll=mob->level*2; 
- SET_BIT(mob->imm_flags,IMM_SUMMON); 
- SET_BIT(mob->imm_flags,IMM_CHARM); 
- SET_BIT(mob->imm_flags,IMM_WEAPON); 
- SET_BIT(mob->imm_flags,IMM_MAGIC); 
+  }
+}
+
+int64 toggle_flag(CHAR_DATA *ch,int64 flag,int64 bit, char *text, bool invert)
+{
+  if(IS_SET(flag,bit))
+  {
+    ptc(ch,"%s {G%s{x.\n\r",text,(!invert) ? "включ":"выключ" );
+    REM_BIT(flag,bit);
+    return flag;
+  }
+  SET_BIT(flag,bit);
+  ptc(ch,"%s {R%s{x.\n\r",text,(!invert) ? "выключ":"включ");
+  return flag;
+}
+
+void fix_keepers(MOB_INDEX_DATA *mob)
+{
+ mob->level=number_range(99,109);
+ mob->hitroll=mob->level*2;
+ SET_BIT(mob->imm_flags,IMM_SUMMON);
+ SET_BIT(mob->imm_flags,IMM_CHARM);
+ SET_BIT(mob->imm_flags,IMM_WEAPON);
+ SET_BIT(mob->imm_flags,IMM_MAGIC);
  SET_BIT(mob->act,ACT_NOSTEAL);
- 
- mob->damage[0]=mob->level/10; 
- mob->damage[1]=mob->level/5; 
- mob->damage[2]=number_range(mob->level/2,200); 
-} 
- 
-void do_blacksmith (CHAR_DATA *ch, const char *argument) 
-{ 
-  char arg1[MAX_INPUT_LENGTH], arg2[MAX_INPUT_LENGTH]; 
+
+ mob->damage[0]=mob->level/10;
+ mob->damage[1]=mob->level/5;
+ mob->damage[2]=number_range(mob->level/2,200);
+}
+
+void do_blacksmith (CHAR_DATA *ch, const char *argument)
+{
+  char arg1[MAX_INPUT_LENGTH], arg2[MAX_INPUT_LENGTH];
   char notetext[MAX_INPUT_LENGTH];
 
   if (ch->in_room == NULL)
@@ -324,7 +324,7 @@ void do_blacksmith (CHAR_DATA *ch, const char *argument)
     stc ("{Y          {x blacksmith unequip <char> <item>\n\r",ch);
     return;
   }
- 
+
   if (!str_prefix(arg1, "help"))
   {
     stc ("Основные моменты:\n\r",ch);
@@ -353,32 +353,32 @@ void do_blacksmith (CHAR_DATA *ch, const char *argument)
     argument=one_argument(argument, arg2);
 
     // Looking for magic object and target object
-    objm = get_obj_carry( ch, arg1, ch ); 
-    if (objm==NULL) 
-    { 
-      stc( "У тебя нет магического камня.\n\r",ch); 
-      return; 
-    } 
-    objt = get_obj_carry( ch, arg2, ch ); 
-    if (objt==NULL) objt=get_obj_list(ch,arg2,ch->in_room->contents); 
-   
-    if (objt==NULL) 
-    { 
-      stc( "У тебя нет этой вещи.\n\r",ch); 
-      return; 
-    } 
-   
+    objm = get_obj_carry( ch, arg1, ch );
+    if (objm==NULL)
+    {
+      stc( "У тебя нет магического камня.\n\r",ch);
+      return;
+    }
+    objt = get_obj_carry( ch, arg2, ch );
+    if (objt==NULL) objt=get_obj_list(ch,arg2,ch->in_room->contents);
+
+    if (objt==NULL)
+    {
+      stc( "У тебя нет этой вещи.\n\r",ch);
+      return;
+    }
+
     if (objm->item_type!=ITEM_ENCHANT)
-    { 
-      stc( "Ты не можешь использовать всякий мусор для переделки\n\r",ch); 
-      return; 
-    } 
+    {
+      stc( "Ты не можешь использовать всякий мусор для переделки\n\r",ch);
+      return;
+    }
 
     if (objt->item_type==ITEM_ENCHANT)
-    { 
+    {
       stc( "Ну и нахрена тебе какое-нибуть 'пылающее сердце вампира'?!:)\n\r",ch);
-      return; 
-    } 
+      return;
+    }
 
     if (!IS_SET(ch->in_room->room_flags,ROOM_BLACKSMITH))
     {
@@ -402,26 +402,26 @@ void do_blacksmith (CHAR_DATA *ch, const char *argument)
       send_note("Белоснежка","elder","{WBlacksmith{x",notetext,0);
     }
 
-    switch (objm->value[0]) 
-    { 
-      case ENCH_BURNPROOF: 
-        SET_BIT(objt->extra_flags,ITEM_BURN_PROOF); 
-        break; 
-   
-      case ENCH_BLESS: 
+    switch (objm->value[0])
+    {
+      case ENCH_BURNPROOF:
+        SET_BIT(objt->extra_flags,ITEM_BURN_PROOF);
+        break;
+
+      case ENCH_BLESS:
         {
           AFFECT_DATA af;
 
-          if (IS_SET(objt->extra_flags,ITEM_BLESS))  
-          { 
+          if (IS_SET(objt->extra_flags,ITEM_BLESS))
+          {
             stc( "Этот предмет уже благословлен.\n\r",ch);
             return;
-          } 
+          }
 
           if (IS_SET(objt->extra_flags,ITEM_EVIL)) REM_BIT(objt->extra_flags,ITEM_EVIL);
           else
           {
-           SET_BIT(objt->extra_flags,ITEM_BLESS); 
+           SET_BIT(objt->extra_flags,ITEM_BLESS);
            af.where    = TO_OBJECT;
            af.type     = skill_lookup("bless");
            af.level    = objm->level;
@@ -432,102 +432,102 @@ void do_blacksmith (CHAR_DATA *ch, const char *argument)
            affect_to_obj(objt,&af);
           }
           break;
-          
+
         }
-   
-      case ENCH_HUM: 
-        SET_BIT(objt->extra_flags,ITEM_HUM); 
-        break; 
-   
-      case ENCH_NODROP: 
-        SET_BIT(objt->extra_flags,ITEM_NODROP); 
-        break; 
-   
-      case ENCH_NOREMOVE: 
-        SET_BIT(objt->extra_flags,ITEM_NOREMOVE); 
-        break; 
-   
-      case ENCH_NOLOCATE: 
-        SET_BIT(objt->extra_flags,ITEM_NOLOCATE); 
-        break; 
-   
-      case ENCH_NOUNCURSE: 
-        SET_BIT(objt->extra_flags,ITEM_NOUNCURSE); 
-        break; 
-   
-      case ENCH_REMINVIS: 
-        REM_BIT(objt->extra_flags,ITEM_INVIS); 
-        break; 
+
+      case ENCH_HUM:
+        SET_BIT(objt->extra_flags,ITEM_HUM);
+        break;
+
+      case ENCH_NODROP:
+        SET_BIT(objt->extra_flags,ITEM_NODROP);
+        break;
+
+      case ENCH_NOREMOVE:
+        SET_BIT(objt->extra_flags,ITEM_NOREMOVE);
+        break;
+
+      case ENCH_NOLOCATE:
+        SET_BIT(objt->extra_flags,ITEM_NOLOCATE);
+        break;
+
+      case ENCH_NOUNCURSE:
+        SET_BIT(objt->extra_flags,ITEM_NOUNCURSE);
+        break;
+
+      case ENCH_REMINVIS:
+        REM_BIT(objt->extra_flags,ITEM_INVIS);
+        break;
       /*
-      case ENCH_REMANTIGOOD: 
-        REM_BIT(objt->extra_flags,ITEM_ANTI_GOOD); 
-        break; 
-   
-      case ENCH_REMANTINEUTRAL: 
-        REM_BIT(objt->extra_flags,ITEM_ANTI_NEUTRAL); 
-        break; 
-   
-      case ENCH_REMANTIEVIL: 
-        REM_BIT(objt->extra_flags,ITEM_ANTI_EVIL); 
-        break; 
+      case ENCH_REMANTIGOOD:
+        REM_BIT(objt->extra_flags,ITEM_ANTI_GOOD);
+        break;
+
+      case ENCH_REMANTINEUTRAL:
+        REM_BIT(objt->extra_flags,ITEM_ANTI_NEUTRAL);
+        break;
+
+      case ENCH_REMANTIEVIL:
+        REM_BIT(objt->extra_flags,ITEM_ANTI_EVIL);
+        break;
       */
-      case ENCH_REMVAMP: 
-        if (objt->item_type!=ITEM_WEAPON)  
-        { 
-          stc( "Ты можешь применить силу этого артефакта только на оружие...\n\r",ch); 
-          return; 
-        } 
-        REM_BIT(objt->value[4],WEAPON_VAMPIRIC); 
-        break; 
-   
-      case ENCH_ADDVAMP: 
-        if (objt->item_type!=ITEM_WEAPON)  
-        { 
-          stc( "Ты можешь применить силу этого артефакта только на оружие...\n\r",ch); 
-          return; 
-        } 
-        SET_BIT(objt->value[4],WEAPON_VAMPIRIC); 
-        break; 
-      case ENCH_SHARP: 
-        if (objt->item_type!=ITEM_WEAPON)  
-        { 
-          stc( "Ты можешь применить силу этого артефакта только на оружие...\n\r",ch); 
-          return; 
-        } 
-        SET_BIT(objt->value[4],WEAPON_SHARP); 
-        break; 
-   
-      case ENCH_ADDFLAMING: 
-        if (objt->item_type!=ITEM_WEAPON)  
-        { 
-          stc( "Ты можешь применить силу этого артефакта только на оружие.\n\r",ch); 
-          return; 
-        } 
-        SET_BIT(objt->value[4],WEAPON_FLAMING); 
-        break; 
-   
-      case ENCH_REMTWOHAND: 
-        if (objt->item_type!=ITEM_WEAPON)  
-        { 
-          stc( "Ты можешь применить силу этого артефакта только на оружие.\n\r",ch); 
-          return; 
-        } 
-        REM_BIT(objt->value[4],WEAPON_TWO_HANDS); 
-        break; 
-      case ENCH_SETWEIGHT: 
-        objt->weight=0; 
-        break; 
-      
-      case ENCH_NONE: 
-      default: 
-        stc( "Ты не можешь понять магическую силу артефакта...\n\r",ch); 
-        return; 
-    } 
-    act("$n взмахивает рукой и $i4 на секунду обрамляется ярким светом.",ch,objt,NULL,TO_ROOM); 
-    ptc(ch,"Ты вливаешь силу артефакта в %s. Яркий свет на секунду вспыхивает вокруг.\n\r",get_obj_desc(objt, '4')); 
-    objt->level+=(int)objm->value[1]; 
-    obj_from_char(objm); 
-    extract_obj(objm); 
+      case ENCH_REMVAMP:
+        if (objt->item_type!=ITEM_WEAPON)
+        {
+          stc( "Ты можешь применить силу этого артефакта только на оружие...\n\r",ch);
+          return;
+        }
+        REM_BIT(objt->value[4],WEAPON_VAMPIRIC);
+        break;
+
+      case ENCH_ADDVAMP:
+        if (objt->item_type!=ITEM_WEAPON)
+        {
+          stc( "Ты можешь применить силу этого артефакта только на оружие...\n\r",ch);
+          return;
+        }
+        SET_BIT(objt->value[4],WEAPON_VAMPIRIC);
+        break;
+      case ENCH_SHARP:
+        if (objt->item_type!=ITEM_WEAPON)
+        {
+          stc( "Ты можешь применить силу этого артефакта только на оружие...\n\r",ch);
+          return;
+        }
+        SET_BIT(objt->value[4],WEAPON_SHARP);
+        break;
+
+      case ENCH_ADDFLAMING:
+        if (objt->item_type!=ITEM_WEAPON)
+        {
+          stc( "Ты можешь применить силу этого артефакта только на оружие.\n\r",ch);
+          return;
+        }
+        SET_BIT(objt->value[4],WEAPON_FLAMING);
+        break;
+
+      case ENCH_REMTWOHAND:
+        if (objt->item_type!=ITEM_WEAPON)
+        {
+          stc( "Ты можешь применить силу этого артефакта только на оружие.\n\r",ch);
+          return;
+        }
+        REM_BIT(objt->value[4],WEAPON_TWO_HANDS);
+        break;
+      case ENCH_SETWEIGHT:
+        objt->weight=0;
+        break;
+
+      case ENCH_NONE:
+      default:
+        stc( "Ты не можешь понять магическую силу артефакта...\n\r",ch);
+        return;
+    }
+    act("$n взмахивает рукой и $i4 на секунду обрамляется ярким светом.",ch,objt,NULL,TO_ROOM);
+    ptc(ch,"Ты вливаешь силу артефакта в %s. Яркий свет на секунду вспыхивает вокруг.\n\r",get_obj_desc(objt, '4'));
+    objt->level+=(int)objm->value[1];
+    obj_from_char(objm);
+    extract_obj(objm);
     return;
   }
 
@@ -581,10 +581,10 @@ void do_blacksmith (CHAR_DATA *ch, const char *argument)
     return;
   }
   stc("Набери blacksmith без параметров для справки.\n\r", ch);
-} 
- 
+}
+
 void do_suicide( CHAR_DATA *ch, const char *argument )
-{ 
+{
   char buf[MAX_STRING_LENGTH];
 
   if (IS_AFFECTED(ch, AFF_CHARM))
@@ -604,109 +604,109 @@ void do_suicide( CHAR_DATA *ch, const char *argument )
    stc("Ты же спишь!\n\rТы хочешь умереть от кошмарного сна?\n\r",ch);
    return;
   }
-  
-  do_printf( buf, "%s сделал себе харакири %s [room %u]",get_char_desc(ch,'1'), 
-    ch->in_room ? ch->in_room->name:"NULL", ch->in_room?ch->in_room->vnum:0); 
+
+  do_printf( buf, "%s сделал себе харакири %s [room %u]",get_char_desc(ch,'1'),
+    ch->in_room ? ch->in_room->name:"NULL", ch->in_room?ch->in_room->vnum:0);
   log_string(buf);
- 
-  // Dying penalty: 2/3 way back to previous level. 
+
+  // Dying penalty: 2/3 way back to previous level.
   // 1/5 of exp_per_level, if exp<=exp_per_level*level
-  if (!IS_NPC(ch) && !IS_SET(ch->act,PLR_ARMY)) 
-  { 
-    if (ch->exp > exp_per_level(ch,ch->pcdata->points) * ch->level) 
-    gain_exp(ch,(2 * (exp_per_level(ch,ch->pcdata->points) * ch->level - ch->exp)/3)+50); 
-  }      
- 
-  if (ch->morph_obj != NULL) 
-  { 
-    extract_obj(ch->morph_obj); 
-  } 
+  if (!IS_NPC(ch) && !IS_SET(ch->act,PLR_ARMY))
+  {
+    if (ch->exp > exp_per_level(ch,ch->pcdata->points) * ch->level)
+    gain_exp(ch,(2 * (exp_per_level(ch,ch->pcdata->points) * ch->level - ch->exp)/3)+50);
+  }
+
+  if (ch->morph_obj != NULL)
+  {
+    extract_obj(ch->morph_obj);
+  }
   ch->pcdata->deathcounter+=3;
   raw_kill(ch);
-  stc("{RТы окончил жизнь самоубийством. Это cкверно.{x\n\r",ch); 
-} 
- 
-void do_online (CHAR_DATA *ch, const char *argument) 
-{ 
- char *class; 
- DESCRIPTOR_DATA *d; 
- bool found = FALSE; 
+  stc("{RТы окончил жизнь самоубийством. Это cкверно.{x\n\r",ch);
+}
+
+void do_online (CHAR_DATA *ch, const char *argument)
+{
+ char *class;
+ DESCRIPTOR_DATA *d;
+ bool found = FALSE;
  CHAR_DATA *wch;
- 
- if (argument[0] == '\0') 
- { 
-  stc("Введи имя или список имен (разделитель - пробел).\n\r",ch); 
-  return; 
- } 
- 
- if (!str_cmp(argument, "auto")) 
- { 
-   if (ch->pcdata->auto_online) do_online(ch, ch->pcdata->auto_online); 
+
+ if (argument[0] == '\0')
+ {
+  stc("Введи имя или список имен (разделитель - пробел).\n\r",ch);
+  return;
+ }
+
+ if (!str_cmp(argument, "auto"))
+ {
+   if (ch->pcdata->auto_online) do_online(ch, ch->pcdata->auto_online);
    else stc("Ваш список пуст.\n\r",ch);
-   return; 
- } 
- 
- for (d = descriptor_list; d != NULL; d = d->next) 
- { 
-  if (d->connected != CON_PLAYING) continue; 
-  wch =  d->character; 
+   return;
+ }
+
+ for (d = descriptor_list; d != NULL; d = d->next)
+ {
+  if (d->connected != CON_PLAYING) continue;
+  wch =  d->character;
   if (IS_NPC(wch) || !can_see(ch,wch,CHECK_LVL)) continue;
   if (!is_name(wch->name, argument) && (!wch->clan || str_cmp(wch->clan->name,argument))) continue;
- 
+
   class = classname(wch);
 
-   ptc(ch,"{C[{Y%3d {x%7s %s{C]{x %s%s%s %s {Y%s {x%s{x\n\r", 
+   ptc(ch,"{C[{Y%3d {x%7s %s{C]{x %s%s%s %s {Y%s {x%s{x\n\r",
    wch->level, race_wname(wch),
-   class, (wch->clan==NULL) ? "" :wch->clan->show_name, 
-   IS_SET(wch->comm, COMM_AFK) ? "{c[A]{x" : "", 
-   IS_SET(wch->act, PLR_WANTED) ? "{r(W){x" : "", 
-   IS_SET(wch->act, PLR_RAPER)  ? "{R(Н){x"  : "", 
-   wch->name, wch->pcdata->title); 
-   found=TRUE; 
- } 
- if (!found) stc("Никого из перечисленных здесь нет.\n\r",ch); 
-} 
- 
-int check_align(CHAR_DATA *ch) 
-{ 
-  register int chance=0; 
- 
-  if (ch->real_alignment==1) 
-  { 
-    if (ch->alignment>=350) chance = ch->alignment/100; 
-    if (ch->alignment<350 && ch->alignment >-350) chance=-5; 
-    if (ch->alignment<=-350) chance=ch->alignment/50; 
-  } 
- 
-  if (ch->real_alignment==-1) 
-  { 
-    if (ch->alignment<=350) chance = ch->alignment/100; 
-    if (ch->alignment>-350 && ch->alignment <350) chance=5; 
-    if (ch->alignment>=-350) chance=ch->alignment/50; 
-    chance=!chance; 
-  } 
-  return chance; 
-} 
- 
-void do_room(CHAR_DATA *ch, const char *argument) 
-{ 
-  char arg[MAX_INPUT_LENGTH]; 
-   
-  argument=one_argument(argument, arg); 
- 
+   class, (wch->clan==NULL) ? "" :wch->clan->show_name,
+   IS_SET(wch->comm, COMM_AFK) ? "{c[A]{x" : "",
+   IS_SET(wch->act, PLR_WANTED) ? "{r(W){x" : "",
+   IS_SET(wch->act, PLR_RAPER)  ? "{R(Н){x"  : "",
+   wch->name, wch->pcdata->title);
+   found=TRUE;
+ }
+ if (!found) stc("Никого из перечисленных здесь нет.\n\r",ch);
+}
+
+int check_align(CHAR_DATA *ch)
+{
+  register int chance=0;
+
+  if (ch->real_alignment==1)
+  {
+    if (ch->alignment>=350) chance = ch->alignment/100;
+    if (ch->alignment<350 && ch->alignment >-350) chance=-5;
+    if (ch->alignment<=-350) chance=ch->alignment/50;
+  }
+
+  if (ch->real_alignment==-1)
+  {
+    if (ch->alignment<=350) chance = ch->alignment/100;
+    if (ch->alignment>-350 && ch->alignment <350) chance=5;
+    if (ch->alignment>=-350) chance=ch->alignment/50;
+    chance=!chance;
+  }
+  return chance;
+}
+
+void do_room(CHAR_DATA *ch, const char *argument)
+{
+  char arg[MAX_INPUT_LENGTH];
+
+  argument=one_argument(argument, arg);
+
   if (EMPTY(arg))
-  { 
-    stc("Usage: room reset    - reload resets in this room.\n\r",ch); 
+  {
+    stc("Usage: room reset    - reload resets in this room.\n\r",ch);
     stc("       room raffect  - show roomaffects.\n\r",ch);
     stc("       room clear    - clear room affects.\n\r",ch);
-    return; 
-  } 
- 
-  if (!str_prefix(arg,"reset")) 
-  { 
-    reset_room(ch->in_room); 
-    return; 
-  } 
+    return;
+  }
+
+  if (!str_prefix(arg,"reset"))
+  {
+    reset_room(ch->in_room);
+    return;
+  }
 
   if (!str_prefix(arg,"raffect"))
   {
@@ -739,53 +739,53 @@ void do_room(CHAR_DATA *ch, const char *argument)
     }
     return;
   }
- 
-  if (is_number(arg)) 
-  { 
-    reset_room(get_room_index(atoi64(arg))); 
-    return; 
-  } 
-} 
- 
-void do_spec(CHAR_DATA *ch, const char *argument) 
-{ 
+
+  if (is_number(arg))
+  {
+    reset_room(get_room_index(atoi64(arg)));
+    return;
+  }
+}
+
+void do_spec(CHAR_DATA *ch, const char *argument)
+{
  char arg[MAX_INPUT_LENGTH];
- 
+
  if (EMPTY(argument))
- { 
-   stc("Special commands for raceskills.\n\r",ch); 
-   stc("Usage:\n\r",ch); 
-   stc("      spec invis\n\r",ch); 
-   stc("      spec restore\n\r",ch); 
-   stc("      spec mist\n\r",ch); 
-   stc("      spec vampiric\n\r",ch); 
-   return; 
- } 
- 
+ {
+   stc("Special commands for raceskills.\n\r",ch);
+   stc("Usage:\n\r",ch);
+   stc("      spec invis\n\r",ch);
+   stc("      spec restore\n\r",ch);
+   stc("      spec mist\n\r",ch);
+   stc("      spec vampiric\n\r",ch);
+   return;
+ }
+
  argument=one_argument(argument,arg);
- if (!str_prefix(arg,"invis")) 
- { 
-   if (!IS_SET(race_table[ch->race].spec,SPEC_INVIS))  
-   { 
-     stc("Невидимость не является твоей врожденной способностью.",ch); 
-     return; 
-   } 
-   if ( IS_AFFECTED(ch, AFF_INVISIBLE) ) 
-   { 
-     stc("Ты уже невидим.\n\r",ch); 
-     return; 
-   } 
-   SET_BIT(ch->affected_by,AFF_INVISIBLE); 
-   stc( "Ты растворяешься в воздухе.\n\r", ch ); 
-   act( "{Y$c2{x Растворяется в воздухе.", ch, NULL, NULL, TO_ROOM ); 
-   return; 
- } 
- if (!str_prefix(arg,"restore")) 
- { 
-   ch->affected_by=ch->affected_by|race_table[ch->race].aff; 
-   stc( "Твои врожденные особенности обновлены.\n\r", ch ); 
-   return; 
- } 
+ if (!str_prefix(arg,"invis"))
+ {
+   if (!IS_SET(race_table[ch->race].spec,SPEC_INVIS))
+   {
+     stc("Невидимость не является твоей врожденной способностью.",ch);
+     return;
+   }
+   if ( IS_AFFECTED(ch, AFF_INVISIBLE) )
+   {
+     stc("Ты уже невидим.\n\r",ch);
+     return;
+   }
+   SET_BIT(ch->affected_by,AFF_INVISIBLE);
+   stc( "Ты растворяешься в воздухе.\n\r", ch );
+   act( "{Y$c2{x Растворяется в воздухе.", ch, NULL, NULL, TO_ROOM );
+   return;
+ }
+ if (!str_prefix(arg,"restore"))
+ {
+   ch->affected_by=ch->affected_by|race_table[ch->race].aff;
+   stc( "Твои врожденные особенности обновлены.\n\r", ch );
+   return;
+ }
 
  if (!str_prefix(arg,"vampiric"))
  {
@@ -829,57 +829,57 @@ void do_spec(CHAR_DATA *ch, const char *argument)
    act(buf,ch,NULL,NULL,TO_ROOM);
    return;
  }
-} 
- 
-void do_referi(CHAR_DATA *ch, const char *argument) 
-{ 
-  CHAR_DATA *referi; 
-  char buf[MAX_INPUT_LENGTH]; 
- 
+}
+
+void do_referi(CHAR_DATA *ch, const char *argument)
+{
+  CHAR_DATA *referi;
+  char buf[MAX_INPUT_LENGTH];
+
   if (EMPTY(argument))
-  { 
-    stc("{RSyntax:{x referi affects\n\r", ch); 
-    return; 
-  } 
- 
-  for (referi=ch->in_room->people;referi!=NULL;referi=referi->next_in_room) 
-    if (IS_NPC(referi) && IS_SET(referi->act, ACT_REFERI)) break; 
- 
-  if (!referi || !IS_NPC(referi) || !IS_SET(referi->act, ACT_REFERI)) 
-  { 
-    stc("Тут нет рефери.\n\r", ch); 
-    return; 
-  } 
- 
-  if (!str_prefix(argument, "show")) 
-  { 
-    AFFECT_DATA *paf; 
-    int paf_last=0; 
- 
-    if ( ch->affected != NULL ) 
-    { 
-      act("{Y$c1{x произносит '{G$C1 находится под влианием следующих заклинаний:{x'",referi,NULL,ch,TO_ALL_IN_ROOM); 
-      for ( paf = ch->affected; paf != NULL; paf = paf->next ) 
-      { 
-        if (paf_last==paf->type) continue; 
+  {
+    stc("{RSyntax:{x referi affects\n\r", ch);
+    return;
+  }
+
+  for (referi=ch->in_room->people;referi!=NULL;referi=referi->next_in_room)
+    if (IS_NPC(referi) && IS_SET(referi->act, ACT_REFERI)) break;
+
+  if (!referi || !IS_NPC(referi) || !IS_SET(referi->act, ACT_REFERI))
+  {
+    stc("Тут нет рефери.\n\r", ch);
+    return;
+  }
+
+  if (!str_prefix(argument, "show"))
+  {
+    AFFECT_DATA *paf;
+    int paf_last=0;
+
+    if ( ch->affected != NULL )
+    {
+      act("{Y$c1{x произносит '{G$C1 находится под влианием следующих заклинаний:{x'",referi,NULL,ch,TO_ALL_IN_ROOM);
+      for ( paf = ch->affected; paf != NULL; paf = paf->next )
+      {
+        if (paf_last==paf->type) continue;
 
         do_printf(buf, "{CЗаклинание : {W%20s {Cуровня {W%d{x",
-        (paf->type < 0)?"{CSpellaffect{x":skill_table[paf->type].name, paf->level); 
-        act(buf, ch, NULL, NULL, TO_ALL_IN_ROOM); 
-        paf_last=paf->type; 
-      } 
-    } 
-    else act("{Y$c1{x произносит '{G$C1 не находится под влиянием заклинаний{x'",referi,NULL,ch,TO_ALL_IN_ROOM); 
-    return; 
-  } 
- 
-  if (!str_prefix(argument, "cancel")) 
-  { 
-    return; 
-  } 
- 
-  stc("Usage: refery show\n\r", ch); 
-} 
+        (paf->type < 0)?"{CSpellaffect{x":skill_table[paf->type].name, paf->level);
+        act(buf, ch, NULL, NULL, TO_ALL_IN_ROOM);
+        paf_last=paf->type;
+      }
+    }
+    else act("{Y$c1{x произносит '{G$C1 не находится под влиянием заклинаний{x'",referi,NULL,ch,TO_ALL_IN_ROOM);
+    return;
+  }
+
+  if (!str_prefix(argument, "cancel"))
+  {
+    return;
+  }
+
+  stc("Usage: refery show\n\r", ch);
+}
 
 #define ispath(x) ( x=='d' || x=='s' || x=='u' || x=='n' || x=='w' || x=='e' || x=='D' || x=='S' || x=='U' || x=='N' || x=='W' || x=='E' )
 
@@ -1031,7 +1031,7 @@ void astat( CHAR_DATA *ch, const char *arg )
  ptc( ch, "{g|{x [{Y%3d{x] %s {G(%s)  {YRoom: {x%u{x\n\r",
   wch->level,wch->name,race_table[wch->race].name,
   wch->in_room==NULL ? 0 : wch->in_room->vnum);
- ptc( ch, "{g| {YClan: {x%s  {YClanrank: {x%d \n\r", 
+ ptc( ch, "{g| {YClan: {x%s  {YClanrank: {x%d \n\r",
   wch->clan==NULL? "{D - none -{x ": wch->clan->show_name,
   wch->clanrank);
  stc("{g=---------------------------------------------------------------------------={x\n\r",ch);
@@ -1047,10 +1047,10 @@ void astat( CHAR_DATA *ch, const char *arg )
  {
    ptc(ch, "{g| {GTrained {GHp: {x%5d  {CMana: {x%5d   {RDeathCounter: {x%d\n\r",
     wch->pcdata->hptrained,
-    wch->pcdata->manatrained, 
+    wch->pcdata->manatrained,
     wch->pcdata->deathcounter);
 
-   ptc(ch,"{g| {CClass:(%s %s %s %s{C) {Gremorts: {x%d \n\r", 
+   ptc(ch,"{g| {CClass:(%s %s %s %s{C) {Gremorts: {x%d \n\r",
     class_table[wch->class[0]].name,
     wch->remort>0 ? class_table[wch->class[1]].name:"",
     wch->remort>1 ? class_table[wch->class[2]].name:"",
@@ -1082,7 +1082,7 @@ int64 sell_gem(CHAR_DATA *ch, int64 amount, int64 vnum)
 
   gem=get_obj_index(vnum);
   if (!gem) return 0;
-  
+
   for(obj=ch->carrying;obj!=NULL;obj=obj_next)
   {
     obj_next=obj->next_content;
@@ -1149,7 +1149,7 @@ void remove_penalty(CHAR_DATA *ch, PENALTY_DATA *penalty)
       REM_BIT(ch->act, PLR_FREEZE);
       break;
     case P_NOEMOTE:
-      stc ("\n\r{YЭмоции {G включены.{x\n\r",ch);        
+      stc ("\n\r{YЭмоции {G включены.{x\n\r",ch);
       REM_BIT(ch->comm, COMM_NOEMOTE);
       break;
     case P_TIPSY:
@@ -1163,7 +1163,7 @@ void remove_penalty(CHAR_DATA *ch, PENALTY_DATA *penalty)
     case P_NODELETE:
       REM_BIT(ch->pcdata->cfg,CFG_NODELETE);
       stc ("\n\r{RРежим nodelete снят!{x\n\r",ch);
-      break;  
+      break;
     default:
       break;
   }
@@ -1242,7 +1242,7 @@ void add_penalty(CHAR_DATA *ch, PENALTY_DATA *penalty, int value)
       SET_BIT(ch->act, PLR_FREEZE);
       break;
     case P_NOEMOTE:
-      ptc (ch, "\n\r{YЭмоции {R отключены на {W%d {Rтиков.{x\n\r",penalty->ticks);        
+      ptc (ch, "\n\r{YЭмоции {R отключены на {W%d {Rтиков.{x\n\r",penalty->ticks);
       SET_BIT(ch->comm, COMM_NOEMOTE);
       break;
     case P_TIPSY:
@@ -1257,7 +1257,7 @@ void add_penalty(CHAR_DATA *ch, PENALTY_DATA *penalty, int value)
     case P_NODELETE:
       SET_BIT(ch->pcdata->cfg,CFG_NODELETE);
       ptc (ch, "\n\r{RБоги волнуются за твою жизнь. Nodelete на {G%d {Rтиков{x\n\r",penalty->ticks);
-      break;  
+      break;
     default:
       break;
   }
@@ -1272,14 +1272,14 @@ void do_add_penalty(CHAR_DATA *ch, const char *argument)
 
   if (EMPTY(argument) || !str_cmp(argument,"help"))
   {
-    stc("Syntax:addpenalty list                  - show penalty types{x\n\r",ch); 
-    stc("       addpenalty remove {Y<char>{x [<num>] - remove penalty from char{x\n\r",ch); 
-    stc("       addpenalty show   {Y<char>{x         - show penalty on char{x\n\r",ch); 
+    stc("Syntax:addpenalty list                  - show penalty types{x\n\r",ch);
+    stc("       addpenalty remove {Y<char>{x [<num>] - remove penalty from char{x\n\r",ch);
+    stc("       addpenalty show   {Y<char>{x         - show penalty on char{x\n\r",ch);
     stc("       addpenalty {Y<char>{x <penalty> <ticks amount> [<value>]\n\r", ch);
     return;
   }
 
-  if (!str_cmp(argument, "list")) 
+  if (!str_cmp(argument, "list"))
   {
     stc("{Cfreeze    {G- заморозить персонажа{x\n\r", ch);
     stc("{Cgodcurse  {G- божественное проклятье <level>{x\n\r", ch);
@@ -1464,15 +1464,15 @@ void do_vote(CHAR_DATA *ch, const char *argument)
     stc("           vote                    - список тем.\n\r",ch);
     stc("           vote new                - список новых тем.\n\r",ch);
     stc("           vote <num> <yes|no|hz>  - голосовать за/против/воздержаться.\n\r",ch);
-    if (IS_DEITY(ch)) 
+    if (IS_DEITY(ch))
        stc("           vote <num> list  - просмотреть список проголосовавших.\n\r",ch);
-    if (IS_IMMORTAL(ch)) 
+    if (IS_IMMORTAL(ch))
        stc("           vote <num> restring <newtext> - сменить тему голосования.\n\r",ch);
-    if (IS_IMMORTAL(ch)) 
+    if (IS_IMMORTAL(ch))
        stc("           vote add <text>    - добавить тему для голосования.\n\r",ch);
-    if (IS_IMMORTAL(ch)) 
+    if (IS_IMMORTAL(ch))
        stc("           vote add <clan_name> <text>    - добавить тему для голосования.\n\r",ch);
-    if (IS_IMMORTAL(ch)) 
+    if (IS_IMMORTAL(ch))
        stc("           vote remove <num>  - убрать тему из списка.\n\r",ch);
     stc(" Для участия в голосовании ты должен достичь совершеннолетия (21 level).\n\r",ch);
     return;
@@ -1547,7 +1547,7 @@ void do_vote(CHAR_DATA *ch, const char *argument)
     {
       if (count==1)
       {
-        if (!IS_IMMORTAL(ch) && (EMPTY(vote->owner) 
+        if (!IS_IMMORTAL(ch) && (EMPTY(vote->owner)
          || str_cmp(vote->owner,ch->clan->name)))
         {
           stc ("Ты не имеешь прав, чтобы удалить этот пункт.\n\r",ch);
@@ -1582,7 +1582,7 @@ void do_vote(CHAR_DATA *ch, const char *argument)
       {
         if (EMPTY(arg2)) remove_voting_char(ch,vote);
         else if (!str_prefix(arg2,"list") && (get_trust(ch) >= 107) )
-        { 
+        {
           VOTE_CHAR *vch;
           int countyes=0,countno=0,counter=0;
 
@@ -1754,7 +1754,7 @@ void do_flag(CHAR_DATA *ch, const char *argument)
       flag_table = comm_flags;
     }
 
-    else 
+    else
     {
       stc("That's not an acceptable flag.\n\r",ch);
       return;
@@ -1762,16 +1762,16 @@ void do_flag(CHAR_DATA *ch, const char *argument)
 
     old = *flag;
     victim->zone = NULL;
-  
+
     if (type != '=') new = old;
-  
+
     /* mark the words */
     for (; ;)
     {
       argument = one_argument(argument,word);
-  
+
       if (word[0] == '\0') break;
-  
+
       pos = flag_lookup(word,flag_table);
       if (pos == 0)
       {
@@ -1790,7 +1790,7 @@ void do_flag(CHAR_DATA *ch, const char *argument)
           SET_BIT(new,flag_table[pos].bit);
           continue;
       }
-  
+
       if (IS_SET(marked,flag_table[pos].bit))
       {
         switch(type)
@@ -1826,7 +1826,7 @@ CHAR_DATA *find_summoner ( CHAR_DATA *ch )
   }
 
   if (summoner == NULL ||
-    ( summoner->spec_fun != spec_lookup("spec_summoner" ) 
+    ( summoner->spec_fun != spec_lookup("spec_summoner" )
    && summoner->spec_fun != spec_lookup("spec_summonera") ) )
   {
     stc("Ты не можешь этого сделать.\n\r",ch);
@@ -1853,7 +1853,7 @@ void travel(int room, int cost, CHAR_DATA *ch, CHAR_DATA *summoner)
     return;
   }
 
-  pet = ch->pet;              
+  pet = ch->pet;
   if ( ch->pet != NULL && ch->pet->in_room == ch->in_room)
   {
     act( "$c1 исчезает!", pet, NULL, NULL, TO_ROOM );
@@ -2001,12 +2001,12 @@ char *class_remort_names( CHAR_DATA *ch)
   return buf;
 }
 
-const struct class_name_type class_ntab[16] = 
-{ 
- { "{xMage{x      ", 1,0,0,0}, 
- { "{xCleric{x    ", 0,1,0,0}, 
- { "{xThief{x     ", 0,0,1,0}, 
- { "{xWarrior{x   ", 0,0,0,1}, 
+const struct class_name_type class_ntab[16] =
+{
+ { "{xMage{x      ", 1,0,0,0},
+ { "{xCleric{x    ", 0,1,0,0},
+ { "{xThief{x     ", 0,0,1,0},
+ { "{xWarrior{x   ", 0,0,0,1},
  { "{GWizard{x    ", 1,1,0,0}, //M+C
  { "{GNightBlade{x", 1,0,1,0}, //M+T
  { "{GBattleMage{x", 1,0,0,1}, //M+W
@@ -2019,10 +2019,10 @@ const struct class_name_type class_ntab[16] =
  { "{RTemplar{x   ", 0,1,1,1}, //C+T+W
  { "{YBodhisatva{x", 1,1,1,1}, //M+C+T+W
  { "{rError{x     ", 1,1,1,1}  //If error
-}; 
+};
 
-const struct class_name_type class_nntab[16] = 
-{ 
+const struct class_name_type class_nntab[16] =
+{
  { "{xMage{x",1,0,0,0},
  { "{xCleric{x",0,1,0,0},
  { "{xThief{x",0,0,1,0},
@@ -2175,7 +2175,7 @@ void do_setclass( CHAR_DATA *ch, const char *argument )
   victim->class[1]=class[2];
   victim->class[2]=class[3];
   victim->class[3]=class[4];
-  ptc(ch,"Перерождения для {Y%s{x: %s %s %s %s, всего [%d].\n\r", 
+  ptc(ch,"Перерождения для {Y%s{x: %s %s %s %s, всего [%d].\n\r",
    victim->name,class_table[victim->class[0]].name,
    victim->remort>0 ? class_table[victim->class[1]].name:"",
    victim->remort>1 ? class_table[victim->class[2]].name:"",
@@ -2199,13 +2199,13 @@ const char *remove_word(const char *argument, const char *word)
     strcat(buf, arg);
     found=TRUE;
   }
-  
+
   /*XXX! (not sure)*/
   free_string(argument);
 
-  if (found) 
+  if (found)
           return str_dup(buf);
-  else 
+  else
           return &str_empty[0];
 }
 
@@ -2214,7 +2214,7 @@ const char *add_word(const char *argument, const char *word)
   char buf[MAX_INPUT_LENGTH];
 
   buf[0]=0;
-  
+
   if(!EMPTY(argument)) {
           strcat(buf,argument);
           strcat(buf," ");
@@ -2257,7 +2257,7 @@ void do_marry(CHAR_DATA *ch, const char *argument)
       stc ("Персонаж не найден.\n\r",ch);
       return;
     }
-    
+
     if (!is_number(arg3) || (proom=get_room_index(atoi64(arg3)))==NULL
      || (!IS_ELDER(ch) && IS_SET( proom->room_flags, ROOM_ELDER)) )
     {
@@ -2331,7 +2331,7 @@ void do_marry(CHAR_DATA *ch, const char *argument)
     stc("Молодые должны быть здесь для проведения обряда.\n\r",ch);
     return;
   }
-  
+
   if (!is_exact_name(victim->name,victim1->pcdata->propose_marry)
    || !is_exact_name(victim1->name,victim->pcdata->propose_marry))
   {
@@ -2400,7 +2400,7 @@ void do_divorce(CHAR_DATA *ch, const char *argument)
     if (IS_IMMORTAL(ch)) {
       stc("           divorce <char> force           - насильно убрать статус married.\n\r",ch);
       stc("                                            (для клинических случаев)\n\r",ch);
-     }       
+     }
     return;
   }
 
@@ -2411,14 +2411,14 @@ void do_divorce(CHAR_DATA *ch, const char *argument)
    return;
   }
   if (IS_IMMORTAL(ch) && !str_cmp(arg2,"force"))
-  { 
+  {
   victim->pcdata->lovers=&str_empty[0];
   victim->pcdata->marry=&str_empty[0];
   stc ("Данные женатости/полюбовности очищены\n\r.",ch);
   ptc (victim, "Теперь ты свобод%s как ветер!\n\r",(victim->sex==SEX_FEMALE)?"на":"ен");
   return;
   }
-   
+
   victim1=get_pchar_world(ch,arg2);
   if(!victim || !victim1 || victim==victim1 || (!IS_MARRY(victim,victim1) && !IS_LOVER(victim,victim1)))
   {
@@ -2636,24 +2636,24 @@ int get_material_modifier(CHAR_DATA *ch, OBJ_DATA *obj)
   if (IS_SET(ch->res_flags,material_table[material_num(obj->material)].res))  return material_table[material_num(obj->material)].resnum;
   if (IS_SET(ch->vuln_flags,material_table[material_num(obj->material)].vul)) return material_table[material_num(obj->material)].vulnum;
   return 0;
-} 
+}
 
 void do_fly( CHAR_DATA *ch, const char *argument )
 {
 
   if ( !IS_SET(race_table[ch->race].spec,SPEC_FLY)
       && (IS_NPC(ch) || !IS_SET(ch->act,PLR_CAN_FLY)) )
-  { 
-    stc("Ты не умеешь летать",ch); 
-    return; 
-  } 
+  {
+    stc("Ты не умеешь летать",ch);
+    return;
+  }
 
   if ( IS_AFFECTED(ch, AFF_FLYING) ) stc("Ты уже паришь в воздухе.\n\r",ch);
-  else 
+  else
   {
-    SET_BIT(ch->affected_by,AFF_FLYING); 
-    stc( "Твои ноги отрываются от земли.\n\r", ch ); 
-    act( "Ноги {Y$c2{x отрываются от земли.", ch, NULL, NULL, TO_ROOM ); 
+    SET_BIT(ch->affected_by,AFF_FLYING);
+    stc( "Твои ноги отрываются от земли.\n\r", ch );
+    act( "Ноги {Y$c2{x отрываются от земли.", ch, NULL, NULL, TO_ROOM );
   }
 }
 
@@ -2661,12 +2661,12 @@ void do_walk( CHAR_DATA *ch, const char *argument )
 {
   if ( !IS_AFFECTED(ch, AFF_FLYING) ) stc("Ты уже стоишь на земле.\n\r",ch);
   else
-  { 
-    affect_strip(ch,skill_lookup("fly")); 
-    REM_BIT(ch->affected_by,AFF_FLYING); 
-    stc("Ты приземляешься.\n\r",ch); 
-    act( "$c1 плавно приземляется.", ch, NULL, NULL, TO_ROOM ); 
-  } 
+  {
+    affect_strip(ch,skill_lookup("fly"));
+    REM_BIT(ch->affected_by,AFF_FLYING);
+    stc("Ты приземляешься.\n\r",ch);
+    act( "$c1 плавно приземляется.", ch, NULL, NULL, TO_ROOM );
+  }
 }
 
 void send_news(char *text, int type)
@@ -2765,7 +2765,7 @@ int get_skill_bonus(CHAR_DATA *ch,int sn)
 }
 
 void do_smoke( CHAR_DATA *ch, const char *argument )
-{ 
+{
   OBJ_DATA *obj;
   bool found=FALSE;
 
@@ -2888,7 +2888,7 @@ void do_newspaper(CHAR_DATA *ch, const char *argument)
       cnt++;
     }
     matrix[cnt]=0;
-    
+
     if (number<0)
     {
       for (;cnt>0;cnt--)
@@ -3112,7 +3112,7 @@ int category_bonus(CHAR_DATA *ch,int category)
  }
  if (IS_SET(category,MAKE))
  {
-   if (GUILD(ch,DWARVES_GUILD))                   bonus++; 
+   if (GUILD(ch,DWARVES_GUILD))                   bonus++;
    if (IS_SET(class,C_BATTLEMAGE))                bonus++; // battlemage
    if (IS_SET(race_table[ch->race].c_pen,MAKE))   bonus-=RPEN; // race
    if (IS_SET(race_table[ch->race].c_bon,MAKE))   bonus+=RBON; // race
@@ -3143,9 +3143,9 @@ int category_bonus(CHAR_DATA *ch,int category)
  if (IS_SET(category,OFFENCE))
  {
    if (IS_SET(class,C_WAR))                       bonus+=2; //
-   if (IS_SET(class,C_THI))                       bonus++;  // thief 
+   if (IS_SET(class,C_THI))                       bonus++;  // thief
    if (IS_SET(class,C_BATTLEMAGE))                bonus+=1; // battlemage
-   if (IS_SET(class,C_NINJA))                     bonus+=2; // 
+   if (IS_SET(class,C_NINJA))                     bonus+=2; //
    if (IS_SET(class,C_SPELLSWORD))                bonus+=1;  // Spellsword
    if (IS_SET(race_table[ch->race].c_bon,OFFENCE))bonus+=RBON; // race +3
    if (IS_SET(race_table[ch->race].c_pen,OFFENCE))bonus-=RPEN; // race -3
@@ -3180,7 +3180,7 @@ char *get_clan_rank(CHAR_DATA *ch)
 
   buf[0] = '\0';
   if (!ch->clan)            strcat(buf,"{Dнет      ");
-  else 
+  else
     switch ( ch->clanrank )
     {
       case 0:
@@ -3196,7 +3196,7 @@ char *get_clan_rank(CHAR_DATA *ch)
              {
                ch->sex==1 ? strcat(buf,"{CKnight   ") : strcat(buf,"{CLady     ") ;
              }
-             else 
+             else
                strcat(buf,"{CSecond   ");
              break;
       case 5:
@@ -3221,7 +3221,7 @@ void bust_arg( CHAR_DATA *ch, const char *argument)
   bool found;
   const char *dir_name[] = {"N","E","S","W","U","D", "n", "e", "s", "w", "u", "d"};
   int door;
- 
+
   point = buf;
   str = argument;
   if( !str || str[0] == '\0') return;
@@ -3252,7 +3252,7 @@ void bust_arg( CHAR_DATA *ch, const char *argument)
           if ((pexit = ch->in_room->exit[door]) != NULL
             &&  pexit ->u1.to_room != NULL
             &&  (can_see_room(ch,pexit->u1.to_room)
-            ||   (IS_AFFECTED(ch,AFF_INFRARED) 
+            ||   (IS_AFFECTED(ch,AFF_INFRARED)
             &&    !IS_AFFECTED(ch,AFF_BLIND))))
           {
             found = TRUE;
@@ -3303,7 +3303,7 @@ void bust_arg( CHAR_DATA *ch, const char *argument)
         else do_printf( buf2, "%s", IS_GOOD(ch) ? "good" : IS_EVIL(ch) ? "evil" : "neutral" );
         i = buf2; break;
       case 'r' :
-        if( ch->in_room != NULL ) do_printf( buf2, "%s", 
+        if( ch->in_room != NULL ) do_printf( buf2, "%s",
           ((!IS_NPC(ch) && IS_SET(ch->act,PLR_HOLYLIGHT)) ||
           (!IS_AFFECTED(ch,AFF_BLIND) && !room_is_dark( ch->in_room )))
           ? ch->in_room->name : "darkness");
@@ -3384,26 +3384,26 @@ void do_guards( CHAR_DATA *ch)
 
     act("{WОхранник ЗАКОНА появляется в комнате",ch,NULL,NULL,TO_ALL_IN_ROOM);
     if (IS_SET(vch->act,PLR_WANTED))
-    guard = create_mobile(get_mob_index (MOB_VNUM_BOUNTYHUNTER)); // spawn strong killer 
-    else 
-    guard = create_mobile(get_mob_index (MOB_VNUM_LAWGUARD)); // spawn usual guard 
-    
+    guard = create_mobile(get_mob_index (MOB_VNUM_BOUNTYHUNTER)); // spawn strong killer
+    else
+    guard = create_mobile(get_mob_index (MOB_VNUM_LAWGUARD)); // spawn usual guard
+
     char_to_room( guard, vch->in_room);
     switch (number_range(0,6))
     {
       case 0: message = "$c1 вскрикивает '{MРуки за голову! По одному на выход!{x'";
         break;
-      case 1: message = 
+      case 1: message =
         "$c1 вскрикивает '{MОбщество в опастности!{x'";
         break;
-      case 2: message = 
+      case 2: message =
         "$c1 вздыхает '{mДети, погрязшие в разврате..{RЗАСЛУЖИВАЮТ СМЕРТИ!{x'";
         break;
       case 3: message = "$c1 вскрикивает '{MПрекратить немедленно!{x' и атакует.";
         break;
       case 4: message = "$c1 поднимает дубинку и принимается за работу.";
         break;
-      case 5: message = 
+      case 5: message =
         "$c1 предъявляет значок и ввязывается в драку.";
         break;
       case 6: message = "$c1 вскрикивает '{MНа пол, сосунки!{x'";
@@ -3417,9 +3417,9 @@ void do_guards( CHAR_DATA *ch)
 
  if (found_crime)
  {
- // spawn some support 
- create_mobile(get_mob_index (MOB_VNUM_LAWGUARD)); 
- create_mobile(get_mob_index (MOB_VNUM_LAWGUARD)); 
+ // spawn some support
+ create_mobile(get_mob_index (MOB_VNUM_LAWGUARD));
+ create_mobile(get_mob_index (MOB_VNUM_LAWGUARD));
 
  act("{YСтраж {WЗАКОНА{Y кричит '{MВсем остальным разойтись!{x'",ch,NULL,NULL,TO_ROOM);
  }
@@ -3519,7 +3519,7 @@ void do_srcwrite( CHAR_DATA *ch, const char *argument )
     ptc(ch,"  skilltab  - write skill_table to const.str\n\r");
     return;
   }
-  
+
   if (!str_prefix(argument,"skilltable")) write_skill_table(ch);
 }
 
@@ -3606,28 +3606,28 @@ void do_family(CHAR_DATA *ch, const char *argument)
 
     // show information
     ptc(ch,"Информация о персонаже: {Y%s{x\n\r",tch->name);
-  
+
     proom=get_room_index(tch->pcdata->proom);
     if (proom)
          ptc(ch," Место проживания: %s {G[%u]{x\n\r",proom->name,tch->pcdata->proom);
     else ptc(ch," Место проживания: {Dнигде не прописан{x\n\r");
-  
-    if (EMPTY(tch->pcdata->marry)) 
+
+    if (EMPTY(tch->pcdata->marry))
          ptc(ch," Семейное положение:{Dне %s{x\n\r",tch->sex==2?"замужем":"женат");
     else ptc(ch," Семейное положение:%sа {Y%s{x\n\r",tch->sex==2?"замужем з":"женат н",tch->pcdata->marry);
-  
-    if (EMPTY(tch->pcdata->lovers)) 
+
+    if (EMPTY(tch->pcdata->lovers))
          ptc(ch," Любовники: {Dотсутствуют (ни с кем не обвенчан%s){x\n\r",tch->sex==2?"a":"");
     else ptc(ch," Любовники(обвенчание): {Y%s{x\n\r",tch->pcdata->lovers);
-  
-    if (EMPTY(tch->pcdata->propose_marry)) 
+
+    if (EMPTY(tch->pcdata->propose_marry))
          ptc(ch," Предложение брака: {Dнет заявок{x\n\r");
     else ptc(ch," Предложена рука и сердце для {Y%s{x\n\r",tch->pcdata->propose_marry);
 
-    if (EMPTY(tch->pcdata->kins)) 
+    if (EMPTY(tch->pcdata->kins))
          ptc(ch," Родственники: {Dнет{x\n\r");
     else ptc(ch," {Y%s{x\n\r",tch->pcdata->kins);
-  
+
     if (EMPTY(tch->pcdata->mother) && EMPTY(tch->pcdata->father))
          ptc(ch," Родители: {Dнеизвестны{x\n\r");
     else ptc(ch," Родители: папа:{Y%s{x мама:{Y%s{x\n\r",
@@ -3755,7 +3755,7 @@ void pban( CHAR_DATA *ch, CHAR_DATA *victim, const char *argument )
   char arg1[MAX_STRING_LENGTH];
 
   if (EMPTY(argument))
-  { 
+  {
     const char *temp ;
 
     temp=victim->pcdata->deny_addr;

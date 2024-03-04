@@ -16,7 +16,7 @@ void do_wiznet(CHAR_DATA *ch, const char *argument)
  int64 flag;
  char buf[MAX_STRING_LENGTH];
 
- if (EMPTY(argument)) 
+ if (EMPTY(argument))
  {
    if (!IS_SET(ch->wiznet,WIZ_ON)) strcat(buf,"off ");
 
@@ -58,7 +58,7 @@ void do_wiznet(CHAR_DATA *ch, const char *argument)
     ptc(ch,"Опции Wiznet, доступные для тебя:\n\r%s\n\r",buf);
     return;
   }
-   
+
   flag = wiznet_lookup(argument);
   if (flag == -1 || get_trust(ch) < wiznet_table[flag].level)
   {
@@ -76,7 +76,7 @@ void wiznet(char *string,CHAR_DATA *ch,OBJ_DATA *obj,int64 flag,int min_level)
   for (d = descriptor_list; d; d = d->next)
   {
     if (d->character && d->connected == CON_PLAYING
-      && d->character!=ch && IS_SET(d->character->wiznet,WIZ_ON) 
+      && d->character!=ch && IS_SET(d->character->wiznet,WIZ_ON)
       && (flag==0 || IS_SET(d->character->wiznet,flag))
       && get_trust(d->character)>=min_level)
     {
@@ -108,7 +108,7 @@ void do_outfit (CHAR_DATA *ch, const char *argument)
       obj_to_char(obj, ch);
       equip_char(ch, obj, WEAR_LIGHT);
     }
- 
+
     if ((obj = get_eq_char(ch, WEAR_BODY)) == NULL)
     {
       obj = create_object(get_obj_index(OBJ_VNUM_SCHOOL_VEST), 0);
@@ -117,10 +117,10 @@ void do_outfit (CHAR_DATA *ch, const char *argument)
       equip_char(ch, obj, WEAR_BODY);
     }
 
-    // do the weapon thing 
+    // do the weapon thing
     if ((obj = get_eq_char(ch,WEAR_RHAND)) == NULL)
     {
-      sn = 0; 
+      sn = 0;
       vnum = OBJ_VNUM_SCHOOL_SWORD;
 
       for (i = 0; weapon_table[i].name != NULL; i++)
@@ -137,8 +137,8 @@ void do_outfit (CHAR_DATA *ch, const char *argument)
       equip_char(ch,obj,WEAR_RHAND);
     }
 
-    if (((obj = get_eq_char(ch,WEAR_RHAND)) == NULL 
-     || !IS_WEAPON_STAT(obj,WEAPON_TWO_HANDS)) 
+    if (((obj = get_eq_char(ch,WEAR_RHAND)) == NULL
+     || !IS_WEAPON_STAT(obj,WEAPON_TWO_HANDS))
      && (obj = get_eq_char(ch, WEAR_LHAND)) == NULL)
     {
       obj = create_object(get_obj_index(OBJ_VNUM_SCHOOL_SHIELD), 0);
@@ -176,12 +176,12 @@ void do_outfit (CHAR_DATA *ch, const char *argument)
 
     if ((obj = get_eq_char(ch,WEAR_RHAND)) == NULL)
     {
-      sn = 0; 
+      sn = 0;
       vnum = OBJ_VNUM_ARMY_SWORD; /* just in case! */
-    
+
       for (i = 0; weapon_army_table[i].name != NULL; i++)
       {
-        if (ch->pcdata->learned[sn] < 
+        if (ch->pcdata->learned[sn] <
         ch->pcdata->learned[*weapon_army_table[i].gsn])
         {
           sn = *weapon_army_table[i].gsn;
@@ -194,10 +194,10 @@ void do_outfit (CHAR_DATA *ch, const char *argument)
       equip_char(ch,obj,WEAR_RHAND);
     }
 
-    if (((obj = get_eq_char(ch,WEAR_RHAND)) == NULL 
-     ||   !IS_WEAPON_STAT(obj,WEAPON_TWO_HANDS)) 
+    if (((obj = get_eq_char(ch,WEAR_RHAND)) == NULL
+     ||   !IS_WEAPON_STAT(obj,WEAPON_TWO_HANDS))
      &&  (obj = get_eq_char(ch, WEAR_LHAND)) == NULL)
-    { 
+    {
       obj = create_object(get_obj_index(OBJ_VNUM_ARMY_SHIELD), 0);
       obj->cost = 0;
       obj_to_char(obj, ch);
@@ -211,27 +211,27 @@ void do_nochannels(CHAR_DATA *ch, const char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
   CHAR_DATA *victim;
- 
+
   one_argument(argument, arg);
- 
+
   if (EMPTY(arg))
   {
     stc("Отключить от каналов кого?", ch);
     return;
   }
- 
+
   if ((victim = get_pchar_world(ch, arg)) == NULL)
   {
     stc("Тут таких нет.\n\r", ch);
     return;
   }
- 
+
   if (get_trust(victim) >= get_trust(ch) || victim->pcdata->protect > get_trust(ch))
   {
     stc("Не вышло.\n\r", ch);
     return;
   }
- 
+
   if (IS_SET(victim->comm, COMM_NOCHANNELS))
   {
     REM_BIT(victim->comm, COMM_NOCHANNELS);
@@ -250,7 +250,7 @@ void do_nogsocial(CHAR_DATA *ch, const char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
   CHAR_DATA *victim;
- 
+
   one_argument(argument, arg);
 
   if (EMPTY(arg))
@@ -263,7 +263,7 @@ void do_nogsocial(CHAR_DATA *ch, const char *argument)
     stc("Тут таких нет.\n\r", ch);
     return;
   }
- 
+
   if (get_trust(victim) >= get_trust(ch) || victim->pcdata->protect > get_trust(ch))
   {
     stc("Не вышло.\n\r", ch);
@@ -280,44 +280,44 @@ void do_smote(CHAR_DATA *ch, const char *argument)
   const char *name;
   char last[MAX_INPUT_LENGTH], temp[MAX_STRING_LENGTH];
   unsigned int matches = 0;
- 
+
   if (!IS_SET(ch->talk,CBIT_EMOTE))
   {
     stc("Эмоции выключены.\n\r", ch);
     return;
   }
- 
+
   if (EMPTY(argument))
   {
     stc("С параметром.\n\r", ch);
     return;
   }
-    
+
   if (strstr(argument,ch->name) == NULL)
   {
     stc("Ты должен указать в строке свое имя.\n\r",ch);
     return;
   }
-   
+
   stc(argument,ch);
   stc("\n\r",ch);
- 
+
   for (vch = ch->in_room->people; vch != NULL; vch = vch->next_in_room)
   {
     if (vch->desc == NULL || vch == ch) continue;
- 
+
     if ((letter = strstr(argument,vch->name)) == NULL)
     {
       stc(argument,vch);
       stc("\n\r",vch);
       continue;
     }
- 
+
     strcpy(temp,argument);
     temp[strlen(argument) - strlen(letter)] = '\0';
     last[0] = '\0';
     name = vch->name;
- 
+
     for (; *letter != '\0'; letter++)
     {
       if (*letter == '\'' && matches == strlen(vch->name))
@@ -325,15 +325,15 @@ void do_smote(CHAR_DATA *ch, const char *argument)
         strcat(temp,"r");
         continue;
       }
- 
+
       if (*letter == 's' && matches == strlen(vch->name))
       {
         matches = 0;
         continue;
       }
- 
+
       if (matches == strlen(vch->name)) matches = 0;
- 
+
       if (*letter == *name)
       {
         matches++;
@@ -348,14 +348,14 @@ void do_smote(CHAR_DATA *ch, const char *argument)
         strncat(last,letter,1);
         continue;
       }
- 
+
       matches = 0;
       strcat(temp,last);
       strncat(temp,letter,1);
       last[0] = '\0';
       name = vch->name;
     }
- 
+
     stc(temp,vch);
     stc("\n\r",vch);
   }
@@ -400,7 +400,7 @@ void do_bamfout(CHAR_DATA *ch, const char *argument)
     ptc(ch,"Эффект твоего исчезновения: %s\n\r",ch->pcdata->bamfout);
     return;
   }
- 
+
   free_string(ch->pcdata->bamfout);
   ch->pcdata->bamfout = str_dup(argument);
   ptc(ch, "Новый эффект твоего исчезновения: %s\n\r",ch->pcdata->bamfout);
@@ -514,7 +514,7 @@ int tipsy(CHAR_DATA *ch, const char *argument)  // tipsy by Dinger
 
   if (!str_prefix(argument,"backstab"))
   {
-   if (number_percent()<90) 
+   if (number_percent()<90)
    {
     stc("Ты подкрадываешься к противнику...целишься к его спину...бьешь изо всех сил!\n\r",ch);
     stc("Ты попадаешь прямо в центр большого железного щита!\n\r",ch);
@@ -801,7 +801,7 @@ int tipsy(CHAR_DATA *ch, const char *argument)  // tipsy by Dinger
   }
 
   return 0;
-} 
+}
 
 void tipsy2(CHAR_DATA *ch, const char *arg1, char *arg2) // tipsy by Dinger
 {
@@ -930,13 +930,13 @@ void do_pardon(CHAR_DATA *ch, const char *argument)
 void do_echo(CHAR_DATA *ch, const char *argument)
 {
   DESCRIPTOR_DATA *d;
-    
+
   if (EMPTY(argument))
   {
     stc("Сказать по global что?\n\r", ch);
     return;
   }
-    
+
   for (d = descriptor_list; d; d = d->next)
   {
     if (d->connected != CON_PLAYING) continue;
@@ -948,7 +948,7 @@ void do_echo(CHAR_DATA *ch, const char *argument)
 void do_recho(CHAR_DATA *ch, const char *argument)
 {
   DESCRIPTOR_DATA *d;
-    
+
   if (EMPTY(argument))
   {
     stc("Сказать по local что?\n\r", ch);
@@ -996,10 +996,10 @@ void do_pecho(CHAR_DATA *ch, const char *argument)
   argument = one_argument(argument, arg);
   if (EMPTY(argument) || EMPTY(arg))
   {
-    stc("Кому вы хотите послать сообщение?\n\r", ch); 
+    stc("Кому вы хотите послать сообщение?\n\r", ch);
     return;
   }
-   
+
   if  ((victim = get_char_world(ch, arg)) == NULL)
   {
     stc("Цель не найдена.\n\r",ch);
@@ -1020,14 +1020,14 @@ ROOM_INDEX_DATA *find_location(CHAR_DATA *ch, const char *arg)
   ROOM_INDEX_DATA *rtogo;
 
   one_argument(arg, buf);
-  
+
   if (is_number(buf))
   {
     if( !(rtogo = get_room_index(atoi64(buf)))) return NULL;
     if( !IS_ELDER(ch) && IS_SET( rtogo->room_flags , ROOM_ELDER)) return NULL;
     else return rtogo;
   }
-  if( (victim = get_char_world(ch, buf) ) && victim->in_room 
+  if( (victim = get_char_world(ch, buf) ) && victim->in_room
     && get_room_index(victim->in_room->vnum))
   {
     if( !IS_ELDER(ch) && IS_SET( victim->in_room->room_flags, ROOM_ELDER) ) return NULL;
@@ -1086,7 +1086,7 @@ void do_transfer(CHAR_DATA *ch, const char *argument)
       return;
     }
 
-    if (!is_room_owner(ch,location) && room_is_private(location) 
+    if (!is_room_owner(ch,location) && room_is_private(location)
      && !IS_ELDER(ch))
     {
       stc("Эта комната в данный момент занята.\n\r", ch);
@@ -1138,7 +1138,7 @@ void do_at(CHAR_DATA *ch, const char *argument)
   ROOM_INDEX_DATA *original;
   OBJ_DATA *on;
   CHAR_DATA *wch;
-    
+
   argument = one_argument(argument, arg);
 
   if (EMPTY(arg) || EMPTY(argument))
@@ -1153,7 +1153,7 @@ void do_at(CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if (!is_room_owner(ch,location) && room_is_private(location) 
+  if (!is_room_owner(ch,location) && room_is_private(location)
    &&  !IS_ELDER(ch))
   {
     stc("Эта комната в данный момент занята.\n\r", ch);
@@ -1212,7 +1212,7 @@ void do_goto(CHAR_DATA *ch, const char *argument)
   char_from_room(ch);
   char_to_room(ch, location);
   ch->position=POS_STANDING;
-  
+
   for (rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room)
   {
     if (get_trust(rch) >= ch->invis_level)
@@ -1254,12 +1254,12 @@ void do_stat (CHAR_DATA *ch, const char *argument)
     do_function(ch, &do_rstat, string);
     return;
   }
-  
+
   if (!str_prefix(arg,"quenia"))
   {
     CHAR_DATA *victim;
     int a;
- 
+
     victim = get_char_world(ch,string);
     if (!victim || IS_NPC(victim))
     {
@@ -1270,7 +1270,7 @@ void do_stat (CHAR_DATA *ch, const char *argument)
     for (a=0;quenia_table[a].name!=Q_END;a++) ptc(ch,"Word: [%10s] - %u\n\r",quenia_table[a].descr,victim->pcdata->quenia[a]);
     return;
   }
-  
+
   if (!str_cmp(arg,"obj"))
   {
     do_function(ch, &do_ostat, string);
@@ -1294,7 +1294,7 @@ void do_stat (CHAR_DATA *ch, const char *argument)
     do_function(ch, &astat, string);
     return;
   }
-   
+
   /* do it the old way */
   obj = get_obj_world(ch,argument);
   if (obj != NULL)
@@ -1340,7 +1340,7 @@ void do_rstat(CHAR_DATA *ch, const char *argument)
   }
 
   buf1[0] = '\0';
-    
+
   stc("\n\r{G/--------------------------{DROOM STATISTIC{G--------------------------------/\n\r",ch);
   ptc(ch,"| {GVnum: {x%5d                ",pRoom->vnum);
   ptc(ch,"{GSector: {x%s  {GArea:{x%d {x%s{G",
@@ -1349,7 +1349,7 @@ void do_rstat(CHAR_DATA *ch, const char *argument)
 
   ptc(ch, "\n\r| Name: {x%s\n\r{G| Heal refresh: {x%d   {GMana refresh: {x%d{G",
    pRoom->name,pRoom->heal_rate,pRoom->mana_rate);
-                         
+
   ptc(ch, "\n\r| Room flags  : {x%s",flag_string(room_flags, pRoom->room_flags));
   ptc(ch, "\n\r| Room affects: [{y%s{x]",flag_string(raff_flags,pRoom->ra));
   strcat(buf1, "\n\r{G| Characters  : {x");
@@ -1451,7 +1451,7 @@ void do_rstat(CHAR_DATA *ch, const char *argument)
   if (pRoom->extra_descr)
   {
     EXTRA_DESCR_DATA *ed;
-    
+
     strcat(buf1, "Desc Kwds:  [");
     for (ed = pRoom->extra_descr; ed; ed = ed->next)
     {
@@ -1508,7 +1508,7 @@ void do_ostat(CHAR_DATA *ch, const char *argument)
   stc("{G+------------------------------------------------------------------------<\n\r",ch);
 
   ptc(ch, "{G| {CLevel:{x %d {CCost:{x %u {CDurability:{m %d {CCondition:{M %d {CTimer:{x %d\n\r",
-   obj->level, obj->cost, 
+   obj->level, obj->cost,
    (obj->durability == -1)?1001:obj->durability,
    (obj->condition == -1)?1001:obj->condition,
    obj->timer);
@@ -1519,16 +1519,16 @@ void do_ostat(CHAR_DATA *ch, const char *argument)
     obj->in_obj     == NULL    ? "(none)" : get_obj_desc(obj->in_obj,'1'),
     obj->carried_by == NULL    ? "(none)" :
     can_see(ch,obj->carried_by,CHECK_LVL) ? obj->carried_by->name : "someone", obj->wear_loc);
-    
+
   ptc(ch, "{G| {CValues:{x %u %u %u %u %u\n\r",
    obj->value[0], obj->value[1], obj->value[2], obj->value[3], obj->value[4]);
 
-  stc("{G+------------------------------------------------------------------------<\n\r",ch);    
+  stc("{G+------------------------------------------------------------------------<\n\r",ch);
 
   // now give out vital statistics as per identify
   switch (obj->item_type)
   {
-    case ITEM_SCROLL: 
+    case ITEM_SCROLL:
     case ITEM_POTION:
     case ITEM_PILL:
      ptc(ch, "{G| {xLevel %u spells of:", obj->value[0]);
@@ -1545,29 +1545,29 @@ void do_ostat(CHAR_DATA *ch, const char *argument)
        stc(skill_table[obj->value[2]].name, ch);
        stc("'", ch);
      }
-     
+
      if (obj->value[3] >= 0 && obj->value[3] < max_skill)
      {
        stc(" '", ch);
        stc(skill_table[obj->value[3]].name, ch);
        stc("'", ch);
      }
-     
+
      if (obj->value[4] >= 0 && obj->value[4] < max_skill)
      {
        stc(" '",ch);
        stc(skill_table[obj->value[4]].name,ch);
        stc("'",ch);
      }
-     
+
      stc(".\n\r", ch);
      break;
 
-    case ITEM_WAND: 
-    case ITEM_STAFF: 
+    case ITEM_WAND:
+    case ITEM_STAFF:
      do_printf(buf, "{G| {xHas %u(%u) charges of level %u",obj->value[1], obj->value[2], obj->value[0]);
      stc(buf, ch);
-      
+
      if (obj->value[3] >= 0 && obj->value[3] < max_skill)
      {
        stc(" '", ch);
@@ -1582,7 +1582,7 @@ void do_ostat(CHAR_DATA *ch, const char *argument)
      ptc(ch,"{G| {xIt holds %s-colored %s.\n\r", liq_table[obj->value[2]].liq_color,
       liq_table[obj->value[2]].liq_name);
      break;
-                                
+
 
     case ITEM_ENCHANT:
      ptc(ch,"{G| {CПозволяет переделать предмет у кузнеца.{x\n\rЭффект:%s\n\r",mitem[obj->value[0]].desc);
@@ -1593,13 +1593,13 @@ void do_ostat(CHAR_DATA *ch, const char *argument)
      stc("{G| {CWeapon type is{x ",ch);
      switch (obj->value[0])
      {
-       case(WEAPON_EXOTIC): 
+       case(WEAPON_EXOTIC):
         stc("exotic\n\r",ch);
         break;
-       case(WEAPON_SWORD): 
+       case(WEAPON_SWORD):
         stc("sword\n\r",ch);
-        break;              
-       case(WEAPON_DAGGER): 
+        break;
+       case(WEAPON_DAGGER):
         stc("dagger\n\r",ch);
         break;
        case(WEAPON_SPEAR):
@@ -1608,26 +1608,26 @@ void do_ostat(CHAR_DATA *ch, const char *argument)
        case(WEAPON_STAFF):
         stc("staff\n\r",ch);
         break;
-       case(WEAPON_MACE): 
-        stc("mace/club\n\r",ch);              
+       case(WEAPON_MACE):
+        stc("mace/club\n\r",ch);
         break;
-       case(WEAPON_AXE): 
-        stc("axe\n\r",ch);              
+       case(WEAPON_AXE):
+        stc("axe\n\r",ch);
         break;
-       case(WEAPON_FLAIL): 
+       case(WEAPON_FLAIL):
         stc("flail\n\r",ch);
         break;
-       case(WEAPON_WHIP): 
+       case(WEAPON_WHIP):
         stc("whip\n\r",ch);
         break;
-       case(WEAPON_POLEARM): 
+       case(WEAPON_POLEARM):
         stc("polearm\n\r",ch);
         break;
-       default: 
+       default:
         stc("unknown\n\r",ch);
         break;
      }
-     
+
      if (obj->pIndexData->new_format)
       ptc(ch,"{G| {CDamage is{x %ud%u (average %u)\n\r",
        obj->value[1],obj->value[2],(1 + obj->value[2]) * obj->value[1] / 2);
@@ -1637,7 +1637,7 @@ void do_ostat(CHAR_DATA *ch, const char *argument)
 
      ptc(ch,"{G| {CDamage noun is{x %s.\n\r",(obj->value[3] > 0 && obj->value[3] < MAX_DAMAGE_MESSAGE) ?
       attack_table[obj->value[3]].noun : "undefined");
-                    
+
      if (obj->value[4])  /* weapon flags */
      {
       ptc(ch,"{G| {CWeapons flags:{x %s\n\r",weapon_bit_name(obj->value[4]));
@@ -1865,7 +1865,7 @@ if (!IS_NPC(victim))
   if (!IS_NPC(victim))
   {
     ptc(ch,"{C| {GPlayed: {W%10d {GLast Lvl: {W%10d {GTimer: {W%d{x",
-    (int) (victim->played + current_time - victim->logon) / 3600, 
+    (int) (victim->played + current_time - victim->logon) / 3600,
      victim->pcdata->last_level, victim->timer);
   }
 
@@ -1885,14 +1885,14 @@ if (!IS_NPC(victim))
   }
 
   ptc(ch, "\n\r{C|{YAct: {W%s{x",act_bit_name(victim->act));
-       
+
   if (victim->comm) ptc(ch,"\n\r{C|Comm: {W%s{x",comm_bit_name(victim->comm));
 
   if (IS_NPC(victim) && victim->off_flags) ptc(ch, "\n\r{C|{GOffense: {W%s{x",off_bit_name(victim->off_flags));
 
   stc("\n\r{C=---------------------------------------------------------------------------={x",ch);
   if (victim->imm_flags) ptc(ch, "\n\r{C|{MImmune:{W%s{x",imm_bit_name(victim->imm_flags));
- 
+
   if (victim->res_flags) ptc(ch, "\n\r{C|{RResist: {W%s{x",imm_bit_name(victim->res_flags));
 
   if (victim->vuln_flags) ptc(ch, "\n\r{C|{DVulnerable: {W%s{x",imm_bit_name(victim->vuln_flags));
@@ -1941,10 +1941,10 @@ void do_affstat(CHAR_DATA *ch, const char *argument)
      if (paf->location == APPLY_SPELL_AFFECT) ptc (ch, "{CSpellaffect: {W%s {Clevel {Y%d{x\n\r",affect_bit_name(paf->modifier),paf->level);
      else ptc(ch,"{CSpell: {W'%s'{C modifies {M%s {Cby {W%d {Cfor {G%d {Chours with bits {G%s{C, level {Y%d{C.{x\n\r",
      skill_table[paf->type].name,
-     affect_loc_name(paf->location), 
-     paf->modifier, 
-     paf->duration, 
-     affect_bit_name(paf->bitvector), 
+     affect_loc_name(paf->location),
+     paf->modifier,
+     paf->duration,
+     affect_bit_name(paf->bitvector),
      paf->level);
   }
 }
@@ -1955,7 +1955,7 @@ void do_vnum(CHAR_DATA *ch, const char *argument)
   const char *string;
 
   string = one_argument(argument,arg);
- 
+
   if (EMPTY(arg))
   {
     stc("Синтаксис:\n\r",ch);
@@ -1972,7 +1972,7 @@ void do_vnum(CHAR_DATA *ch, const char *argument)
   }
 
   if (!str_cmp(arg,"mob") || !str_cmp(arg,"char"))
-  { 
+  {
     do_function(ch, &do_mfind, string);
     return;
   }
@@ -2101,7 +2101,7 @@ void do_owhere(CHAR_DATA *ch, const char *argument)
     number++;
 
     for (in_obj = obj; in_obj->in_obj != NULL; in_obj = in_obj->in_obj);
- 
+
     if (in_obj->carried_by != NULL && can_see(ch,in_obj->carried_by,CHECK_LVL)
      && in_obj->carried_by->in_room != NULL)
      do_printf(buf, "%3d) %s находится в руках %s [Комната %u]\n\r",
@@ -2109,16 +2109,16 @@ void do_owhere(CHAR_DATA *ch, const char *argument)
       in_obj->carried_by->in_room->vnum);
     else if (in_obj->in_room != NULL && can_see_room(ch,in_obj->in_room))
      do_printf(buf, "%3d) %s находится в %s [Комната %u]\n\r",
-      number, get_obj_desc(obj,'1'),in_obj->in_room->name, 
+      number, get_obj_desc(obj,'1'),in_obj->in_room->name,
       in_obj->in_room->vnum);
     else do_printf(buf, "%3d) %s в неизвестном месте\n\r",number, get_obj_desc(obj,'1'));
- 
+
     buf[0] = UPPER(buf[0]);
     add_buf(buffer,buf);
- 
+
     if (number >= max_found) break;
   }
- 
+
   if (!found) stc("Нигде нет ничего подобного.\n\r", ch);
   else page_to_char(buf_string(buffer),ch);
 
@@ -2141,7 +2141,7 @@ void do_mwhere(CHAR_DATA *ch, const char *argument)
     for (d = descriptor_list; d != NULL; d = d->next)
     {
       if (d->character && d->connected == CON_PLAYING
-       && d->character->in_room 
+       && d->character->in_room
        && can_see(ch,d->character,CHECK_LVL)
        && can_see_room(ch,d->character->in_room))
       {
@@ -2220,7 +2220,7 @@ void do_reboot(CHAR_DATA *ch, const char *argument)
   }
 
   if (!str_cmp(argument,"stop") || !str_cmp(argument,"cancel"))
-  {                 
+  {
     rebootcount=0;
     do_printf(buf,"{RSYSTEM: REBOOT cancelled{*{x\n\r");
     act(buf, ch, NULL, NULL, TO_ALL);
@@ -2281,7 +2281,7 @@ void do_protect(CHAR_DATA *ch, const char *argument)
     SET_BIT(victim->pcdata->cfg,CFG_NOSNOOP);
   }
 }
-  
+
 void do_snoop(CHAR_DATA *ch, const char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
@@ -2290,7 +2290,7 @@ void do_snoop(CHAR_DATA *ch, const char *argument)
   char buf[MAX_STRING_LENGTH];
 
   one_argument(argument, arg);
-  
+
   if (EMPTY(arg))
   {
     stc("Просмотреть кого?\n\r", ch);
@@ -2322,8 +2322,8 @@ void do_snoop(CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if ( get_trust(victim) > get_trust(ch) 
-   || ( IS_CFG(victim,CFG_NOSNOOP) && !IS_SET(ch->comm,COMM_COMSYS)) 
+  if ( get_trust(victim) > get_trust(ch)
+   || ( IS_CFG(victim,CFG_NOSNOOP) && !IS_SET(ch->comm,COMM_COMSYS))
    || ( victim->pcdata->protect > get_trust(ch) ) )
   {
     stc("Не вышло.\n\r", ch);
@@ -2454,7 +2454,7 @@ void do_clone(CHAR_DATA *ch, const char *argument)
     {
      stc("{RBUG! Unable to create obj!{x\n\r",ch);
      return;
-    } 
+    }
     clone_object(obj,clone);
     if (obj->carried_by != NULL) obj_to_char(clone,ch);
     else obj_to_room(clone,ch->in_room);
@@ -2490,9 +2490,9 @@ void do_clone(CHAR_DATA *ch, const char *argument)
       stc("{RBUG! Unable to create MOB! Report to IMMS!{x\n\r",ch);
       return;
     }
-    
-    clone_mobile(mob,clone); 
-                
+
+    clone_mobile(mob,clone);
+
     for (obj = mob->carrying; obj != NULL; obj = obj->next_content)
     {
       if (obj_check(ch,obj))
@@ -2521,7 +2521,7 @@ void do_load(CHAR_DATA *ch, const char *argument)
   char arg[MAX_INPUT_LENGTH];
 
   argument = one_argument(argument,arg);
-  
+
   if (EMPTY(arg))
   {
     stc("Синтаксис:\n\r",ch);
@@ -2543,7 +2543,7 @@ void do_load(CHAR_DATA *ch, const char *argument)
    do_function(ch, &do_oload, argument);
    return;
   }
-  
+
   if (!str_cmp(arg,"r_weapon"))
   {
     int l;
@@ -2582,7 +2582,7 @@ void do_mload(CHAR_DATA *ch, const char *argument)
   char arg[MAX_INPUT_LENGTH];
   MOB_INDEX_DATA *pMobIndex;
   CHAR_DATA *victim;
-    
+
   one_argument(argument, arg);
 
   if (EMPTY(arg) || !is_number(arg))
@@ -2602,7 +2602,7 @@ void do_mload(CHAR_DATA *ch, const char *argument)
    stc("{RBUG! Unable to create mob!{x\n\r",ch);
    return;
   }
-  
+
   char_to_room(victim, ch->in_room);
   act("$c1 создал $C4!", ch, NULL, victim, TO_ROOM);
   stc("Ok.\n\r", ch);
@@ -2614,7 +2614,7 @@ void do_oload(CHAR_DATA *ch, const char *argument)
   OBJ_INDEX_DATA *pObjIndex;
   OBJ_DATA *obj;
   int level;
-    
+
   argument = one_argument(argument, arg1);
   one_argument(argument, arg2);
 
@@ -2623,9 +2623,9 @@ void do_oload(CHAR_DATA *ch, const char *argument)
     stc("Синтаксис: load obj <vnum> <уровень>.\n\r", ch);
     return;
   }
-    
+
   level = get_trust(ch); // default
-  
+
   if (arg2[0] != '\0')  // load with a level
   {
     if (!is_number(arg2))
@@ -2761,7 +2761,7 @@ void do_advance(CHAR_DATA *ch, const char *argument)
     {
       ch->trust=UMAX(ch->trust,ch->level);
       victim->level=level;
-      victim->exp=exp_per_level(victim,victim->pcdata->points) 
+      victim->exp=exp_per_level(victim,victim->pcdata->points)
                                   * UMAX(1, victim->level);
       return;
     }
@@ -2803,7 +2803,7 @@ void do_advance(CHAR_DATA *ch, const char *argument)
     advance_level(victim,TRUE);
   }
   ptc(victim,"Ты сейчас %d уровня.\n\r",victim->level);
-  victim->exp   = exp_per_level(victim,victim->pcdata->points) 
+  victim->exp   = exp_per_level(victim,victim->pcdata->points)
                                   * UMAX(1, victim->level);
   save_char_obj(victim);
 }
@@ -2856,7 +2856,7 @@ void do_restore(CHAR_DATA *ch, const char *argument)
       affect_strip(vch,gsn_blindness);
       affect_strip(vch,gsn_sleep);
       affect_strip(vch,gsn_curse);
-            
+
       vch->hit                 = vch->max_hit;
       vch->mana                = vch->max_mana;
       vch->move                = vch->max_move;
@@ -2866,7 +2866,7 @@ void do_restore(CHAR_DATA *ch, const char *argument)
     stc("Комната восстановлена.\n\r",ch);
     return;
   }
-    
+
   if (get_trust(ch) >= MAX_LEVEL - 1 && !str_cmp(argument,"all"))
   {
     for (d = descriptor_list; d != NULL; d = d->next)
@@ -2879,7 +2879,7 @@ void do_restore(CHAR_DATA *ch, const char *argument)
       affect_strip(victim,gsn_blindness);
       affect_strip(victim,gsn_sleep);
       affect_strip(victim,gsn_curse);
-          
+
       victim->hit                 = victim->max_hit;
       victim->mana                = victim->max_mana;
       victim->move                = victim->max_move;
@@ -3142,7 +3142,7 @@ void do_set(CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if ( !str_prefix(arg,"self") ) 
+  if ( !str_prefix(arg,"self") )
   {
     char arg[MAX_INPUT_LENGTH];
     do_printf(arg,"%s %s",ch->name,argument);
@@ -3150,7 +3150,7 @@ void do_set(CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if ( !str_prefix(arg,"character") ) 
+  if ( !str_prefix(arg,"character") )
   {
     if( get_trust(ch) < 109 )
     {
@@ -3239,7 +3239,7 @@ void do_sset(CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if( ch!=victim && get_trust(ch) < 109 ) 
+  if( ch!=victim && get_trust(ch) < 109 )
   {
     stc("Ты не можешь выставлять навыки другим.\n\r",ch);
     return;
@@ -3270,7 +3270,7 @@ void do_sset(CHAR_DATA *ch, const char *argument)
   if (fAll)
   {
     for (sn = 0; sn < max_skill; sn++)
-      if (skill_table[sn].name != NULL && !IS_SET(skill_table[sn].flag, S_CLAN)) 
+      if (skill_table[sn].name != NULL && !IS_SET(skill_table[sn].flag, S_CLAN))
        victim->pcdata->learned[sn] = value;
   }
   else
@@ -3294,7 +3294,7 @@ void do_mset(CHAR_DATA *ch, const char *argument)
   if (EMPTY(arg1) || EMPTY(arg2) || EMPTY(arg3))
   {
     stc("Синтаксис:\n\r",ch);
-    stc(" set mob <имя> <поле> <значение>\n\r",ch); 
+    stc(" set mob <имя> <поле> <значение>\n\r",ch);
     stc("Поля - одно из:\n\r",ch);
     stc(" str int wis dex con sex level align race\n\r",ch);
     stc(" group gold silver hp mana move prac\n\r",ch);
@@ -3351,7 +3351,7 @@ void do_mset(CHAR_DATA *ch, const char *argument)
     stc("ok.\n\r",ch);
     return;
   }
-     
+
   if (!str_cmp(arg2, "dex"))
   {
     if (value < 1 || value > get_max_train(victim,STAT_DEX))
@@ -3363,7 +3363,7 @@ void do_mset(CHAR_DATA *ch, const char *argument)
     stc("ok.\n\r",ch);
     return;
   }
- 
+
   if (!str_cmp(arg2, "con"))
   {
     if (value < 1 || value > get_max_train(victim,STAT_CON))
@@ -3375,7 +3375,7 @@ void do_mset(CHAR_DATA *ch, const char *argument)
     stc("ok.\n\r",ch);
     return;
   }
- 
+
   if (!str_prefix(arg2, "sex"))
   {
     if (value < 0 || value > 2)
@@ -3387,7 +3387,7 @@ void do_mset(CHAR_DATA *ch, const char *argument)
     stc("ok.\n\r",ch);
     return;
   }
- 
+
   if (!str_prefix(arg2, "level"))
   {
     if (value < 0 || value > MAX_LEVEL)
@@ -3404,13 +3404,13 @@ void do_mset(CHAR_DATA *ch, const char *argument)
     victim->gold = value;
     return;
   }
-  
+
   if (!str_prefix(arg2, "silver"))
   {
     victim->silver = value;
     return;
   }
-  
+
   if (!str_prefix(arg2, "hp"))
   {
     if (value < -10 || value > 32760)
@@ -3432,7 +3432,7 @@ void do_mset(CHAR_DATA *ch, const char *argument)
     victim->max_mana = value;
     return;
   }
- 
+
   if (!str_prefix(arg2, "move"))
   {
     if (value < 0 || value > 30000)
@@ -3458,7 +3458,7 @@ void do_mset(CHAR_DATA *ch, const char *argument)
   if (!str_prefix(arg2, "race"))
   {
     int race;
-    
+
     race = race_lookup(arg3);
 
     if (race == 0)
@@ -3475,7 +3475,7 @@ void do_mset(CHAR_DATA *ch, const char *argument)
     victim->vuln_flags= race_table[race].vuln;
     return;
   }
-   
+
   if (!str_prefix(arg2,"group"))
   {
     victim->group = value;
@@ -3500,7 +3500,7 @@ void do_cset(CHAR_DATA *ch, const char *argument)
   if (EMPTY(arg1) || EMPTY(arg2) || EMPTY(arg3))
   {
     stc("Синтаксис:\n\r",ch);
-    stc(" set char <имя> <поле> <значение>\n\r",ch); 
+    stc(" set char <имя> <поле> <значение>\n\r",ch);
     stc("Поля - одно из:\n\r",ch);
     stc(" gold silver align thirst hunger drunk full\n\r",ch);
     stc(" qp addqp remqp toquest qtime\n\r",ch);
@@ -3582,13 +3582,13 @@ void do_cset(CHAR_DATA *ch, const char *argument)
     victim->gold = value;
     return;
   }
-  
+
   if (!str_prefix(arg2, "silver"))
   {
     victim->silver = value;
     return;
   }
-  
+
   if (!str_prefix(arg2, "qp"))
   {
     if (value < 0 || value > 50000)
@@ -3600,7 +3600,7 @@ void do_cset(CHAR_DATA *ch, const char *argument)
     victim->questpoints = value;
     return;
   }
- 
+
   if( !str_cmp(arg2, "addqp") )
   {
     if( value < 0 || victim->questpoints+value > 50000)
@@ -3813,7 +3813,7 @@ void do_cset(CHAR_DATA *ch, const char *argument)
     stc("ok.\n\r",ch);
     return;
   }
-     
+
   if (!str_cmp(arg2, "dex"))
   {
     if (value < 1 || value > get_max_train(victim,STAT_DEX))
@@ -3825,7 +3825,7 @@ void do_cset(CHAR_DATA *ch, const char *argument)
     stc("ok.\n\r",ch);
     return;
   }
- 
+
   if (!str_cmp(arg2, "con"))
   {
     if (value < 1 || value > get_max_train(victim,STAT_CON))
@@ -3837,7 +3837,7 @@ void do_cset(CHAR_DATA *ch, const char *argument)
     stc("ok.\n\r",ch);
     return;
   }
- 
+
   if (!str_prefix(arg2, "sex"))
   {
     if (value < 0 || value > 2)
@@ -3850,7 +3850,7 @@ void do_cset(CHAR_DATA *ch, const char *argument)
     stc("ok.\n\r",ch);
     return;
   }
- 
+
   if (!str_prefix(arg2, "hp"))
   {
     if (value < -10 || value > 32760)
@@ -3874,7 +3874,7 @@ void do_cset(CHAR_DATA *ch, const char *argument)
     victim->pcdata->perm_mana = value;
     return;
   }
- 
+
   if (!str_prefix(arg2, "move"))
   {
     if (value < 0 || value > 30000)
@@ -3970,7 +3970,7 @@ void do_string(CHAR_DATA *ch, const char *argument)
     stc("    где поле: name short long extended\n\r",ch);
     return;
   }
-    
+
   if (!str_prefix(type,"character") || !str_prefix(type,"mobile"))
   {
     if ((victim = get_char_world(ch, arg1)) == NULL)
@@ -3994,7 +3994,7 @@ void do_string(CHAR_DATA *ch, const char *argument)
       victim->name = str_dup(arg3);
       return;
     }
-                    
+
     if (!str_prefix(arg2, "description"))
     {
       free_string(victim->description);
@@ -4043,7 +4043,7 @@ void do_string(CHAR_DATA *ch, const char *argument)
       return;
     }
   }
-    
+
   if (!str_prefix(type,"object"))
   {
     /* string an obj */
@@ -4052,7 +4052,7 @@ void do_string(CHAR_DATA *ch, const char *argument)
       stc("Ничего подобного не найдено.\n\r", ch);
       return;
     }
-                    
+
     if (!str_prefix(arg2, "name"))
     {
       free_string(obj->name);
@@ -4085,10 +4085,10 @@ void do_string(CHAR_DATA *ch, const char *argument)
         stc("Синтаксис: oset <предмет> ed <ключевое слово> <строка>\n\r",ch);
         return;
       }
-      
+
       strcpy(arg4, argument);
       strcat(arg4, "\n\r");
-     
+
       ed = new_extra_descr();
 
       ed->keyword     = str_dup(arg3    );
@@ -4207,7 +4207,7 @@ void do_oset(CHAR_DATA *ch, const char *argument)
     obj->level = value;
     return;
   }
-                
+
   if (!str_prefix(arg2, "weight"))
   {
    obj->weight = value;
@@ -4262,7 +4262,7 @@ void do_rset(CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if (!is_room_owner(ch,location) && ch->in_room != location 
+  if (!is_room_owner(ch,location) && ch->in_room != location
    &&  room_is_private(location) && !IS_TRUSTED(ch,IMPLEMENTOR))
   {
     stc("Эта комната в данный момент занята.\n\r",ch);
@@ -4338,7 +4338,7 @@ void do_sockets(CHAR_DATA *ch, const char *argument)
         case CON_READ_MOTD:            st = "{YReading MOTD{x"; break;
         case CON_DROP_CLASS:           st = "{CDrop class..{x"; break;
         default:                       st = "{D!UNKNOWN!...{x"; break;
-      }                                                         
+      }
       vch = d->character;
       if (argument[0] != '\0' && str_prefix(argument,vch->name)) continue;
       if (get_trust(ch) < vch->invis_level) continue;
@@ -4401,7 +4401,7 @@ void do_sockets(CHAR_DATA *ch, const char *argument)
     case CON_BREAK_CONNECT:        st = "{R   LINKDEAD    {x"; break;
     case CON_READ_MOTD:            st = "{Y  Reading MOTD {x"; break;
     default:                       st = "{D   !UNKNOWN!   {x"; break;
-  }                                                         
+  }
   strftime(s, 100, "%I:%M%p", localtime(&vch->logon));
   ptc(ch, "[%3d %s %7s %-2d] %12s %32s\n\r",vch->desc->descriptor,st,s,
     vch->timer, vch->name, vch->host ? vch->host:vch->desc->host);
@@ -4467,17 +4467,17 @@ void do_force(CHAR_DATA *ch, const char *argument)
   {
     CHAR_DATA *vch;
     CHAR_DATA *vch_next;
- 
+
     if (get_trust(ch) < 109)
     {
       stc("Не на твоем уровне!\n\r",ch);
       return;
     }
- 
+
     for (vch = char_list; vch != NULL; vch = vch_next)
     {
       vch_next = vch->next;
- 
+
       if (!IS_NPC(vch) && !IS_IMMORTAL(vch))
       {
         int cmd,trust=get_trust(vch);
@@ -4500,17 +4500,17 @@ void do_force(CHAR_DATA *ch, const char *argument)
   {
    CHAR_DATA *vch;
    CHAR_DATA *vch_next;
- 
+
    if (get_trust(ch) < MAX_LEVEL)
    {
      stc("Не на твоем уровне!\n\r",ch);
      return;
    }
- 
+
    for (vch = char_list; vch != NULL; vch = vch_next)
    {
      vch_next = vch->next;
- 
+
      if (!IS_NPC(vch) && get_trust(vch) < get_trust(ch)
       &&  vch->level >= 102)
      {
@@ -4591,7 +4591,7 @@ void do_invis(CHAR_DATA *ch, const char *argument)
   /* RT code for taking a level argument */
   one_argument(argument, arg);
 
-  if (EMPTY(arg)) 
+  if (EMPTY(arg))
   /* take the default path */
 
   if (ch->invis_level)
@@ -4632,10 +4632,10 @@ void do_incognito(CHAR_DATA *ch, const char *argument)
 
   /* RT code for taking a level argument */
   one_argument(argument, arg);
- 
+
   if (EMPTY(arg))
   /* take the default path */
- 
+
   if (ch->incog_level)
   {
     ch->incog_level = 0;
@@ -4766,7 +4766,7 @@ void do_remort(CHAR_DATA *ch, const char *argument)
   stc("Ты должен быть СуперГероем если хочешь перерождатьсЯ\n\r",ch);
   return;
  }
- 
+
  if (argument[0] != '\0')
  {
   stc("Набери Remort без параметровs.\n\r",ch);
@@ -4830,7 +4830,7 @@ void item_info(CHAR_DATA *ch, OBJ_INDEX_DATA *obji,int type)
 
   switch (obji->item_type)
   {
-    case ITEM_SCROLL: 
+    case ITEM_SCROLL:
     case ITEM_POTION:
     case ITEM_PILL:
       do_printf(buf, "[%u] spells of:", obji->value[0]);
@@ -4866,11 +4866,11 @@ void item_info(CHAR_DATA *ch, OBJ_INDEX_DATA *obji,int type)
       stf(".\n", ch);
       break;
 
-    case ITEM_WAND: 
-    case ITEM_STAFF: 
+    case ITEM_WAND:
+    case ITEM_STAFF:
       do_printf(buf, "%u charges of level %u",obji->value[2], obji->value[0]);
       stf(buf, ch);
-      
+
       if (obji->value[3] >= 0 && obji->value[3] < max_skill)
       {
         stf(" '", ch);
@@ -4902,7 +4902,7 @@ void item_info(CHAR_DATA *ch, OBJ_INDEX_DATA *obji,int type)
       switch (obji->value[0])
       {
         case(WEAPON_EXOTIC) : stf("exotic]",ch);   break;
-        case(WEAPON_SWORD)  : stf("sword]",ch);    break;              
+        case(WEAPON_SWORD)  : stf("sword]",ch);    break;
         case(WEAPON_DAGGER) : stf("dagger]",ch);   break;
         case(WEAPON_SPEAR)  : stf("spear]",ch);break;
         case(WEAPON_STAFF)  : stf("staff]",ch);break;
@@ -4924,7 +4924,7 @@ void item_info(CHAR_DATA *ch, OBJ_INDEX_DATA *obji,int type)
       break;
 
     case ITEM_ARMOR:
-      do_printf(buf, "AC %u/%u/%u/%u\n", 
+      do_printf(buf, "AC %u/%u/%u/%u\n",
        obji->value[0], obji->value[1], obji->value[2], obji->value[3]);
       stf(buf, ch);
       break;
@@ -4986,7 +4986,7 @@ void item_find(OBJ_INDEX_DATA *obji)
   for (obj = object_list; obj != NULL ; obj = obj->next)
   {
     if (obji->vnum==obj->pIndexData->vnum)
-    { 
+    {
       if (obj->carried_by != NULL)
       {
         found=TRUE;
@@ -5038,7 +5038,7 @@ void base_info(CHAR_DATA *ch, OBJ_INDEX_DATA *obji,int type)
 
   switch (obji->item_type)
   {
-    case ITEM_SCROLL: 
+    case ITEM_SCROLL:
     case ITEM_POTION:
     case ITEM_PILL:
       do_printf(buf, "Level %u spells of:", obji->value[0]);
@@ -5074,11 +5074,11 @@ void base_info(CHAR_DATA *ch, OBJ_INDEX_DATA *obji,int type)
       stf(".\n", ch);
       break;
 
-    case ITEM_WAND: 
-    case ITEM_STAFF: 
+    case ITEM_WAND:
+    case ITEM_STAFF:
       do_printf(buf, "Has %u charges of level %u",obji->value[2], obji->value[0]);
       stf(buf, ch);
-      
+
       if (obji->value[3] >= 0 && obji->value[3] < max_skill)
       {
         stf(" '", ch);
@@ -5104,13 +5104,13 @@ void base_info(CHAR_DATA *ch, OBJ_INDEX_DATA *obji,int type)
         stf(buf,ch);
       }
       break;
-                                
+
     case ITEM_WEAPON:
       stf("Weapon type is ",ch);
       switch (obji->value[0])
       {
         case(WEAPON_EXOTIC) : stf("exotic.\n",ch);   break;
-        case(WEAPON_SWORD)  : stf("sword.\n",ch);    break;              
+        case(WEAPON_SWORD)  : stf("sword.\n",ch);    break;
         case(WEAPON_DAGGER) : stf("dagger.\n",ch);   break;
         case(WEAPON_SPEAR)  : stf("spear.\n",ch);break;
         case(WEAPON_STAFF)  : stf("staff.\n",ch);break;
@@ -5140,7 +5140,7 @@ void base_info(CHAR_DATA *ch, OBJ_INDEX_DATA *obji,int type)
      stf("Бонус-итем",ch);
      break;
     case ITEM_ARMOR:
-      do_printf(buf, "Armor class is %u pierce, %u bash, %u slash, and %u vs. magic.\n", 
+      do_printf(buf, "Armor class is %u pierce, %u bash, %u slash, and %u vs. magic.\n",
        obji->value[0], obji->value[1], obji->value[2], obji->value[3]);
       stf(buf, ch);
       break;
@@ -5358,7 +5358,7 @@ void do_itemlist(CHAR_DATA *ch, const char *argument)
     for (i=0;i<36;i+=2) ptc(ch,"[%2d] %15s  [%2d] %15s\n\r",i,item_name(i),i+1,item_name(i+1));
   else do_itemlist(ch,"");
 }
-    
+
 void stf(const char *str,CHAR_DATA *ch)
 {
   FILE *fp;
@@ -5442,27 +5442,27 @@ void do_nomlove(CHAR_DATA *ch, const char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
   CHAR_DATA *victim;
- 
+
   one_argument(argument, arg);
- 
+
   if (EMPTY(arg))
   {
     stc("Кому установить/убрать NO_MLOVE?", ch);
     return;
   }
- 
+
   if ((victim = get_pchar_world(ch, arg)) == NULL)
   {
     stc("Тут таких нет.\n\r", ch);
     return;
   }
- 
+
   if (get_trust(victim) > get_trust(ch))
   {
     stc("Не вышло.\n\r", ch);
     return;
   }
- 
+
   if (IS_SET(victim->act,PLR_NOMLOVE))
   {
     REM_BIT(victim->act, PLR_NOMLOVE);
@@ -5485,32 +5485,32 @@ void gecho(const char *argument)
   for (d = descriptor_list; d; d = d->next)
   {
     if (!d->character || d->connected!=CON_PLAYING) continue;
-    ptc(d->character,"%s \n\r",argument);   
+    ptc(d->character,"%s \n\r",argument);
   }
 }
 
 void do_nodelete(CHAR_DATA *ch, const char *argument)
 {
   CHAR_DATA *victim;
- 
+
   if (EMPTY(argument))
   {
     stc("Отключить delete у кого?", ch);
     return;
   }
- 
+
   if ((victim = get_pchar_world(ch, argument)) == NULL)
   {
     stc("Тут таких нет.\n\r", ch);
     return;
   }
- 
+
   if (get_trust(victim) >= get_trust(ch))
   {
     stc("Не вышло.\n\r", ch);
     return;
   }
- 
+
   victim->pcdata->cfg=toggle_int64(victim->pcdata->cfg,CFG_NODELETE);
   ptc(ch,"Режим NODELETE %s.\n\r",IS_CFG(victim,CFG_NODELETE)?"установлен":"убран");
 }
@@ -5585,7 +5585,7 @@ void do_nopost(CHAR_DATA *ch, const char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
   CHAR_DATA *victim;
- 
+
   one_argument(argument, arg);
 
   if (EMPTY(arg))
@@ -5598,7 +5598,7 @@ void do_nopost(CHAR_DATA *ch, const char *argument)
     stc("Тут таких нет.\n\r", ch);
     return;
   }
- 
+
   if (get_trust(victim) >= get_trust(ch) || victim->pcdata->protect > get_trust(ch))
   {
     stc("Не вышло.\n\r", ch);
@@ -5621,7 +5621,7 @@ void do_setcurse(CHAR_DATA *ch, const char *argument)
     stc("На кого наложить проклятье?\n\r", ch);
     return;
   }
-  
+
   if ((victim = get_pchar_world(ch, arg)) == NULL)
   {
     stc("Тут таких нет.\n\r", ch);

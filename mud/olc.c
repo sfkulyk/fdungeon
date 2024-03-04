@@ -1,6 +1,6 @@
 // Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
- 
+
 #include <sys/types.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -39,7 +39,7 @@ bool run_olc_editor( DESCRIPTOR_DATA *d )
 char *olc_ed_name( CHAR_DATA *ch )
 {
   static char buf[10];
-    
+
   buf[0] = '\0';
   switch (ch->desc->editor)
   {
@@ -72,7 +72,7 @@ char *olc_ed_vnum( CHAR_DATA *ch )
   OBJ_INDEX_DATA *pObj;
   MOB_INDEX_DATA *pMob;
   static char buf[10];
-      
+
   buf[0] = '\0';
   switch ( ch->desc->editor )
   {
@@ -233,7 +233,7 @@ const struct olc_cmd_type oedit_table[] =
 
 const struct olc_cmd_type mpedit_table[] =
 {
- { "commands",show_commands }, 
+ { "commands",show_commands },
  { "create",  mpedit_create },
  { "code",    mpedit_code   },
  { "clear",   mpedit_clear  },
@@ -672,7 +672,7 @@ void do_redit( CHAR_DATA *ch, const char *argument )
     {
       if( IS_SET( pRoom2->room_flags, ROOM_ELDER)
         && !IS_ELDER(ch) )
-      {  
+      {
          stc("Ты не можешь редактировать эту комнату.\n\r", ch);
          return;
       }
@@ -684,7 +684,7 @@ void do_redit( CHAR_DATA *ch, const char *argument )
     {
       stc("У тебя недостаточно прав для редактирования комнат, или комната не существует.\n\r",ch);
       return;
-    }   
+    }
   }
   if ( !IS_BUILDER( ch, pRoom->area ) )
   {
@@ -869,8 +869,8 @@ void display_resets( CHAR_DATA *ch )
 
   EDIT_ROOM(ch, pRoom);
   final[0]  = '\0';
-  
-  stc ( 
+
+  stc (
 "#N   Vnum      Описание ресета     Куда  грузится    Vnum   Mx Mn Описание\n\r"
 "== ======== ===================== ================ ======== ===== ===========\n\r", ch );
 
@@ -984,28 +984,28 @@ void display_resets( CHAR_DATA *ch )
         {
           do_printf( buf,
               "{MO[%5u]{x %-21s {Gв инвентори{x      {ПS[%5u]{x       %s\n\r",
-              pReset->arg1,get_objindex_desc(pObj,'1'),                           
+              pReset->arg1,get_objindex_desc(pObj,'1'),
               pMob->vnum,get_mobindex_desc(pMob,'2'));
         }
         else
         do_printf( buf,
-              "{MO[%5u]{x %-21s {G%-16s{x {GM[%5u]{x       %s\n\r",
-              pReset->arg1,get_objindex_desc(pObj,'1'),
-              (pReset->command == 'G') ?
-                  flag_string( wear_loc_strings, WEAR_NONE )
-                : flag_string( wear_loc_strings, pReset->arg3 ),
-                pMob->vnum,
-                get_mobindex_desc(pMob,'2'));
+          "{MO[%5u]{x %-21s {G%-16s{x {GM[%5u]{x       %s\n\r",
+          pReset->arg1,get_objindex_desc(pObj,'1'),
+          (pReset->command == 'G') ?
+            flag_string( wear_loc_strings, WEAR_NONE )
+            : flag_string( wear_loc_strings, pReset->arg3 ),
+          pMob->vnum,
+          get_mobindex_desc(pMob,'2'));
         strcat( final, buf );
         break;
 
       case 'D':
         pRoomIndex = get_room_index( pReset->arg1 );
         do_printf( buf, "{CR[%5u]{x %s дверь %-16s выход в %s\n\r",
-              pReset->arg1,
-              capitalize( dir_name[ pReset->arg2 ] ),
-              pRoomIndex->name,
-              flag_string( door_resets, pReset->arg3 ) );
+          pReset->arg1,
+          capitalize( dir_name[ pReset->arg2 ] ),
+          pRoomIndex->name,
+          flag_string( door_resets, pReset->arg3 ) );
         strcat( final, buf );
 
         break;
@@ -1018,7 +1018,7 @@ void display_resets( CHAR_DATA *ch )
         }
 
         do_printf( buf, "{CR[%5u]{x выход случайным образом в %s\n\r",
-              pReset->arg1, pRoomIndex->name );
+          pReset->arg1, pRoomIndex->name );
         strcat( final, buf );
         break;
     }

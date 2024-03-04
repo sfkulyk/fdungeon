@@ -222,7 +222,7 @@ void fwrite_char (CHAR_DATA * ch, FILE * fp)
 
   if (ch->pcdata->bamfout[0] != '\0') do_fprintf (fp, "Bout %s~\n", ch->pcdata->bamfout);
 
-  if (ch->pcdata->pseudoname) 
+  if (ch->pcdata->pseudoname)
     do_fprintf (fp, "Pseudo %s~\n", ch->pcdata->pseudoname);
 
   do_fprintf (fp, "Titl %s~\n",      ch->pcdata->title     );
@@ -244,7 +244,7 @@ void fwrite_char (CHAR_DATA * ch, FILE * fp)
   do_fprintf(fp, "Lovers %s~\n", ch->pcdata->lovers);
   do_fprintf(fp, "Vislist %s~\n", ch->pcdata->vislist);
   do_fprintf(fp, "IgnoreList %s~\n", ch->pcdata->ignorelist);
- 
+
   {
     int a;
 
@@ -283,8 +283,8 @@ void fwrite_char (CHAR_DATA * ch, FILE * fp)
   {
     do_fprintf (fp, "Pena %d %u %u %s~\n",
       pena->type, pena->affect, pena->ticks, pena->inquisitor);
-  }   
-  
+  }
+
   do_fprintf (fp, "End\n\n");
 }
 
@@ -364,11 +364,11 @@ void fwrite_pet (CHAR_DATA * pet, FILE * fp)
   do_fprintf (fp, "AMod %d %d %d %d %d\n", pet->mod_stat[STAT_STR],
     pet->mod_stat[STAT_INT], pet->mod_stat[STAT_WIS],
     pet->mod_stat[STAT_DEX], pet->mod_stat[STAT_CON]);
-    
+
   for (paf = pet->affected; paf != NULL; paf = paf->next)
   {
     if (paf->type < 0 || paf->type >= max_skill) continue;
-            
+
     do_fprintf (fp, "Affc '%s' %d %d %d %d %d %u\n",
       skill_table[paf->type].name,
       paf->where, paf->level, paf->duration, paf->modifier,
@@ -376,7 +376,7 @@ void fwrite_pet (CHAR_DATA * pet, FILE * fp)
   }
   do_fprintf (fp,"End\n");
 }
-    
+
 void fwrite_obj (CHAR_DATA * ch, OBJ_DATA * obj, FILE * fp, int iNest, bool type)
 {
   EXTRA_DESCR_DATA * ed;
@@ -455,7 +455,7 @@ void fwrite_obj (CHAR_DATA * ch, OBJ_DATA * obj, FILE * fp, int iNest, bool type
       obj->value[1] != obj->pIndexData->value[1] ||
       obj->value[2] != obj->pIndexData->value[2] ||
       obj->value[3] != obj->pIndexData->value[3] ||
-      obj->value[4] != obj->pIndexData->value[4]) 
+      obj->value[4] != obj->pIndexData->value[4])
     do_fprintf (fp, "Val  %u %u %u %u %u\n",
       obj->value[0], obj->value[1], obj->value[2],
       obj->value[3], obj->value[4]);
@@ -522,16 +522,16 @@ bool load_char_obj (DESCRIPTOR_DATA * d, const char * name, int status)
   ch->prompt                 = str_dup("{w<{R%h{w/{y%Hhp {c%m{w/{y%Mm {g%vmv{w {G%e {B%X>{x  ");
   ch->pcdata->confirm_delete = FALSE;
   ch->pcdata->pwd            = str_dup ("");
-  ch->pcdata->bamfin         = str_dup (""); 
+  ch->pcdata->bamfin         = str_dup ("");
   ch->pcdata->bamfout        = str_dup ("");
-  ch->pcdata->pseudoname     = str_dup (""); 
+  ch->pcdata->pseudoname     = str_dup ("");
   ch->pcdata->title          = str_dup ("");
   ch->pcdata->deny_addr      = str_dup ("");
   ch->pcdata->denied_by      = str_dup ("");
-  ch->host                   = NULL;
+  ch->host                   = str_dup ("");
 
   for (stat = 0; stat < MAX_STATS; stat++) ch->perm_stat[stat] = 13;
-  ch->pcdata->condition[COND_THIRST]  = 48  ; 
+  ch->pcdata->condition[COND_THIRST]  = 48  ;
   ch->pcdata->condition[COND_FULL]    = 48  ;
   ch->pcdata->condition[COND_HUNGER]  = 48  ;
   ch->pcdata->security                = 0   ;
@@ -793,14 +793,14 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
       KEY("Cla",      ch->class[0],      fread_number(fp));
       KEY("Clan",     ch->clan,          clan_lookup(fread_string(fp)));
       if ( ch->clan == NULL && ch->level > 10)
-       {    
+       {
         ch->clan = clan_lookup("loner");
         ch->clanrank = 0;
-       }        
+       }
       KEY("Criminal", ch->criminal,   fread_number(fp));
-      KEY("Comm",     ch->comm,       fread_flag64(fp)); 
+      KEY("Comm",     ch->comm,       fread_flag64(fp));
       KEY("Coms",     ch->pcdata->comm_save, fread_flag64(fp));
-      KEY("Cfg",      ch->pcdata->cfg,fread_flag64(fp)); 
+      KEY("Cfg",      ch->pcdata->cfg,fread_flag64(fp));
 
       if (!str_cmp (word, "Class"))
       {
@@ -857,7 +857,7 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
 
       if (!str_cmp (word, "End"))
       {
-      // adjust hp mana move up  -- here for speed's sake 
+      // adjust hp mana move up  -- here for speed's sake
         percent = (current_time - lastlogoff) * 25 / ( 2 * 60 * 60);
         percent = UMIN(percent, 100);
 
@@ -885,7 +885,7 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
 /*
         REM_BIT(ch->act, PLR_LASTREMORT);
         REM_BIT(ch->act, PLR_5REMORT);
-        if (ch->remort > 2) 
+        if (ch->remort > 2)
          {
           ch->remort = 2;
                if (ch->class[3]==0)     ch->classmag=FALSE;
@@ -893,7 +893,7 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
           else if (ch->class[3]==2)     ch->classthi=FALSE;
           else if (ch->class[3]==3)     ch->classwar=FALSE;
          }
-*/         
+*/
         return;
          }
       break;
@@ -936,7 +936,7 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
       KEY("Hit", ch->hitroll, fread_number (fp));
 
       if (!str_cmp (word, "Host"))
-      { 
+      {
           KEY("Host", ch->host, fread_string (fp));
           fMatch = TRUE;
           break;
@@ -1023,7 +1023,7 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
       KEY("PerBan",ch->pcdata->deny_addr,  fread_string (fp));
       KEY("Petit", ch->clanpet,clan_lookup(fread_string (fp)));
       KEY("Pseudo",ch->pcdata->pseudoname, fread_string (fp));
-  
+
       if (!str_cmp (word, "Pena"))
       {
         PENALTY_DATA *pena, *pnext;
@@ -1033,7 +1033,7 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
         pena->ticks     = fread_number64(fp);
 //        if (ch->version<22) fread_number(fp);
         pena->inquisitor= fread_string(fp);
-        pnext=ch->penalty;        
+        pnext=ch->penalty;
         ch->penalty=pena;
         ch->penalty->next=pnext;
         fMatch = TRUE;
@@ -1084,7 +1084,7 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
       KEY("ShD",  ch->short_descr,      fread_string (fp));
       KEY("Sec",  ch->pcdata->security, fread_number (fp));   /* OLC */
       KEY("Silv", ch->silver,           fread_number64 (fp));
-      KEY("Spam", ch->spam,             fread_flag(fp)); 
+      KEY("Spam", ch->spam,             fread_flag(fp));
 
       if (!str_cmp(word, "Skill") || !str_cmp(word, "Sk"))
       {
@@ -1151,7 +1151,7 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
 
       break;
     }
-    
+
     if (!fMatch)
     {
       log_printf("Fread_char: no match '%s'", word);
@@ -1159,7 +1159,7 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
     }
   }
       if ( ch->clan == NULL && ( ch->level > 10 || ch->remort > 0) )
-       {    
+       {
         ch->clan = clan_lookup("loner");
         ch->clanrank = 0;
        }
@@ -1186,7 +1186,7 @@ void fread_pet (CHAR_DATA * ch, FILE * fp)
   if (!str_cmp(word, "Vnum"))
   {
     int64 vnum;
-    
+
     vnum = fread_number64 (fp);
 
     if (get_mob_index(vnum) == NULL)
@@ -1201,34 +1201,34 @@ void fread_pet (CHAR_DATA * ch, FILE * fp)
     bug ("Fread_pet: no vnum in file.", 0);
     pet = create_mobile (get_mob_index (MOB_VNUM_FIDO));
   }
-  
+
   for (;;)
   {
     word   = feof(fp) ? "END" : fread_word (fp);
     fMatch = FALSE;
-    
+
     switch (UPPER(word[0]))
     {
       case '*':
       fMatch = TRUE;
       fread_to_eol (fp);
       break;
-          
+
       case 'A':
       KEY("Act",  pet->act,         fread_flag64 (fp));
       KEY("AfBy", pet->affected_by, fread_flag64 (fp));
       KEY("Alig", pet->alignment,   fread_number (fp));
-      
+
       if (!str_cmp(word,"ACs"))
       {
         int i;
-        
+
         for (i = 0; i < 4; i++) pet->armor[i] = fread_number(fp);
 
         fMatch = TRUE;
         break;
       }
-      
+
       if (!str_cmp (word,"Affc"))
       {
         AFFECT_DATA *paf;
@@ -1251,21 +1251,21 @@ void fread_pet (CHAR_DATA * ch, FILE * fp)
         fMatch         = TRUE;
         break;
       }
-       
+
       if (!str_cmp (word, "AMod"))
       {
         int stat;
-        
+
         for (stat = 0; stat < MAX_STATS; stat++)
             pet->mod_stat[stat] = fread_number (fp);
         fMatch = TRUE;
         break;
       }
-       
+
       if (!str_cmp(word,"Attr"))
       {
          int stat;
-         
+
          for (stat = 0; stat < MAX_STATS; stat++)
              pet->perm_stat[stat] = fread_number (fp);
 
@@ -1273,17 +1273,17 @@ void fread_pet (CHAR_DATA * ch, FILE * fp)
          break;
       }
       break;
-       
+
       case 'C':
       KEY("Clan", pet->clan, clan_lookup(fread_string (fp)));
-      KEY("Comm", pet->comm, fread_flag64 (fp)); 
+      KEY("Comm", pet->comm, fread_flag64 (fp));
       break;
-       
+
       case 'D':
       KEY("Dam", pet->damroll,     fread_number (fp));
       KEY("Desc",pet->description, fread_string (fp));
       break;
-       
+
       case 'E':
       if (!str_cmp(word,"End"))
       {
@@ -1306,14 +1306,14 @@ void fread_pet (CHAR_DATA * ch, FILE * fp)
       }
       KEY("Exp", pet->exp,  fread_number(fp));
       break;
-       
+
       case 'G':
       KEY("Gold", pet->gold, fread_number64(fp));
       break;
-       
+
       case 'H':
       KEY("Hit", pet->hitroll, fread_number(fp));
-       
+
       if (!str_cmp(word,"HMV"))
       {
         pet->hit      = fread_number (fp);
@@ -1326,32 +1326,32 @@ void fread_pet (CHAR_DATA * ch, FILE * fp)
         break;
       }
       break;
-       
+
       case 'L':
       KEY("Levl", pet->level,      fread_number (fp));
       KEY("LnD",  pet->long_descr, fread_string (fp));
       KEY("LogO", lastlogoff,      fread_number (fp));
       break;
-       
+
       case 'N':
       KEY("Name", pet->name,       fread_string (fp));
       break;
-       
+
       case 'P':
       KEY("Pos",  pet->position,   fread_number (fp));
       break;
-       
+
       case 'R':
       KEY("Race",  pet->race,       race_lookup(fread_string (fp)));
       break;
-      
+
       case 'S' :
       KEY("Save",  pet->saving_throw, fread_number (fp));
       KEY("Sex",   pet->sex,          fread_number (fp));
       KEY("ShD",   pet->short_descr,  fread_string (fp));
       KEY("Silv",  pet->silver,       fread_number64 (fp));
       break;
-      
+
       if (!fMatch)
       {
         bug ("Fread_pet: no match.", 0);
@@ -1374,7 +1374,7 @@ void fread_obj (CHAR_DATA * ch, FILE * fp, bool type)
   bool first ;
   bool new_format;  // to prevent errors
   bool make_new  ;  // update object
-  
+
   fVnum      = FALSE;
   obj        = NULL ;
   first      = TRUE ;  // used to counter fp offset
@@ -1398,7 +1398,7 @@ void fread_obj (CHAR_DATA * ch, FILE * fp, bool type)
           obj = create_object (get_obj_index(vnum), -1);
           new_format = TRUE;
       }
-          
+
   }
 
   if (obj == NULL) // either not found or old style
@@ -1537,7 +1537,7 @@ void fread_obj (CHAR_DATA * ch, FILE * fp, bool type)
             if (make_new)
             {
               int wear;
-              
+
               wear = obj->wear_loc;
               extract_obj (obj);
               obj = create_object (obj->pIndexData, 0);
@@ -1591,7 +1591,7 @@ void fread_obj (CHAR_DATA * ch, FILE * fp, bool type)
 
       case 'O':
       if (!str_cmp  (word, "Oldstyle"))
-      {                       
+      {
         if (obj->pIndexData != NULL && obj->pIndexData->new_format)
               make_new = TRUE;
         fMatch = TRUE;
@@ -1637,7 +1637,7 @@ void fread_obj (CHAR_DATA * ch, FILE * fp, bool type)
         obj->value[3] = fread_number64 (fp);
         obj->value[4] = fread_number64 (fp);
         if (obj->pIndexData!=NULL)
-        { 
+        {
          if (obj->pIndexData->item_type==ITEM_LIGHT)
          {
           obj->value[0] = 0;
@@ -1858,7 +1858,7 @@ void save_one_char( CHAR_DATA *ch ,int action)
 
      for (victim=ch->in_room->people;victim!=NULL;victim=victim->next_in_room)
        if(!IS_NPC(victim) && victim!=ch && victim->on==obj_on) obj_on=NULL;
-      
+
      if (obj_on && CAN_WEAR(ch->on,ITEM_TAKE)) fwrite_obj (ch, ch->on, fp, 0, FALSE );
     }
 
@@ -1924,7 +1924,7 @@ void save_races()
     bug ("Could not open " RACE_FILE " for writing.", 0);
     return;
   }
- 
+
   do_fprintf (fp, "; Races data version 2\n");
   for (race=0;;race++)
   {

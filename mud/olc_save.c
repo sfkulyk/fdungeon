@@ -1,7 +1,7 @@
 // $Id: olc_save.c,v 1.19 2002/10/11 10:22:27 saboteur Exp $
 // Copyrights (C) 1998-2001, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
- 
+
 #include <sys/types.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -86,19 +86,19 @@ void save_mobile( FILE *fp, MOB_INDEX_DATA *pMobIndex )
   do_fprintf( fp, "%d %d\n",pMobIndex->alignment , pMobIndex->group);
   do_fprintf( fp, "%d ",    pMobIndex->level );
   do_fprintf( fp, "%d ",    pMobIndex->hitroll );
-  do_fprintf( fp, "%dd%d+%d ", pMobIndex->hit[DICE_NUMBER], 
-     pMobIndex->hit[DICE_TYPE], 
+  do_fprintf( fp, "%dd%d+%d ", pMobIndex->hit[DICE_NUMBER],
+     pMobIndex->hit[DICE_TYPE],
      pMobIndex->hit[DICE_BONUS] );
-  do_fprintf( fp, "%dd%d+%d ", pMobIndex->mana[DICE_NUMBER], 
-     pMobIndex->mana[DICE_TYPE], 
+  do_fprintf( fp, "%dd%d+%d ", pMobIndex->mana[DICE_NUMBER],
+     pMobIndex->mana[DICE_TYPE],
      pMobIndex->mana[DICE_BONUS] );
-  do_fprintf( fp, "%dd%d+%d ", pMobIndex->damage[DICE_NUMBER], 
-     pMobIndex->damage[DICE_TYPE], 
+  do_fprintf( fp, "%dd%d+%d ", pMobIndex->damage[DICE_NUMBER],
+     pMobIndex->damage[DICE_TYPE],
      pMobIndex->damage[DICE_BONUS] );
   do_fprintf( fp, "%s\n",      attack_table[pMobIndex->dam_type].name );
-  do_fprintf( fp, "%d %d %d %d\n", pMobIndex->ac[AC_PIERCE] / 10, 
-     pMobIndex->ac[AC_BASH]   / 10, 
-     pMobIndex->ac[AC_SLASH]  / 10, 
+  do_fprintf( fp, "%d %d %d %d\n", pMobIndex->ac[AC_PIERCE] / 10,
+     pMobIndex->ac[AC_BASH]   / 10,
+     pMobIndex->ac[AC_SLASH]  / 10,
      pMobIndex->ac[AC_EXOTIC] / 10 );
   do_fprintf( fp, "%s ",  pflag64(pMobIndex->off_flags));
   do_fprintf( fp, "%s ",  pflag64( pMobIndex->imm_flags));
@@ -123,7 +123,7 @@ void save_mobile( FILE *fp, MOB_INDEX_DATA *pMobIndex )
       i++;
       do_fprintf( fp, "M %s %d %s~\n", mprog_type_to_name( mprg->trig_type ),
         mprg->vnum,mprg->trig_phrase );
-    }    
+    }
 }
 
 // Saves all mobiles in area
@@ -179,20 +179,20 @@ void save_object( FILE *fp, OBJ_INDEX_DATA *pObjIndex )
       do_fprintf( fp, "%u %u 0 0 0\n",pObjIndex->value[0],
                                       pObjIndex->value[1]);
       break;
-            
+
     case ITEM_DRINK_CON:
       do_fprintf( fp, "%u %u '%s' %u 0\n",pObjIndex->value[0],
                                           pObjIndex->value[1],
                                           liq_table[pObjIndex->value[2]].liq_name,
                                           pObjIndex->value[3]);
       break;
-                    
+
     case ITEM_FOUNTAIN:
       do_fprintf( fp, "%u %u '%s' 0 0 \n",pObjIndex->value[0],
                                           pObjIndex->value[1],
                                           liq_table[pObjIndex->value[2]].liq_name);
       break;
-            
+
     case ITEM_CONTAINER:
       do_fprintf( fp, "%u %s %u %u %u\n",pObjIndex->value[0],
                                          pflag64( pObjIndex->value[1]),
@@ -200,20 +200,20 @@ void save_object( FILE *fp, OBJ_INDEX_DATA *pObjIndex )
                                          pObjIndex->value[3],
                                          pObjIndex->value[4]);
       break;
-            
+
     case ITEM_FOOD:
-      do_fprintf( fp, "%u %u 0 %s 0\n",pObjIndex->value[0], 
-                                       pObjIndex->value[1], 
+      do_fprintf( fp, "%u %u 0 %s 0\n",pObjIndex->value[0],
+                                       pObjIndex->value[1],
                                        pflag64(pObjIndex->value[3]));
       break;
-            
+
     case ITEM_PORTAL:
-      do_fprintf( fp, "%u %s %s %u 0\n",pObjIndex->value[0], 
+      do_fprintf( fp, "%u %s %s %u 0\n",pObjIndex->value[0],
                                         pflag64(pObjIndex->value[1]),
                                         pflag64(pObjIndex->value[2]),
                                         pObjIndex->value[3]);
       break;
-            
+
     case ITEM_FURNITURE:
       do_fprintf( fp, "%u ",pObjIndex->value[0]);
       do_fprintf( fp, "%u ",pObjIndex->value[1]);
@@ -221,7 +221,7 @@ void save_object( FILE *fp, OBJ_INDEX_DATA *pObjIndex )
                                pObjIndex->value[3]);
       do_fprintf( fp, "%u\n",pObjIndex->value[4]);
       break;
-            
+
     case ITEM_WEAPON:
       do_fprintf( fp, "%s %u %u %s %s\n",
              weapon_name((int)pObjIndex->value[0]),
@@ -230,7 +230,7 @@ void save_object( FILE *fp, OBJ_INDEX_DATA *pObjIndex )
              attack_table[pObjIndex->value[3]].name,
              pflag64(pObjIndex->value[4]));
       break;
-            
+
     case ITEM_ARMOR:
       do_fprintf( fp, "%u ",pObjIndex->value[0]);
       do_fprintf( fp, "%u ",pObjIndex->value[1]);
@@ -238,7 +238,7 @@ void save_object( FILE *fp, OBJ_INDEX_DATA *pObjIndex )
       do_fprintf( fp, "%u ",pObjIndex->value[3]);
       do_fprintf( fp, "%u\n",pObjIndex->value[4]);
       break;
-            
+
     case ITEM_PILL:
     case ITEM_POTION:
     case ITEM_SCROLL:
@@ -269,14 +269,14 @@ void save_object( FILE *fp, OBJ_INDEX_DATA *pObjIndex )
     if( pObjIndex->durability )
     {
       if( pObjIndex->durability != -1 )
-        if( pObjIndex->durability == 0 || pObjIndex->durability == 200 
+        if( pObjIndex->durability == 0 || pObjIndex->durability == 200
          || pObjIndex->durability < -1 || pObjIndex->durability > 1000
-         || pObjIndex->durability != material_table[material_num(pObjIndex->material)].d_dam ) 
+         || pObjIndex->durability != material_table[material_num(pObjIndex->material)].d_dam )
               pObjIndex->durability = material_table[material_num(pObjIndex->material)].d_dam;
     }
     else pObjIndex->durability = material_table[material_num(pObjIndex->material)].d_dam;
   }
-  else 
+  else
   {
     bug("NULL obj is sent as an argument to save_obj()!", 0);
     return;
@@ -310,7 +310,7 @@ void save_object( FILE *fp, OBJ_INDEX_DATA *pObjIndex )
     do_fprintf(fp,"T %s %d\n",pflag64(pObjIndex->ttype),pObjIndex->ttime);
   }
 }
- 
+
 // Saves all objects in area
 void save_objects( FILE *fp, AREA_DATA *pArea )
 {
@@ -322,7 +322,7 @@ void save_objects( FILE *fp, AREA_DATA *pArea )
   for( i = pArea->min_vnum; i <= pArea->max_vnum; i++ )
   {
     pObj=get_obj_index(i);
-    if (pObj && !IS_SET(pObj->extra_flags,ITEM_DELETED)) 
+    if (pObj && !IS_SET(pObj->extra_flags,ITEM_DELETED))
     {
       save_object(fp,pObj);
     }
@@ -368,8 +368,8 @@ void save_rooms( FILE *fp, AREA_DATA *pArea )
         if ( ( pExit = pRoomIndex->exit[door] ) && pExit->u1.to_room )
         {
           int locks = 0;
-          if ( IS_SET( pExit->rs_flags, EX_ISDOOR ) 
-            && ( !IS_SET( pExit->rs_flags, EX_PICKPROOF ) ) 
+          if ( IS_SET( pExit->rs_flags, EX_ISDOOR )
+            && ( !IS_SET( pExit->rs_flags, EX_PICKPROOF ) )
             && ( !IS_SET( pExit->rs_flags, EX_NOPASS ) )  ) locks = 1;
           if ( IS_SET( pExit->rs_flags, EX_ISDOOR )
             && ( IS_SET( pExit->rs_flags, EX_PICKPROOF ) )
@@ -398,7 +398,7 @@ void save_rooms( FILE *fp, AREA_DATA *pArea )
             && ( IS_SET( pExit->rs_flags, EX_PICKPROOF ) )
             && ( IS_SET( pExit->rs_flags, EX_BASHPROOF ) )
             && ( IS_SET( pExit->rs_flags, EX_NOPASS ) ) )   locks = 8;
-                      
+
           do_fprintf( fp, "D%d\n",      pExit->orig_door );
           do_fprintf( fp, "%s~\n",      fix_string( pExit->description ) );
           do_fprintf( fp, "%s~\n",      pExit->keyword );
@@ -420,7 +420,7 @@ void save_specials( FILE *fp, AREA_DATA *pArea )
 {
   int iHash;
   MOB_INDEX_DATA *pMobIndex;
-    
+
   do_fprintf( fp, "#SPECIALS\n" );
 
   for( iHash = 0; iHash < MAX_KEY_HASH; iHash++ )
@@ -457,7 +457,7 @@ void save_door_resets( FILE *fp, AREA_DATA *pArea )
         for( door = 0; door < MAX_DIR; door++ )
         {
           if ( ( pExit = pRoomIndex->exit[door] )
-            && pExit->u1.to_room 
+            && pExit->u1.to_room
             && ( IS_SET( pExit->rs_flags, EX_CLOSED )
             || IS_SET( pExit->rs_flags, EX_LOCKED ) ) )
           {
@@ -531,13 +531,13 @@ void save_resets( FILE *fp, AREA_DATA *pArea )
 
             case 'P':
               pLastObj = get_obj_index( pReset->arg1 );
-              do_fprintf( fp, "P 0 %u %d %u %d %s put inside %s\n", 
+              do_fprintf( fp, "P 0 %u %d %u %d %s put inside %s\n",
                   pReset->arg1, pReset->arg2,
                   pReset->arg3, pReset->arg4,
                   capitalize(get_obj_index( pReset->arg1 )->short_descr),
                   pLastObj->short_descr );
               break;
-              
+
             case 'G':
               do_fprintf( fp, "G 0 %u 0 %s is given to %s\n",
                    pReset->arg1,
@@ -569,7 +569,7 @@ void save_resets( FILE *fp, AREA_DATA *pArea )
 
             case 'R':
               pRoom = get_room_index( pReset->arg1 );
-              do_fprintf( fp, "R 0 %u %d Randomize %s\n", 
+              do_fprintf( fp, "R 0 %u %d Randomize %s\n",
                 pReset->arg1, pReset->arg2, pRoom->name );
               break;
           }
@@ -577,7 +577,7 @@ void save_resets( FILE *fp, AREA_DATA *pArea )
 #if !defined( VERBOSE )
           case 'M':
             pLastMob = get_mob_index( pReset->arg1 );
-            do_fprintf( fp, "M 1 %u %d %u %d \n", 
+            do_fprintf( fp, "M 1 %u %d %u %d \n",
                 pReset->arg1, pReset->arg2,
                 pReset->arg3, pReset->arg4 );
             break;
@@ -636,7 +636,7 @@ void save_shops( FILE *fp, AREA_DATA *pArea )
   MOB_INDEX_DATA *pMobIndex;
   int iTrade;
   int iHash;
-    
+
   do_fprintf( fp, "#SHOPS\n" );
 
   for( iHash = 0; iHash < MAX_KEY_HASH; iHash++ )
@@ -671,7 +671,7 @@ void save_area( AREA_DATA *pArea )
   FILE *fp;
   char buf[MAX_STRING_LENGTH];
   int64 vnum;
-  int minlevel = 120,maxlevel = 0; 
+  int minlevel = 120,maxlevel = 0;
   MOB_INDEX_DATA *pMob;
 
   fclose( fpReserve );
@@ -694,18 +694,18 @@ void save_area( AREA_DATA *pArea )
        if (IS_SET(pMob->act, ACT_IS_HEALER)
          || IS_SET(pMob->act, ACT_TRAIN)
          || pMob->pShop != NULL
-         || IS_SET(pMob->act, ACT_PET)) continue; 
+         || IS_SET(pMob->act, ACT_PET)) continue;
        if (pMob->level < minlevel) minlevel = pMob->level;
        if (pMob->level > maxlevel) maxlevel = pMob->level;
       }
     // fix the numbers if there's no mob in this area
     if (maxlevel==0)   maxlevel = 110;
     if (minlevel==120) minlevel = 0;
-    
-    do_printf(buf, "<%3d %3d> %s", minlevel, maxlevel, pArea->name);  
+
+    do_printf(buf, "<%3d %3d> %s", minlevel, maxlevel, pArea->name);
     free_string( pArea->credits );
     pArea->credits = str_dup(buf);
-    
+
     do_fprintf( fp, "Credits %s~\n",pArea->credits );
     do_fprintf( fp, "Security %d\n",pArea->security );
     do_fprintf( fp, "Flags %u\n",pArea->area_flags );
@@ -743,7 +743,7 @@ void do_mpsave( CHAR_DATA *ch, char *argument )
     bug( "Open_help: fopen", 0);
     perror( "mobprog.prg");
   }
-  else 
+  else
   {
     do_fprintf(fp, "#MOBPROGS\n");
     for (i=0; i< MAX_VNUM; i++)
@@ -760,7 +760,7 @@ void do_mpsave( CHAR_DATA *ch, char *argument )
 
 // Name:          do_asave
 // Purpose:       Entry point for saving area data.
-// Called by:     interpreter(interp.c) 
+// Called by:     interpreter(interp.c)
 void do_asave( CHAR_DATA *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
@@ -832,7 +832,7 @@ void do_asave( CHAR_DATA *ch, char *argument )
         ptc(ch,"Area %s was not saved! (Locked from saving)\n\r",ch);
         continue;
       }
-      if ( !IS_BUILDER( ch, pArea ) ) continue;     
+      if ( !IS_BUILDER( ch, pArea ) ) continue;
 
       REM_BIT( pArea->area_flags, AREA_CHANGED );
       log_printf("Saving: %s", pArea->file_name);

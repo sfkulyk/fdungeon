@@ -16,9 +16,9 @@ struct guild_type
 
 struct  ban_data
 {
-  BAN_DATA *  next;
-  const char *      host;
-  int         ban_flags;
+  BAN_DATA   * next;
+  const char * host;
+  int          ban_flags;
 };
 
 struct  cmd_type
@@ -90,9 +90,9 @@ struct buf_type
 {
   BUFFER * next;
   bool     valid;
-  int      state;  // error state of the buffer      
-  int      size;   // size in k     
-  char *   string; // buffer's string     
+  int      state;  // error state of the buffer
+  int      size;   // size in k
+  char *   string; // buffer's string
 };
 
 struct mprog_list
@@ -188,13 +188,13 @@ struct  help_data
 
 struct  shop_data
 {
-  SHOP_DATA * next;                 // Next shop in list              
+  SHOP_DATA * next;                 // Next shop in list
   int64       keeper;               // Vnum of shop keeper mob
-  int         buy_type [MAX_TRADE]; // Item types shop will buy       
-  int         profit_buy;           // Cost multiplier for buying     
+  int         buy_type [MAX_TRADE]; // Item types shop will buy
+  int         profit_buy;           // Cost multiplier for buying
   int         profit_sell;          // Cost multiplier for selling
-  int         open_hour;            // First opening hour           
-  int         close_hour;           // First closing hour           
+  int         open_hour;            // First opening hour
+  int         close_hour;           // First closing hour
 };
 
 struct  class_type
@@ -484,7 +484,7 @@ struct mem_data
 {
   MEM_DATA    *next;
   bool        valid;
-  int         id;     
+  int         id;
   int         reaction;
   time_t      when;
 };
@@ -750,7 +750,7 @@ struct item_cond_type
 // Material durability info table
 struct item_durability_status
 {
- int from;              // cond_list lower 
+ int from;              // cond_list lower
  int to;                // cond_list upper
  const char *d_message; // durability fit message
 };
@@ -853,7 +853,7 @@ struct  exit_data
 
 // Reset commands:
 // '*': comment
-// 'M': read a mobile 
+// 'M': read a mobile
 // 'O': read an object
 // 'P': put object in object
 // 'G': give object to mobile

@@ -38,7 +38,7 @@ bool show_version( CHAR_DATA *ch, const char *argument )
   stc( CREDITS, ch );
   stc( "\n\r", ch );
   return FALSE;
-}  
+}
 
 // This table contains help commands and a brief description of each.
 const struct olc_help_type help_table[] =
@@ -69,7 +69,7 @@ const struct olc_help_type help_table[] =
   {   "size",         size_flags,      "Размеры монстров."             },
   {   "position",     position_flags,  "Позиции монстров."             },
 //  {   "material",     material_type,   "Материалы."                    },
-  {   "wclass",       weapon_class,    "Класс оружия."                 }, 
+  {   "wclass",       weapon_class,    "Класс оружия."                 },
   {   "wtype",        weapon_type2,    "Специальные типы оружия."      },
   {   "portal",       portal_flags,    "Типы порталов."                },
   {   "furniture",    furniture_flags, "Типы диванов и лежаков."       },
@@ -425,7 +425,7 @@ REDIT( redit_mshow )
 
   medit_show( ch, argument );
   ch->desc->pEdit = (void *)ch->in_room;
-  return FALSE; 
+  return FALSE;
 }
 
 REDIT( redit_oshow )
@@ -459,7 +459,7 @@ REDIT( redit_oshow )
 
   oedit_show( ch, argument );
   ch->desc->pEdit = (void *)ch->in_room;
-  return FALSE; 
+  return FALSE;
 }
 
 /*****************************************************************************
@@ -715,7 +715,7 @@ AEDIT( aedit_file )
         stc( "No more than eight characters allowed.\n\r", ch );
         return FALSE;
     }
-    
+
     /*
      * Allow only letters and numbers.
      */
@@ -726,7 +726,7 @@ AEDIT( aedit_file )
             stc( "Only letters and numbers are valid.\n\r", ch );
             return FALSE;
         }
-    }    
+    }
 
     free_string( pArea->file_name );
     strcat( file, ".are" );
@@ -841,7 +841,7 @@ AEDIT( aedit_vnum )
       stc( "AEdit:  Upper must be larger then lower.\n\r", ch );
       return FALSE;
   }
-  
+
   if ( !check_range( atoi64( lower ), atoi64( upper ) ) )
   {
       stc( "AEdit:  Range must include only this area.\n\r", ch );
@@ -893,7 +893,7 @@ AEDIT( aedit_lvnum )
       stc( "AEdit:  Value must be less than the max_vnum.\n\r", ch );
       return FALSE;
   }
-  
+
   if ( !check_range( ilower, iupper ) )
   {
       stc( "AEdit:  Range must include only this area.\n\r", ch );
@@ -934,7 +934,7 @@ AEDIT( aedit_uvnum )
       stc( "AEdit:  Upper must be larger then lower.\n\r", ch );
       return FALSE;
   }
-  
+
   if ( !check_range( ilower, iupper ) )
   {
       stc( "AEdit:  Range must include only this area.\n\r", ch );
@@ -963,11 +963,11 @@ REDIT( redit_show )
   CHAR_DATA           *rch;
   int                 door;
   bool                fcnt;
-  
+
   EDIT_ROOM(ch, pRoom);
 
   buf1[0] = '\0';
-  
+
   do_printf( buf, "Description:\n\r%s", pRoom->description );
   strcat( buf1, buf );
 
@@ -989,7 +989,7 @@ REDIT( redit_show )
   do_printf( buf, "Health recovery:[%d]\n\rMana recovery  :[%d]\n\r",
           pRoom->heal_rate , pRoom->mana_rate );
   strcat( buf1, buf );
-      
+
   if ( pRoom->extra_descr )
   {
       EXTRA_DESCR_DATA *ed;
@@ -1172,8 +1172,8 @@ bool change_exit( CHAR_DATA *ch, const char *argument, int door )
   if ( !str_cmp( command, "delete" ) )
   {
       ROOM_INDEX_DATA *pToRoom;
-      int rev; 
-      
+      int rev;
+
       if ( !pRoom->exit[door] )
       {
           stc( "REdit:  Cannot delete a null exit.\n\r", ch );
@@ -1183,7 +1183,7 @@ bool change_exit( CHAR_DATA *ch, const char *argument, int door )
       // Remove ToRoom Exit.
       rev = rev_dir[door];
       pToRoom = pRoom->exit[door]->u1.to_room;
-      
+
       if ( pToRoom->exit[rev] )
       {
           free_exit( pToRoom->exit[rev] );
@@ -1235,7 +1235,7 @@ bool change_exit( CHAR_DATA *ch, const char *argument, int door )
 
     pRoom->exit[door]->u1.to_room = get_room_index( value );
     pRoom->exit[door]->orig_door = door;
-    
+
     pRoom                   = get_room_index( value );
     door                    = rev_dir[door];
     pExit                   = new_exit();
@@ -1246,17 +1246,17 @@ bool change_exit( CHAR_DATA *ch, const char *argument, int door )
     stc( "Two-way link established.\n\r", ch );
     return TRUE;
   }
-      
+
   if ( !str_cmp( command, "dig" ) )
   {
       char buf[MAX_STRING_LENGTH];
-      
+
       if ( arg[0] == '\0' || !is_number( arg ) )
       {
           stc( "Syntax: [direction] dig <vnum>\n\r", ch );
           return FALSE;
       }
-      
+
       redit_create( ch, arg );
       do_printf( buf, "link %s", arg );
       change_exit( ch, buf, door);
@@ -1536,7 +1536,7 @@ REDIT( redit_create )
     ROOM_INDEX_DATA *pRoom;
     int64 value;
     int iHash;
-    
+
     EDIT_ROOM(ch, pRoom);
 
     value = atoi64( argument );
@@ -1619,9 +1619,9 @@ REDIT( redit_desc )
 REDIT( redit_heal )
 {
   ROOM_INDEX_DATA *pRoom;
-  
+
   EDIT_ROOM(ch, pRoom);
-  
+
   if (is_number(argument))
      {
         pRoom->heal_rate = atoi ( argument );
@@ -1631,14 +1631,14 @@ REDIT( redit_heal )
 
   stc ( "Syntax : heal <#xnumber>\n\r", ch);
   return FALSE;
-}       
+}
 
 REDIT( redit_mana )
 {
   ROOM_INDEX_DATA *pRoom;
-  
+
   EDIT_ROOM(ch, pRoom);
-  
+
   if (is_number(argument))
      {
         pRoom->mana_rate = atoi ( argument );
@@ -1648,14 +1648,14 @@ REDIT( redit_mana )
 
   stc ( "Syntax : mana <#xnumber>\n\r", ch);
   return FALSE;
-}       
+}
 
 REDIT( redit_delete )
 {
   ROOM_INDEX_DATA *pRoom;
-  
+
   EDIT_ROOM(ch, pRoom);
-  
+
   if (IS_SET(pRoom->room_flags,ROOM_DELETED))
   {
     stc("Комната уже помечена к удалению - ожидайте перезагрузки.\n\r",ch);
@@ -1664,14 +1664,14 @@ REDIT( redit_delete )
   SET_BIT(pRoom->room_flags,ROOM_DELETED);
   stc("Комната помечена к удалению\n\r",ch);
   return TRUE;
-}       
+}
 
 REDIT( redit_undelete )
 {
   ROOM_INDEX_DATA *pRoom;
-  
+
   EDIT_ROOM(ch, pRoom);
-  
+
   if (!IS_SET(pRoom->room_flags,ROOM_DELETED))
   {
     stc("Комната не помечена к удалению - нечего восстанавливать.\n\r",ch);
@@ -1680,7 +1680,7 @@ REDIT( redit_undelete )
   REM_BIT(pRoom->room_flags,ROOM_DELETED);
   stc("Пометка к удалению убрана\n\r",ch);
   return TRUE;
-}       
+}
 
 REDIT( redit_format )
 {
@@ -1999,7 +1999,7 @@ void show_obj_values( CHAR_DATA *ch, OBJ_INDEX_DATA *obj )
   {
       default:
           break;
-          
+
       case ITEM_LIGHT:
           if ( obj->value[2] == 998 )
               do_printf( buf, "[v2] Light:  Infinite[998]\n\r" );
@@ -2035,8 +2035,8 @@ void show_obj_values( CHAR_DATA *ch, OBJ_INDEX_DATA *obj )
               obj->value[3] );
           stc( buf, ch);
           break;
-          
-      case ITEM_FURNITURE:          
+
+      case ITEM_FURNITURE:
           do_printf( buf,
               "[v0] Max people:      [%u]\n\r"
               "[v1] Max weight:      [%u]\n\r"
@@ -2137,7 +2137,7 @@ void show_obj_values( CHAR_DATA *ch, OBJ_INDEX_DATA *obj )
               liq_table[obj->value[2]].liq_name,
               liq_table[obj->value[2]].liq_showname );
           break;
-              
+
       case ITEM_FOOD:
           ptc(ch,
               "[v0] Food hours: [%u]\n\r"
@@ -2159,7 +2159,7 @@ void show_obj_values( CHAR_DATA *ch, OBJ_INDEX_DATA *obj )
       case ITEM_BONUS:
         if (obj->value[0]==SCROLL_QUENIA)
          ptc (ch,"[v0] Type:    [%2u]\n\r[v1] Word:    [%s]\n\r[v2] quantity:[%u]\n\r",
-           obj->value[0],quenia_table[obj->value[1]].descr,obj->value[2]); 
+           obj->value[0],quenia_table[obj->value[1]].descr,obj->value[2]);
         else if (obj->value[0]==SCROLL_CLANSKILL)
          ptc (ch,"[v0] Type:    [%2u]\n\r[v1] Skill:   [%s]\n\r[v2] ticks   :[%u]\n\r",
            obj->value[0],skill_table[obj->value[1]].name,obj->value[2]);
@@ -2173,7 +2173,7 @@ bool set_obj_values( CHAR_DATA *ch, OBJ_INDEX_DATA *pObj, int value_num, const c
   {
     default:
       break;
-        
+
     case ITEM_LIGHT:
       switch ( value_num )
       {
@@ -2349,7 +2349,7 @@ bool set_obj_values( CHAR_DATA *ch, OBJ_INDEX_DATA *pObj, int value_num, const c
       switch ( value_num )
       {
         int64 value;
-            
+
         default:
           do_help( ch, "ITEM_CONTAINER" );
           return FALSE;
@@ -2783,7 +2783,7 @@ OEDIT( oedit_long )
       stc( "Syntax:  long [string]\n\r", ch );
       return FALSE;
   }
-      
+
   free_string( pObj->description );
   pObj->description = str_dup( argument );
   ((char*)pObj->description)[0] = UPPER( pObj->description[0] );
@@ -2918,11 +2918,11 @@ OEDIT( oedit_create )
       stc( "OEdit:  Object vnum already exists.\n\r", ch );
       return FALSE;
   }
-      
+
   pObj                        = new_obj_index();
   pObj->vnum                  = value;
   pObj->area                  = pArea;
-      
+
   if ( value > top_vnum_obj )
       top_vnum_obj = value;
 
@@ -3149,7 +3149,7 @@ OEDIT( oedit_durability )
   OBJ_INDEX_DATA *pObj;
   int value;
 
-  if ( argument[0] != '\0' && ( value = atoi (argument) ) != 0 
+  if ( argument[0] != '\0' && ( value = atoi (argument) ) != 0
   && value >= -1 && value <= 1000 )
   {
       EDIT_OBJ( ch, pObj );
@@ -3171,8 +3171,8 @@ OEDIT( oedit_condition )
   OBJ_INDEX_DATA *pObj;
   int value;
 
-  if ( argument[0] != '\0' 
-  && ( value = atoi (argument ) ) >= 0 
+  if ( argument[0] != '\0'
+  && ( value = atoi (argument ) ) >= 0
   && ( value <= 1000 ) )
   {
       EDIT_OBJ( ch, pObj );
@@ -3205,7 +3205,7 @@ OEDIT( oedit_material )
   if( (pObj->material = str_dup( material_lookup(argument)) ) == NULL )
    pObj->material = material_table[MATERIAL_NONE].name;
 
-  if( str_cmp( get_obj_cond( (OBJ_DATA *)pObj, 0), SHOW_COND_ETERNAL) 
+  if( str_cmp( get_obj_cond( (OBJ_DATA *)pObj, 0), SHOW_COND_ETERNAL)
    || pObj->durability != -1 );
   pObj->condition = pObj->durability = material_table[material_num(pObj->material)].d_dam;
 
@@ -3252,9 +3252,9 @@ MEDIT( medit_show )
    !pMob->area ? "No Area" : pMob->area->name);
 
   ptc(ch, "Race [{G%s{x]   Sex: [{G%s{x]\n\r",
-      race_table[pMob->race].name, 
+      race_table[pMob->race].name,
       pMob->sex == SEX_MALE    ? "male"   :
-      pMob->sex == SEX_FEMALE  ? "female" : 
+      pMob->sex == SEX_FEMALE  ? "female" :
       pMob->sex == 3           ? "random" : "neutral" );
 
   ptc(ch,"{GHit dice:{x    [%6dd%-5d+%6d]\n\r",
@@ -3389,9 +3389,9 @@ MEDIT( medit_create )
   pMob                        = new_mob_index();
   pMob->vnum                  = value;
   pMob->area                  = pArea;
-      
+
   if ( value > top_vnum_mob )
-      top_vnum_mob = value;        
+      top_vnum_mob = value;
 
   pMob->act                   = ACT_IS_NPC;
   iHash                       = (int)value % MAX_KEY_HASH;
@@ -3686,7 +3686,7 @@ MEDIT( medit_shop )
       SHOP_DATA *pShop_next;
       int value;
       int cnt = 0;
-      
+
       if ( arg1[0] == '\0' || !is_number( arg1 ) )
       {
           stc( "Syntax:  shop delete [#x0-4]\n\r", ch );
@@ -3694,7 +3694,7 @@ MEDIT( medit_shop )
       }
 
       value = atoi( argument );
-      
+
       if ( !pMob->pShop )
       {
           stc( "REdit:  Non-existant shop.\n\r", ch );
@@ -3845,7 +3845,7 @@ MEDIT( medit_ac )
       pMob->ac[AC_BASH]   = bash;
       pMob->ac[AC_SLASH]  = slash;
       pMob->ac[AC_EXOTIC] = exotic;
-      
+
       stc( "Ac set.\n\r", ch );
       return TRUE;
   } while ( FALSE );    /* Just do it once.. */
@@ -4017,7 +4017,7 @@ MEDIT( medit_hitdice )
   if ( *cp != '\0' ) *cp = '\0';
 
   if ( ( !is_number( num   ) || atoi( num   ) < 1 )
-  ||   ( !is_number( type  ) || atoi( type  ) < 1 ) 
+  ||   ( !is_number( type  ) || atoi( type  ) < 1 )
   ||   ( !is_number( bonus ) || atoi( bonus ) < 0 ) )
   {
       stc( syntax, ch );
@@ -4069,7 +4069,7 @@ MEDIT( medit_manadice )
   }
 
   if ( ( !is_number( num   ) || atoi( num   ) < 1 )
-  ||   ( !is_number( type  ) || atoi( type  ) < 1 ) 
+  ||   ( !is_number( type  ) || atoi( type  ) < 1 )
   ||   ( !is_number( bonus ) || atoi( bonus ) < 0 ) )
   {
       stc( syntax, ch );
@@ -4121,7 +4121,7 @@ MEDIT( medit_damdice )
   }
 
   if ( ( !is_number( num   ) || atoi( num   ) < 1 )
-  ||   ( !is_number( type  ) || atoi( type  ) < 1 ) 
+  ||   ( !is_number( type  ) || atoi( type  ) < 1 )
   ||   ( !is_number( bonus ) || atoi( bonus ) < 0 ) )
   {
       stc( syntax, ch );
@@ -4368,10 +4368,10 @@ OEDIT( oedit_liqlist )
   int liq;
   BUFFER *buffer;
   char buf[MAX_STRING_LENGTH];
-  
+
   buffer = new_buf();
   do_printf(buf,"Name       ShowName          Color          Proof Full Thirst Food Ssize\n\r");
-  
+
   for ( liq = 0; liq_table[liq].liq_name; liq++)
   {
     do_printf(buf, "%-20s %-35s %-20s %5d %4d %6d %4d %5d\n\r",

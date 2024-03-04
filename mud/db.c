@@ -66,7 +66,7 @@ struct magic {
                                 }
 
 #if !defined(OLD_RAND)
-#ifdef  WIN32 
+#ifdef  WIN32
 #define random() rand()
 #define srandom( x ) srand( x )
 #else
@@ -94,13 +94,13 @@ NEWS_DATA *       news_free;
 VOTE_DATA *       vote_free;
 
 // For debugging and counting memory leaks
-int cnt_char;  
+int cnt_char;
 int cnt_pcdata;
-int cnt_descr; 
-int cnt_obj;   
-int cnt_aff;   
-int cnt_raff;  
-int cnt_buff;  
+int cnt_descr;
+int cnt_obj;
+int cnt_aff;
+int cnt_raff;
+int cnt_buff;
 
 char              bug_buf         [2*MAX_STRING_LENGTH];
 CHAR_DATA *       char_list;
@@ -250,12 +250,12 @@ void init_mm( )
 #if defined (OLD_RAND)
   int *piState;
   int iState;
- 
+
   piState     = &rgiState[2];
- 
+
   piState[-2] = 55 - 55;
   piState[-1] = 55 - 24;
- 
+
   piState[0]  = ((int) current_time) & ((1 << 30) - 1);
   piState[1]  = 1;
   for ( iState = 2; iState < 55; iState++ )
@@ -324,7 +324,7 @@ void load_config()
           fread_to_eol(fp);
         }
         break;
-        
+
       case 'B':
         KEYS( "BD0", bdmsg[0],fread_string(fp));
         KEYS( "BD1", bdmsg[1],fread_string(fp));
@@ -610,7 +610,7 @@ void load_clans()
         fMatch = TRUE;
         clans++;
         break;
-  
+
       case 'A':
         KEYS( "AcceptAlli", clan->acceptalli,fread_string(fp));
         if (!str_cmp (word, "Affc"))
@@ -655,14 +655,14 @@ void load_clans()
         break;
 
       case 'F':
-        KEY("Flag", clan->flag, fread_flag64( fp ) ); 
+        KEY("Flag", clan->flag, fread_flag64( fp ) );
         break;
 
       case 'I':
         if (!str_cmp(word, "Independent"))
         {
           fread_to_eol(fp);
-          SET_BIT(clan->flag,CLAN_LONER); 
+          SET_BIT(clan->flag,CLAN_LONER);
           fMatch=TRUE;
         }
         break;
@@ -744,28 +744,28 @@ void random_apply( OBJ_DATA *obj, CHAR_DATA *mob )
 }
 
 // Jewelry stuff
-char  const *cond1[] = 
-  { "сверкающ|ий|его|ему|ий|им|ем|их|их",                       
-    "древн|ий|его|ему|ий|им|ем|их|их", 
+char  const *cond1[] =
+  { "сверкающ|ий|его|ему|ий|им|ем|их|их",
+    "древн|ий|его|ему|ий|им|ем|их|их",
     "дымнчат|ый|ого|ому|ый|ым|ом|ых|ых",
     "темн|ый|ого|ому|ый|ым|ом|ых|ых",
-    "переливающ|ийся|егося|емуся|ийся|имся|емся|ихся|ихся", 
-    "пылающ|ий|его|ему|ий|им|ем|их|их", 
-    "искрящ|ийся|егося|емуся|ийся|имся|емся|ихся|ихся", 
-    "светящ|ийся|егося|емуся|ийся|имся|емся|ихся|ихся", 
-    "светл|ый|ого|ому|ый|ым|ом|ых|ых", 
+    "переливающ|ийся|егося|емуся|ийся|имся|емся|ихся|ихся",
+    "пылающ|ий|его|ему|ий|им|ем|их|их",
+    "искрящ|ийся|егося|емуся|ийся|имся|емся|ихся|ихся",
+    "светящ|ийся|егося|емуся|ийся|имся|емся|ихся|ихся",
+    "светл|ый|ого|ому|ый|ым|ом|ых|ых",
     "гудящ|ий|его|ему|ий|им|ем|их|их",
     "мерцающ|ий|его|ему|ий|им|ем|их|их" };
 
 char  const *cond2[] =
-  { "бурлящ|ий|его|ему|ий|им|ем|их|их", 
-    "зловонн|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "мутн|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "кипящ|ий|его|ему|ий|им|ем|их|их",                     
-    "пузырящ|ийся|егося|емуся|ийся|имся|емся|ихся|ихся", 
-    "прозрачн|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "кристально чист|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "густ|ой|ого|ому|ой|ым|ом|ых|ых", 
+  { "бурлящ|ий|его|ему|ий|им|ем|их|их",
+    "зловонн|ый|ого|ому|ый|ым|ом|ых|ых",
+    "мутн|ый|ого|ому|ый|ым|ом|ых|ых",
+    "кипящ|ий|его|ему|ий|им|ем|их|их",
+    "пузырящ|ийся|егося|емуся|ийся|имся|емся|ихся|ихся",
+    "прозрачн|ый|ого|ому|ый|ым|ом|ых|ых",
+    "кристально чист|ый|ого|ому|ый|ым|ом|ых|ых",
+    "густ|ой|ого|ому|ой|ым|ом|ых|ых",
     "гудящ|ий|его|ему|ий|им|ем|их|их"};
 
 char  const *cond3[] =
@@ -787,27 +787,27 @@ char  const *cond4[] =
     "обожженн|ый|ого|ому|ый|ым|ом|ых|ых",
     "перемолот|ый|ого|ому|ый|ым|ом|ых|ых",
     "полусгнивш|ий|ого|ому|ий|им|ем|их|их",
-    "мягкий|ий|его|ему|ий|им|ем|их|их", 
+    "мягкий|ий|его|ему|ий|им|ем|их|их",
     "тверд|ый|ого|ому|ый|ым|ом|ых|ых"};
 
 static char *cond5[] =
-  { "остр|ый|ого|ому|ый|ым|ом|ых|ых ", 
-    "гладк|ый|ого|ому|ый|ым|ом|ых|ых ",  
+  { "остр|ый|ого|ому|ый|ым|ом|ых|ых ",
+    "гладк|ый|ого|ому|ый|ым|ом|ых|ых ",
     "стар|ый|ого|ому|ый|ым|ом|ых|ых ",
-    "ржав|ый|ого|ому|ый|ым|ом|ых|ых ", 
-    "нов|ый|ого|ому|ый|ым|ом|ых|ых ", 
+    "ржав|ый|ого|ому|ый|ым|ом|ых|ых ",
+    "нов|ый|ого|ому|ый|ым|ом|ых|ых ",
     "крив|ой|ого|ому|ой|ым|ом|ых|ых ",
     "",""};
 
-static char *material1[] = 
-  { "золот|ой|ого|ому|ой|ым|ом|ых|ых",  
-    "топазов|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "рубинов|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "платинов|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "ониксов|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "стеклянн|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "мифрилов|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "серебрянн|ый|ого|ому|ый|ым|ом|ых|ых", 
+static char *material1[] =
+  { "золот|ой|ого|ому|ой|ым|ом|ых|ых",
+    "топазов|ый|ого|ому|ый|ым|ом|ых|ых",
+    "рубинов|ый|ого|ому|ый|ым|ом|ых|ых",
+    "платинов|ый|ого|ому|ый|ым|ом|ых|ых",
+    "ониксов|ый|ого|ому|ый|ым|ом|ых|ых",
+    "стеклянн|ый|ого|ому|ый|ым|ом|ых|ых",
+    "мифрилов|ый|ого|ому|ый|ым|ом|ых|ых",
+    "серебрянн|ый|ого|ому|ый|ым|ом|ых|ых",
     "гранитн|ый|ого|ому|ый|ым|ом|ых|ых",
     "бронзов|ый|ого|ому|ый|ым|ом|ых|ых",
     "медн|ый|ого|ому|ый|ым|ом|ых|ых",
@@ -816,35 +816,35 @@ static char *material1[] =
     "опалов|ый|ого|ому|ый|ым|ом|ых|ых"};
 
 static char *material2[] =
-  { "стальн|ой|ого|ому|ой|ым|ом|ых|ых",  
-    "бронзов|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "медн|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "железн|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "деревянн|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "гранитн|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "металлическ|ий|его|ему|ий|им|ем|их|их", 
+  { "стальн|ой|ого|ому|ой|ым|ом|ых|ых",
+    "бронзов|ый|ого|ому|ый|ым|ом|ых|ых",
+    "медн|ый|ого|ому|ый|ым|ом|ых|ых",
+    "железн|ый|ого|ому|ый|ым|ом|ых|ых",
+    "деревянн|ый|ого|ому|ый|ым|ом|ых|ых",
+    "гранитн|ый|ого|ому|ый|ым|ом|ых|ых",
+    "металлическ|ий|его|ему|ий|им|ем|их|их",
     "серебрян|ый|ого|ому|ый|ым|ом|ых|ых",
     "золот|ой|ого|ому|ой|ым|ом|ых|ых"};
 
 
 static char *material3[] =
-  { "кожанн|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "матерчат|ый|ого|ому|ый|ым|ом|ых|ых", 
+  { "кожанн|ый|ого|ому|ый|ым|ом|ых|ых",
+    "матерчат|ый|ого|ому|ый|ым|ом|ых|ых",
     "войлочн|ый|ого|ому|ый|ым|ом|ых|ых",
     "суконн|ый|ого|ому|ый|ым|ом|ых|ых",
     "мехов|ой|ого|ому|ой|ым|ом|ых|ых",
     "подбит|ый|ого|ому|ый|ым|ом|ых|ых мехом"};
 
 static char *material4[] =
-  { "пергаментн|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "кожанн|ый|ого|ому|ый|ым|ом|ых|ых", 
+  { "пергаментн|ый|ого|ому|ый|ым|ом|ых|ых",
+    "кожанн|ый|ого|ому|ый|ым|ом|ых|ых",
     "папирусн|ый|ого|ому|ый|ым|ом|ых|ых",
     "атласн|ый|ого|ому|ый|ым|ом|ых|ых",
     "бумажн|ый|ого|ому|ый|ым|ом|ых|ых"};
 
 static char *material5[] =
-  { "красн|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "коричнев|ый|ого|ому|ый|ым|ом|ых|ых", 
+  { "красн|ый|ого|ому|ый|ым|ом|ых|ых",
+    "коричнев|ый|ого|ому|ый|ым|ом|ых|ых",
     "зелен|ый|ого|ому|ый|ым|ом|ых|ых",
     "оранжев|ый|ого|ому|ый|ым|ом|ых|ых",
     "фиолетов|ый|ого|ому|ый|ым|ом|ых|ых",
@@ -853,84 +853,84 @@ static char *material5[] =
     "черн|ый|ого|ому|ый|ым|ом|ых|ых"};
 
 static char *material6[] =
-  { "кожанн|ый|ого|ому|ый|ым|ом|ых|ых", 
+  { "кожанн|ый|ого|ому|ый|ым|ом|ых|ых",
     "укрепленн|ый|ого|ому|ый|ым|ом|ых|ых кожанн|ый|ого|ому|ый|ым|ом|ых|ых",
     "бронзов|ый|ого|ому|ый|ым|ом|ых|ых",
     "кольчужн|ый|ого|ому|ый|ым|ом|ых|ых",
-    "стальн|ой|ого|ому|ой|ым|ом|ых|ых", 
-    "золот|ой|ого|ому|ой|ым|ом|ых|ых", 
-    "серебрянн|ый|ого|ому|ый|ым|ом|ых|ых", 
-    "кованн|ый|ого|ому|ый|ым|ом|ых|ых", 
+    "стальн|ой|ого|ому|ой|ым|ом|ых|ых",
+    "золот|ой|ого|ому|ой|ым|ом|ых|ых",
+    "серебрянн|ый|ого|ому|ый|ым|ом|ых|ых",
+    "кованн|ый|ого|ому|ый|ым|ом|ых|ых",
     "лит|ой|ого|ому|ой|ым|ом|ых|ых"};
 
 static char *potions[] =
-  { "сосуд||а|у||ом|е|а|ов", 
-    "эликсир||а|у||ом|е|а|ов", 
-    "отвар||а|у||ом|е|а|ов", 
+  { "сосуд||а|у||ом|е|а|ов",
+    "эликсир||а|у||ом|е|а|ов",
+    "отвар||а|у||ом|е|а|ов",
     "насто|й|я|ю|й|ем|е|я|ев" };
 
 static char *pills[] =
-  { "кор|ень|ня|ню|ень|нем|не|ня|ней", 
-    "лист||а|у||ом|е|а|ьев", 
-    "кореш|ок|ка|ку|ок|ком|ке|ка|ков", 
-    "кусоч|ек|ка|ку|ек|ком|ке|ка|ков тины", 
+  { "кор|ень|ня|ню|ень|нем|не|ня|ней",
+    "лист||а|у||ом|е|а|ьев",
+    "кореш|ок|ка|ку|ок|ком|ке|ка|ков",
+    "кусоч|ек|ка|ку|ек|ком|ке|ка|ков тины",
     "облом|ок|ка|ку|ок|ком|ке|ка|ков ветки",
     "обруб|ок|ка|ку|ок|ком|ке|ка|ков дерева",
     "обрыв|ок|ка|ку|ок|ком|ке|ка|ков паутины"};
 
-static char *bags[] = 
-  { "рюкзак||а|у||ом|е|а|ов", 
-    "кошел|ь|я|ю|ь|ем|е|я|ей", 
-    "короб||а|у||ом|е|а|ов", 
+static char *bags[] =
+  { "рюкзак||а|у||ом|е|а|ов",
+    "кошел|ь|я|ю|ь|ем|е|я|ей",
+    "короб||а|у||ом|е|а|ов",
     "чемодан||а|у||ом|е|а|ов"};
 
-static char *weapon_types[] = 
-  { "меч||а|у||ом|е|а|ей", 
-    "серп||а|у||ом|е|а|ов", 
-    "плуг||а|у||ом|е|а|ов", 
-    "топор||а|у||ом|е|а|ов", 
-    "кинжал||а|у||ом|е|а|ов", 
-    "хлыст||а|у||ом|е|а|ов", 
-    "клев|ец|ца|цу|ец|цом|це|ца|цов", 
-    "са|й|я|ю|й|ем|е|я|ев", 
-    "посох||а|у||ом|е|а|ов", 
-    "кнут||а|у||ом|е|а|ов", 
-    "кистен|ь|я|ю|ь|ем|е|я|ей", 
-    "эспадон||а|у||ом|е|а|ов", 
-    "фламберг||а|у||ом|е|а|ов", 
-    "секач||а|у||ом|е|а|ей", 
-    "гладиус||а|у||ом|е|а|ов", 
-    "стилет||а|у||ом|е|а|ов", 
-    "эсток||а|у||ом|е|а|ов", 
-    "шест||а|у||ом|е|а|ов", 
+static char *weapon_types[] =
+  { "меч||а|у||ом|е|а|ей",
+    "серп||а|у||ом|е|а|ов",
+    "плуг||а|у||ом|е|а|ов",
+    "топор||а|у||ом|е|а|ов",
+    "кинжал||а|у||ом|е|а|ов",
+    "хлыст||а|у||ом|е|а|ов",
+    "клев|ец|ца|цу|ец|цом|це|ца|цов",
+    "са|й|я|ю|й|ем|е|я|ев",
+    "посох||а|у||ом|е|а|ов",
+    "кнут||а|у||ом|е|а|ов",
+    "кистен|ь|я|ю|ь|ем|е|я|ей",
+    "эспадон||а|у||ом|е|а|ов",
+    "фламберг||а|у||ом|е|а|ов",
+    "секач||а|у||ом|е|а|ей",
+    "гладиус||а|у||ом|е|а|ов",
+    "стилет||а|у||ом|е|а|ов",
+    "эсток||а|у||ом|е|а|ов",
+    "шест||а|у||ом|е|а|ов",
     "трезуб|ец|ца|цу|ец|цом|це|ца|цев"};
 
 static char *weapon_names[] =
   { "sword random weapon",
-    "sickle random weapon", 
-    "plow random weapon", 
-    "axe random weapon", 
-    "dagger random weapon", 
-    "lash random weapon", 
-    "axe random weapon", 
-    "sai random weapon", 
-    "staff random weapon", 
-    "whip random weapon", 
-    "slung random weapon", 
-    "espadon random weapon", 
-    "flamberg random weapon", 
-    "axe random weapon", 
-    "gladius random weapon", 
-    "stiletto random weapon", 
-    "estok random weapon", 
-    "pole random weapon", 
+    "sickle random weapon",
+    "plow random weapon",
+    "axe random weapon",
+    "dagger random weapon",
+    "lash random weapon",
+    "axe random weapon",
+    "sai random weapon",
+    "staff random weapon",
+    "whip random weapon",
+    "slung random weapon",
+    "espadon random weapon",
+    "flamberg random weapon",
+    "axe random weapon",
+    "gladius random weapon",
+    "stiletto random weapon",
+    "estok random weapon",
+    "pole random weapon",
     "trident random weapon"};
 
 static int weapon_classes[] =
-  { WEAPON_SWORD, WEAPON_EXOTIC, WEAPON_EXOTIC, WEAPON_AXE, 
-    WEAPON_DAGGER, WEAPON_DAGGER, WEAPON_AXE, WEAPON_DAGGER, 
-    WEAPON_SPEAR, WEAPON_WHIP, WEAPON_MACE, WEAPON_SWORD, 
-    WEAPON_SWORD, WEAPON_AXE, WEAPON_SWORD, WEAPON_DAGGER, 
+  { WEAPON_SWORD, WEAPON_EXOTIC, WEAPON_EXOTIC, WEAPON_AXE,
+    WEAPON_DAGGER, WEAPON_DAGGER, WEAPON_AXE, WEAPON_DAGGER,
+    WEAPON_SPEAR, WEAPON_WHIP, WEAPON_MACE, WEAPON_SWORD,
+    WEAPON_SWORD, WEAPON_AXE, WEAPON_SWORD, WEAPON_DAGGER,
     WEAPON_SWORD, WEAPON_SPEAR, WEAPON_POLEARM};
 
 static char *noun[] = { "жезл", "божок", "идол", "череп" };
@@ -972,12 +972,12 @@ void wield_random_magic( CHAR_DATA *mob )
   obj->level = number_fuzzy( mob->level );
   switch (item_type)
   {
-    case 59: 
-     do_printf(buffer, "%s %s свит|ок|ка|ку|ок|ком|ке|ка|ков", 
+    case 59:
+     do_printf(buffer, "%s %s свит|ок|ка|ку|ок|ком|ке|ка|ков",
       cond3[(number_range(0, nelems(cond3)-1))],
       material4[number_range(0, nelems(material4)-1)]);
 
-     obj->value[0] = number_range(obj->level - 5, obj->level +25); 
+     obj->value[0] = number_range(obj->level - 5, obj->level +25);
      obj->value[0] = URANGE(1, obj->value[0], 110);
      obj->value[1] = random_spell((int)obj->value[0],
       MASK_IGNORE|MASK_OFFENSIVE|MASK_DEFENSIVE|MASK_SELF, &type);
@@ -990,7 +990,7 @@ void wield_random_magic( CHAR_DATA *mob )
 
      break;
    case 60: /* wand */
-     do_printf(buffer, "%s %s жезл||а|у||ом|е|а|ов", 
+     do_printf(buffer, "%s %s жезл||а|у||ом|е|а|ов",
       cond1[number_range(0, (nelems(cond1)-1))],
       material1[number_range(0, (nelems(material1)-1))]);
 
@@ -998,7 +998,7 @@ void wield_random_magic( CHAR_DATA *mob )
      obj->value[0] = URANGE(1, obj->value[0], 110);
      obj->value[1] = number_fuzzy((int)obj->level / 2 + 3); /* max charges */
      obj->value[2] = number_range(1, (int)obj->value[1]);   /* charges left */
-     obj->value[3] = random_spell((int)obj->value[0], 
+     obj->value[3] = random_spell((int)obj->value[0],
       MASK_IGNORE|MASK_OFFENSIVE|MASK_DEFENSIVE|MASK_SELF, &type);
      break;
 
@@ -1014,7 +1014,7 @@ void wield_random_magic( CHAR_DATA *mob )
       MASK_IGNORE|MASK_OFFENSIVE|MASK_DEFENSIVE|MASK_SELF, &type);
      break;
    case 62: /* potion */
-     do_printf(buffer, "%s %s %s", 
+     do_printf(buffer, "%s %s %s",
       cond2[number_range(0, (nelems(cond2)-1))],
       material5[number_range(0, (nelems(material5)-1))],
       potions[number_range(0, nelems(potions)-1)]);
@@ -1030,7 +1030,7 @@ void wield_random_magic( CHAR_DATA *mob )
      break;
 
    case 63: /* pill */
-     do_printf(buffer, "%s %s", 
+     do_printf(buffer, "%s %s",
       cond4[number_range(0, (nelems(cond4)-1))],
       pills[number_range(0, nelems(pills)-1)]);
      obj->value[0] = number_range(obj->level / 2+1, obj->level * 3 / 2+1); /* level */
@@ -1077,7 +1077,7 @@ void wield_random_armor( CHAR_DATA *mob )
   char buffer[64];
 
   char buf[MAX_STRING_LENGTH];
-  
+
   if (!obj) return;
   obj->level = number_fuzzy( mob->level );
   if (obj->item_type == ITEM_ARMOR)
@@ -1448,14 +1448,14 @@ void load_rooms( FILE *fp )
       if ( letter == 'S' ) break;
 
       if ( letter == 'H') pRoomIndex->heal_rate = fread_number(fp);
-        
+
       else if ( letter == 'M') pRoomIndex->mana_rate = fread_number(fp);
 
       else if ( letter == 'C') /* clan */
       {
         fread_string(fp); /* was clan rooms */
       }
-        
+
       else if ( letter == 'D' )
       {
         EXIT_DATA *pexit;
@@ -1480,7 +1480,7 @@ void load_rooms( FILE *fp )
 
         switch ( locks )
         {
- case 1: pexit->exit_info = EX_ISDOOR;               
+ case 1: pexit->exit_info = EX_ISDOOR;
          pexit->rs_flags  = EX_ISDOOR;
          break;
  case 2: pexit->exit_info = EX_ISDOOR|EX_PICKPROOF;
@@ -1638,7 +1638,7 @@ void fix_exits( void )
            pexit->u1.to_room = NULL;
           else
           {
-            fexit = TRUE; 
+            fexit = TRUE;
             pexit->u1.to_room = get_room_index( pexit->u1.vnum );
           }
         }
@@ -1682,7 +1682,7 @@ void area_update( void )
       reset_area( pArea );
       do_printf(buf,"%s has just been reset.",pArea->name);
       wiznet(buf,NULL,NULL,WIZ_RESETS,0);
-        
+
       pArea->age = number_range( 0, 3 );
       pRoomIndex = get_room_index( ROOM_VNUM_SCHOOL );
       if ( pRoomIndex != NULL && pArea == pRoomIndex->area ) pArea->age = 15 - 2;
@@ -1692,11 +1692,11 @@ void area_update( void )
 }
 
 int   is_random_obj_in_room(ROOM_INDEX_DATA *pRoom)
-{       
+{
     int v;
     CHAR_DATA *ch;
     OBJ_DATA *o;
-    
+
     v=0;
     for ( ch = pRoom->people; ch; ch = ch->next_in_room )
     {
@@ -1706,7 +1706,7 @@ int   is_random_obj_in_room(ROOM_INDEX_DATA *pRoom)
                 if ( o->pIndexData->vnum == RANDOM_VNUM ) v++;
         }
     }
-    
+
     return v;
 }
 
@@ -1727,11 +1727,11 @@ void reset_room( ROOM_INDEX_DATA *pRoom )
 
   pMob        = NULL;
   last        = FALSE;
-    
+
   for ( iExit = 0;  iExit < MAX_DIR;  iExit++ )
   {
     EXIT_DATA *pExit;
-    if ( ( pExit = pRoom->exit[iExit] ))  
+    if ( ( pExit = pRoom->exit[iExit] ))
     {
       pExit->exit_info = pExit->rs_flags;
       if ( ( pExit->u1.to_room != NULL )
@@ -1914,7 +1914,7 @@ void reset_room( ROOM_INDEX_DATA *pRoom )
                   }
                 }
               }
-                   
+
               olevel = UMAX(0,(olevel * 3 / 4) - 2);
               break;
             case ITEM_WAND:         olevel = number_range( 10, 20 ); break;
@@ -1951,7 +1951,7 @@ void reset_room( ROOM_INDEX_DATA *pRoom )
           }
           else break;
         }
-                                                                         
+
       #if 0 /* envy else version */
       else
       {
@@ -2003,9 +2003,9 @@ void  reset_random_items( AREA_DATA *pA, int nroom )
   if (!IS_SET(global_cfg,CFG_RANDOM)) return;
   n1=number_range(0,URANGE(1,nroom-2,1000));
   cntr=0;
-    
+
   if ( pA->clan && !pA->clan[0] ) return;
-    
+
   for ( vnum = pA->min_vnum; vnum < pA->max_vnum; vnum++ )
   {
     pRoom = get_room_index(vnum);
@@ -2017,7 +2017,7 @@ void  reset_random_items( AREA_DATA *pA, int nroom )
         {
           ch=pRoom->people;
           if (!IS_NPC(ch)) continue;
-                    
+
           if((o=create_random_item(number_range( URANGE(0,ch->pIndexData->level-5,101), URANGE(0,ch->pIndexData->level+5,100)+1 ))))
            obj_to_char(o,ch);
           //return;
@@ -2048,7 +2048,7 @@ void reset_area( AREA_DATA *pArea )
         nroom++;
     }
   }
-  
+
   if ( pArea->nrandom < 3 )
   reset_random_items(pArea,nroom);
 }
@@ -2060,7 +2060,7 @@ void fix_mobprogs( void )
   MPROG_LIST        *list;
   MPROG_CODE        *prog;
   int iHash;
- 
+
   for ( iHash = 0; iHash < MAX_KEY_HASH; iHash++ )
   {
     for ( pMobIndex   = mob_index_hash[iHash];
@@ -2117,7 +2117,7 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex )
     wealth = number_range(pMobIndex->wealth/2, pMobIndex->wealth);
     mob->gold = number_range(wealth/200,wealth/100);
     mob->silver = wealth - (mob->gold * 100);
-  } 
+  }
   else mob->silver=mob->gold=0;
 
   mob->group       = pMobIndex->group;
@@ -2147,7 +2147,7 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex )
       case (3): mob->dam_type = 11; break;  /* pierce */
     }
   for (i = 0; i < 4; i++)
-    mob->armor[i]   = pMobIndex->ac[i]; 
+    mob->armor[i]   = pMobIndex->ac[i];
   mob->off_flags   = pMobIndex->off_flags;
   mob->imm_flags   = pMobIndex->imm_flags;
   mob->res_flags   = pMobIndex->res_flags;
@@ -2163,38 +2163,38 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex )
   // computed on the spot
   for (i = 0; i < MAX_STATS; i ++)
     mob->perm_stat[i] = UMIN(25,11 + mob->level/4);
-          
+
   if (IS_SET(mob->act,ACT_WARRIOR))
   {
     mob->perm_stat[STAT_STR] += 3;
     mob->perm_stat[STAT_INT] -= 1;
     mob->perm_stat[STAT_CON] += 2;
   }
-      
+
   if (IS_SET(mob->act,ACT_THIEF))
   {
     mob->perm_stat[STAT_DEX] += 3;
     mob->perm_stat[STAT_INT] += 1;
     mob->perm_stat[STAT_WIS] -= 1;
   }
-      
+
   if (IS_SET(mob->act,ACT_CLERIC))
   {
     mob->perm_stat[STAT_WIS] += 3;
     mob->perm_stat[STAT_DEX] -= 1;
     mob->perm_stat[STAT_STR] += 1;
   }
-      
+
   if (IS_SET(mob->act,ACT_MAGE))
   {
     mob->perm_stat[STAT_INT] += 3;
     mob->perm_stat[STAT_STR] -= 1;
     mob->perm_stat[STAT_DEX] += 1;
   }
-      
+
   if (IS_SET(mob->off_flags,OFF_FAST))
     mob->perm_stat[STAT_DEX] += 2;
-          
+
   mob->perm_stat[STAT_STR] += mob->size - SIZE_MEDIUM;
   mob->perm_stat[STAT_CON] += (mob->size - SIZE_MEDIUM) / 2;
 
@@ -2218,7 +2218,7 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex )
     af.level     = mob->level;
     af.duration  = -1;
     af.location  = APPLY_DEX;
-    af.modifier  = 1 + (mob->level >= 18) + (mob->level >= 25) + 
+    af.modifier  = 1 + (mob->level >= 18) + (mob->level >= 25) +
                        (mob->level >= 32);
     af.bitvector = AFF_HASTE;
     affect_to_char( mob, &af );
@@ -2262,8 +2262,8 @@ void clone_mobile(CHAR_DATA *parent, CHAR_DATA *clone)
   AFFECT_DATA *paf;
 
   if ( parent == NULL || clone == NULL || !IS_NPC(parent)) return;
-    
-  /* start fixing values */ 
+
+  /* start fixing values */
   clone->name         = str_dup(parent->name);
   clone->version      = parent->version;
   clone->short_descr  = str_dup(parent->short_descr);
@@ -2311,7 +2311,7 @@ void clone_mobile(CHAR_DATA *parent, CHAR_DATA *clone)
   clone->start_pos    = parent->start_pos;
   clone->default_pos  = parent->default_pos;
   clone->spec_fun     = parent->spec_fun;
-  
+
   for (i = 0; i < 4; i++) clone->armor[i] = parent->armor[i];
 
   for (i = 0; i < MAX_STATS; i++)
@@ -2444,10 +2444,10 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
       if (!pObjIndex->new_format) obj->value[0] = obj->cost;
       break;
   }
-  
-  for (paf = pObjIndex->affected; paf != NULL; paf = paf->next) 
+
+  for (paf = pObjIndex->affected; paf != NULL; paf = paf->next)
     if ( paf->location == APPLY_SPELL_AFFECT ) affect_to_obj(obj,paf);
-  
+
   obj->next           = object_list;
   object_list         = obj;
   pObjIndex->count++;
@@ -2483,8 +2483,8 @@ void clone_object(OBJ_DATA *parent, OBJ_DATA *clone)
 
   /* affects */
   clone->enchanted    = parent->enchanted;
-  
-  for (paf = parent->affected; paf != NULL; paf = paf->next) 
+
+  for (paf = parent->affected; paf != NULL; paf = paf->next)
     affect_to_obj(clone,paf);
 
   /* extended desc */
@@ -2502,22 +2502,22 @@ void clone_object(OBJ_DATA *parent, OBJ_DATA *clone)
 void load_mobprogs( FILE *fp )
 {
   MPROG_CODE *pMprog;
- 
+
   for ( ; ; )
   {
     int vnum;
     char letter;
- 
+
     letter = fread_letter( fp );
     if ( letter != '#' )
     {
       bug( "Load_mobprogs: # not found.", 0 );
       exit( 1 );
     }
- 
+
     vnum = fread_number( fp );
     if ( vnum == 0 ) break;
- 
+
     fBootDb = FALSE;
     if ( get_mprog_index( vnum ) != NULL )
     {
@@ -2525,7 +2525,7 @@ void load_mobprogs( FILE *fp )
       exit( 1 );
     }
     fBootDb = TRUE;
- 
+
     pMprog          = alloc_perm( sizeof(*pMprog) );
     pMprog->vnum    = vnum;
     pMprog->code    = fread_string( fp );
@@ -2547,7 +2547,7 @@ MPROG_CODE *get_mprog_index( int vnum )
     if ( prg->vnum == vnum ) return( prg );
   }
   return NULL;
-}    
+}
 
 /* Clear a new character. */
 void clear_char( CHAR_DATA *ch )
@@ -2574,7 +2574,7 @@ void clear_char( CHAR_DATA *ch )
   ch->on           = NULL;
   for (i = 0; i < MAX_STATS; i ++)
   {
-    ch->perm_stat[i] = 13; 
+    ch->perm_stat[i] = 13;
     ch->mod_stat[i] = 0;
   }
 }
@@ -2813,7 +2813,7 @@ long flag_convert(char letter )
   long bitsum = 0;
   char i;
 
-  if ('A' <= letter && letter <= 'Z') 
+  if ('A' <= letter && letter <= 'Z')
   {
     bitsum = 1;
     for (i = letter; i > 'A'; i--) bitsum *= 2;
@@ -2872,7 +2872,7 @@ const char *fread_string( FILE *fp )
   if ( ( *plast++ = c ) == '~' ) return &str_empty[0];
 
   for ( ;; )
-  { 
+  {
     /* Back off the char type lookup, it was too dirty for portability.
      *   -- Furey */
     *plast=chy=getc(fp);
@@ -2944,21 +2944,21 @@ const char *fread_string_eol( FILE *fp )
   static bool char_special[256-EOF];
   char *plast;
   char c;
- 
+
   if ( char_special[EOF-EOF] != TRUE )
   {
     char_special[EOF -  EOF] = TRUE;
     char_special['\n' - EOF] = TRUE;
     char_special['\r' - EOF] = TRUE;
   }
- 
+
   plast = top_string + sizeof(char *);
   if ( plast > &string_space[MAX_STRING - MAX_STRING_LENGTH] )
   {
     bug( "Fread_string: MAX_STRING %d exceeded.", MAX_STRING );
     exit (1);//return NULL;
   }
- 
+
   /* Skip blanks.
    * Read first char. */
   do
@@ -2966,13 +2966,13 @@ const char *fread_string_eol( FILE *fp )
     c = getc( fp );
   }
   while ( isspace(c) );
- 
+
   if ( ( *plast++ = c ) == '\n') return &str_empty[0];
- 
+
   for ( ;; )
   {
     if ( !char_special[ ( *plast++ = getc( fp ) ) - EOF ] ) continue;
- 
+
     switch ( plast[-1] )
     {
       default:
@@ -2993,7 +2993,7 @@ const char *fread_string_eol( FILE *fp )
           char *pHash;
           char *pHashPrev;
           char *pString;
- 
+
           plast[-1] = '\0';
           iHash     = UMIN( MAX_KEY_HASH - 1, plast - 1 - top_string );
           for ( pHash = string_hash[iHash]; pHash; pHash = pHashPrev )
@@ -3002,12 +3002,12 @@ const char *fread_string_eol( FILE *fp )
              u1.rgc[ic] = pHash[ic];
             pHashPrev = u1.pc;
             pHash    += sizeof(char *);
- 
+
             if ( top_string[sizeof(char *)] == pHash[0]
              &&   !strcmp( top_string+sizeof(char *)+1, pHash+1 ) )
              return pHash;
           }
- 
+
           if ( fBootDb )
           {
             pString             = top_string;
@@ -3015,7 +3015,7 @@ const char *fread_string_eol( FILE *fp )
             u1.pc               = string_hash[iHash];
             for ( ic = 0; ic < sizeof(char *); ic++ ) pString[ic] = u1.rgc[ic];
             string_hash[iHash]  = pString;
- 
+
             nAllocString += 1;
             sAllocString += top_string - pString;
             return pString + sizeof(char *);
@@ -3060,7 +3060,7 @@ const char *fread_word( FILE *fp )
 
   do { cEnd = getc( fp );}
   while ( isspace( cEnd ) );
-  
+
   pos = ftell ( fp );
 
   if ( cEnd == '\'' || cEnd == '"' )
@@ -3154,7 +3154,7 @@ void free_mem( void *pMem, int sMem )
 
 #ifdef MAGIC_CHECKING
   pMem -= sizeof(struct magic); // non-unix: MAGIC (pMem) --;
-  
+
   if (MAGIC (pMem)->cookie != MAGIC_COOKIE)
   {
     snprintf (tmp, sizeof(tmp), "Attempt to recycle invalid memory: %s", MAGIC (pMem)->data); // non-unix printf
@@ -3167,7 +3167,7 @@ void free_mem( void *pMem, int sMem )
     bug (tmp, 0);
     sMem = MAGIC (pMem)->size;
   }
- 
+
   MAGIC (pMem)->cookie = 0;
   sMem += sizeof (struct magic);
 #endif
@@ -3182,7 +3182,7 @@ void free_mem( void *pMem, int sMem )
 
   * ((void **) pMem) = rgFreeList[iList];
   rgFreeList[iList]  = pMem;
-    
+
   allocated-=sMem;
 }
 
@@ -3319,24 +3319,24 @@ void do_memory( CHAR_DATA *ch, char *argument )
 
      ptc(ch,"Данные далеко не полные, только примерные.Sab.\n\r");
      ptc(ch,"Sizes of structures:\n\r");
-     ptc(ch,"GQ_DATA          %6d     OBJ_DATA         %d\n\r",sizeof(GQ_DATA),sizeof(OBJ_DATA));          
-     ptc(ch,"AFFECT_DATA      %6d     OBJ_INDEX_DATA   %d\n\r",sizeof(AFFECT_DATA),sizeof(OBJ_INDEX_DATA));    
-     ptc(ch,"VOTE_DATA        %6d     VICTIM_DATA      %d\n\r",sizeof(VOTE_DATA),sizeof(VICTIM_DATA));       
-     ptc(ch,"OFFER_DATA       %6d     PC_DATA          %d\n\r",sizeof(OFFER_DATA),sizeof(PC_DATA));           
-     ptc(ch,"VOTE_CHAR        %6d     GEN_DATA         %d\n\r",sizeof(VOTE_CHAR),sizeof(GEN_DATA));          
-     ptc(ch,"PENALTY_DATA     %6d     RESET_DATA       %d\n\r",sizeof(PENALTY_DATA),sizeof(RESET_DATA));        
-     ptc(ch,"AREA_DATA        %6d     ROOM_INDEX_DATA  %d\n\r",sizeof(AREA_DATA),sizeof(ROOM_INDEX_DATA));   
-     ptc(ch,"BAN_DATA         %6d     SHOP_DATA        %d\n\r",sizeof(BAN_DATA),sizeof(SHOP_DATA));         
-     ptc(ch,"BUFFER           %6d     TIME_INFO_DATA   %d\n\r",sizeof(BUFFER),sizeof(TIME_INFO_DATA));    
-     ptc(ch,"CHAR_DATA        %6d     WEATHER_DATA     %d\n\r",sizeof(CHAR_DATA),sizeof(WEATHER_DATA));      
-     ptc(ch,"DESCRIPTOR_DATA  %6d     MPROG_LIST       %d\n\r",sizeof(DESCRIPTOR_DATA),sizeof(MPROG_LIST));        
-     ptc(ch,"EXIT_DATA        %6d     MPROG_CODE       %d\n\r",sizeof(EXIT_DATA),sizeof(MPROG_CODE));        
-     ptc(ch,"EXTRA_DESCR_DATA %6d     CLAN_DATA        %d\n\r",sizeof(EXTRA_DESCR_DATA),sizeof(CLAN_DATA));         
-     ptc(ch,"HELP_DATA        %6d     TOURNAMENT_DATA  %d\n\r",sizeof(HELP_DATA),sizeof(TOURNAMENT_DATA));   
-     ptc(ch,"KILL_DATA        %6d     BET_DATA         %d\n\r",sizeof(KILL_DATA),sizeof(BET_DATA));          
-     ptc(ch,"MEM_DATA         %6d     RAFFECT          %d\n\r",sizeof(MEM_DATA),sizeof(RAFFECT));           
-     ptc(ch,"MOB_INDEX_DATA   %6d     GQUEST_DATA      %d\n\r",sizeof(MOB_INDEX_DATA),sizeof(GQUEST_DATA));       
-     ptc(ch,"NOTE_DATA        %6d     AUCTION_DATA     %d\n\r",sizeof(NOTE_DATA),sizeof(AUCTION_DATA));      
+     ptc(ch,"GQ_DATA          %6d     OBJ_DATA         %d\n\r",sizeof(GQ_DATA),sizeof(OBJ_DATA));
+     ptc(ch,"AFFECT_DATA      %6d     OBJ_INDEX_DATA   %d\n\r",sizeof(AFFECT_DATA),sizeof(OBJ_INDEX_DATA));
+     ptc(ch,"VOTE_DATA        %6d     VICTIM_DATA      %d\n\r",sizeof(VOTE_DATA),sizeof(VICTIM_DATA));
+     ptc(ch,"OFFER_DATA       %6d     PC_DATA          %d\n\r",sizeof(OFFER_DATA),sizeof(PC_DATA));
+     ptc(ch,"VOTE_CHAR        %6d     GEN_DATA         %d\n\r",sizeof(VOTE_CHAR),sizeof(GEN_DATA));
+     ptc(ch,"PENALTY_DATA     %6d     RESET_DATA       %d\n\r",sizeof(PENALTY_DATA),sizeof(RESET_DATA));
+     ptc(ch,"AREA_DATA        %6d     ROOM_INDEX_DATA  %d\n\r",sizeof(AREA_DATA),sizeof(ROOM_INDEX_DATA));
+     ptc(ch,"BAN_DATA         %6d     SHOP_DATA        %d\n\r",sizeof(BAN_DATA),sizeof(SHOP_DATA));
+     ptc(ch,"BUFFER           %6d     TIME_INFO_DATA   %d\n\r",sizeof(BUFFER),sizeof(TIME_INFO_DATA));
+     ptc(ch,"CHAR_DATA        %6d     WEATHER_DATA     %d\n\r",sizeof(CHAR_DATA),sizeof(WEATHER_DATA));
+     ptc(ch,"DESCRIPTOR_DATA  %6d     MPROG_LIST       %d\n\r",sizeof(DESCRIPTOR_DATA),sizeof(MPROG_LIST));
+     ptc(ch,"EXIT_DATA        %6d     MPROG_CODE       %d\n\r",sizeof(EXIT_DATA),sizeof(MPROG_CODE));
+     ptc(ch,"EXTRA_DESCR_DATA %6d     CLAN_DATA        %d\n\r",sizeof(EXTRA_DESCR_DATA),sizeof(CLAN_DATA));
+     ptc(ch,"HELP_DATA        %6d     TOURNAMENT_DATA  %d\n\r",sizeof(HELP_DATA),sizeof(TOURNAMENT_DATA));
+     ptc(ch,"KILL_DATA        %6d     BET_DATA         %d\n\r",sizeof(KILL_DATA),sizeof(BET_DATA));
+     ptc(ch,"MEM_DATA         %6d     RAFFECT          %d\n\r",sizeof(MEM_DATA),sizeof(RAFFECT));
+     ptc(ch,"MOB_INDEX_DATA   %6d     GQUEST_DATA      %d\n\r",sizeof(MOB_INDEX_DATA),sizeof(GQUEST_DATA));
+     ptc(ch,"NOTE_DATA        %6d     AUCTION_DATA     %d\n\r",sizeof(NOTE_DATA),sizeof(AUCTION_DATA));
      ptc(ch,"NEWS_DATA        %6d\n\r\n\r",sizeof(NEWS_DATA));
 
      count=used=0;
@@ -3474,7 +3474,7 @@ void do_dump( CHAR_DATA *ch, char *argument )
 
   /* pcdata */
   count = 0;
-  for (pc = pcdata_free; pc != NULL; pc = pc->next) count++; 
+  for (pc = pcdata_free; pc != NULL; pc = pc->next) count++;
 
   do_fprintf(fp,"Pcdata  %5u (%9d bytes), %3u free (%d bytes)\n",
     num_pcs, num_pcs * (sizeof(*pc)), count, count * (sizeof(*pc)));
@@ -3641,7 +3641,7 @@ int number_bits( int width )
  * -- Furey */
 
 /* I noticed streaking with this random number generator, so I switched
-   back to the system srandom call.  If this doesn't work for you, 
+   back to the system srandom call.  If this doesn't work for you,
    define OLD_RAND to use the old system -- Alander */
 
 long number_mm( void )
@@ -3651,7 +3651,7 @@ long number_mm( void )
   int iState1;
   int iState2;
   int iRand;
- 
+
   piState             = &rgiState[2];
   iState1             = piState[-2];
   iState2             = piState[-1];
@@ -3727,7 +3727,7 @@ void smash_beep( char *str, bool total )
 void smash_newline( char *str )
 {
   for ( ; *str != '\0'; str++ )
-   if ( *str == '{' && *(str+1)=='/' ) 
+   if ( *str == '{' && *(str+1)=='/' )
     *str='(';
 }
 
@@ -3962,13 +3962,13 @@ void fix_weapons(void)
   if (obj->item_type==ITEM_WEAPON && obj->value[3]==0)
    switch (obj->value[1])
    {
-    case WEAPON_DAGGER: 
+    case WEAPON_DAGGER:
     case WEAPON_WHIP:
     case WEAPON_SPEAR:
          obj->value[3] = 3;   /* slash*/
          break;
     case WEAPON_MACE:
-    case WEAPON_FLAIL:  
+    case WEAPON_FLAIL:
     case WEAPON_POLEARM:
          obj->value[3] = 7;    /* pound*/
          break;
@@ -4003,7 +4003,7 @@ random_flag_name rnd_flag_names[]=
  {{"{Bострый{x ", "{Bзаточенный{x ", ""}, WEAPON_SHARP, 1},
  {{"{Bострая{x ", "{Bзаточенная{x ", ""}, WEAPON_SHARP, 2},
  {{"{Bострое{x ", "{Bзаточенное{x ", ""}, WEAPON_SHARP, 3},
- 
+
  {{"{Mпылающий{x ", "{Mогненный{x ", ""}, WEAPON_FLAMING, 1},
  {{"{Mпылающая{x ", "{Mогненная{x ", ""}, WEAPON_FLAMING, 2},
  {{"{Mпылающее{x ", "{Mогненное{x ", ""}, WEAPON_FLAMING, 3},
@@ -4127,22 +4127,22 @@ OBJ_DATA *create_random_item( int lvl )
 
   if ( lvl < 5 ) lvl=5;
   if ( lvl > 101 ) lvl=101;
-    
+
   // Item - tolkienists sword :)
   if(!(o=create_object(get_obj_index(RANDOM_VNUM),lvl)))return NULL;
-    
+
   o->enchanted=TRUE;
   o->owner = str_dup("(public)");
   //o->item_type=ITEM_WEAPON;
   //o->wear_loc=ITEM_TAKE | ITEM_WIELD;
   o->level=lvl;
-    
+
   avg=number_range(lvl*2/3,lvl);
   if ( number_percent() < 20 ) avg+=number_range(0,lvl/2);
   if ( lvl > 95 )              avg=URANGE(0,avg,114*lvl/100);
   else                         avg=URANGE(0,avg,lvl);
   dep=delta=avg;d1=1;d2=1;
-    
+
   // Get dice by average
   for ( i=1; i < avg; i++ )
   {
@@ -4158,12 +4158,12 @@ OBJ_DATA *create_random_item( int lvl )
       }
     }
   }
-    
+
   if ( number_percent() > 55 ) hr=number_range(0,lvl/3);
   if ( number_percent() > 55 ) dr=number_range(0,lvl/3);
   if ( number_percent() > 80 ) hr=number_range(0,lvl/3);
   if ( number_percent() > 85 ) dr=number_range(0,lvl/3);
-  
+
   if ( lvl < 30 )
   {
     hr=URANGE(0,hr,lvl/4);
@@ -4189,7 +4189,7 @@ OBJ_DATA *create_random_item( int lvl )
     hr=URANGE(0,hr+15,lvl/2);
     dr=URANGE(0,dr+15,lvl/2);
   }
-    
+
   is_sharp    = (avg>4*lvl/5) ? 4 : 7;
   is_flaming  = ((avg>4*lvl/5) ? 3 : 6);
   is_exotic   = ((avg>4*lvl/5) ? 3 : 5);
@@ -4198,7 +4198,7 @@ OBJ_DATA *create_random_item( int lvl )
   is_frost    = 8;
   is_poison   = 6;
   is_twohanded= 10;
-  
+
   if ( lvl > 93 )
   {
     is_sharp*=3;
@@ -4210,7 +4210,7 @@ OBJ_DATA *create_random_item( int lvl )
     is_sharp = is_sharp*3/2;
     is_flaming = is_flaming*3/2;
   }
-    
+
   if ( number_percent() <= is_sharp ) is_sharp=1; else is_sharp=0;
   if ( number_percent() <= is_flaming ) is_flaming=1; else is_flaming=0;
   if ( number_percent() <= is_exotic ) is_exotic=1; else is_exotic=0;
@@ -4223,9 +4223,9 @@ OBJ_DATA *create_random_item( int lvl )
   /*if ( o->value[0]==WEAPON_MACE || o->value[0]==WEAPON_WHIP ||
     o->value[0]==WEAPON_FLAIL ) is_sharp=0;  */
   o->value[0]=is_exotic ? 0 : number_range(1,9);
-  
+
   if ( o->value[0]==WEAPON_DAGGER || o->value[0]==WEAPON_WHIP ) is_twohanded=0;
-    
+
   if ( number_percent() > 50 )
   {
     if ( is_sharp ) is_flaming=0;
@@ -4234,16 +4234,16 @@ OBJ_DATA *create_random_item( int lvl )
   {
     if ( is_flaming ) is_sharp=0;
   }
-  
+
   if ( is_flaming ) { is_frost=0; is_shocking=0; }
-    
+
   value = avg*100/lvl + 8*is_exotic + 20*is_flaming + 20*is_sharp +
     12*is_vampiric + 7*(is_shocking+is_poison+is_frost) +
     hr*50/lvl + dr*100/lvl - 20*is_twohanded;
-            
+
   o->weight=value/50;
   o->cost  =value*100;
-    
+
 
   if ( value > 250 ) { nodrop=1; noremove=1; nouncurse=1; }
   else if ( value > 190 )
@@ -4258,25 +4258,25 @@ OBJ_DATA *create_random_item( int lvl )
     if ( number_percent() > 75 ) noremove=1;
     if ( number_percent() > 75 ) nouncurse=1;
   }
-    
+
   if ( o->name ) free_string( o->name );
   if ( o->description ) free_string( o->description );
   if ( o->short_descr ) free_string( o->short_descr );
-  
+
   o->name=0;
   o->description=0;
   o->short_descr=0;
-  
+
   o->value[1]=d1;
   o->value[2]=d2;
-  o->value[4]= ((is_sharp)     ? WEAPON_SHARP     : 0) | 
+  o->value[4]= ((is_sharp)     ? WEAPON_SHARP     : 0) |
                ((is_flaming)   ? WEAPON_FLAMING   : 0) |
                ((is_vampiric)  ? WEAPON_VAMPIRIC  : 0) |
                ((is_shocking)  ? WEAPON_SHOCKING  : 0) |
                ((is_frost)     ? WEAPON_FROST     : 0) |
                ((is_poison)    ? WEAPON_POISON    : 0) |
                ((is_twohanded) ? WEAPON_TWO_HANDS : 0) ;
-                 
+
   af.where = TO_AFFECTS;
   af.type  = 0;
   af.level = lvl;
@@ -4285,22 +4285,22 @@ OBJ_DATA *create_random_item( int lvl )
   af.modifier = hr;
   af.bitvector= 0;
   if (hr) affect_to_obj(o,&af);
-    
+
   af.location = APPLY_DAMROLL;
   af.modifier = dr;
   if (dr) affect_to_obj(o,&af);
-    
+
   o->extra_flags =  ((nodrop)     ? ITEM_NODROP    : 0) |
                     ((noremove)   ? ITEM_NOREMOVE  : 0) |
                     ((nouncurse)  ? ITEM_NOUNCURSE : 0) |
                     ((value>170)  ? ITEM_HUM       : 0) |
                     ((value>140)  ? ITEM_MAGIC     : 0) |
                     ((value>150)  ? ITEM_BLESS     : 0) | ITEM_NOLOCATE;
-    
+
   for ( i=0; rnd_weapon_names[o->value[0]].names[i][0]; i++);
   i=number_range(0,URANGE(0,i-1,1000)); sss=rnd_weapon_names[o->value[0]].s[i];
   strcpy(wname,rnd_weapon_names[o->value[0]].names[i]);
-    
+
   flg=0;
   if (is_twohanded) flg=WEAPON_TWO_HANDS;
   if (is_frost)     flg=WEAPON_FROST;
@@ -4309,8 +4309,8 @@ OBJ_DATA *create_random_item( int lvl )
   if (is_vampiric)  flg=WEAPON_VAMPIRIC;
   if (is_sharp)     flg=WEAPON_SHARP;
   if (is_flaming)   flg=WEAPON_FLAMING;
-    
-  for ( i=0; rnd_flag_names[i].s && (rnd_flag_names[i].flag!=flg || 
+
+  for ( i=0; rnd_flag_names[i].s && (rnd_flag_names[i].flag!=flg ||
        rnd_flag_names[i].s != sss); i++ );
   if ( rnd_flag_names[i].s && flg )
   {
@@ -4318,7 +4318,7 @@ OBJ_DATA *create_random_item( int lvl )
     j=number_range(0,URANGE(0,j-1,1000));
     strcpy(prefix,rnd_flag_names[i].names[j]);
   }
-    
+
   dr=dr*100/lvl; dr=URANGE(0,dr,100);
   hr=hr*100/lvl; hr=URANGE(0,hr,100);
   if ( value < 125 )
@@ -4363,7 +4363,7 @@ OBJ_DATA *create_random_item( int lvl )
            value >= rnd_asuffix_names[i].min_value ) break;
     strcpy(suffix,rnd_asuffix_names[i].name);
   }
-    
+
   do_printf(s,"%s%s{w%s{x",prefix,wname,suffix);
   o->short_descr=str_dup(s);
   suffix[0]=0;
@@ -4403,7 +4403,7 @@ OBJ_DATA *create_random_item( int lvl )
      break;
     case WEAPON_FLAIL:
      strcpy(suffix,"flail");
-     dam_mes=get_random_bash_message();     
+     dam_mes=get_random_bash_message();
      break;
     case WEAPON_STAFF:
      strcpy(suffix,"staff");
@@ -4414,12 +4414,12 @@ OBJ_DATA *create_random_item( int lvl )
   o->name=str_dup(s);
   o->description=str_dup("Неизвестное оружие притягивает твой взгляд.");
   o->value[3]=dam_mes+1;
-  
+
   return o;
 }
 
 OBJ_DATA *create_random_armor( int lvl )
-{                                                
+{
 
   OBJ_DATA *o;
   AFFECT_DATA af;
@@ -4428,9 +4428,9 @@ OBJ_DATA *create_random_armor( int lvl )
   int hr=0,dr=0,str=0,dex=0, ac=0, svs=0;
   int intt=0, wis=0, con=0;
 
-    
+
 if(!(o=create_object(get_obj_index(OBJ_VNUM_ARMY_SHIELD), 0))) return NULL;
-    
+
   o->enchanted=TRUE;
   o->owner = str_dup("(public)");
   o->item_type=ITEM_ARMOR;
@@ -4444,7 +4444,7 @@ if(!(o=create_object(get_obj_index(OBJ_VNUM_ARMY_SHIELD), 0))) return NULL;
   if ( number_percent() > 55 ) dr=number_range(0,lvl/3);
   if ( number_percent() > 80 ) hr=number_range(0,lvl/3);
   if ( number_percent() > 85 ) dr=number_range(0,lvl/3);
-  
+
   if ( lvl < 30 )
   {
     hr=URANGE(0,hr,lvl/4);
@@ -4472,11 +4472,11 @@ if(!(o=create_object(get_obj_index(OBJ_VNUM_ARMY_SHIELD), 0))) return NULL;
   }
 
   //playing vs ac.
-  if (( number_percent() > (100-lvl) ) && ((hr+dr*3/2)) < (lvl/2)) 
+  if (( number_percent() > (100-lvl) ) && ((hr+dr*3/2)) < (lvl/2))
   ac=(-1)*number_range(lvl/2,lvl*3);
 
   //playing vs svs.
-  if (( number_percent() > (100-(lvl/2)) ) && ((hr+dr*3/2-ac/10)) < (lvl/2)) 
+  if (( number_percent() > (100-(lvl/2)) ) && ((hr+dr*3/2-ac/10)) < (lvl/2))
   svs=(-1)*number_range(0,lvl/5);
 
   value = hr*50/lvl + dr*100/lvl - ac*10/lvl - svs*100/lvl;
@@ -4497,7 +4497,7 @@ if(!(o=create_object(get_obj_index(OBJ_VNUM_ARMY_SHIELD), 0))) return NULL;
   af.modifier = hr;
   af.bitvector= 0;
   if (hr) affect_to_obj(o,&af);
-    
+
   af.location = APPLY_DAMROLL;
   af.modifier = dr;
   if (dr) affect_to_obj(o,&af);
@@ -4529,7 +4529,7 @@ if(!(o=create_object(get_obj_index(OBJ_VNUM_ARMY_SHIELD), 0))) return NULL;
   af.location = APPLY_SAVES;
   af.modifier = svs;
   if (svs) affect_to_obj(o,&af);
- 
+
   if ( value > 200 ) { nodrop=1; noremove=1; nouncurse=1; }
   else if ( value > 120 )
   {
@@ -4551,69 +4551,69 @@ if(!(o=create_object(get_obj_index(OBJ_VNUM_ARMY_SHIELD), 0))) return NULL;
                     ((value>30)  ? ITEM_HUM       : 0) |
                     ((value>40)  ? ITEM_MAGIC     : 0) |
                     ((value>50)  ? ITEM_BLESS     : 0) | ITEM_NOLOCATE;
-    
-    
+
+
   if (value < 20 )
     {
-      if (str!=0) 
-       { 
+      if (str!=0)
+       {
         o->short_descr="Щит {BСилы{x";
         o->name="shield random strength щит силы";
        }
-      else 
-        if (wis!=0) 
+      else
+        if (wis!=0)
           {
             o->short_descr="Щит {CМудрости{x";
             o->name="shield random wisdom щит мудрости";
           }
-        else 
-         if (intt!=0) 
+        else
+         if (intt!=0)
            {
               o->short_descr="Щит {RЗнания{x";
               o->name="shield random intelligence щит знания";
            }
-         else 
-          if (con!=0) 
+         else
+          if (con!=0)
             {
                o->short_descr="Щит {cЭнергии{x";
                o->name="shield random constitution щит энергии";
             }
-          else 
-           if (dex!=0) 
+          else
+           if (dex!=0)
              {
                 o->short_descr="Щит {GЛовкости{x";
                 o->name="shield random dexterity щит ловкости";
              }
-            else 
+            else
               {
                  o->short_descr="Обыкновенный щит";
                  o->name="shield random standart обыкновенный щит";
               }
     }
-  else 
-    if ( ac < ((-1)*lvl)) 
+  else
+    if ( ac < ((-1)*lvl))
       {
         o->short_descr="Щит {WЗащиты{x";
         o->name="shield random defence щит защиты";
       }
-    else 
-      if ( hr > (lvl/10)) 
+    else
+      if ( hr > (lvl/10))
         {
            o->short_descr="Щит {rПовреждения{x";
            o->name="shield random hitroll щит повреждения";
         }
-       else 
-         if ( dr > (lvl/10)) 
+       else
+         if ( dr > (lvl/10))
            {
               o->short_descr="Щит {YОГРА{x";
               o->name="shield random damroll щит огра";
            }
-          else 
+          else
             {
               o->short_descr="Щит {gиз драконовой кожи{x";
               o->name="shield random dragon scale щит драконовой кожи";
             }
-  
+
   return o;
 }
 
@@ -4682,11 +4682,11 @@ void load_mobiles( FILE *fp )
     pMobIndex->hitroll        = fread_number( fp );
 
     /* read hit dice */
-    pMobIndex->hit[DICE_NUMBER]     = fread_number( fp );  
-    /* 'd'          */                fread_letter( fp ); 
+    pMobIndex->hit[DICE_NUMBER]     = fread_number( fp );
+    /* 'd'          */                fread_letter( fp );
     pMobIndex->hit[DICE_TYPE]       = fread_number( fp );
-    /* '+'          */                fread_letter( fp );   
-    pMobIndex->hit[DICE_BONUS]      = fread_number( fp ); 
+    /* '+'          */                fread_letter( fp );
+    pMobIndex->hit[DICE_BONUS]      = fread_number( fp );
 
     /* read mana dice */
     pMobIndex->mana[DICE_NUMBER]    = fread_number( fp );
@@ -4710,7 +4710,7 @@ void load_mobiles( FILE *fp )
     pMobIndex->ac[AC_EXOTIC]        = fread_number( fp ) * 10;
 
     // read flags and add in data from the race table
-    pMobIndex->off_flags            = fread_flag64( fp ) 
+    pMobIndex->off_flags            = fread_flag64( fp )
                                     | race_table[pMobIndex->race].off;
     pMobIndex->imm_flags            = fread_flag64( fp )
                                     | race_table[pMobIndex->race].imm;
@@ -4762,7 +4762,7 @@ void load_mobiles( FILE *fp )
         MPROG_LIST *pMprog;
         const char *word;
         int64 trigger = 0;
-          
+
         pMprog  = alloc_perm(sizeof(*pMprog));
         word    = fread_word( fp );
         if ( !(trigger = flag_lookup( word, mprog_flags )) )
@@ -4840,7 +4840,7 @@ void load_objects( FILE *fp )
     pObjIndex->description          = fread_string( fp );
 
     pObjIndex->material=fread_string(fp);
-    if( !pObjIndex->material ) 
+    if( !pObjIndex->material )
         pObjIndex->material = material_table[MATERIAL_NONE].name;
 
     pObjIndex->item_type            = item_lookup(fread_word( fp ));
@@ -4899,7 +4899,7 @@ void load_objects( FILE *fp )
         pObjIndex->value[3]=0;
         pObjIndex->value[4]=0;
         break;
-    
+
     default:
         pObjIndex->value[0]             = fread_flag64( fp );
         pObjIndex->value[1]             = fread_flag64( fp );
@@ -4910,11 +4910,11 @@ void load_objects( FILE *fp )
     }
     pObjIndex->level                = fread_number( fp );
     pObjIndex->weight               = fread_number( fp );
-    pObjIndex->cost                 = fread_number64( fp ); 
+    pObjIndex->cost                 = fread_number64( fp );
 
     pOIT=fread_word( fp );
 
-    if( is_number(pOIT) ) 
+    if( is_number(pOIT) )
     {
       pObjIndex->durability = atoi(pOIT);
       letter = fread_letter( fp );
@@ -5202,9 +5202,9 @@ void convert_object( OBJ_INDEX_DATA *pObjIndex )
       case ITEM_WEAPON:
           /*
            * The conversion below is based on the values generated
-           * in one_hit() (fight.c).  Since I don't want a lvl 50 
+           * in one_hit() (fight.c).  Since I don't want a lvl 50
            * weapon to do 15d3 damage, the min value will be below
-           * the one in one_hit, and to make up for it, I've made 
+           * the one in one_hit, and to make up for it, I've made
            * the max value higher.
            * (I don't want 15d2 because this will hardly ever roll
            * 15 or 30, it will only roll damage close to 23.
@@ -5273,7 +5273,7 @@ void save_bans(void)
   FILE *fp;
   bool found = FALSE;
 
-  fclose( fpReserve ); 
+  fclose( fpReserve );
   if ( ( fp = fopen( BAN_FILE, "w" ) ) == NULL )
   {
     perror( BAN_FILE );
@@ -5297,9 +5297,9 @@ void load_bans(void)
   FILE *fp;
   BAN_DATA *ban_last;
   int bans=0;
- 
+
   if ( ( fp = fopen( BAN_FILE, "r" ) ) == NULL ) return;
- 
+
   ban_last = NULL;
 
   fseek(fp,0,SEEK_END);
@@ -5315,10 +5315,10 @@ void load_bans(void)
       fclose( fp );
       return;
     }
- 
+
     pban = new_ban();
     bans++;
- 
+
     pban->host = str_dup(fread_word(fp));
     pban->ban_flags = fread_number(fp);
     SET_BIT(pban->ban_flags, BAN_PERMANENT);
@@ -5337,7 +5337,7 @@ bool check_ban(const char *site,int type)
 
   strcpy(host,site);
 
-  for ( pban = ban_list; pban != NULL; pban = pban->next ) 
+  for ( pban = ban_list; pban != NULL; pban = pban->next )
   {
     if (!IS_SET(pban->ban_flags,type)) continue;
     if (!str_cmp(pban->host,host)) return TRUE;
@@ -5437,7 +5437,7 @@ void do_ban(CHAR_DATA *ch, const char *argument)
   ptc(ch,"Адрес %s закрыт для %s.\n\r",pban->host, IS_SET(pban->ban_flags, BAN_ALL) ? "всех":"новичков");
 }
 
-void do_allow( CHAR_DATA *ch, char *argument )                        
+void do_allow( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   BAN_DATA *prev;
@@ -5779,7 +5779,7 @@ void boot_db( void )
     bug ("malloc'ing AUCTION_DATA didn't give %d bytes",sizeof(AUCTION_DATA));
     exit (1);
   }
-                
+
   auction->item = NULL; /* nothing is being sold */
   {
     int i;

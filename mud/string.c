@@ -1,6 +1,5 @@
 // Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
-
 #include <sys/types.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -36,7 +35,7 @@ void string_append (CHAR_DATA * ch, const char ** pString)
   stc ("-=======- –ежим редактировани€ текста -=======-\n\r", ch) ;
   stc (" ¬ведите :h или .h дл€ вызова справки          \n\r", ch) ;
   stc ("-=============================================-\n\r", ch) ;
-  
+
   // check for empty string
   if (*pString == NULL) *pString = str_empty ;
   string_show (ch, *pString) ;
@@ -87,7 +86,7 @@ void string_add (CHAR_DATA * ch, const char * argument)
 
         number = atoi (arg2) ;
       }
-      else 
+      else
       {
         if (EMPTY (argument) || !is_number (arg1 + 1))
         {
@@ -148,16 +147,16 @@ void string_add (CHAR_DATA * ch, const char * argument)
     // help
     if (arg1[1] == 'h')
     {
-      stc (" —правка по редактированию строк:          \n\r", ch) ;
-      stc (" ¬место ':' можно использовать '.' или '#')\n\r", ch) ;
-      stc (" :h             - вызвать эту справку      \n\r", ch) ;
-      stc (" :s             - просмотр всего текста    \n\r", ch) ;
-      stc (" :f             - отформатировать текст    \n\r", ch) ;
-      stc (" :c             - очистить весь тескт      \n\r", ch) ;
-      stc (" :d <num>       - удалить одну строку      \n\r", ch) ;
-      stc (" :i <num> <str> - вставить строку          \n\r", ch) ;
-      stc (" :r <num> <str> - заменить строку          \n\r", ch) ;
-      stc (" @              - закончить редактирование \n\r", ch) ;
+      stc (" —правка по редактированию строк:          \n\r", ch);
+      stc (" ¬ качестве префикса команды, можно использовать ':', '.' или '#')\n\r", ch);
+      stc (" :h             - вызвать эту справку      \n\r", ch);
+      stc (" :s             - просмотр всего текста    \n\r", ch);
+      stc (" :f             - отформатировать текст    \n\r", ch);
+      stc (" :c             - очистить весь тескт      \n\r", ch);
+      stc (" :d <num>       - удалить одну строку      \n\r", ch);
+      stc (" :i <num> <str> - вставить строку          \n\r", ch);
+      stc (" :r <num> <str> - заменить строку          \n\r", ch);
+      stc (" @              - закончить редактирование \n\r", ch);
       return ;
     }
 
@@ -213,7 +212,7 @@ void string_add (CHAR_DATA * ch, const char * argument)
       ptc (ch, "—трока %d удалена.\n\r", atoi(arg2)) ;
       return ;
     }
-      
+
     stc ("Ќет такой команды редактировани€.\n\r", ch) ;
     return ;
   }
@@ -259,7 +258,7 @@ const char * string_remove (const char * strch, int number)
     if (strch[i++] == '\r') number-- ;
   }
 
-  // must be terminated for proper use  
+  // must be terminated for proper use
   buf[j] = '\0' ;
 
   // reallocate
@@ -377,7 +376,7 @@ const char * string_format (const char * oldstring)
   const char *rdesc;
   int i=0;
   bool cap=TRUE;
-  
+
   xbuf[0]=xbuf2[0]=0;
   i=0;
   for (rdesc = oldstring; *rdesc; rdesc++)
@@ -401,7 +400,7 @@ const char * string_format (const char * oldstring)
     }
     else if (*rdesc==')')
     {
-      if (xbuf[i-1]==' ' && xbuf[i-2]==' ' && 
+      if (xbuf[i-1]==' ' && xbuf[i-2]==' ' &&
           (xbuf[i-3]=='.' || xbuf[i-3]=='?' || xbuf[i-3]=='!'))
       {
         xbuf[i-2]=*rdesc;
@@ -416,7 +415,7 @@ const char * string_format (const char * oldstring)
       }
     }
     else if (*rdesc=='.' || *rdesc=='?' || *rdesc=='!') {
-      if (xbuf[i-1]==' ' && xbuf[i-2]==' ' && 
+      if (xbuf[i-1]==' ' && xbuf[i-2]==' ' &&
           (xbuf[i-3]=='.' || xbuf[i-3]=='?' || xbuf[i-3]=='!')) {
         xbuf[i-2]=*rdesc;
         if (*(rdesc+1) != '\"')
@@ -467,7 +466,7 @@ const char * string_format (const char * oldstring)
   }
   xbuf[i]=0;
   strcpy(xbuf2,xbuf);
-  
+
   p=xbuf2;
   xbuf[0]=0;
   for ( ; ; )
@@ -503,17 +502,17 @@ const char * string_format (const char * oldstring)
   }
 
   while (
-          *(p+i) && 
+          *(p+i) &&
           ( *(p+i)==' '|| *(p+i)=='\n'|| *(p+i)=='\r')
     ) i--;
-  
+
   *(p+i+1)=0;
-  
+
   strcat(xbuf,p);
-  
+
   if (xbuf[strlen(xbuf)-2] != '\n')
       strcat(xbuf,"\n\r");
-  
+
   free_string(oldstring);
   return str_dup(xbuf);
 }

@@ -52,10 +52,10 @@ char *do_show_iflag(CHAR_DATA *ch,OBJ_DATA *obj, bool fshort)
 
   if (IS_OBJ_STAT(obj,ITEM_GLOW))   strcat(buf,(fshort)?"{M(Пыл){x":"{w({MПылает{w){x");
   if (IS_OBJ_STAT(obj,ITEM_INVIS))  strcat(buf,(fshort)?"{D(Нев){x":"{D(Невидимо){x");
-  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_EVIL)) 
+  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_EVIL))
   && IS_OBJ_STAT(obj,ITEM_EVIL))
     strcat(buf,(fshort)?"{r(Кр){x":"{w({rКрасная{w Аура){x");
-  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_GOOD)) 
+  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_GOOD))
    && IS_OBJ_STAT(obj,ITEM_BLESS))   strcat(buf,(fshort)?"{c(Гол){x":"{w({cГолубая{w Аура){x");
   if (IS_AFFECTED(ch,AFF_DETECT_MAGIC)
    && IS_OBJ_STAT(obj,ITEM_MAGIC))   strcat(buf,(fshort)?"{C(Маг){x":"{w({cМагическое{w){x");
@@ -68,7 +68,7 @@ char *format_obj_to_char(OBJ_DATA *obj, CHAR_DATA *ch, bool fShort)
   static char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH], first_name[MAX_STRING_LENGTH];
   buf[0] = '\0';
-   
+
   if (!obj) return buf;
 
   if (!can_see_obj(ch , obj))
@@ -88,8 +88,8 @@ char *format_obj_to_char(OBJ_DATA *obj, CHAR_DATA *ch, bool fShort)
 
   if (fShort)
   {
-    if (obj->short_descr) 
-    {  
+    if (obj->short_descr)
+    {
       strcat(buf, "{G");
       strcat(buf, get_obj_desc(obj,'1'));
       strcat(buf, "{x");
@@ -103,7 +103,7 @@ char *format_obj_to_char(OBJ_DATA *obj, CHAR_DATA *ch, bool fShort)
       strcat(buf, "{G");
       strcat(buf, obj->description);
       strcat(buf, "{x");
-    }  
+    }
     if (obj->pIndexData->area->security==8) strcat(buf, buf2);
   }
   if (strlen(buf)<=0) strcat(buf,"Bug - NO DESCRIPTION! Report to IMM.");
@@ -217,11 +217,11 @@ char *do_show_flag(CHAR_DATA *ch,CHAR_DATA *victim,bool fshort)
   if (IS_AFFECTED(victim, AFF_SANCTUARY) )strcat(buf,(fshort)?"{W(Б){x":"{W(Белая Аура){x");
   if (IS_AFFECTED(victim, AFF_SHIELD)    )strcat(buf,(fshort)?"{C(M){x":"{C(Магический щит){x");
 
-  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_EVIL)) 
+  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_EVIL))
      && IS_EVIL(victim))
     strcat(buf,(fshort)?"{R(К){x":"{r(Красная Аура){x");
 
-  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_GOOD)) 
+  if (((!IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT)) || IS_AFFECTED(ch, AFF_DETECT_GOOD))
      && IS_GOOD(victim))
     strcat(buf,(fshort)?"{Y(З){x":"{y(Золотая Аура){x");
 
@@ -252,7 +252,7 @@ void show_char_to_char_0(CHAR_DATA *victim, CHAR_DATA *ch)
   {
     if (IS_NPC(victim) && victim->pIndexData->area->security==8) strcat(buf, buf2);
     strcat(buf, "{y");
-    strcat(buf, victim->long_descr); 
+    strcat(buf, victim->long_descr);
     strcat(buf, "{x");
     stc(buf, ch);
     return;
@@ -386,7 +386,7 @@ void show_char_to_char_1(CHAR_DATA *victim, CHAR_DATA *ch)
         stc("--------------------------------------------------------------------------------\n\r", ch);
         found = TRUE;
       }
-      if (showPic) 
+      if (showPic)
       {
         if (victim->sex == 2) stc(where_name_female[victim->class[victim->remort]].picture[iWear], ch);
         else stc(where_name_male[victim->class[victim->remort]].picture[iWear], ch);
@@ -405,7 +405,7 @@ void show_char_to_char_1(CHAR_DATA *victim, CHAR_DATA *ch)
           if (iWear == 3) stc(GreyRank[victim->clanrank], ch);
         }
       */
-                
+
         {
                         stc(format_obj_to_char(obj, ch, TRUE), ch);
                               }
@@ -433,11 +433,11 @@ void show_char_to_char(CHAR_DATA *list, CHAR_DATA *ch)
   {
     if (rch == ch) continue;
     if (IS_AFFECTED(rch,AFF_MIST) && number_range(1,10)>5)
-    {  
+    {
       stc("Облако желтоватого тумана клубится в комнате.\n\r",ch);
-      continue; 
+      continue;
     }
-    if (!can_see(ch,rch,CHECK_LVL)) 
+    if (!can_see(ch,rch,CHECK_LVL))
     {
       if (!IS_IMMORTAL(rch) && IS_GOOD(rch) && IS_AFFECTED (ch,AFF_DETECT_GOOD)) stc("Ты чувствуешь {Wнечто доброе{x в комнате.{x\n\r",ch);
       if (!IS_IMMORTAL(rch) && IS_EVIL(rch) && IS_AFFECTED (ch,AFF_DETECT_EVIL)) stc("Ты чувствуешь {rприсутствие зла.{x\n\r",ch);
@@ -748,11 +748,11 @@ void do_look(CHAR_DATA *ch, const char *argument)
   if (ch->morph_obj)
   {
     if (ch->morph_obj->in_room!=NULL) cur_room=ch->morph_obj->in_room;
-    else 
+    else
     {
-      if (ch->morph_obj->carried_by) 
+      if (ch->morph_obj->carried_by)
         cur_room=ch->morph_obj->carried_by->in_room;
-      else 
+      else
       {
         stc("Похоже, у тебя проблемы...Ты у кого-то в мешке.\n\r",ch);
         return;
@@ -782,7 +782,7 @@ void do_look(CHAR_DATA *ch, const char *argument)
 
   if (!*arg1 || !str_cmp(arg1, "auto"))
   {
-    if (!IS_SET(ch->act, PLR_HOLYLIGHT) && room_is_dark(cur_room)) 
+    if (!IS_SET(ch->act, PLR_HOLYLIGHT) && room_is_dark(cur_room))
       stc("Темно, хоть глаза выколи... \n\r", ch);
     else stc(cur_room->name, ch);
 
@@ -870,7 +870,7 @@ void do_look(CHAR_DATA *ch, const char *argument)
   for (obj = ch->carrying; obj != NULL; obj = obj->next_content)
   {
     if (can_see_obj(ch, obj))
-    {  
+    {
       pdesc = get_extra_descr(arg3, obj->extra_descr);
       if (pdesc)
       {
@@ -1044,7 +1044,7 @@ void do_examine(CHAR_DATA *ch, const char *argument)
          switch (obj->value[0])
          {
            case(WEAPON_EXOTIC) : stc("Это экзотическое оружие.\n\r",ch); break;
-           case(WEAPON_SWORD)  : stc("Это меч.\n\r",ch);          break;  
+           case(WEAPON_SWORD)  : stc("Это меч.\n\r",ch);          break;
            case(WEAPON_DAGGER) : stc("Это кинжал.\n\r",ch);       break;
            case(WEAPON_SPEAR)  : stc("Это копье.\n\r",ch);  break;
            case(WEAPON_STAFF)  : stc("Это посох.\n\r",ch);  break;
@@ -1090,7 +1090,7 @@ void do_exits(CHAR_DATA *ch, const char *argument)
   if (ch->morph_obj)
   {
     if (ch->morph_obj->in_room) cur_room=ch->morph_obj->in_room;
-    else 
+    else
     {
       if (ch->morph_obj->carried_by) cur_room=ch->morph_obj->carried_by->in_room;
       else
@@ -1122,7 +1122,7 @@ void do_exits(CHAR_DATA *ch, const char *argument)
       if (fAuto)
       {
         do_printf(buf + strlen(buf), " %s%s",
-          IS_SET(pexit->exit_info, EX_CLOSED) ? "{R":"{c", 
+          IS_SET(pexit->exit_info, EX_CLOSED) ? "{R":"{c",
           dir_name[door]);
       }
       else
@@ -1315,7 +1315,7 @@ void do_oscore(CHAR_DATA *ch, const char *argument)
 
 void do_score(CHAR_DATA *ch, const char *argument)
 {
-  int i; 
+  int i;
   int64 gold, silver;
   char buf[MAX_INPUT_LENGTH];
   gold = ch->gold;
@@ -1358,7 +1358,7 @@ void do_score(CHAR_DATA *ch, const char *argument)
    ch->perm_stat[STAT_STR],get_curr_stat(ch,STAT_STR),ch->practice,-1*calc_saves(ch),ch->saving_throw,
    ch->perm_stat[STAT_INT],get_curr_stat(ch,STAT_INT),ch->train,(ch->level>19)?GET_AC(ch,AC_PIERCE):0,
    ch->perm_stat[STAT_WIS],get_curr_stat(ch,STAT_WIS),ch->exp,(ch->level>19)?GET_AC(ch,AC_BASH):0);
- 
+
    ptc(ch,"\n\r{G   |  {RDEX : {C%-2d ({Y%-2d{G)        | {WДо уровня   : {C%-7d{G | {gпротив тяжелых : {C%-8d{G|\n\r   |  {RCON : {C%-2d ({Y%-2d{G)        | {RТрусость    : {C%-7d{G | {gпротив экзотич.: {C%-8d{G|",
    ch->perm_stat[STAT_DEX],get_curr_stat(ch,STAT_DEX),
    IS_NPC(ch)?0:(ch->level + 1) * exp_per_level(ch,ch->pcdata->points) - ch->exp,(ch->level>19)?GET_AC(ch,AC_SLASH):0,
@@ -1378,9 +1378,9 @@ void do_score(CHAR_DATA *ch, const char *argument)
    ptc(ch,"Здоровье: {C%-5d{G/{C%-5d{G |                          |\n\r   | {WСеребро: %12u{G | ",ch->hit,ch->max_hit,silver);
    ptc(ch,"{CМана    : {C%-5d{G/{C%-5d{G |                          |",ch->mana,ch->max_mana);
   }
- 
+
   do_printf(buf,(ch->countdown==0) ? "нет          " : (ch->questobj==0) ? "убить тварь  ":"найти предмет");
- 
+
   ptc(ch,"\n\r{G   | {WМаx.вещей:{C%-5d{G/",ch->carry_number);
   ptc(ch,"{C%-5d{G | ",can_carry_n(ch));
   ptc(ch,"{GДвижения: {C%-5d{G/",ch->move);
@@ -1390,9 +1390,9 @@ void do_score(CHAR_DATA *ch, const char *argument)
   ptc(ch,"{C%-5d{G | ",can_carry_w(ch)/10);
   ptc(ch,"{RКвестовые очки: {C%-5d{G | ",ch->questpoints);
   ptc(ch,"{YЗадание: {W%s {G  |",buf);
- 
+
   ptc(ch,"\n\r{G   |--------------------------------------------------------------------------|");
- 
+
   if (!IS_NPC(ch))
   {
     if(ch->pcdata->condition[COND_DRUNK] > 10 )stc("\n\r   | {RТы пьян{G                                                                  |",   ch);
@@ -1430,13 +1430,13 @@ void do_score(CHAR_DATA *ch, const char *argument)
      break;
   }
  //Shows victim for which char is waiting
- 
+
   if (ch->level<20)
   {
     for (i = 0; i < 4; i++)
     {
       char * temp;
- 
+
       switch(i)
       {
         case(AC_PIERCE):    temp = "{Wвыпадов             {x";      break;
@@ -1445,9 +1445,9 @@ void do_score(CHAR_DATA *ch, const char *argument)
         case(AC_EXOTIC):    temp = "{Wэкзотического оружия{x";      break;
         default:            temp = "...глюк...";         break;
       }
- 
+
       stc("\n\r{G   |   {WТы {G", ch);
- 
+
    if      (GET_AC(ch,i) >= 101)
      ptc(ch,"совсем беззащитен против %-26s                 {G|{x",temp);
    else if (GET_AC(ch,i) >= 80)
@@ -1470,7 +1470,7 @@ void do_score(CHAR_DATA *ch, const char *argument)
      ptc(ch,"великолепно защищен от %-26s                   {G|{x",temp);
    else
      ptc(ch,"божественно защищен от %-26s                   {G|{x",temp);
- 
+
    }
   }
      /* RT wizinvis and holy light */
@@ -1479,7 +1479,7 @@ void do_score(CHAR_DATA *ch, const char *argument)
     stc("\n\r{G   | {GHoly Light: ",ch);
     if (IS_SET(ch->act,PLR_HOLYLIGHT)) stc("{Won      ",ch);
     else  stc("{Doff     ",ch);
-  
+
    ptc(ch, "{GInvisible level:{D%-3d    {GIncognito level {D%-3d{G           |{x",
    (ch->invis_level)?ch->invis_level:0,(ch->incog_level)?ch->incog_level:0);
   }
@@ -1488,7 +1488,7 @@ void do_score(CHAR_DATA *ch, const char *argument)
   {
     ptc(ch, "\n\r{G   | {CYou are trusted at level {W%d{C.{G                                            |{x",get_trust(ch));
   }
- 
+
   stc("\n\r {G/~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/  |\n\r",ch);
   stc("{G \\_________________________________________________________________________\\__/{x\n\r",ch);
 }
@@ -1517,10 +1517,10 @@ void do_affects(CHAR_DATA *ch, const char *argument)
         ptc(ch,"{CSpellaffect:{x [%-15s]\n\r",affect_bit_name(paf->modifier));
         continue;
        }
-       
-       if (ch->level>=20) 
+
+       if (ch->level>=20)
           ptc(ch,"{C%15s{x ({c%3d{x) ", skill_table[paf->type].name,paf->duration);
-       else 
+       else
           ptc(ch,"{C%15s{x       ", skill_table[paf->type].name);
        column++;
        if (column==3)
@@ -1540,26 +1540,26 @@ void do_affects(CHAR_DATA *ch, const char *argument)
              ptc(ch,"{CSpellaffect:{x %-15s\n\r",affect_bit_name(paf->modifier));
              continue;
           }
-        else 
+        else
         {
-         if (paf_last && paf->type == paf_last->type) 
+         if (paf_last && paf->type == paf_last->type)
            {
-             if (ch->level >= 20) 
+             if (ch->level >= 20)
                 stc("                            ",ch);
            }
-           else 
+           else
              ptc(ch, "Заклинание : %-15s", skill_table[paf->type].name);
-   
+
          if (ch->level >= 20)
          {
           ptc(ch, ": изменяет %s на %d ", affect_loc_name(paf->location),paf->modifier);
-          if (paf->duration == -1) 
-              stc("постоянно",ch); 
-          else 
+          if (paf->duration == -1)
+              stc("постоянно",ch);
+          else
               ptc(ch, "на %d часов", paf->duration);
          }
-         
-         if (!(paf_last && paf->type == paf_last->type && ch->level < 20)) 
+
+         if (!(paf_last && paf->type == paf_last->type && ch->level < 20))
             stc("\n\r", ch);
         }
 
@@ -1569,7 +1569,7 @@ void do_affects(CHAR_DATA *ch, const char *argument)
  }
  else stc("Ты не находишься под воздействием заклинаний.\n\r",ch);
  if (IS_SET(ch->affected_by, AFF_HIDE)) stc("{CТы спрятался.{x\n\r",ch);
-    
+
  if (calc_saves(ch))
         ptc (ch, "{CЗащита от заклинаний: {Y%d (%d).{x\n\r", -1*calc_saves(ch),ch->saving_throw);
  if (ch->pcdata->charged_num)
@@ -1677,7 +1677,7 @@ void do_help(CHAR_DATA *ch, const char *argument)
         && ch->desc->connected != CON_GEN_GROUPS)
         break;
     }
-  }                                   
+  }
   if (!found){
     stc("Hет подсказки на это слово. Ищем в ahelp:\n\r", ch);
     do_ahelp (ch, argall);
@@ -1779,23 +1779,23 @@ void do_whois (CHAR_DATA *ch, const char *argument)
         add_buf(output,buf);
       }
       else if (wch==ch || IS_CFG(ch,CFG_SHOWKILLS))
-      { 
+      {
         do_printf(buf,"{C| Побед на арене:{G%-7ld{C       Поражений на арене:{G%-7ld{C                   |\n\r{x",
         wch->vic_pc_arena, wch->death_pc_arena);
         add_buf(output,buf);
       }
-    
+
       if (ch == wch || IS_IMMORTAL(ch))
       {
         do_printf(buf,"{C| {DУчастие в квестах : {W%-7ld  {Cвыполнено: {W%-7ld  {Dна этом уровне: {W%-7ld  {C|{x\n\r",wch->qcounter,wch->qcomplete[0],wch->qcomplete[1]);
         add_buf(output,buf);
-      } 
+      }
 
       if (ch == wch || IS_IMMORTAL(ch))
       {
         do_printf(buf,"{C| {DУчастие в Гквестах: {W%-7ld  {Dвыполнено: {W%-7ld                           {C|{x\n\r",wch->gqcounter,wch->gqcomplete);
         add_buf(output,buf);
-      } 
+      }
 
       if (GUILD(wch,DWARVES_GUILD))
       {
@@ -1899,13 +1899,13 @@ void do_who (CHAR_DATA * ch, const char * argument)
     {
       // look for classes to turn on
       if (GUILD(ch, ASSASIN_GUILD) &&
-         (!str_prefix (arg, "assasins"))) showflag |= SHOW_ASSASIN  ; else 
+         (!str_prefix (arg, "assasins"))) showflag |= SHOW_ASSASIN  ; else
       if (!str_prefix (arg, "immortals")) showflag |= SHOW_IMMONLY  ; else
       if (!str_prefix (arg, "male"))      showflag |= SHOW_MALE     ; else
       if (!str_prefix (arg, "it"))        showflag |= SHOW_IT       ; else
       if (!str_prefix (arg, "female"))    showflag |= SHOW_FEMALE   ; else
       if (!str_prefix (arg, "pk"))        showflag |= SHOW_PK       ; else
-      if (!str_prefix (arg, "mlt"))       showflag |= SHOW_MLT      ; else 
+      if (!str_prefix (arg, "mlt"))       showflag |= SHOW_MLT      ; else
       if (!str_prefix (arg, "criminal"))  showflag |= SHOW_CRIMINAL ; else
       if (!str_prefix (arg, "clan"))      showflag |= SHOW_CLAN     ; else
       if ((i = class_lookup (arg)) >= 0)
@@ -1958,7 +1958,7 @@ void do_who (CHAR_DATA * ch, const char * argument)
     // check level here, so invisible players are undetectable!
     if (!can_see(ch, wch, CHECK_LVL)) continue ;
     if ((wch->level < minlevel      || wch->level > maxlevel)         ||
-        ((showflag & SHOW_IMMONLY)  && 
+        ((showflag & SHOW_IMMONLY)  &&
         (wch->level<LEVEL_IMMORTAL  || get_trust(wch)<LEVEL_IMMORTAL))||
         ((showflag & SHOW_CLAN)     && wch->clan == NULL)             ||
         ((showflag & SHOW_IT)       && wch->sex != 0)                 ||
@@ -2195,8 +2195,8 @@ void do_where(CHAR_DATA *ch, const char *argument)
   {
    if (victim->in_room != NULL
    &&   victim->in_room->area == ch->in_room->area
-   &&   !IS_SET(victim->in_room->room_flags,ROOM_NOWHERE) 
-   &&   !IS_AFFECTED(victim,AFF_HIDE)  
+   &&   !IS_SET(victim->in_room->room_flags,ROOM_NOWHERE)
+   &&   !IS_AFFECTED(victim,AFF_HIDE)
    &&   can_see(ch, victim,CHECK_LVL)
    &&   is_name(arg, victim->name))
    {
@@ -2262,7 +2262,7 @@ void set_title(CHAR_DATA *ch, const char *title)
   smash_flash(buf);
   smash_beep(buf,1);
   smash_newline(buf);
-  
+
   free_string(ch->pcdata->title);
   ch->pcdata->title = str_dup(buf);
 }
@@ -2283,7 +2283,7 @@ void do_title(CHAR_DATA *ch, const char *argument)
 
   len = strlen(buf);
   if ((buf[len-1]=='{' || buf[len-1]=='`')
-   && buf[len-2] !='{' && buf[len-2] != '`') buf[len-1] = '\0'; 
+   && buf[len-2] !='{' && buf[len-2] != '`') buf[len-1] = '\0';
 
   if(len>60)
   {
@@ -2297,7 +2297,7 @@ void do_title(CHAR_DATA *ch, const char *argument)
   set_title(ch, buf);
   stc("Ok.\n\r", ch);
 }
-  
+
 void do_description(CHAR_DATA *ch, const char *argument)
 {
   char buf[MAX_STRING_LENGTH];
@@ -2353,7 +2353,7 @@ void do_description(CHAR_DATA *ch, const char *argument)
       argument++;
       while (isspace(*argument)) argument++;
 
-      if (strlen(buf) >= 1536) // 1.5 kb 
+      if (strlen(buf) >= 1536) // 1.5 kb
       {
         stc("Описание слишком длинное.\n\r", ch);
         return;
@@ -2412,7 +2412,7 @@ void do_practice(CHAR_DATA *ch, const char *argument)
         int sn_level=min_level(ch,sn);
 
         if (skill_table[sn].name == NULL) break;
-        if (level!=sn_level || ch->level<sn_level 
+        if (level!=sn_level || ch->level<sn_level
          || ch->pcdata->learned[sn] < 1) continue;
         if (ch->pcdata->learned[sn]>maxx
          || ch->pcdata->learned[sn]<minx) continue;
@@ -2433,7 +2433,7 @@ void do_practice(CHAR_DATA *ch, const char *argument)
         else if (ch->pcdata->learned[sn] <=  90) clr='B';
         else if (ch->pcdata->learned[sn] <=  99) clr='W';
         else if (ch->pcdata->learned[sn] == 100) clr='C';
-          
+
         ptc(ch, " {Y%15s{%c %3d%%",
           skill_table[sn].name, clr,ch->pcdata->learned[sn]);
         if (++col % 3 == 0) stc("\n\r", ch);
@@ -2491,7 +2491,7 @@ void do_practice(CHAR_DATA *ch, const char *argument)
 
   sn=find_spell(ch,argument);
 
-  if (sn < 0 || (!IS_NPC(ch) && (ch->level < min_level(ch,sn) 
+  if (sn < 0 || (!IS_NPC(ch) && (ch->level < min_level(ch,sn)
              || ch->pcdata->learned[sn] < 1 || rll == 0)))
   {
       stc("Ты не можешь пpактиковаться этому.\n\r", ch);
@@ -2823,7 +2823,7 @@ void do_qstat(CHAR_DATA *ch, const char *argument)
   ptc(ch, "{G| {YFormat:{x%s  {YGroup: {x%d      ",
    IS_NPC(victim) ? "npc" : "pc.", IS_NPC(victim) ? victim->group : 0);
   ptc(ch,"{YRoom:{x%u     ",(victim->in_room) ? 0 : victim->in_room->vnum);
-  ptc(ch,"{YCount: {x%d        {YKilled:{x%d\n\r", 
+  ptc(ch,"{YCount: {x%d        {YKilled:{x%d\n\r",
    IS_NPC(victim) ? victim->pIndexData->count:0,
    IS_NPC(victim) ? victim->pIndexData->killed:0);
   stc("{G=---------------------------------------------------------------------------=\n\r",ch);
@@ -2908,12 +2908,12 @@ void do_reform(CHAR_DATA *ch, const char *argument)
     stc("Ты и так в своем облике.\n\r",ch);
     return;
   }
- 
+
   if (ch->morph_obj->in_room!=NULL) cur_room=ch->morph_obj->in_room;
-  else 
+  else
   {
     if (ch->morph_obj->carried_by!=NULL) cur_room=ch->morph_obj->carried_by->in_room;
-    else 
+    else
     {
       stc("Похоже, у тебя проблемы...Ты у кого-то в мешке.\n\r",ch);
       return;
@@ -2951,7 +2951,7 @@ void do_polymorph(CHAR_DATA *ch, const char *argument)
     stc("Ты не умеешь принимать другую форму.\n\r",ch);
     return;
   }
-   
+
   if (IS_SET(ch->in_room->room_flags, ROOM_NOMORPH))
   {
     stc("Ты не можешь принять другую форму здесь.\n\r", ch);
@@ -2976,13 +2976,13 @@ void do_polymorph(CHAR_DATA *ch, const char *argument)
   {
     stc("У тебя этого нет.\n\r",ch);
     return;
-  }  
-    
+  }
+
   if (ch->level + 2*category_bonus(ch,MAKE|MIND) < obj->level)
   {
     ptc(ch,"У тебя ничего не выходит, {c%s{x имеет слишком сложную форму.\n\r",get_obj_desc(obj,'1'));
     return;
-  }       
+  }
 
   if (obj->morph_name)
   {
@@ -3027,14 +3027,14 @@ void do_seen(CHAR_DATA *ch, const char *argument)
      found=TRUE;
      break;
    }
-     
+
   if(!found)
   {
     stc("Тут нет {wХранителя Архивов{x...\n\r",ch);
     return;
   }
   do_printf(buf,"%s info",argument);
-  do_offline(ch,buf); 
+  do_offline(ch,buf);
 }
 
 void do_config(CHAR_DATA *ch, const char *argument)
@@ -3082,7 +3082,7 @@ void do_config(CHAR_DATA *ch, const char *argument)
     stc("{RНа арене люди сражаются, а не настройками балуются!{x\n\r",ch);
     WAIT_STATE(ch,PULSE_VIOLENCE);
     return;
-  } 
+  }
 
   if (!str_prefix(arg,"autoonline"))
   {
@@ -3098,14 +3098,14 @@ void do_config(CHAR_DATA *ch, const char *argument)
     stc("Авто-онлайн выключен\n\r.",ch);
     return;
   }
- 
+
   if (!str_prefix(arg,"autologout") || !str_prefix(arg,"logout"))
   {
     argument=one_argument(argument,arg);
     if (!is_number(arg) || (i=atoi(arg))<2 || i>30) stc("Укажите число в пределах 2 - 30.\n\r",ch);
     else ch->settimer=i;
     ptc(ch,"Текущее значение autologout %d.\n\r",ch->settimer);
-    return; 
+    return;
   }
 
   if (!str_prefix(arg,"maxrun"))
@@ -3114,7 +3114,7 @@ void do_config(CHAR_DATA *ch, const char *argument)
     if (!is_number(arg) || (i=atoi(arg))<5 || i>150) stc("Укажите число в пределах 5 - 150.\n\r",ch);
     else ch->maxrun[0]=i;
     ptc(ch,"Текущее значение для непреревной пробежки - %d.\n\r",ch->maxrun[0]);
-    return; 
+    return;
   }
 
   if (!str_prefix(arg,"tickstring"))
@@ -3220,7 +3220,7 @@ void do_crimereport(CHAR_DATA *ch, const char *argument)
     do_function(crimer, &do_yell, buf);
     SET_BIT(victim->act,PLR_WANTED);
   }
-  else 
+  else
   {
     do_printf(buf, "{y%s {rподлый лгун{x! Правосудие нельзя обмануть!{x", get_char_desc(ch,'1'));
     SET_BIT(crimer->talk,CBIT_SHOUT);
@@ -3288,7 +3288,7 @@ void whois_info(CHAR_DATA* ch, CHAR_DATA * victim)
   add_buf(output,buf);
 
   if (IS_IMMORTAL(ch))
-  { 
+  {
     do_printf(buf,"{C| Количество убитых:           Количество смертей от:                       |\n\r| мобов:   {R%-7ld             {Cмобов  :{R%-7ld                              {C|\n\r| игроков: {R%-7ld             {Cигроков:{R%-7ld                              {C|\n\r| Побед на арене:{G%-7ld{C       Поражений на арене:{G%-7ld{C                   |\n\r{x",
     victim->vic_npc,victim->death_npc,victim->vic_pc_total,victim->death_pc_total,
     victim->vic_pc_arena, victim->death_pc_arena);
@@ -3299,7 +3299,7 @@ void whois_info(CHAR_DATA* ch, CHAR_DATA * victim)
   {
    do_printf(buf,"{C| Участвовал в квестах: {W%-7ld{Cвыполнил: {W%-7ld  {Cна этом уровне: {W%-7ld   {C|{x\n\r",victim->qcounter,victim->qcomplete[0],victim->qcomplete[1]);
    add_buf(output,buf);
-  } 
+  }
 
   if (GUILD(victim,DWARVES_GUILD))
   {
@@ -3391,11 +3391,11 @@ void mstat_info(CHAR_DATA *ch, CHAR_DATA *victim)
 
     ptc(ch, "|  {GDex: {Y%3d {C({Y%3d {C) |                          | {GAlign : {W%d{C\n\r",
       victim->perm_stat[STAT_DEX],get_curr_stat(victim,STAT_DEX),victim->alignment);
-   
+
     ptc(ch, "|  {GCon: {Y%3d {C({Y%3d {C) | {YClan :{W%s     {C|                \n\r",
       victim->perm_stat[STAT_CON],get_curr_stat(victim,STAT_CON),
       (victim->clan==NULL)? "{D   - none -  {x " : victim->clan->show_name);
- 
+
   }
 
   ptc(ch,"|{WAC:{Gpierce:{W%6d{C | {RHit  :{W%7d  {C        | Size      : {W%s{C\n\r",
@@ -3417,9 +3417,9 @@ void mstat_info(CHAR_DATA *ch, CHAR_DATA *victim)
     ptc(ch,"  {Gtoquest:{W%5d {Gqcount  :{W%5d",
       victim->nextquest,victim->countdown);
 
-    if (victim->questobj) 
+    if (victim->questobj)
       ptc(ch,"{Gquestobj:{W%5d{x\n\r",victim->questobj);
-    if (victim->questmob) 
+    if (victim->questmob)
       ptc(ch,"{Gquestmob:{W%s\n\r{x",get_char_desc(victim->questmob,'1'));
   }
 
@@ -3442,10 +3442,10 @@ void mstat_info(CHAR_DATA *ch, CHAR_DATA *victim)
       victim->pcdata->condition[COND_FULL],victim->pcdata->condition[COND_DRUNK]);
 
     ptc(ch,"  {GPlayed: {W%10d {GLast Lvl: {W%10d {GTimer: {W%d{x\n\r",
-      (int) (victim->played + current_time - victim->logon) / 3600, 
+      (int) (victim->played + current_time - victim->logon) / 3600,
       victim->pcdata->last_level, victim->timer);
     ptc(ch,"{C=---------------------------------------------------------------------------={x\n\r");
-  
+
     if (IS_CFG(victim,CFG_GETEXP)) stc("GetExp: {GON{x\n\r",ch);
     else stc("GetExp: {ROFF{x\n\r",ch);
 
@@ -3453,7 +3453,7 @@ void mstat_info(CHAR_DATA *ch, CHAR_DATA *victim)
   }
 
   ptc(ch, "\n\r{YAct: {W%s{x",act_bit_name(victim->act));
-       
+
   if (victim->comm) ptc(ch,"\n\r{CComm: {W%s{x",comm_bit_name(victim->comm));
   if (IS_NPC(victim) && victim->off_flags) ptc(ch, "\n\r{GOffense: {W%s{x",off_bit_name(victim->off_flags));
   if (victim->imm_flags) ptc(ch, "\n\r{MImmune:{W%s{x",imm_bit_name(victim->imm_flags));

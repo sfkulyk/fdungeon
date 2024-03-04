@@ -32,7 +32,7 @@ typedef unsigned __int64 uint64;
 // typedef int64_t int64; // For OLD FreeBSD
 typedef  __int64_t  int64;
 typedef  __uint64_t  uint64; // unsigned int64
-#endif 
+#endif
 
 // system calls
 int unlink();
@@ -168,7 +168,7 @@ extern int gsn_staff;
 extern int gsn_sword;
 extern int gsn_whip;
 extern int gsn_missile;
- 
+
 extern int gsn_bash;
 extern int gsn_crush;
 extern int gsn_berserk;
@@ -176,12 +176,12 @@ extern int gsn_dirt;
 extern int gsn_hand_to_hand;
 extern int gsn_trip;
 extern int gsn_frame;
- 
+
 extern int gsn_fast_healing;
 extern int gsn_haggle;
 extern int gsn_lore;
 extern int gsn_meditation;
- 
+
 extern int gsn_scrolls;
 extern int gsn_staves;
 extern int gsn_wands;
@@ -239,7 +239,7 @@ extern const  char *  weapon_bonus_types[WEAPON_MAX+1];
 extern const  int     pk_range_table  [4][4];
 extern const  unsigned char char_table[256];
 extern char           *GreyEq         [MAX_WEAR_L+1];
-extern char           *GreyRank       []; 
+extern char           *GreyRank       [];
 
 extern void change_favour args( (CHAR_DATA *ch, int cvalue) );
 
@@ -439,7 +439,7 @@ void   free_mem        args( ( void *pMem, int sMem ) );
 void   load_deities(void);
 
 // Sure, it have to be `const' (; (unicorn)
-const   char * str_dup  args( ( const char *str ) ); 
+const   char * str_dup  args( ( const char *str ) );
 void    free_string     args( ( const char *pstr ) );
 int     number_fuzzy    args( ( int number ) );
 int     number_range    args( ( int from, int to ) );
@@ -547,8 +547,8 @@ void update_pos      args( ( CD *victim ) );
 void stop_fighting   args( ( CD *ch, bool fBoth ) );
 void check_criminal  args( ( CD *ch, CD *victim, int level) );
 bool can_attack      args( ( CD *ch, int type) );
-void raw_kill        args( ( CHAR_DATA *victim ) ); 
-bool check_skill     args( ( CHAR_DATA *ch, int gsn_skill) ); 
+void raw_kill        args( ( CHAR_DATA *victim ) );
+bool check_skill     args( ( CHAR_DATA *ch, int gsn_skill) );
 
 // handler.c
 RAFFECT *get_raffect        ( ROOM_INDEX_DATA *room, int bit);
@@ -574,7 +574,7 @@ int     weapon_lookup   args( ( const char *name) );
 int     weapon_type     args( ( const char *name) );
 CLAN_DATA *clan_lookup  args( ( const char *name) );
 const char *weapon_name args( ( int weapon_Type) );
-const char *item_name   args( ( int item_type) ); 
+const char *item_name   args( ( int item_type) );
 int     item_lookup     args( ( const char *name) );
 int     attack_lookup   args( ( const char *name) );
 int     race_lookup     args( ( const char *name) );
@@ -668,7 +668,7 @@ const char *  get_mobindex_desc args( ( MID *pIndex, char needcase ));
 const char *  get_obj_desc      args( ( OD *obj, char needcase ));
 const char *  get_rdeity        args( ( const char *rdeity, char needcase ));
 const char *  get_objindex_desc args( ( OID *pIndex, char needcase ));
-const char *  str_cut           args( (char *arg,int len)); 
+const char *  str_cut           args( (char *arg,int len));
 bool  check_clanspell(int sn, CLAN_DATA *clan);
 
 // interp.c
@@ -735,7 +735,7 @@ void program_flow   args( ( int64 vnum, const char *source, CD *mob, CD *ch,
 void mp_act_trigger args( ( char *argument, CD *mob, CD *ch,
                                const void *arg1, const void *arg2, int type ) );
 
-bool mp_percent_trigger args( ( CD *mob, CD *ch,                               
+bool mp_percent_trigger args( ( CD *mob, CD *ch,
                                const void *arg1, const void *arg2, int type ) );
 void mp_bribe_trigger   args( ( CD *mob, CD *ch, int64 amount ) );
 bool mp_exit_trigger    args( ( CD *ch, int dir ) );

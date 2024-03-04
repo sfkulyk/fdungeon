@@ -18,7 +18,7 @@ NOTE_DATA *new_note()
 
   if (note_free == NULL) note = alloc_perm(sizeof(*note));
   else
-  { 
+  {
     note = note_free;
     note_free = note_free->next;
   }
@@ -41,7 +41,7 @@ void free_note(NOTE_DATA *note)
   note_free  = note;
 }
 
-    
+
 // stuff for recycling ban structures
 BAN_DATA *ban_free;
 
@@ -148,7 +148,7 @@ void free_gen_data(GEN_DATA *gen)
   INVALIDATE(gen);
   gen->next = gen_data_free;
   gen_data_free = gen;
-} 
+}
 
 /* stuff for recycling extended descs */
 EXTRA_DESCR_DATA *extra_descr_free;
@@ -255,7 +255,7 @@ void free_obj(OBJ_DATA *obj)
   free_string( obj->material );
   free_string( obj->owner);
   obj->next   = obj_free;
-  obj_free    = obj; 
+  obj_free    = obj;
   INVALIDATE(obj);
   cnt_obj--;
 }
@@ -390,12 +390,12 @@ PC_DATA *new_pcdata(void)
   pcdata->lovers=&str_empty[0];
   pcdata->propose_marry=&str_empty[0];
   pcdata->tickstr=&str_empty[0];
-  
+
   VALIDATE(pcdata);
   cnt_pcdata++;
   return pcdata;
 }
-        
+
 void free_pcdata(PC_DATA *pcdata)
 {
   int alias;
@@ -457,7 +457,7 @@ BUFFER *buf_free;
 MEM_DATA *new_mem_data(void)
 {
   MEM_DATA *memory;
-  
+
   if (mem_data_free == NULL) memory = alloc_mem(sizeof(*memory));
   else
   {
@@ -486,7 +486,7 @@ const int buf_size[MAX_BUF_LIST] =
   16,32,64,128,256,1024,2048,4096,8192,16384
 };
 
-// local procedure for finding the next acceptable size 
+// local procedure for finding the next acceptable size
 // -1 indicates out-of-boundary error
 int get_size (int val)
 {
@@ -607,7 +607,7 @@ char *buf_string(BUFFER *buffer)
 
 // stuff for recycling mobprograms
 MPROG_LIST *mprog_free;
- 
+
 MPROG_LIST *new_mprog(void)
 {
   static MPROG_LIST mp_zero;
@@ -836,7 +836,7 @@ NEWS_DATA *new_news()
 
   if (news_free == NULL) news = alloc_perm(sizeof(*news));
   else
-  { 
+  {
     news = news_free;
     news_free = NULL;
   }

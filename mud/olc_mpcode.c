@@ -41,7 +41,7 @@ char *mprog_type_to_name( int64 type )
     default:          return "ERROR";
   }
 }
- 
+
 void mpedit( CHAR_DATA *ch, const char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
@@ -123,7 +123,7 @@ void do_mpedit(CHAR_DATA *ch, const char *argument)
     }
     pMcode=get_mprog_index(atoi(argument));
     if (pMcode)
-    { 
+    {
       free_mpcode(pMcode);
       stc("Программа удалена.\n\r",ch);
     }
@@ -188,7 +188,7 @@ MPEDIT(mpedit_clear)
   EDIT_MPCODE(ch,code);
 
   if (code)
-  { 
+  {
     edit_done(ch);
     free_mpcode(code);
     stc("Программа очищена.\n\r",ch);
@@ -266,7 +266,7 @@ MPEDIT(mpedit_help)
       ptc(ch,"[{G%10s{x] %s\n\r",mob_cmd_table[i].name,mob_cmd_table[i].help);
     return FALSE;
   }
-  
+
   return FALSE;
 }
 

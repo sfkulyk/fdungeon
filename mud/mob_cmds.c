@@ -120,7 +120,7 @@ void do_mpstat( CHAR_DATA *ch, const char *argument )
 
   do_printf( arg, "Delay   %-6d [%s]\n\r",
       victim->mprog_delay,
-      victim->mprog_target == NULL 
+      victim->mprog_target == NULL
               ? "No target" : victim->mprog_target->name );
   stc( arg, ch );
 
@@ -203,7 +203,7 @@ void do_mpzecho( CHAR_DATA *ch, const char *argument )
 
   for ( d = descriptor_list; d; d = d->next )
   {
-    if ( d->connected == CON_PLAYING && d->character->in_room 
+    if ( d->connected == CON_PLAYING && d->character->in_room
       && d->character->in_room->area == ch->in_room->area )
     {
       if ( IS_IMMORTAL(d->character) ) stc( "Mob echo> ", d->character );
@@ -227,7 +227,7 @@ void do_mpasound( CHAR_DATA *ch, const char *argument )
   for ( door = 0; door < 6; door++ )
   {
     EXIT_DATA       *pexit;
-    
+
     if ( ( pexit = was_in_room->exit[door] ) != NULL
       &&   pexit->u1.to_room != NULL
       &&   pexit->u1.to_room != was_in_room )
@@ -291,8 +291,8 @@ void do_mpassist( CHAR_DATA *ch, const char *argument )
 }
 
 /* Lets the mobile destroy an object in its inventory
- * it can also destroy a worn object and it can destroy 
- * items using all.xxxxx or just plain all of them 
+ * it can also destroy a worn object and it can destroy
+ * items using all.xxxxx or just plain all of them
  *
  * Syntax: mob junk [item]
  */
@@ -315,7 +315,7 @@ void do_mpjunk( CHAR_DATA *ch, const char *argument )
           return;
       }
       if ( ( obj = get_obj_carry( ch, arg, ch ) ) == NULL )
-          return; 
+          return;
       extract_obj( obj );
   }
   else
@@ -327,7 +327,7 @@ void do_mpjunk( CHAR_DATA *ch, const char *argument )
               if ( obj->wear_loc != WEAR_NONE)
               unequip_char( ch, obj );
               extract_obj( obj );
-          } 
+          }
       }
 }
 
@@ -436,14 +436,14 @@ void do_mpoload( CHAR_DATA *ch, const char *argument )
        */
       if ( !is_number( arg2 ) )
       {
-          bug( "Mpload - Bad syntax from vnum %u.", 
+          bug( "Mpload - Bad syntax from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
           return;
       }
       level = atoi( arg2 );
       if ( level < 0 || level > get_trust( ch ) )
       {
-          bug( "Mpload - Bad level from vnum %u.", 
+          bug( "Mpload - Bad level from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
           return;
       }
@@ -459,7 +459,7 @@ void do_mpoload( CHAR_DATA *ch, const char *argument )
 
   if ( ( pObjIndex = get_obj_index( atoi64( arg1 ) ) ) == NULL )
   {
-      bug( "Mpoload - Bad vnum arg from vnum %u.", 
+      bug( "Mpoload - Bad vnum arg from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
@@ -476,7 +476,7 @@ void do_mpoload( CHAR_DATA *ch, const char *argument )
     obj_to_room( obj, ch->in_room );
    }
   }
-  else stc("{RBUG! Unable to create object! Report to Imms NOW!{x\n\r",ch); 
+  else stc("{RBUG! Unable to create object! Report to Imms NOW!{x\n\r",ch);
 }
 
 /* Lets the mobile purge all objects and other npcs in the room,
@@ -502,7 +502,7 @@ void do_mppurge( CHAR_DATA *ch, const char *argument )
       for ( victim = ch->in_room->people; victim != NULL; victim = vnext )
       {
           vnext = victim->next_in_room;
-          if ( IS_NPC( victim ) && victim != ch 
+          if ( IS_NPC( victim ) && victim != ch
           &&   !IS_SET(victim->act, ACT_NOPURGE) )
               extract_char( victim, TRUE );
       }
@@ -533,7 +533,7 @@ void do_mppurge( CHAR_DATA *ch, const char *argument )
 
   if ( !IS_NPC( victim ) )
   {
-      bug( "Mppurge - Purging a PC from vnum %u.", 
+      bug( "Mppurge - Purging a PC from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
@@ -551,14 +551,14 @@ void do_mpgoto( CHAR_DATA *ch, const char *argument )
     one_argument( argument, arg );
     if ( arg[0] == '\0' )
     {
-        bug( "Mpgoto - No argument from vnum %u.", 
+        bug( "Mpgoto - No argument from vnum %u.",
                 IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
         return;
     }
 
     if ( ( location = find_location( ch, arg ) ) == NULL )
     {
-        bug( "Mpgoto - No such location from vnum %u.", 
+        bug( "Mpgoto - No such location from vnum %u.",
                 IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
         return;
     }
@@ -585,7 +585,7 @@ void do_mpat( CHAR_DATA *ch, const char *argument )
 
   if ( arg[0] == '\0' || argument[0] == '\0' )
   {
-      bug( "Mpat - Bad argument from vnum %u.", 
+      bug( "Mpat - Bad argument from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
@@ -616,9 +616,9 @@ void do_mpat( CHAR_DATA *ch, const char *argument )
           ch->on = on;
           break;
       }
-  }   
+  }
 }
- 
+
 /* Lets the mobile transfer people.  The 'all' argument transfers
  *  everyone in the current room to the specified location
  * Syntax: mob transfer [target|'all'] [location]
@@ -636,7 +636,7 @@ void do_mptransfer( CHAR_DATA *ch, const char *argument )
 
   if ( arg1[0] == '\0' )
   {
-      bug( "Mptransfer - Bad syntax from vnum %u.", 
+      bug( "Mptransfer - Bad syntax from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
@@ -706,7 +706,7 @@ void do_mpgtransfer( CHAR_DATA *ch, const char *argument )
 
   if ( arg1[0] == '\0' )
   {
-      bug( "Mpgtransfer - Bad syntax from vnum %u.", 
+      bug( "Mpgtransfer - Bad syntax from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
@@ -808,7 +808,7 @@ void do_mpgforce( CHAR_DATA *ch, const char *argument )
 
   if ( arg[0] == '\0' || argument[0] == '\0' )
   {
-      bug( "MpGforce - Bad syntax from vnum %u.", 
+      bug( "MpGforce - Bad syntax from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
@@ -850,14 +850,14 @@ void do_mpvforce( CHAR_DATA *ch, const char *argument )
 
   if ( arg[0] == '\0' || argument[0] == '\0' )
   {
-      bug( "MpVforce - Bad syntax from vnum %u.", 
+      bug( "MpVforce - Bad syntax from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
 
   if ( !is_number( arg ) )
   {
-      bug( "MpVforce - Non-number argument vnum %u.", 
+      bug( "MpVforce - Non-number argument vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
@@ -894,14 +894,14 @@ void do_mpcast( CHAR_DATA *ch, const char *argument )
 
   if ( spell[0] == '\0' )
   {
-      bug( "MpCast - Bad syntax from vnum %u.", 
+      bug( "MpCast - Bad syntax from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
 
   if ( ( sn = skill_lookup( spell ) ) < 0 )
   {
-      bug( "MpCast - No such spell from vnum %u.", 
+      bug( "MpCast - No such spell from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
@@ -910,9 +910,9 @@ void do_mpcast( CHAR_DATA *ch, const char *argument )
   switch ( skill_table[sn].target )
   {
       default: return;
-      case TAR_IGNORE: 
+      case TAR_IGNORE:
           break;
-      case TAR_CHAR_OFFENSIVE: 
+      case TAR_CHAR_OFFENSIVE:
           if ( vch == NULL || vch == ch )
               return;
           victim = ( void * ) vch;
@@ -952,7 +952,7 @@ void do_mpdamage( CHAR_DATA *ch, const char *argument )
 
   if ( target[0] == '\0' )
   {
-      bug( "MpDamage - Bad syntax from vnum %u.", 
+      bug( "MpDamage - Bad syntax from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
@@ -965,7 +965,7 @@ void do_mpdamage( CHAR_DATA *ch, const char *argument )
       low = atoi( min );
   else
   {
-      bug( "MpDamage - Bad damage min vnum %u.", 
+      bug( "MpDamage - Bad damage min vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
@@ -973,7 +973,7 @@ void do_mpdamage( CHAR_DATA *ch, const char *argument )
       high = atoi( max );
   else
   {
-      bug( "MpDamage - Bad damage max vnum %u.", 
+      bug( "MpDamage - Bad damage max vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
@@ -992,15 +992,15 @@ void do_mpdamage( CHAR_DATA *ch, const char *argument )
       {
           victim_next = victim->next_in_room;
           if ( victim != ch )
-              damage( victim, victim, 
-                  fKill ? 
+              damage( victim, victim,
+                  fKill ?
                   number_range(low,high) : UMIN(victim->hit,number_range(low,high)),
               TYPE_UNDEFINED, DAM_NONE, FALSE, FALSE, NULL );
       }
   }
   else
-      damage( victim, victim, 
-          fKill ? 
+      damage( victim, victim,
+          fKill ?
           number_range(low,high) : UMIN(victim->hit,number_range(low,high)),
       TYPE_UNDEFINED, DAM_NONE, FALSE, FALSE, NULL );
 }
@@ -1017,7 +1017,7 @@ void do_mpremember( CHAR_DATA *ch, const char *argument )
   if ( arg[0] != '\0' )
       ch->mprog_target = get_char_world( ch, arg );
   else
-      bug( "MpRemember: missing argument from vnum %u.", 
+      bug( "MpRemember: missing argument from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
 }
 
@@ -1042,7 +1042,7 @@ void do_mpdelay( CHAR_DATA *ch, const char *argument )
   one_argument( argument, arg );
   if ( !is_number( arg ) )
   {
-      bug( "MpDelay: invalid arg from vnum %u.", 
+      bug( "MpDelay: invalid arg from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
@@ -1076,13 +1076,13 @@ void do_mpcall( CHAR_DATA *ch, const char *argument )
   argument = one_argument( argument, arg );
   if ( arg[0] == '\0' )
   {
-      bug( "MpCall: missing arguments from vnum %u.", 
+      bug( "MpCall: missing arguments from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
   if ( ( prg = get_mprog_index( atol(arg) ) ) == NULL )
   {
-      bug( "MpCall: invalid prog from vnum %u.", 
+      bug( "MpCall: invalid prog from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
       return;
   }
@@ -1140,14 +1140,14 @@ void do_mpotransfer( CHAR_DATA *ch, const char *argument )
   argument = one_argument( argument, arg );
   if ( arg[0] == '\0' )
   {
-    bug( "MpOTransfer - Missing argument from vnum %u.", 
+    bug( "MpOTransfer - Missing argument from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
     return;
   }
   one_argument( argument, buf );
   if ( ( location = find_location( ch, buf ) ) == NULL )
   {
-    bug( "MpOTransfer - No such location from vnum %u.", 
+    bug( "MpOTransfer - No such location from vnum %u.",
               IS_NPC(ch) ? ch->pIndexData->vnum : 0 );
     return;
   }
@@ -1169,7 +1169,7 @@ void do_mplist( CHAR_DATA *ch, const char *argument )
   BUFFER *buffer;
   buffer=new_buf();
 
-  for (count =1, mprg= mprog_list; mprg !=NULL; mprg = mprg->next) 
+  for (count =1, mprg= mprog_list; mprg !=NULL; mprg = mprg->next)
   {
     do_printf(buf, "[%3d] %5d\n\r", count, mprg->vnum);
     add_buf(buffer, buf);

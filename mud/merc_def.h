@@ -13,7 +13,7 @@
 // String and memory management parameters.
 #define MAX_KEY_HASH       1024
 #define MAX_STRING_LENGTH  4096
-#define MAX_INPUT_LENGTH   1024 
+#define MAX_INPUT_LENGTH   1024
 #define PAGELEN              22
 
 // Memory management.
@@ -57,7 +57,7 @@
 
 #define I  256              // 9
 #define J  512              //10
-#define K  1024             //11    
+#define K  1024             //11
 #define L  2048             //12
 #define M  4096             //13
 #define N  8192             //14
@@ -117,7 +117,7 @@
 #define CFG_RANDOM      (G) // enable random items
 #define CFG_PUBLIC      (H)
 #define CFG_GQUEST      (I)
-#define CFG_ANTICRASH   (J) // Only if compiled 
+#define CFG_ANTICRASH   (J) // Only if compiled
 #define CFG_IGNORECRASH (K) // with ANTICRASH option.
 #define CFG_BUGTRACE    (L) // (unicorn)
 #define CFG_DLOG        (M) // turn on debug log
@@ -126,7 +126,7 @@
 #define CFG_GTFIX       (P) // GlobalTemporaryFix option (used once per reboot)
 #define CFG_NODR        (Q) // Turn off damroll & hit damage shaping
 
-// Saving defines 
+// Saving defines
 #define SAVE_NORMAL  0 // write to player dir
 #define SAVE_BACKUP  1 // write to backup dir
 #define SAVE_DELETED 2 // write to deleted dir
@@ -148,7 +148,7 @@
 #define SCROLL_CLANSKILL 2
 
 // number of mobiles you "remember"
-#define MAX_VICT 10  
+#define MAX_VICT 10
 
 // Game parameters.
 // Increase the max'es if you add more of something.
@@ -156,7 +156,7 @@
 #define MAX_PK_RANGE  6
 #define MAX_SKILL   219
 #define PK_LEVEL      5
-#define MAX_GROUP    41 
+#define MAX_GROUP    41
 #define MAX_IN_GROUP 50
 #define MAX_ALIAS    15
 #define MAX_CLASS     4
@@ -184,8 +184,8 @@
 #define HERO        LEVEL_HERO
 
 #define CLAN_LONER      (A)
-#define CLAN_ROM        (B) // for 100-th channel 
-#define CLAN_CANTLEAVE  (C) // members can't petition to another clan 
+#define CLAN_ROM        (B) // for 100-th channel
+#define CLAN_CANTLEAVE  (C) // members can't petition to another clan
 #define CLAN_SEC_ACCEPT (D)
 #define CLAN_SEC_REJECT (E)
 #define CLAN_SEC_RAISE  (F)
@@ -246,7 +246,7 @@
 #define RACE_ZOMBIE   17
 #define RACE_UNIQUE   42
 
-// Criminal 
+// Criminal
 #define C_RAPER    1
 #define C_CRIMINAL 2
 #define C_DEMBEL   3
@@ -260,7 +260,7 @@
 #define C_MAGENTA   "[0;35m"
 #define C_CYAN      "[0;36m"
 #define C_WHITE     "[0;37m"
-#define C_D_GREY    "[1;30m" // Light Colors         
+#define C_D_GREY    "[1;30m" // Light Colors
 #define C_B_RED     "[1;31m"
 #define C_B_GREEN   "[1;32m"
 #define C_B_YELLOW  "[1;33m"
@@ -268,10 +268,10 @@
 #define C_B_MAGENTA "[1;35m"
 #define C_B_CYAN    "[1;36m"
 #define C_B_WHITE   "[1;37m"
-#define C_FLASHON   "[0;5m"  // Flash 
+#define C_FLASHON   "[0;5m"  // Flash
 #define C_FLASHOFF  "[0;4m"
 
-// Site ban structure. 
+// Site ban structure.
 #define BAN_NEWBIE      (A)
 #define BAN_ALL         (B)
 #define BAN_PERMANENT   (C)
@@ -279,7 +279,7 @@
 #define BAN_PREFIX      (E)
 #define BAN_IMM         (F)
 
-#define MAX_VNUM  99999 
+#define MAX_VNUM  99999
 
 #define DAM_MAX     20    // Max number of DAM_TYPES
 #define WEAPON_MAX  11    // Max number of WEAPON types
@@ -326,8 +326,8 @@
 #define CON_GET_NEW_SEX             7
 #define CON_GET_NEW_CLASS           8
 #define CON_GET_ALIGNMENT           9
-#define CON_DEFAULT_CHOICE         10 
-#define CON_GEN_GROUPS             11 
+#define CON_DEFAULT_CHOICE         10
+#define CON_GEN_GROUPS             11
 #define CON_PICK_WEAPON            12
 #define CON_READ_MOTD              14
 #define CON_BREAK_CONNECT          15
@@ -519,7 +519,7 @@
 #define IMM_SILVER     (Y)
 #define IMM_IRON       (Z)
 #define IMM_ALL        (aa)
- 
+
 // RES bits for mobs
 #define RES_SUMMON     (A)
 #define RES_CHARM      (B)
@@ -544,7 +544,7 @@
 #define RES_WOOD       (X)
 #define RES_SILVER     (Y)
 #define RES_IRON       (Z)
- 
+
 // VULN bits for mobs
 #define VULN_SUMMON    (A)
 #define VULN_CHARM     (B)
@@ -569,14 +569,14 @@
 #define VULN_WOOD      (X)
 #define VULN_SILVER    (Y)
 #define VULN_IRON      (Z)
- 
+
 // body form
 #define FORM_EDIBLE        (A)
 #define FORM_POISON        (B)
 #define FORM_MAGICAL       (C)
 #define FORM_INSTANT_DECAY (D)
 #define FORM_OTHER         (E)  // defined by material bit
- 
+
 // actual form
 #define FORM_ANIMAL      (G)
 #define FORM_SENTIENT    (H)
@@ -591,7 +591,7 @@
 #define FORM_CRUSTACEAN  (Q)
 #define FORM_WORM        (R)
 #define FORM_BLOB        (S)
- 
+
 #define FORM_MAMMAL      (V)
 #define FORM_BIRD        (W)
 #define FORM_REPTILE     (X)
@@ -599,8 +599,8 @@
 #define FORM_DRAGON      (Z)
 #define FORM_AMPHIBIAN   (aa)
 #define FORM_FISH        (bb)
-#define FORM_COLD_BLOOD  (cc)    
- 
+#define FORM_COLD_BLOOD  (cc)
+
 // body parts
 #define PART_HEAD        (A)
 #define PART_ARMS        (B)
@@ -743,9 +743,9 @@
 #define OBJ_VNUM_COINS             5
 #define OBJ_VNUM_DIAMOND        3377
 #define OBJ_VNUM_CRYSTAL          32
-#define MAX_OBJS_VALUE         32767  
+#define MAX_OBJS_VALUE         32767
 #define OBJ_VNUM_MUMMY            20
-                                 
+
 #define OBJ_VNUM_CORPSE_NPC       10
 #define OBJ_VNUM_CORPSE_PC        11
 #define OBJ_VNUM_SEVERED_HEAD     12
@@ -909,7 +909,7 @@
 #define WEAPON_MACE     4
 #define WEAPON_AXE      5
 #define WEAPON_FLAIL    6
-#define WEAPON_WHIP     7       
+#define WEAPON_WHIP     7
 #define WEAPON_POLEARM  8
 #define WEAPON_STAFF    9
 
@@ -1458,7 +1458,7 @@
 #define CBIT_GSOCIAL  (U)
 #define CBIT_EMOTE    (V)
 #define CBIT_FD       (W)
-                         
+
 // Channels numbers
 #define CHAN_YELL     0
 #define CHAN_AUCTION  1
@@ -1469,7 +1469,7 @@
 #define CHAN_MUSIC    6
 #define CHAN_CLAN     7
 #define CHAN_QUOTE    8
-#define CHAN_CENSORED 9 
+#define CHAN_CENSORED 9
 #define CHAN_GRAT     10
 #define CHAN_CHAT     11
 #define CHAN_NEWBIE   12
@@ -1602,7 +1602,7 @@
 // Get some info macros
 #define GET_AGE(ch)     ((int) (17 + ((ch)->played + current_time - (ch)->logon )/72000))
 #define IS_QUESTOR(ch)  (IS_SET((ch)->act, PLR_QUESTOR))
-#define GET_AC(ch,type) ((ch)->armor[type] + ( IS_AWAKE(ch) ? dex_app[get_curr_stat(ch,STAT_DEX)].defensive : 0 ))  
+#define GET_AC(ch,type) ((ch)->armor[type] + ( IS_AWAKE(ch) ? dex_app[get_curr_stat(ch,STAT_DEX)].defensive : 0 ))
 #define GET_HITROLL(ch) ((ch)->hitroll+str_app[get_curr_stat(ch,STAT_STR)].tohit)
 #define GET_DAMROLL(ch) ((ch)->damroll+str_app[get_curr_stat(ch,STAT_STR)].todam)
 #define get_carry_weight(ch) ((ch)->carry_weight + (ch)->silver/10 + (ch)->gold * 2 / 5)
@@ -1642,7 +1642,7 @@
 #define IS_GUARD(ch) ((ch)->clan && !str_cmp((ch)->clan->name,"guards"))
 
 // Mobprog Code defines
-#define MPEDIT( fun )           bool fun(CHAR_DATA *ch, const char*argument) 
+#define MPEDIT( fun )           bool fun(CHAR_DATA *ch, const char*argument)
 #define EDIT_MPCODE(Ch, Code)   ( Code = (MPROG_CODE*)Ch->desc->pEdit )
 
 #endif  // LEFT FROM THE TOP !

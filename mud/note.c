@@ -124,7 +124,7 @@ void do_unread(CHAR_DATA *ch,char *argument)
       found = TRUE;
       ptc(ch,"Непрочитанных изменений(changes) : %d .\n\r",count);
     }
-                       
+
     if ((count = count_spool(ch,note_list)) > 0)
     {
       found = TRUE;
@@ -148,7 +148,7 @@ void do_unread(CHAR_DATA *ch,char *argument)
       found = TRUE;
       ptc(ch,"Непрочитанных багрепортов(bugreport) : %d.\n\r",count);
     }
-      
+
     if (IS_TRUSTED(ch,ANGEL) && (count = count_spool(ch,penalty_list)) > 0)
     {
       found = TRUE;
@@ -163,7 +163,7 @@ void do_unread(CHAR_DATA *ch,char *argument)
 
     if (!found) stc("У тебя нет непрочитанных сообщений.\n\r",ch);
 
-                       
+
 }
 
 void update_read(CHAR_DATA *ch, NOTE_DATA *pnote)
@@ -361,7 +361,7 @@ void note_attach( CHAR_DATA *ch, int type )
   pnote->next         = NULL;
   pnote->sender       = str_dup(ch->name);
   /* fixed APAR for `order lostlink_player note to all' (unicorn) */
-  pnote->host         = (IS_SET(ch->act,PLR_AUTOSPIT) || !ch->desc) ? 
+  pnote->host         = (IS_SET(ch->act,PLR_AUTOSPIT) || !ch->desc) ?
           str_dup(ch->host) : str_dup(ch->desc->host);
   pnote->date         = str_dup("");
   pnote->to_list      = str_dup("");
@@ -583,11 +583,11 @@ void parse_note( CHAR_DATA *ch, const char *argument, int type )
     output = new_buf(); // Alloc space for output lines
 
     stc ("\n\rListing:\n\r",ch);
-    
+
     if (listfrom < 0)
     {
       for (pnote=*list; pnote; pnote=pnote->next)
-      if (is_note_to( ch, pnote ))  
+      if (is_note_to( ch, pnote ))
         listfrom++;
     }
 
@@ -623,10 +623,10 @@ void parse_note( CHAR_DATA *ch, const char *argument, int type )
       switch(type)
       {
         default:
-        case NOTE_NOTE: 
+        case NOTE_NOTE:
           stc("Нет непрочитанных сообщений.\n\r",ch);
           break;
-        case NOTE_OFFTOPIC: 
+        case NOTE_OFFTOPIC:
           stc("Нет непрочитанных неигровых сообщений.\n\r",ch);
           break;
         case NOTE_IDEA:
@@ -691,7 +691,7 @@ void parse_note( CHAR_DATA *ch, const char *argument, int type )
     ptc(ch,"Тут нет так много %s.",list_name);
     return;
   }
-  
+
   if (!str_prefix(arg,"help"))
   {
     stc("{wСправка по почтовой системе нашего Мира{x.\n\r",ch);
@@ -702,22 +702,22 @@ void parse_note( CHAR_DATA *ch, const char *argument, int type )
        stc("{G, penalty{x",ch);
     stc(".\n\r{G   где <параметры>: один(несколько) из допустимых параметров: {x\n\r",ch);
 
-    stc("\n\r{gЧтение сообщений: {x\n\r",ch); 
-    stc("{Gcatchup    :{x пометить все сообщения данного типа как \"прочитанные\".\n\r",ch); 
-    stc("{Glist       :{x вывести полный список сообщений.\n\r",ch); 
-    stc("{Glist -ХХ   :{x вывести список последних {WХХ{x сообщений.\n\r",ch); 
-    stc("{Gread       :{x чтение следующего непрочитанного сообщения.\n\r",ch); 
-    stc("{Gread ХХ    :{x чтение сообщения под номером {WХХ{x в списке сообщений.\n\r",ch); 
+    stc("\n\r{gЧтение сообщений: {x\n\r",ch);
+    stc("{Gcatchup    :{x пометить все сообщения данного типа как \"прочитанные\".\n\r",ch);
+    stc("{Glist       :{x вывести полный список сообщений.\n\r",ch);
+    stc("{Glist -ХХ   :{x вывести список последних {WХХ{x сообщений.\n\r",ch);
+    stc("{Gread       :{x чтение следующего непрочитанного сообщения.\n\r",ch);
+    stc("{Gread ХХ    :{x чтение сообщения под номером {WХХ{x в списке сообщений.\n\r",ch);
 
-    stc("{g\n\rРедактирование сообщений: {x\n\r",ch); 
-    stc("{G+ <строка> :{x добавить <строка> в редактируемое сообщение.\n\r",ch); 
-    stc("{G-          :{x удалить последнюю строку в редактируемом сообщении.\n\r",ch); 
-    stc("{Gclear      :{x очистить редактируемое сообщение.\n\r",ch); 
+    stc("{g\n\rРедактирование сообщений: {x\n\r",ch);
+    stc("{G+ <строка> :{x добавить <строка> в редактируемое сообщение.\n\r",ch);
+    stc("{G-          :{x удалить последнюю строку в редактируемом сообщении.\n\r",ch);
+    stc("{Gclear      :{x очистить редактируемое сообщение.\n\r",ch);
     if (IS_DEITY(ch))
-       stc("{Gdelete XX  :{R удалить сообщение под номером {WXX{x.\n\r",ch); 
+       stc("{Gdelete XX  :{R удалить сообщение под номером {WXX{x.\n\r",ch);
 
     stc("{Gedit       :{x запустить встроенный редактор соообщений.\n\r",ch);
-    stc("{R             ВНИМАНИЕ! В редакторе не действуют комманды отличные от комманд редактора!\n\r{x",ch); 
+    stc("{R             ВНИМАНИЕ! В редакторе не действуют комманды отличные от комманд редактора!\n\r{x",ch);
     stc("{Gpost       :{x отправить сообщение (аналогично параметру send).\n\r",ch);
     stc("{Gremove ХХ  :{x удалить написанное ВАМИ соообщение под номером {WХХ{x.\n\r",ch);
     stc("{Gto         :{x указать получателя. ({Rобязательное поле{x)\n\r",ch);
@@ -725,7 +725,7 @@ void parse_note( CHAR_DATA *ch, const char *argument, int type )
     stc("{Gshow       :{x показать текущее редактируемое сообщение.\n\r",ch);
     stc("{Gsubject    :{x указать тему сообщения. ({Rобязательное поле{x)\n\r",ch);
 
-    return; 
+    return;
 
   }
 
@@ -733,13 +733,13 @@ void parse_note( CHAR_DATA *ch, const char *argument, int type )
   {
     switch(type)
     {
-      case NOTE_NOTE:     
+      case NOTE_NOTE:
         ch->pcdata->last_note = current_time;
         break;
-      case NOTE_OFFTOPIC:     
+      case NOTE_OFFTOPIC:
         ch->pcdata->last_offtopic = current_time;
         break;
-      case NOTE_COMPLAIN:     
+      case NOTE_COMPLAIN:
         ch->pcdata->last_complain = current_time;
         break;
       case NOTE_IDEA:
@@ -768,7 +768,7 @@ void parse_note( CHAR_DATA *ch, const char *argument, int type )
        (type == NOTE_NEWS && !IS_TRUSTED(ch,ANGEL)) ||
        (type == NOTE_CHANGES && !IS_TRUSTED(ch,ANGEL))
       )
-     ) 
+     )
   {
     ptc(ch,"Ты еще недостаточного уровня для написания %s.",list_name);
     return;
@@ -1014,15 +1014,15 @@ void load_thread(char *name, NOTE_DATA **list, int type, time_t free_time)
   FILE *fp;
   NOTE_DATA *pnotelast;
   const char *buf;
- 
+
   if ( ( fp = fopen( name, "r" ) ) == NULL ) return;
-         
+
   pnotelast = NULL;
   for ( ; ; )
   {
     NOTE_DATA *pnote;
     char letter;
-         
+
     do
     {
       letter = getc( fp );
@@ -1034,12 +1034,12 @@ void load_thread(char *name, NOTE_DATA **list, int type, time_t free_time)
     }
     while ( isspace(letter) );
     ungetc( letter, fp );
- 
+
     pnote = alloc_perm( sizeof(*pnote) );
- 
+
     if (str_cmp(fread_word(fp),"sender")) break;
     pnote->sender = fread_string(fp);
- 
+
     buf = fread_word(fp);
     if (str_cmp(buf,"host")) pnote->host = str_dup("");
     else
@@ -1050,31 +1050,31 @@ void load_thread(char *name, NOTE_DATA **list, int type, time_t free_time)
 
     if (str_cmp(buf,"date")) break;
     pnote->date = fread_string(fp);
- 
+
     if (str_cmp(fread_word(fp),"stamp")) break;
     pnote->date_stamp = fread_number(fp);
- 
+
     if (str_cmp(fread_word(fp),"to")) break;
     pnote->to_list = fread_string(fp);
- 
+
     if (str_cmp(fread_word(fp),"subject")) break;
     pnote->subject = fread_string(fp);
- 
+
     if (str_cmp(fread_word(fp),"text")) break;
     pnote->text = fread_string(fp);
- 
+
     if (free_time && pnote->date_stamp < current_time - free_time)
     {
       free_note(pnote);
       continue;
     }
     pnote->type = type;
- 
+
     if (*list == NULL) *list = pnote;
     else pnotelast->next     = pnote;
     pnotelast       = pnote;
   }
- 
+
   strcpy( strArea, NOTE_FILE );
   fpArea = fp;
   bug( "Load_notes: bad key word.", 0 );
@@ -1102,7 +1102,7 @@ void unread_update(void)
 
  for ( d = descriptor_list; d != NULL; d = d->next )
  {
-   if (d->connected!=CON_PLAYING || !d->character 
+   if (d->connected!=CON_PLAYING || !d->character
     || IS_NPC(d->character)) continue;
    ch=d->character;
 
@@ -1130,7 +1130,7 @@ void unread_update(void)
 
    if (IS_TRUSTED(ch,ANGEL) && (count = count_spool(ch,penalty_list)) > 0)
     ptc(ch,"%d %s.\n\r",
-        count, count > 1 ? "Были добавлены новые штрафные санкции(penalties)" : 
+        count, count > 1 ? "Были добавлены новые штрафные санкции(penalties)" :
                            "Была добавлена новая штрафная санкция(penalty)");
   }
 }

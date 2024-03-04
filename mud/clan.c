@@ -49,7 +49,7 @@ void do_petition_list(CLAN_DATA *clan, CHAR_DATA *ch)
   {
     CHAR_DATA *victim;
     victim = d->character;
-        
+
     if (!victim || d->connected != CON_PLAYING || victim->clanpet!=clan) continue;
 
     if (!flag)
@@ -336,7 +336,7 @@ void do_cleader( CHAR_DATA *ch, const char *argument )
     {
       if(!IS_SET(clan->flag, CLAN_LONER)) ptc( ch, "   {G%s{x\n\r", clan->name);
     }
-        
+
     stc( "\n\rСинтаксис: {Gcleader {c<{wимя игрока{c> <{wимя клана{c>{x\n\r",ch);
     stc( "If {c<{wимя клана{c>{x is {r'{wnone{r'{x лидерство будет убрано.\n\r",ch);
     return;
@@ -400,7 +400,7 @@ void do_ear( CHAR_DATA *victim, CHAR_DATA *ch)
   do_printf( buf, "У|хо|ха|ху|хо|хом|хе|ха|шей %s", victim->name);
   free_string( obj->short_descr );
   obj->short_descr = str_dup( buf );
-                  
+
   do_printf( buf1, "Ухо %s (%s %d уровень), отрезанное ",victim->name ,class_remort_names(victim),victim->level);
   do_printf( buf,"%s %s (%s %d уровень).",buf1,ch->name, class_remort_names(ch),ch->level);
 
@@ -490,7 +490,7 @@ CLAN_DATA *new_clan()
 
   if (clan_free == NULL) clan = alloc_perm(sizeof(*clan));
   else
-  { 
+  {
     clan = clan_free;
     clan_free = clan_free->next;
   }
@@ -553,7 +553,7 @@ void do_clanwork(CHAR_DATA *ch, const char *argument)
    stc ("                 addskill     - add clanskill\n\r",ch);
    stc ("                 remskill     - remove clanskill\n\r",ch);
    stc ("                 remove <num> - remove apply to clanenchant\n\r",ch);
-   return;                  
+   return;
  }
 
  if (!str_cmp(argument,"save"))
@@ -635,7 +635,7 @@ void do_clanwork(CHAR_DATA *ch, const char *argument)
      else
       for(apply=clan->mod;apply!=NULL;apply=apply->next)
       {
-       ptc(ch,"[%3d] %s by %d\n\r",number,flag_string(apply_flags,apply->location),apply->modifier); 
+       ptc(ch,"[%3d] %s by %d\n\r",number,flag_string(apply_flags,apply->location),apply->modifier);
        number++;
       }
    }
@@ -705,7 +705,7 @@ void do_clanwork(CHAR_DATA *ch, const char *argument)
    clan->long_desc=str_dup(argument);
    found=TRUE;
  }
- else 
+ else
  {
   if (!str_cmp(arg2,"wear"))
   {
@@ -735,7 +735,7 @@ void do_clanwork(CHAR_DATA *ch, const char *argument)
   {
     int64 time;
     int sn=skill_lookup(arg3);
- 
+
     argtemp=one_argument(argtemp,arg4);
 
     if (EMPTY(arg4)) time=-1;
@@ -897,7 +897,7 @@ void do_leader( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  if (!str_prefix(arg1, "toggle") && ch->clanrank==LEADER)  
+  if (!str_prefix(arg1, "toggle") && ch->clanrank==LEADER)
   {
     int count;
 
@@ -955,7 +955,7 @@ void do_leader( CHAR_DATA *ch, const char *argument )
       victim->clan=clan_lookup("loner");
       ptc(ch,"%s теперь лонер.\n\r",victim->name);
       save_char_obj(victim);
-    } 
+    }
     else stc ("Ты не можешь этого сделать\n\r",ch);
     extract_char(victim,TRUE);
     return;
@@ -990,12 +990,12 @@ void do_leader( CHAR_DATA *ch, const char *argument )
     {
       ptc(ch,"\n\r|Level|Name        |Race      |Class       |Clanrank    |\n\r");
       ptc(ch,"|%5d|%12s|%10s|%12s|%12s\n\r",
-        victim->level,           
+        victim->level,
         victim->name,
         race_table[victim->race].who_name,
         classname(victim),
         clan_ranks[victim->clanrank]);
-    } 
+    }
     else stc ("Ты не можешь этого сделать\n\r",ch);
     extract_char(victim,TRUE);
     return;
@@ -1044,7 +1044,7 @@ void do_leader( CHAR_DATA *ch, const char *argument )
       }
       ptc(ch,"%s теперь %s\n\r",victim->name,clan_ranks[victim->clanrank].name);
       save_char_obj(victim);
-    } 
+    }
     else stc ("Ты не можешь этого сделать\n\r",ch);
     extract_char(victim, TRUE );
     return;
@@ -1231,7 +1231,7 @@ void do_clanbank( CHAR_DATA *ch, const char *argument )
     {
       stc("{RТы должен быть в клане.{x\n\r", ch);
       return;
-    } 
+    }
 
   if (EMPTY(argument))
   {
@@ -1332,7 +1332,7 @@ void do_clanbank( CHAR_DATA *ch, const char *argument )
       ptc(ch, "Ты кладешь {M%d{x qp в кланбанк %s\n\r", count, ch->clan->show_name);
       ptc(ch,"На счету в %s теперь {Y%d{C.{x\n\r", ch->clan->show_name,ch->clan->qp);
     }
-    else 
+    else
     {
       do_clanbank(ch, "");
       return;

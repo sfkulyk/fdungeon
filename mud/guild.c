@@ -1,11 +1,11 @@
 // Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
-#include <sys/types.h> 
-#include <ctype.h> 
-#include <stdio.h> 
-#include <string.h> 
+#include <sys/types.h>
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
 #include <time.h>
-#include <stdlib.h> 
+#include <stdlib.h>
 #include "merc.h"
 #include "recycle.h"
 
@@ -56,15 +56,15 @@ int guild_lookup(const char *name)
   return 0;
 }
 
-void do_gaccount( CHAR_DATA *ch, const char *argument ) 
-{ 
-  CHAR_DATA *keeper; 
-  char arg1[MAX_INPUT_LENGTH],arg2[MAX_INPUT_LENGTH]; 
+void do_gaccount( CHAR_DATA *ch, const char *argument )
+{
+  CHAR_DATA *keeper;
+  char arg1[MAX_INPUT_LENGTH],arg2[MAX_INPUT_LENGTH];
   int64 amount;
   int guild=0,tmp;
- 
+
   if (IS_SET(ch->act,PLR_TIPSY)) if (tipsy(ch,"account")) return;
- 
+
   if (ch->pcdata->guild==0)
   {
     stc("Ась?\n\r", ch);
@@ -77,8 +77,8 @@ void do_gaccount( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  for ( keeper=ch->in_room->people; keeper; keeper=keeper->next_in_room ) 
-  { 
+  for ( keeper=ch->in_room->people; keeper; keeper=keeper->next_in_room )
+  {
     if (!IS_NPC(keeper)) continue;
     for (tmp=1;guild_table[tmp].guild!=255;tmp++)
     {
@@ -91,28 +91,28 @@ void do_gaccount( CHAR_DATA *ch, const char *argument )
       }
     }
     if (guild!=0) break;
-  } 
+  }
 
   if (!keeper)
-  { 
-    stc("{RСначала зайди в банк.\n\r{x",ch); 
-    return; 
-  } 
- 
-  argument = one_argument(argument, arg1); 
-  argument = one_argument(argument, arg2); 
- 
-  if (is_number(arg2)) amount=atoi(arg2); 
+  {
+    stc("{RСначала зайди в банк.\n\r{x",ch);
+    return;
+  }
+
+  argument = one_argument(argument, arg1);
+  argument = one_argument(argument, arg2);
+
+  if (is_number(arg2)) amount=atoi(arg2);
   else
-  { 
-    stc("синтаксис: GACCOUNT <get|put> <число> [gold]\n\r",ch); 
+  {
+    stc("синтаксис: GACCOUNT <get|put> <число> [gold]\n\r",ch);
     stc("           GACCOUNT <put> <число> diamonds\n\r",ch);
     stc("           GACCOUNT <put> <чиcло> crystals\n\r",ch);
-    return; 
-  } 
-   
-  if (!str_prefix(arg1,"put")) 
-  { 
+    return;
+  }
+
+  if (!str_prefix(arg1,"put"))
+  {
     int64 count=0;
 
     if (EMPTY(argument) || !str_prefix(argument, "gold"))
@@ -156,15 +156,15 @@ void do_gaccount( CHAR_DATA *ch, const char *argument )
   {
     if (amount<10 || amount>guild_table[guild].gold)
     {
-      stc("{RТы не можешь снять меньше 10 или больше, чем есть на счету.{x",ch); 
-      return; 
-    } 
-    guild_table[guild].gold-=amount; 
-    ch->gold+=amount; 
-    ptc(ch,"\n\r{CТы снимаешь со счета {Y%u {Cзолота. Осталось {Y%u.{x\n\r",amount,guild_table[guild].gold); 
+      stc("{RТы не можешь снять меньше 10 или больше, чем есть на счету.{x",ch);
+      return;
+    }
+    guild_table[guild].gold-=amount;
+    ch->gold+=amount;
+    ptc(ch,"\n\r{CТы снимаешь со счета {Y%u {Cзолота. Осталось {Y%u.{x\n\r",amount,guild_table[guild].gold);
     save_config ();
-  } 
-} 
+  }
+}
 
 void do_offer(CHAR_DATA *ch, const char *argument)
 {
@@ -258,7 +258,7 @@ void do_offer(CHAR_DATA *ch, const char *argument)
       return;
     }
 
-    
+
     for(offer=offer_list;offer;offer=offer->next)
     {
       if (!strcmp(ch->name,offer->customer) && !str_cmp(offer->name, vch->name))
@@ -279,7 +279,7 @@ void do_offer(CHAR_DATA *ch, const char *argument)
         return;
       }
     }
-    
+
 
     offer=new_offer();
     offer->customer=str_dup(ch->name);
@@ -323,7 +323,7 @@ void do_offer(CHAR_DATA *ch, const char *argument)
     OBJ_DATA *obj;
     OFFER_DATA *tmp;
     bool found=FALSE;
-    
+
     argument=one_argument(argument,arg);
 
     if (EMPTY(arg))
@@ -382,7 +382,7 @@ void assasin_echo(const char *argument )
 bool is_offered( CHAR_DATA *ch )
 {
   OFFER_DATA *off;
-    
+
   for ( off=offer_list; off; off=off->next )
     if (!strcmp(ch->name,off->name)) return TRUE;
   return FALSE;
@@ -409,7 +409,7 @@ void do_guild( CHAR_DATA *ch, const char *argument )
      stc ("guild <char> <guild name>\n\r",ch);
     if (!IS_IMMORTAL(ch)) return;
      stc ("guild <char> elder\n\r",ch);
-     stc ("guild <char> none\n\r",ch); 
+     stc ("guild <char> none\n\r",ch);
      stc ("guild list\n\r",ch);
      stc ("guild show\n\r",ch);
     return;
@@ -448,7 +448,7 @@ void do_guild( CHAR_DATA *ch, const char *argument )
     stc( "Тут таких нет.\n\r", ch );
     return;
   }
-    
+
   if (IS_IMMORTAL(ch) && !str_prefix(arg2,"none"))
   {
     stc("Этот персонаж теперь вне клана.\n\r",ch);
@@ -492,9 +492,9 @@ void do_guild( CHAR_DATA *ch, const char *argument )
     if (GUILD(victim, DWARVES_GUILD))
     {
       ptc(ch,"%s теперь состоит в Гильдии Гномов.\n\r",victim->name);
-//      if (!IS_IMMORTAL(ch)) 
+//      if (!IS_IMMORTAL(ch))
       gecho("{YЯркие вспышки прочертили небо, и земля содрогнулась от тяжкого стона.{x");
-//      if (!IS_IMMORTAL(ch)) 
+//      if (!IS_IMMORTAL(ch))
       gecho("{DГильдия гномов{x приняла еще одного {CКУЗНЕЦА{x.");
       stc ("Тебя приняли в гильдию Гномов.\n\r", victim);
     }
@@ -536,9 +536,9 @@ void do_guild( CHAR_DATA *ch, const char *argument )
     if (GUILD(victim, DRUIDS_GUILD))
     {
       ptc(ch,"%s теперь послушник в Гильдии Друидов.\n\r",victim->name);
-//      if (!IS_IMMORTAL(ch)) 
+//      if (!IS_IMMORTAL(ch))
       gecho("{YЯркие вспышки прочертили небо, травы и деревья радостно прошелестели в приветствии.{x");
-//      if (!IS_IMMORTAL(ch)) 
+//      if (!IS_IMMORTAL(ch))
       gecho("{GГильдия Друидов{x приняла еще одного {GПОСЛУШНИКА{x.");
       stc ("Тебя приняли в гильдию Друидов.\n\r", victim);
     }
@@ -649,11 +649,11 @@ void do_guild( CHAR_DATA *ch, const char *argument )
     if ( gn_new > -1) gn_add(victim,gn_new);
   }
   else if ( strcmp(victim->clan->name,"loner") && !strcmp(clan->name,"loner") )
-  {    
+  {
     gn_new=group_lookup(clan->name);
     if ( gn_new > -1) gn_add(victim,gn_new);
-  }    
-  else if ( !strcmp(victim->clan->name,"loner") && strcmp(clan->name,"loner") ) 
+  }
+  else if ( !strcmp(victim->clan->name,"loner") && strcmp(clan->name,"loner") )
   {
     gn_old=group_lookup(victim->clan->name);
     if (gn_old > -1) gn_remove(victim,gn_old);
@@ -672,7 +672,7 @@ void do_guild( CHAR_DATA *ch, const char *argument )
 }
 
 void do_resurrect( CHAR_DATA *ch, const char *argument )
-{ 
+{
   char buff[MAX_STRING_LENGTH];
   CHAR_DATA *mob;
   int i;
@@ -684,21 +684,21 @@ void do_resurrect( CHAR_DATA *ch, const char *argument )
   }
 
   if (ch->in_room->sector_type!=SECT_FOREST)
-  { 
+  {
       stc("Тебе некого здесь призывать.\n\r",ch);
       return;
-  } 
+  }
 
-  if( ch->pet != NULL ) 
-  { 
+  if( ch->pet != NULL )
+  {
       stc( "Деревья лишь тихо зашелестели в ответ на твой призыв.\n\r", ch );
       return;
-  } 
+  }
 
   // add dendroid
   if((mob = create_mobile(get_mob_index(2)))==NULL) // VNUM 2 - dendroid (LIMBO)
   {
-   stc("{RBUG! Unable to create mob! Report to Imms NOW!{x\n\r",ch); 
+   stc("{RBUG! Unable to create mob! Report to Imms NOW!{x\n\r",ch);
    return;
   }
 
@@ -723,7 +723,7 @@ void do_resurrect( CHAR_DATA *ch, const char *argument )
   mob->hit                    = mob->max_hit;
   mob->max_mana               = 100 + dice(mob->level,10);
   mob->mana                   = mob->max_mana;
-  for (i = 0;i < 3;i++) 
+  for (i = 0;i < 3;i++)
   mob->armor[i]               = interpolate(mob->level,100,-100);
   mob->armor[3]               = interpolate(mob->level,100,0);
   mob->alignment=0;
@@ -737,11 +737,11 @@ void do_resurrect( CHAR_DATA *ch, const char *argument )
   SET_BIT(mob->act, ACT_PET);
   SET_BIT(mob->act, ACT_EXTRACT_CORPSE);
 
-  if (ch->clan!=NULL) 
-  { 
+  if (ch->clan!=NULL)
+  {
     mob->clan=ch->clan;
     mob->clanrank=0;
-  } 
+  }
   add_follower( mob, ch );
   mob->leader = ch;
   ch->pet = mob;

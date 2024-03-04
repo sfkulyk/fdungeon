@@ -213,7 +213,7 @@ ROOM_INDEX_DATA *new_room_index( void )
   pRoom->heal_rate   = 100;
   pRoom->mana_rate   = 100;
   return pRoom;
-} 
+}
 
 void free_room_index( ROOM_INDEX_DATA *pRoom )
 {
@@ -333,7 +333,7 @@ void free_obj_index( OBJ_INDEX_DATA *pObj )
   {
     free_extra_descr( pExtra );
   }
-  
+
   pObj->next    = obj_index_free;
   obj_index_free= pObj;
 }
@@ -377,10 +377,10 @@ MOB_INDEX_DATA *new_mob_index( void )
   pMob->vuln_flags = 0;
   pMob->off_flags  = 0;
   pMob->size       = SIZE_MEDIUM;
-  pMob->ac[AC_PIERCE] = 0;        
-  pMob->ac[AC_BASH]   = 0;        
-  pMob->ac[AC_SLASH]  = 0;        
-  pMob->ac[AC_EXOTIC] = 0;        
+  pMob->ac[AC_PIERCE] = 0;
+  pMob->ac[AC_BASH]   = 0;
+  pMob->ac[AC_SLASH]  = 0;
+  pMob->ac[AC_EXOTIC] = 0;
   pMob->hit[DICE_NUMBER]    = 0;
   pMob->hit[DICE_TYPE]      = 0;
   pMob->hit[DICE_BONUS]     = 0;

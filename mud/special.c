@@ -11,66 +11,66 @@
 #include "magic.h"
 
 // The following special functions are available for mobiles.
-DECLARE_SPEC_FUN(       spec_breath_any         );
-DECLARE_SPEC_FUN(       spec_breath_acid        );
-DECLARE_SPEC_FUN(       spec_breath_fire        );
-DECLARE_SPEC_FUN(       spec_breath_frost       );
-DECLARE_SPEC_FUN(       spec_breath_gas         );
-DECLARE_SPEC_FUN(       spec_breath_lightning   );
-DECLARE_SPEC_FUN(       spec_cast_adept         );
-DECLARE_SPEC_FUN(       spec_cast_cleric        );
-DECLARE_SPEC_FUN(       spec_cast_judge         );
-DECLARE_SPEC_FUN(       spec_cast_mage          );
-DECLARE_SPEC_FUN(       spec_cast_undead        );
-DECLARE_SPEC_FUN(       spec_executioner        );
-DECLARE_SPEC_FUN(       spec_fido               );
-DECLARE_SPEC_FUN(       spec_guard              );
-DECLARE_SPEC_FUN(       spec_janitor            );
-DECLARE_SPEC_FUN(       spec_mayor              );
-DECLARE_SPEC_FUN(       spec_poison             );
-DECLARE_SPEC_FUN(       spec_thief              );
-DECLARE_SPEC_FUN(       spec_nasty              );
-DECLARE_SPEC_FUN(       spec_troll_member       );
-DECLARE_SPEC_FUN(       spec_ogre_member        );
-DECLARE_SPEC_FUN(       spec_patrolman          );
-DECLARE_SPEC_FUN(       spec_questmaster        );
-DECLARE_SPEC_FUN(       spec_summoner           );
-DECLARE_SPEC_FUN(       spec_summonera          );
+DECLARE_SPEC_FUN( spec_breath_any       );
+DECLARE_SPEC_FUN( spec_breath_acid      );
+DECLARE_SPEC_FUN( spec_breath_fire      );
+DECLARE_SPEC_FUN( spec_breath_frost     );
+DECLARE_SPEC_FUN( spec_breath_gas       );
+DECLARE_SPEC_FUN( spec_breath_lightning );
+DECLARE_SPEC_FUN( spec_cast_adept       );
+DECLARE_SPEC_FUN( spec_cast_cleric      );
+DECLARE_SPEC_FUN( spec_cast_judge       );
+DECLARE_SPEC_FUN( spec_cast_mage        );
+DECLARE_SPEC_FUN( spec_cast_undead      );
+DECLARE_SPEC_FUN( spec_executioner      );
+DECLARE_SPEC_FUN( spec_fido             );
+DECLARE_SPEC_FUN( spec_guard            );
+DECLARE_SPEC_FUN( spec_janitor          );
+DECLARE_SPEC_FUN( spec_mayor            );
+DECLARE_SPEC_FUN( spec_poison           );
+DECLARE_SPEC_FUN( spec_thief            );
+DECLARE_SPEC_FUN( spec_nasty            );
+DECLARE_SPEC_FUN( spec_troll_member     );
+DECLARE_SPEC_FUN( spec_ogre_member      );
+DECLARE_SPEC_FUN( spec_patrolman        );
+DECLARE_SPEC_FUN( spec_questmaster      );
+DECLARE_SPEC_FUN( spec_summoner         );
+DECLARE_SPEC_FUN( spec_summonera        );
 
 const   struct  spec_type    spec_table[] =
 {
- {   "spec_breath_any",        spec_breath_any         },
- {   "spec_breath_acid",       spec_breath_acid        },
- {   "spec_breath_fire",       spec_breath_fire        },
- {   "spec_breath_frost",      spec_breath_frost       },
- {   "spec_breath_gas",        spec_breath_gas         },
- {   "spec_breath_lightning",  spec_breath_lightning   },      
- {   "spec_cast_adept",        spec_cast_adept         },
- {   "spec_cast_cleric",       spec_cast_cleric        },
- {   "spec_cast_judge",        spec_cast_judge         },
- {   "spec_cast_mage",         spec_cast_mage          },
- {   "spec_cast_undead",       spec_cast_undead        },
- {   "spec_executioner",       spec_executioner        },
- {   "spec_fido",              spec_fido               },
- {   "spec_guard",             spec_guard              },
- {   "spec_janitor",           spec_janitor            },
- {   "spec_mayor",             spec_mayor              },
- {   "spec_poison",            spec_poison             },
- {   "spec_thief",             spec_thief              },
- {   "spec_nasty",             spec_nasty              },
- {   "spec_troll_member",      spec_troll_member       },
- {   "spec_ogre_member",       spec_ogre_member        },
- {   "spec_patrolman",         spec_patrolman          },
- {   "spec_questmaster",       spec_questmaster        }, // Vassago
- {   "spec_summonera",         spec_summonera          },
- {   NULL,                     NULL                    }
+ { "spec_breath_any",       spec_breath_any       },
+ { "spec_breath_acid",      spec_breath_acid      },
+ { "spec_breath_fire",      spec_breath_fire      },
+ { "spec_breath_frost",     spec_breath_frost     },
+ { "spec_breath_gas",       spec_breath_gas       },
+ { "spec_breath_lightning", spec_breath_lightning },
+ { "spec_cast_adept",       spec_cast_adept       },
+ { "spec_cast_cleric",      spec_cast_cleric      },
+ { "spec_cast_judge",       spec_cast_judge       },
+ { "spec_cast_mage",        spec_cast_mage        },
+ { "spec_cast_undead",      spec_cast_undead      },
+ { "spec_executioner",      spec_executioner      },
+ { "spec_fido",             spec_fido             },
+ { "spec_guard",            spec_guard            },
+ { "spec_janitor",          spec_janitor          },
+ { "spec_mayor",            spec_mayor            },
+ { "spec_poison",           spec_poison           },
+ { "spec_thief",            spec_thief            },
+ { "spec_nasty",            spec_nasty            },
+ { "spec_troll_member",     spec_troll_member     },
+ { "spec_ogre_member",      spec_ogre_member      },
+ { "spec_patrolman",        spec_patrolman        },
+ { "spec_questmaster",      spec_questmaster      }, // Vassago
+ { "spec_summonera",        spec_summonera        },
+ { NULL,                    NULL                  }
 };
 
 // Given a name, return the appropriate spec fun.
 SPEC_FUN *spec_lookup( const char *name )
 {
   int i;
- 
+
   for ( i = 0; spec_table[i].name != NULL; i++)
   {
     if (LOWER(name[0]) == LOWER(spec_table[i].name[0])
@@ -97,7 +97,7 @@ bool spec_troll_member( CHAR_DATA *ch)
   int count = 0;
   char *message;
 
-  if (!IS_AWAKE(ch) || IS_AFFECTED(ch,AFF_CALM) || ch->in_room == NULL 
+  if (!IS_AWAKE(ch) || IS_AFFECTED(ch,AFF_CALM) || ch->in_room == NULL
     ||  IS_AFFECTED(ch,AFF_CHARM) || ch->fighting != NULL) return FALSE;
 
   // find an ogre to beat up
@@ -128,7 +128,7 @@ bool spec_troll_member( CHAR_DATA *ch)
     case 3: message = "$c1 хрустнув пальцами, произносит '{GЧувтвуешь удачу?{x'";
       break;
     case 4: message = "$c1 произносит '{GТут нет охранников, ты попал!{x'";
-      break;  
+      break;
     case 5: message = "$c1 произносит '{GВремя присоединиться к остальным, сосунок.{x'";
       break;
     case 6: message = "$c1 произносит '{GДочирикался...{x'";
@@ -145,7 +145,7 @@ bool spec_ogre_member( CHAR_DATA *ch)
   CHAR_DATA *vch, *victim = NULL;
   int count = 0;
   char *message;
- 
+
   if (!IS_AWAKE(ch) || IS_AFFECTED(ch,AFF_CALM) || ch->in_room == NULL
     ||  IS_AFFECTED(ch,AFF_CHARM) || ch->fighting != NULL) return FALSE;
 
@@ -153,9 +153,9 @@ bool spec_ogre_member( CHAR_DATA *ch)
   for (vch = ch->in_room->people;  vch != NULL;  vch = vch->next_in_room)
   {
     if (!IS_NPC(vch) || ch == vch) continue;
- 
+
     if (vch->pIndexData->vnum == MOB_VNUM_PATROLMAN) return FALSE;
- 
+
     if (vch->pIndexData->group == GROUP_VNUM_TROLLS
       &&  ch->level > vch->level - 2 && !is_safe(ch,vch))
     {
@@ -164,7 +164,7 @@ bool spec_ogre_member( CHAR_DATA *ch)
     }
   }
   if (victim == NULL) return FALSE;
- 
+
   /* say something, then raise hell */
   switch (number_range(0,6))
   {
@@ -178,7 +178,7 @@ bool spec_ogre_member( CHAR_DATA *ch)
     case 3: message = "$c1 хрустнув пальцами, произносит '{GЧувтвуешь удачу?{x'";
       break;
     case 4: message = "$c1 произносит '{GТут нет охранников, ты попал!{x'";
-      break;  
+      break;
     case 5: message = "$c1 произносит '{GВремя присоединиться к остальным, сосунок.{x'";
       break;
     case 6: message = "$c1 произносит '{GДочирикался...{x'";
@@ -207,7 +207,7 @@ bool spec_patrolman(CHAR_DATA *ch)
 
     if (vch->fighting != NULL)  /* break it up! */
     {
-      if (number_range(0,count) == 0) victim = (vch->level > vch->fighting->level) 
+      if (number_range(0,count) == 0) victim = (vch->level > vch->fighting->level)
         ? vch : vch->fighting;
       count++;
     }
@@ -216,7 +216,7 @@ bool spec_patrolman(CHAR_DATA *ch)
   if (victim == NULL || (IS_NPC(victim) && victim->spec_fun == ch->spec_fun))
     return FALSE;
 
-  if (((obj = get_eq_char(ch,WEAR_NECK)) != NULL 
+  if (((obj = get_eq_char(ch,WEAR_NECK)) != NULL
      && obj->pIndexData->vnum == OBJ_VNUM_WHISTLE))
   {
     act("Ты сильно дуешь в $i4.",ch,obj,NULL,TO_CHAR);
@@ -236,17 +236,17 @@ bool spec_patrolman(CHAR_DATA *ch)
     default:        message = NULL;         break;
     case 0: message = "$c1 вскрикивает '{MРуки за голову! По одному на выход!{x'";
       break;
-    case 1: message = 
+    case 1: message =
       "$c1 вскрикивает '{MОбщество в опастности!{x'";
       break;
-    case 2: message = 
+    case 2: message =
       "$c1 вздыхает '{mДети, погрязшие в разврате..{RЗАСЛУЖИВАЮТ СМЕРТИ!{x'";
       break;
     case 3: message = "$c1 вскрикивает '{MПрекратить немедленно!{x' и атакует.";
       break;
     case 4: message = "$c1 поднимает дубинку и принимается за работу.";
       break;
-    case 5: message = 
+    case 5: message =
       "$c1 предъявляет значок и ввязывается в драку.";
       break;
     case 6: message = "$c1 вскрикивает '{MНа пол, сосунки!{x'";
@@ -262,9 +262,9 @@ bool spec_nasty( CHAR_DATA *ch )
 {
   CHAR_DATA *victim, *v_next;
   int64 gold;
- 
+
   if (!IS_AWAKE(ch)) {return FALSE;}
- 
+
   if (ch->position != POS_FIGHTING)
   {
     for ( victim = ch->in_room->people; victim != NULL; victim = v_next)
@@ -287,7 +287,7 @@ bool spec_nasty( CHAR_DATA *ch )
   }
   /* okay, we must be fighting.... steal some coins and flee */
   if ( (victim = ch->fighting) == NULL) return FALSE;// let's be paranoid....
- 
+
   switch ( number_bits(2) )
   {
     case 0:  act( "$c1 срезает твой кошелек!",ch, NULL, victim, TO_VICT);
@@ -321,13 +321,13 @@ bool dragon( CHAR_DATA *ch, char *spell_name )
   if ( ( sn = skill_lookup( spell_name ) ) < 0 )
         return FALSE;
   if ( !IS_NPC(victim) && victim->clan != NULL && IS_SET(victim->clan->flag, CLAN_WARRIOR)
-       && IS_AFFECTED(victim, AFF_FORCEFIELD) 
+       && IS_AFFECTED(victim, AFF_FORCEFIELD)
        && number_percent() < 65 )
     {
       stc("{yТвоя ненависть к магии поглощает заклинание!{x\n\r",victim);
       act("{yНенависть {W$c2{y к магии поглощает заклинание!{x",victim,NULL,NULL,TO_ROOM);
-     return FALSE; 
-    }   
+     return FALSE;
+    }
   (*skill_table[sn].spell_fun) ( sn, ch->level, ch, victim, TARGET_CHAR);
   return TRUE;
 }
@@ -392,7 +392,7 @@ bool spec_cast_adept( CHAR_DATA *ch )
   for ( victim = ch->in_room->people; victim != NULL; victim = v_next )
   {
     v_next = victim->next_in_room;
-    if ( victim != ch && can_see( ch, victim,NOCHECK_LVL ) && number_bits( 1 ) == 0 
+    if ( victim != ch && can_see( ch, victim,NOCHECK_LVL ) && number_bits( 1 ) == 0
         && !IS_NPC(victim) && victim->level < 11) break;
   }
   if ( victim == NULL ) return FALSE;
@@ -463,7 +463,7 @@ bool spec_cast_cleric( CHAR_DATA *ch )
 
     switch ( number_bits( 4 ) )
     {
-      case  0: min_level = 0; do_printf(spell,"'blindness'");      break;        
+      case  0: min_level = 0; do_printf(spell,"'blindness'");      break;
       case  1: min_level = 3; do_printf(spell,"'cause serious'");  break;
       case  2: min_level = 7; do_printf(spell,"'earthquake'");     break;
       case  3: min_level = 9; do_printf(spell,"'cause critical'"); break;
@@ -475,7 +475,7 @@ bool spec_cast_cleric( CHAR_DATA *ch )
       case  9: min_level = 45; do_printf(spell,"'cure critical'"); victim = ch; break;
       case 10: min_level = 25; do_printf(spell,"'harm'");           break;
       case 11: min_level = 15; do_printf(spell,"'plague'");        break;
-      case 12: min_level = 25; 
+      case 12: min_level = 25;
         if (IS_EVIL(ch)) {do_printf(spell,"'demonfire'");}
         else if (IS_GOOD(ch)) {do_printf(spell,"'ray of truth'");}
         else {do_printf(spell,"'harm'");}
@@ -496,9 +496,9 @@ bool spec_cast_judge( CHAR_DATA *ch )
   CHAR_DATA *v_next;
   char *spell;
   int sn;
- 
+
   if ( ch->position != POS_FIGHTING ) return FALSE;
- 
+
   for ( victim = ch->in_room->people; victim != NULL; victim = v_next )
   {
     v_next = victim->next_in_room;
@@ -543,7 +543,7 @@ bool spec_cast_mage( CHAR_DATA *ch )
       case  6: min_level = 13; do_printf(spell,"'energy'");        break;
       case  7: min_level = 15; do_printf(spell, "'fireball'");     break;
       case  8: min_level = 20; do_printf(spell, "'plague'");       break;
-      case  9: min_level = 40; do_printf(spell, "'ensnare'");      break;      
+      case  9: min_level = 40; do_printf(spell, "'ensnare'");      break;
       default: min_level = 20; do_printf(spell, "'acid'");         break;
     }
     if ( ch->level >= min_level )        break;
@@ -617,7 +617,7 @@ bool spec_executioner( CHAR_DATA *ch )
 
     if ( !IS_NPC(victim) && IS_SET(victim->act, PLR_RAPER))
     { crime = C_RAPER; break; }
-        
+
     if ( !IS_NPC(victim) && IS_SET(victim->act, PLR_ARMY))
     { crime = C_DEMBEL; break; }
   }
@@ -627,7 +627,7 @@ bool spec_executioner( CHAR_DATA *ch )
   if    (crime == C_RAPER && !IS_IMMORTAL(victim))
   {
     do_printf( buf, "%s НАСИЛЬНИК! {RГОТОВЬСЯ К РАСПЛАТЕ!!!{x", victim->name );
-    do_function(ch, &do_yell, buf );      
+    do_function(ch, &do_yell, buf );
     act("$c1 срывает с тебя одежду и {rжестоко насилует{x!!!",
                                            ch,NULL,victim,TO_VICT);
     act("$c1 срывает одежду c $C2 и {rжестоко насилует{x!!!",
@@ -635,7 +635,7 @@ bool spec_executioner( CHAR_DATA *ch )
     WAIT_STATE(victim, 5*PULSE_VIOLENCE);
     act("$c1 с жестокой ухмылкой повторяет экзекуцию...{rты не можешь пошевелиться{x!",
                                            ch,NULL,victim,TO_VICT);
-    act("$c1 жестоко мучает $C4 {rво второй раз{x...",                                             ch,NULL,victim,TO_NOTVICT);
+    act("$c1 жестоко мучает $C4 {rво второй раз{x...",ch,NULL,victim,TO_NOTVICT);
     REM_BIT( victim->act, PLR_RAPER );
 
     victim->hit=-2;
@@ -659,7 +659,7 @@ bool spec_executioner( CHAR_DATA *ch )
     char_to_room(victim, get_room_index(ROOM_VNUM_ALTAR) );
     do_function(victim, &do_look, "auto" );
     return TRUE;
-  } 
+  }
 
   do_printf( buf, "%s ПРЕСТУПНИК! {RКРОВИ И ОТМЩЕНИЯ!!!{x",victim->name );
   do_function(ch, &do_yell, buf );
@@ -715,7 +715,7 @@ bool spec_guard( CHAR_DATA *ch )
   for ( victim = ch->in_room->people; victim != NULL; victim = v_next )
   {
     v_next = victim->next_in_room;
-    if ( !IS_NPC(victim) && (IS_SET(victim->act, PLR_WANTED) || victim->criminal>50) 
+    if ( !IS_NPC(victim) && (IS_SET(victim->act, PLR_WANTED) || victim->criminal>50)
     &&   can_see(ch,victim,CHECK_LVL))
     { crime = "ПРЕСТУПНИК"; break; }
 
@@ -773,9 +773,9 @@ bool spec_janitor( CHAR_DATA *ch )
 bool spec_mayor( CHAR_DATA *ch )
 {
   static const char open_path[] =
-        "W3a3003b33000c111d0d111Oe333333Oe22c222112212111a1S.";
+    "W3a3003b33000c111d0d111Oe333333Oe22c222112212111a1S.";
   static const char close_path[] =
-        "W3a3003b33000c111d0d111CE333333CE22c222112212111a1S.";
+    "W3a3003b33000c111d0d111CE333333CE22c222112212111a1S.";
 
   static const char *path;
   static int pos;
@@ -892,16 +892,15 @@ bool spec_thief( CHAR_DATA *ch )
     v_next = victim->next_in_room;
 
     if ( IS_NPC(victim)
-    ||   victim->level >= LEVEL_IMMORTAL
-    ||   number_bits( 5 ) != 0 
-    ||   !can_see(ch,victim,CHECK_LVL))
-        continue;
+      || victim->level >= LEVEL_IMMORTAL
+      || number_bits( 5 ) != 0
+      || !can_see(ch,victim,CHECK_LVL))
+      continue;
 
     if ( IS_AWAKE(victim) && number_range( 0, ch->level ) == 0 )
     {
       act( "Ты чувствуешь пальцы $c2 у себя в карманах!",ch, NULL, victim, TO_VICT );
-      act( "$C1 чувствует пальцы $c2 в своих карманах!",
-          ch, NULL, victim, TO_NOTVICT );
+      act( "$C1 чувствует пальцы $c2 в своих карманах!",ch, NULL, victim, TO_NOTVICT );
       return TRUE;
     }
     else

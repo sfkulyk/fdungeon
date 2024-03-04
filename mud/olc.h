@@ -56,7 +56,7 @@ extern const struct olc_cmd_type redit_table[];
 extern const struct olc_cmd_type oedit_table[];
 extern const struct olc_cmd_type medit_table[];
 extern const struct olc_cmd_type mpedit_table[];
-                                        
+
 DECLARE_DO_FUN2( do_aedit  );
 DECLARE_DO_FUN2( do_redit  );
 DECLARE_DO_FUN2( do_oedit  );

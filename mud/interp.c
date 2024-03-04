@@ -259,7 +259,7 @@ struct  cmd_type        cmd_table       [] =
  { "where",       "где",          "де",           do_where,       POS_RESTING,   0,  WIZ_SECURE, SHOW|HIDE|NOLOG|NOMOB },
  { "crimereport", "криминал",     "кримінал",     do_crimereport, POS_RESTING,   0,  WIZ_SECURE, SHOW|NOMOB|NOORDER|FREEZE },
  { "ahelp",       "асправка",     "асправка",     do_ahelp,       POS_DEAD,      0,  WIZ_SECURE, SHOW|MORPH|NOMOB|HIDE|NOLOG },
- 
+
  // Deity commands
  { "devote",      "посвятить", "посвятити", do_devote,      POS_DEAD,     21,  WIZ_SECURE,  MORPH|HIDE|NOMOB|NOORDER|NOFORCE },
  { "deity",       "божить",    "божити",    do_deity,       POS_DEAD,    109,  WIZ_SECURE,  MORPH|HIDE|NOMOB|NOORDER|NOFORCE },
@@ -679,7 +679,7 @@ bool check_social( CHAR_DATA *ch, char *command, const char *argument )
  {
   act( social_table[cmd].others_found,  ch, NULL, victim, TO_NOTVICT );
   act( social_table[cmd].char_found,    ch, NULL, victim, TO_CHAR    );
-  act( social_table[cmd].vict_found,    ch, NULL, victim, TO_VICT    ); 
+  act( social_table[cmd].vict_found,    ch, NULL, victim, TO_VICT    );
 
   if ( !IS_NPC(ch) && IS_NPC(victim) && !IS_AFFECTED(victim, AFF_CHARM)
      && IS_AWAKE(victim) && victim->desc == NULL)
@@ -691,8 +691,8 @@ bool check_social( CHAR_DATA *ch, char *command, const char *argument )
      case 1: case 2: case 3: case 4:
      case 5: case 6: case 7: case 8:
        act( social_table[cmd].others_found,victim, NULL, ch, TO_NOTVICT );
-       act( social_table[cmd].char_found,victim, NULL, ch, TO_CHAR    ); 
-       act( social_table[cmd].vict_found,victim, NULL, ch, TO_VICT    ); 
+       act( social_table[cmd].char_found,victim, NULL, ch, TO_CHAR    );
+       act( social_table[cmd].vict_found,victim, NULL, ch, TO_VICT    );
        break;
 
      case 9: case 10: case 11: case 12:
@@ -757,7 +757,7 @@ int mult_argument(char *argument, char *arg)
    return number;
   }
  }
- 
+
  strcpy( arg, argument );
  return 1;
 }
@@ -792,7 +792,7 @@ const char *one_argument( const char *argument, char *arg_first )
 void do_commands( CHAR_DATA *ch, const char *argument )
 {
   int cmd=0, col=0;
- 
+
 
   stc("Список доступных команд:\n",ch);
   for (;cmd_table[cmd].name[0]!= '\0'; cmd++ )
@@ -813,14 +813,14 @@ void do_commands( CHAR_DATA *ch, const char *argument )
 void do_wizhelp( CHAR_DATA *ch, const char *argument )
 {
   int level,cmd,col=0;
- 
+
   for (level=102;level<=get_trust(ch);level++)
   {
     col=0;
     ptc(ch,"{C%3d:{x",level);
-      
+
     for ( cmd = 0; cmd_table[cmd].name[0] != '\0'; cmd++ )
-    {                                            
+    {
       if ( cmd_table[cmd].level == level
 /*        && IS_SET(cmd_table[cmd].flag, SHOW)*/)
       {
@@ -831,8 +831,8 @@ void do_wizhelp( CHAR_DATA *ch, const char *argument )
         }
         ptc( ch, "%-12s", cmd_table[cmd].name );
         if (++col % 6 == 0 ) stc("\n\r", ch );
-      }                                   
-    }                                      
+      }
+    }
     if (col % 6 != 0) stc("{x\n\r", ch);
   }
   return;
@@ -875,7 +875,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
     stc(" ahelp material\n\r",ch);
     return;
   }
-  
+
   if (!str_prefix(arg1,"race"))
   {
     int race;
@@ -938,7 +938,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
     ptc(ch,"{CИммунитет         :{W %s\n\r{x",imm_bit_name(race_table[race].imm));
     stc("{C=-------------------------------------------------------------------=\n\r",ch);
     if (race_table[race].c_pen!=0)
-    {                                                   
+    {
       stc("{RПенальти для категорий: [",ch);
       if (IS_SET(race_table[race].c_pen,WATER))       stc("Water ",ch);
       if (IS_SET(race_table[race].c_pen,AIR))         stc("Air ",ch);
@@ -959,20 +959,20 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
     if (race_table[race].c_bon!=0)
     {
       stc("{GБонус для категорий: [",ch);
-      if (IS_SET(race_table[race].c_bon,WATER))       stc("Water ",ch);       
-      if (IS_SET(race_table[race].c_bon,AIR))         stc("Air ",ch);         
-      if (IS_SET(race_table[race].c_bon,EARTH))       stc("Earth ",ch);        
-      if (IS_SET(race_table[race].c_bon,FIRE))        stc("Fire ",ch);        
-      if (IS_SET(race_table[race].c_bon,SPIRIT))      stc("Spirit ",ch);      
+      if (IS_SET(race_table[race].c_bon,WATER))       stc("Water ",ch);
+      if (IS_SET(race_table[race].c_bon,AIR))         stc("Air ",ch);
+      if (IS_SET(race_table[race].c_bon,EARTH))       stc("Earth ",ch);
+      if (IS_SET(race_table[race].c_bon,FIRE))        stc("Fire ",ch);
+      if (IS_SET(race_table[race].c_bon,SPIRIT))      stc("Spirit ",ch);
       if (IS_SET(race_table[race].c_bon,PROTECT))     stc("Protection ",ch);
-      if (IS_SET(race_table[race].c_bon,MIND))        stc("Mind ",ch);        
-      if (IS_SET(race_table[race].c_bon,LIGHT))       stc("Light ",ch);       
-      if (IS_SET(race_table[race].c_bon,DARK))        stc("Dark ",ch);        
+      if (IS_SET(race_table[race].c_bon,MIND))        stc("Mind ",ch);
+      if (IS_SET(race_table[race].c_bon,LIGHT))       stc("Light ",ch);
+      if (IS_SET(race_table[race].c_bon,DARK))        stc("Dark ",ch);
       if (IS_SET(race_table[race].c_bon,FORTITUDE))   stc("Fortitude ",ch);
       if (IS_SET(race_table[race].c_bon,CURATIVE))    stc("Curative ",ch);
-      if (IS_SET(race_table[race].c_bon,PERCEP))      stc("Perception ",ch);  
-      if (IS_SET(race_table[race].c_bon,LEARN))       stc("Learning ",ch);    
-      if (IS_SET(race_table[race].c_bon,MAKE))        stc("MakeMastery",ch); 
+      if (IS_SET(race_table[race].c_bon,PERCEP))      stc("Perception ",ch);
+      if (IS_SET(race_table[race].c_bon,LEARN))       stc("Learning ",ch);
+      if (IS_SET(race_table[race].c_bon,MAKE))        stc("MakeMastery",ch);
       stc("]\n\r{C=-------------------------------------------------------------------=\n\r",ch);
     }
     ptc(ch,"{CОсобенности    :{Y %s\n\r",spec_bit_name(race_table[race].spec));
@@ -982,7 +982,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
     stc("{C=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\r",ch);
     return;
   }
-  
+
 
   if (!str_prefix(arg1,"damage"))
   {
@@ -1042,7 +1042,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
           ptc( ch, "{C[{Y%s{C]{x\n\r", item_durability_table[mIndex].d_message);
         }
       }
-      else 
+      else
       {
         ptc( ch, "{GПрочность материалов в порядке возростания.{x\n\r");
         for( mIndex=0; item_durability_table[mIndex].to != -1; mIndex++ )
@@ -1054,7 +1054,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
     {
       int mn_arg2;
 
-      if( !str_prefix(arg2,"bug") ) 
+      if( !str_prefix(arg2,"bug") )
       {
         bug("Kakogo-to hrena gluchit esli arg2 == bug v ahelp material:(", 0);
         if( !IS_ELDER(ch) ) WAIT_STATE( ch, 10);
@@ -1066,14 +1066,14 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
         stc("{RBUG in reading material table data.{x", ch);
         return;
       }
-      else 
+      else
       {
         ptc( ch, "{GМатериал{w: {Y[{R%s{Y][{R%s{Y]{x\n\r", material_table[mn_arg2].real_name, arg2);
         for( mIndex = 0; item_durability_table[mIndex].to != -1; mIndex++)
           if( material_table[mn_arg2].d_dam > item_durability_table[mIndex].from && material_table[mn_arg2].d_dam <= item_durability_table[mIndex].to)
           {
             ptc( ch, "{GБазовая прочность для даного материала{w:{x %s", item_durability_table[mIndex].d_message );
-            if( IS_ELDER(ch) ) 
+            if( IS_ELDER(ch) )
             {
               ptc( ch, " {Y[{R%d{Y]{x.\n\r", material_table[mn_arg2].d_dam );
               ptc( ch, "{GОтносится к диапазону прочностей {Y[{m%d{Y]-[{R%d{Y]{x.\n\r", item_durability_table[mIndex].from, item_durability_table[mIndex].to );
@@ -1088,7 +1088,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
     {
       int mnr_arg2;
 
-      if( !str_prefix(arg2,"bug") ) 
+      if( !str_prefix(arg2,"bug") )
       {
         bug("Kakogo-to hrena gluchit esli arg2 == bug v ahelp material:(", 0);
         if( !IS_ELDER(ch) ) WAIT_STATE( ch, 10);
@@ -1100,14 +1100,14 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
         stc("{RBUG :({x", ch);
         return;
       }
-      else 
+      else
       {
         ptc( ch, "{GМатериал{w: {Y[{R%s{Y][{R%s{Y]{x\n\r", arg2, material_table[mnr_arg2].name );
         for( mIndex = 0; item_durability_table[mIndex].to != -1; mIndex++)
           if( material_table[mnr_arg2].d_dam > item_durability_table[mIndex].from && material_table[mnr_arg2].d_dam <= item_durability_table[mIndex].to)
           {
             ptc( ch, "{GБазовая прочность для даного материала{w:{x %s", item_durability_table[mIndex].d_message );
-            if( IS_ELDER(ch) ) 
+            if( IS_ELDER(ch) )
             {
               ptc( ch, " {Y[{R%d{Y]{x.\n\r", material_table[mnr_arg2].d_dam );
               ptc( ch, "{GОтносится к диапазону прочностей {Y[{m%d{Y]-[{R%d{Y]{x.\n\r", item_durability_table[mIndex].from, item_durability_table[mIndex].to );
@@ -1183,7 +1183,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
       stc("{wCleric {x:              +2 Spirit     +2 Curative\n\r",ch);
       stc("{wThief  {x:              +3 Perception +1 Offence\n\r",ch);
       stc("{wWarrior{x:              +2 Fortitude  +2 Offence\n\r",ch);
-                                     
+
       stc("{GBattleMage{x [M+W]:     +1 Fortitude  +2 Learning   +1 MakeMastery +1 Offence\n\r",ch);
       stc("{GWizard    {x [M+C]:     +2 Fire,Air,Water,Earth\n\r",ch);
       stc("{GNightBlade{x [M+T]:     +2 Perception +2 Mind       +1 Learn\n\r",ch);
@@ -1232,7 +1232,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
     if ( !str_prefix(arg2,"list"))
     {
       int col=0;
-  
+
       if (EMPTY(argument))
       {
         stc("{CЗаклинания: {x\n\r",ch);
@@ -1370,7 +1370,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
       ptc(ch,"{YПринадлежность к группам: [{M%s{Y]{x\n\r",spell_group_name(skill_table[sn].group));
       ptc(ch,"%s{x\n\r",skill_table[sn].help);
   }
-  
+
   if (!str_prefix(arg1,"stat"))
   {
     int i,j;
@@ -1385,7 +1385,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
     {
       ptc(ch,"Такой расы не существует.\n\r");
       return;
-    }      
+    }
     ptc(ch,"{GСопротивляемости и {Rуязвимости {xдля {W%s{x:\n\r",race_table[i].name);
     for ( j = 0;j < DAM_MAX;j++)
     {
@@ -1424,7 +1424,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
     }
     if (!is_found) stc("Нет.\n\r",ch);
   }
-  
+
 }
 
 // Проверяем входит ли f2 в f1
@@ -1474,7 +1474,7 @@ void rem_bit(int64 flag,int64 bit)
   flagl &= ~(bitl);
   flag = flagl;
  }
- else 
+ else
  {
   flagh &= ~(bith);
   flagl &= ~(bitl);
@@ -1734,7 +1734,7 @@ void do_tournament( CHAR_DATA *ch, const char *argument )
     }
     return;
   }
-    
+
   argument=one_argument(argument,arg);
 
   if (!str_prefix(arg,"info"))
@@ -1744,7 +1744,7 @@ void do_tournament( CHAR_DATA *ch, const char *argument )
       stc("No active tournament found.\n\r",ch);
       return;
     }
-       
+
     if ( get_trust(ch)< 102 )
     {
       ptc(ch,"{DTournament: {C%s {rvs. {C%s{x\n\r",t->ch1->name,t->ch2->name);
@@ -1759,66 +1759,66 @@ void do_tournament( CHAR_DATA *ch, const char *argument )
   if (!str_prefix(arg,"bet"))
   {
     int r;
-        
+
     if (!t) {stc("Нет активных турниров.\n\r",ch); return;}
-        
+
     if ( !t->isbet )
     {
       stc("Букмекер вышел покурить.\n\r",ch);
       return;
     }
-       
+
     if ( ch->level < 5 && !ch->remort )
     {
       stc("Дорасти до 5 уровня.\n\r",ch);
       return;
     }
-       
+
     argument=one_argument(argument,chn1);
     if ( !(ch1=get_pchar_world(ch,chn1)) )
     {
       stc("Нет такого игрока.\n\r",ch);
       return;
     }
-       
+
     if ( !ch1->pcdata->tournament )
     {
       stc("Он не участник турнира.\n\r",ch);
       return;
     }
-       
+
     if (!argument || !argument[0] || !is_number(argument))
     {
       stc("Сколько ты хочешь поставить?",ch);
       return;
     }
-       
+
     r=atoi(argument);
     if ( ch->questpoints < 10 )
     {
       ptc(ch,"You got much-much qp, right?\n\r");
       return;
     }
-       
+
     if ( !r || r > t->prize || r > ch->questpoints || r < 10 )
     {
       ptc(ch,"Ты можешь делать ставки от 10 до %d qp.\n\r",UMIN(t->prize,ch->questpoints));
       return;
     }
-       
+
     if ( ch == ch1 || ch == t->ch2 )
     {
       stc("Букмекер вышел покурить. А Рефери уже ждет!\n\r",ch);
       return;
     }
-       
+
     for ( b1=t->bet; b1; b1=b1->next )
       if ( !strcmp(b1->chname,ch->name) )
       {
         stc("Ты уже сделал ставку.",ch);
         return;
       }
-       
+
 /*
     if (!strcmp(ch->name,"Belka"))
     {
@@ -1836,9 +1836,9 @@ void do_tournament( CHAR_DATA *ch, const char *argument )
     b->prize=r;
     ch->questpoints-=r;
     t->bank+=r;
-       
+
     ch->pcdata->bet=b;
-       
+
     ptc(ch,"{wУдачи, {W%s. {wТы поставил {Y%d qp {xна {C%s{x",b->chname,b->prize,b->victimname);
     return;
   }
@@ -1852,7 +1852,7 @@ void do_tournament( CHAR_DATA *ch, const char *argument )
       stc("Уже есть один турнир.\n\r",ch);
       return;
     }
-        
+
     argument=one_argument(argument,chn1);
     argument=one_argument(argument,chn2);
 
@@ -1870,19 +1870,19 @@ void do_tournament( CHAR_DATA *ch, const char *argument )
       stc("Указанные игроки не найдены.\n\r",ch);
       return;
     }
-        
+
     if (EMPTY(argument) || !is_number(argument))
     {
       stc("Не объявлен приз турнира.\n\r",ch);
       return;
     }
-        
+
     if (ch1==ch2)
     {
       stc("Fatal error 0xFFA7. Call to Borland.\n\r",ch);
       return;
     }
-        
+
     if ( ch1->pcdata->tournament || ch2->pcdata->tournament )
     {
       stc("Один из игроков уже принимает участие в турнире.\n\r",ch);
@@ -1894,20 +1894,20 @@ void do_tournament( CHAR_DATA *ch, const char *argument )
       stc("Игроки должны достигнуть 5 уровня, чтобы принять участие в турнире.\n\r",ch);
       return;
     }
-        
+
     if ( atoi(argument) < 10 )
     {
       ptc(ch,"А если тебе такой приз ?\n\r");
       return;
     }
-        
+
     t=malloc(sizeof(TOURNAMENT_DATA));
     if (!t)
     {
       stc("Fatal error 0x00A7. Call to Borland.\n\r",ch);
       return;
     }
-        
+
     t->next=tournament;
     tournament=t;
     t->bet=0;
@@ -1918,10 +1918,10 @@ void do_tournament( CHAR_DATA *ch, const char *argument )
     t->vnum=1;
     t->isbet=0;
     t->isfight=0;
-        
+
     ch1->pcdata->tournament=t;
     ch2->pcdata->tournament=t;
-        
+
     do_printf(str,"\n\r{D[Tournament]{w: {xПредлагается турнир: {C%s {rvs. {C%s.{x Приз: {Y%d qp{x\n\r",ch1->name,ch2->name,t->prize);
     gecho(str);
     return;
@@ -1950,23 +1950,23 @@ void do_tournament( CHAR_DATA *ch, const char *argument )
   if (!str_prefix(arg,"cancel"))
   {
     if ( get_trust(ch)< 105 ) return;
-       
-    if (!t) 
+
+    if (!t)
     {
       stc("No tournaments active now.\n\r",ch);
       return;
     }
-       
+
     t->ch1->pcdata->tournament=0;
     t->ch2->pcdata->tournament=0;
     do_printf(str,"\n\r{D[Tournament]{w: {CТурнир {Rотменен.{x\n\r");
     gecho(str);
-       
+
     for ( b1=t->bet; b1; b1=b1->next )
     {
       ch1=get_pchar_world(ch,b1->chname);
       if (!ch1) continue;
-           
+
       ch1->pcdata->bet=0;
       ch1->questpoints+=b1->prize;
       stc("Ты получил назад свою ставку.\n\r",ch1);
@@ -1978,36 +1978,36 @@ void do_tournament( CHAR_DATA *ch, const char *argument )
   if (!str_prefix(arg,"complete"))
   {
     if ( get_trust(ch)< 105 ) return;
-       
-    if (!t) 
+
+    if (!t)
     {
       stc("No tournaments active now.\n\r",ch);
       return;
     }
-       
+
     argument=one_argument(argument,chn1);
     ch1=get_pchar_world(ch,chn1);
-       
+
     if (!ch1)
     {
       stc("Нет такого игрока.\n\r",ch);
       return;
     }
-       
+
     if ( !ch1->pcdata->tournament )
-    {       
+    {
       stc("Он не участник турнира.",ch);
       return;
     }
-       
+
     ch1->questpoints+=t->prize;
     ptc(ch1,"{WПоздравляем, {C%s,{W ты выиграл турнир.{c Ты получаешь {Y%d qp{x\n\r",ch1->name,t->prize);
-       
+
     t->ch1->pcdata->tournament=0;
     t->ch2->pcdata->tournament=0;
     do_printf(str,"\n\r{D[Tournament]{w: {C%s {xWINS. {RFatality.{x\n\r",ch1->name);
     gecho(str);
-       
+
     i=0; //total winners' bets
     for ( b1=t->bet; b1; b1=b1->next )
     {
@@ -2015,13 +2015,13 @@ void do_tournament( CHAR_DATA *ch, const char *argument )
       if (!ch2) continue;
       if (!strcmp(b1->victimname,ch1->name)) i+=b1->prize;
     }
-       
+
     for ( b1=t->bet; b1; b1=b1->next )
     {
       ch2=get_pchar_world(ch,b1->chname);
       if (!ch2) continue;
       ch2->pcdata->bet=0;
-           
+
       if (!strcmp(b1->victimname,ch1->name))
       {
         k=b1->prize*t->bank/i;

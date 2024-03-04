@@ -82,7 +82,7 @@ void do_gain(CHAR_DATA *ch, const char *argument)
   int gn = 0, sn = 0;
 
   // find a trainer
-  for ( trainer = ch->in_room->people; trainer != NULL; 
+  for ( trainer = ch->in_room->people; trainer != NULL;
         trainer = trainer->next_in_room)
    if (IS_NPC(trainer) && IS_SET(trainer->act,ACT_GAIN)) break;
 
@@ -148,7 +148,7 @@ void do_gain(CHAR_DATA *ch, const char *argument)
       }
     }
     if (col % 3 != 0) stc("\n\r",ch);
-    stc("\n\r",ch);         
+    stc("\n\r",ch);
     col = 0;
     ptc(ch, "%-18s %-5s %-18s %-5s %-18s %-5s\n\r",
                  "skill","cost","skill","cost","skill","cost");
@@ -259,7 +259,7 @@ void do_gain(CHAR_DATA *ch, const char *argument)
   }
   act("$C1 говорит тебе 'Я не понял...'",ch,NULL,trainer,TO_CHAR);
 }
-    
+
 int min_level(CHAR_DATA *ch,int sn)
 {
  int maglevel=102,thilevel=102,warlevel=102,clelevel=102,level;
@@ -499,7 +499,7 @@ void list_group_costs(CHAR_DATA *ch)
   {
     if (group_table[gn].name == NULL) break;
 
-    if (!ch->gen_data->group_chosen[gn] 
+    if (!ch->gen_data->group_chosen[gn]
     &&  !ch->pcdata->group_known[gn]
     &&  group_cost(ch,gn) > 0)
     {
@@ -516,11 +516,11 @@ void list_group_costs(CHAR_DATA *ch)
   {
     if (skill_table[sn].name == NULL) break;
 
-    if (!ch->gen_data->skill_chosen[sn] 
+    if (!ch->gen_data->skill_chosen[sn]
     &&  ch->pcdata->learned[sn] == 0
     &&  skill_table[sn].spell_fun == spell_null
     &&  skill_cost(ch,sn) > 0
-    &&  !IS_SET(skill_table[sn].flag,S_CLAN) ) 
+    &&  !IS_SET(skill_table[sn].flag,S_CLAN) )
     {
         ptc(ch,"%-18s %-5d ",skill_table[sn].name,skill_cost(ch,sn));
         if (++col % 3 == 0) stc("\n\r",ch);
@@ -582,7 +582,7 @@ int exp_per_level(CHAR_DATA *ch, int points)
 {
   int expl,inc;
 
-  if (IS_NPC(ch)) return 1000; 
+  if (IS_NPC(ch)) return 1000;
   expl = 1000;
   inc = 500;
 
@@ -592,7 +592,7 @@ int exp_per_level(CHAR_DATA *ch, int points)
 
   if (points <= 40)
     return 1000*ch->remort + 1000 * (race_table[ch->race].class_mult[ch->class[ch->remort]] ?
-                   race_table[ch->race].class_mult[ch->class[ch->remort]]/100 : 1); 
+                   race_table[ch->race].class_mult[ch->class[ch->remort]]/100 : 1);
 
   points -= 40;
 
@@ -607,7 +607,7 @@ int exp_per_level(CHAR_DATA *ch, int points)
       points -= 10;
     }
   }
-  expl += points * inc / 10;  
+  expl += points * inc / 10;
   return (expl * race_table[ch->race].class_mult[ch->class[ch->remort]]/100)+1000*ch->remort;
 }
 
@@ -692,7 +692,7 @@ bool parse_gen_groups(CHAR_DATA *ch, const char *argument)
     sn = skill_lookup(argument);
     if (sn != -1)
     {
-     if ( IS_SET(skill_table[sn].flag,S_CLAN) ) 
+     if ( IS_SET(skill_table[sn].flag,S_CLAN) )
       return TRUE;
      if (ch->gen_data->skill_chosen[sn])
      {
@@ -742,7 +742,7 @@ bool parse_gen_groups(CHAR_DATA *ch, const char *argument)
     }
 
     sn = skill_lookup(argument);
-    if (sn != -1 && ch->gen_data->skill_chosen[sn] 
+    if (sn != -1 && ch->gen_data->skill_chosen[sn]
             && skill_table[sn].spell_fun == spell_null)
     {
       stc("Навык убран.\n\r",ch);
@@ -781,7 +781,7 @@ bool parse_gen_groups(CHAR_DATA *ch, const char *argument)
   }
   return FALSE;
 }
-            
+
 // shows all groups, or the sub-members of a group
 void do_groups(CHAR_DATA *ch, const char *argument)
 {
@@ -817,7 +817,7 @@ void do_groups(CHAR_DATA *ch, const char *argument)
     if ( col % 3 != 0 ) stc( "\n\r", ch );
     return;
   }
-      
+
   // show the sub-members of a group
   gn = group_lookup(argument);
   if (gn == -1)
@@ -850,19 +850,19 @@ void check_improve( CHAR_DATA *ch, int sn, bool success, int multiplier )
   if (ch->level < min_level(ch,sn)
   ||  ch->pcdata->learned[sn] == 0 /* dodelat'? */
   ||  ch->pcdata->learned[sn] == 100)
-      return;  /* skill is not known */ 
+      return;  /* skill is not known */
 
-                      
-  if ((ch->classmag) && (rll > skill_table[sn].rating[0]) && (skill_table[sn].rating[0] != 0)) 
-                            rll = skill_table[sn].rating[0];     
-  if ((ch->classcle) && (rll > skill_table[sn].rating[1]) && (skill_table[sn].rating[1] != 0)) 
-                            rll = skill_table[sn].rating[1];     
-  if ((ch->classthi) && (rll > skill_table[sn].rating[2]) && (skill_table[sn].rating[2] != 0)) 
-                            rll = skill_table[sn].rating[2];     
-  if ((ch->classwar) && (rll > skill_table[sn].rating[3]) && (skill_table[sn].rating[3] != 0)) 
-                            rll = skill_table[sn].rating[3];     
 
-      if (rll == 100) return; 
+  if ((ch->classmag) && (rll > skill_table[sn].rating[0]) && (skill_table[sn].rating[0] != 0))
+                            rll = skill_table[sn].rating[0];
+  if ((ch->classcle) && (rll > skill_table[sn].rating[1]) && (skill_table[sn].rating[1] != 0))
+                            rll = skill_table[sn].rating[1];
+  if ((ch->classthi) && (rll > skill_table[sn].rating[2]) && (skill_table[sn].rating[2] != 0))
+                            rll = skill_table[sn].rating[2];
+  if ((ch->classwar) && (rll > skill_table[sn].rating[3]) && (skill_table[sn].rating[3] != 0))
+                            rll = skill_table[sn].rating[3];
+
+      if (rll == 100) return;
 
   chance = 10 * int_app[get_curr_stat(ch,STAT_INT)].learn;
   chance /= ( multiplier * rll * 4);
@@ -870,7 +870,7 @@ void check_improve( CHAR_DATA *ch, int sn, bool success, int multiplier )
 
   if (number_range(1,1000) > chance) return;
 
-  /* now that the character has a CHANCE to learn, see if they really have */ 
+  /* now that the character has a CHANCE to learn, see if they really have */
   if (success)
   {
     chance = URANGE(5,100 - ch->pcdata->learned[sn], 95);
@@ -915,7 +915,7 @@ int group_lookup( const char *name )
 void gn_add( CHAR_DATA *ch, int gn)
 {
   int i;
-  
+
   ch->pcdata->group_known[gn] = TRUE;
   for ( i = 0; i < MAX_IN_GROUP; i++)
   {
@@ -936,7 +936,7 @@ void gn_remove( CHAR_DATA *ch, int gn)
     group_remove(ch,group_table[gn].spells[i]);
   }
 }
-        
+
 // use for processing a skill or group for addition
 void group_add( CHAR_DATA *ch, const char *name, bool deduct)
 {
@@ -950,16 +950,16 @@ void group_add( CHAR_DATA *ch, const char *name, bool deduct)
     if (ch->pcdata->learned[sn] == 0) // i.e. not known
     {
       ch->pcdata->learned[sn] = 1;
-      if (deduct) ch->pcdata->points += skill_table[sn].rating[ch->class[ch->remort]]; 
+      if (deduct) ch->pcdata->points += skill_table[sn].rating[ch->class[ch->remort]];
     }
     return;
   }
-      
+
   gn = group_lookup(name);
 
   if (gn != -1)
   {
-    if (ch->pcdata->group_known[gn] == FALSE)  
+    if (ch->pcdata->group_known[gn] == FALSE)
     {
       ch->pcdata->group_known[gn] = TRUE;
       if (deduct) ch->pcdata->points += group_table[gn].rating[ch->class[ch->remort]];
@@ -972,12 +972,12 @@ void group_add( CHAR_DATA *ch, const char *name, bool deduct)
 void group_remove(CHAR_DATA *ch, const char *name)
 {
   int sn, gn;
-  
+
   sn = skill_lookup(name);
   if (sn != -1)
   {
-      ch->pcdata->learned[sn] = 0;
-      return;
+    ch->pcdata->learned[sn] = 0;
+    return;
   }
 
   /* now check groups */
@@ -985,8 +985,8 @@ void group_remove(CHAR_DATA *ch, const char *name)
 
   if (gn != -1 && ch->pcdata->group_known[gn] == TRUE)
   {
-      ch->pcdata->group_known[gn] = FALSE;
-      gn_remove(ch,gn);  /* be sure to call gn_add on all remaining groups */
+    ch->pcdata->group_known[gn] = FALSE;
+    gn_remove(ch,gn);  /* be sure to call gn_add on all remaining groups */
   }
 }
 

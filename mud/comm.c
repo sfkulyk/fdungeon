@@ -75,7 +75,7 @@ extern  int     malloc_verify   args( ( void ) );
 const   char    echo_off_str    [] = { IAC, WILL, TELOPT_ECHO, '\0' };
 const   char    echo_on_str     [] = { IAC, WONT, TELOPT_ECHO, '\0' };
 const   char    go_ahead_str    [] = { IAC, GA, '\0' };
-int     select          args( ( int width, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout ) );  
+int     select          args( ( int width, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout ) );
 #endif
 
 /* OS-dependent declarations. */
@@ -371,7 +371,7 @@ int main( int argc, char **argv )
 
   /* That's all, folks. */
   log_string( "Normal termination of game." );
-  
+
   exit( reboot_reason );
   return reboot_reason;
 }
@@ -381,7 +381,7 @@ int init_socket( u_short port )
 {
   static struct sockaddr_in sa_zero;
   struct sockaddr_in sa;
-  int x = 1; 
+  int x = 1;
   int fd;
 
 #if !defined( WIN32 )
@@ -393,7 +393,7 @@ int init_socket( u_short port )
 #else
   WORD    wVersionRequested = MAKEWORD( 1, 1 );
   WSADATA wsaData;
-  int err = WSAStartup( wVersionRequested, &wsaData ); 
+  int err = WSAStartup( wVersionRequested, &wsaData );
   if ( err != 0 )
   {
     perror( "No useable WINSOCK.DLL" );
@@ -534,10 +534,10 @@ void game_loop_unix( int control )
        log_printf("!PANIC! Crash while reboot!");
        exit(0x12);
     }
-          
+
     log_printf("!!!!!CrAsH!!!!! !!!!!CrAsH!!!!! !!!!!CrAsH!!!!! ");
     log_printf("Resuming, but game is unstable!");
-        
+
     for (d=descriptor_list;d;d=d->next)
     {
       if ( !d->character || d->connected != CON_PLAYING ) continue;
@@ -560,7 +560,7 @@ void game_loop_unix( int control )
   }
 
 #endif
-  
+
   /* Main loop */
   while ( !merc_down )
   {
@@ -599,12 +599,12 @@ void game_loop_unix( int control )
      // Kick out the freaky folks.
      for ( d = descriptor_list; d != NULL; d = d_next )
      {
-       d_next = d->next;   
+       d_next = d->next;
        if ( FD_ISSET( d->descriptor, &exc_set ) )
        {
          FD_CLR( (unsigned)d->descriptor, &in_set );
          FD_CLR( (unsigned)d->descriptor, &out_set );
-         if ( d->character && d->connected == CON_PLAYING) 
+         if ( d->character && d->connected == CON_PLAYING)
            save_char_obj( d->character );
          d->outtop = 0;
          close_socket( d );
@@ -639,7 +639,7 @@ void game_loop_unix( int control )
        }
 
         read_from_buffer( d );
-        if (d->character && d->connected==CON_PLAYING 
+        if (d->character && d->connected==CON_PLAYING
           && !EMPTY(d->character->runbuf))
         {
           run(d->character);
@@ -665,10 +665,10 @@ void game_loop_unix( int control )
           d->incomm[0]    = '\0';
         }
      }
-     
+
      /* Autonomous game motion. */
     update_handler( );
-    
+
     /* Output.*/
     for ( d = descriptor_list; d != NULL; d = d_next )
     {
@@ -720,7 +720,7 @@ void game_loop_unix( int control )
 
         stall_time.tv_usec = usecDelta;
         stall_time.tv_sec  = secDelta;
-        
+
         if ( (rc=select(FD_SETSIZE, &fds, NULL, NULL, &stall_time )) < 0 ) {
                 perror( "Game_loop: select: stall" );
                 exit( 1 );
@@ -796,7 +796,7 @@ void game_loop_unix( int control )
 #ifdef WITH_ANTICRASH
     ignore_ignorecrash = 0;
 #endif
-  }  
+  }
 }
 #endif
 
@@ -829,7 +829,7 @@ void init_descriptor( int control )
     return;
   }
 #endif
-  
+
   // Cons a new descriptor.
   dnew = new_descriptor();
   dnew->descriptor    = desc;
@@ -846,7 +846,7 @@ void init_descriptor( int control )
   dnew->pString       = NULL; // OLC
   dnew->editor        = 0;    // OLC
   dnew->outbuf        = alloc_mem( dnew->outsize );
-  
+
   size = sizeof(sock);
   if ( getpeername( desc, (struct sockaddr *) &sock, &size ) < 0 )
   {
@@ -878,7 +878,7 @@ void init_descriptor( int control )
     from=gethostbyaddr((char *) &sock.sin_addr,sizeof(sock.sin_addr),AF_INET);
     dnew->host = str_dup( from ? from->h_name : buf );
   }
-        
+
   if ( check_ban(dnew->host,BAN_ALL))
   {
     write_to_descriptor( desc,"Host is down.\n\r", 0 );
@@ -958,7 +958,7 @@ void close_socket( DESCRIPTOR_DATA *dclose )
       free_char(ch);
     }
   }
-  if ( d_next == dclose ) d_next = d_next->next;   
+  if ( d_next == dclose ) d_next = d_next->next;
 
 #if !defined( WIN32 )
   close( dclose->descriptor );
@@ -1000,10 +1000,10 @@ bool read_from_descriptor( DESCRIPTOR_DATA *d )
     if ( nRead > 0 )
     {
       int cnt;
-         
+
       for (cnt=iStart; cnt<=iStart+nRead; cnt++)
         if (d->inbuf[cnt] == 27) d->inbuf[cnt]=' ';
-            
+
       iStart += nRead;
       if ( d->inbuf[iStart-1] == '\n' || d->inbuf[iStart-1] == '\r' )
         break;
@@ -1177,10 +1177,10 @@ bool process_output (DESCRIPTOR_DATA * d, bool fPrompt)
         char buffer [MAX_STRING_LENGTH*2] ;
         char wound  [100] ;
 
-        // calculate percentage of the victims hp 
+        // calculate percentage of the victims hp
         if (victim->max_hit > 0) percent = victim->hit * 100 / victim->max_hit ;
         else percent = -1 ;
- 
+
         // print this data for everyone
         if (percent >= 100) do_printf (wound, "{cв пpекpасном состоянии.{g(%d%%){x",                          percent) ; else
         if (percent >= 90)  do_printf (wound, "{bимеет несколько цаpапин.{g(%d%%){x",                         percent) ; else
@@ -1190,8 +1190,8 @@ bool process_output (DESCRIPTOR_DATA * d, bool fPrompt)
         if (percent >= 15)  do_printf (wound, "{mвыглядит сильно повpежденным.{g(%d%%){x",                    percent) ; else
         if (percent >= 0)   do_printf (wound, "{rв ужасном состоянии.{g(%d%%){x",                             percent) ; else
                             do_printf (wound, "{rвыглядит..хмм..немного убитым...{g(%d%%){x",                 percent) ;
-        
-        do_printf (buf, "%s %s \n\r", 
+
+        do_printf (buf, "%s %s \n\r",
                    IS_NPC (victim) ? get_char_desc (victim, '1') :
                    victim->name, wound) ;
 
@@ -1217,7 +1217,7 @@ bool process_output (DESCRIPTOR_DATA * d, bool fPrompt)
       }
     }
   }
-  
+
   // short-circuit if nothing to write.
   if (d->outtop == 0) return TRUE ;
 
@@ -1263,7 +1263,7 @@ void bust_a_prompt (CHAR_DATA * ch)
 
   const char * dir_name[] = {"{GN{x","{GE{x","{GS{x","{GW{x","{GU{x","{GD{x", "{Rn{x", "{Re{x", "{Rs{x", "{Rw{x", "{Ru{x", "{Rd{x"} ;
   int door ;
- 
+
   point = buf ;
   str   = ch->prompt ;
 
@@ -1322,7 +1322,7 @@ void bust_a_prompt (CHAR_DATA * ch)
 
       // no exits
       if (!found) strcat (buf, "none") ;
-    
+
       do_printf (buf2, "%s", doors) ;
       i = buf2 ; break ;
 
@@ -1369,7 +1369,7 @@ void bust_a_prompt (CHAR_DATA * ch)
     case 'x': // current exp
       do_printf (buf2, "%d", ch->exp) ;
       i = buf2 ; break ;
-    
+
     case 'X': // exp to the next level
 
       do_printf (buf2, "%d", IS_NPC(ch) ? 0 :
@@ -1429,7 +1429,7 @@ void bust_a_prompt (CHAR_DATA * ch)
 
       do_printf (buf2, "%%") ;
       i = buf2 ; break ;
- 
+
     case 'o': // name of object edited in OLC
 
       if (IS_IMMORTAL (ch)) do_printf (buf2, "%s", olc_ed_name(ch)) ;
@@ -1484,7 +1484,7 @@ void bust_a_prompt (CHAR_DATA * ch)
     ++str ;
     while ((*point = *i) != '\0') ++point, ++i ;
   }
-  
+
   *point = '\0' ;
   pbuff  = buffer ;
 
@@ -1506,7 +1506,7 @@ void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, int length )
   else if(strlen(txt) > (unsigned)length)
   {
    /* XXX
-    * APAR: memmory blocks screwing. 
+    * APAR: memmory blocks screwing.
     *       (extrem unstability after `snoop' command in some cases)
     * STAT: TEMPFIXED
     * This fix is only for testing/tracing.
@@ -1517,7 +1517,7 @@ void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, int length )
     */
     log_printf("[BUG] (unicorn) !%s! "
                "write_to_buffer argument length assertion failed."
-               "%d > %d.",(d->character && d->character->name) ? 
+               "%d > %d.",(d->character && d->character->name) ?
                d->character->name : "unknown",strlen(txt), length);
     return;
   }
@@ -1559,7 +1559,7 @@ void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, int length )
       EncodeDOS(txt, d->outbuf + d->outtop);
       break;
     case 4:
-      /* XXX FIXME WTF! 
+      /* XXX FIXME WTF!
        *
        * This causes allocated memmory overflow
        * CAUTION: !THIS IS NOTFIXED BUG LEFT FOR FIGURING UP DETAILS!
@@ -1604,7 +1604,7 @@ bool write_to_descriptor( int desc, const char *txt, int length )
     if ( ( nWrite = send( desc, txt + iStart, nBlock , 0) ) < 0 )
 #endif
     { perror( "Write_to_descriptor" ); return FALSE; }
-  } 
+  }
   return TRUE;
 }
 
@@ -1626,7 +1626,7 @@ bool check_parse_name (const char * name, bool new)
 
   // closed names of deities except elders' names
   for( deity=0; deity_table[deity].name != NULL; deity++)
-    if( is_exact_name( name, deity_table[deity].name) 
+    if( is_exact_name( name, deity_table[deity].name)
      && !is_exact_name( name, "astellar saboteur magica adron") ) return FALSE;
 
   // "popular" words
@@ -1658,7 +1658,7 @@ bool check_parse_name (const char * name, bool new)
     {
       if (!isalpha(*pc)) return FALSE ;
 
-      if (isupper(*pc)) // ugly anti-caps hack 
+      if (isupper(*pc)) // ugly anti-caps hack
       {
         if (adjcaps) cleancaps = TRUE ;
         total_caps++ ;
@@ -1773,7 +1773,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
     // empty character - without player file
     existent = load_char_obj (d, argument, SAVE_NORMAL);
 
-    if( (ch = d->character ) == NULL ) 
+    if( (ch = d->character ) == NULL )
     {
       close_socket(d);
       log_printf("Prohibited access for conflicting character %s from %s.\n\r", argument, d->host);
@@ -1822,12 +1822,13 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
         {
           temp1 = ctime(&ch->lastlogin) ;
           temp1[strlen (temp1) - 1] = 0 ;
-          ptc (ch, "\n\r{WВ последний раз этот персонаж заходил {G%s с {Y%s{x.\n\r", temp1, ch->host) ;
+          log_printf("1 Char %s last connection from %s %s",ch->name,ch->host, d->host);
+          ptc (ch, "\n\r{WВ последний раз этот персонаж заходил {G%s с {Y%s{x.\n\r", temp1, ch->host);
         }
 
-        if (!IS_SET (ch->act, PLR_AUTOSPIT)) ch->host = str_dup (d->host) ;
+        if (!IS_SET (ch->act, PLR_AUTOSPIT)) ch->host = str_dup (d->host);
         ch->lastlogin = time (&temp2) ;
-     
+
         // go to the next stage without promting for password
         d->connected = CON_READ_MOTD ;
         return ;
@@ -1860,7 +1861,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
         write_to_buffer (d, "Неверное имя. Назови имя, достойное тебя.\n\rName: ", 0) ;
         return ;
       }
-       
+
       do_printf (buf, "%s, я правильно произношу (Y/N)? ", argument) ;
       write_to_buffer (d, buf, 0) ;
 
@@ -1898,7 +1899,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
       close_socket    (d) ;
       return ;
     }
- 
+
     // will reconnect already playing or disconnected character
     if (check_playing   (d, ch->name)) return ;
     if (check_reconnect (d, ch->name)) return ;
@@ -1919,13 +1920,12 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
                 IS_SET (ch->act, PLR_AUTOSPIT) ? ch->host : d->host) ;
 
     wiznet     (log_buf, NULL, NULL, WIZ_SITES, get_trust (ch)) ;
-//    log_printf ("%s entered", ch->name) ;
 
-    // test if we can say the host character has last connected from
     if (ch->host != NULL)
     {
       temp1 = ctime(&ch->lastlogin) ;
       temp1[strlen (temp1) - 1] = 0 ;
+      log_printf("2 Char %s last connection from %s %s",ch->name,ch->host, d->host);
       ptc (ch, "\n\r{WВ последний раз этот персонаж заходил {G%s с {Y%s{x.\n\r", temp1, ch->host) ;
     }
 
@@ -1964,7 +1964,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
         free_char (d->character) ;
         d->character = NULL ;
       }
-      
+
       // ... and ask for the name again
       d->connected = CON_GET_NAME ;
       break ;
@@ -2093,7 +2093,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
       char buf [MAX_INPUT_LENGTH] ;
 
       argument = one_argument (argument, arg) ;
-      strcpy (buf, "race ")  ; 
+      strcpy (buf, "race ")  ;
       strcat (buf, argument) ;
 
       do_function (ch, &do_ahelp, buf) ;
@@ -2101,9 +2101,9 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
       break ;
     }
 
-    // lookup for race selected 
+    // lookup for race selected
     race = race_lookup (argument) ;
- 
+
     // no race is found
     if (race == 0 || !race_table[race].pc_race)
     {
@@ -2135,7 +2135,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
     ch->res_flags   = ch->res_flags   | race_table[race].res  ;
     ch->vuln_flags  = ch->vuln_flags  | race_table[race].vuln ;
     ch->form        = race_table[race].form ;
-  
+
     // add race skills
     for (i = 0 ; i < 5 ; i++)
     {
@@ -2146,7 +2146,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
     // add cost
     ch->pcdata->points = race_table[race].points ;
     ch->size           = race_table[race].size   ;
-  
+
     // ask for sex
     write_to_buffer (d, "Какого ты пола, M(мужского) или F(женского)? ", 0) ;
     d->connected = CON_GET_NEW_SEX ;
@@ -2180,30 +2180,30 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
     write_to_buffer (d, buf, 0) ;
     d->connected = CON_GET_NEW_CLASS ;
     break ;
-  
+
   //  drop class for remorts
   case CON_DROP_CLASS:
 
     // drop class for 3rd & more life
     i = class_lookup (argument) ;
-   
+
     if (i == -1)
     {
       write_to_buffer (d, "Это не класс.\n\rВыбери класс. ", 0) ;
       return ;
     }
 
-    if ((ch->classmag != 1 && i == 0) || 
-        (ch->classcle != 1 && i == 1) || 
-        (ch->classthi != 1 && i == 2) || 
+    if ((ch->classmag != 1 && i == 0) ||
+        (ch->classcle != 1 && i == 1) ||
+        (ch->classthi != 1 && i == 2) ||
         (ch->classwar != 1 && i == 3))
     {
       write_to_buffer (d, "У тебя нет этого класса\n\rДавай еще раз:", 0) ;
       return ;
     }
-    
+
     // Masturbative class shiftin' (lazy to write 'for')
-    
+
     if (ch->class[0] == i)
     {
       ch->class[0] = ch->class[1] ;
@@ -2224,13 +2224,13 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
       ch->class[2] = ch->class[3] ;
       ch->class[3] = -1 ;
     }
-      
+
     if (ch->class[3] == i)
     {
       ch->class[3] = -1 ;
     }
 
-    // clear the class that is dropped 
+    // clear the class that is dropped
     if (i == 0) ch->classmag = FALSE ; else
     if (i == 1) ch->classcle = FALSE ; else
     if (i == 2) ch->classthi = FALSE ; else
@@ -2238,7 +2238,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
 
     ch->remort-- ;
 
-    // choose new class     
+    // choose new class
     if (ch->remort <= 2)
     {
       strcpy (buf, "Выбери класс [") ;
@@ -2247,14 +2247,14 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
       if (ch->classwar == 0) strcat (buf, "warrior ") ;
       if (ch->classcle == 0) strcat (buf, "cleric " ) ;
       if (ch->classthi == 0) strcat (buf, "thief "  ) ;
-      
+
       strcat (buf, "]: ") ;
       write_to_buffer (d, buf, 0) ;
 
       d->connected = CON_GET_NEW_CLASS ;
       break ;
-    }  
-    
+    }
+
     write_to_buffer (d, "Твои классы:\n\r", 0) ;
     if (ch->classmag) write_to_buffer (d, "mage ",    0) ;
     if (ch->classwar) write_to_buffer (d, "warrior ", 0) ;
@@ -2263,10 +2263,10 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
 
     write_to_buffer (d,"\n\r",0) ;
     write_to_buffer (d,"Выкинь один: ",0) ;
-    
+
     break ;
-  
-  // class selection 
+
+  // class selection
   case CON_GET_NEW_CLASS:
 
     i = class_lookup (argument) ;
@@ -2319,7 +2319,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
         ch->class[1] = ch->class[2] ;
         ch->class[2] = ch->class[3] ;
         ch->class[3] = i ;
-      }                     
+      }
       else
       if (ch->class[2] == i)
       {
@@ -2342,7 +2342,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
 
   // align selection
   case CON_GET_ALIGNMENT:
- 
+
     switch (argument[0])
     {
     case 'g': case 'G': ch->real_alignment = -1 ; ch->alignment =  750 ; break ;
@@ -2382,7 +2382,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
           group_add (ch, group_table[sn].name, FALSE) ;
         }
       }
-    
+
       ch->gen_data->points_chosen = ch->pcdata->points ;
       do_help (ch, "group header") ;
       list_group_costs (ch) ;
@@ -2401,11 +2401,11 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
 
   // default skills confirmation
   case CON_DEFAULT_CHOICE:
-  
+
     write_to_buffer (d, "\n\r", 2) ;
     switch (argument[0])
     {
-    case 'y': case 'Y': 
+    case 'y': case 'Y':
       ch->gen_data                = new_gen_data () ;
       ch->gen_data->points_chosen = ch->pcdata->points ;
 
@@ -2417,7 +2417,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
       d->connected = CON_GEN_GROUPS ;
       break ;
 
-    case 'n': case 'N': 
+    case 'n': case 'N':
       group_add (ch, class_table[ch->class[ch->remort]].default_group, TRUE) ;
       write_to_buffer (d, "\n\r", 2) ;
       write_to_buffer (d, "Выбери себе оружие:\n\r", 0) ;
@@ -2489,7 +2489,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
       }
 
       if ((ch->pcdata->points < 39 + race_table[ch->race].points) &&
-          ch->remort == 0) 
+          ch->remort == 0)
       {
         do_printf (buf, "Ты должен набрать умений минимум на %d points.",
                    39 + race_table[ch->race].points) ;
@@ -2622,7 +2622,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
       char_to_room (ch, ch->in_room) ;
 
       // remove from foreign clan
-      if (!IS_IMMORTAL(ch) && 
+      if (!IS_IMMORTAL(ch) &&
          ch->in_room->area->clan && str_cmp(ch->in_room->area->clan, "none"))
       {
         if (!ch->clan || str_cmp (ch->clan->name, ch->in_room->area->clan))
@@ -2651,7 +2651,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
     }
 
     act ("{y$c1{x появился из небытия.", ch, NULL, NULL, TO_ROOM) ;
-    
+
     if (ch->level < 25  && ch->trust < 25)  do_printf (buf, "{y%s{x появил$z в затерянном мире.",                           ch->name) ; else
     if (ch->level < 40  && ch->trust < 40)  do_printf (buf, "{xМогущественн$y {y%s{x появил$z в затерянном мире.",            ch->name) ; else
     if (ch->level < 60  && ch->trust < 80)  do_printf (buf, "{xМир содрогнулся от тяжелой поступи {y%s{x.",                   ch->name) ; else
@@ -2715,7 +2715,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
       bool found=FALSE;
 
       if (get_trust(ch)>65001) found=TRUE;
-      if (get_trust(ch)>=110 
+      if (get_trust(ch)>=110
         && !is_exact_name(ch->name,"Saboteur")) found=TRUE;
       if (get_trust(ch)>=109
         && !is_exact_name(ch->name,"Saboteur Invader Adron Magica Astellar Chase Dragon")) found=TRUE;
@@ -2859,7 +2859,7 @@ void stc( const char *txt, CHAR_DATA *ch )
         }
         *point2 = *point;
         *++point2 = '\0';
-      }                       
+      }
       *point2 = '\0';
       write_to_buffer( ch->desc, buf, point2 - buf );
     }
@@ -2891,7 +2891,7 @@ void page_to_char_bw( const char *txt, CHAR_DATA *ch )
     stc(txt,ch);
     return;
   }
-        
+
   ch->desc->showstr_head = alloc_mem(strlen(txt) + 1); /* ***!!!****  */
   strcpy(ch->desc->showstr_head,txt);
   ch->desc->showstr_point = ch->desc->showstr_head;
@@ -2922,7 +2922,7 @@ void page_to_char( const char *txt, CHAR_DATA *ch )
           if(!*point)
                   break;
           skip = colour( *point, ch, colour_str);
-          if(skip + 5 > (signed)sizeof(buf) -(point2 - buf) ) 
+          if(skip + 5 > (signed)sizeof(buf) -(point2 - buf) )
           {
             /* ...hate motherhackers... \= so log tricky boys...  */
             log_printf("%s tries to overflow buffer...", ch->name);
@@ -2938,7 +2938,7 @@ void page_to_char( const char *txt, CHAR_DATA *ch )
         }
         *point2 = *point;
         *++point2 = '\0';
-      }                       
+      }
       *point2 = '\0';
       ch->desc->showstr_head  = alloc_mem( strlen( buf ) + 1 );
       strcpy( ch->desc->showstr_head, buf );
@@ -3014,7 +3014,7 @@ void show_string(struct descriptor_data *d, char *input)
       return;
     }
   }
-  
+
   if(d->character) log_printf("%s tries to overflow buffer!..", d->character->name);
 
   if(d->showstr_head) {
@@ -3024,7 +3024,7 @@ void show_string(struct descriptor_data *d, char *input)
 
   d->showstr_point  = 0;
 }
-        
+
 /* quick sex fixer */
 void fix_sex(CHAR_DATA *ch)
 {
@@ -3033,7 +3033,7 @@ void fix_sex(CHAR_DATA *ch)
 }
 
 
-/* Формирование слова в нужном падеже (новый формат) 
+/* Формирование слова в нужном падеже (новый формат)
    Выглядит так:
    голова||ы|е|у стражника
 
@@ -3047,7 +3047,7 @@ void fix_sex(CHAR_DATA *ch)
    после первого    - именительный                    (есть что?)
    после второго    - родительный,                    (нет чего?)
    после третьего   - творительный,                   (врезать чем?)
-   после четвертого - множ. число                     (999 чего?)         
+   после четвертого - множ. число                     (999 чего?)
 
    если окончание не нужно - соответствующие буквы пропускаются.
    если символа | в описании моба нет, разборка формата не производится.
@@ -3062,7 +3062,7 @@ void fix_sex(CHAR_DATA *ch)
 #define PHASE_FINDNEXT  4
 
 void gram_newformat ( char *buf, const char *description, char gram_case )
-{                                                                          
+{
   int cnt=0, bufcnt=0, case_set, case_counter, iPhase=PHASE_COPYTOBUF;
   register char tempchar;
   const int len = strlen (description);
@@ -3208,7 +3208,7 @@ char * act_parse_obj (char *buf, CHAR_DATA *ch, OBJ_DATA *obj, char needcase)
       case '2': strcpy(buf, "{wчего-то");break;
       case '3': strcpy(buf, "{wчему-то");break;
       case '4': strcpy(buf, "{wчто-то"); break;
-      case '5': 
+      case '5':
       case '6': strcpy(buf, "{wчем-то"); break;
       case '7': strcpy(buf, "{wневидимых вещи");break;
       case '8': strcpy(buf, "{wневидимых вещей"); break;
@@ -3254,7 +3254,7 @@ const char * act_ending (char *buf, int sex, const char *str)
 }
 
 /* The colour version of the act_new( ) function, -Lope */
-void act_new( const char *format, CHAR_DATA *ch, const void *arg1, 
+void act_new( const char *format, CHAR_DATA *ch, const void *arg1,
               const void *arg2, int type, int min_pos )
 {
   static char * const he_she   [] = { "it",  "he",  "she" };
@@ -3262,15 +3262,15 @@ void act_new( const char *format, CHAR_DATA *ch, const void *arg1,
   static char * const his_her  [] = { "its", "his", "her" };
   static char * const on_ona   [] = { "оно", "он",  "она" };
   static char * const ego_ee   [] = { "его", "его", "ее" };
-  static char * const emu_ei   [] = { "ему", "ему", "ей" };   
-  static char * const sam_sama [] = { "сам", "сам", "сама" };   
-  static char * const samomu_samoj[] = { "самому", "самому", "самой" };   
-  static char * const nim_nej  [] = { "ним", "ним", "ней" };   
-  static char * const nemu_nej [] = { "нему", "нему", "ней" };   
-  static char * const nemu_nee [] = { "нему", "нему", "неe" };   
-  static char * const sa_as    [] = { "ся", "ся", "ась" };   
-  static char * const a_a      [] = { "", "", "a" };   
-  static char * const ij_aja   [] = { "ый", "ый", "ая" };   
+  static char * const emu_ei   [] = { "ему", "ему", "ей" };
+  static char * const sam_sama [] = { "сам", "сам", "сама" };
+  static char * const samomu_samoj[] = { "самому", "самому", "самой" };
+  static char * const nim_nej  [] = { "ним", "ним", "ней" };
+  static char * const nemu_nej [] = { "нему", "нему", "ней" };
+  static char * const nemu_nee [] = { "нему", "нему", "неe" };
+  static char * const sa_as    [] = { "ся", "ся", "ась" };
+  static char * const a_a      [] = { "", "", "a" };
+  static char * const ij_aja   [] = { "ый", "ый", "ая" };
   static char * const im_oy    [] = { "ым", "ым", "ой" };
 
   CHAR_DATA           *to;
@@ -3301,13 +3301,13 @@ void act_new( const char *format, CHAR_DATA *ch, const void *arg1,
     }
     if( !vch->in_room ) return;
   }
- 
-  for( ; to ; to = to->next ) 
+
+  for( ; to ; to = to->next )
   {
     if (to->position < min_pos) continue;
     if (IS_NPC(to) && !HAS_TRIGGER(to, TRIG_ACT)) continue;
     if (!IS_NPC(to) && (!to->desc || to->desc->connected!=CON_PLAYING)) continue;
- 
+
     if (type == TO_CHAR && to != ch) continue;
     if (type == TO_VICT && (to!=vch || to==ch)) continue;
     if (type == TO_ROOM && (to==ch || ch->in_room!=to->in_room || !can_see(to,ch,CHECK_LVL) || !can_see_sneak(to,ch,CHECK_LVL))) continue;
@@ -3315,7 +3315,7 @@ void act_new( const char *format, CHAR_DATA *ch, const void *arg1,
     if (type == TO_ALL && (to==ch || to==vch)) continue;
     if (type == TO_ALL_IN_ROOM && (ch->in_room!=to->in_room || !can_see(to,ch,CHECK_LVL) || !can_see_sneak(to,ch,CHECK_LVL))) continue;
     if (type == TO_NOTCHARVICT && (to != ch) && (to !=vch)) continue;
- 
+
     point   = buf;
     str     = format;
     while( *str != '\0' )
@@ -3325,7 +3325,7 @@ void act_new( const char *format, CHAR_DATA *ch, const void *arg1,
         *point++ = *str++;
         continue;
       }
- 
+
       ++str;
       i = " <   > ";
       if( !arg2 && *str >= 'A' && *str <= 'Z' )
@@ -3351,7 +3351,7 @@ void act_new( const char *format, CHAR_DATA *ch, const void *arg1,
           case 't': i = (char *) arg1;                            break;
           case 'T': i = (char *) arg2;                            break;
           case 'n': i = PERS( ch,  to  );                         break;
-          case 'N': i = PERS( vch, to  );                         break; 
+          case 'N': i = PERS( vch, to  );                         break;
           case 'e': i = he_she  [URANGE(0, ch  ->sex, 2)];        break;
           case 'E': i = he_she  [URANGE(0, vch ->sex, 2)];        break;
           case 'm': i = him_her [URANGE(0, ch  ->sex, 2)];        break;
@@ -3359,7 +3359,7 @@ void act_new( const char *format, CHAR_DATA *ch, const void *arg1,
           case 's': i = his_her [URANGE(0, ch  ->sex, 2)];        break;
           case 'S': i = his_her [URANGE(0, vch ->sex, 2)];        break;
           case 'o': i = on_ona  [URANGE(0, ch  ->sex, 2)];        break;
-          case 'O': i = on_ona  [URANGE(0, vch ->sex, 2)];        break;                
+          case 'O': i = on_ona  [URANGE(0, vch ->sex, 2)];        break;
           case 'g': i = ego_ee  [URANGE(0, ch  ->sex, 2)];        break;
           case 'G': i = ego_ee  [URANGE(0, vch ->sex, 2)];        break;
           case 'u': i = emu_ei  [URANGE(0, ch  ->sex, 2)];        break;
@@ -3397,7 +3397,7 @@ void act_new( const char *format, CHAR_DATA *ch, const void *arg1,
           case 'w': str = act_ending (temp, ch->sex, str); i = temp; break;
           case 'W': str = act_ending (temp, vch->sex, str); i = temp; break;
           case 'i': i = act_parse_obj (temp, to, obj1, str[1]); str++; break;
-          case 'I': i = act_parse_obj (temp, to, obj2, str[1]); str++; break; 
+          case 'I': i = act_parse_obj (temp, to, obj2, str[1]); str++; break;
           case 'c': i = act_parse_name (temp, ch, to, str[1]); str++; break;
           case 'C': i = act_parse_name (temp, vch, to, str[1]); str++; break;
         }
@@ -3409,7 +3409,7 @@ void act_new( const char *format, CHAR_DATA *ch, const void *arg1,
         *point++ = *i++;
       }
     }
- 
+
     *point++ = '{';
     *point++ = 'x';
     *point++ = '\n';
@@ -3546,7 +3546,7 @@ void colourconv( char *buffer, const char *txt, CHAR_DATA *ch )
         }
         *buffer = *point;
         *++buffer = '\0';
-      }                   
+      }
       *buffer = '\0';
     }
     else

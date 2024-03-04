@@ -8,7 +8,7 @@
 #include "merc.h"
 #include "tables.h"
 #include "interp.h"
-#include "recycle.h" 
+#include "recycle.h"
 
 int64 iObjCount; // for count objects between functions
 bool  bFlushText;
@@ -19,9 +19,9 @@ bool can_loot(CHAR_DATA *ch, OBJ_DATA *obj)
   CHAR_DATA *owner=NULL, *wch;
   if (IS_IMMORTAL(ch)) return TRUE;
   if (IS_NPC(ch) && (obj->pIndexData->vnum==26 || obj->pIndexData->vnum==120
-    || obj->pIndexData->vnum==121 || obj->pIndexData->vnum==122 
-    || obj->pIndexData->vnum==123)) return FALSE; 
- 
+    || obj->pIndexData->vnum==121 || obj->pIndexData->vnum==122
+    || obj->pIndexData->vnum==123)) return FALSE;
+
   if (!obj->owner) return TRUE;
 
   for(wch=char_list;wch;wch=wch->next)
@@ -65,7 +65,7 @@ char* can_get_obj (CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool fSelf
       && container->item_type != ITEM_CORPSE_PC)
       return "$I1 не контейнер.";
 
-    if (IS_SET(container->value[1],CONT_CLOSED)) 
+    if (IS_SET(container->value[1],CONT_CLOSED))
       return "Для начала открой $i4.";
 
     if (container->pIndexData->vnum == OBJ_VNUM_PIT && !IS_IMMORTAL(ch))
@@ -103,18 +103,18 @@ bool is_same_obj (OBJ_DATA *obj, OBJ_DATA *next)
   if (strcmp (next->short_descr, obj->short_descr)) return FALSE;
   if (strcmp (next->description, obj->description)) return FALSE;
   if (next->pIndexData->vnum != obj->pIndexData->vnum) return FALSE;
-        
+
   return TRUE;
 }
 
 char * local_outtext (int64 count, char *string_one, char *string_many)
-{ 
+{
   static char textbuf [MAX_STRING_LENGTH];
 
   if (count==1) do_printf(textbuf,string_one);
   else do_printf (textbuf, string_many, count);
   return textbuf;
-} 
+}
 
 int local_get_obj ( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool IsOne )
 {
@@ -131,7 +131,7 @@ int local_get_obj ( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool IsOn
 
 
   if (obj->owner && obj->enchanted && !IS_IMMORTAL(ch) && str_cmp(obj->owner,"(public)") && strcmp(obj->owner,ch->name))
-  {     
+  {
      stc( "Нельзя брать чужие вещи.\n\r", ch );
      return 0;
   }
@@ -156,7 +156,7 @@ int local_get_obj ( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool IsOn
     if (bFlushText)
     {
       act (local_outtext (iObjCount, "$d: ты не можешь нести так много вещей.",
-           "$d {C[%d]{x: ты не можешь нести так много вещей."), 
+           "$d {C[%d]{x: ты не можешь нести так много вещей."),
            ch, NULL, obj->name, TO_CHAR); iObjCount=1; }
       return 0;
     }
@@ -167,7 +167,7 @@ int local_get_obj ( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool IsOn
     if (bFlushText)
     {
       act (local_outtext (iObjCount, "$d: ты не можешь нести такой большой вес.",
-        "$d {C[%d]{x: ты не можешь нести такой большой вес."), 
+        "$d {C[%d]{x: ты не можешь нести такой большой вес."),
         ch, NULL, obj->name, TO_CHAR); iObjCount=1; }
       return 0;
     }
@@ -190,7 +190,7 @@ int local_get_obj ( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool IsOn
         }
       }
     }
-                
+
     if ( container)
     {
       if (container->pIndexData->vnum == OBJ_VNUM_PIT
@@ -202,16 +202,16 @@ int local_get_obj ( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool IsOn
 
     if (container->pIndexData->vnum == OBJ_VNUM_PIT
      && !CAN_WEAR(container, ITEM_TAKE)
-     && !IS_OBJ_STAT(obj,ITEM_HAD_TIMER)) obj->timer=0; 
+     && !IS_OBJ_STAT(obj,ITEM_HAD_TIMER)) obj->timer=0;
 
     if (bFlushText)
     {
       if (iObjCount!=1)
-      { 
+      {
         do_printf(temp,"{C%u{x %s",iObjCount, get_obj_desc(obj,num_char64(iObjCount)));
         act ("Ты берешь $t из $I2.", ch, temp, container, TO_CHAR);
       }
-      else 
+      else
       act ("Ты берешь $i4 из $I2.", ch, obj, container, TO_CHAR);
       act (local_outtext (iObjCount, "$c1 берет $i4 из $I2.",
            "$c1 берет несколько $i8 из $I2.{x"),
@@ -259,7 +259,7 @@ int local_get_obj ( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool IsOn
       if ( members > 1 && (obj->value[0] > 1 || obj->value[1] >1))
       {
         do_printf(buffer,"%u %u",obj->value[0],obj->value[1]);
-        do_function(ch, &do_split, buffer); 
+        do_function(ch, &do_split, buffer);
       }
     }
     extract_obj( obj );
@@ -278,9 +278,9 @@ void do_get( CHAR_DATA *ch, const char *argument )
   OBJ_DATA *container;
   bool found;
   int number, count=0;
-    
+
   iObjCount=1; /* Init object counter */
-    
+
   number = mult_argument((char *)argument, arg);
   if (number==1) number=MAX_OBJS_VALUE;
 
@@ -296,8 +296,8 @@ void do_get( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  if (IS_SET(ch->act,PLR_TIPSY) && tipsy(ch,"get")) return; 
- 
+  if (IS_SET(ch->act,PLR_TIPSY) && tipsy(ch,"get")) return;
+
   if (EMPTY(arg2))
   {
     if ( str_cmp( arg1, "all" ) && str_prefix( "all.", arg1 ) && number==MAX_OBJS_VALUE )
@@ -406,8 +406,8 @@ void do_put( CHAR_DATA *ch, const char *argument )
   OBJ_DATA *obj;
   OBJ_DATA *obj_next;
   int number=1, foundobjs=0;
-  int bFlush=TRUE; 
-  int64 iObjCount=1; 
+  int bFlush=TRUE;
+  int64 iObjCount=1;
 
   number = mult_argument((char *)argument, arg);
   argument = one_argument( arg, arg1 );
@@ -474,13 +474,13 @@ void do_put( CHAR_DATA *ch, const char *argument )
       return;
     }
 
-    if (get_obj_weight( obj ) + get_true_weight( container ) > (container->value[0] * 10) 
+    if (get_obj_weight( obj ) + get_true_weight( container ) > (container->value[0] * 10)
         || get_obj_weight(obj) > (container->value[3] * 10))
     {
       stc("Не лезет.\n\r",ch);
       return;
     }
-    
+
     if (container->pIndexData->vnum==OBJ_VNUM_PIT && !CAN_WEAR(container,ITEM_TAKE))
     {
       if (obj->timer) SET_BIT(obj->extra_flags,ITEM_HAD_TIMER);
@@ -494,8 +494,8 @@ void do_put( CHAR_DATA *ch, const char *argument )
     {
       act("$c1 кладет $i4 на $I4.",ch,obj,container, TO_ROOM);
       act("Ты кладешь $i4 на $I4.",ch,obj,container, TO_CHAR);
-      if (obj->morph_name!=NULL) 
-        ptc(obj->morph_name,"{y%s{x кладет тебя на {c%s{x.\n\r", 
+      if (obj->morph_name!=NULL)
+        ptc(obj->morph_name,"{y%s{x кладет тебя на {c%s{x.\n\r",
           ch->name, get_obj_desc(container,'1'));
     }
     else
@@ -523,7 +523,7 @@ void do_put( CHAR_DATA *ch, const char *argument )
       && obj != container
       && can_drop_obj( ch, obj ))
     {
-      if ( get_obj_weight( obj ) + get_true_weight( container ) > (container->value[0] * 10) 
+      if ( get_obj_weight( obj ) + get_true_weight( container ) > (container->value[0] * 10)
         ||   get_obj_weight(obj) > (container->value[3] * 10))
       {
         act ("$i1 не помещается.", ch, obj, container, TO_CHAR);
@@ -593,8 +593,8 @@ void do_drop( CHAR_DATA *ch, const char *argument )
   OBJ_DATA *obj_next;
   bool found;
   int bFlush, number = 1, count=0;
-  int64 iObjCount=1; 
-  
+  int64 iObjCount=1;
+
   number = mult_argument((char *)argument, arg2);
   argument = one_argument( arg2, arg );
 
@@ -609,7 +609,7 @@ void do_drop( CHAR_DATA *ch, const char *argument )
   if (is_number( arg ))
   {
     // 'drop NNNN coins'
-    int64 amount; 
+    int64 amount;
     int64 gold = 0, silver = 0;
 
     amount   = atoi64(arg);
@@ -621,7 +621,7 @@ void do_drop( CHAR_DATA *ch, const char *argument )
       return;
     }
 
-    if ( !str_cmp( arg, "coins") || !str_cmp(arg,"coin") 
+    if ( !str_cmp( arg, "coins") || !str_cmp(arg,"coin")
       ||   !str_cmp( arg, "silver"))
     {
       if (ch->silver < amount)
@@ -718,7 +718,7 @@ void do_drop( CHAR_DATA *ch, const char *argument )
       || ( number!=MAX_OBJS_VALUE && is_name (arg, obj->name) ) )
       && can_see_obj( ch, obj )
       && obj->wear_loc == WEAR_NONE
-      && can_drop_obj( ch, obj ) 
+      && can_drop_obj( ch, obj )
       && !((obj->morph_name!=NULL) && IS_SET(ch->in_room->room_flags,ROOM_ARENA)))
     {
       count++;
@@ -779,7 +779,7 @@ void do_give( CHAR_DATA *ch, const char *argument )
   bool all;
   bool found;
   int bFlush, number, count=0;
-  int64 iObjCount=1; 
+  int64 iObjCount=1;
   char *check;
 
   number = mult_argument((char *)argument, arg);
@@ -800,9 +800,9 @@ void do_give( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  if (IS_SET(ch->act,PLR_TIPSY)) // tipsy by Dinger 
-   if (tipsy(ch,"give")) return; 
- 
+  if (IS_SET(ch->act,PLR_TIPSY)) // tipsy by Dinger
+   if (tipsy(ch,"give")) return;
+
   if ( is_number( arg1 ) )
   {
     // 'give NNNN coins victim'
@@ -1046,7 +1046,7 @@ void do_envenom(CHAR_DATA *ch, const char *argument)
      return;
    }
 
-   if (obj->value[3] < 0 
+   if (obj->value[3] < 0
      ||  attack_table[obj->value[3]].damage == DAM_BASH)
    {
      stc("Ты можешь отравить только оружие с острыми гранями.\n\r",ch);
@@ -1070,7 +1070,7 @@ void do_envenom(CHAR_DATA *ch, const char *argument)
      af.modifier  = 0;
      af.bitvector = WEAPON_POISON;
      affect_to_obj(obj,&af);
- 
+
      act("$c1 смазывает $i4 сильным ядом.",ch,obj,NULL,TO_ROOM);
      act("Ты смазываешь $i4 сильным ядом.",ch,obj,NULL,TO_CHAR);
      check_improve(ch,gsn_envenom,TRUE,3);
@@ -1155,13 +1155,13 @@ void do_fill( CHAR_DATA *ch, const char *argument )
   act(buf,ch,obj,fountain,TO_ROOM);
   if (obj->morph_name!=NULL)
   {
-    ptc(obj->morph_name,"{y%s{x наполняет тебя, наливая в тебя %s из {c%s{x.\n\r", ch->name, liq_table[fountain->value[2]].liq_showname, 
+    ptc(obj->morph_name,"{y%s{x наполняет тебя, наливая в тебя %s из {c%s{x.\n\r", ch->name, liq_table[fountain->value[2]].liq_showname,
       get_obj_desc(fountain,'2'));
   }
   obj->value[2] = fountain->value[2];
   obj->value[1] = obj->value[0];
 }
- 
+
 void do_pour (CHAR_DATA *ch, const char *argument)
 {
   char arg[MAX_STRING_LENGTH],buf[MAX_STRING_LENGTH];
@@ -1170,13 +1170,13 @@ void do_pour (CHAR_DATA *ch, const char *argument)
   int64 amount;
 
   argument = one_argument(argument,arg);
-    
+
   if (EMPTY(arg) || EMPTY(argument))
   {
     stc("Опорожнить что куда?\n\r",ch);
     return;
   }
-    
+
   if ((out = get_obj_carry(ch,arg, ch)) == NULL)
   {
     stc("У тебя нет этой вещи.\n\r",ch);
@@ -1201,7 +1201,7 @@ void do_pour (CHAR_DATA *ch, const char *argument)
     do_printf(buf,"Ты переворачиваешь $i4, выливая %s на землю.",
                 liq_table[out->value[2]].liq_showname);
     act(buf,ch,out,NULL,TO_CHAR);
-        
+
     do_printf(buf,"$c1 переворачивает $i4, выливая %s на землю.",
                 liq_table[out->value[2]].liq_showname);
     act(buf,ch,out,NULL,TO_ROOM);
@@ -1235,7 +1235,7 @@ void do_pour (CHAR_DATA *ch, const char *argument)
     stc("Ты не можешь перелить жидкoсть сюда.\n\r",ch);
     return;
   }
-    
+
   if (in == out)
   {
     stc("Ты не можешь изменить законы физики!\n\r",ch);
@@ -1265,7 +1265,7 @@ void do_pour (CHAR_DATA *ch, const char *argument)
     if (out->value[0] > 0) out->value[1] = 0;
     in->value[1]=-1;
   }
-  else 
+  else
   {
     amount = UMIN(out->value[1],in->value[0] - in->value[1]);
     in->value[1] += amount;
@@ -1277,7 +1277,7 @@ void do_pour (CHAR_DATA *ch, const char *argument)
   }
 
   in->value[2] = out->value[2];
-    
+
   if (vch == NULL)
   {
     do_printf(buf,"Ты переливаешь %s из $i2 в $I4.",
@@ -1285,7 +1285,7 @@ void do_pour (CHAR_DATA *ch, const char *argument)
     act(buf,ch,out,in,TO_CHAR);
     do_printf(buf,"$c1 переливает %s из $i2 в $I8.",
             liq_table[out->value[2]].liq_showname);
-        
+
     act(buf,ch,out,in,TO_ROOM);
   }
   else
@@ -1307,11 +1307,11 @@ void do_pour (CHAR_DATA *ch, const char *argument)
   {
    out->value[2] = 0;
    out->value[3] = 0;
-  } 
+  }
 }
 
 void do_drink( CHAR_DATA *ch, const char *argument )
-{ 
+{
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
   OBJ_DATA *obj;
@@ -1320,13 +1320,13 @@ void do_drink( CHAR_DATA *ch, const char *argument )
 
   one_argument( argument, arg );
 
-  if ( ch->fighting && !IS_IMMORTAL(ch) ) 
-  { 
-    stc( "Пока будешь водку пьянствовать, тебе отрежут чего-то лишнее.\n\r", ch ); 
-    stc( "Например голову.\n\r", ch ); 
+  if ( ch->fighting && !IS_IMMORTAL(ch) )
+  {
+    stc( "Пока будешь водку пьянствовать, тебе отрежут чего-то лишнее.\n\r", ch );
+    stc( "Например голову.\n\r", ch );
     WAIT_STATE(ch,PULSE_VIOLENCE);
-    return; 
-  } 
+    return;
+  }
 
   if (EMPTY(arg))
   {
@@ -1364,13 +1364,13 @@ void do_drink( CHAR_DATA *ch, const char *argument )
 
     case ITEM_FOUNTAIN:
       if ( ( liquid = obj->value[2] )  < 0 )
-      { 
+      {
         bug( "Do_drink: bad liquid number %d.", liquid );
         liquid = obj->value[2] = 0;
       }
       amount = liq_table[liquid].liq_affect[4] * 3;
       break;
-    case ITEM_DRINK_CON: 
+    case ITEM_DRINK_CON:
       if ( obj->value[1] ==0 )
       {
         stc( "Тут уже пусто.\n\r", ch );
@@ -1405,7 +1405,7 @@ void do_drink( CHAR_DATA *ch, const char *argument )
     stc("Ты проглатываешь сухой комок в горле\n\r", ch);
     REM_BIT(ch->act,PLR_MUSTDRINK);
   }
-  gain_condition( ch, COND_DRUNK, 
+  gain_condition( ch, COND_DRUNK,
       amount * liq_table[liquid].liq_affect[COND_DRUNK] / 36 );
   gain_condition( ch, COND_FULL,
       amount * liq_table[liquid].liq_affect[COND_FULL] / 4 );
@@ -1419,7 +1419,7 @@ void do_drink( CHAR_DATA *ch, const char *argument )
    stc( "В тебя больше не влезет ни капли.\n\r", ch );
   if ( !IS_NPC(ch) && ch->pcdata->condition[COND_THIRST] > 40 )
    stc( "Ты больше не хочешь пить.\n\r", ch );
-        
+
   if ( obj->value[3] != 0 )
   {
     // The drink was poisoned!
@@ -1429,32 +1429,32 @@ void do_drink( CHAR_DATA *ch, const char *argument )
     stc( "Ты корчишься в судорогах! Тебя отравили!\n\r", ch );
     af.where     = TO_AFFECTS;
     af.type      = gsn_poison;
-    af.level     = number_fuzzy((int)amount); 
+    af.level     = number_fuzzy((int)amount);
     af.duration  = 3 * (int)amount;
     af.location  = APPLY_NONE;
     af.modifier  = 0;
     af.bitvector = AFF_POISON;
     affect_join( ch, &af );
   }
- 
+
   if (obj->value[0] > 0)
   {
     obj->value[1] -= amount;
     if (obj->value[1]<0) obj->value[1]=0;
   }
 
-  if (IS_SET(race_table[ch->race].spec,SPEC_VAMPIRE)) 
-  { 
+  if (IS_SET(race_table[ch->race].spec,SPEC_VAMPIRE))
+  {
     if (!str_cmp(liq_table[liquid].liq_name,"{rкровь{x")
      || !str_cmp(liq_table[liquid].liq_name,"кровь")
      || !str_cmp(liq_table[liquid].liq_name,"blood"))
-    { 
-      stc("Свежая {Rкpовь{x стpуится по твоим жилам!\n\r", ch); 
-      ch->hit+=liq_table[liquid].liq_affect[COND_THIRST]*(ch->level/20+1)*2/3; 
-    } 
+    {
+      stc("Свежая {Rкpовь{x стpуится по твоим жилам!\n\r", ch);
+      ch->hit+=liq_table[liquid].liq_affect[COND_THIRST]*(ch->level/20+1)*2/3;
+    }
   }
 }
- 
+
 void do_eat( CHAR_DATA *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
@@ -1463,19 +1463,19 @@ void do_eat( CHAR_DATA *ch, const char *argument )
   char buf[MAX_STRING_LENGTH];
   one_argument( argument, arg );
 
-  if ( ch->fighting && !IS_IMMORTAL(ch)) 
-  { 
-    stc( "Пока ты будешь пирожки жевать, тебе отрежут чего-то лишнее.\n\r", ch ); 
-    stc( "Например голову.\n\r", ch ); 
+  if ( ch->fighting && !IS_IMMORTAL(ch))
+  {
+    stc( "Пока ты будешь пирожки жевать, тебе отрежут чего-то лишнее.\n\r", ch );
+    stc( "Например голову.\n\r", ch );
     WAIT_STATE(ch,PULSE_VIOLENCE);
-    return; 
-  } 
+    return;
+  }
 
-  if ( IS_SET(ch->act,PLR_MUSTDRINK) ) 
-  { 
-    stc( "Комок стоит у тебя поперек горла.\n\r", ch ); 
-    return; 
-  } 
+  if ( IS_SET(ch->act,PLR_MUSTDRINK) )
+  {
+    stc( "Комок стоит у тебя поперек горла.\n\r", ch );
+    return;
+  }
 
   if (EMPTY(arg))
   {
@@ -1483,7 +1483,7 @@ void do_eat( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  if ( ( obj = get_obj_carry( ch, arg, ch ) ) == NULL ) 
+  if ( ( obj = get_obj_carry( ch, arg, ch ) ) == NULL )
   {
     stc( "У тебя этого нет.\n\r", ch );
     return;
@@ -1498,7 +1498,7 @@ void do_eat( CHAR_DATA *ch, const char *argument )
     }
 
     if ( !IS_NPC(ch) && ch->pcdata->condition[COND_FULL] > 40 )
-    {   
+    {
       stc( "Ты больше не съешь ни кусочка.\n\r", ch );
       return;
     }
@@ -1510,17 +1510,17 @@ void do_eat( CHAR_DATA *ch, const char *argument )
     }
   }
 
-  if (IS_SET(ch->act,PLR_TIPSY) && tipsy(ch,"eat")) return; 
- 
-  act( "$c1 ест $i4.",  ch, obj, NULL, TO_ROOM ); 
+  if (IS_SET(ch->act,PLR_TIPSY) && tipsy(ch,"eat")) return;
+
+  act( "$c1 ест $i4.",  ch, obj, NULL, TO_ROOM );
   act( "Ты ешь $i4.", ch, obj, NULL, TO_CHAR );
-  if (obj->morph_name!=NULL) 
-  { 
+  if (obj->morph_name!=NULL)
+  {
     do_printf(buf,"{y%s{x съел тебя... нувязочка...\n\r", ch->name);
     stc(buf,obj->morph_name);
   }
 
-  switch ( obj->item_type ) 
+  switch ( obj->item_type )
   {
     case ITEM_FOOD:
       if ( !IS_NPC(ch) )
@@ -1555,14 +1555,14 @@ void do_eat( CHAR_DATA *ch, const char *argument )
       break;
 
     case ITEM_PILL:
-      if (IS_SET(ch->in_room->room_flags,ROOM_ARENA)) 
-      { 
-        stc( "Мрачное местечко... таблетка выпала из твоих трясущихся рук...\n\r", ch ); 
-        act( "$c1 пытается сьесть таблетку, но роняет ее. $i1 закатывается в щель.", ch, obj, NULL, TO_ROOM ); 
-        extract_obj( obj ); 
-        return; 
-      } 
-      obj_cast_spell( (int)obj->value[1], (int)obj->value[0], ch, ch, NULL ); 
+      if (IS_SET(ch->in_room->room_flags,ROOM_ARENA))
+      {
+        stc( "Мрачное местечко... таблетка выпала из твоих трясущихся рук...\n\r", ch );
+        act( "$c1 пытается сьесть таблетку, но роняет ее. $i1 закатывается в щель.", ch, obj, NULL, TO_ROOM );
+        extract_obj( obj );
+        return;
+      }
+      obj_cast_spell( (int)obj->value[1], (int)obj->value[0], ch, ch, NULL );
       obj_cast_spell( (int)obj->value[2], (int)obj->value[0], ch, ch, NULL );
       obj_cast_spell( (int)obj->value[3], (int)obj->value[0], ch, ch, NULL );
       if (number_range(1,100) <20)
@@ -1656,7 +1656,7 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool w_left)
     {
       ptc(obj->morph_name,"{y%s{x зажигает тебя и берет в руки.\n\r", ch->name);
     }
-    equip_char( ch, obj, WEAR_LIGHT ); 
+    equip_char( ch, obj, WEAR_LIGHT );
     return;
   }
 
@@ -1669,11 +1669,11 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool w_left)
 
    if ( !w_left &&   get_eq_char( ch, WEAR_RHAND ) != NULL
      && get_eq_char( ch, WEAR_LHAND ) != NULL
-     && !remove_obj( ch, WEAR_RHAND, fReplace ) 
+     && !remove_obj( ch, WEAR_RHAND, fReplace )
      && !remove_obj( ch, WEAR_LHAND, fReplace ) )  return;
-   else 
-   if ( w_left &&   get_eq_char( ch, WEAR_LHAND ) != NULL 
-     &&   !remove_obj( ch, WEAR_LHAND, fReplace )) return;        
+   else
+   if ( w_left &&   get_eq_char( ch, WEAR_LHAND ) != NULL
+     &&   !remove_obj( ch, WEAR_LHAND, fReplace )) return;
 
    if ( get_eq_char( ch, WEAR_RHAND ) == NULL && !w_left)
    {
@@ -1691,13 +1691,13 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool w_left)
      if (weapon && CAN_WEAR(obj, ITEM_WIELD)
       && IS_WEAPON_STAT(obj,WEAPON_TWO_HANDS)
       && !IS_SET(race_table[ch->race].spec,SPEC_TWOHAND))
-     { 
-       stc("Освободи сначала левую руку.\n\r",ch); 
-       return; 
-     } 
+     {
+       stc("Освободи сначала левую руку.\n\r",ch);
+       return;
+     }
      if (CAN_WEAR (obj, ITEM_WEAR_SHIELD))
      {
-     if (get_eq_char(ch,WEAR_LHAND) 
+     if (get_eq_char(ch,WEAR_LHAND)
      && CAN_WEAR(get_eq_char(ch,WEAR_LHAND), ITEM_WEAR_SHIELD))
      {
        stc("Нельзя одеть два щита одновременно.\n\r",ch);
@@ -1755,7 +1755,7 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool w_left)
        stc("Твои руки заняты оружием!\n\r",ch);
        return;
      }
-        
+
      weapon=obj;
      if (weapon != NULL && CAN_WEAR(weapon, ITEM_WIELD))
      {
@@ -1775,7 +1775,7 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool w_left)
          && ch->size<SIZE_LARGE)
        {
          stc("Ты не можешь вооружиться этим в левой руке.\n\r",ch);
-         return; 
+         return;
        }
        if (!IS_NPC(ch) && ch->classwar==0 && obj->value[0] != WEAPON_DAGGER)
        {
@@ -1785,7 +1785,7 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool w_left)
      }
      if (CAN_WEAR (obj, ITEM_WEAR_SHIELD))
      {
-     if (get_eq_char(ch,WEAR_RHAND) 
+     if (get_eq_char(ch,WEAR_RHAND)
      && CAN_WEAR(get_eq_char(ch,WEAR_RHAND), ITEM_WEAR_SHIELD))
      {
        stc("Нельзя одеть два щита одновременно.\n\r",ch);
@@ -1814,7 +1814,7 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool w_left)
 
      act( buf1,ch, obj, NULL, TO_ROOM );
      act( buf2,ch, obj, NULL, TO_CHAR );
-     if (obj->morph_name!=NULL) stc(buf3,obj->morph_name); 
+     if (obj->morph_name!=NULL) stc(buf3,obj->morph_name);
      equip_char( ch, obj, WEAR_LHAND );
      if (CAN_WEAR (obj, ITEM_WIELD))
      {
@@ -1843,8 +1843,8 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool w_left)
      &&   get_eq_char( ch, WEAR_FINGER_L ) != NULL
      &&   !remove_obj( ch, WEAR_FINGER_R, fReplace )
      &&   !remove_obj( ch, WEAR_FINGER_L, fReplace ) )  return;
-   else if ( w_left &&   get_eq_char( ch, WEAR_FINGER_L ) != NULL 
-     &&   !remove_obj( ch, WEAR_FINGER_L, fReplace )) return; 
+   else if ( w_left &&   get_eq_char( ch, WEAR_FINGER_L ) != NULL
+     &&   !remove_obj( ch, WEAR_FINGER_L, fReplace )) return;
 
    if ( get_eq_char( ch, WEAR_FINGER_R ) == NULL && !w_left)
    {
@@ -2039,17 +2039,17 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool w_left)
 
   if ( CAN_WEAR( obj, ITEM_WEAR_WRIST ) )
   {
-    if ( !w_left 
+    if ( !w_left
       &&   get_eq_char( ch, WEAR_WRIST_R ) != NULL
       &&   get_eq_char( ch, WEAR_WRIST_L ) != NULL
       &&   !remove_obj( ch, WEAR_WRIST_R, fReplace )
       &&   !remove_obj( ch, WEAR_WRIST_L, fReplace ) )
          return;
 
-    else if ( w_left 
-      &&   get_eq_char( ch, WEAR_WRIST_L ) != NULL 
-      &&   !remove_obj( ch, WEAR_WRIST_L, fReplace )) 
-         return; 
+    else if ( w_left
+      &&   get_eq_char( ch, WEAR_WRIST_L ) != NULL
+      &&   !remove_obj( ch, WEAR_WRIST_L, fReplace ))
+         return;
 
     if ( get_eq_char( ch, WEAR_WRIST_R ) == NULL && !w_left)
     {
@@ -2065,16 +2065,16 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool w_left)
       return;
     }
 
-    if ( get_eq_char( ch, WEAR_WRIST_L ) == NULL ) 
-    { 
-      act( "$c1 одевает $i4 вокруг левого запястья.", ch, obj, NULL, TO_ROOM ); 
-      act( "Ты одеваешь $i4 вокруг левого запястья.", ch, obj, NULL, TO_CHAR ); 
-      if (ch->fighting!=NULL) WAIT_STATE(ch,2*PULSE_VIOLENCE); 
-      if (obj->morph_name!=NULL) 
-      { 
-        do_printf(buf,"{y%s{x одевает тебя вокруг левого запястья.\n\r", ch->name); 
-        stc(buf,obj->morph_name); 
-      } 
+    if ( get_eq_char( ch, WEAR_WRIST_L ) == NULL )
+    {
+      act( "$c1 одевает $i4 вокруг левого запястья.", ch, obj, NULL, TO_ROOM );
+      act( "Ты одеваешь $i4 вокруг левого запястья.", ch, obj, NULL, TO_CHAR );
+      if (ch->fighting!=NULL) WAIT_STATE(ch,2*PULSE_VIOLENCE);
+      if (obj->morph_name!=NULL)
+      {
+        do_printf(buf,"{y%s{x одевает тебя вокруг левого запястья.\n\r", ch->name);
+        stc(buf,obj->morph_name);
+      }
       equip_char( ch, obj, WEAR_WRIST_L );
       return;
     }
@@ -2100,17 +2100,17 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool w_left)
 
   if ( fReplace ) stc( "Ты не можешь одеть, взять в руки или вооружиться этим.\n\r", ch );
 }
- 
+
 void do_wear( CHAR_DATA *ch, const char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  bool w_left=FALSE; 
+  bool w_left=FALSE;
   OBJ_DATA *obj;
 
-  argument = one_argument( argument, arg1 ); 
-  one_argument(argument,arg2); 
-  
+  argument = one_argument( argument, arg1 );
+  one_argument(argument,arg2);
+
   if (EMPTY(arg1))
   {
     stc( "Одеть что?\n\r", ch );
@@ -2150,7 +2150,7 @@ void do_wear( CHAR_DATA *ch, const char *argument )
   }
   else
   {
-    if (!str_cmp(arg2,"left")) w_left=TRUE; 
+    if (!str_cmp(arg2,"left")) w_left=TRUE;
     if ( ( obj = get_obj_carry( ch, arg1, ch ) ) == NULL )
     {
       stc( "У тебя нет этой вещи.\n\r", ch );
@@ -2236,7 +2236,7 @@ static void do_sacrifice1(CHAR_DATA *ch, OBJ_DATA *obj, bool isOne, int count )
       stc("Боги не примут этого.\n\r",ch);
       return;
     }
-        else 
+        else
         {
          ptc(ch,"Боги дают тебе 0 серебрянных монет за твое жертвоприношение.\n\r", silver);
      extract_obj(obj);
@@ -2284,8 +2284,8 @@ static void do_sacrifice1(CHAR_DATA *ch, OBJ_DATA *obj, bool isOne, int count )
     }
   }
 
-  if (isOne) 
-  { 
+  if (isOne)
+  {
    silver = UMAX(1,obj->level * 3)*count;
    if (obj->item_type != ITEM_CORPSE_NPC && obj->item_type != ITEM_CORPSE_PC)
     silver = UMIN(silver,obj->cost * count);
@@ -2296,28 +2296,28 @@ static void do_sacrifice1(CHAR_DATA *ch, OBJ_DATA *obj, bool isOne, int count )
    ch->silver = ch->silver+silver;
 
    if (IS_CFG(ch,CFG_AUTOSPLIT))
-   { 
+   {
      members = 0;
      for (gch=ch->in_room->people;gch!=NULL;gch=gch->next_in_room)
        if ( is_same_group( gch, ch ) ) members++;
-   
+
      if ( members > 1 && silver > 1)
      {
        do_printf(buffer,"%u",silver);
-       do_function(ch, &do_split, buffer); 
+       do_function(ch, &do_split, buffer);
      }
    }
- 
-   if (count==1) 
-   { 
+
+   if (count==1)
+   {
     act( "$c1 {wприносит{x $i4 {wв жертву Богам.{x", ch, obj, NULL, TO_ROOM );
-    wiznet("$C1 {wприносит{x $i4 в жертву Богам.", ch,obj,WIZ_SACCING,0); 
-   } 
-   else 
-   { 
+    wiznet("$C1 {wприносит{x $i4 в жертву Богам.", ch,obj,WIZ_SACCING,0);
+   }
+   else
+   {
     act( "$c1 {wприносит несколько{x $i8 {wв жертву Богам.{x", ch, obj, NULL, TO_ROOM );
-    wiznet("$C1 {wприносит несколько{x $i8 в жертву Богам.", ch,obj,WIZ_SACCING,0); 
-   } 
+    wiznet("$C1 {wприносит несколько{x $i8 в жертву Богам.", ch,obj,WIZ_SACCING,0);
+   }
   }
 
   if ((obj->item_type == ITEM_CORPSE_NPC) && (obj->contains))
@@ -2344,7 +2344,7 @@ void do_sacrifice( CHAR_DATA *ch, const char *argument)
   char objname[50];
   OBJ_DATA *tobj;
   int position = 0, count = 0;
-  int same = 1; 
+  int same = 1;
 
   if (ch->in_room->contents == NULL)
   {
@@ -2374,20 +2374,20 @@ void do_sacrifice( CHAR_DATA *ch, const char *argument)
   for (obj = ch->in_room->contents; obj != NULL; obj = tobj)
   {
     tobj = obj->next_content;
- 
+
     if (can_see_obj(ch, obj) && ((is_name(objname, obj->name)
      && (!position || ++count == position)) || !str_cmp(objname, "all")))
     {
-      found++; 
-      if (isOne) same=1; 
-      if (is_same_obj(obj,tobj)) { same++; isOne=FALSE;} 
-      else isOne=TRUE; 
+      found++;
+      if (isOne) same=1;
+      if (is_same_obj(obj,tobj)) { same++; isOne=FALSE;}
+      else isOne=TRUE;
       do_sacrifice1(ch, obj,isOne,same);
       if (position && count == position) break;
     }
   }
 
-  if (!found) stc( "Ты не можешь найти это.\n\r", ch );    
+  if (!found) stc( "Ты не можешь найти это.\n\r", ch );
 }
 
 void do_quaff( CHAR_DATA *ch, const char *argument )
@@ -2421,17 +2421,17 @@ void do_quaff( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  if (IS_SET(ch->in_room->room_flags,ROOM_ARENA)) 
-  { 
-   stc( "Мрачное местечко... от страха ты проливаешь зелье на землю..\n\r", ch ); 
-   act( "$c1 пытается выпить $i4, но проливает зелье на землю.", ch, obj, NULL, TO_ROOM ); 
-   extract_obj( obj ); 
-   return; 
-  } 
- 
-  if (IS_SET(ch->act,PLR_TIPSY)) // tipsy by Dinger 
-   if (tipsy(ch,"quaff")) return; 
- 
+  if (IS_SET(ch->in_room->room_flags,ROOM_ARENA))
+  {
+   stc( "Мрачное местечко... от страха ты проливаешь зелье на землю..\n\r", ch );
+   act( "$c1 пытается выпить $i4, но проливает зелье на землю.", ch, obj, NULL, TO_ROOM );
+   extract_obj( obj );
+   return;
+  }
+
+  if (IS_SET(ch->act,PLR_TIPSY)) // tipsy by Dinger
+   if (tipsy(ch,"quaff")) return;
+
   act( "$c1 одним глотком выпивает $i4.", ch, obj, NULL, TO_ROOM );
   act( "Ты одним глотком выпиваешь $i4.", ch, obj, NULL ,TO_CHAR );
   if (obj->morph_name!=NULL)
@@ -2444,7 +2444,7 @@ void do_quaff( CHAR_DATA *ch, const char *argument )
   obj_cast_spell( (int)obj->value[3], (int)obj->value[0], ch, ch, NULL );
 
   extract_obj( obj );
-  WAIT_STATE(ch,PULSE_VIOLENCE); 
+  WAIT_STATE(ch,PULSE_VIOLENCE);
 }
 
 void do_recite( CHAR_DATA *ch, const char *argument )
@@ -2471,8 +2471,8 @@ void do_recite( CHAR_DATA *ch, const char *argument )
     // value1 = type of word
     // value2 = quantity of use
     if (scroll->value[0]==SCROLL_QUENIA)
-    { 
-      if (scroll->value[1] >= MAX_QUENIA) 
+    {
+      if (scroll->value[1] >= MAX_QUENIA)
       {
         stc("Ты не можешь понять что это такое...Похоже боги перемудрили.\n\r",ch);
         WAIT_STATE( ch, 2 * PULSE_VIOLENCE );
@@ -2526,9 +2526,9 @@ void do_recite( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  if (IS_SET(ch->act,PLR_TIPSY)) // tipsy by Dinger 
-   if (tipsy(ch,"recite")) return; 
- 
+  if (IS_SET(ch->act,PLR_TIPSY)) // tipsy by Dinger
+   if (tipsy(ch,"recite")) return;
+
   obj = NULL;
   if (EMPTY(arg2))
   {
@@ -2608,14 +2608,14 @@ void do_brandish( CHAR_DATA *ch, const char *argument )
       stc(buf,staff->morph_name);
     }
 
-    if ( ch->level+2*category_bonus(ch,MAKE) < staff->level 
+    if ( ch->level+2*category_bonus(ch,MAKE) < staff->level
      || number_percent() >= 20 + get_skill(ch,gsn_staves) * 4/5)
     {
       act ("Силы $i2 отказались служить тебе.",ch,staff,NULL,TO_CHAR);
       act ("...И ничего не произошло.",ch,NULL,NULL,TO_ROOM);
       check_improve(ch,gsn_staves,FALSE,2);
     }
-      
+
     else for ( vch = ch->in_room->people; vch; vch = vch_next )
     {
       vch_next    = vch->next_in_room;
@@ -2671,12 +2671,12 @@ void do_zap( CHAR_DATA *ch, const char *argument )
   }
 
  //   if ( ( wand = get_eq_char( ch, WEAR_HOLD ) ) == NULL ) //-old version
-  if ((wand = get_eq_char(ch, WEAR_LHAND)) == NULL) 
+  if ((wand = get_eq_char(ch, WEAR_LHAND)) == NULL)
   {
     stc( "У тебя в руке ничего нет.\n\r", ch );
     return;
   }
-  
+
   if ( wand->item_type != ITEM_WAND )
   {
     stc( "Взмахнуть можно только жезлом.\n\r", ch );
@@ -2704,7 +2704,7 @@ void do_zap( CHAR_DATA *ch, const char *argument )
   }
 
   if (IS_SET(ch->act,PLR_TIPSY)) if (tipsy(ch,"zap")) return;// tipsy by Dinger
- 
+
   WAIT_STATE( ch, 2 * PULSE_VIOLENCE );
 
   if ( wand->value[2] > 0 )
@@ -2721,8 +2721,8 @@ void do_zap( CHAR_DATA *ch, const char *argument )
       act( "Ты стукнул $I4 $i5.", ch, wand, obj, TO_CHAR );
     }
 
-    if (ch->level+2*category_bonus(ch,MAKE) < wand->level 
-      ||  number_percent() >= 20 + get_skill(ch,gsn_wands) * 4/5) 
+    if (ch->level+2*category_bonus(ch,MAKE) < wand->level
+      ||  number_percent() >= 20 + get_skill(ch,gsn_wands) * 4/5)
     {
       act( "Ты добился от $i2 только дыма и искр.", ch,wand,NULL,TO_CHAR);
       act( "Попытки $c2 использовать $i4 окончились дымом и искрами.", ch,wand,NULL,TO_ROOM);
@@ -2760,7 +2760,7 @@ void do_steal( CHAR_DATA *ch, const char *argument )
 //    return;
 //  }
 
-  if (!can_attack(ch,1)) return; 
+  if (!can_attack(ch,1)) return;
 
   ISORDEN(ch)
 
@@ -2792,9 +2792,9 @@ void do_steal( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  if (IS_SET(ch->act,PLR_TIPSY)) 
-   if (tipsy(ch,"steal")) return; 
- 
+  if (IS_SET(ch->act,PLR_TIPSY))
+   if (tipsy(ch,"steal")) return;
+
   WAIT_STATE( ch, skill_table[gsn_steal].beats );
   percent  = number_percent();
 
@@ -2857,7 +2857,7 @@ void do_steal( CHAR_DATA *ch, const char *argument )
 
   if ( !str_cmp( arg1, "coin" ) || !str_cmp( arg1, "coins" )
    ||  !str_cmp( arg1, "gold" ) || !str_cmp( arg1, "silver"))
-  { 
+  {
     int64 gold, silver;
     gold = victim->gold * number_range(1, ch->level) / 60;
     silver = victim->silver * number_range(1,ch->level) / 60;
@@ -2887,7 +2887,7 @@ void do_steal( CHAR_DATA *ch, const char *argument )
     stc( "Ты не нашел этого.\n\r", ch );
     return;
   }
-        
+
   if ( !can_drop_obj( ch, obj ) || obj->level > ch->level )
   {
     stc( "Ты не можешь стащить это.\n\r", ch );
@@ -2927,7 +2927,7 @@ void do_steal( CHAR_DATA *ch, const char *argument )
   stc( "Есть!\n\r", ch );
 }
 
- 
+
 
 /* Shopping commands. */
 CHAR_DATA *find_keeper( CHAR_DATA *ch )
@@ -2953,7 +2953,7 @@ CHAR_DATA *find_keeper( CHAR_DATA *ch )
     do_say( keeper, "Извините, тут закрыто. Зайдите позже." );
     return NULL;
   }
-  
+
   if ( time_info.hour > pShop->close_hour )
   {
     do_say( keeper, "Извините, тут закрыто. Зайдите завтра." );
@@ -2979,7 +2979,7 @@ void obj_to_keeper( OBJ_DATA *obj, CHAR_DATA *ch )
   {
     t_obj_next = t_obj->next_content;
 
-    if (obj->pIndexData == t_obj->pIndexData 
+    if (obj->pIndexData == t_obj->pIndexData
       &&  !str_cmp(obj->short_descr,t_obj->short_descr))
     {
       /* if this is an unlimited item, destroy the new one */
@@ -3018,7 +3018,7 @@ OBJ_DATA *get_obj_keeper( CHAR_DATA *ch, CHAR_DATA *keeper, const char *argument
   OBJ_DATA *obj;
   int number;
   int count;
- 
+
   number = number_argument( (char*)argument, arg );
   count  = 0;
   for ( obj = keeper->carrying; obj != NULL; obj = obj->next_content )
@@ -3032,7 +3032,7 @@ OBJ_DATA *get_obj_keeper( CHAR_DATA *ch, CHAR_DATA *keeper, const char *argument
     {
 //     if (!obj->owner) obj->owner = str_dup("(public)");
      return obj;
-    }  
+    }
 
     /* skip other objects of the same name */
     while (obj->next_content != NULL
@@ -3080,7 +3080,7 @@ int64 get_cost( CHAR_DATA *keeper, OBJ_DATA *obj, bool fBuy )
           else  cost = cost * 3 / 4;
         }
        }
-  } 
+  }
   if ( obj->item_type == ITEM_STAFF || obj->item_type == ITEM_WAND )
   {
     if (obj->value[1] == 0) cost /= 4;
@@ -3093,7 +3093,7 @@ void do_buy( CHAR_DATA *ch, const char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char temp[MAX_STRING_LENGTH];
-  int64 cost; 
+  int64 cost;
   int roll;
 
   if (EMPTY(argument))
@@ -3102,8 +3102,8 @@ void do_buy( CHAR_DATA *ch, const char *argument )
       return;
   }
 
-  if (IS_SET(ch->act,PLR_TIPSY)) 
-   if (tipsy(ch,"buy")) return; // tipsy by Dinger 
+  if (IS_SET(ch->act,PLR_TIPSY))
+   if (tipsy(ch,"buy")) return; // tipsy by Dinger
 
 
   if ( IS_SET(ch->in_room->room_flags, ROOM_PET_SHOP) )
@@ -3176,7 +3176,7 @@ void do_buy( CHAR_DATA *ch, const char *argument )
       stc ("{/{RBUG! unable to create mob! Report to imms!{x\n\r",ch);
       return;
     }
-  
+
     SET_BIT(pet->act, ACT_PET);
     SET_BIT(pet->affected_by, AFF_CHARM);
     pet->clan = ch->clan;
@@ -3232,8 +3232,8 @@ void do_buy( CHAR_DATA *ch, const char *argument )
 
     if (!IS_OBJ_STAT(obj,ITEM_INVENTORY))
     {
-      for (t_obj = obj->next_content; count < number && t_obj != NULL; 
-             t_obj = t_obj->next_content) 
+      for (t_obj = obj->next_content; count < number && t_obj != NULL;
+             t_obj = t_obj->next_content)
       {
         if (t_obj->pIndexData == obj->pIndexData
           &&  !str_cmp(t_obj->short_descr,obj->short_descr)) count++;
@@ -3257,7 +3257,7 @@ void do_buy( CHAR_DATA *ch, const char *argument )
       ch->reply = keeper;
       return;
     }
-      
+
     if ( obj->level > ch->level )
     {
       act( "$c1 говорит тебе 'Ты еще мал, чтобы использовать $i4'.",
@@ -3266,9 +3266,9 @@ void do_buy( CHAR_DATA *ch, const char *argument )
       return;
     }
 
-    if ( obj->owner && obj->enchanted && obj->item_type==ITEM_ARMOR && strcmp(obj->owner,ch->name) &&  !IS_IMMORTAL(ch))  
+    if ( obj->owner && obj->enchanted && obj->item_type==ITEM_ARMOR && strcmp(obj->owner,ch->name) &&  !IS_IMMORTAL(ch))
      {
-        stc("Ты не можешь купить чужую вещь.\n\r",ch);  
+        stc("Ты не можешь купить чужую вещь.\n\r",ch);
         return;
      }
 
@@ -3319,7 +3319,7 @@ void do_buy( CHAR_DATA *ch, const char *argument )
                {
                 stc("{RBUG! Unable to create obj! Report to Imms NOW!{x\n\r",ch);
                 return;
-               }} 
+               }}
       else
       {
         t_obj = obj;
@@ -3340,7 +3340,7 @@ void do_buy( CHAR_DATA *ch, const char *argument )
     }
   }
 }
- 
+
 void do_list( CHAR_DATA *ch, const char *argument )
 {
   char buf[MAX_STRING_LENGTH];char buf2[MAX_STRING_LENGTH],first_name[MAX_STRING_LENGTH];
@@ -3385,7 +3385,7 @@ void do_list( CHAR_DATA *ch, const char *argument )
   {
     CHAR_DATA *keeper;
     OBJ_DATA *obj;
-    int64 cost; 
+    int64 cost;
     int count;
     bool found;
     char arg[MAX_INPUT_LENGTH];
@@ -3398,7 +3398,7 @@ void do_list( CHAR_DATA *ch, const char *argument )
     {
       if ( obj->wear_loc == WEAR_NONE
         &&   can_see_obj( ch, obj )
-        &&   ( cost = get_cost( keeper, obj, TRUE ) ) > 0 
+        &&   ( cost = get_cost( keeper, obj, TRUE ) ) > 0
         &&   ( EMPTY(arg) || is_name(arg,obj->name) ))
       {
         if ( !found )
@@ -3408,15 +3408,15 @@ void do_list( CHAR_DATA *ch, const char *argument )
         }
 
         if (IS_OBJ_STAT(obj,ITEM_INVENTORY))
-        { 
-          do_printf(buf,"[%3d %7d -- ]", obj->level,cost); 
-          strcat(buf,get_obj_desc(obj,'1')); 
-        } 
+        {
+          do_printf(buf,"[%3d %7d -- ]", obj->level,cost);
+          strcat(buf,get_obj_desc(obj,'1'));
+        }
         else
         {
            count = 1;
 
-           while (obj->next_content != NULL 
+           while (obj->next_content != NULL
              && obj->pIndexData == obj->next_content->pIndexData
              && !str_cmp(obj->short_descr,
              obj->next_content->short_descr))
@@ -3425,11 +3425,11 @@ void do_list( CHAR_DATA *ch, const char *argument )
              count++;
            }
            do_printf(buf,"[%3d %7d", obj->level,cost);
-           do_printf(buf2," %3d] %s", count,get_obj_desc(obj,'1')); 
-           strcat(buf, buf2); 
+           do_printf(buf2," %3d] %s", count,get_obj_desc(obj,'1'));
+           strcat(buf, buf2);
         }
-        one_argument(obj->name,first_name); 
-        do_printf(buf2,"{g({y%s{g){x\n\r",first_name); 
+        one_argument(obj->name,first_name);
+        do_printf(buf2,"{g({y%s{g){x\n\r",first_name);
         if (obj->pIndexData->area->security==8) strcat( buf, buf2);
         else strcat(buf, "\n\r");
         stc( buf, ch );
@@ -3446,7 +3446,7 @@ void do_sell( CHAR_DATA *ch, const char *argument )
   char arg[MAX_INPUT_LENGTH];
   CHAR_DATA *keeper;
   OBJ_DATA *obj;
-  int64 cost; 
+  int64 cost;
   int roll;
 
   one_argument( argument, arg );
@@ -3566,7 +3566,7 @@ void do_value( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  do_printf( buf, "$c1 говорит тебе 'Я дам тебе %u серебрянных и %u золотых монет за $i4'.", 
+  do_printf( buf, "$c1 говорит тебе 'Я дам тебе %u серебрянных и %u золотых монет за $i4'.",
         cost - (cost/100) * 100, cost/100 );
   act( buf, keeper, obj, ch, TO_VICT );
   ch->reply = keeper;
@@ -3603,7 +3603,7 @@ void sac_obj( CHAR_DATA *ch, OBJ_DATA *obj)
       return;
     }
   }
-                
+
   silver = UMAX(1,obj->level * 3);
   if (obj->item_type != ITEM_CORPSE_NPC && obj->item_type != ITEM_CORPSE_PC)
     silver = UMIN(silver,obj->cost);
@@ -3612,11 +3612,11 @@ void sac_obj( CHAR_DATA *ch, OBJ_DATA *obj)
     ptc(ch,"%s дает тебе одну серебряную монету.\n\r",SabAdron);
   else
     ptc(ch,"%s дает тебе %u серебряных монет.\n\r",SabAdron,silver);
-    
+
   ch->silver += silver;
-    
+
   if (IS_CFG(ch,CFG_AUTOSPLIT))
-  { 
+  {
     members = 0;
     for (gch = ch->in_room->people; gch != NULL; gch = gch->next_in_room )
       if ( is_same_group( gch, ch ) ) members++;
@@ -3624,7 +3624,7 @@ void sac_obj( CHAR_DATA *ch, OBJ_DATA *obj)
     if ( members > 1 && silver > 1)
     {
       do_printf(buffer,"%u",silver);
-      do_split(ch,buffer);      
+      do_split(ch,buffer);
     }
   }
 
@@ -3768,7 +3768,7 @@ void do_auction (CHAR_DATA *ch, const char *argument)
   if (!str_cmp(arg1,"info"))
   {
     if (IS_SET(ch->act,PLR_TIPSY) && tipsy(ch,"auction info")) return;
- 
+
     if (auction->item != NULL)
     {
       if (auction->bet > 0)
@@ -3815,7 +3815,7 @@ void do_auction (CHAR_DATA *ch, const char *argument)
   }
   }
 
-  if (!str_cmp(arg1,"bet") ) 
+  if (!str_cmp(arg1,"bet") )
   {
     if (auction->item != NULL)
     {
@@ -3843,9 +3843,9 @@ void do_auction (CHAR_DATA *ch, const char *argument)
       }
 
       /* the actual bet is OK! */
-      if (IS_SET(ch->act,PLR_TIPSY)) 
-        if (tipsy(ch,"auction bet")) return; // tipsy by Dinger 
- 
+      if (IS_SET(ch->act,PLR_TIPSY))
+        if (tipsy(ch,"auction bet")) return; // tipsy by Dinger
+
       /* return the gold to the last buyer, if one exists */
       if (auction->buyer != NULL) auction->buyer->gold += auction->bet;
 
@@ -3870,7 +3870,7 @@ void do_auction (CHAR_DATA *ch, const char *argument)
       stc ("У тебя нет этого.\n\r",ch);
       return;
     }
-                        
+
     if (obj->morph_name!=NULL)
     {
       stc ("Ты не можешь выставить это на аукцион.\n\r",ch);
@@ -3892,14 +3892,14 @@ void do_auction (CHAR_DATA *ch, const char *argument)
     if (obj->owner && obj->enchanted && !strcmp(obj->owner,ch->name))
     {
       stc( "Ты не можешь продать личную вещь.\n\r", ch );
-      return; 
+      return;
     }
 
-    if (auction->item == NULL) 
+    if (auction->item == NULL)
       switch (obj->item_type)
     {
 
-      default: 
+      default:
        ptc(ch, "Вы не можете выставить на аукцион %s",item_name(obj->item_type));
        return;
       case ITEM_ARMOR:
@@ -3922,16 +3922,16 @@ void do_auction (CHAR_DATA *ch, const char *argument)
       case ITEM_WAND:
       case ITEM_WARP_STONE:
       case ITEM_WEAPON:
- 
+
       if (EMPTY(argument)|| !is_number(argument))
         startbet = 0;
       else
         startbet = atoi64 (argument);
-      
+
       if (startbet<0) startbet=0;
 
-      if (IS_SET(ch->act,PLR_TIPSY)) 
-       if (tipsy(ch,"auction put")) return; // tipsy by Dinger 
+      if (IS_SET(ch->act,PLR_TIPSY))
+       if (tipsy(ch,"auction put")) return; // tipsy by Dinger
       obj_from_char (obj);
       auction->item = obj;
       auction->bet = startbet;
@@ -3962,7 +3962,7 @@ void do_send( CHAR_DATA *ch, const char *argument )
   int64 toll, iObjCount=1;
   bool all, found;
   int bFlush, number = 1, count=0;
-    
+
   number = mult_argument((char *)argument, arg);
   argument = one_argument( arg, arg1 );
   argument = one_argument( argument, arg2 );
@@ -3975,8 +3975,8 @@ void do_send( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  if (IS_SET(ch->act,PLR_TIPSY) && tipsy(ch,"send")) return; 
- 
+  if (IS_SET(ch->act,PLR_TIPSY) && tipsy(ch,"send")) return;
+
   if ( is_number( arg1 ) )
   {
     // send NNNN coins victim
@@ -3992,14 +3992,14 @@ void do_send( CHAR_DATA *ch, const char *argument )
     }
 
     silver = str_cmp(arg2, "gold");
-                
+
     argument = one_argument( argument, arg2 );
     if (EMPTY(arg2))
     {
       stc( "Кому дать?\n\r", ch );
       return;
     }
-                 
+
     if ( (victim=get_char_room(ch, arg2))!=NULL )
     {
       stc( "Может лучше попробовать просто отдать? (give).\n\r", ch );
@@ -4018,7 +4018,7 @@ void do_send( CHAR_DATA *ch, const char *argument )
       return;
     }
 
-    if ( IS_SET(victim->act, PLR_ARMY) ) 
+    if ( IS_SET(victim->act, PLR_ARMY) )
     {
       stc( "Получатель служит на благо Отчизны.\n\r", ch);
       return;
@@ -4058,7 +4058,7 @@ void do_send( CHAR_DATA *ch, const char *argument )
     stc( "Может лучше попробовать просто отдать? (give).\n\r", ch );
     return;
   }
-                        
+
   if (!(victim=get_pchar_world(ch,arg2)))
   {
     stc( "Получатель не обнаружен.\n\r", ch );
@@ -4095,7 +4095,7 @@ void do_send( CHAR_DATA *ch, const char *argument )
         if (all) continue;
         else return;
       }
- 
+
       if (obj->morph_name)
       {
         if (obj->morph_name->level>ch->level || IS_SET(victim->act,PLR_ARMY) ||
@@ -4138,7 +4138,7 @@ void do_send( CHAR_DATA *ch, const char *argument )
       }
 
       if ( IS_SET (victim->act, PLR_ARMY) &&
-       obj->item_type != ITEM_FOOD && 
+       obj->item_type != ITEM_FOOD &&
        obj->item_type != ITEM_DRINK_CON)
       {
         stc( "В военную часть можно передавать только еду и выпивку.\n\r", ch);
@@ -4179,7 +4179,7 @@ void do_send( CHAR_DATA *ch, const char *argument )
 
       obj_from_char( obj );
       obj_to_char( obj, victim );
-                        
+
       act( "$c1 посылает $i4 в чьи-то руки.", ch, obj, victim, TO_NOTVICT );
       if (bFlush)
       {
@@ -4203,47 +4203,47 @@ void do_send( CHAR_DATA *ch, const char *argument )
 }
 
 
-void do_clanfit(CHAR_DATA *ch, const char *argument) 
-{ 
- CHAR_DATA *keeper; 
- OBJ_DATA *obj; 
- AFFECT_DATA *paf, *apply; 
- int coeff; 
- char buff[MAX_STRING_LENGTH]; 
+void do_clanfit(CHAR_DATA *ch, const char *argument)
+{
+ CHAR_DATA *keeper;
+ OBJ_DATA *obj;
+ AFFECT_DATA *paf, *apply;
+ int coeff;
+ char buff[MAX_STRING_LENGTH];
  long cost;
 
- if (EMPTY(argument)) 
- { 
-  stc("Переделать что?\n\r",ch); 
-  return; 
- } 
- if (ch==NULL) return; 
- if (ch->clan==NULL || ch->clan==clan_lookup("loner")) 
- { 
-  stc("Ты не в клане.\n\r",ch); 
-  return; 
- } 
- 
- // searching for clanfitter 
+ if (EMPTY(argument))
+ {
+  stc("Переделать что?\n\r",ch);
+  return;
+ }
+ if (ch==NULL) return;
+ if (ch->clan==NULL || ch->clan==clan_lookup("loner"))
+ {
+  stc("Ты не в клане.\n\r",ch);
+  return;
+ }
+
+ // searching for clanfitter
  for ( keeper = ch->in_room->people; keeper; keeper = keeper->next_in_room )
  {
-  if (!IS_NPC(keeper)) continue; 
+  if (!IS_NPC(keeper)) continue;
   if (IS_SET(keeper->act,ACT_CLANENCHANTER)) break;
  }
- if (keeper==NULL) 
- { 
-  stc("Здесь нет никого, кто переделал бы твою вещь.\n\r",ch); 
-  return; 
- } 
- 
- // seeking for object 
- obj = get_obj_carry(ch,argument,ch); 
- if (obj==NULL) 
- { 
-  stc("У тебя нет такой вещи.\n\r",ch); 
-  return; 
- } 
- 
+ if (keeper==NULL)
+ {
+  stc("Здесь нет никого, кто переделал бы твою вещь.\n\r",ch);
+  return;
+ }
+
+ // seeking for object
+ obj = get_obj_carry(ch,argument,ch);
+ if (obj==NULL)
+ {
+  stc("У тебя нет такой вещи.\n\r",ch);
+  return;
+ }
+
  if (obj->item_type == ITEM_WEAPON
   || obj->item_type == ITEM_WAND
   || obj->item_type == ITEM_STAFF)
@@ -4253,24 +4253,24 @@ void do_clanfit(CHAR_DATA *ch, const char *argument)
  }
 
  if (IS_SET(obj->extra_flags,ITEM_CLANENCHANT))
- { 
-  stc("Эта вещь уже переделана согласно нормам клана.\n\r",ch); 
-  return; 
- } 
- 
- if (ch->clan->wear_loc==-1) 
- { 
-  stc("Твой клан не умеет переделывать вещи. Посоветуй своему Лидеру обратиться к Богам...\n\r",ch); 
-  return; 
- } 
- 
+ {
+  stc("Эта вещь уже переделана согласно нормам клана.\n\r",ch);
+  return;
+ }
+
+ if (ch->clan->wear_loc==-1)
+ {
+  stc("Твой клан не умеет переделывать вещи. Посоветуй своему Лидеру обратиться к Богам...\n\r",ch);
+  return;
+ }
+
  if  ((ch->clan->wear_loc == ITEM_TAKE && obj->item_type != ITEM_LIGHT)
-  || (!IS_SET(obj->wear_flags,ch->clan->wear_loc))) 
- { 
-  stc("Твой клан не умеет переделывать такие вещи.\n\r",ch); 
-  return; 
- } 
- 
+  || (!IS_SET(obj->wear_flags,ch->clan->wear_loc)))
+ {
+  stc("Твой клан не умеет переделывать такие вещи.\n\r",ch);
+  return;
+ }
+
  cost = obj->level*100; //in gold
  if (ch->clan->wear_loc==ITEM_WEAR_WRIST
   || ch->clan->wear_loc==ITEM_WEAR_FINGER)
@@ -4283,9 +4283,9 @@ void do_clanfit(CHAR_DATA *ch, const char *argument)
   }
 
   ch->pcdata->account -= cost;
- // we can fix it! :) 
- act_new("$C1 переделывает $i4 согласно нормам твоего клана.",ch,obj,keeper,TO_CHAR,POS_RESTING); 
- SET_BIT(obj->extra_flags,ITEM_CLANENCHANT); 
+ // we can fix it! :)
+ act_new("$C1 переделывает $i4 согласно нормам твоего клана.",ch,obj,keeper,TO_CHAR,POS_RESTING);
+ SET_BIT(obj->extra_flags,ITEM_CLANENCHANT);
  one_argument(obj->name,buff);
  strcat(buff," clan ");
  strcat(buff,ch->clan->name);
@@ -4304,23 +4304,23 @@ void do_clanfit(CHAR_DATA *ch, const char *argument)
   obj->description = str_dup(ch->clan->long_desc);
  }
 
- coeff = (obj->level>9)  + (obj->level>24) + (obj->level>39) 
+ coeff = (obj->level>9)  + (obj->level>24) + (obj->level>39)
        + (obj->level>54) + (obj->level>69) + (obj->level>84)
-       + (obj->level>99); 
+       + (obj->level>99);
  if (coeff > 0)
-  for(apply=ch->clan->mod;apply!=NULL;apply=apply->next) 
-  { 
-   paf             = new_affect(); 
-   paf->location   = apply->location; 
-   paf->modifier   = apply->modifier*coeff; 
-   paf->type       = 0; 
-   paf->duration   = -1; 
-   paf->bitvector  = 0; 
-   paf->level      = obj->level; 
-   paf->next       = obj->affected; 
-   obj->affected   = paf; 
-  } 
-} 
+  for(apply=ch->clan->mod;apply!=NULL;apply=apply->next)
+  {
+   paf             = new_affect();
+   paf->location   = apply->location;
+   paf->modifier   = apply->modifier*coeff;
+   paf->type       = 0;
+   paf->duration   = -1;
+   paf->bitvector  = 0;
+   paf->level      = obj->level;
+   paf->next       = obj->affected;
+   obj->affected   = paf;
+  }
+}
 /* End pack code by TY */
 // 'Split' originally by Gnort, God of Chaos.
 void do_split( CHAR_DATA *ch, const char *argument )
@@ -4341,7 +4341,7 @@ void do_split( CHAR_DATA *ch, const char *argument )
     stc( "Сколько разделить?\n\r", ch );
     return;
   }
-  
+
   amount_silver = atoi64( arg1 );
 
   if (arg2[0] != '\0') amount_gold = atoi64(arg2);
@@ -4375,7 +4375,7 @@ void do_split( CHAR_DATA *ch, const char *argument )
     stc( "Оставь их себе.\n\r", ch );
     return;
   }
-          
+
   share_silver = amount_silver / members;
   extra_silver = amount_silver % members;
 

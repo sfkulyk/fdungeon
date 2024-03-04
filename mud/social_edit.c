@@ -2,7 +2,7 @@
 // Copyrights (C) 1998-2001, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 
-// Online Social Editting Module, 
+// Online Social Editting Module,
 //   (c) 1996,97 Erwin S. Andreasen <erwinpip.dknet.dk>
 //   See the file "License" for important licensing information
 //   Upgraded by Saboteur
@@ -37,7 +37,7 @@ void load_social_table ()
   FILE *fp;
   int i;
   bool new=FALSE;
-        
+
   if ((fp=fopen(SOCIAL_FILE,"r"))==NULL)
   {
     log_string("BUG:Could not open " SOCIAL_FILE " for reading.");
@@ -47,7 +47,7 @@ void load_social_table ()
 
   // IMPORTANT to use malloc so we can realloc later on
   social_table = malloc (sizeof(struct social_type) * (maxsocial+1));
-        
+
   for (i = 0; i < maxsocial; i++) load_social (fp,&social_table[i],new);
 
   log_printf("Loaded %d socials",i);
@@ -60,13 +60,13 @@ void save_social (const struct social_type *s, FILE *fp)
 {
   // get rid of (null)
   do_fprintf (fp, "%s~\n%s~\n%s~\n%s~\n%s~\n%s~\n%s~\n%s~\n%s\n%s~\n\n",
-    s->name, 
-    s->char_no_arg  ? s->char_no_arg  :"", 
+    s->name,
+    s->char_no_arg  ? s->char_no_arg  :"",
     s->others_no_arg? s->others_no_arg:"",
-    s->char_found   ? s->char_found   :"", 
-    s->others_found ? s->others_found :"", 
+    s->char_found   ? s->char_found   :"",
+    s->others_found ? s->others_found :"",
     s->vict_found   ? s->vict_found   :"",
-    s->char_auto    ? s->char_auto    :"", 
+    s->char_auto    ? s->char_auto    :"",
     s->others_auto  ? s->others_auto  :"",
     pflag64(s->flag),s->help);
 }
@@ -77,7 +77,7 @@ void save_social_table()
   int i;
 
   fp = fopen (SOCIAL_FILE, "w");
-        
+
   if (!fp)
   {
     bug ("Could not open " SOCIAL_FILE " for writing.",0);
@@ -85,7 +85,7 @@ void save_social_table()
   }
 
   do_fprintf (fp, "Maxsocials %d\n", maxsocial);
-        
+
   for ( i = 0 ; i < maxsocial ; i++) save_social (&social_table[i], fp);
   fclose (fp);
 }
@@ -94,10 +94,10 @@ void save_social_table()
 int social_lookup (const char *name)
 {
   int i;
-        
+
   for (i = 0; i < maxsocial ; i++)
     if (!str_cmp(name, social_table[i].name)) return i;
-                        
+
   return -1;
 }
 
@@ -106,24 +106,24 @@ void do_sedit (CHAR_DATA *ch, const char *argument)
 {
   char cmd[MAX_INPUT_LENGTH], social[MAX_INPUT_LENGTH];
   int iSocial;
-        
+
   argument = one_argument (argument,cmd);
   argument = one_argument (argument,social);
-        
+
   if (!cmd[0])
   {
     stc ("Ась? Набери {WHELP SEDIT{x чтобы посмотреть синтаксис.\n\r",ch);
     return;
   }
-                
+
   if (!social[0])
   {
     stc ("С каким social вы хотите работать?\n\r",ch);
     return;
   }
-        
+
   iSocial = social_lookup (social);
-        
+
   if (str_cmp(cmd,"new") && (iSocial == -1))
   {
     stc ("Такого social нет.\n\r",ch);
@@ -134,13 +134,13 @@ void do_sedit (CHAR_DATA *ch, const char *argument)
   {
     int i,j;
     struct social_type *new_table = malloc (sizeof(struct social_type) * maxsocial);
-                
+
     if (!new_table)
     {
       stc ("Ошибка разделения памяти. Щас будет торба...\n\r",ch);
       return;
     }
-                
+
     for (i = 0, j = 0; i < maxsocial+1; i++)
       if (i != iSocial)
       {
@@ -149,34 +149,34 @@ void do_sedit (CHAR_DATA *ch, const char *argument)
       }
     free (social_table);
     social_table = new_table;
-                
+
     maxsocial--;
     stc ("Social удален.\n\r",ch);
   }
-        
+
   else if (!str_cmp(cmd, "new"))
   {
     struct social_type *new_table;
-                
+
     if (iSocial != -1)
     {
       stc ("Social с таким именем уже существует.\n\r",ch);
       return;
     }
-                
+
     // reallocate the table
     // Note that the table contains maxsocial socials PLUS one empty spot!
     maxsocial++;
     new_table = realloc (social_table, sizeof(struct social_type) * (maxsocial + 1));
-                
+
     if (!new_table)
     {
       stc ("Ошибка разделения памяти. Щас будет торба...\n\r",ch);
       return;
     }
-                
+
     social_table = new_table;
-                
+
     strcpy(social_table[maxsocial-1].name, str_dup (social));
     social_table[maxsocial-1].char_no_arg = str_dup ("");
     social_table[maxsocial-1].others_no_arg = str_dup ("");
@@ -186,7 +186,7 @@ void do_sedit (CHAR_DATA *ch, const char *argument)
     social_table[maxsocial-1].char_auto = str_dup ("");
     social_table[maxsocial-1].others_auto = str_dup ("");
     social_table[maxsocial-1].help = str_dup ("");
-                
+
     strcpy(social_table[maxsocial].name, str_dup (""));
     // 'terminating' empty string
     stc ("Новый social добавлен.\n\r",ch);
@@ -224,7 +224,7 @@ void do_sedit (CHAR_DATA *ch, const char *argument)
   else if (!str_cmp(cmd, "cnoarg"))
   {
     free_string (social_table[iSocial].char_no_arg);
-    social_table[iSocial].char_no_arg = str_dup(argument);          
+    social_table[iSocial].char_no_arg = str_dup(argument);
 
     if (!argument[0]) stc ("Теперь игрок не будет видеть ничего, если не укажет параметров.\n\r",ch);
     else              ptc(ch,"Новое сообщение:\n\r%s\n\r", argument);
@@ -232,7 +232,7 @@ void do_sedit (CHAR_DATA *ch, const char *argument)
   else if (!str_cmp(cmd, "onoarg"))
   {
     free_string (social_table[iSocial].others_no_arg);
-    social_table[iSocial].others_no_arg = str_dup(argument);                
+    social_table[iSocial].others_no_arg = str_dup(argument);
 
     if (!argument[0]) stc ("Теперь окружающие не будут видеть ничего, если не укажет параметров.\n\r",ch);
     else              ptc(ch,"Новое сообщение:\n\r%s\n\r", argument);
@@ -240,7 +240,7 @@ void do_sedit (CHAR_DATA *ch, const char *argument)
   else if (!str_cmp(cmd, "cfound"))
   {
     free_string (social_table[iSocial].char_found);
-    social_table[iSocial].char_found = str_dup(argument);           
+    social_table[iSocial].char_found = str_dup(argument);
 
     if (!argument[0]) stc ("Теперь игрок не будет видеть ничего, если цель найдена.\n\r",ch);
     else              ptc(ch,"Новое сообщение:\n\r%s\n\r", argument);
@@ -248,7 +248,7 @@ void do_sedit (CHAR_DATA *ch, const char *argument)
   else if (!str_cmp(cmd, "ofound"))
   {
     free_string (social_table[iSocial].others_found);
-    social_table[iSocial].others_found = str_dup(argument);         
+    social_table[iSocial].others_found = str_dup(argument);
 
     if (!argument[0]) stc ("Теперь окружающие не будут видеть ничего, если цель найдена.\n\r",ch);
     else              ptc(ch,"Новое сообщение:\n\r%s\n\r", argument);
@@ -256,15 +256,15 @@ void do_sedit (CHAR_DATA *ch, const char *argument)
   else if (!str_cmp(cmd, "vfound"))
   {
     free_string (social_table[iSocial].vict_found);
-    social_table[iSocial].vict_found = str_dup(argument);           
-                                              
+    social_table[iSocial].vict_found = str_dup(argument);
+
     if (!argument[0]) stc ("Теперь жертва не будет видеть ничего, если цель найдена.\n\r",ch);
     else              ptc(ch,"Новое сообщение:\n\r%s\n\r", argument);
   }
   else if (!str_cmp(cmd, "cself"))
   {
     free_string (social_table[iSocial].char_auto);
-    social_table[iSocial].char_auto = str_dup(argument);            
+    social_table[iSocial].char_auto = str_dup(argument);
 
     if (!argument[0]) stc ("Теперь игрок не будет видеть ничего, когда цель - он сам.\n\r",ch);
     else              ptc(ch,"Новое сообщение:\n\r%s\n\r", argument);
@@ -272,7 +272,7 @@ void do_sedit (CHAR_DATA *ch, const char *argument)
   else if (!str_cmp(cmd, "oself"))
   {
     free_string (social_table[iSocial].others_auto);
-    social_table[iSocial].others_auto = str_dup(argument);          
+    social_table[iSocial].others_auto = str_dup(argument);
 
     if (!argument[0]) stc ("Теперь окружающие не будут видеть ничего, когда цель - он сам.\n\r",ch);
     else              ptc(ch,"Новое сообщение:\n\r%s\n\r", argument);

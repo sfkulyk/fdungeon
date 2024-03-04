@@ -2,11 +2,11 @@
 // Read ours copyrights and license terms in 'license.fd'
 #include <sys/types.h>
 #include <time.h>
-#include <ctype.h> 
+#include <ctype.h>
 #include <stdio.h>
-#include <string.h> 
+#include <string.h>
 #include <stdlib.h>
-#include "merc.h" 
+#include "merc.h"
 #include "tables.h"
 #include "interp.h"
 #include "recycle.h"
@@ -23,7 +23,7 @@ void save_deities()
     fpReserve = fopen (NULL_FILE, "r");
     return;
   }
- 
+
   do_fprintf(fp, "Version 2\n");
   for ( deity = 0;deity<MAX_DEITIES; deity++)
   {
@@ -54,7 +54,7 @@ int get_vacant_deity()
   int v_deity;
   for( v_deity = 0; v_deity < MAX_DEITIES ; v_deity++)
   {
-    if( deity_table[v_deity].name == NULL && deity_table[v_deity+1].name == NULL ) 
+    if( deity_table[v_deity].name == NULL && deity_table[v_deity+1].name == NULL )
       return v_deity;
   }
   bug("Error in deity data file!", 0);
@@ -70,11 +70,11 @@ bool may_devote( CHAR_DATA *ch, int dn)
      case RACE_UNIQUE:
        break;
      case RACE_ELF:
-       if( dn != 0  && dn != 1  && dn != 4 && dn != 9 && dn != 10 
+       if( dn != 0  && dn != 1  && dn != 4 && dn != 9 && dn != 10
         && dn != 13 && dn != 15 && dn != 16 ) return FALSE;
        break;
      case RACE_DWARF:
-       if( dn != 4 && dn != 5  && dn != 6 && dn != 7 && dn != 8  
+       if( dn != 4 && dn != 5  && dn != 6 && dn != 7 && dn != 8
         && dn != 9 && dn !=11 && dn != 12 && dn != 17) return FALSE;
        break;
      case RACE_GIANT:
@@ -98,15 +98,15 @@ bool may_devote( CHAR_DATA *ch, int dn)
        break;
      case RACE_DROW:
        if( dn !=  2 && dn != 3  && dn != 5 && dn != 8
-        && dn != 13 && dn != 14 && dn != 17 ) 
+        && dn != 13 && dn != 14 && dn != 17 )
            return FALSE;
        break;
      case RACE_CENTAUR:
-       if( dn != 0 && dn != 1 && dn !=  3 && dn !=  4 && dn != 7 
+       if( dn != 0 && dn != 1 && dn !=  3 && dn !=  4 && dn != 7
         && dn != 8 && dn != 9 && dn != 10 && dn != 12 ) return FALSE;
        break;
      case RACE_HGRYPHON:
-       if( dn != 0  && dn !=  1 && dn != 2  && dn != 7  && dn != 8 && dn != 9 
+       if( dn != 0  && dn !=  1 && dn != 2  && dn != 7  && dn != 8 && dn != 9
         && dn != 12 && dn != 15 && dn !=16  && dn != 17 ) return FALSE;
        break;
      case RACE_LIZARD:
@@ -118,8 +118,8 @@ bool may_devote( CHAR_DATA *ch, int dn)
         && dn != 15 && dn != 16 && dn != 17 ) return FALSE;
        break;
      case RACE_SPRITE:
-       if( dn != 1  && dn != 2  && dn != 4  && dn != 5 && dn != 6 && dn != 9 
-        && dn != 10 && dn != 13 && dn != 14 && dn != 15 && dn != 16 && dn != 17 ) 
+       if( dn != 1  && dn != 2  && dn != 4  && dn != 5 && dn != 6 && dn != 9
+        && dn != 10 && dn != 13 && dn != 14 && dn != 15 && dn != 16 && dn != 17 )
            return FALSE;
        break;
      case RACE_DRUID:
@@ -127,7 +127,7 @@ bool may_devote( CHAR_DATA *ch, int dn)
         && dn != 16 && dn != 17 ) return FALSE;
        break;
      case RACE_SKELETON:
-       if( dn != 2  && dn != 5 && dn != 6 && dn != 7 && dn != 8 && dn != 14 ) 
+       if( dn != 2  && dn != 5 && dn != 6 && dn != 7 && dn != 8 && dn != 14 )
            return FALSE;
      case RACE_ZOMBIE:
        if( dn != 2  && dn != 5 && dn != 8 && dn != 12 && dn != 14 ) return FALSE;
@@ -219,7 +219,7 @@ int deity_char_power( CHAR_DATA *ch, int type, int subtype)
       {
         if( deity_apply_table[dtab.d_apply[8]].res_flag )
         {
-           do_printf( buf," char %s resist %s", ch->name, 
+           do_printf( buf," char %s resist %s", ch->name,
             deity_apply_table[dtab.d_apply[8]].res_flag );
           do_function( ch, &do_flag, buf);
           free_buf(buf);
@@ -251,7 +251,7 @@ void show_deity_applies( CHAR_DATA *ch, int deity)
     if( number % 4 == 0) incdec = "{GУвеличивает{x";
     else incdec = "{RУменьшает{x";
     if( deity_table[deity].d_apply[number] == 0 ) continue;
-    else 
+    else
      switch(number)
      {
        case 0 :
@@ -373,7 +373,7 @@ void do_cfix( CHAR_DATA *ch, const char *argument)
 //  if( IS_SET(ch->act, PLR_HIGHPRIEST) ) ch->pcdata->favour = 1000;
 
   if( ch->version > 10 || ch->version < 1 ) ch->version = 1;
-  if( ch->version < 5) 
+  if( ch->version < 5)
   {
     ch->long_descr = str_dup(ch->name);
     if( IS_IMMORTAL(ch) && ch->pcdata->pseudoname == NULL )
@@ -496,7 +496,7 @@ void do_repair( CHAR_DATA *ch, const char *argument )
     stc("Сначала зайди в кузницу.\n\r", ch);
     return;
   }
-  if( EMPTY(arg2) || !str_cmp(arg2,"self") ) victim=ch; 
+  if( EMPTY(arg2) || !str_cmp(arg2,"self") ) victim=ch;
   else victim=get_char_room(ch, arg2);
   if (!victim)
   {
@@ -525,7 +525,7 @@ void do_repair( CHAR_DATA *ch, const char *argument )
           return;
       }
       if( robj->durability == 0 ) robj->durability = material_table[material_num(robj->material)].d_dam;
-      if( robj->durability == -1 || (robj->condition)*100/((robj->durability < 1)?1:robj->durability) >= 100) 
+      if( robj->durability == -1 || (robj->condition)*100/((robj->durability < 1)?1:robj->durability) >= 100)
       {
         ptc(ch,"Эта вещь не нуждается в починке...\n\r");
         return;
@@ -536,7 +536,7 @@ void do_repair( CHAR_DATA *ch, const char *argument )
         ptc(ch,"У тебя не хватит денег на починку %s!\n\r", get_obj_desc(robj,'2') );
         return;
       }
-      
+
       if( !str_prefix( argument, "value") && !EMPTY(argument) )
       {
         if( g_delta == 0) ptc( ch, "%s произносит: '{GЯ починю тебе {C%s {Gнашару!{x'\n\r", get_obj_desc( robj, '2'));
@@ -555,7 +555,7 @@ void do_repair( CHAR_DATA *ch, const char *argument )
         ptc(ch, "%s {Gчинит для тебя {C%s{x за {Y%d {Gзолотых монет.{x\n\r",
             get_char_desc( victim, '1'),
             get_obj_desc( robj, '4'),
-            g_delta );                      
+            g_delta );
         ch->gold -= g_delta;
       }
       ptc(ch, "Теперь {C%s {xв %s состоянии.\n\r",
@@ -569,9 +569,9 @@ void do_repair( CHAR_DATA *ch, const char *argument )
       return;
     }
     else
-    { 
+    {
       stc("Сначала найди кузнеца!\n\r",ch);
-      return; 
+      return;
     }
   }
   else if( !IS_SET( race_table[ch->race].spec, SPEC_BLACKSMITH) && !IS_IMMORTAL(ch) )
@@ -598,7 +598,7 @@ void do_repair( CHAR_DATA *ch, const char *argument )
       return;
   }
   if( robj->durability == 0 ) robj->durability = material_table[material_num(robj->material)].d_dam;
-  if( robj->durability == -1 || (robj->condition)*100/((robj->durability < 1)?1:robj->durability) >= 100) 
+  if( robj->durability == -1 || (robj->condition)*100/((robj->durability < 1)?1:robj->durability) >= 100)
   {
     ptc(ch,"Эта вещь не нуждается в починке...\n\r");
     return;
@@ -614,7 +614,7 @@ void do_repair( CHAR_DATA *ch, const char *argument )
 /*
   if( !str_prefix( argument, "value") && !IS_NPC(victim) )
   {
-    do_printf( buf1,"{GПочинка %s будет стоить {Y%d{x золотых монет.{x\n\r", 
+    do_printf( buf1,"{GПочинка %s будет стоить {Y%d{x золотых монет.{x\n\r",
        get_obj_desc( robj,'2'),
        g_delta );
     do_function( victim, &do_say, buf1);
@@ -629,13 +629,13 @@ void do_repair( CHAR_DATA *ch, const char *argument )
          get_obj_desc( robj, '4'),
          g_delta,
          get_obj_desc( robj, '1'),
-         get_obj_cond( robj, 1 ) );  
+         get_obj_cond( robj, 1 ) );
 
     victim->gold -= g_delta;
     ch->gold += g_delta;
   }
 
-  robj->condition = robj->durability; 
+  robj->condition = robj->durability;
   do_printf(buf, "{Y$c1{x ремонтирует для {Y%s{x {y%s{x.",
     (ch==victim)?"себя":get_char_desc(victim, 2), get_obj_desc(robj,'4'));
   act(buf, ch, NULL, victim, TO_NOTVICT);
@@ -709,7 +709,7 @@ void do_reward( CHAR_DATA *ch, const char *argument )
      return;
    }
    victim->gold += value;
-   if( victim != ch && !IS_NPC(ch) ) 
+   if( victim != ch && !IS_NPC(ch) )
    {
      do_printf( buf,"{Y%s{x получил%s от {c%s{x награду в размере {Y%d{x золотых.",victim->name,victim->sex==1?"":"а",ch->name,value);
      if( victim != NULL && value) ptc( ch, "{Y%s {xполучает от тебя награду в размере {R%d {c%s{x! (В сумме теперь: {w%d{x).\n\r", get_char_desc( victim, '1'), value, arg2, victim->gold);
@@ -777,13 +777,13 @@ void do_damage( CHAR_DATA *ch, const char *argument)
 
   if( !(value=atoi(arg2)) ) value=1;
 
-  if( obj->durability == -1 ) 
+  if( obj->durability == -1 )
   {
     stc("Ты не можешь повредить эту вещь.\n\r", ch);
     return;
   }
 
-  if( obj->condition < 1) 
+  if( obj->condition < 1)
   {
     stc("Эта вещь и так сломана.\n\r", ch);
     return;
@@ -791,7 +791,7 @@ void do_damage( CHAR_DATA *ch, const char *argument)
   if( obj->condition < value ) value = obj->condition;
   obj->condition -= value;
   ptc(ch, "Ты повредил {c%s{x у {Y%s{x на {R%d{x единиц. Осталось {R%d{x.\n\r",
-  get_obj_desc( obj,'4'), (victim==ch)?"себя":get_char_desc(victim,'2'), value, 
+  get_obj_desc( obj,'4'), (victim==ch)?"себя":get_char_desc(victim,'2'), value,
   obj->condition );
 }
 
@@ -821,7 +821,7 @@ void do_seize( CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if( ( victim = get_char_room( ch, arg2)) == NULL ) 
+  if( ( victim = get_char_room( ch, arg2)) == NULL )
   {
     stc("Этого персонажа нет в комнате!\n\r", ch);
     return;
@@ -833,7 +833,7 @@ void do_seize( CHAR_DATA *ch, const char *argument)
     stc("Предмет с таким именем у персонажа не найден!\n\r", ch);
     return;
   }
-  
+
   if( get_trust(ch) < get_trust(victim) )
   {
      stc("Хамство наказуемо...\n\r", ch);
@@ -849,13 +849,13 @@ void do_seize( CHAR_DATA *ch, const char *argument)
 
   obj_from_char(obj);
   obj_to_char( obj, ch);
-  ptc( ch, "Ты конфисковываешь {c%s{x у {Y%s{x.\n\r", 
+  ptc( ch, "Ты конфисковываешь {c%s{x у {Y%s{x.\n\r",
        get_obj_desc( obj, '4'), get_char_desc( victim, '2') );
 
   if( !str_cmp(argument,"quiet") && IS_ELDER(ch) && !IS_ELDER(victim) ) return;
   else
   {
-    ptc( victim, "{Y%s{x конфисковывает у тебя {c%s{x.\n\r", 
+    ptc( victim, "{Y%s{x конфисковывает у тебя {c%s{x.\n\r",
          get_char_desc( ch, '1'), get_obj_desc( obj, '4') );
   }
 };
@@ -898,7 +898,7 @@ void do_devote( CHAR_DATA *ch, const char *argument )
    {
      stc("{D Имя Божества {GИмя на кириллице {cОписание\n\r", ch);
      for( deity = 0; dtab.name && deity<MAX_DEITIES; deity++)
-     { 
+     {
        ptc( ch, "{C %12s [{Y%14s{C] %s\n\r", dtab.name, get_rdeity( dtab.rname, '1' ), dtab.descr);
      }
      return;
@@ -976,7 +976,7 @@ void do_devote( CHAR_DATA *ch, const char *argument )
       return;
     }
 
-    if( EMPTY(argument) || EMPTY(arg) ) 
+    if( EMPTY(argument) || EMPTY(arg) )
     {
        stc("{cСинтаксис: {Gdevote help {cдля информации.{x\n\r", ch);
        return;
@@ -1040,7 +1040,7 @@ void do_devote( CHAR_DATA *ch, const char *argument )
          return;
        }
        deity_table[deity_lookup(arg)].worship +=1;
-       ptc( ch, "Теперь у %s %d посвященных.\n\r", 
+       ptc( ch, "Теперь у %s %d посвященных.\n\r",
             get_rdeity( deity_table[deity_lookup(arg)].rname, '2'),
             deity_table[deity_lookup(arg)].worship );
        return;
@@ -1122,9 +1122,9 @@ void do_devote( CHAR_DATA *ch, const char *argument )
          return;
        }
        if( !may_devote( victim, deity_lookup(argument) ) && !IS_ELDER(ch) )
-       { 
-          stc("No match.\n\r", ch); 
-          return; 
+       {
+          stc("No match.\n\r", ch);
+          return;
        }
        else
        {
@@ -1208,11 +1208,11 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
        stc("{w[{g#No{w] [{rWsh {w] [{CName        {w] [{yRName       {w] [{DDescription{w]{x\n\r", ch);
        stc("{w >-<   >--<   >----------<   >----------<   >---------<{x\n\r", ch);
        for( deity = 0; dtab.name && deity<MAX_DEITIES; deity++)
-         ptc( ch, "{w[{G%3d{w] [{R%4d{w] [{c%12s{w] [{Y%12s{w] [{x%s{x\n\r", deity, dtab.worship, 
+         ptc( ch, "{w[{G%3d{w] [{R%4d{w] [{c%12s{w] [{Y%12s{w] [{x%s{x\n\r", deity, dtab.worship,
              dtab.name, get_rdeity( dtab.rname,'1'), dtab.descr);
        return;
      }
-     else 
+     else
        if( !str_cmp( argument, deity_table[deity_lookup(argument)].name ) )
        {
          stc( "{w[{DNum{w] [{DName        {w] [{DR_Name      {w] [{DWorship{w] [{DMinAlign{w] [{DMaxAlign{w]{x\n\r", ch);
@@ -1292,7 +1292,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
    {
      if( !str_cmp( argument, "delete") && !str_cmp(arg, deity_table[deity_lookup(arg)].name) )
      {
-       deity = deity_lookup(arg); 
+       deity = deity_lookup(arg);
 
        ptc( ch, "Удаляем божество {y%s{x...", deity_table[deity_lookup(arg)].name);
        for( ; deity < MAX_DEITIES; deity++)
@@ -1349,7 +1349,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
      if ( !str_prefix( arg1, "descr") && !EMPTY(argument) )
      {
          ptc(ch,"Описание {W%s{x изменено на '{Y%s{x'.\n\r",
-             get_rdeity( deity_table[deity_lookup(arg)].rname, '2'), 
+             get_rdeity( deity_table[deity_lookup(arg)].rname, '2'),
              str_dup( argument) );
          do_printf( buf, "%s", argument);
          buf[0]=UPPER(buf[0]);
@@ -1365,7 +1365,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
          if( !(value = atoi(arg2)) ) value = 0;
          if( value < -1000) value = -1000;
          if( value > 1000 ) value = 1000;
- 
+
          if( value >= deity_table[deity_lookup(arg)].max_align )
          {
            stc( "Минимальный характер не может быть больше максимального!\n\r", ch);
@@ -1383,14 +1383,14 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
          if( !(value = atoi(arg2)) ) value = 0;
          if( value < -1000) value = -1000;
          if( value > 1000 ) value = 1000;
- 
+
          if( value <= deity_table[deity_lookup(arg)].min_align )
          {
            stc( "Максимальный характер не может быть меньше минимального!\n\r", ch);
            return;
          }
          ptc(ch,"{GMaxalign {W%s{x изменено с '{y%d{x' на '{Y%d{x'.\n\r",
-             get_rdeity( deity_table[deity_lookup(arg)].rname, '2'), 
+             get_rdeity( deity_table[deity_lookup(arg)].rname, '2'),
              deity_table[deity_lookup(arg)].max_align, value);
          deity_table[deity_lookup(arg)].max_align = value;
          return;
@@ -1422,7 +1422,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
          if( str_cmp( arg2, "spell") && str_cmp( arg2, "skill") )
          {
            if( EMPTY(arg3) || (iarg3=atoi(arg3)) < 0 ) iarg3=0;
-           if( iarg3 < 0 || iarg3 > 10 ) iarg3 = 0; 
+           if( iarg3 < 0 || iarg3 > 10 ) iarg3 = 0;
            if( is_exact_name( arg2,"water rslash str" ) ) value = 1;
            else if( is_exact_name( arg2,"air rpierce int" ) ) value = 2;
            else if( is_exact_name( arg2,"earth rbash wis" ) ) value = 3;
@@ -1433,7 +1433,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
            else if( is_exact_name( arg2,"dark rnegative" ) ) value = 8;
            else if( is_exact_name( arg2,"fortitude racid" ) ) value = 9;
            else if( is_exact_name( arg2,"curative rholy" ) ) value = 10;
-           else if( !str_cmp( arg2,"perception") ) value=11; 
+           else if( !str_cmp( arg2,"perception") ) value=11;
            else if( !str_cmp( arg2,"learning" ) ) value = 12;
            else if( !str_cmp( arg2,"offence") ) value = 13;
            else if( !str_cmp( arg2,"protection" ) ) value = 14;
@@ -1446,7 +1446,7 @@ void do_deity ( CHAR_DATA *ch, const char *argument)
              i += 2;
              isapply = FALSE;
            }
-           if( is_exact_name(arg2,"str int wis dex con") 
+           if( is_exact_name(arg2,"str int wis dex con")
             && deity_apply_table[value].param )
            {
              i += 0;

@@ -9,8 +9,8 @@
 #include <stdarg.h>
 #include <sys/stat.h>
 #if defined (WIN32)
-#include <windows.h> 
-#include <io.h> 
+#include <windows.h>
+#include <io.h>
 #else
 #include <dirent.h>
 #endif
@@ -174,7 +174,7 @@ void do_offline( CHAR_DATA *ch, const char *argument )
   }
 
   victim=d.character;
- 
+
   if (!str_prefix(arg1,"info") || !IS_IMMORTAL (ch))
   {
     if ((IS_IMMORTAL(victim) && !IS_IMMORTAL (ch)) ||
@@ -186,14 +186,14 @@ void do_offline( CHAR_DATA *ch, const char *argument )
     ptc(ch, "{WВ последний раз этот персонаж заходил {Y%s{W{x\n\r",ctime(&victim->lastlogin));
     if (IS_IMMORTAL(ch) && get_trust(victim) < get_trust(ch))
       ptc(ch,"{CStatus: {RDeny:%s {RTipsy:%s {RNopost:%s {RNochannel:%s{x\n\r{CHost:%s{x\n\r",
-      IS_SET(victim->act,PLR_DENY) ? "{Gon" : "{Doff", 
-      IS_SET(victim->act,PLR_TIPSY) ? "{Gon" : "{Doff", 
-      IS_SET(victim->act,PLR_NOPOST) ? "{Gon" : "{Doff", 
-      IS_SET(victim->comm,COMM_NOCHANNELS) ? "{Gon" : "{Doff", 
+      IS_SET(victim->act,PLR_DENY) ? "{Gon" : "{Doff",
+      IS_SET(victim->act,PLR_TIPSY) ? "{Gon" : "{Doff",
+      IS_SET(victim->act,PLR_NOPOST) ? "{Gon" : "{Doff",
+      IS_SET(victim->comm,COMM_NOCHANNELS) ? "{Gon" : "{Doff",
       victim->host);
-    if (IS_ELDER(ch) && victim->pcdata->denied_by) 
+    if (IS_ELDER(ch) && victim->pcdata->denied_by)
       ptc(ch,"%s\n\r",victim->pcdata->denied_by);
-    whois_info(ch,victim);  
+    whois_info(ch,victim);
     extract_char(victim, TRUE );
     return;
   }
@@ -365,9 +365,9 @@ void do_guild( CHAR_DATA *ch, const char *argument )
     {
       ptc(ch, "%s теперь член гильдии Вампиров.\n\r",victim->name);
     }
-    else 
+    else
       ptc(ch, "%s исключен из гильдии Вампиров.\n\r",victim->name);
-    
+
     if (!GUILD(victim,VAMPIRE_GUILD)) REM_BIT(victim->pcdata->elder,VAMPIRE_GUILD);
     return;
   }
@@ -393,11 +393,11 @@ void do_guild( CHAR_DATA *ch, const char *argument )
     if ( gn_new > -1) gn_add(victim,gn_new);
    }
   else if ( (victim->clan->name == "loner") && (clan->name !="loner") )
-   {    
+   {
     gn_new=group_lookup(clan->name);
     if ( gn_new > -1) gn_add(victim,gn_new);
-   }    
-  else if ( (victim->clan->name != "loner") && (clan->name != "loner") ) 
+   }
+  else if ( (victim->clan->name != "loner") && (clan->name != "loner") )
    {
     gn_old=group_lookup(victim->clan->name);
     if (gn_old > -1) gn_remove(victim,gn_old);
@@ -536,7 +536,7 @@ void add_pkiller(CHAR_DATA *ch, CHAR_DATA *killer)
 
  if (ch->pcdata->pkillers==NULL) do_printf(buf,killer->name);
   else
-  {       
+  {
    do_printf(buf,ch->pcdata->pkillers);
    strcat (buf," ");
    strcat (buf,killer->name);
@@ -569,7 +569,7 @@ void remove_pkiller(CHAR_DATA *ch, char *name)
     found=TRUE;
   }
  }
- free_string(ch->pcdata->pkillers); 
+ free_string(ch->pcdata->pkillers);
  if (found) ch->pcdata->pkillers = str_dup(arg2);
  else ch->pcdata->pkillers = str_empty;
 }
@@ -598,7 +598,7 @@ void add_stealer(CHAR_DATA *ch, CHAR_DATA *stealer)
    return;
  }
  else
- {       
+ {
    strcpy(buf,ch->stealer);
    strcat(buf," ");
    strcat(buf,stealer->name);
@@ -818,7 +818,7 @@ void do_global( CHAR_DATA *ch, const char *argument )
          (IS_SET (global_cfg, CFG_ANTICRASH)) ? "on" : "off");
       return;
     }
-  
+
   if (!str_prefix (arg, "bugtrace"))
     {
       if (IS_SET (global_cfg, CFG_BUGTRACE))
@@ -832,7 +832,7 @@ void do_global( CHAR_DATA *ch, const char *argument )
          (IS_SET (global_cfg, CFG_BUGTRACE)) ? "on" : "off");
       return;
     }
-  
+
   if (!str_prefix (arg, "ignorecrash"))
     {
       if (IS_SET (global_cfg, CFG_IGNORECRASH))
@@ -853,7 +853,7 @@ void do_global( CHAR_DATA *ch, const char *argument )
    ptc(ch,"New Year mode is %s\n\r",(IS_SET(global_cfg,CFG_NEWYEAR)) ? "on" : "off");
    return;
   }
-  
+
   if (!str_prefix(arg,"random"))
   {
    if (IS_SET(global_cfg,CFG_RANDOM)) REM_BIT(global_cfg,CFG_RANDOM);
@@ -952,7 +952,7 @@ DIR *opendir (const char *dirname)
 
   path[0]='\0';
   strcat(path, dirname);
-    
+
   for (cnt=0; cnt<dlen; cnt++) if (path[cnt]=='/') path[cnt]='\\';
 
   dir->d_name[0]='\0';

@@ -21,7 +21,7 @@ void spell_portal( int sn, int level, CHAR_DATA *ch, void *vo,int target)
   || victim == ch
   || ch->fighting != NULL
   || victim->in_room == NULL
-  || !can_see_room(ch,victim->in_room) 
+  || !can_see_room(ch,victim->in_room)
   || IS_SET(victim->in_room->room_flags, ROOM_SAFE)
   || IS_SET(victim->in_room->ra, RAFF_SAFE_PLC)
   || IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
@@ -42,9 +42,9 @@ void spell_portal( int sn, int level, CHAR_DATA *ch, void *vo,int target)
   {
     stc( "Неудача.\n\r", ch );
     return;
-  }   
+  }
 
-  if (!IS_NPC(victim) && !IS_MARRY(ch,victim) && 
+  if (!IS_NPC(victim) && !IS_MARRY(ch,victim) &&
    (
    victim->fighting != NULL
    || victim->level>=level+3
@@ -53,12 +53,12 @@ void spell_portal( int sn, int level, CHAR_DATA *ch, void *vo,int target)
   {
     stc( "Неудача.\n\r", ch );
     return;
-  }   
+  }
 
     stone = get_eq_char(ch,WEAR_LHAND);
     if (stone==NULL) stone = get_eq_char(ch, WEAR_RHAND);
 
-    if (!IS_IMMORTAL(ch) 
+    if (!IS_IMMORTAL(ch)
     &&  (stone == NULL || stone->item_type != ITEM_WARP_STONE))
     {
         stc("У тебя не хватает важных компонентов.\n\r",ch);
@@ -74,7 +74,7 @@ void spell_portal( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 
     if((portal = create_object(get_obj_index(OBJ_VNUM_PORTAL),0)))
     {
-     portal->timer = 2 + level / 25; 
+     portal->timer = 2 + level / 25;
      portal->value[3] = victim->in_room->vnum;
 
      obj_to_room(portal,ch->in_room);
@@ -82,7 +82,7 @@ void spell_portal( int sn, int level, CHAR_DATA *ch, void *vo,int target)
      act("$i1 вырастает из под земли.",ch,portal,NULL,TO_ROOM);
      act("$i1 вырастает перед тобой.",ch,portal,NULL,TO_CHAR);
     }
-   else stc("{RBUG! Unable to create object! Report to Imms NOW!{x\n\r",ch);  
+   else stc("{RBUG! Unable to create object! Report to Imms NOW!{x\n\r",ch);
 }
 
 void spell_nexus( int sn, int level, CHAR_DATA *ch, void *vo, int target)
@@ -92,12 +92,12 @@ void spell_nexus( int sn, int level, CHAR_DATA *ch, void *vo, int target)
     ROOM_INDEX_DATA *to_room, *from_room;
 
     from_room = ch->in_room;
- 
+
   if ( ( victim = get_char_world( ch, target_name ) ) == NULL
   || victim == ch
   || ch->fighting != NULL
   || (to_room = victim->in_room) == NULL
-  || !can_see_room(ch,victim->in_room) 
+  || !can_see_room(ch,victim->in_room)
   || IS_SET(victim->in_room->room_flags, ROOM_SAFE)
   || IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
   || IS_SET(victim->in_room->ra, RAFF_SAFE_PLC)
@@ -118,9 +118,9 @@ void spell_nexus( int sn, int level, CHAR_DATA *ch, void *vo, int target)
   {
     stc( "Неудача.\n\r", ch );
     return;
-  }   
+  }
 
-  if (!IS_NPC(victim) && !IS_MARRY(ch,victim) && 
+  if (!IS_NPC(victim) && !IS_MARRY(ch,victim) &&
    (
    victim->fighting != NULL
    || victim->level>=level+3
@@ -129,8 +129,8 @@ void spell_nexus( int sn, int level, CHAR_DATA *ch, void *vo, int target)
   {
     stc( "Неудача.\n\r", ch );
     return;
-  }  
-  
+  }
+
     stone = get_eq_char(ch,WEAR_LHAND);
     if (!IS_IMMORTAL(ch)
     &&  (stone == NULL || stone->item_type != ITEM_WARP_STONE))
@@ -138,7 +138,7 @@ void spell_nexus( int sn, int level, CHAR_DATA *ch, void *vo, int target)
         stc("У тебя не хватает важных компонентов.\n\r",ch);
         return;
     }
- 
+
     if (stone != NULL && stone->item_type == ITEM_WARP_STONE)
     {
         act("Ты берешь энергию $i2, направляя ее в новое русло.",ch,stone,NULL,TO_CHAR);
@@ -146,14 +146,14 @@ void spell_nexus( int sn, int level, CHAR_DATA *ch, void *vo, int target)
         extract_obj(stone);
     }
 
-    /* portal one */ 
+    /* portal one */
     if((portal = create_object(get_obj_index(OBJ_VNUM_PORTAL),0)))
     {
      portal->timer = 1 + level / 10;
      portal->value[3] = to_room->vnum;
- 
+
      obj_to_room(portal,from_room);
- 
+
      act("$i1 вырастает из-под земли.",ch,portal,NULL,TO_ROOM);
      act("$i1 вырастает перед тобой.",ch,portal,NULL,TO_CHAR);
 
@@ -175,9 +175,9 @@ void spell_nexus( int sn, int level, CHAR_DATA *ch, void *vo, int target)
        act("$i1 вырастает из-под земли.",to_room->people,portal,NULL,TO_CHAR);
       }
      }
-     else stc("{RBUG! Unable to create object! Report to Imms NOW!{x\n\r",ch);  
+     else stc("{RBUG! Unable to create object! Report to Imms NOW!{x\n\r",ch);
     }
-   else stc("{RBUG! Unable to create object! Report to Imms NOW!{x\n\r",ch);  
+   else stc("{RBUG! Unable to create object! Report to Imms NOW!{x\n\r",ch);
 }
 
 void spell_gate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
@@ -191,25 +191,25 @@ void spell_gate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   if (!victim) {
     stc( "Неудача.\n\r", ch );
     return;
-  }   
+  }
   if (ch->fighting || victim == ch || !victim->in_room
     || IS_SET(ch->act, PLR_ARMY)
     || IS_SET(victim->in_room->room_flags, ROOM_SAFE)
     || IS_SET(victim->in_room->ra, RAFF_SAFE_PLC)
     || IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
     || IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
-    || !can_see_room(ch,victim->in_room) 
+    || !can_see_room(ch,victim->in_room)
     || (IS_SET(victim->in_room->room_flags, ROOM_NO_RECALL) && !IS_SET(victim->in_room->ra, RAFF_LIFE_STR))
     || (IS_SET(ch->in_room->room_flags, ROOM_NO_RECALL) && !IS_SET(ch->in_room->ra, RAFF_LIFE_STR))
     || IS_AFFECTED(ch, AFF_CURSE)
     || IS_SET(ch->in_room->ra, RAFF_EVIL_PR)
-    || IS_SET(victim->in_room->ra, RAFF_EVIL_PR)  
+    || IS_SET(victim->in_room->ra, RAFF_EVIL_PR)
     || (!IS_NPC(victim) && (IS_SET(victim->act, PLR_ARMY) || (victim->level>LEVEL_HERO)))
     || ((!IS_NPC(victim) || IS_SET(victim->act, ACT_PET)) && !is_same_clan(ch,victim))) {
     stc( "Неудача.\n\r", ch );
     return;
-  }   
-  
+  }
+
   if (IS_NPC(victim) &&
     (   IS_SET(victim->imm_flags,IMM_SUMMON)
     || victim->level>=level+3
@@ -217,9 +217,9 @@ void spell_gate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     || (victim->pIndexData && is_gqmob(victim->pIndexData->vnum)))) {
     stc( "Неудача.\n\r", ch );
     return;
-  }   
+  }
 
-  if (!IS_NPC(victim) && !IS_MARRY(ch,victim) && 
+  if (!IS_NPC(victim) && !IS_MARRY(ch,victim) &&
    (  victim->fighting != NULL
    || victim->level>=level+3
    || saves_spell(level,victim,DAM_OTHER)
@@ -227,10 +227,10 @@ void spell_gate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   {
     stc( "Неудача.\n\r", ch );
     return;
-  }   
+  }
 
-  if (!IS_NPC(ch) && ch->pcdata->condition[COND_ADRENOLIN] > 0 && 
-      IS_SET(victim->in_room->room_flags,ROOM_SAFE) 
+  if (!IS_NPC(ch) && ch->pcdata->condition[COND_ADRENOLIN] > 0 &&
+      IS_SET(victim->in_room->room_flags,ROOM_SAFE)
       && IS_SET(victim->in_room->ra,RAFF_SAFE_PLC)
       && get_trust(ch)<102)
   {
@@ -382,7 +382,7 @@ void spell_teleport( int sn, int level, CHAR_DATA *ch, void *vo,int target )
       stc( "Неудача.\n\r", ch );
       return;
     }
-    
+
     if (victim != ch) stc("Ты телепортирован!\n\r",victim);
 
     act( "$c1 исчезает!", victim, NULL, NULL, TO_ROOM );
@@ -449,18 +449,18 @@ void do_lore( CHAR_DATA *ch, const char *argument )
  if (obj->owner)
  ptc( ch,"{CСобственность:{x %s\n\r",obj->owner);
 
- if( IS_ELDER(ch) ) 
+ if( IS_ELDER(ch) )
  {
-  if( !obj ) 
+  if( !obj )
   {
       bug("NULL obj is sent as an argument to 'lore'", 0);
       obj->durability = material_table[material_num(obj->material)].d_dam;
       obj->condition = material_table[material_num(obj->material)].d_dam;
   }
 //      ptc(ch,"{RГлючный запас прочности у %s!!!\n\r", get_obj_desc(obj,'2') );
-//  else 
+//  else
        ptc(ch,"{DDurability{x: {y%4d{x \n\r{WCondition{x : {y%4d{x\n\r",
-          (obj->durability == -1)?1001:obj->durability, 
+          (obj->durability == -1)?1001:obj->durability,
           (obj->durability == -1)?1001:obj->condition);
  }
 
@@ -557,18 +557,18 @@ void spell_word_of_recall( int sn, int level, CHAR_DATA *ch,void *vo,int target)
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     ROOM_INDEX_DATA *location;
-    
+
     if (IS_NPC(victim)) return;
-   
+
     if ((location = get_room_index( ROOM_VNUM_TEMPLE)) == NULL)
     {
         stc("Ты полностью потерялся.\n\r",victim);
         return;
-    } 
+    }
 
     if ((IS_SET(victim->in_room->room_flags,ROOM_NO_RECALL)
-         && !IS_SET(victim->in_room->ra, RAFF_LIFE_STR)) 
-       || IS_AFFECTED(victim,AFF_CURSE) 
+         && !IS_SET(victim->in_room->ra, RAFF_LIFE_STR))
+       || IS_AFFECTED(victim,AFF_CURSE)
        || IS_SET(ch->in_room->ra,RAFF_EVIL_PR))
     {
         stc("Заклинание не сработало.\n\r",victim);
@@ -576,7 +576,7 @@ void spell_word_of_recall( int sn, int level, CHAR_DATA *ch,void *vo,int target)
     }
 
     if (victim->fighting != NULL) stop_fighting(victim,TRUE);
-    
+
     ch->move /= 2;
     act("$c1 исчезает.",victim,NULL,NULL,TO_ROOM);
     char_from_room(victim);
@@ -639,8 +639,8 @@ void spell_fire_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     {
         vch_next = vch->next_in_room;
 
-        if (is_safe_spell(ch,vch,TRUE) 
-        ||  (IS_NPC(vch) && IS_NPC(ch) 
+        if (is_safe_spell(ch,vch,TRUE)
+        ||  (IS_NPC(vch) && IS_NPC(ch)
         &&   (ch->fighting != vch || vch->fighting != ch)))
             continue;
 
@@ -690,7 +690,7 @@ void spell_frost_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
     dam = UMAX(hp_dam + dice_dam/10,dice_dam + hp_dam/10);
     dam += dam*get_int_modifier(ch,victim,skill_lookup("frost breath"),DAM_COLD)/200;
-    cold_effect(victim->in_room,level,dam/2,TARGET_ROOM); 
+    cold_effect(victim->in_room,level,dam/2,TARGET_ROOM);
 
     // prevent crash with frostbreath
     if (!victim || !victim->in_room || !victim->in_room->people) return;
@@ -700,7 +700,7 @@ void spell_frost_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
         vch_next = vch->next_in_room;
 
         if (is_safe_spell(ch,vch,TRUE)
-        ||  (IS_NPC(vch) && IS_NPC(ch) 
+        ||  (IS_NPC(vch) && IS_NPC(ch)
         &&   (ch->fighting != vch || vch->fighting != ch)))
             continue;
 
@@ -733,7 +733,7 @@ void spell_frost_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     }
 }
 
-    
+
 void spell_gas_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
@@ -760,7 +760,7 @@ void spell_gas_breath( int sn, int level, CHAR_DATA *ch, void *vo,int target )
         vch_next = vch->next_in_room;
 
         if (is_safe_spell(ch,vch,TRUE)
-        ||  (IS_NPC(ch) && IS_NPC(vch) 
+        ||  (IS_NPC(ch) && IS_NPC(vch)
         &&   (ch->fighting == vch || vch->fighting == ch)))
             continue;
 
@@ -800,7 +800,7 @@ void spell_lightning_breath(int sn,int level,CHAR_DATA *ch,void *vo,int target)
     else
     {
         shock_effect(victim,level,dam,TARGET_CHAR);
-        damage(ch,victim,dam,sn,DAM_LIGHTNING,TRUE, TRUE, NULL); 
+        damage(ch,victim,dam,sn,DAM_LIGHTNING,TRUE, TRUE, NULL);
     }
 }
 
@@ -882,7 +882,7 @@ void spell_charm_person( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 void spell_enchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
   OBJ_DATA *obj = (OBJ_DATA *) vo;
-  AFFECT_DATA *paf; 
+  AFFECT_DATA *paf;
   int result, fail;
   int ac_bonus, added;
   bool ac_found = FALSE;
@@ -906,7 +906,7 @@ void spell_enchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
   }
 
   if (obj->enchanted && obj->owner && str_cmp(obj->owner,"(public)") && strcmp(obj->owner,ch->name))
-  {     
+  {
      stc( "Нельзя улучшать чужие вещи.\n\r", ch );
      return;
   }
@@ -970,7 +970,7 @@ void spell_enchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     /* remove all affects */
     for (paf = obj->affected; paf != NULL; paf = paf_next)
     {
-      paf_next = paf->next; 
+      paf_next = paf->next;
       free_affect(paf);
     }
     obj->affected = NULL;
@@ -992,10 +992,10 @@ void spell_enchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     AFFECT_DATA *af_new;
     obj->enchanted = TRUE;
 
-    for (paf = obj->pIndexData->affected; paf != NULL; paf = paf->next) 
+    for (paf = obj->pIndexData->affected; paf != NULL; paf = paf->next)
     {
       af_new = new_affect();
-      
+
       af_new->next = obj->affected;
       obj->affected = af_new;
 
@@ -1017,7 +1017,7 @@ void spell_enchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     SET_BIT(obj->extra_flags, ITEM_MAGIC);
     added = -number_range((obj->level / 30),(obj->level / 10));
   }
-  
+
   else  /* exceptional enchant */
   {
     act("$i1 загорается {Wярким {Yзолотым{x свечением!",ch,obj,NULL,TO_CHAR);
@@ -1027,12 +1027,12 @@ void spell_enchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     added = -number_range((obj->level / 30),(obj->level / 10)) - (obj->level / 20);
   }
 
-  if ( category_bonus(ch,MAKE) > 5 ) 
+  if ( category_bonus(ch,MAKE) > 5 )
     added-= (category_bonus(ch,MAKE)-4)*obj->level/LEVEL_HERO;
-              
-  /* now add the enchantments */ 
 
-  //if (number_percent() > (4*category_bonus(ch,MAKE))) 
+  /* now add the enchantments */
+
+  //if (number_percent() > (4*category_bonus(ch,MAKE)))
   obj->level++;
 
   if (ac_found)
@@ -1079,7 +1079,7 @@ void spell_enchant_armor( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 void spell_enchant_weapon(int sn,int level,CHAR_DATA *ch, void *vo,int target)
 {
   OBJ_DATA *obj = (OBJ_DATA *) vo;
-  AFFECT_DATA *paf; 
+  AFFECT_DATA *paf;
   int result, fail;
   int hit_bonus, dam_bonus, added;
   bool hit_found = FALSE, dam_found = FALSE;
@@ -1176,7 +1176,7 @@ void spell_enchant_weapon(int sn,int level,CHAR_DATA *ch, void *vo,int target)
       /* remove all affects */
       for (paf = obj->affected; paf != NULL; paf = paf_next)
       {
-          paf_next = paf->next; 
+          paf_next = paf->next;
           free_affect(paf);
       }
       obj->affected = NULL;
@@ -1198,10 +1198,10 @@ void spell_enchant_weapon(int sn,int level,CHAR_DATA *ch, void *vo,int target)
       AFFECT_DATA *af_new;
       obj->enchanted = TRUE;
 
-      for (paf = obj->pIndexData->affected; paf != NULL; paf = paf->next) 
+      for (paf = obj->pIndexData->affected; paf != NULL; paf = paf->next)
       {
           af_new = new_affect();
-      
+
           af_new->next = obj->affected;
           obj->affected = af_new;
 
@@ -1222,7 +1222,7 @@ void spell_enchant_weapon(int sn,int level,CHAR_DATA *ch, void *vo,int target)
       SET_BIT(obj->extra_flags, ITEM_MAGIC);
       added = 1;
   }
-  
+
   else  /* exceptional enchant */
   {
       act("$i1 {xокутывается {Cяркой {Bсиней{x аурой!",ch,obj,NULL,TO_CHAR);
@@ -1231,11 +1231,11 @@ void spell_enchant_weapon(int sn,int level,CHAR_DATA *ch, void *vo,int target)
       SET_BIT(obj->extra_flags,ITEM_GLOW);
       added = 2;
   }
-              
-  //if (number_percent() > (4*category_bonus(ch,MAKE))) 
+
+  //if (number_percent() > (4*category_bonus(ch,MAKE)))
   obj->level++;
 
-  /* now add the enchantments */ 
+  /* now add the enchantments */
   if (dam_found)
   {
     for ( paf = obj->affected; paf != NULL; paf = paf->next)
@@ -1301,15 +1301,15 @@ void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   int dam = 0;
   bool fail = TRUE;
 
- if (!saves_spell(level + 2,victim,DAM_FIRE) 
+ if (!saves_spell(level + 2,victim,DAM_FIRE)
  &&  !IS_SET(victim->imm_flags,IMM_FIRE))
  {
       for ( obj_lose = victim->carrying;
-            obj_lose != NULL; 
+            obj_lose != NULL;
             obj_lose = obj_next)
       {
           obj_next = obj_lose->next_content;
-          if ( number_range(1,2 * level) > obj_lose->level 
+          if ( number_range(1,2 * level) > obj_lose->level
           &&   !saves_spell(level,victim,DAM_FIRE)
           &&   !IS_OBJ_STAT(obj_lose,ITEM_NONMETAL)
           &&   !IS_OBJ_STAT(obj_lose,ITEM_BURN_PROOF))
@@ -1320,7 +1320,7 @@ void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
               if (obj_lose->wear_loc != -1) /* remove the item */
               {
                   if (can_drop_obj(victim,obj_lose)
-                  &&  (obj_lose->weight / 10) < 
+                  &&  (obj_lose->weight / 10) <
                       number_range(1,2 * get_curr_stat(victim,STAT_DEX))
                   &&  remove_obj( victim, obj_lose->wear_loc, TRUE ))
                   {
@@ -1370,7 +1370,7 @@ void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
                   if (IS_WEAPON_STAT(obj_lose,WEAPON_FLAMING))
                       continue;
 
-                  if (can_drop_obj(victim,obj_lose) 
+                  if (can_drop_obj(victim,obj_lose)
                   &&  remove_obj(victim,obj_lose->wear_loc,TRUE))
                   {
                       act("$c1 отдергивает руку от $i2, роняя на землю .",
@@ -1416,7 +1416,7 @@ void spell_heat_metal( int sn, int level, CHAR_DATA *ch, void *vo,int target )
               }
           }
       }
-  } 
+  }
   if (fail)
   {
       stc("Твое заклинание не подействовало.\n\r", ch);
@@ -1480,7 +1480,7 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
   switch ( obj->item_type )
   {
-  case ITEM_SCROLL: 
+  case ITEM_SCROLL:
   case ITEM_POTION:
   case ITEM_PILL:
       ptc(ch, "Магия {C%u{x-го уровня: ", obj->value[0] );
@@ -1499,11 +1499,11 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
       stc( ".\n\r", ch );
       break;
 
-  case ITEM_WAND: 
-  case ITEM_STAFF: 
+  case ITEM_WAND:
+  case ITEM_STAFF:
       ptc(ch, "Содержит {y%u{x зарядов уровня {c%u{x",
           obj->value[2], obj->value[0] );
-    
+
       if ( obj->value[3] >= 0 && obj->value[3] < max_skill )
           ptc(ch, " '{g%s{x'", skill_table[obj->value[3]].name, ch );
       stc( ".\n\r", ch );
@@ -1525,13 +1525,13 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
               obj->value[4]);
       }
       break;
-              
+
   case ITEM_WEAPON:
       stc("Тип оружия: {c",ch);
       switch (obj->value[0])
       {
           case(WEAPON_EXOTIC) : stc("экзотическое{x.\n\r",ch);        break;
-          case(WEAPON_SWORD)  : stc("меч{x.\n\r",ch); break;  
+          case(WEAPON_SWORD)  : stc("меч{x.\n\r",ch); break;
           case(WEAPON_DAGGER) : stc("кинжал{x.\n\r",ch);      break;
           case(WEAPON_SPEAR)  : stc("копье{x.\n\r",ch); break;
           case(WEAPON_STAFF)  : stc("посох{x.\n\r",ch); break;
@@ -1558,7 +1558,7 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
       break;
 
   case ITEM_ARMOR:
-      ptc(ch,"Класс защиты: {c%u{x от укола, {c%u{x от удара, {c%u{x от пореза, и {c%u{x против магических ударов.\n\r", 
+      ptc(ch,"Класс защиты: {c%u{x от укола, {c%u{x от удара, {c%u{x от пореза, и {c%u{x против магических ударов.\n\r",
           obj->value[0], obj->value[1], obj->value[2], obj->value[3] );
       break;
 
@@ -1571,7 +1571,7 @@ void spell_identify( int sn, int level, CHAR_DATA *ch, void *vo,int target )
       {
         if (number_percent()>50)
              stc ("Ты не можешь разобрать надпись. Похоже тут что-то на {Cquenia{x.\n\r",ch);
-        else ptc (ch,"Надпись на {Cquenia {xгласит '%s'.\n\r",quenia_table[obj->value[1]].descr); 
+        else ptc (ch,"Надпись на {Cquenia {xгласит '%s'.\n\r",quenia_table[obj->value[1]].descr);
       }
       else if (obj->value[0]==SCROLL_CLANSKILL)
       {
@@ -1789,7 +1789,7 @@ void acid_effect(void *vo, int level, int dam, int target)
   {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     OBJ_DATA *obj, *obj_next;
-      
+
     for (obj = victim->carrying; obj != NULL; obj = obj_next)
     {
       obj_next = obj->next_content;
@@ -1838,7 +1838,7 @@ void acid_effect(void *vo, int level, int dam, int target)
       case ITEM_SCROLL:
         chance += 10;
         msg = "$i1 сгорает дотла.";
-        break; 
+        break;
     }
 
     chance = URANGE(3,chance,97);
@@ -1913,7 +1913,7 @@ void cold_effect(void *vo, int level, int dam, int target)
   {
     ROOM_INDEX_DATA *room = (ROOM_INDEX_DATA *) vo;
     OBJ_DATA *obj, *obj_next;
- 
+
     for (obj = room->contents; obj != NULL; obj = obj_next)
     {
       obj_next = obj->next_content;
@@ -1926,7 +1926,7 @@ void cold_effect(void *vo, int level, int dam, int target)
   {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
     OBJ_DATA *obj, *obj_next;
-        
+
     if (!saves_spell(level/4 + dam / 20, victim, DAM_COLD))
     {
       AFFECT_DATA af;
@@ -2014,7 +2014,7 @@ void fire_effect(void *vo, int level, int dam, int target)
     }
     return;
   }
- 
+
   if (target == TARGET_CHAR)
   {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
@@ -2032,7 +2032,7 @@ void fire_effect(void *vo, int level, int dam, int target)
       AFFECT_DATA af;
       act("$c1 ослеплен дымом!",victim,NULL,NULL,TO_ROOM);
       act("Твои глаза ослеплены дымом...ты не можешь видеть!",victim,NULL,NULL,TO_CHAR);
-         
+
       af.where        = TO_AFFECTS;
       af.type         = skill_lookup("fire breath");
       af.level        = level;
@@ -2040,7 +2040,7 @@ void fire_effect(void *vo, int level, int dam, int target)
       af.location     = APPLY_HITROLL;
       af.modifier     = -level/4;
       af.bitvector    = AFF_BLIND;
- 
+
       affect_to_char(victim,&af);
     }
 
@@ -2064,7 +2064,7 @@ void fire_effect(void *vo, int level, int dam, int target)
 
     if (IS_OBJ_STAT(obj,ITEM_BURN_PROOF) || IS_OBJ_STAT(obj,ITEM_INVENTORY)
         || number_range(0,4) == 0) return;
- 
+
     chance = level / 4 + dam / 10;
     if (chance > 25) chance = (chance - 25) / 2 + 25;
     if (chance > 50) chance = (chance - 50) / 2 + 50;
@@ -2073,7 +2073,7 @@ void fire_effect(void *vo, int level, int dam, int target)
 
     switch ( obj->item_type )
     {
-      default:             
+      default:
         return;
       case ITEM_CONTAINER:
         msg = "$i1 вспыхивает и сгорает!";
@@ -2102,7 +2102,7 @@ void fire_effect(void *vo, int level, int dam, int target)
     }
     chance = URANGE(5,chance,95);
     if (number_percent() > chance) return;
- 
+
     if (obj->carried_by) act( msg, obj->carried_by, obj, NULL, TO_ROOM );
     else if (obj->in_room && obj->in_room->people)
                          act(msg,obj->in_room->people,obj,NULL,TO_ROOM);
@@ -2134,7 +2134,7 @@ void poison_effect(void *vo,int level, int dam, int target)
   {
     ROOM_INDEX_DATA *room = (ROOM_INDEX_DATA *) vo;
     OBJ_DATA *obj, *obj_next;
- 
+
     for (obj = room->contents; obj != NULL; obj = obj_next)
     {
       obj_next = obj->next_content;
@@ -2142,7 +2142,7 @@ void poison_effect(void *vo,int level, int dam, int target)
     }
     return;
   }
- 
+
   if (target == TARGET_CHAR)
   {
     CHAR_DATA *victim = (CHAR_DATA *) vo;
@@ -2177,7 +2177,7 @@ void poison_effect(void *vo,int level, int dam, int target)
   {
     OBJ_DATA *obj = (OBJ_DATA *) vo;
     int chance;
-        
+
     if (IS_OBJ_STAT(obj,ITEM_BURN_PROOF)
      || IS_OBJ_STAT(obj,ITEM_BLESS)
      || number_range(0,4) == 0) return;
@@ -2267,7 +2267,7 @@ void shock_effect(void *vo,int level, int dam, int target)
         chance -= 10;
         msg = "$i1 рассыпается на груду осколков.";
     }
-        
+
     chance = URANGE(5,chance,95);
     if (number_percent() > chance) return;
     if (obj->carried_by) act(msg,obj->carried_by,obj,NULL,TO_ROOM);
@@ -2300,63 +2300,63 @@ void do_mist(CHAR_DATA *ch, const char *argument)
   WAIT_STATE(ch, PULSE_VIOLENCE);
 }
 
-void do_howl( CHAR_DATA *ch, const char *argument ) 
-{ 
-  CHAR_DATA *victim; 
+void do_howl( CHAR_DATA *ch, const char *argument )
+{
+  CHAR_DATA *victim;
   int chance=50;
- 
+
   if (!IS_SET(race_table[ch->race].spec,SPEC_HOWL))
   {
     stc("Твой вой никого не испугает...\n\r",ch);
     return;
   }
-  if (!can_attack(ch,1)) return; 
+  if (!can_attack(ch,1)) return;
   if (ch->fighting!=NULL)
-  { 
-    stc("Некогда выть, ты сражаешься!\n\r",ch); 
-    return; 
-  } 
-  if ((victim = get_char_room(ch,argument)) == NULL) 
-  { 
-    stc("Нет здесь таких.\n\r",ch); 
-    return; 
-  } 
-  if (is_affected(victim,skill_lookup("fear"))) 
-  { 
-    act("{y$O{x уже дрожит от страха.",ch,NULL,victim,TO_CHAR); 
-    return; 
-  } 
-  if (victim == ch) 
-  { 
-    stc("Ты жутко взвываешь и твои волосы встают дыбом от страха 8/\n\r",ch); 
-    return; 
-  } 
-  if (is_safe(ch,victim)) return; 
-  if (IS_AFFECTED(ch,AFF_CHARM) && ch->master == victim) 
-  { 
-    act("Hо {y$C1{x твой хоpоший дpуг!",ch,NULL,victim,TO_CHAR); 
-    return; 
-  } 
+  {
+    stc("Некогда выть, ты сражаешься!\n\r",ch);
+    return;
+  }
+  if ((victim = get_char_room(ch,argument)) == NULL)
+  {
+    stc("Нет здесь таких.\n\r",ch);
+    return;
+  }
+  if (is_affected(victim,skill_lookup("fear")))
+  {
+    act("{y$O{x уже дрожит от страха.",ch,NULL,victim,TO_CHAR);
+    return;
+  }
+  if (victim == ch)
+  {
+    stc("Ты жутко взвываешь и твои волосы встают дыбом от страха 8/\n\r",ch);
+    return;
+  }
+  if (is_safe(ch,victim)) return;
+  if (IS_AFFECTED(ch,AFF_CHARM) && ch->master == victim)
+  {
+    act("Hо {y$C1{x твой хоpоший дpуг!",ch,NULL,victim,TO_CHAR);
+    return;
+  }
   if (is_affected(victim,skill_lookup("deaf")))
   {
     act("Ты жутко {Gвзвываешь{x!!! Но {y$O{x ничего не слышит...",ch,NULL,victim,TO_CHAR);
     return;
   }
- 
-  chance += (ch->level - victim->level) * 2; 
-  
-  switch(ch->in_room->sector_type) 
-  { 
-    case(SECT_INSIDE):      chance +=15;break; 
-    case(SECT_FOREST):      chance += 5;break; 
-    case(SECT_MOUNTAIN):    chance +=30;break; 
-    case(SECT_WATER_SWIM):  chance -=10;break; 
-    case(SECT_WATER_NOSWIM):chance  = 0;break; 
-  } 
- 
-  if (number_percent() < chance) 
-  { 
-    AFFECT_DATA af; 
+
+  chance += (ch->level - victim->level) * 2;
+
+  switch(ch->in_room->sector_type)
+  {
+    case(SECT_INSIDE):      chance +=15;break;
+    case(SECT_FOREST):      chance += 5;break;
+    case(SECT_MOUNTAIN):    chance +=30;break;
+    case(SECT_WATER_SWIM):  chance -=10;break;
+    case(SECT_WATER_NOSWIM):chance  = 0;break;
+  }
+
+  if (number_percent() < chance)
+  {
+    AFFECT_DATA af;
     act("От жуткого вопля {Y$c2{x, волосу на голове у {Y$C2{x встают дыбом!",ch,NULL,victim,TO_ROOM);
     act("{Y$c1{x жутко взвывает, его вопль продирает тебя до костей!",ch,NULL,victim,TO_VICT);
     act("От твоего жуткого вопля {Y$c2{x едва непадает в обморок!",ch,NULL,victim,TO_CHAR);
@@ -2371,13 +2371,13 @@ void do_howl( CHAR_DATA *ch, const char *argument )
     affect_to_char( victim, &af );
     WAIT_STATE(ch,2*PULSE_VIOLENCE);
     DAZE_STATE(victim,2*PULSE_VIOLENCE);
-  } 
+  }
   else
   {
     stc("Никто не испугался твоего вопля.. может надо погромче?.\n\r",ch);
     WAIT_STATE(ch,2*PULSE_VIOLENCE);
   }
-} 
+}
 
 void spell_distortion( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
@@ -2408,7 +2408,7 @@ void spell_distortion( int sn, int level, CHAR_DATA *ch, void *vo,int target)
    stc("Ты слишком истощен\n\r",ch);
    return;
   }
-  
+
   raf=new_raffect();
   raf->level=level + 20;
   raf->duration=number_range(level/15,level/7);
@@ -2423,7 +2423,7 @@ void spell_distortion( int sn, int level, CHAR_DATA *ch, void *vo,int target)
   af.modifier  = 0;
   af.bitvector = 0;
   affect_to_char( ch, &af );
-  
+
   do_printf(buf,"Пространство вокруг {Y%s{x исказилось.",get_char_desc(ch,'2'));
   act(buf,ch,NULL,NULL,TO_ROOM);
   stc("Пространство вокруг тебя исказилось.\n\r",ch);
@@ -2441,7 +2441,7 @@ void spell_oasis( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     act("{Y$c1{x пыжится, но его попытка ни к чему не приводит.",ch,NULL,NULL,TO_ROOM);
     return;
   }
-  
+
   raf=get_raffect(ch->in_room,RAFF_OASIS);
   if (!raf)
   {
@@ -2478,7 +2478,7 @@ void spell_mind_ch( int sn, int level, CHAR_DATA *ch, void *vo,int target)
     act("{Y$c1{x пыжится, но его попытка ни к чему не приводит.",ch,NULL,NULL,TO_ROOM);
     return;
   }
-  
+
   raf=get_raffect(ch->in_room,RAFF_MIND_CH);
   if (!raf)
   {
@@ -2504,7 +2504,7 @@ void spell_mind_ch( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 }
 
 void spell_evil_presence( int sn, int level, CHAR_DATA *ch, void *vo,int target )
-{ 
+{
 //  bool first=FALSE;
   RAFFECT *roomaf;
   AFFECT_DATA charaf;
@@ -2563,24 +2563,24 @@ void spell_evil_presence( int sn, int level, CHAR_DATA *ch, void *vo,int target 
    }
   }
 
-//  if (first) 
+//  if (first)
 //  {
     act("Аура тёмной Силы окутывает окрестности.",ch,NULL,NULL,TO_ROOM);
     stc("От выпущенных тобой Сил свет вокруг мернет.\n\r",ch);
     check_improve(ch, skill_lookup("evil presence"), TRUE, 1);
 /*  }
-  else 
+  else
   {
    roomaf->level+=level/7+2;
    roomaf->duration+=number_range(1,2);
    act("{Y$c1{x обновил мрачную ауру комнаты свежей силой.",ch,NULL,NULL,TO_ROOM);
    stc("Ты придал мраку комнаты новых сил.\n\r",ch);
-  }  
+  }
 */
-} 
+}
 
 void spell_life_stream( int sn, int level, CHAR_DATA *ch, void *vo,int target )
-{ 
+{
   RAFFECT *roomaf;
   AFFECT_DATA charaf;
 
@@ -2589,7 +2589,7 @@ void spell_life_stream( int sn, int level, CHAR_DATA *ch, void *vo,int target )
      stc( "Не злоупотребляй вниманием {WБогов{x, смертный...\n\r", ch );
      return;
   }
- 
+
   if(ch->in_room && IS_CLAN_ROOM(ch->in_room))
   {
    stc("Не в кланах\n\r",ch);
@@ -2655,7 +2655,7 @@ void spell_life_stream( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 
    stc( "Ты взываешь к небесам и мягкий свет озаряет комнату.\n\r", ch);
    act( "Мягкий свет, призванный {Y$c5{x, заполняет комнату.",ch,NULL,NULL,TO_ROOM);
-} 
+}
 
 void spell_gaseous_form( int sn, int level, CHAR_DATA *ch, void *vo,int target)
 {
@@ -2695,7 +2695,7 @@ void spell_safty_place( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   RAFFECT *raf;
   AFFECT_DATA af;
   CHAR_DATA *vch;
-  
+
   if (IS_AFFECTED(ch,AFF_SAFE_PLACE))
   {
     stc( "У тебя не хватает сил.\n\r",ch);
@@ -2713,7 +2713,7 @@ void spell_safty_place( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   {
     raf=get_raffect(ch->in_room,RAFF_VIOLENCE);
     raffect_from_room(raf);
- 
+
     af.where     = TO_AFFECTS;
     af.type      = sn;
     af.level     = level;
@@ -2806,7 +2806,7 @@ void spell_rejuvinate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
    af.modifier  = 0;
    af.bitvector = AFF_REJUVINATE;
    affect_to_char( ch, &af );
- 
+
    stc("Ты восстановил силы.\n\r",ch);
    act("{W$c2{x восстановил твои силы.\n\r",ch,NULL,NULL,TO_ROOM);
 
@@ -2847,14 +2847,14 @@ void spell_peace( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     affect_to_char( vch, &af );
     gain_condition( vch, COND_ADRENOLIN, -50);
     stop_fighting(vch,FALSE);
-  }      
+  }
 }
 
 void spell_violence( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
   RAFFECT *raf;
   AFFECT_DATA af;
-  
+
   if ( IS_AFFECTED(ch,AFF_VIOLENCE) )
   {
     stc( "У тебя не хватает сил.\n\r", ch );
@@ -2865,7 +2865,7 @@ void spell_violence( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   {
     stc("У тебя слишком мирное настроение для этого.\n\r",ch);
     return;
-  }   
+  }
 
   if( IS_SET(ch->in_room->ra, RAFF_VIOLENCE))
   {
@@ -2877,7 +2877,7 @@ void spell_violence( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   {
     raf=get_raffect(ch->in_room,RAFF_SAFE_PLC);
     raffect_from_room(raf);
-  
+
     af.where     = TO_AFFECTS;
     af.type      = sn;
     af.level     = level;
@@ -2888,7 +2888,7 @@ void spell_violence( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     affect_to_char( ch, &af );
     return;
   }
-   
+
   raf=new_raffect();
   raf->level=level;
   raf->duration=level/10;
@@ -2932,11 +2932,11 @@ void spell_spook( int sn, int level, CHAR_DATA *ch, void *vo,int target )
       af.modifier  = 0;
       af.bitvector = AFF_CANT_FEAR;
       affect_to_char( vch, &af );
-    } 
-    if ( vch != ch && number_percent() < 50 && !IS_IMMORTAL(vch) 
-      && PK_RANGE(ch,vch) && PK_RANGE(vch,ch) 
-      && vch->fighting != NULL && vch->fighting == ch 
-      && ch->pcdata->pkillers!=NULL 
+    }
+    if ( vch != ch && number_percent() < 50 && !IS_IMMORTAL(vch)
+      && PK_RANGE(ch,vch) && PK_RANGE(vch,ch)
+      && vch->fighting != NULL && vch->fighting == ch
+      && ch->pcdata->pkillers!=NULL
       && is_exact_name(vch->name,ch->pcdata->pkillers) )
     {
       af.where     = TO_AFFECTS;
@@ -2950,13 +2950,13 @@ void spell_spook( int sn, int level, CHAR_DATA *ch, void *vo,int target )
       do_function(vch,&do_flee,"");
     }
   }
-}    
+}
 
 void spell_madness( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
   AFFECT_DATA af;
   CHAR_DATA *victim = (CHAR_DATA *) vo;
-  
+
   if (IS_AFFECTED(victim,AFF_MADNESS))
   {
     stc( "Ты не можешь дважды навесить заклинание безумия.\n\r", ch );
@@ -2976,7 +2976,7 @@ void spell_madness( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     stc("Выбери кого-то себе по силам.\n\r",ch);
     return;
   }
-  
+
   af.where     = TO_AFFECTS;
   af.type      = sn;
   af.level     = level;
@@ -2988,7 +2988,7 @@ void spell_madness( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   if (victim==ch)
   {
     affect_to_char( ch, &af );
-        
+
     af.location  = APPLY_HITROLL;
     af.modifier  = 3*ch->level/4;
     affect_to_char( ch, &af );
@@ -2996,14 +2996,14 @@ void spell_madness( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     af.location  = APPLY_DAMROLL;
     af.modifier  = 3*ch->level/4;
     affect_to_char( ch, &af );
-   
+
     stc("Безумие затмевает твой разум!\n\r",ch);
     act("Безумие затмевает разум {W$c1{x!\n\r",ch,NULL,NULL,TO_ROOM);
-  }    
+  }
   if ( victim != ch && !saves_spell(level,victim,DAM_OTHER ) )
   {
     affect_to_char( victim, &af );
-   
+
     af.location  = APPLY_HITROLL;
     af.modifier  = ch->level/5;
     affect_to_char( victim, &af );
@@ -3015,7 +3015,7 @@ void spell_madness( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     act("Безумие затмевает разум {W$c1{x!\n\r",victim,NULL,NULL,TO_ROOM);
   }
 }
-   
+
 void spell_breath_death( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
   CHAR_DATA *victim = (CHAR_DATA *) vo;
@@ -3037,13 +3037,13 @@ void spell_eyes_death( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
   AFFECT_DATA af;
   CHAR_DATA *victim;
-  ROOM_INDEX_DATA *ch_room; 
-    
+  ROOM_INDEX_DATA *ch_room;
+
   if (is_affected(ch,skill_lookup("death eyes")))
   {
     stc("У тебя не хватает сил.\n\r",ch);
     return;
-  }    
+  }
 
   victim = get_char_world(ch,target_name);
 
@@ -3052,7 +3052,7 @@ void spell_eyes_death( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     stc("Ты не смог найти это сознание в ментальном поле.\n\r",ch);
     return;
   }
-  
+
   if (ch==victim)
   {
     stc("Ты и так себя неплохо видишь.\n\r",ch);
@@ -3080,7 +3080,7 @@ void spell_eyes_death( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     ch_room = ch->in_room;
     char_from_room(ch);
     char_to_room(ch, victim->in_room);
-    do_look(ch,"auto"); 
+    do_look(ch,"auto");
     char_from_room(ch);
     char_to_room(ch, ch_room);
     af.where     = TO_AFFECTS;
@@ -3098,7 +3098,7 @@ void spell_eyes_death( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 void spell_pain( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
   CHAR_DATA *victim = (CHAR_DATA *) vo;
-    
+
   if (victim==ch)
   {
     stc("Не будь мазохистом...\n\r",ch);
@@ -3144,13 +3144,13 @@ void spell_cursed_lands( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   AFFECT_DATA af;
   int64 i;
   int skill=get_skill(ch,sn);
-  
+
   if (is_affected(ch,sn))
   {
     stc("У тебя не хватает сил.\n\r",ch);
     return;
-  }         
-   
+  }
+
   if (IS_SET(room->room_flags, ROOM_LAW)|| IS_SET(room->room_flags, ROOM_SAFE))
   {
     stc("Боги защищают это место.\n\r",ch);
@@ -3162,15 +3162,15 @@ void spell_cursed_lands( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     stc("Найди чистое место. Здесь уже проклято.\n\r",ch);
     return;
   }
-  
+
   stc("Великое проклятие заполняет эти земли.\n\r",ch);
   for (i=pArea->min_vnum;i<pArea->max_vnum;i++)
   {
     room = get_room_index(i);
     if (!room) continue;
-    if ( !IS_SET(room->room_flags, ROOM_LAW) 
+    if ( !IS_SET(room->room_flags, ROOM_LAW)
       && !IS_SET(room->room_flags, ROOM_SAFE)
-      && !IS_SET(room->ra, RAFF_EVIL_PR) 
+      && !IS_SET(room->ra, RAFF_EVIL_PR)
       && number_percent() < skill  )
     {
       if (IS_SET(room->ra, RAFF_LIFE_STR))
@@ -3186,7 +3186,7 @@ void spell_cursed_lands( int sn, int level, CHAR_DATA *ch, void *vo,int target )
         raf->bit=RAFF_EVIL_PR;
         raffect_to_room( raf,room);
       }
-    }    
+    }
   }
   af.where     = TO_AFFECTS;
   af.type      = sn;
@@ -3198,7 +3198,7 @@ void spell_cursed_lands( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   affect_to_char( ch, &af );
   for (d=descriptor_list;d;d=d->next)
   {
-    if (d->character && d->connected==CON_PLAYING 
+    if (d->character && d->connected==CON_PLAYING
      && d->character->in_room->area == ch->in_room->area)
      act("$c1 проклинает местность вокруг тебя!",ch,NULL,d->character,TO_VICT);
   }
@@ -3212,19 +3212,19 @@ void spell_nightfall( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   AFFECT_DATA af;
   int64 i;
   int skill=get_skill(ch,sn);
-  
+
   if ( is_affected(ch, sn) )
   {
     stc("У тебя на достаточно сил.\n\r",ch);
     return;
-  }         
-   
+  }
+
   if ( IS_SET(ch->in_room->ra, RAFF_BLIND) )
   {
     stc("Ночь уже властвует здесь.\n\r",ch);
     return;
   }
-  
+
   stc("{DНочь{X опускается на эту местность.\n\r",ch);
   act("{W$c2{X вызывает {DНочь{X!",ch,NULL,NULL,TO_ROOM);
 
@@ -3232,8 +3232,8 @@ void spell_nightfall( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   {
     room = get_room_index(i);
     if ( !room ) continue;
-    if ( number_percent() < skill 
-         && !IS_SET(room->room_flags, ROOM_LAW) 
+    if ( number_percent() < skill
+         && !IS_SET(room->room_flags, ROOM_LAW)
          && !IS_SET(room->room_flags, ROOM_SAFE) )
      {
        raf=new_raffect();
@@ -3241,7 +3241,7 @@ void spell_nightfall( int sn, int level, CHAR_DATA *ch, void *vo,int target )
        raf->duration=level/10;
        raf->bit=RAFF_BLIND;
        raffect_to_room( raf,room);
-     }    
+     }
    }
    af.where     = TO_AFFECTS;
    af.type      = sn;
@@ -3256,7 +3256,7 @@ void spell_nightfall( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 void spell_vision( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
   AFFECT_DATA af;
-  
+
   if (IS_AFFECTED(ch,AFF_VISION))
   {
     stc("Ты уже видишь во тьме.\n\r",ch);
@@ -3271,16 +3271,16 @@ void spell_vision( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   af.modifier  = 0;
   af.bitvector = AFF_VISION;
   affect_to_char( ch, &af );
-}   
+}
 
 
 void spell_power_dark( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
   AFFECT_DATA af;
-  
+
   stc("Ты чувствуешь как {DСила Ночи{X разливается по твоему телу.\n\r",ch);
   act("Сила {DНочи{X наполяет {W$c2{X.",ch,NULL,NULL,TO_ROOM);
-   
+
   af.where     = TO_AFFECTS;
   af.type      = sn;
   af.level     = level;
@@ -3297,7 +3297,7 @@ void spell_power_dark( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   vo = (void *) ch;
   sn=skill_lookup("protection good");
   (*skill_table[sn].spell_fun) (sn,level,ch,vo, TAR_CHAR_SELF);
-}   
+}
 
 void spell_dark_swarm( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
@@ -3320,12 +3320,12 @@ void spell_daylight( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   ROOM_INDEX_DATA *room;
   AFFECT_DATA af;
   int64 i;
-  
+
   if ( is_affected(ch, sn) )
   {
     stc("У тебя на достаточно сил.\n\r",ch);
     return;
-  }         
+  }
 
   stc("Яркий свет рассеивает {DНочь{X.\n\r",ch);
   act("Яркий свет, вызванный {W$c2{X рассеивает {DНочь{X!",ch,NULL,NULL,TO_ROOM);
@@ -3355,12 +3355,12 @@ void spell_consecrate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   AFFECT_DATA af;
   int64 i;
   int skill=get_skill(ch,sn);
-  
+
   if (is_affected(ch, sn))
   {
     stc("У тебя не достаточно сил.\n\r",ch);
     return;
-  }         
+  }
   stc("Проклятие отступило.\n\r",ch);
   act("{W$c2{X снимает проклятие с этих мест!",ch,NULL,NULL,TO_ROOM);
 
@@ -3372,7 +3372,7 @@ void spell_consecrate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
     {
       raf=get_raffect(room,RAFF_EVIL_PR);
       if (raf->level<level) raffect_from_room(raf);
-    }  
+    }
   }
   af.where     = TO_AFFECTS;
   af.type      = sn;
@@ -3384,7 +3384,7 @@ void spell_consecrate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   affect_to_char( ch, &af );
   for (d=descriptor_list;d;d=d->next)
   {
-    if (d->character && d->connected==CON_PLAYING 
+    if (d->character && d->connected==CON_PLAYING
      && d->character->in_room->area == pArea)
      act("$c1 освящает местность вокруг тебя!",ch,NULL,d->character,TO_VICT);
   }
@@ -3393,10 +3393,10 @@ void spell_consecrate( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 void spell_nimbus( int sn, int level, CHAR_DATA *ch, void *vo,int target )
 {
   AFFECT_DATA af;
-  
+
   stc("Маленький {Yнимб{X появляется над твоей головой.\n\r",ch);
   act("Маленький {Yнимб{X появляется над головой {W$c2{X.",ch,NULL,NULL,TO_ROOM);
-   
+
   af.where     = TO_AFFECTS;
   af.type      = sn;
   af.level     = level;
@@ -3421,10 +3421,10 @@ void spell_nimbus( int sn, int level, CHAR_DATA *ch, void *vo,int target )
   vo = (void *) ch;
   sn=skill_lookup("protection evil");
   (*skill_table[sn].spell_fun) (sn,level,ch,vo, TAR_CHAR_SELF);
-}   
+}
 
-void spell_mummy( int sn, int level, CHAR_DATA *ch, void *vo,int target) 
-{ 
+void spell_mummy( int sn, int level, CHAR_DATA *ch, void *vo,int target)
+{
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   OBJ_DATA *obj;
   AFFECT_DATA af,*aff;
@@ -3438,13 +3438,13 @@ void spell_mummy( int sn, int level, CHAR_DATA *ch, void *vo,int target)
   }
 
   for (aff=victim->affected;aff;aff=aff->next)
-  { 
+  {
     if (aff->type==sn)
     {
       found=TRUE;
       break;
-    } 
-  } 
+    }
+  }
   if (!found)
   {
     if (victim->hit > victim->max_hit/20)
@@ -3453,7 +3453,7 @@ void spell_mummy( int sn, int level, CHAR_DATA *ch, void *vo,int target)
       act("{Y#c1{x произносит {Dчерное заклинание{x, но ничего не происходит.",ch,NULL,NULL,TO_ROOM);
       return;
     }
- 
+
     af.where     = TO_AFFECTS;
     af.type      = sn;
     af.level     = level;
@@ -3527,7 +3527,7 @@ void spell_mind_blast(int sn,int level,CHAR_DATA *ch,void *vo,int target)
         ptc(ch,"У тебя недостаточно способностей для мозговой атаки.\r\n");
         return;
       }
-      
+
       if (ch->classwar==1)
       {
         ptc(ch,"Воины не могут использовать мозговую атаку.\r\n");
@@ -3571,14 +3571,14 @@ void spell_shine_of_heaven( int sn, int level, CHAR_DATA *ch, void *vo,int targe
 
         check_criminal(ch,vch,60);
         if (!PK_RANGE(vch,ch)) add_pkiller(vch,ch);
- 
-        if ( IS_AFFECTED(vch, AFF_BLIND)) 
-        { 
+
+        if ( IS_AFFECTED(vch, AFF_BLIND))
+        {
             act("{y$C4{x уже ослеплен.",ch,NULL,vch,TO_CHAR);
             continue;
-        } 
+        }
 
-        if ( (vch==victim && number_percent()<50) 
+        if ( (vch==victim && number_percent()<50)
           || (vch!=victim && number_percent()<25) )
         {
             i=number_range(1,20);
@@ -3597,9 +3597,8 @@ void spell_shine_of_heaven( int sn, int level, CHAR_DATA *ch, void *vo,int targe
             affect_to_char( vch, &af );
             stc( "Твой противник поражен ярким светом.\n\r", ch );
             stc( "Твои глаза поражены ярким светом!\n\r", vch );
-//            act("$c1 поражен ярким светом.",vch,NULL,NULL,TO_ROOM);
-            if ( vch->race==RACE_VAMPIRE 
-              || vch->race==RACE_SKELETON 
+            if ( vch->race==RACE_VAMPIRE
+              || vch->race==RACE_SKELETON
               || vch->race==RACE_ZOMBIE )
               damage( ch, vch, dice(level*3/4, 3), sn, DAM_HOLY, TRUE, FALSE, NULL );
 

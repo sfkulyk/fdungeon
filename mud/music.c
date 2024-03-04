@@ -91,7 +91,7 @@ void song_update(void)
     }
     else
     {
-      if (obj->value[0] >= MAX_LINES 
+      if (obj->value[0] >= MAX_LINES
        || obj->value[0] >= song_table[obj->value[1]].lines)
       {
         obj->value[0] = -1;
@@ -157,7 +157,7 @@ void load_songs(void)
         break;
       }
       else ungetc(letter,fp);
-                
+
       if (lines >= MAX_LINES)
       {
         bug("Too many lines in a song -- limit is  %d.",MAX_LINES);
@@ -233,7 +233,7 @@ void do_play(CHAR_DATA *ch, const char *argument)
     {
       if (song_table[i].name == NULL) break;
 
-      if (artist && (!match 
+      if (artist && (!match
        || !str_prefix(argument,song_table[i].group)))
        do_printf(buf,"%-39s %-39s\n\r",
        song_table[i].group,song_table[i].name);
@@ -262,7 +262,7 @@ void do_play(CHAR_DATA *ch, const char *argument)
     return;
   }
 
-  if ((global && channel_songs[MAX_GLOBAL] > -1) 
+  if ((global && channel_songs[MAX_GLOBAL] > -1)
    ||  (!global && juke->value[4] > -1))
   {
     stc("ћузыкальный автомат в данный момент загружен.\n\r",ch);
@@ -297,7 +297,7 @@ void do_play(CHAR_DATA *ch, const char *argument)
        return;
      }
    }
-   else 
+   else
    {
      for (i = 1; i < 5; i++)
       if (juke->value[i] < 0)

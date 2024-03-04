@@ -10,10 +10,6 @@
 #include "music.h"
 #include "tables.h"
 
-// used for saving
-int save_number = 0;
-int stealer_update=0;
-
 // for web who.htm
 const char *fname_online;
 const char *fname_who;
@@ -99,7 +95,7 @@ void advance_level( CHAR_DATA *ch, bool hide )
     stc("Тебе теперь доступны такие заклинания:",ch);
     do_printf(buf, "%d %d",ch->level,ch->level);    do_spells(ch,buf);
   }
-}   
+}
 
 void gain_exp( CHAR_DATA *ch, int gain )
 {
@@ -124,7 +120,7 @@ void gain_exp( CHAR_DATA *ch, int gain )
     // The end of quite newbie's life
     if ((ch->level == 5) && (ch->remort == 0) )
     {
-                 stc("\n\r/~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/~~\\",ch);      
+                 stc("\n\r/~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/~~\\",ch);
       do_printf( buf,"\n\r|   Теперь ты стал%1s старше и перед тобой открываются новые|__/",ch->sex==1?"":"a");
                  stc(buf,ch);
                  stc("\n\r| горизонты. Школа останется приятным воспоминанием,      |",ch);
@@ -142,7 +138,7 @@ void gain_exp( CHAR_DATA *ch, int gain )
     // character gains 17 level
     if (ch->level == 17)
     {
-         stc("\n\r/~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/~~\\",ch);      
+         stc("\n\r/~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/~~\\",ch);
          stc("\n\r|                       {RПОВЕСТКА{x                         | __/",ch);
          stc("\n\r|      {Yоб обязательной явке на призывной участок{x         |",ch);
          stc("\n\r|            {Yдля выполнения воинского долга{x              |",ch);
@@ -164,7 +160,7 @@ void gain_exp( CHAR_DATA *ch, int gain )
     // character gains 17 level and not army
     if ((ch->level>=18) && (!IS_SET(ch->act,PLR_ARMY)) && (ch->level<21))
     {
-      SET_BIT(ch->act, PLR_ARMY);  
+      SET_BIT(ch->act, PLR_ARMY);
       stc( "\n\r{rАрмия{g ждет тебя {Gс распростертыми обьятиями...{x\n\r", ch );
       info(ch,0,1,ch->name,"уходит служить в {RАрмию{x!");
       /* exclude char from Auction and sell his objects */
@@ -224,14 +220,14 @@ void gain_exp( CHAR_DATA *ch, int gain )
       act("\n\rВходит майор {rМолчанов{x.", ch,NULL,NULL,TO_ROOM);
       act("Майор {rМолчанов{x произосит: '{G$n! Ваш срок службы истек. Можете быть свободны.", ch,NULL,NULL,TO_ROOM);
       act("Майор {rМолчанов{x уводит $n.", ch,NULL,NULL,TO_NOTVICT);
-    
+
       WAIT_STATE(ch, 5*PULSE_VIOLENCE);
- 
+
       ch->position= POS_RESTING;
       char_from_room(ch);
       char_to_room(ch,get_room_index(12482));
       do_function (ch, &do_look, "");
-    } 
+    }
 
     // character gains 101 level (Superhero)
     if (ch->level==101)
@@ -249,7 +245,7 @@ void gain_exp( CHAR_DATA *ch, int gain )
         affect_strip(victim,gsn_blindness);
         affect_strip(victim,gsn_sleep);
         affect_strip(victim,gsn_curse);
-           
+
         victim->hit  = victim->max_hit;
         victim->mana = victim->max_mana;
         victim->move = victim->max_move;
@@ -270,10 +266,10 @@ void gain_exp( CHAR_DATA *ch, int gain )
 void sifilis_update(CHAR_DATA *ch)
 {
   int64 vnum=0;
- 
+
   switch(number_range(1,10))
   {
-    case  2:                                                    
+    case  2:
       if (IS_SET(race_table[ch->race].parts,PART_GUTS))
       {
         act("Кишки {y$c2{x pасплескиваются во все стоpоны.",ch,NULL,NULL,TO_ROOM);
@@ -281,20 +277,20 @@ void sifilis_update(CHAR_DATA *ch)
         vnum = OBJ_VNUM_GUTS;
       }
       break;
-    case  6: 
+    case  6:
       if (IS_SET(race_table[ch->race].parts,PART_ARMS))
       {
         act("Рука {y$c2{x отваливается от $g гниющего тела.",ch,NULL,NULL,TO_ROOM);
         act("Твоя рука сгнивает и отваливается от тела.",ch,NULL,NULL,TO_CHAR);
-        vnum = OBJ_VNUM_SLICED_ARM;                         
+        vnum = OBJ_VNUM_SLICED_ARM;
       }
       break;
-    case  9: 
+    case  9:
       if (IS_SET(race_table[ch->race].parts,PART_LEGS))
-      {         
+      {
         act("Нога {y$c2{x отваливается от $g гниющего тела.",ch,NULL,NULL,TO_ROOM);
         act("Кусок твоей сгнившей ноги отваливается от тела.",ch,NULL,NULL,TO_CHAR);
-        vnum = OBJ_VNUM_SLICED_LEG;                         
+        vnum = OBJ_VNUM_SLICED_LEG;
       }
     break;
   }
@@ -340,7 +336,7 @@ void drent_update (CHAR_DATA *ch)
           do_function(vch,&do_wake,"");
         }
       }
-      act("{DПризрак Фрамина{x с криком '{MБарук Казад!{x' выбрасывает {Y$c1{x в окно спальни.{/Потом он разворачивается и говорит:'{GНет денег - спи в храме!'{x ",ch,NULL,NULL,TO_ROOM); 
+      act("{DПризрак Фрамина{x с криком '{MБарук Казад!{x' выбрасывает {Y$c1{x в окно спальни.{/Потом он разворачивается и говорит:'{GНет денег - спи в храме!'{x ",ch,NULL,NULL,TO_ROOM);
       act("В который раз вылетая из окна, ты снова убеждаешься в справедливости одной простой истины:{/{YДварфы любят за деньги...{x.",ch,NULL,ch,TO_CHAR);
       char_from_room( ch );
       char_to_room( ch, get_room_index(ROOM_VNUM_KOZEL));
@@ -377,9 +373,9 @@ void sect_water_noswim_update (CHAR_DATA *ch)
  if ( !boat )
  {
   stc("Ты тонешь!\n\r",ch);
-  if (ch->hit>200) 
+  if (ch->hit>200)
      damage(ch,ch,UMIN(100,ch->hit-1),0,DAM_NONE,FALSE, FALSE, NULL);
-  else 
+  else
      damage(ch,ch,UMIN(15,ch->hit-1),0,DAM_NONE,FALSE, FALSE, NULL);
  }
 }
@@ -410,10 +406,10 @@ void sect_uwater_update (CHAR_DATA *ch)
 
 void light_update (CHAR_DATA *ch)
 {
- if (!IS_NPC(ch)) 
+ if (!IS_NPC(ch))
  {
   OBJ_DATA *obj=get_eq_char(ch,WEAR_LIGHT);
- 
+
   if ( obj && obj->item_type == ITEM_LIGHT)
   {
    if ((obj->value[2]==-1 || obj->value[2]>998)) obj->value[2]=300;
@@ -429,7 +425,7 @@ void light_update (CHAR_DATA *ch)
     act( "$i1 мерцает и затухает.", ch, obj, NULL, TO_CHAR );
     extract_obj( obj );
    }
-   else 
+   else
    if ( obj->value[2] <= 5 && ch->in_room != NULL)
     act("$i1 мерцает.",ch,obj,NULL,TO_CHAR);
   }
@@ -464,7 +460,7 @@ void nostalgia_update (CHAR_DATA *ch)
   case 10:do_function(ch,do_say,"Уу, саммонеры чертовы! Оторвать бы им... руки...");
           break;
   default:do_function(ch,do_emote,"рыдает.");
-          break; 
+          break;
  }
 }
 
@@ -478,31 +474,31 @@ void plague_update (CHAR_DATA *ch)
  if (IS_IMMORTAL(ch))  return;
 
  if (ch->in_room == NULL) return;
-          
+
  act("$c1 вскрикивает от боли в страшных чумных язвах.",ch,NULL,NULL,TO_ROOM);
  stc("Ты бьешься в агонии от чумы.\n\r",ch);
- for ( af = ch->affected; af != NULL; af = af->next ) 
+ for ( af = ch->affected; af != NULL; af = af->next )
   if(af->type == gsn_plague) break;
-      
+
  if (af == NULL)
  {
   REM_BIT(ch->affected_by,AFF_PLAGUE);
   return;
  }
-      
+
  if (af->level == 1) return;
-      
+
  plague.where    = TO_AFFECTS;
  plague.type     = gsn_plague;
- plague.level    = af->level - 1; 
+ plague.level    = af->level - 1;
  plague.duration = number_range(1,2 * plague.level);
  plague.location = APPLY_STR;
  plague.modifier = -5;
  plague.bitvector = AFF_PLAGUE;
-      
+
  for ( vch = ch->in_room->people; vch != NULL; vch = vch->next_in_room)
  {
-  if (!saves_spell(plague.level - 2,vch,DAM_DISEASE) 
+  if (!saves_spell(plague.level - 2,vch,DAM_DISEASE)
   &&  !IS_IMMORTAL(vch)
 // a esli y tebya immunitet - ne zarazishsya (c) Wagner
   &&  check_immune(vch,DAM_DISEASE)!=IS_IMMUNE
@@ -523,7 +519,7 @@ void plague_update (CHAR_DATA *ch)
    ch->move -= dam;
  }
 // Questmobs won't die (c) Wagner
- if (IS_NPC(ch) && ch->questmob!=NULL) 
+ if (IS_NPC(ch) && ch->questmob!=NULL)
     dam=UMIN(abs(ch->hit-1),dam);
 
  damage( ch, ch, dam, gsn_plague,DAM_DISEASE,FALSE, FALSE, NULL);
@@ -548,7 +544,7 @@ void poison_update(CHAR_DATA *ch)
   if (IS_AFFECTED(ch,AFF_HASTE)) tdam*=2;
   if (IS_AFFECTED(ch,AFF_SLOW)) tdam/=2;
 // Questmobs won't die (c) Wagner
-  if (IS_NPC(ch) && ch->questmob!=NULL) 
+  if (IS_NPC(ch) && ch->questmob!=NULL)
      tdam=UMIN(abs(ch->hit-1),tdam);
    damage(ch,ch,tdam,gsn_poison,DAM_POISON,FALSE, FALSE, NULL);
  }
@@ -595,7 +591,7 @@ void gain_condition( CHAR_DATA *ch, int iCond, int64 value )
         if (IS_SET(race_table[ch->race].spec,SPEC_NODRINK) || ch->level >= LEVEL_IMMORTAL)
          {
           ch->pcdata->condition[iCond] = 20;
-          REM_BIT(ch->act,PLR_MUSTDRINK); 
+          REM_BIT(ch->act,PLR_MUSTDRINK);
           return;
          }
         if (condition<=-3) hungry_damage(ch, iCond);
@@ -622,8 +618,10 @@ void mobile_update( void )
   CHAR_DATA *victim, *v_next;
   EXIT_DATA *pexit;
   register int door;
+  const int stealer_update=0;
 
-  // Examine all mobs. 
+
+  // Examine all mobs.
   for ( ch = char_list; ch != NULL; ch = ch_next )
   {
    ch_next = ch->next;
@@ -663,7 +661,7 @@ void mobile_update( void )
 
    if (IS_AFFECTED(ch,AFF_CHARM)) continue;
 
-   // Examine call for special procedure 
+   // Examine call for special procedure
    if ( ch->spec_fun != 0 ) if ( (*ch->spec_fun) ( ch ) ) continue;
 
    // Midgaard Healer kills mobiles in room
@@ -684,7 +682,7 @@ void mobile_update( void )
         }
        }
      }
-   }  
+   }
 
    if (race_table[ch->pIndexData->race].wealth || ch->pIndexData->pShop )
    {
@@ -700,7 +698,7 @@ void mobile_update( void )
        remove_one_stealer(ch);
      }
    }
-         
+
    // That's all for sleeping / busy monster, and empty zones
    if ( ch->position != POS_STANDING ) continue;
 
@@ -743,7 +741,7 @@ void mobile_update( void )
          mp_percent_trigger( ch, NULL, NULL, NULL, TRIG_DELAY );
          continue;
        }
-     } 
+     }
      if ( HAS_TRIGGER( ch, TRIG_RANDOM) )
      {
        if( mp_percent_trigger( ch, NULL, NULL, NULL, TRIG_RANDOM ) )
@@ -759,7 +757,7 @@ void mobile_update( void )
        && pexit && pexit->u1.to_room
        && !IS_SET(pexit->exit_info,EX_CLOSED)
        && !IS_SET(pexit->u1.to_room->room_flags,ROOM_NO_MOB)
-       && (!IS_SET(ch->act,ACT_STAY_AREA) 
+       && (!IS_SET(ch->act,ACT_STAY_AREA)
           || ch->in_room->area==pexit->u1.to_room->area)
        && (!IS_SET(ch->act,ACT_STAY_PLAIN)
           || ch->in_room->sector_type==pexit->u1.to_room->sector_type)
@@ -870,7 +868,7 @@ void weather_update( void )
         if (weather_info.sky < SKY_CLOUDY)
             strcat( buf, "{YСолнце{x прячется за горизонтом.\n\r" );
         else
-            strcat( buf, "{wСтановится темнее{x.\n\r");    
+            strcat( buf, "{wСтановится темнее{x.\n\r");
         break;
 
     case 20:
@@ -915,7 +913,7 @@ void weather_update( void )
 
   switch ( weather_info.sky )
   {
-    default: 
+    default:
       bug( "Weather_update: bad sky %d.", weather_info.sky );
       weather_info.sky = SKY_CLOUDLESS;
       break;
@@ -987,8 +985,9 @@ void weather_update( void )
 
 // Update all chars, including mobs
 void char_update( void )
-{   
+{
   CHAR_DATA *ch,*ch_next;
+  int const save_number = 0;
 
   save_number++; // update save counter
 
@@ -1017,11 +1016,11 @@ void char_update( void )
       if (ch->pcdata->dc == 0 && IS_SET(ch->act, PLR_DISAVOWED) )
          REM_BIT( ch->act, PLR_DISAVOWED);
       if (ch->desc && ch->desc->connected!=CON_PLAYING) continue;
-      if (ch->in_room && IS_SET(ch->in_room->room_flags,ROOM_DWARVES_RENT)) 
+      if (ch->in_room && IS_SET(ch->in_room->room_flags,ROOM_DWARVES_RENT))
          drent_update(ch);
 
-      if (IS_DEVOTED_ANY(ch) && number_percent()==77) 
-      { 
+      if (IS_DEVOTED_ANY(ch) && number_percent()==77)
+      {
           change_favour(ch, -1);
           stc("Твое божество потихоньку забывает о тебе.\n\r", ch);
       }
@@ -1029,7 +1028,7 @@ void char_update( void )
       // do not put in limbo characters that are in creation
       if (ch->timer>=ch->settimer && ch->desc && !IS_IMMORTAL(ch))
       {
-        if (ch->fighting && ch->pcdata->condition[COND_ADRENOLIN]==0) 
+        if (ch->fighting && ch->pcdata->condition[COND_ADRENOLIN]==0)
            stop_fighting(ch, TRUE);
         act("$n растворяется в пустоте.", ch, NULL, NULL, TO_ROOM);
         stc("Ты растворяешься в пустоте.\n\r", ch);
@@ -1040,24 +1039,24 @@ void char_update( void )
         continue;
       }
       if (IS_CFG(ch,CFG_TICK)) stc(ch->pcdata->tickstr,ch);
-    
-      if (IS_SET(ch->act, PLR_SIFILIS) && number_percent() < 50) 
+
+      if (IS_SET(ch->act, PLR_SIFILIS) && number_percent() < 50)
          sifilis_update(ch);
 
       if ( ch->in_room !=NULL && ch->in_room->sector_type == SECT_WATER_NOSWIM
         && (!IS_NPC(ch)) && (!IS_AFFECTED(ch,AFF_FLYING) && !IS_AFFECTED(ch,AFF_SWIM)))
       sect_water_noswim_update(ch);
-    
+
       if ( ch->in_room !=NULL && ch->in_room->sector_type == SECT_UWATER
         && (!IS_NPC(ch)) && (!is_affected(ch,skill_lookup("wbreath"))
         && !IS_SET(race_table[ch->race].spec,SPEC_UWATER)))
       sect_uwater_update(ch);
-    
+
       if ( ch->position >= POS_STUNNED )
       {
        // check to see if we need to go home
        if (IS_NPC(ch) && ch->zone && ch->zone != ch->in_room->area
-         && ch->desc &&  ch->fighting == NULL 
+         && ch->desc &&  ch->fighting == NULL
          && !IS_AFFECTED(ch,AFF_CHARM) && number_percent() < 5)
        {
          act("$c1 возвращается в сознание.",ch,NULL,NULL,TO_ROOM);
@@ -1067,16 +1066,16 @@ void char_update( void )
 
        if ( ch->position == POS_STUNNED )  update_pos( ch );
       }
-       
+
       if ( (ch->criminal > 0 || IS_SET(ch->act,PLR_WANTED)) && --(ch->criminal)<=0)
       {
        REM_BIT(ch->act, PLR_WANTED);
        stc("{YТы больше не в розыске.{x\n\r",ch);
        ch->criminal=0;
       }
-    
+
       light_update(ch);
-    
+
       gain_condition( ch, COND_DRUNK,  -1 );
       gain_condition( ch, COND_FULL, ch->size > SIZE_MEDIUM ? -4 : -2 );
       gain_condition( ch, COND_THIRST, -1 );
@@ -1115,7 +1114,7 @@ void char_update( void )
             extract_char(ch,TRUE);
             return;
           }
-          
+
           if (paf->bitvector==AFF_CHARM) stop_follower(ch);
           if ( paf->type > 0 && skill_table[paf->type].msg_off )
           {
@@ -1133,8 +1132,8 @@ void char_update( void )
     //  as it may be lethal damage (on NPC).
 
     if (is_affected(ch, gsn_plague)) plague_update(ch);
-    
-    if (IS_AFFECTED(ch, AFF_POISON)) poison_update(ch); 
+
+    if (IS_AFFECTED(ch, AFF_POISON)) poison_update(ch);
     else if ( ch->position == POS_INCAP && number_range(0,1) == 0)
     {
       damage( ch, ch, 1, TYPE_UNDEFINED, DAM_NONE,FALSE, FALSE, NULL);
@@ -1144,13 +1143,13 @@ void char_update( void )
       damage( ch, ch, 1, TYPE_UNDEFINED, DAM_NONE,FALSE, FALSE, NULL);
     }
 
-//    if (ch!=NULL) 
+//    if (ch!=NULL)
 //      if (IS_NPC(ch))
     if (IS_STATUE(ch) && time_info.hour==12)
           statue_moving(ch);
 
   }
-  
+
   for ( ch = char_list; ch != NULL; ch = ch->next)
   {
     if (ch->desc && ch->desc->descriptor % 30 == save_number)
@@ -1159,9 +1158,9 @@ void char_update( void )
 }
 
 // Update all objs.
-// This function is performance sensitive. 
+// This function is performance sensitive.
 void obj_update( void )
-{   
+{
   OBJ_DATA *obj;
   OBJ_DATA *obj_next;
   AFFECT_DATA *paf, *paf_next;
@@ -1174,7 +1173,7 @@ void obj_update( void )
     obj_next = obj->next;
 
     if( obj->carried_by) // Durability & condition updating
-    { 
+    {
       if((rch=obj->carried_by) == NULL)
       {
         bug("NULL char is detected in recieved data!", 0);
@@ -1185,18 +1184,18 @@ void obj_update( void )
     if( obj )
     {
       if( obj->durability != -1 )
-        if( obj->durability == 0 || obj->durability == 200 
+        if( obj->durability == 0 || obj->durability == 200
          || obj->durability < -1 || obj->durability > 1000
          || obj->durability != material_table[material_num(obj->material)].d_dam )
               obj->durability = material_table[material_num(obj->material)].d_dam;
     }
-    else 
+    else
     {
       bug("NULL obj is sent as an argument to obj_update()!", 0);
       return;
     }
 
-    if( obj->condition > obj->durability || obj->condition < 0 ) 
+    if( obj->condition > obj->durability || obj->condition < 0 )
         obj->condition = obj->durability;
 
     for ( paf = obj->affected; paf != NULL; paf = paf_next )
@@ -1244,7 +1243,7 @@ void obj_update( void )
       case ITEM_FOOD:       message = "$i1 разлагается.";        break;
       case ITEM_POTION:     message = "$i1 испаряется от долгого неупотребления.";break;
       case ITEM_PORTAL:     message = "$i1 пропадает из виду."; break;
-      case ITEM_CONTAINER: 
+      case ITEM_CONTAINER:
         if (CAN_WEAR(obj,ITEM_WEAR_FLOAT))
          if (obj->contains) message = "$i1 вспыхивает и пропадает, вываливая содержимое на землю.";
          else message = "$i1 вспыхивает и пропадает.";
@@ -1254,7 +1253,7 @@ void obj_update( void )
 
     if ( obj->carried_by != NULL )
     {
-      if (IS_NPC(obj->carried_by) 
+      if (IS_NPC(obj->carried_by)
         &&  obj->carried_by->pIndexData->pShop != NULL)
         obj->carried_by->silver += obj->cost/5;
       else
@@ -1276,7 +1275,7 @@ void obj_update( void )
 
     if ((obj->item_type == ITEM_CORPSE_PC || obj->wear_loc == WEAR_FLOAT)
       &&  obj->contains)
-    {   // save the contents 
+    {   // save the contents
       OBJ_DATA *t_obj, *next_obj;
 
       for (t_obj = obj->contains; t_obj != NULL; t_obj = next_obj)
@@ -1326,35 +1325,35 @@ void aggr_update( void )
       register int count;
       ch_next = ch->next_in_room;
 
-      if ( !IS_NPC(ch) 
+      if ( !IS_NPC(ch)
         || ch->in_room==NULL
         || IS_SET(ch->in_room->room_flags,ROOM_SAFE)
         || IS_SET(ch->in_room->ra,RAFF_SAFE_PLC)
         || IS_SET(ch->in_room->area->area_flags,AREA_LAW)
         || IS_SET(ch->act, ACT_PET)
-        || IS_AFFECTED(ch,AFF_CALM) 
+        || IS_AFFECTED(ch,AFF_CALM)
         || ch->fighting != NULL
-        || IS_AFFECTED(ch, AFF_CHARM) 
+        || IS_AFFECTED(ch, AFF_CHARM)
         || !IS_AWAKE(ch)
         || ( IS_SET(ch->act, ACT_WIMPY) && IS_AWAKE(wch) )
-        || !can_see( ch, wch,CHECK_LVL ) 
+        || !can_see( ch, wch,CHECK_LVL )
         || number_bits(1) == 0)
       continue;
 
       if (ch->pIndexData!=NULL && ch->pIndexData->pShop!=NULL)
       {
-       if (ch->stealer==NULL || !is_exact_name(wch->name,ch->stealer)) 
+       if (ch->stealer==NULL || !is_exact_name(wch->name,ch->stealer))
        continue;
-       
+
        do_printf(buf,"{Y%s{m грязный {RВОР{m! ДЕРЖИТЕ ВОРА!{x\n\r",wch->name);
        do_yell(ch, buf);
        multi_hit( ch, wch);
        continue;
       }
-      
+
       if (!IS_SET(ch->act, ACT_AGGRESSIVE)) continue;
       if (IS_AFFECTED(ch,AFF_CHARM)) continue;
-      
+
       // Ok we have a 'wch' player character and a 'ch' npc aggressor.
       // Now make the aggressor fight a RANDOM pc victim in the room,
       // giving each 'vch' an equal chance of selection
@@ -1385,7 +1384,7 @@ void aggr_update( void )
 
         if ( !IS_NPC(vch)
          &&   vch->level < LEVEL_IMMORTAL
-         &&   ch->level +5 >= vch->level + vch->criminal/50 
+         &&   ch->level +5 >= vch->level + vch->criminal/50
          &&   ( !IS_SET(ch->act, ACT_WIMPY) || !IS_AWAKE(vch) )
          &&   can_see( ch, vch,CHECK_LVL ) )
         {
@@ -1402,13 +1401,13 @@ void aggr_update( void )
   }
 }
 
-// Gain hp,mana,moves 
+// Gain hp,mana,moves
 void gain_stats(CHAR_DATA *ch )
 {
   int hp, mana, moves, number,dam;
   AFFECT_DATA *af;
 
-  hp = UMAX(3,get_curr_stat(ch,STAT_CON) + ch->level/2); 
+  hp = UMAX(3,get_curr_stat(ch,STAT_CON) + ch->level/2);
   if (ch->classthi) hp+=hp/15;
   if (ch->classwar) hp+=hp/20;
   number = number_percent();
@@ -1463,14 +1462,14 @@ void gain_stats(CHAR_DATA *ch )
       case POS_FIGHTING:mana /= 6;break;
     }
   }
-  
+
   moves = UMAX( 15, ch->level );
   switch ( ch->position )
   {
    case POS_SLEEPING: moves += get_curr_stat(ch,STAT_DEX);break;
    case POS_RESTING:  moves += get_curr_stat(ch,STAT_DEX) / 2;break;
   }
-  
+
   hp = hp * (ch->in_room->heal_rate+raffect_level(ch->in_room,RAFF_OASIS)) / 100;
   if (ch->on != NULL && ch->on->item_type == ITEM_FURNITURE)
     hp= hp* (int)ch->on->value[3] / 100;
@@ -1506,16 +1505,16 @@ void gain_stats(CHAR_DATA *ch )
     hp/= 4;
     mana/=4;
     moves/=4;
-    
+
     af = affect_find(ch->affected,gsn_poison);
-    
+
     if (af) tdam=af->level+1;
     else tdam=ch->level+1;
     if (IS_AFFECTED(ch,AFF_HASTE)) tdam*=2;
     if (IS_AFFECTED(ch,AFF_SLOW)) tdam/=2;
 
 // Questmobs won't die (c) Wagner
-    if (IS_NPC(ch) && ch->questmob!=NULL) 
+    if (IS_NPC(ch) && ch->questmob!=NULL)
         tdam=UMIN(abs(ch->hit-1),tdam);
 
     act( "$c1 дрожит и стонет.", ch, NULL, NULL, TO_ROOM );
@@ -1539,7 +1538,7 @@ void gain_stats(CHAR_DATA *ch )
     ch->mana -= dam;
     ch->move -= dam;
 // Questmobs won't die (c) Wagner
-    if (IS_NPC(ch) && ch->questmob!=NULL)    
+    if (IS_NPC(ch) && ch->questmob!=NULL)
         dam=UMIN(abs(ch->hit-1),dam);
 
     act("$c1 вскрикивает от боли в страшных чумных язвах.",ch,NULL,NULL,TO_ROOM);
@@ -1565,15 +1564,15 @@ void gain_stats(CHAR_DATA *ch )
   hp/=4;
   mana/=4;
   moves/=4;
-  if (IS_NPC(ch) && ch->questmob!=NULL) 
+  if (IS_NPC(ch) && ch->questmob!=NULL)
       { }
     else
   {
-     if (ch->hit<ch->max_hit) 
+     if (ch->hit<ch->max_hit)
         ch->hit +=UMIN(hp,   ch->max_hit  - ch->hit);
-     if (ch->mana<ch->max_mana) 
+     if (ch->mana<ch->max_mana)
         ch->mana+=UMIN(mana, ch->max_mana - ch->mana);
-     if (ch->move<ch->max_move)    
+     if (ch->move<ch->max_move)
         ch->move+=UMIN(moves,ch->max_move - ch->move);
      if (number_range(1,50)>45)
      {
@@ -1676,7 +1675,7 @@ void remort_update(void)
   ch->vuln_flags = ch->vuln_flags|race_table[ch->race].vuln;
   ch->form  = race_table[ch->race].form;
 
-  // add race skills   
+  // add race skills
   for (i = 0; i < 5; i++)
   {
     if (race_table[ch->race].skills[i] == NULL) break;
@@ -1685,7 +1684,7 @@ void remort_update(void)
 
   ch->pcdata->points = race_table[ch->race].points;
 
-  //All learned skills set to 1%   
+  //All learned skills set to 1%
   for (sn = 0; sn < max_skill; sn++)
   {
     if (skill_table[sn].name == NULL ) break;
@@ -1709,11 +1708,11 @@ void remort_update(void)
     obj_from_char( obj );
     extract_obj(obj);
   }
- 
+
   // drop extra classes
   REM_BIT(ch->act,PLR_5REMORT);
-  REM_BIT(ch->act,PLR_LASTREMORT);  
-  if (ch->remort > 2) 
+  REM_BIT(ch->act,PLR_LASTREMORT);
+  if (ch->remort > 2)
   {
     stc ("Выбери какой класс выкинуть: \n\r",ch);
     if (ch->classmag) stc("mage ",ch);
@@ -1721,9 +1720,9 @@ void remort_update(void)
     if (ch->classcle) stc("cleric ",ch);
     if (ch->classthi) stc("thief ",ch);
     stc("\n\r",ch);
-   
+
     d->connected=CON_DROP_CLASS;
-  }                 
+  }
   else
   {
   // end of Remort process, and go to select new class
@@ -1908,8 +1907,8 @@ void auction_update (void)
         act ("Аукционеp появляется пеpед $c5, и вpучает $u $i4",
           auction->buyer,auction->item,NULL,TO_ROOM);
 
-        auction->seller->gold += auction->bet; // give him the money 
-        auction->item = NULL; // reset item 
+        auction->seller->gold += auction->bet; // give him the money
+        auction->item = NULL; // reset item
         auction->seller = NULL;
         auction->buyer  = NULL;
       }
@@ -1929,7 +1928,7 @@ void auction_update (void)
      if (auction->going>3) auction->going=3;
      else auction->going=2;
   }
-} 
+}
 
 void penalty_update(CHAR_DATA *ch)
 {
@@ -2017,8 +2016,8 @@ void statue_moving(CHAR_DATA *ch)
      && !room_is_private(room)
      && !IS_CLAN_ROOM(room)) break;
   }
-  do_function(ch,do_emote,"растворяется в {Dнеизвестности{x.");              
+  do_function(ch,do_emote,"растворяется в {Dнеизвестности{x.");
   char_from_room(ch);
   char_to_room(ch, room);
-  do_function(ch,do_emote,"появляется из {Dнеизвестности{x.");              
+  do_function(ch,do_emote,"появляется из {Dнеизвестности{x.");
 }

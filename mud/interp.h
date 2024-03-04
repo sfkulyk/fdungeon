@@ -275,7 +275,7 @@ DECLARE_DO_FUN2( do_vlist        ); // vlist command (C) Saboteur
 DECLARE_DO_FUN2( do_lore         ); // lore skill (C) Saboteur
 DECLARE_DO_FUN2( do_rename       ); // rename command (C) Saboteur
 DECLARE_DO_FUN2( do_reform       ); // morph module (C) Adron
-DECLARE_DO_FUN2( do_polymorph    ); // morph module (C) Adron 
+DECLARE_DO_FUN2( do_polymorph    ); // morph module (C) Adron
 DECLARE_DO_FUN2( do_seen         ); // Seen by Cortney. rewritten by Saboteur
 DECLARE_DO_FUN2( do_test         ); // temporary command for test something
 DECLARE_DO_FUN2( do_gsocial      ); // Global Socials (C) Sab
@@ -322,7 +322,7 @@ DECLARE_DO_FUN2( do_marry        ); // Marry (C) Saboteur
 DECLARE_DO_FUN2( do_ptalk        ); // Channel for married (C) Saboteur
 DECLARE_DO_FUN2( do_divorce      ); // Divorce (C) Saboteur
 DECLARE_DO_FUN2( do_vislist      ); // Visible List (C) Saboteur
-DECLARE_DO_FUN2( do_ignorelist   ); // Ignore  List (C) Apc :) 
+DECLARE_DO_FUN2( do_ignorelist   ); // Ignore  List (C) Apc :)
 DECLARE_DO_FUN2( do_censored     ); // Censored channel (C) Saboteur
 DECLARE_DO_FUN2( do_sprecall     ); // Recall for marryed (C) Saboteur
 DECLARE_DO_FUN2( do_nopost       ); // NOPOST (penalty) (C) Saboteur

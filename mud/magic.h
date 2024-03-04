@@ -2,7 +2,7 @@
 // Read ours copyrights and license terms in 'license.fd'
 
 // Spell functions. Defined in magic.c and magic2.c
-DECLARE_SPELL_FUN( spell_null              ); 
+DECLARE_SPELL_FUN( spell_null              );
 DECLARE_SPELL_FUN( spell_acid_blast        ); // improved by Saboteur
 DECLARE_SPELL_FUN( spell_armor             ); // improved by Saboteur
 DECLARE_SPELL_FUN( spell_bless             ); // standart
@@ -68,7 +68,7 @@ DECLARE_SPELL_FUN( spell_invis             ); // standart
 DECLARE_SPELL_FUN( spell_know_person       ); // (C) Saboteur, (idea by Dika)
 DECLARE_SPELL_FUN( spell_lightning_bolt    ); // standart
 DECLARE_SPELL_FUN( spell_locate_object     ); // standart
-DECLARE_SPELL_FUN( spell_magic_missile     ); // changed by 
+DECLARE_SPELL_FUN( spell_magic_missile     ); // changed by
 DECLARE_SPELL_FUN( spell_mass_healing      ); // standart
 DECLARE_SPELL_FUN( spell_mass_invis        ); // standart
 DECLARE_SPELL_FUN( spell_nexus             ); // standart

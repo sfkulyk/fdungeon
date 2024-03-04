@@ -189,7 +189,7 @@ void do_quest(CHAR_DATA *ch, const char *argument)
   OBJ_DATA *obj=NULL;
   OBJ_INDEX_DATA *questinfoobj;
   char buf [MAX_STRING_LENGTH];
-  char arg1 [MAX_INPUT_LENGTH];                        
+  char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
   char arg3 [MAX_INPUT_LENGTH];
 
@@ -219,7 +219,7 @@ void do_quest(CHAR_DATA *ch, const char *argument)
     if (!IS_SET(ch->act, PLR_QUESTOR)) stc("У тебЯ сейчас нет задания.\n\r",ch);
     else if (QSTAT(ch, Q_KILL_MOB)) {
       Pquestman=get_mob_index(ch->questgiver);
-      if (QSTAT(ch,Q_MOB_KILLED)) 
+      if (QSTAT(ch,Q_MOB_KILLED))
        ptc(ch, "Ты ПОЧТИ выполнил свое задание!\n\rВозвращайсЯ к %s пока не истекло вpемЯ!\n\r",get_mobindex_desc(Pquestman, '3'));
       else {
        ptc(ch, "{CТебе нужно {Rубить {Cужасного {Y%s{C!\n\r",get_char_desc(ch->questmob,'4'));
@@ -340,7 +340,7 @@ void do_quest(CHAR_DATA *ch, const char *argument)
         do_say(questman, "Извини, но тут глюкануло и я не могу создать для тебя квестовый предмет..");
         do_say(questman, "Так что лучше беги к Иммам сдавать буг - тоже qp дадут");
         return;
-       } 
+       }
        break;
      case 1: // QUEST FOR FIND AND BRING ITEM
      case 2:
@@ -539,8 +539,8 @@ void do_quest(CHAR_DATA *ch, const char *argument)
     if (ch->level < 100) {
      stc("Ты слишком мал, чтобы пользоваться этой возможностью.\n\r", ch);
      return;
-    } 
-    
+    }
+
     if (ch->practice >= 10) {
       ch->practice -= 10;
       ch->questpoints += (15*150)/UMAX(ch->perm_stat[STAT_WIS],15);
@@ -556,7 +556,7 @@ void do_quest(CHAR_DATA *ch, const char *argument)
 
   else if (!str_prefix(arg1, "buy")) {
     int item=-1, i, ttmp=0, qtmp=0;
-   
+
     if (EMPTY(arg2)) {
         stc("Для покупки предмета, набеpи 'QUEST BUY <item>'.\n\r",ch);
         return;
@@ -605,7 +605,7 @@ void do_quest(CHAR_DATA *ch, const char *argument)
         act( "$C1 дает 30 практик $c3.", ch, NULL, questman, TO_ROOM );
         act( "$C1 дает тебе 30 практик.",   ch, NULL, questman, TO_CHAR );
         break;
-      case 1: 
+      case 1:
         ch->gold += 20000;
         act( "$C1 дает 20,000 золотых монет $c3.", ch, NULL, questman, TO_ROOM );
         act( "$C1 дает тебе 20,000 золотых монет.",ch, NULL, questman, TO_CHAR );
@@ -621,7 +621,7 @@ void do_quest(CHAR_DATA *ch, const char *argument)
             do_say(questman,"Сорри, не могу создать нужную тебе вешь.. Беги к Иммам!");
             ch->questpoints+= quest_table[item].cost;
           }
-        } 
+        }
         break;
     }
 
@@ -644,7 +644,7 @@ void quest_update(void)
 
   for ( d = descriptor_list; d != NULL; d = d->next ) {
     if (!d->character || d->connected != CON_PLAYING) continue;
-    
+
     ch = d->character;
     if (IS_SET(ch->act,PLR_QUESTOR)) {
       if (--ch->countdown <= 0) {
@@ -657,7 +657,7 @@ void quest_update(void)
         if (ch->questmob!=NULL) ch->questmob->questmob=NULL;
         ch->questmob = NULL;
         ch->q_stat=0;
-        if (ch->questobj!=0) ch->questobj=0; 
+        if (ch->questobj!=0) ch->questobj=0;
         continue;
       }
 
@@ -760,18 +760,18 @@ void create_gquest(int min,int max, int mobs)
     for (mob=char_list;mob;mob=mob->next) {
       if (!IS_NPC(mob) || gquest.target[i]!=mob->pIndexData->vnum || !mob->in_room) continue;
       gquest.room[t]=mob->in_room->vnum;
-      /* 
-       * `break' breaks only current `for' 
+      /*
+       * `break' breaks only current `for'
        *
        * (unicorn)
        */
       if (++t>=99) break;
     }
-    /* 
+    /*
      * Ugly fix for gquest.room[] overflow.
      * APAR: [*****] BUG: Bad sn 10 in get_skill. 9515
      *       (gsn_dodge follows the gquest static info and was rewritten by
-     *       room number 9515 (somewhere in New Thalos), thus that skills 
+     *       room number 9515 (somewhere in New Thalos), thus that skills
      *       doesn't work properly)
      * TODO: increase enthrophy in rooms election.
      * (uni)
@@ -866,7 +866,7 @@ void do_gquest(CHAR_DATA *ch, const char *argument)
     }
     stc("Ты уведомляешь богов о выполнении задания.\n\r",ch);
     act_new("Задание перв$b выполнил$r $n!",ch,NULL,NULL,TO_ALL,POS_DEAD);
-    reward=number_range(20,30);      
+    reward=number_range(20,30);
     prac=number_range(1,6);
     train=number_range(0,10)>8?1:0;
     ptc(ch,"В награду ты получаешь %d quest points.\n\r",reward);

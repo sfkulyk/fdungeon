@@ -1,7 +1,7 @@
 // Copyrights (C) 1998-2003, Forgotten Dungeon team.
 // Read ours copyrights and license terms in 'license.fd'
 #include "merc.h"
- 
+
 struct clan_rank_type
 {
     char *name;
@@ -24,14 +24,14 @@ struct size_type
 };
 
 struct mitem_type
-{       
+{
     char *name;
     char *desc;
     int64 bit;
 };
 
 struct wear_ntype
-{       
+{
     char *name;
     int wear_num;
 };
@@ -51,8 +51,8 @@ struct material_type
   bool  metal;      // is metal?
   int64 res;        // resist affects
   int64 vul;        // vulnerable affects
-  int   resnum;     // vulnerable 
-  int   vulnum;     // vulnerable 
+  int   resnum;     // vulnerable
+  int   vulnum;     // vulnerable
 };
 
 /* game tables */

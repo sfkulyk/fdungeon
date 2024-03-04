@@ -126,7 +126,7 @@ const struct keywords_type fn_keyword[] =
   {"race",      "if race $n dragon    - is $n of 'dragon' race"       },
   {"class",     "if class $n mage     - is $n's class 'mage'"         },
   {"objtype",   "if objtype $p scroll - is $p a scroll"               },
-  
+
   {"vnum",      "if vnum $i == 1233   - virtual number check"       },
   {"hpcnt",     "if hpcnt $i > 30     - hit point percent check"    },
   {"room",      "if room $i == 1233   - room virtual number"        },
@@ -213,16 +213,16 @@ int count_people_room( CHAR_DATA *mob, int iFlag )
   int count;
   for ( count = 0, vch = mob->in_room->people; vch; vch = vch->next_in_room )
     if ( mob != vch && (iFlag == 0
-     || (iFlag == 1 && !IS_NPC( vch )) 
+     || (iFlag == 1 && !IS_NPC( vch ))
      || (iFlag == 2 && IS_NPC( vch ))
      || (iFlag == 3 && IS_NPC( mob ) && IS_NPC( vch ) && mob->pIndexData->vnum == vch->pIndexData->vnum )
-     || (iFlag == 4 && is_same_group( mob, vch )) ) && can_see( mob, vch,CHECK_LVL ) ) 
+     || (iFlag == 4 && is_same_group( mob, vch )) ) && can_see( mob, vch,CHECK_LVL ) )
      count++;
   return ( count );
 }
 
 // Get the order of a mob in the room. Useful when several mobs in
-// a room have the same trigger and you want only the first of them to act 
+// a room have the same trigger and you want only the first of them to act
 int get_order( CHAR_DATA *ch )
 {
   CHAR_DATA *vch;
@@ -402,7 +402,7 @@ int64 cmd_eval( int64 vnum, const char *line, int check,CHAR_DATA *mob,
       case CHK_ISCHARM: /* A relic from MERC 2.2 MOBprograms */
           return( lval_char != NULL && IS_AFFECTED( lval_char, AFF_CHARM ) );
       case CHK_ISFOLLOW:
-          return( lval_char != NULL && lval_char->master != NULL 
+          return( lval_char != NULL && lval_char->master != NULL
                && lval_char->master->in_room == lval_char->in_room );
       case CHK_ISACTIVE:
           return( lval_char != NULL && lval_char->position > POS_SLEEPING );
@@ -435,16 +435,16 @@ int64 cmd_eval( int64 vnum, const char *line, int check,CHAR_DATA *mob,
    switch( check )
    {
       case CHK_AFFECTED:
-          return( lval_char != NULL 
+          return( lval_char != NULL
               &&  IS_SET(lval_char->affected_by, flag_lookup(buf, affect_flags)) );
       case CHK_ACT:
-          return( lval_char != NULL 
+          return( lval_char != NULL
               &&  IS_SET(lval_char->act, flag_lookup(buf, act_flags)) );
       case CHK_IMM:
-          return( lval_char != NULL 
+          return( lval_char != NULL
               &&  IS_SET(lval_char->imm_flags, flag_lookup(buf, imm_flags)) );
       case CHK_OFF:
-          return( lval_char != NULL 
+          return( lval_char != NULL
               &&  IS_SET(lval_char->off_flags, flag_lookup(buf, off_flags)) );
       case CHK_CARRIES:
           if ( is_number( buf ) )
@@ -533,7 +533,7 @@ int64 cmd_eval( int64 vnum, const char *line, int check,CHAR_DATA *mob,
           if ( lval_char != NULL ) lval = lval_char->alignment;
           break;
       case CHK_MONEY:  /* Money is converted to silver... */
-          if ( lval_char != NULL ) 
+          if ( lval_char != NULL )
               lval = lval_char->gold + (lval_char->silver * 100);
           break;
       case CHK_OBJVAL0:
@@ -542,7 +542,7 @@ int64 cmd_eval( int64 vnum, const char *line, int check,CHAR_DATA *mob,
       case CHK_OBJVAL1:
           if ( lval_obj != NULL ) lval = lval_obj->value[1];
           break;
-      case CHK_OBJVAL2: 
+      case CHK_OBJVAL2:
           if ( lval_obj != NULL ) lval = lval_obj->value[2];
           break;
       case CHK_OBJVAL3:
@@ -563,9 +563,9 @@ int64 cmd_eval( int64 vnum, const char *line, int check,CHAR_DATA *mob,
 /* EXPAND_ARG
  * This is a hack of act() in comm.c. I've added some safety guards,
  * so that missing or invalid $-codes do not crash the server */
-void expand_arg( char *buf, 
-        const char *format, 
-        CHAR_DATA *mob, CHAR_DATA *ch, 
+void expand_arg( char *buf,
+        const char *format,
+        CHAR_DATA *mob, CHAR_DATA *ch,
         const void *arg1, const void *arg2, CHAR_DATA *rch )
 {
     static char * const he_she  [] = { "оно",  "он",  "она" };
@@ -574,7 +574,7 @@ void expand_arg( char *buf,
     const char *someone = "некто";
     const char *something = "нечто";
     const char *someones = "кто-то";
- 
+
     char fname[MAX_INPUT_LENGTH];
     CHAR_DATA *vch = (CHAR_DATA *) arg2;
     OBJ_DATA *obj1 = (OBJ_DATA  *) arg1;
@@ -582,7 +582,7 @@ void expand_arg( char *buf,
     const char *str;
     const char *i;
     char *point;
- 
+
     // Discard null and zero-length messages.
     if ( format == NULL || format[0] == '\0' ) return;
 
@@ -605,30 +605,30 @@ void expand_arg( char *buf,
                 one_argument( mob->name, fname );
                 i = fname;                                      break;
             case 'I': i = mob->short_descr;                     break;
-            case 'n': 
+            case 'n':
                 i = someone;
                 if ( ch != NULL && can_see( mob, ch,CHECK_LVL ) )
                 {
                     one_argument( ch->name, fname );
                     i = capitalize(fname);
                 }                                               break;
-            case 'N': 
+            case 'N':
                 i = (ch != NULL && can_see( mob, ch,CHECK_LVL ) )
                 ? ( IS_NPC( ch ) ? ch->short_descr : ch->name )
                 : someone;                                      break;
-            case 't': 
+            case 't':
                 i = someone;
                 if ( vch != NULL && can_see( mob, vch,CHECK_LVL ) )
                 {
                      one_argument( vch->name, fname );
                      i = capitalize(fname);
                 }                                               break;
-            case 'T': 
+            case 'T':
                 i = (vch != NULL && can_see( mob, vch,CHECK_LVL ))
                 ? ( IS_NPC( vch ) ? vch->short_descr : vch->name )
                 : someone;                                      break;
-            case 'r': 
-                if ( rch == NULL ) 
+            case 'r':
+                if ( rch == NULL )
                     rch = get_random_char( mob );
                 i = someone;
                 if( rch != NULL && can_see( mob, rch,CHECK_LVL ) )
@@ -636,8 +636,8 @@ void expand_arg( char *buf,
                     one_argument( rch->name, fname );
                     i = capitalize(fname);
                 }                                               break;
-            case 'R': 
-                if ( rch == NULL ) 
+            case 'R':
+                if ( rch == NULL )
                     rch = get_random_char( mob );
                 i  = ( rch != NULL && can_see( mob, rch,CHECK_LVL ) )
                 ? ( IS_NPC( ch ) ? ch->short_descr : ch->name )
@@ -654,57 +654,57 @@ void expand_arg( char *buf,
                 ? ( IS_NPC( mob->mprog_target ) ? mob->mprog_target->short_descr : mob->mprog_target->name )
                 : someone;                                      break;
             case 'j': i = he_she  [URANGE(0, mob->sex, 2)];     break;
-            case 'e': 
+            case 'e':
                 i = (ch != NULL && can_see( mob, ch,CHECK_LVL ))
-                ? he_she  [URANGE(0, ch->sex, 2)]        
+                ? he_she  [URANGE(0, ch->sex, 2)]
                 : someone;                                      break;
-            case 'E': 
+            case 'E':
                 i = (vch != NULL && can_see( mob, vch,CHECK_LVL ))
-                ? he_she  [URANGE(0, vch->sex, 2)]        
+                ? he_she  [URANGE(0, vch->sex, 2)]
                 : someone;                                      break;
-            case 'J': 
+            case 'J':
                 i = (rch != NULL && can_see( mob, rch,CHECK_LVL ))
-                ? he_she  [URANGE(0, rch->sex, 2)]        
+                ? he_she  [URANGE(0, rch->sex, 2)]
                 : someone;                                      break;
             case 'X':
                 i = (mob->mprog_target != NULL && can_see( mob, mob->mprog_target,CHECK_LVL))
                 ? he_she  [URANGE(0, mob->mprog_target->sex, 2)]
                 : someone;                                      break;
             case 'k': i = him_her [URANGE(0, mob->sex, 2)];     break;
-            case 'm': 
+            case 'm':
                 i = (ch != NULL && can_see( mob, ch,CHECK_LVL ))
                 ? him_her [URANGE(0, ch  ->sex, 2)]
                 : someone;                                      break;
-            case 'M': 
+            case 'M':
                 i = (vch != NULL && can_see( mob, vch,CHECK_LVL ))
-                ? him_her [URANGE(0, vch ->sex, 2)]        
+                ? him_her [URANGE(0, vch ->sex, 2)]
                 : someone;                                      break;
-            case 'K': 
-                if ( rch == NULL ) 
+            case 'K':
+                if ( rch == NULL )
                     rch = get_random_char( mob );
                 i = (rch != NULL && can_see( mob, rch,CHECK_LVL ))
                 ? him_her [URANGE(0, rch ->sex, 2)]
                 : someone;                                      break;
-            case 'Y': 
+            case 'Y':
                 i = (mob->mprog_target != NULL && can_see( mob, mob->mprog_target,CHECK_LVL ))
-                ? him_her [URANGE(0, mob->mprog_target->sex, 2)]        
+                ? him_her [URANGE(0, mob->mprog_target->sex, 2)]
                 : someone;                                      break;
             case 'l': i = his_her [URANGE(0, mob ->sex, 2)];    break;
-            case 's': 
+            case 's':
                 i = (ch != NULL && can_see( mob, ch,CHECK_LVL ))
                 ? his_her [URANGE(0, ch ->sex, 2)]
                 : someones;                                     break;
-            case 'S': 
+            case 'S':
                 i = (vch != NULL && can_see( mob, vch,CHECK_LVL ))
                 ? his_her [URANGE(0, vch ->sex, 2)]
                 : someones;                                     break;
-            case 'L': 
-                if ( rch == NULL ) 
+            case 'L':
+                if ( rch == NULL )
                     rch = get_random_char( mob );
                 i = ( rch != NULL && can_see( mob, rch ,CHECK_LVL) )
                 ? his_her [URANGE(0, rch ->sex, 2)]
                 : someones;                                     break;
-            case 'Z': 
+            case 'Z':
                 i = (mob->mprog_target != NULL && can_see( mob, mob->mprog_target,CHECK_LVL ))
                 ? his_her [URANGE(0, mob->mprog_target->sex, 2)]
                 : someones;                                     break;
@@ -731,16 +731,16 @@ void expand_arg( char *buf,
                 ? obj2->short_descr
                 : something;                                    break;
         }
- 
+
         ++str;
         while ( ( *point = *i ) != '\0' )
             ++point, ++i;
- 
+
     }
     *point = '\0';
- 
+
     return;
-}    
+}
 
 /*  PROGRAM_FLOW
  *  This is the program driver. It parses the mob program code lines
@@ -755,7 +755,7 @@ void expand_arg( char *buf,
 #define END_BLOCK        -2 /* Flag: End of if-else-endif block */
 #define MAX_CALL_LEVEL    5 /* Maximum nested calls */
 
-void program_flow( 
+void program_flow(
         int64 pvnum,  /* For diagnostic purposes */
         const char *source,  /* the actual MOBprog code */
         CHAR_DATA *mob, CHAR_DATA *ch, const void *arg1, const void *arg2 )
@@ -839,7 +839,7 @@ void program_flow(
                 bug( buf, 0 );
                 return;
             }
-            if ( level && cond[level-1] == FALSE ) 
+            if ( level && cond[level-1] == FALSE )
             {
                 cond[level] = FALSE;
                 continue;
@@ -963,15 +963,15 @@ void program_flow(
 
 // A general purpose string trigger. Matches argument to a string trigger
 // phrase.
-void mp_act_trigger( 
-        char *argument, CHAR_DATA *mob, CHAR_DATA *ch, 
+void mp_act_trigger(
+        char *argument, CHAR_DATA *mob, CHAR_DATA *ch,
         const void *arg1, const void *arg2, int type )
 {
     MPROG_LIST *prg;
 
     for ( prg = mob->pIndexData->mprogs; prg != NULL; prg = prg->next )
     {
-        if ( prg->trig_type == type 
+        if ( prg->trig_type == type
         &&  strstr( argument, prg->trig_phrase ) != NULL )
         {
             program_flow( prg->vnum, prg->code, mob, ch, arg1, arg2 );
@@ -983,15 +983,15 @@ void mp_act_trigger(
 
 // A general purpose percentage trigger. Checks if a random percentage
 // number is less than trigger phrase
-bool mp_percent_trigger( 
-        CHAR_DATA *mob, CHAR_DATA *ch, 
+bool mp_percent_trigger(
+        CHAR_DATA *mob, CHAR_DATA *ch,
         const void *arg1, const void *arg2, int type )
 {
     MPROG_LIST *prg;
 
     for ( prg = mob->pIndexData->mprogs; prg != NULL; prg = prg->next )
     {
-        if ( prg->trig_type == type 
+        if ( prg->trig_type == type
         &&   number_percent() < atoi( prg->trig_phrase ) )
         {
             program_flow( prg->vnum, prg->code, mob, ch, arg1, arg2 );
@@ -1025,7 +1025,7 @@ bool mp_exit_trigger( CHAR_DATA *ch, int dir )
   MPROG_LIST   *prg;
 
   for ( mob = ch->in_room->people; mob != NULL; mob = mob->next_in_room )
-  {    
+  {
     if (IS_NPC(mob) &&
        (HAS_TRIGGER(mob, TRIG_EXIT) || HAS_TRIGGER(mob, TRIG_EXALL)))
     {
@@ -1095,7 +1095,7 @@ void mp_greet_trigger( CHAR_DATA *ch )
   CHAR_DATA *mob;
 
   for ( mob = ch->in_room->people; mob != NULL; mob = mob->next_in_room )
-  {    
+  {
     if ( IS_NPC( mob )
     && ( HAS_TRIGGER(mob, TRIG_GREET) || HAS_TRIGGER(mob,TRIG_GRALL) ) )
     {
@@ -1106,7 +1106,7 @@ void mp_greet_trigger( CHAR_DATA *ch )
       &&   mob->position == mob->pIndexData->default_pos
       &&   can_see( mob, ch,CHECK_LVL ) )
           mp_percent_trigger( mob, ch, NULL, NULL, TRIG_GREET );
-      else                 
+      else
       if ( HAS_TRIGGER( mob, TRIG_GRALL ) )
           mp_percent_trigger( mob, ch, NULL, NULL, TRIG_GRALL );
     }
