@@ -12,6 +12,8 @@
 #include "recycle.h"
 #include "tables.h"
 
+extern char str_boot_time[];
+
 #define MAX_CFG 19
 struct cfg_type
 {
@@ -1597,17 +1599,19 @@ char *  const   month_name      [] =
 
 void do_time(CHAR_DATA *ch, const char *argument)
 {
-  extern char str_boot_time[];
   int day;
+  day = time_info.day + 1;
+  struct tm *now_time_tm;
+  char cur_system_time[32];
 
-  day     = time_info.day + 1;
+  now_time_tm =  localtime(&current_time);
+  strftime(cur_system_time,sizeof cur_system_time,"%Y-%B-%d %H:%M:%S (%a)", now_time_tm);
 
   ptc(ch,"\n\r{GСейчас {C%d {Gчасов {C%s{G, День {C%s{G, день {C%d {GМесяца {C%s.{x\n\r\n\r",
       (time_info.hour % 12 == 0) ? 12 : time_info.hour %12,
       time_info.hour >= 12 ? "пп" : "дп",
       day_name[day % 7], day,month_name[time_info.month]);
-  ptc(ch,"ROM запущен в  : %s\rСистемное время: %s",
-      str_boot_time,(char *) ctime(&current_time));
+  ptc(ch,"ROM запущен в  : %s\n\rСистемное время: %s\n\r", str_boot_time,cur_system_time);
 }
 
 void do_weather(CHAR_DATA *ch, const char *argument)
@@ -1818,17 +1822,6 @@ void do_whois (CHAR_DATA *ch, const char *argument)
         else do_printf(buf,"{C| Является {RВампиром {Cиз {RГильдии Вампиров                                     {C|{x\n\r");
         add_buf(output,buf);
       }
-/*      if (GUILD(ch,ASSASIN_GUILD) || IS_IMMORTAL(ch))
-      {
-        if (GUILD(wch,ASSASIN_GUILD))
-        {
-          if (ELDER(wch,ASSASIN_GUILD))
-               do_printf(buf,"{C| Является {DМастер Ассасином{C из {RГильдии Ассасинов                            {C|{x\n\r");
-          else do_printf(buf,"{C| Является {Dнаемником {Cиз {RГильдии Ассасинов                                   {C|{x\n\r");
-          add_buf(output,buf);
-        }
-      }
-*/
       add_buf(output,"{C=---------------------------------------------------------------------------=\n\r{x");
     }
   }
@@ -1975,25 +1968,25 @@ void do_who (CHAR_DATA * ch, const char * argument)
     class = classname(wch);
 
     do_printf (buf, "[%3d %s %10s{x] %s%s%s%s",
-               wch->level, race_wname (wch), class,
-               wch->clan ? wch->clan->show_name : "                ",
-               wch->incog_level >= LEVEL_HERO ? "{w(I){x" : "",
-               wch->invis_level >= LEVEL_HERO ? "{w(W){x" : "",
-               IS_SET(wch->comm, COMM_AFK)    ? "{c[A]{x" : "");
+      wch->level, race_wname (wch), class,
+      wch->clan ? wch->clan->show_name : "                ",
+      wch->incog_level >= LEVEL_HERO ? "{w(I){x" : "",
+      wch->invis_level >= LEVEL_HERO ? "{w(W){x" : "",
+      IS_SET(wch->comm, COMM_AFK)    ? "{c[A]{x" : "");
 
     add_buf (output, buf) ;
 
     do_printf (buf, "%s%s%s %s %s{x\n\r",
-               IS_SET(wch->act, PLR_WANTED) ? "{r(W){x" : "",
-               IS_SET(wch->act, PLR_RAPER)  ? "{R(Н){x" : "",
-               wch->godcurse                ? "{D(C){x" : "",
-               wch->name, IS_NPC(wch) ? "" : wch->pcdata->title) ;
+      IS_SET(wch->act, PLR_WANTED) ? "{r(W){x" : "",
+      IS_SET(wch->act, PLR_RAPER)  ? "{R(Н){x" : "",
+      wch->godcurse                ? "{D(C){x" : "",
+      wch->name, IS_NPC(wch) ? "" : wch->pcdata->title) ;
 
     add_buf (output, buf) ;
   }
   page_to_char (buf_string (output), ch) ;
   free_buf (output) ;
-   do_function(ch, &do_count, "");
+  do_function(ch, &do_count, "");
 }
 
 // Count number of active players in the game, do not include immortals
@@ -2016,10 +2009,10 @@ void do_count (CHAR_DATA * ch, const char * argument)
   }
 
   if (max_online <= count)
-    ptc (ch, "\n\rВсего игроков %d, видимых %d, максимум на сегодня.\n\r",count, count_vis);
+    ptc (ch, "\n\rВсего игроков %d, видимых %d, максимум c %s.\n\r",count, count_vis,str_boot_time);
   else
   {
-    ptc (ch, "\n\rВсего игроков %d, видимых %d, максимум с последнего рестарта было %d.\n\r", count, count_vis, max_online);
+    ptc (ch, "\n\rВсего игроков %d, видимых %d, максимум с %s было %d.\n\r", count, count_vis, str_boot_time, max_online);
     max_online = count;
   }
 }
@@ -2084,7 +2077,7 @@ void do_compare(CHAR_DATA *ch, const char *argument)
       if (obj2->wear_loc != WEAR_NONE && can_see_obj(ch,obj2)
         && obj1->item_type == obj2->item_type
         && (obj1->wear_flags & obj2->wear_flags & ~ITEM_TAKE) != 0)
-            break;
+        break;
     }
     if (!obj2)
     {
@@ -2200,8 +2193,7 @@ void do_where(CHAR_DATA *ch, const char *argument)
    &&   can_see(ch, victim,CHECK_LVL)
    &&   is_name(arg, victim->name))
    {
-     // statue is invisible for where command
-     if (IS_STATUE(victim)) continue;
+     if (IS_STATUE(victim)) continue; // statue is invisible for where command
 
      found = TRUE;
      ptc(ch, "%-28s %s\n\r", PERS(victim, ch),

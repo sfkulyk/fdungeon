@@ -19,8 +19,7 @@
 #endif
 
 #define args( list ) list
-#define DECLARE_DO_FUN2( fun )   void fun( CHAR_DATA* ch, const char* argument )
-#define DECLARE_DO_FUN1( fun )  void fun( CHAR_DATA* ch)
+#define DECLARE_DO_FUN2(fun) void fun(CHAR_DATA* ch, const char* argument)
 
 // Assume BSD compatible GCC - By Shiva
 #if defined (WIN32)

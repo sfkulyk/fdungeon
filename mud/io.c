@@ -636,7 +636,6 @@ void do_global( CHAR_DATA *ch, const char *argument )
    ptc (ch,"New Year     :%s\n\r",(IS_SET(global_cfg,CFG_NEWYEAR)) ? "{Gon{x" : "{Doff{x");
    ptc (ch,"Debug Log    :%s\n\r",(IS_SET(global_cfg,CFG_DLOG)) ? "{Gon{x" : "{Doff{x");
    ptc (ch,"DamageObj    :%s\n\r",(IS_SET(global_cfg,CFG_DAMAGEOBJ)) ? "{Gon{x" : "{Doff{x");
-   ptc (ch,"GTFix        :%s\n\r",(IS_SET(global_cfg,CFG_GTFIX)) ? "{Gon{x" : "{Doff{x");
    ptc (ch,"NewOneHit    :%s\n\r",(IS_SET(global_cfg,CFG_NEWHIT)) ? "{Gon{x" : "{Doff{x");
    ptc (ch,"NoDamroll    :%s\n\r",(IS_SET(global_cfg,CFG_NODR)) ? "{Gon{x" : "{Doff{x");
 #ifdef WITH_ANTICRASH
@@ -762,13 +761,6 @@ void do_global( CHAR_DATA *ch, const char *argument )
   {
     global_cfg=toggle_int64(global_cfg,CFG_DAMAGEOBJ);
     ptc(ch, "Повреждение объектов в%sключенo.\n\r", IS_SET(global_cfg,CFG_DAMAGEOBJ)?"":"ы");
-    return;
-  }
-
-  if (!str_prefix(arg,"gtfix") && IS_CREATOR(ch) )
-  {
-    global_cfg=toggle_int64(global_cfg,CFG_GTFIX);
-    ptc(ch, "Глобальная временная правка в%sключенa.\n\r", IS_SET(global_cfg,CFG_GTFIX)?"":"ы");
     return;
   }
 

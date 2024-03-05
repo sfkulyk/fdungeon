@@ -119,18 +119,7 @@ int     socket          args( ( int domain, int type, int protocol ) );
 #endif
 
 #if     defined(linux)
-/*  Linux shouldn't need these. If you have a problem compiling, try
-    uncommenting these functions. */
-/*
-int     accept          args( ( int s, struct sockaddr *addr, int *addrlen ) );
-int     bind            args( ( int s, struct sockaddr *name, int namelen ) );
-int     getpeername     args( ( int s, struct sockaddr *name, int *namelen ) );
-int     getsockname     args( ( int s, struct sockaddr *name, int *namelen ) );
-int     listen          args( ( int s, int backlog ) );
-*/
-
 int     close           args( ( int fd ) );
-// int     gettimeofday    args( ( struct timeval *tp, struct timezone *tzp ) );
 int     gettimeofday    args( ( struct timeval *tp, void *tzp ) );
 int     read            args( ( int fd, char *buf, int nbyte ) );
 int     select          args( ( int width, fd_set *readfds, fd_set *writefds,
@@ -237,8 +226,9 @@ FILE *            fpReserve;       // Reserved file handle
 FILE *            logReserve;      // Reserved for log file handle
 bool              god;             // All new chars are gods!
 bool              merc_down;       // Shutdown
-char              str_boot_time[MAX_INPUT_LENGTH];
+char              str_boot_time[32];
 time_t            current_time;    // time of this pulse
+
 
 int reboot_reason = 0;
 
@@ -292,7 +282,8 @@ void segmentation_handler(int sig) { // Crash handler, generate backtrace to std
 int main( int argc, char **argv )
 {
   struct timeval now_time;
-  u_short port;
+  struct tm *now_time_tm;
+  u_short port=4000;
 
 #if defined(unix) || defined( WIN32 )
   int control;
@@ -315,8 +306,9 @@ int main( int argc, char **argv )
 
   // Init time.
   gettimeofday( &now_time, NULL );
-  current_time        = (time_t) now_time.tv_sec;
-  strcpy( str_boot_time, ctime( &current_time ) );
+  current_time = (time_t) now_time.tv_sec;
+  now_time_tm =  localtime(&current_time);
+  strftime(str_boot_time,sizeof str_boot_time,"%Y-%B-%d %H:%M:%S (%a)", now_time_tm);
 
   { // Reserve two streams for log and write to file
     FILE *fp;
@@ -338,18 +330,13 @@ int main( int argc, char **argv )
     logReserve = fopen( LOGR_FILE, "r" );
   }
 
-  // Get the port number
-  port = 4000;
+  // Get the custom port number
   if ( argc > 1 )
   {
-    if ( !is_number( argv[1] ) )
+    port=atoi(argv[1]);
+    if (port < 1024)
     {
-      do_fprintf( stderr, "Usage: %s [port #]\n", argv[0] );
-      exit( 1 );
-    }
-    else if ( ( port = atoi( argv[1] ) ) <= 1024 )
-    {
-      do_fprintf( stderr, "Port number must be above 1024.\n" );
+      do_fprintf( stderr, "Usage: %s [port #]\nPort should be number and must be above 1024", argv[0] );
       exit( 1 );
     }
   }
@@ -358,7 +345,6 @@ int main( int argc, char **argv )
 #if defined(unix) || defined( WIN32 )
   control = init_socket( port );
   boot_db( );
-//  if( IS_SET(global_cfg,CFG_GTFIX) ) REM_BIT(global_cfg, CFG_GTFIX);
   log_printf("ROM is ready to rock on port %d.", port );
   game_loop_unix( control );
 #if !defined( WIN32 )
@@ -2696,7 +2682,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
       do_function (ch, &do_version, "") ;
       if (IS_CFG(ch,CFG_AUTONOTE)) do_function (ch, &do_unread,  "") ;
       if (IS_CFG(ch,CFG_AUTOVOTE)) do_function (ch, &do_vote,    "new") ;
-      if (IS_CFG(ch,CFG_AUTOPLR)) do_function (ch, &do_count,   "") ;
+      if (IS_CFG(ch,CFG_AUTOPLR)) do_function (ch, &do_count,    "") ;
 
       if (ch->pcdata->auto_online)
         do_function (ch, &do_online, ch->pcdata->auto_online) ;

@@ -325,12 +325,6 @@ void do_gfix( CHAR_DATA *ch, const char *argument)
     stc("{RYou have no access to this command.{x\n\r", ch);
   }
 
-  if( !IS_SET(global_cfg, CFG_GTFIX) )
-  {
-    stc("GTFix global configuration has to be toggled 'on' to use this option.\n\r", ch);
-    return;
-  }
-
   if( !str_cmp( argument,"clearworships") )
   {
     gdef = gvd();
@@ -342,7 +336,6 @@ void do_gfix( CHAR_DATA *ch, const char *argument)
     for( gvalue=0; gvalue < gdef; gvalue++)
       deity_table[gvalue].worship=0;
     stc("Путем загрузки файла {Rможна отменить обнуление{x последователей deity{x.\n\r", ch);
-    REM_BIT( global_cfg, CFG_GTFIX);
     return;
   }
 
@@ -358,7 +351,6 @@ void do_gfix( CHAR_DATA *ch, const char *argument)
       for( i=0; i < MAX_DEITY_APP; i++)
         deity_table[gvalue].d_apply[i] = 0;
     stc("Путем загрузки файла {Rможна отменить обнуление{x эффектов deity{x.\n\r", ch);
-    REM_BIT( global_cfg, CFG_GTFIX);
     return;
   }
   stc("Type 'gfix help' for extra information.\n\r", ch);

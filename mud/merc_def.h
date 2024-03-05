@@ -123,7 +123,6 @@
 #define CFG_DLOG        (M) // turn on debug log
 #define CFG_NEWHIT      (N) // turn on new_one_hit function
 #define CFG_DAMAGEOBJ   (O) // turn on object damaging
-#define CFG_GTFIX       (P) // GlobalTemporaryFix option (used once per reboot)
 #define CFG_NODR        (Q) // Turn off damroll & hit damage shaping
 
 // Saving defines

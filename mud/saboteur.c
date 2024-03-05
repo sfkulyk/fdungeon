@@ -1421,8 +1421,7 @@ void do_vote(CHAR_DATA *ch, const char *argument)
 
   argument=one_argument(argument,arg);
 
-  if(ch->level<21 && ((int)(ch->played + current_time - ch->logon) / 3600) < 50
-    && ch->remort==0 && !IS_SET( global_cfg, CFG_GTFIX) )
+  if(ch->level<21 && ((int)(ch->played + current_time-ch->logon) / 3600)<50 && ch->remort==0)
   {
     stc("“ы недостаточно авторитетен, чтоб голосовать.\n\r",ch);
     return;
@@ -3647,7 +3646,7 @@ void do_family(CHAR_DATA *ch, const char *argument)
       return;
     }
     if (!is_number(argument) || (proom=get_room_index(atoi64(argument)))==NULL
-     || ( !IS_SET( global_cfg,CFG_GTFIX) && !IS_ELDER(ch) && IS_SET(proom->room_flags,ROOM_ELDER) ))
+     || (!IS_ELDER(ch) && IS_SET(proom->room_flags,ROOM_ELDER)))
     {
       stc("“акой комнаты не существует",ch);
       return;
