@@ -1,4 +1,29 @@
 #CLAN
+Name cossacs~
+Showname {x[   {R—i{Wчови{Rки  {x] {x~
+Recalmsg1  озарлюга {y$c1 {xз≥ свистом плигаЇ в {Bƒн≥про{x~
+Recalmsg2 {y$c2 {x опиняЇтьсяя на {C’ортиц≥. {x“ам його чекають {Rпобратими...{x~
+Clanqp 100
+Clangold 99672
+Clanrecal 80452
+Clandeath 80466
+Flag 0
+War evil yakudza judges guards~
+
+#CLAN
+Name yakudza~
+Showname [{Rяку{Dдза  ур{Rабу{x] ~
+Recalmsg1 {c$c1{D бросает шарик на пол ... {Rвзрыв{x~
+Recalmsg2 {c$c1{D исчезает в клубах дыма.~
+Clanqp 1000
+Clangold 769777
+Clanrecal 80401
+Clandeath 80400
+Flag DEGHIJKLNO
+War judges evil cossacs~
+Alli guards~
+
+#CLAN
 Name rom~
 Showname [{CЌовые  {MЋонеры{x] ~
 Recalmsg1 {y$c1{x разводит пальцы и технично сьезжает в указанном направлении.~
@@ -74,4 +99,4 @@ Affc 'reserved' 0 0 0 3 18 0
 Affc 'reserved' 0 0 0 -2 20 0
 
 #END
-; Currently 5 clans in Forgotten Dungeon
+; Currently 7 clans in Forgotten Dungeon

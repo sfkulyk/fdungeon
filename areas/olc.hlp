@@ -166,7 +166,7 @@ hitdice		    - dice to toss to get mobile's hitpoints
 manadice	    - dice to toss to get mobile's mana
 damdice		    - dice to toss to get mobile's hand to hand damage
 
-type 'help HITDICE', 'help MANADICE', 'help DAMDICE' for lists of reasonable dice 
+type 'help HITDICE', 'help MANADICE', 'help DAMDICE' for lists of reasonable dice
 combinations on different levels.
 ~
 
@@ -244,7 +244,7 @@ For example if you are equiping a mobile don't load a container in the room
 and fill it with some objects and then continue equiping the mobile.  It is
 likely that resets will backfire if they are not carefully entered.
 
-If you wish to reset the room then use EDIT ROOM RESET.  
+If you wish to reset the room then use EDIT ROOM RESET.
 ~
 
 
@@ -279,7 +279,7 @@ is because the server multiplies what it reads from file with 10.
 0 ITEM_LIGHT~
 .   value 0    unused
    value 1    unused
-   value 2    hours of light available, 0 is dead, -1 or 999 is infinite            
+   value 2    hours of light available, 0 is dead, -1 or 999 is infinite
    value 3    unused
    value 4    unused
 ~
@@ -346,7 +346,7 @@ converting a merc-format mobile to ROM format.  A higher
 number of dice gives less variance in damage.  There is no
 dice-bonus on weapon dice.
 
-      level:   dice 
+      level:   dice
         1:     1d8
         2:     2d5
         3:     2d5
@@ -361,7 +361,7 @@ dice-bonus on weapon dice.
 
 0 ITEM_CONTAINER~
 .   value 0    weight capacity
-   value 1    flags: closeable, pickproof, closed, locked            
+   value 1    flags: closeable, pickproof, closed, locked
    value 2    key vnum
    value 3    unused
    value 4    unused

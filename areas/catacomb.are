@@ -290,9 +290,9 @@ jewelry J AB
 0 0 0 0 0
 7 10 800 1 B
 A
-4 1
-A
 17 -1
+A
+4 1
 T 0 0
 #2004
 neutralizer sword~
@@ -303,9 +303,9 @@ weapon BJK AN
 sword 5 5 slash DH
 16 90 1280 1 B
 A
-18 3
-A
 19 3
+A
+18 3
 T 0 0
 #2005
 sword excalibur~
@@ -316,13 +316,13 @@ weapon ABGHKLT AN
 sword 10 7 slash DGH
 40 150 3400 480 W
 A
-5 2
-A
-1 3
+19 7
 A
 18 7
 A
-19 7
+1 3
+A
+5 2
 T 0 0
 #2006
 crown~
@@ -371,15 +371,15 @@ armor A AK
 5 5 5 3 0
 12 30 1000 1 B
 A
-18 4
-A
-13 10
-A
-12 15
+4 1
 A
 19 1
 A
-4 1
+12 15
+A
+13 10
+A
+18 4
 T 0 0
 #2011
 shield defense~
@@ -390,15 +390,15 @@ armor G AJ
 6 6 6 4 0
 13 150 1920 1 B
 A
-19 -1
-A
-18 -2
-A
-13 10
+17 -2
 A
 12 10
 A
-17 -2
+13 10
+A
+18 -2
+A
+19 -1
 T 0 0
 #2012
 scale shield dragonscale~
@@ -443,7 +443,7 @@ T 0 0
 #2016
 templars sword~
 меч тамплиера (templar's sword)~
-Меч рицарей(sword) брошен здесь.~
+Меч рыцарей-тамплиеров брошен здесь.~
 oldstyle~
 weapon AI AN
 sword 3 9 slash FG
@@ -1653,13 +1653,13 @@ D 0 2028 2 2 The south door of Священная роща is closed and locked
 D 0 2032 0 2 The north door of Святое место is closed and locked
 M 1 2006 7 2049 1 Load Оно
 M 1 2016 1 2050 1 Load призматический дракон
-E 0 2012 0 5 драконий щит (dragonscale shield) is loaded на тело of призматический дракон
-E 0 2013 0 17 призматический жезл (prism wand) is loaded зажато в руке of призматический дракон
+E 0 2012 0 5 Драконий щит (dragonscale shield) is loaded на тело of призматический дракон
+E 0 2013 0 17 Призматический жезл (prism wand) is loaded зажато в руке of призматический дракон
 M 1 2001 6 2052 3 Load летучая мышь
 M 1 2001 6 2052 3 Load летучая мышь
 M 1 2001 6 2052 3 Load летучая мышь
 M 1 2013 1 2052 1 Load вампир
-E 0 2004 0 16 нейтрализатор (neutralizer) is loaded вооружение of вампир
+E 0 2004 0 16 Нейтрализатор (neutralizer) is loaded вооружение of вампир
 M 1 2001 6 2052 3 Load летучая мышь
 M 1 2001 6 2052 3 Load летучая мышь
 M 1 2001 6 2052 3 Load летучая мышь
@@ -1669,17 +1669,17 @@ M 1 2011 4 2053 1 Load зомби-маг
 M 1 2004 4 2055 2 Load грабитель могил
 M 1 2004 4 2055 2 Load грабитель могил
 M 1 2014 1 2055 1 Load злой некромант
-E 0 2011 0 11 щит-защитник (shield of defense) is loaded как щит of злой некромант
+E 0 2011 0 11 Щит-защитник (shield of defense) is loaded как щит of злой некромант
 M 1 2003 2 2064 1 Load археолог
 M 1 2003 2 2002 1 Load археолог
 M 1 2008 12 2003 1 Load тамплиер
-E 0 2009 0 5 кольчуга (chainmail) is loaded на тело of тамплиер
-E 0 2016 0 16 меч тамплиера (templar's sword) is loaded вооружение of тамплиер
+E 0 2009 0 5 Кольчуга (chainmail) is loaded на тело of тамплиер
+E 0 2016 0 16 Меч тамплиера (templar's sword) is loaded вооружение of тамплиер
 M 1 2008 12 2004 1 Load тамплиер
-E 0 2016 0 16 меч тамплиера (templar's sword) is loaded вооружение of тамплиер
+E 0 2016 0 16 Меч тамплиера (templar's sword) is loaded вооружение of тамплиер
 M 1 2008 12 2005 1 Load тамплиер
 M 1 2008 12 2006 1 Load тамплиер
-E 0 2009 0 5 кольчуга (chainmail) is loaded на тело of тамплиер
+E 0 2009 0 5 Кольчуга (chainmail) is loaded на тело of тамплиер
 M 1 2002 8 2008 8 Load паж-тамплиер
 M 1 2002 8 2008 8 Load паж-тамплиер
 M 1 2002 8 2008 8 Load паж-тамплиер
@@ -1688,84 +1688,84 @@ M 1 2002 8 2008 8 Load паж-тамплиер
 M 1 2002 8 2009 8 Load паж-тамплиер
 M 1 2002 8 2009 8 Load паж-тамплиер
 M 1 2008 12 2009 3 Load тамплиер
-E 0 2009 0 5 кольчуга (chainmail) is loaded на тело of тамплиер
+E 0 2009 0 5 Кольчуга (chainmail) is loaded на тело of тамплиер
 M 1 2008 12 2009 3 Load тамплиер
-E 0 2016 0 16 меч тамплиера (templar's sword) is loaded вооружение of тамплиер
+E 0 2016 0 16 Меч тамплиера (templar's sword) is loaded вооружение of тамплиер
 M 1 2008 12 2009 3 Load тамплиер
-E 0 2009 0 5 кольчуга (chainmail) is loaded на тело of тамплиер
+E 0 2009 0 5 Кольчуга (chainmail) is loaded на тело of тамплиер
 M 1 2002 8 2010 8 Load паж-тамплиер
 M 1 2010 6 2015 1 Load тамплиер-офицер
-E 0 2016 0 16 меч тамплиера (templar's sword) is loaded вооружение of тамплиер-офицер
-E 0 2009 0 5 кольчуга (chainmail) is loaded на тело of тамплиер-офицер
+E 0 2016 0 16 Меч тамплиера (templar's sword) is loaded вооружение of тамплиер-офицер
+E 0 2009 0 5 Кольчуга (chainmail) is loaded на тело of тамплиер-офицер
 M 1 2008 12 2016 3 Load тамплиер
-E 0 2016 0 16 меч тамплиера (templar's sword) is loaded вооружение of тамплиер
+E 0 2016 0 16 Меч тамплиера (templar's sword) is loaded вооружение of тамплиер
 M 1 2008 12 2016 3 Load тамплиер
-E 0 2009 0 5 кольчуга (chainmail) is loaded на тело of тамплиер
+E 0 2009 0 5 Кольчуга (chainmail) is loaded на тело of тамплиер
 M 1 2008 12 2016 3 Load тамплиер
-E 0 2009 0 5 кольчуга (chainmail) is loaded на тело of тамплиер
+E 0 2009 0 5 Кольчуга (chainmail) is loaded на тело of тамплиер
 M 1 2010 6 2016 2 Load тамплиер-офицер
-E 0 2016 0 16 меч тамплиера (templar's sword) is loaded вооружение of тамплиер-офицер
-E 0 2009 0 5 кольчуга (chainmail) is loaded на тело of тамплиер-офицер
+E 0 2016 0 16 Меч тамплиера (templar's sword) is loaded вооружение of тамплиер-офицер
+E 0 2009 0 5 Кольчуга (chainmail) is loaded на тело of тамплиер-офицер
 M 1 2010 6 2016 2 Load тамплиер-офицер
-E 0 2016 0 16 меч тамплиера (templar's sword) is loaded вооружение of тамплиер-офицер
-E 0 2009 0 5 кольчуга (chainmail) is loaded на тело of тамплиер-офицер
+E 0 2016 0 16 Меч тамплиера (templar's sword) is loaded вооружение of тамплиер-офицер
+E 0 2009 0 5 Кольчуга (chainmail) is loaded на тело of тамплиер-офицер
 M 1 2010 6 2016 2 Load тамплиер-офицер
-E 0 2016 0 16 меч тамплиера (templar's sword) is loaded вооружение of тамплиер-офицер
-E 0 2009 0 5 кольчуга (chainmail) is loaded на тело of тамплиер-офицер
+E 0 2016 0 16 Меч тамплиера (templar's sword) is loaded вооружение of тамплиер-офицер
+E 0 2009 0 5 Кольчуга (chainmail) is loaded на тело of тамплиер-офицер
 M 1 2010 6 2018 1 Load тамплиер-офицер
-E 0 2016 0 16 меч тамплиера (templar's sword) is loaded вооружение of тамплиер-офицер
-E 0 2009 0 5 кольчуга (chainmail) is loaded на тело of тамплиер-офицер
+E 0 2016 0 16 Меч тамплиера (templar's sword) is loaded вооружение of тамплиер-офицер
+E 0 2009 0 5 Кольчуга (chainmail) is loaded на тело of тамплиер-офицер
 M 1 2006 7 2019 1 Load Оно
 M 1 2008 12 2023 2 Load тамплиер
-E 0 2016 0 16 меч тамплиера (templar's sword) is loaded вооружение of тамплиер
+E 0 2016 0 16 Меч тамплиера (templar's sword) is loaded вооружение of тамплиер
 M 1 2008 12 2023 2 Load тамплиер
 M 1 2010 6 2023 1 Load тамплиер-офицер
-E 0 2009 0 5 кольчуга (chainmail) is loaded на тело of тамплиер-офицер
-E 0 2016 0 16 меч тамплиера (templar's sword) is loaded вооружение of тамплиер-офицер
+E 0 2009 0 5 Кольчуга (chainmail) is loaded на тело of тамплиер-офицер
+E 0 2016 0 16 Меч тамплиера (templar's sword) is loaded вооружение of тамплиер-офицер
 M 1 2015 1 2025 1 Load Глава тамплиеров
-E 0 2001 0 0 сияющий ключ (glowing key) is loaded освещает of Глава тамплиеров
-E 0 2008 0 17 фляга святой воды (flask of holy water) is loaded зажато в руке of Глава тамплиеров
-E 0 2010 0 12 белаЯ накидка ({Wwhite cloak{x) is loaded накинуто на тело of Глава тамплиеров
+E 0 2001 0 0 Сияющий ключ (glowing key) is loaded освещает of Глава тамплиеров
+E 0 2008 0 17 Фляга святой воды (flask of holy water) is loaded зажато в руке of Глава тамплиеров
+E 0 2010 0 12 Белая накидка ({wwhite cloak{x) is loaded накинуто на тело of Глава тамплиеров
 M 1 2012 2 2026 2 Load тень
-E 0 2014 0 12 плащ теней (shadow cloak) is loaded накинуто на тело of тень
+E 0 2014 0 12 Плащ теней (shadow cloak) is loaded накинуто на тело of тень
 M 1 2006 7 2028 1 Load Оно
 M 1 2017 1 2030 1 Load Порождение Тьмы
-E 0 2003 0 2 ониксовый перстень (onyx ring) is loaded на П. палец of Порождение Тьмы
-E 0 2002 0 5 гранитная кираса (granite platemail) is loaded на тело of Порождение Тьмы
-E 0 2006 0 17 королевская корона (crown) is loaded зажато в руке of Порождение Тьмы
+E 0 2003 0 2 Ониксовый перстень (onyx ring) is loaded на П. палец of Порождение Тьмы
+E 0 2002 0 5 Гранитная кираса (granite platemail) is loaded на тело of Порождение Тьмы
+E 0 2006 0 17 Королевская корона (crown) is loaded зажато в руке of Порождение Тьмы
 O 0 2007 0 2032 Камень (stone) loaded to Святое место
 P 0 2005 9 2007 1 Экскалибур (excalibur) put inside Экскалибур (Excalibur)
 M 1 2006 7 2033 1 Load Оно
 M 1 2005 9 2033 1 Load клубящийся туман
-E 0 2015 0 17 туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
+E 0 2015 0 17 Туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
 M 1 2007 4 2035 1 Load скелет
-E 0 2009 0 5 кольчуга (chainmail) is loaded на тело of скелет
+E 0 2009 0 5 Кольчуга (chainmail) is loaded на тело of скелет
 M 1 2006 7 2036 1 Load Оно
 M 1 2007 4 2036 1 Load скелет
 M 1 2011 4 2036 1 Load зомби-маг
 M 1 2007 4 2037 1 Load скелет
-E 0 2009 0 5 кольчуга (chainmail) is loaded на тело of скелет
+E 0 2009 0 5 Кольчуга (chainmail) is loaded на тело of скелет
 M 1 2011 4 2037 1 Load зомби-маг
 M 1 2007 4 2038 1 Load скелет
 M 1 2006 7 2039 1 Load Оно
 M 1 2009 2 2039 2 Load загадочный дух
 M 1 2006 7 2040 1 Load Оно
 M 1 2005 9 2040 2 Load клубящийся туман
-E 0 2015 0 17 туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
+E 0 2015 0 17 Туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
 M 1 2005 9 2040 2 Load клубящийся туман
-E 0 2015 0 17 туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
+E 0 2015 0 17 Туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
 M 1 2005 9 2041 2 Load клубящийся туман
-E 0 2015 0 17 туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
+E 0 2015 0 17 Туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
 M 1 2005 9 2041 2 Load клубящийся туман
-E 0 2015 0 17 туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
+E 0 2015 0 17 Туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
 M 1 2005 9 2042 1 Load клубящийся туман
-E 0 2015 0 17 туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
+E 0 2015 0 17 Туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
 M 1 2005 9 2043 3 Load клубящийся туман
-E 0 2015 0 17 туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
+E 0 2015 0 17 Туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
 M 1 2005 9 2043 3 Load клубящийся туман
-E 0 2015 0 17 туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
+E 0 2015 0 17 Туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
 M 1 2005 9 2043 3 Load клубящийся туман
-E 0 2015 0 17 туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
+E 0 2015 0 17 Туманное зелье (misty potion) is loaded зажато в руке of клубящийся туман
 M 1 2009 2 2047 2 Load загадочный дух
 M 1 2011 4 2047 4 Load зомби-маг
 S

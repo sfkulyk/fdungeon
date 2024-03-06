@@ -912,23 +912,23 @@ D 0 8918 3 1 The west door of Трапезная is closed
 D 0 8919 0 1 The north door of Терраса is closed
 D 0 8919 1 1 The east door of Терраса is closed
 M 1 8901 1 8901 1 Load Иерофант
-E 0 8910 0 16 деревянный посох(wooden staff) is loaded вооружение of Иерофант
-E 0 8911 0 5 бурая роба(brown robe) is loaded на тело of Иерофант
+E 0 8910 0 16 Деревянный посох(wooden staff) is loaded вооружение of Иерофант
+E 0 8911 0 5 Бурая роба(brown robe) is loaded на тело of Иерофант
 G 0 8913 0 Голубая травка(bluish herbs) is given to Иерофант
 G 0 8915 0 Черноватая травка(blackish herbs) is given to Иерофант
 M 1 8902 1 8902 1 Load Старейшина друидов
-E 0 8910 0 16 деревянный посох(wooden staff) is loaded вооружение of Старейшина друидов
+E 0 8910 0 16 Деревянный посох(wooden staff) is loaded вооружение of Старейшина друидов
 G 0 8914 0 Пурпурная травка(purplish herbs) is given to Старейшина друидов
 G 0 8916 0 Серенькая травка(grayish herbs) is given to Старейшина друидов
 M 1 8907 4 8903 4 Load маленький кролик
 M 1 8907 4 8903 4 Load маленький кролик
 M 1 8903 1 8904 1 Load Старейшина-друидесса
-E 0 8910 0 16 деревянный посох(wooden staff) is loaded вооружение of Старейшина-друидесса
+E 0 8910 0 16 Деревянный посох(wooden staff) is loaded вооружение of Старейшина-друидесса
 G 0 8919 0 Розовая травка(pinkish herbs) is given to Старейшина-друидесса
 G 0 8917 0 Красненькая травка(reddish herbs) is given to Старейшина-друидесса
 M 1 8900 1 8905 1 Load Иерофант
-E 0 8910 0 16 деревянный посох(wooden staff) is loaded вооружение of Иерофант
-E 0 8911 0 5 бурая роба(brown robe) is loaded на тело of Иерофант
+E 0 8910 0 16 Деревянный посох(wooden staff) is loaded вооружение of Иерофант
+E 0 8911 0 5 Бурая роба(brown robe) is loaded на тело of Иерофант
 G 0 8919 0 Розовая травка(pinkish herbs) is given to Иерофант
 G 0 8918 0 Оранжевая травка(orangish herbs) is given to Иерофант
 M 1 8904 2 8905 2 Load лань

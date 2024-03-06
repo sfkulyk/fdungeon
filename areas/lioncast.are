@@ -192,7 +192,7 @@ T 0 0
 #ROOMS
 #500
 Вход в гильдию~
-Ты стоишь у входа в гильдию Львов. Стража посматривает на тебя с 
+Ты стоишь у входа в гильдию Львов. Стража посматривает на тебя с
 недоверием. Лучше тебе идти отсюда.
 ~
 0 8388616 0
@@ -236,7 +236,7 @@ An oak door protects the storge room.
 S
 #502
 Meeting room~
-This room is for the for the lionMan's to talk about their future and 
+This room is for the for the lionMan's to talk about their future and
 enemies.
 ~
 0 8388616 0
@@ -260,7 +260,7 @@ Doorway to the greater guild room.
 S
 #504
 The Altar~
-You stand beside the huge wooden altar.  One other side a heavy rag of 
+You stand beside the huge wooden altar.  One other side a heavy rag of
 cleric is found.  On the north wall the Eye of a Lion is carved.
 ~
 0 8388616 0
@@ -277,7 +277,7 @@ S
 #505
 Hidden Lair~
 Ты попал в скрытую пещеру, здесь очень темно и ты с трудом можешь
-разглядеть стены.  Присмотревшись ты замечаешь разветвление в горе.  
+разглядеть стены.  Присмотревшись ты замечаешь разветвление в горе.
 ~
 0 0 0
 D1
@@ -296,7 +296,7 @@ S
 #506
 Тупик~
 Ты неправильно выбрал направление и забрел в тупик.  Чтож ты зря потерял
-своё время 
+своё время
 ~
 0 0 0
 D1
@@ -331,7 +331,7 @@ S
 #509
 Спасительный Лаз~
 Ты с трудом протискиваешся в лаз и вот ты уже чувствуешь ветерок на лице.
-Да ты Вылез 
+Да ты Вылез
 ~
 0 0 0
 D4
@@ -367,16 +367,16 @@ D 0 505 5 1 The down door of Hidden Lair is closed
 D 0 508 4 1 The up door of Сокровищница is closed
 D 0 509 5 1 The down door of Спасительный Лаз is closed
 M 1 501 1 500 1 Load Страж
-E 0 500 0 19 деревянный ключик(wooden key) is loaded нет of Страж
+E 0 500 0 19 Деревянный ключик(wooden key) is loaded нет of Страж
 M 1 502 1 502 1 Load Глава гильдии
 M 1 500 1 504 1 Load Лекарь
 O 0 501 0 504 Алтарь(altar) loaded to The Altar
 P 0 502 1 501 1 Секретный код(сode of secret) put inside секретный код(сode of secret)
 P 0 503 1 501 1 Серебрянный меч(silver sword) put inside серебрянный меч(silver sword)
 M 1 503 1 508 1 Load Старый Хранитель
-E 0 504 0 19 {Wтe-Ваза {WПреобладания{x(te-waza) is loaded нет of Старый Хранитель
+E 0 504 0 19 {wтe-ваза {wпреобладания{x(te-waza) is loaded нет of Старый Хранитель
 M 1 504 1 510 1 Load {WБелый дракон{x
-E 0 505 0 19 {R¤ {cCвЯтое {WРаспЯтие {R¤{x is loaded нет of {WБелый дракон{x
+E 0 505 0 19 {r¤ {ccвят|ое|ого|ому|ое|ым|ом|ых|ых {wраспяти|е|я|ю|е|ем|и|я|й {r¤{x is loaded нет of {WБелый дракон{x
 S
 
 

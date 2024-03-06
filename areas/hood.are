@@ -75,7 +75,7 @@ doll gang~
 Красотк|а|и|е|у|ой|е из подворотни~
 Эта девушка красива, но и строптива.
 ~
-Она просто красавица! 
+Она просто красавица!
 Не спорь - братки из обоих бригад тебе быстро это докажут.
 ~
 doll~
@@ -1686,15 +1686,15 @@ S
 
 
 #SPECIALS
-M 2101 spec_troll_member Load to: Тролль бандюга
-M 2102 spec_ogre_member Load to: Огр бандюга
-M 2103 spec_troll_member Load to: Тролль-Главарь
-M 2104 spec_troll_member Load to: Вышибала
-M 2106 spec_patrolman Load to: Полисмен
-M 2107 spec_troll_member Load to: Подстрекатель
-M 2109 spec_troll_member Load to: Панк
-M 2110 spec_ogre_member Load to: Огр-Главарь
-M 2111 spec_ogre_member Load to: Отморозок
+M 2101 spec_troll_member Load to: Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 2102 spec_ogre_member Load to: Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 2103 spec_troll_member Load to: Тролл|ь|Я|ю|Я|ем|е-Главар|ь|Я|ю|Я|ем|е
+M 2104 spec_troll_member Load to: Вышибал|а|ы|е|у|ой|е
+M 2106 spec_patrolman Load to: Полисмен||а|у|а|ом|е
+M 2107 spec_troll_member Load to: Подстрекател|ь|Я|ю|Я|ем|е
+M 2109 spec_troll_member Load to: Панк||а|у|а|ом|е
+M 2110 spec_ogre_member Load to: Огр||а|у|а|ом|е-Главар|ь|Я|ю|Я|ем|е
+M 2111 spec_ogre_member Load to: Отмороз|ок|ка|ку|ка|ком|ке
 S
 
 #RESETS
@@ -1702,214 +1702,214 @@ D 0 2124 1 1 The east door of Old Abandoned Warehouse is closed
 D 0 2125 3 1 The west door of Bronze Dragon Street at Warehouse is closed
 D 0 2148 1 1 The east door of A small ruined chapel is closed
 D 0 2149 3 1 The west door of Ajax Avenue at chapel is closed
-M 1 2109 3 2102 1 Load Панк
-E 0 2105 0 17 a spray paint can is loaded зажато в руке of Панк||а|у|а|ом|е
-E 0 2114 0 5 a studded Troll gang jacket is loaded на тело of Панк||а|у|а|ом|е
-M 1 2101 25 2102 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2103 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2104 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2105 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2106 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2107 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2104 5 2108 1 Load Вышибала
-E 0 2114 0 5 a studded Troll gang jacket is loaded на тело of Вышибал|а|ы|е|у|ой|е
-E 0 2109 0 9 comfortable leather gloves is loaded на плечи of Вышибал|а|ы|е|у|ой|е
-E 0 2113 0 16 a lead pipe is loaded вооружение of Вышибал|а|ы|е|у|ой|е
-M 1 2101 25 2108 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2109 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2110 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2111 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2112 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2113 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2104 5 2114 1 Load Вышибала
-E 0 2114 0 5 a studded Troll gang jacket is loaded на тело of Вышибал|а|ы|е|у|ой|е
-E 0 2111 0 1 a troll signet ring is loaded на Л. палец of Вышибал|а|ы|е|у|ой|е
-E 0 2103 0 16 a hefty length of chain is loaded вооружение of Вышибал|а|ы|е|у|ой|е
-M 1 2109 3 2114 1 Load Панк
-E 0 2114 0 5 a studded Troll gang jacket is loaded на тело of Панк||а|у|а|ом|е
-E 0 2118 0 16 a switchblade is loaded вооружение of Панк||а|у|а|ом|е
-M 1 2101 25 2114 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2115 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2104 5 2116 1 Load Вышибала
-E 0 2114 0 5 a studded Troll gang jacket is loaded на тело of Вышибал|а|ы|е|у|ой|е
-E 0 2104 0 11 a metal shield is loaded как щит of Вышибал|а|ы|е|у|ой|е
-E 0 2103 0 16 a hefty length of chain is loaded вооружение of Вышибал|а|ы|е|у|ой|е
-M 1 2101 25 2116 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2117 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2118 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2119 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2120 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2121 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2122 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2104 5 2123 1 Load Вышибала
-E 0 2114 0 5 a studded Troll gang jacket is loaded на тело of Вышибал|а|ы|е|у|ой|е
-E 0 2113 0 16 a lead pipe is loaded вооружение of Вышибал|а|ы|е|у|ой|е
-E 0 2117 0 7 a pair of black leather pants is loaded на бедра of Вышибал|а|ы|е|у|ой|е
-M 1 2105 10 2123 2 Load Красотка из подворотни
-E 0 2108 0 17 a mirror is loaded зажато в руке of Красотк|а|и|е|у|ой|е из подворотни
-M 1 2103 1 2124 1 Load Тролль-Главарь
-E 0 2119 0 16 a broken bottle is loaded вооружение of Тролл|ь|Я|ю|Я|ем|е-Главар|ь|Я|ю|Я|ем|е
-E 0 2111 0 1 a troll signet ring is loaded на Л. палец of Тролл|ь|Я|ю|Я|ем|е-Главар|ь|Я|ю|Я|ем|е
-E 0 2114 0 5 a studded Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е-Главар|ь|Я|ю|Я|ем|е
-M 1 2108 12 2124 6 Load Бультерьер
-M 1 2108 12 2124 6 Load Бультерьер
-M 1 2105 10 2125 2 Load Красотка из подворотни
-E 0 2108 0 17 a mirror is loaded зажато в руке of Красотк|а|и|е|у|ой|е из подворотни
-E 0 2107 0 8 spiked heeled boots is loaded на ноги of Красотк|а|и|е|у|ой|е из подворотни
-M 1 2109 3 2128 1 Load Панк
-E 0 2114 0 5 a studded Troll gang jacket is loaded на тело of Панк||а|у|а|ом|е
-E 0 2105 0 17 a spray paint can is loaded зажато в руке of Панк||а|у|а|ом|е
-E 0 2118 0 16 a switchblade is loaded вооружение of Панк||а|у|а|ом|е
-M 1 2101 25 2128 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2130 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2101 25 2131 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2106 10 2131 1 Load Полисмен
-E 0 2110 0 16 a patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
-E 0 2116 0 3 a police whistle is loaded на шею of Полисмен||а|у|а|ом|е
-M 1 2105 10 2132 2 Load Красотка из подворотни
-E 0 2107 0 8 spiked heeled boots is loaded на ноги of Красотк|а|и|е|у|ой|е из подворотни
-M 1 2106 10 2132 1 Load Полисмен
-E 0 2110 0 16 a patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
-M 1 2106 10 2133 1 Load Полисмен
-E 0 2110 0 16 a patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
-E 0 2116 0 3 a police whistle is loaded на шею of Полисмен||а|у|а|ом|е
-M 1 2101 25 2134 1 Load Тролль бандюга
-E 0 2101 0 5 a Troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
-M 1 2106 10 2134 1 Load Полисмен
-E 0 2110 0 16 a patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
-M 1 2104 5 2135 1 Load Вышибала
-E 0 2114 0 5 a studded Troll gang jacket is loaded на тело of Вышибал|а|ы|е|у|ой|е
-E 0 2104 0 11 a metal shield is loaded как щит of Вышибал|а|ы|е|у|ой|е
-E 0 2111 0 1 a troll signet ring is loaded на Л. палец of Вышибал|а|ы|е|у|ой|е
-M 1 2106 10 2135 1 Load Полисмен
-E 0 2110 0 16 a patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
-M 1 2106 10 2136 1 Load Полисмен
-E 0 2110 0 16 a patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
-E 0 2116 0 3 a police whistle is loaded на шею of Полисмен||а|у|а|ом|е
-M 1 2102 25 2137 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2106 10 2137 1 Load Полисмен
-E 0 2110 0 16 a patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
-M 1 2111 5 2138 1 Load Отморозок
-E 0 2115 0 5 a studded Ogre gang jacket is loaded на тело of Отмороз|ок|ка|ку|ка|ком|ке
-E 0 2103 0 16 a hefty length of chain is loaded вооружение of Отмороз|ок|ка|ку|ка|ком|ке
-E 0 2109 0 9 comfortable leather gloves is loaded на плечи of Отмороз|ок|ка|ку|ка|ком|ке
-M 1 2106 10 2138 1 Load Полисмен
-E 0 2110 0 16 a patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
-E 0 2116 0 3 a police whistle is loaded на шею of Полисмен||а|у|а|ом|е
-M 1 2106 10 2139 1 Load Полисмен
-E 0 2110 0 16 a patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
-E 0 2116 0 3 a police whistle is loaded на шею of Полисмен||а|у|а|ом|е
-M 1 2102 25 2140 1 Load Огр бандюга
-M 1 2106 10 2140 1 Load Полисмен
-E 0 2110 0 16 a patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
-M 1 2102 25 2142 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2107 3 2143 1 Load Подстрекатель
-E 0 2118 0 16 a switchblade is loaded вооружение of Подстрекател|ь|Я|ю|Я|ем|е
-E 0 2115 0 5 a studded Ogre gang jacket is loaded на тело of Подстрекател|ь|Я|ю|Я|ем|е
-M 1 2102 25 2145 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2102 25 2146 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2111 5 2147 1 Load Отморозок
-E 0 2115 0 5 a studded Ogre gang jacket is loaded на тело of Отмороз|ок|ка|ку|ка|ком|ке
-E 0 2103 0 16 a hefty length of chain is loaded вооружение of Отмороз|ок|ка|ку|ка|ком|ке
-E 0 2112 0 9 brass knuckles is loaded на плечи of Отмороз|ок|ка|ку|ка|ком|ке
-M 1 2110 1 2148 1 Load Огр-Главарь
-E 0 2115 0 5 a studded Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е-Главар|ь|Я|ю|Я|ем|е
-E 0 2106 0 16 a stiletto is loaded вооружение of Огр||а|у|а|ом|е-Главар|ь|Я|ю|Я|ем|е
-E 0 2112 0 9 brass knuckles is loaded на плечи of Огр||а|у|а|ом|е-Главар|ь|Я|ю|Я|ем|е
-M 1 2108 12 2148 6 Load Бультерьер
-M 1 2108 12 2148 6 Load Бультерьер
-M 1 2105 10 2149 2 Load Красотка из подворотни
-E 0 2107 0 8 spiked heeled boots is loaded на ноги of Красотк|а|и|е|у|ой|е из подворотни
-E 0 2108 0 17 a mirror is loaded зажато в руке of Красотк|а|и|е|у|ой|е из подворотни
-M 1 2102 25 2150 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2102 25 2151 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2102 25 2152 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2105 10 2152 2 Load Красотка из подворотни
-E 0 2108 0 17 a mirror is loaded зажато в руке of Красотк|а|и|е|у|ой|е из подворотни
-M 1 2111 5 2153 1 Load Отморозок
-E 0 2115 0 5 a studded Ogre gang jacket is loaded на тело of Отмороз|ок|ка|ку|ка|ком|ке
-E 0 2113 0 16 a lead pipe is loaded вооружение of Отмороз|ок|ка|ку|ка|ком|ке
-E 0 2117 0 7 a pair of black leather pants is loaded на бедра of Отмороз|ок|ка|ку|ка|ком|ке
-M 1 2102 25 2153 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2102 25 2154 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2111 5 2155 1 Load Отморозок
-E 0 2115 0 5 a studded Ogre gang jacket is loaded на тело of Отмороз|ок|ка|ку|ка|ком|ке
-E 0 2104 0 11 a metal shield is loaded как щит of Отмороз|ок|ка|ку|ка|ком|ке
-E 0 2109 0 9 comfortable leather gloves is loaded на плечи of Отмороз|ок|ка|ку|ка|ком|ке
-M 1 2102 25 2155 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2102 25 2156 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2102 25 2157 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2102 25 2158 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2102 25 2159 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2102 25 2160 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2107 3 2161 1 Load Подстрекатель
-E 0 2105 0 17 a spray paint can is loaded зажато в руке of Подстрекател|ь|Я|ю|Я|ем|е
-E 0 2115 0 5 a studded Ogre gang jacket is loaded на тело of Подстрекател|ь|Я|ю|Я|ем|е
-M 1 2102 25 2161 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2102 25 2162 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2102 25 2163 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2102 25 2164 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2107 3 2165 1 Load Подстрекатель
-E 0 2105 0 17 a spray paint can is loaded зажато в руке of Подстрекател|ь|Я|ю|Я|ем|е
-E 0 2118 0 16 a switchblade is loaded вооружение of Подстрекател|ь|Я|ю|Я|ем|е
-E 0 2115 0 5 a studded Ogre gang jacket is loaded на тело of Подстрекател|ь|Я|ю|Я|ем|е
-M 1 2102 25 2165 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2102 25 2166 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2102 25 2167 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2102 25 2169 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
-M 1 2111 5 2170 1 Load Отморозок
-E 0 2115 0 5 a studded Ogre gang jacket is loaded на тело of Отмороз|ок|ка|ку|ка|ком|ке
-E 0 2104 0 11 a metal shield is loaded как щит of Отмороз|ок|ка|ку|ка|ком|ке
-E 0 2117 0 7 a pair of black leather pants is loaded на бедра of Отмороз|ок|ка|ку|ка|ком|ке
-M 1 2102 25 2170 1 Load Огр бандюга
-E 0 2102 0 5 an Ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2109 3 2102 1 Load Панк||а|у|а|ом|е
+E 0 2105 0 17 A spray paint can is loaded зажато в руке of Панк||а|у|а|ом|е
+E 0 2114 0 5 A studded troll gang jacket is loaded на тело of Панк||а|у|а|ом|е
+M 1 2101 25 2102 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2103 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2104 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2105 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2106 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2107 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2104 5 2108 1 Load Вышибал|а|ы|е|у|ой|е
+E 0 2114 0 5 A studded troll gang jacket is loaded на тело of Вышибал|а|ы|е|у|ой|е
+E 0 2109 0 9 Comfortable leather gloves is loaded на плечи of Вышибал|а|ы|е|у|ой|е
+E 0 2113 0 16 A lead pipe is loaded вооружение of Вышибал|а|ы|е|у|ой|е
+M 1 2101 25 2108 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2109 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2110 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2111 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2112 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2113 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2104 5 2114 1 Load Вышибал|а|ы|е|у|ой|е
+E 0 2114 0 5 A studded troll gang jacket is loaded на тело of Вышибал|а|ы|е|у|ой|е
+E 0 2111 0 1 A troll signet ring is loaded на Л. палец of Вышибал|а|ы|е|у|ой|е
+E 0 2103 0 16 A hefty length of chain is loaded вооружение of Вышибал|а|ы|е|у|ой|е
+M 1 2109 3 2114 1 Load Панк||а|у|а|ом|е
+E 0 2114 0 5 A studded troll gang jacket is loaded на тело of Панк||а|у|а|ом|е
+E 0 2118 0 16 A switchblade is loaded вооружение of Панк||а|у|а|ом|е
+M 1 2101 25 2114 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2115 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2104 5 2116 1 Load Вышибал|а|ы|е|у|ой|е
+E 0 2114 0 5 A studded troll gang jacket is loaded на тело of Вышибал|а|ы|е|у|ой|е
+E 0 2104 0 11 A metal shield is loaded как щит of Вышибал|а|ы|е|у|ой|е
+E 0 2103 0 16 A hefty length of chain is loaded вооружение of Вышибал|а|ы|е|у|ой|е
+M 1 2101 25 2116 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2117 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2118 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2119 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2120 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2121 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2122 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2104 5 2123 1 Load Вышибал|а|ы|е|у|ой|е
+E 0 2114 0 5 A studded troll gang jacket is loaded на тело of Вышибал|а|ы|е|у|ой|е
+E 0 2113 0 16 A lead pipe is loaded вооружение of Вышибал|а|ы|е|у|ой|е
+E 0 2117 0 7 A pair of black leather pants is loaded на бедра of Вышибал|а|ы|е|у|ой|е
+M 1 2105 10 2123 2 Load Красотк|а|и|е|у|ой|е из подворотни
+E 0 2108 0 17 A mirror is loaded зажато в руке of Красотк|а|и|е|у|ой|е из подворотни
+M 1 2103 1 2124 1 Load Тролл|ь|Я|ю|Я|ем|е-Главар|ь|Я|ю|Я|ем|е
+E 0 2119 0 16 A broken bottle is loaded вооружение of Тролл|ь|Я|ю|Я|ем|е-Главар|ь|Я|ю|Я|ем|е
+E 0 2111 0 1 A troll signet ring is loaded на Л. палец of Тролл|ь|Я|ю|Я|ем|е-Главар|ь|Я|ю|Я|ем|е
+E 0 2114 0 5 A studded troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е-Главар|ь|Я|ю|Я|ем|е
+M 1 2108 12 2124 6 Load Бультерьер||а|у|а|ом|е
+M 1 2108 12 2124 6 Load Бультерьер||а|у|а|ом|е
+M 1 2105 10 2125 2 Load Красотк|а|и|е|у|ой|е из подворотни
+E 0 2108 0 17 A mirror is loaded зажато в руке of Красотк|а|и|е|у|ой|е из подворотни
+E 0 2107 0 8 Spiked heeled boots is loaded на ноги of Красотк|а|и|е|у|ой|е из подворотни
+M 1 2109 3 2128 1 Load Панк||а|у|а|ом|е
+E 0 2114 0 5 A studded troll gang jacket is loaded на тело of Панк||а|у|а|ом|е
+E 0 2105 0 17 A spray paint can is loaded зажато в руке of Панк||а|у|а|ом|е
+E 0 2118 0 16 A switchblade is loaded вооружение of Панк||а|у|а|ом|е
+M 1 2101 25 2128 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2130 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2101 25 2131 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2106 10 2131 1 Load Полисмен||а|у|а|ом|е
+E 0 2110 0 16 A patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
+E 0 2116 0 3 A police whistle is loaded на шею of Полисмен||а|у|а|ом|е
+M 1 2105 10 2132 2 Load Красотк|а|и|е|у|ой|е из подворотни
+E 0 2107 0 8 Spiked heeled boots is loaded на ноги of Красотк|а|и|е|у|ой|е из подворотни
+M 1 2106 10 2132 1 Load Полисмен||а|у|а|ом|е
+E 0 2110 0 16 A patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
+M 1 2106 10 2133 1 Load Полисмен||а|у|а|ом|е
+E 0 2110 0 16 A patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
+E 0 2116 0 3 A police whistle is loaded на шею of Полисмен||а|у|а|ом|е
+M 1 2101 25 2134 1 Load Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+E 0 2101 0 5 A troll gang jacket is loaded на тело of Тролл|ь|Я|ю|Я|ем|е бандюг|а|и|е|у|ой|е
+M 1 2106 10 2134 1 Load Полисмен||а|у|а|ом|е
+E 0 2110 0 16 A patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
+M 1 2104 5 2135 1 Load Вышибал|а|ы|е|у|ой|е
+E 0 2114 0 5 A studded troll gang jacket is loaded на тело of Вышибал|а|ы|е|у|ой|е
+E 0 2104 0 11 A metal shield is loaded как щит of Вышибал|а|ы|е|у|ой|е
+E 0 2111 0 1 A troll signet ring is loaded на Л. палец of Вышибал|а|ы|е|у|ой|е
+M 1 2106 10 2135 1 Load Полисмен||а|у|а|ом|е
+E 0 2110 0 16 A patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
+M 1 2106 10 2136 1 Load Полисмен||а|у|а|ом|е
+E 0 2110 0 16 A patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
+E 0 2116 0 3 A police whistle is loaded на шею of Полисмен||а|у|а|ом|е
+M 1 2102 25 2137 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2106 10 2137 1 Load Полисмен||а|у|а|ом|е
+E 0 2110 0 16 A patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
+M 1 2111 5 2138 1 Load Отмороз|ок|ка|ку|ка|ком|ке
+E 0 2115 0 5 A studded ogre gang jacket is loaded на тело of Отмороз|ок|ка|ку|ка|ком|ке
+E 0 2103 0 16 A hefty length of chain is loaded вооружение of Отмороз|ок|ка|ку|ка|ком|ке
+E 0 2109 0 9 Comfortable leather gloves is loaded на плечи of Отмороз|ок|ка|ку|ка|ком|ке
+M 1 2106 10 2138 1 Load Полисмен||а|у|а|ом|е
+E 0 2110 0 16 A patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
+E 0 2116 0 3 A police whistle is loaded на шею of Полисмен||а|у|а|ом|е
+M 1 2106 10 2139 1 Load Полисмен||а|у|а|ом|е
+E 0 2110 0 16 A patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
+E 0 2116 0 3 A police whistle is loaded на шею of Полисмен||а|у|а|ом|е
+M 1 2102 25 2140 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2106 10 2140 1 Load Полисмен||а|у|а|ом|е
+E 0 2110 0 16 A patrol club is loaded вооружение of Полисмен||а|у|а|ом|е
+M 1 2102 25 2142 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2107 3 2143 1 Load Подстрекател|ь|Я|ю|Я|ем|е
+E 0 2118 0 16 A switchblade is loaded вооружение of Подстрекател|ь|Я|ю|Я|ем|е
+E 0 2115 0 5 A studded ogre gang jacket is loaded на тело of Подстрекател|ь|Я|ю|Я|ем|е
+M 1 2102 25 2145 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2102 25 2146 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2111 5 2147 1 Load Отмороз|ок|ка|ку|ка|ком|ке
+E 0 2115 0 5 A studded ogre gang jacket is loaded на тело of Отмороз|ок|ка|ку|ка|ком|ке
+E 0 2103 0 16 A hefty length of chain is loaded вооружение of Отмороз|ок|ка|ку|ка|ком|ке
+E 0 2112 0 9 Brass knuckles is loaded на плечи of Отмороз|ок|ка|ку|ка|ком|ке
+M 1 2110 1 2148 1 Load Огр||а|у|а|ом|е-Главар|ь|Я|ю|Я|ем|е
+E 0 2115 0 5 A studded ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е-Главар|ь|Я|ю|Я|ем|е
+E 0 2106 0 16 A stiletto is loaded вооружение of Огр||а|у|а|ом|е-Главар|ь|Я|ю|Я|ем|е
+E 0 2112 0 9 Brass knuckles is loaded на плечи of Огр||а|у|а|ом|е-Главар|ь|Я|ю|Я|ем|е
+M 1 2108 12 2148 6 Load Бультерьер||а|у|а|ом|е
+M 1 2108 12 2148 6 Load Бультерьер||а|у|а|ом|е
+M 1 2105 10 2149 2 Load Красотк|а|и|е|у|ой|е из подворотни
+E 0 2107 0 8 Spiked heeled boots is loaded на ноги of Красотк|а|и|е|у|ой|е из подворотни
+E 0 2108 0 17 A mirror is loaded зажато в руке of Красотк|а|и|е|у|ой|е из подворотни
+M 1 2102 25 2150 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2102 25 2151 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2102 25 2152 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2105 10 2152 2 Load Красотк|а|и|е|у|ой|е из подворотни
+E 0 2108 0 17 A mirror is loaded зажато в руке of Красотк|а|и|е|у|ой|е из подворотни
+M 1 2111 5 2153 1 Load Отмороз|ок|ка|ку|ка|ком|ке
+E 0 2115 0 5 A studded ogre gang jacket is loaded на тело of Отмороз|ок|ка|ку|ка|ком|ке
+E 0 2113 0 16 A lead pipe is loaded вооружение of Отмороз|ок|ка|ку|ка|ком|ке
+E 0 2117 0 7 A pair of black leather pants is loaded на бедра of Отмороз|ок|ка|ку|ка|ком|ке
+M 1 2102 25 2153 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2102 25 2154 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2111 5 2155 1 Load Отмороз|ок|ка|ку|ка|ком|ке
+E 0 2115 0 5 A studded ogre gang jacket is loaded на тело of Отмороз|ок|ка|ку|ка|ком|ке
+E 0 2104 0 11 A metal shield is loaded как щит of Отмороз|ок|ка|ку|ка|ком|ке
+E 0 2109 0 9 Comfortable leather gloves is loaded на плечи of Отмороз|ок|ка|ку|ка|ком|ке
+M 1 2102 25 2155 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2102 25 2156 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2102 25 2157 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2102 25 2158 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2102 25 2159 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2102 25 2160 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2107 3 2161 1 Load Подстрекател|ь|Я|ю|Я|ем|е
+E 0 2105 0 17 A spray paint can is loaded зажато в руке of Подстрекател|ь|Я|ю|Я|ем|е
+E 0 2115 0 5 A studded ogre gang jacket is loaded на тело of Подстрекател|ь|Я|ю|Я|ем|е
+M 1 2102 25 2161 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2102 25 2162 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2102 25 2163 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2102 25 2164 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2107 3 2165 1 Load Подстрекател|ь|Я|ю|Я|ем|е
+E 0 2105 0 17 A spray paint can is loaded зажато в руке of Подстрекател|ь|Я|ю|Я|ем|е
+E 0 2118 0 16 A switchblade is loaded вооружение of Подстрекател|ь|Я|ю|Я|ем|е
+E 0 2115 0 5 A studded ogre gang jacket is loaded на тело of Подстрекател|ь|Я|ю|Я|ем|е
+M 1 2102 25 2165 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2102 25 2166 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2102 25 2167 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2102 25 2169 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+M 1 2111 5 2170 1 Load Отмороз|ок|ка|ку|ка|ком|ке
+E 0 2115 0 5 A studded ogre gang jacket is loaded на тело of Отмороз|ок|ка|ку|ка|ком|ке
+E 0 2104 0 11 A metal shield is loaded как щит of Отмороз|ок|ка|ку|ка|ком|ке
+E 0 2117 0 7 A pair of black leather pants is loaded на бедра of Отмороз|ок|ка|ку|ка|ком|ке
+M 1 2102 25 2170 1 Load Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
+E 0 2102 0 5 An ogre gang jacket is loaded на тело of Огр||а|у|а|ом|е бандюг|а|и|е|у|ой|е
 S
 
 

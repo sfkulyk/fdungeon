@@ -17,7 +17,7 @@ oldstyle baby beholder~
 the baby beholder~
 You meet a baby beholder's cute gaze!
 ~
-It has a large central eye that blinks like a guppy and eyestalks atop the 
+It has a large central eye that blinks like a guppy and eyestalks atop the
 round body which can charm you with its cuteness.  Baby beholders are known for
 their playful personality.  Hmmm....  It looks like the baby is teething!
 ~
@@ -177,8 +177,8 @@ He looks at you, and says, 'What's your poison, stranger?'
 ~
 human~
 ABN 0 600 0
-107 214 6d12+853 15d9+100 4d10+21 none
-9 -9 -9 6
+99 198 6d12+853 15d9+100 4d9+19 none
+12 -9 -9 6
 EFNU ABCD 0 0
 stand stand either 50
 AHMV medium
@@ -192,8 +192,8 @@ he asks, 'How much you want?'
 ~
 human~
 ABN 0 600 0
-99 198 6d12+853 15d9+100 4d9+19 none
-8 -9 -9 6
+109 218 6d12+853 15d9+100 4d10+21 none
+15 -9 -9 6
 EFNU ABCD 0 0
 stand stand either 50
 AHMV medium
@@ -207,7 +207,7 @@ She smiles at you meekly.
 human~
 ABN 0 650 0
 103 206 6d12+853 15d9+100 4d10+20 none
-12 -9 -9 6
+15 -9 -9 6
 EFNU ABCD 0 0
 stand stand either 50
 AHMV medium
@@ -221,8 +221,8 @@ metal into items of defense and destruction.
 ~
 human~
 ABN 0 550 0
-105 210 6d12+853 15d9+100 4d10+21 none
-10 -9 -9 6
+101 202 6d12+853 15d9+100 4d10+20 none
+16 -9 -9 6
 EFNU ABCD 0 0
 stand stand either 50
 AHMV medium
@@ -235,8 +235,8 @@ Ben tries to pawn his various wares to you.
 ~
 human~
 ABN 0 600 0
-101 202 6d12+853 15d9+100 4d10+20 none
-12 -9 -9 6
+108 216 6d12+853 15d9+100 4d10+21 none
+11 -9 -9 6
 EFNU ABCD 0 0
 stand stand either 50
 AHMV medium
@@ -277,8 +277,8 @@ This old wizard almost looks like he is about to fall over and sleep.
 ~
 human~
 ABNR D 550 0
-108 216 6d12+778 30d9+100 5d10+21 none
-11 -9 -9 1
+103 206 6d12+778 30d9+100 5d10+20 none
+12 -9 -9 1
 FU ABCD 0 0
 stand stand either 50
 AHMV medium
@@ -364,7 +364,7 @@ oldstyle deer~
 a deer~
 A deer stares back at you.
 ~
-The deer looks angered at your intrusion.  He butts his head against you, 
+The deer looks angered at your intrusion.  He butts his head against you,
 albeit ineffectively.
 ~
 human~
@@ -533,15 +533,15 @@ statue zdreni unknown~
 {yстатУЯ {Dнеизвестной {rЗдрени{x~
 {wСтатУЯ {DЗдрени{x с {rокровавленным{x стилетом стоит тут. А кровь-то - {rсвежаЯ{x...
 ~
-СтатуЯ неизвестной Здрени стоит тут, сжимаЯ в руке окровавленный стилет. 
+СтатуЯ неизвестной Здрени стоит тут, сжимаЯ в руке окровавленный стилет.
 ДовольнаЯ ухмылка на ее лице пробуждает в тебе худшие из твоих страхов...
- 
+
 ~
 modron~
 ABGQRST HJNOVc 0 0
 109 218 20d40+30000 10d10+15000 10d5+109 none
 -300 -300 -300 -300
-ADFKQR BMNPQ DHIK 0
+ADFKQR ABMNPQ DHIK 0
 stand stand female 5000
 CHJ huge
 #0
@@ -600,7 +600,7 @@ a large beautiful fountain~
 An elaborate white marble fountain is here.~
 oldstyle~
 fountain 0 0
-10 10 'water' 0 0 
+10 10 'water' 0 0
 0 0 0 1 B
 E
 fountain~
@@ -633,7 +633,7 @@ container 0 0
 0 0 0 1 B
 E
 cabinet~
-A cabinet made of oak and mahogany, this piece of woodmanship is just splendid 
+A cabinet made of oak and mahogany, this piece of woodmanship is just splendid
 to view.  The wood is varnished with a very strong stain that looks as if it
 would last longer than the cabinet itself.
 ~
@@ -723,9 +723,9 @@ weapon G AN
 sword 4 6 slash G
 14 50 1420 1 B
 A
-18 2
-A
 19 2
+A
+18 2
 E
 sword~
 You see a sword of great craftsmanship.  Imprinted on the side is:
@@ -741,11 +741,11 @@ weapon ABGT AN
 mace 5 5 pound DF
 15 50 1180 1 B
 A
-18 2
+17 -20
 A
 19 2
 A
-17 -20
+18 2
 E
 mace~
 You see a mace of great craftsmanship.  Imprinted on the side is:
@@ -915,9 +915,9 @@ jewelry G AB
 0 0 0 0 0
 16 10 1280 1 B
 A
-17 -4
-A
 20 -1
+A
+17 -4
 T 0 0
 #5331
 imperial banner~
@@ -928,9 +928,9 @@ light AG A
 0 0 999 0 0
 20 10 1440 1 B
 A
-20 -2
-A
 17 -2
+A
+20 -2
 E
 banner~
 This is the official Merc war banner to see you through the darkest realm!
@@ -945,9 +945,9 @@ weapon GK AN
 sword 8 8 cleave DF
 34 240 4400 1 B
 A
-19 4
-A
 18 5
+A
+19 4
 T 0 0
 #5333
 shield magic blessed~
@@ -958,23 +958,23 @@ armor ASTY AJ
 60 60 60 60 0
 98 30 5000 65 B
 A
-3 2
-A
-4 2
-A
-5 2
-A
-1 3
-A
-2 3
-A
-20 -15
-A
-13 100
+19 20
 A
 12 200
 A
-19 20
+13 100
+A
+20 -15
+A
+2 3
+A
+1 3
+A
+5 2
+A
+4 2
+A
+3 2
 T 0 0
 #5334
 stiletto bloody crimson~
@@ -985,9 +985,9 @@ weapon MT AN
 dagger 10 15 pierce CD
 90 180 12500 810 G
 A
-19 25
-A
 18 25
+A
+19 25
 T 0 0
 #0
 
@@ -996,7 +996,7 @@ T 0 0
 The Grand Gate of Thalos~
 You stand in the archway of a gigantic stone archway. The two
 steel gates look indestructible, yet they are elaborate in engravings.  You can
-hear laughter and good cheer from the other side of these gates.  Obviously, 
+hear laughter and good cheer from the other side of these gates.  Obviously,
 the city is teeming with activity!  There is a small gold plaque on mounted
 on the archway.
 ~
@@ -1052,9 +1052,9 @@ S
 Main Street~
 This is a magnificent street, immaculate all over.  The streets are filled
 with people rushing from building to building and a balmy zephyr blows by you.
-The whole city is teeming with activity.  On one side is a beautiful house 
+The whole city is teeming with activity.  On one side is a beautiful house
 while on the other is the entrance to a large mansion.  Sounds of people hard
-at work echo within the mansion.  Near the center of town you see a large 
+at work echo within the mansion.  Near the center of town you see a large
 domed building, magnificent and immense.
 ~
 0 0 1
@@ -1082,7 +1082,7 @@ S
 #5303
 A Garden Path~
 A circular path surrounds a magnificent domed temple in the center
-of the city. Flowers grow on the sides of the path and the lush trees are 
+of the city. Flowers grow on the sides of the path and the lush trees are
 laden with fruit.  Vines and ivy snake up the sides of the temple, making this
 temple truly a blend of nature and man's work of art.
 ~
@@ -1173,7 +1173,7 @@ S
 #5307
 The market place~
 You stand in the middle of a large square lined on each side with
-baskets, carts, and stands of all shapes and sizes.  The little shops are 
+baskets, carts, and stands of all shapes and sizes.  The little shops are
 filled with goods sold to the demanding public.
 ~
 0 0 1
@@ -1294,7 +1294,7 @@ S
 #5312
 A side street~
 This small side street leads south away from the temple into the
-business section of town. To the east is the famous City Hall of Thalos.  
+business section of town. To the east is the famous City Hall of Thalos.
 Well disciplined guards stand at attention, watching over the city hall, but
 you don't see any source of threats in THIS city.  North is a garden path,
 west is a smithy, and this side street continues south.
@@ -1668,7 +1668,7 @@ S
 The city hall~
 This is the main reception area of Thalos' city hall. The walls have
 been painted in pure white and thick lush carpet line the floor wall to wall.
-A side door on the west wall allows you to go out to one of the city's side 
+A side door on the west wall allows you to go out to one of the city's side
 streets.  Hallways lead south and east.
 ~
 0 8 1
@@ -1846,9 +1846,9 @@ You see up the powerful watchtower.
 S
 #5342
 A bath house~
-This is the bath house for the commoners of the city. Hot steamy water 
-wells up from a hole in the floor. Obviously there is a hot spring located 
-under the city (making the decision to put a city here seem much more 
+This is the bath house for the commoners of the city. Hot steamy water
+wells up from a hole in the floor. Obviously there is a hot spring located
+under the city (making the decision to put a city here seem much more
 reasonable). To the west is another room.
 ~
 0 8 1
@@ -1889,8 +1889,8 @@ S
 #5344
 A Resting Room~
 You are in a resting room.  Soft mats line the floor, and you see many
-people just relaxing on them.  The comfort of this place is so inviting, you 
-want to join them.  Great amounts of steam issue forth from the hole in the 
+people just relaxing on them.  The comfort of this place is so inviting, you
+want to join them.  Great amounts of steam issue forth from the hole in the
 east wall.
 ~
 0 8 1
@@ -1918,7 +1918,7 @@ S
 #5346
 The north-west watchtower~
 You stand atop one of the city watchtowers. The view is magnificent
-from here and you can see all the way to the western mountains.  You are 
+from here and you can see all the way to the western mountains.  You are
 confident nothing can touch this tower.
 ~
 0 0 1
@@ -1957,10 +1957,10 @@ The city lies below.
 S
 #5350
 The Temple of Thalos~
-You stand within one of the most holy places in the realm. This stunning 
-domed temple houses the city's worshipers en masse. Long benches line the 
-aisles and the altar glistens with the gold and platinum inlay.The walls and 
-roof are all made of ceramic, making this place reflect the sun well.  
+You stand within one of the most holy places in the realm. This stunning
+domed temple houses the city's worshipers en masse. Long benches line the
+aisles and the altar glistens with the gold and platinum inlay.The walls and
+roof are all made of ceramic, making this place reflect the sun well.
     The greenery around the temple itself makes this place a great blend of
 nature and man's works of art.
 ~
@@ -2214,7 +2214,7 @@ City Entrance~
 You stand on the outskirts of a construction site - Midgaard; the capital
 of this land. The road leads east into the peace and quiet - and dangers -
 of the forest; and to the west it becomes the main street of the town;
-surrounded by building foundations of unfinished shops, houses, and temple. 
+surrounded by building foundations of unfinished shops, houses, and temple.
 ~
 0 4 1
 D1
@@ -2511,6 +2511,16 @@ rainbow then back to its normal state.  In the middle of this room is
 a ladder standing vertical.
 ~
 0 0 3
+D2
+You see a fuzzy portal of some sort and a little green.
+~
+~
+0 0 5368
+D4
+You see stars.
+~
+~
+0 0 5376
 D1
 You see stars.
 ~
@@ -2521,16 +2531,6 @@ You see stars.
 ~
 ~
 0 0 5378
-D4
-You see stars.
-~
-~
-0 0 5376
-D2
-You see a fuzzy portal of some sort and a little green.
-~
-~
-0 0 5368
 D5
 You see stars.
 ~
@@ -2546,27 +2546,7 @@ either.  Occasionally, the starry 'sky' fades into a fuzzy, yet bright,
 rainbow then back to its normal state.
 ~
 0 0 3
-D1
-You see stars.
-~
-~
-0 0 5376
 D4
-You see stars.
-~
-~
-0 0 5375
-D2
-You see stars.
-~
-~
-0 0 5377
-D0
-You see stars.
-~
-~
-0 0 5377
-D5
 You see stars.
 ~
 ~
@@ -2576,6 +2556,26 @@ You see stars.
 ~
 ~
 0 0 5376
+D2
+You see stars.
+~
+~
+0 0 5377
+D5
+You see stars.
+~
+~
+0 0 5375
+D1
+You see stars.
+~
+~
+0 0 5376
+D0
+You see stars.
+~
+~
+0 0 5377
 S
 #5377
 The Void~
@@ -2586,7 +2586,7 @@ either.  Occasionally, the starry 'sky' fades into a fuzzy, yet bright,
 rainbow then back to its normal state.
 ~
 0 0 3
-D2
+D0
 You see stars.
 ~
 ~
@@ -2596,26 +2596,26 @@ You see stars.
 ~
 ~
 0 0 5377
-D5
-You see stars.
-~
-~
-0 0 5378
-D0
-You see stars.
-~
-~
-0 0 5376
 D1
 You see stars.
 ~
 ~
 0 0 5377
+D5
+You see stars.
+~
+~
+0 0 5378
 D4
 You see stars.
 ~
 ~
 0 0 5378
+D2
+You see stars.
+~
+~
+0 0 5376
 S
 #5378
 The Void~
@@ -2627,16 +2627,16 @@ rainbow then back to its normal state.  In the middle of this room is
 a ladder standing vertical.
 ~
 0 0 3
-D2
-You see a fuzzy portal of some sort and a little green.
-~
-~
-0 0 8903
 D1
 You see stars.
 ~
 ~
 0 0 5375
+D2
+You see a fuzzy portal of some sort and a little green.
+~
+~
+0 0 8903
 D3
 You see stars.
 ~
@@ -2766,9 +2766,14 @@ Main Street leads west from here.
 ~
 0 0 1
 E
-bridge footbridge~
-It is too high up to reach but it looks as if one easily could walk across it
-from one tower to the other.
+wall~
+It is built from large grey rocks that have been fastened to each other with
+some kind of mortar.  It is far too high to climb.
+~
+E
+tower towers~
+Both of the towers are built from large grey rocks that have been fastened to
+each other with some kind of mortar, just like the city wall.
 ~
 E
 gate~
@@ -2777,14 +2782,9 @@ reinforced with large iron bands to make them even more sturdy.  One of the
 doors is equipped with a very big lock.
 ~
 E
-tower towers~
-Both of the towers are built from large grey rocks that have been fastened to
-each other with some kind of mortar, just like the city wall.
-~
-E
-wall~
-It is built from large grey rocks that have been fastened to each other with
-some kind of mortar.  It is far too high to climb.
+bridge footbridge~
+It is too high up to reach but it looks as if one easily could walk across it
+from one tower to the other.
 ~
 D1
 You see the city gate.
@@ -2804,9 +2804,14 @@ plains stretch out in the distance.
 ~
 0 0 1
 E
-bridge footbridge~
-It is too high up to reach but it looks as if one easily could walk across it
-from one tower to the other.
+wall~
+It is built from large grey rocks that have been fastened to each other with
+some kind of mortar.  It is far too high to climb.
+~
+E
+tower towers~
+Both of the towers are built from large grey rocks that have been fastened to
+each other with some kind of mortar, just like the city wall.
 ~
 E
 gate~
@@ -2815,14 +2820,9 @@ reinforced with large iron bands to make them even more sturdy.  One of the
 doors is equipped with a very big lock.
 ~
 E
-tower towers~
-Both of the towers are built from large grey rocks that have been fastened to
-each other with some kind of mortar, just like the city wall.
-~
-E
-wall~
-It is built from large grey rocks that have been fastened to each other with
-some kind of mortar.  It is far too high to climb.
+bridge footbridge~
+It is too high up to reach but it looks as if one easily could walk across it
+from one tower to the other.
 ~
 D1
 You see the plains.~
@@ -2842,16 +2842,16 @@ behind it is a ten foot tall sitting statue of Odin, the King of the Gods.
 ~
 0 1032 0
 E
-altar~
-Even though the altar is more than ten feet long it appears to be made from a
-single block of white virgin marble.
-~
-E
 statue odin king god~
 The statue represents the one-eyed Odin sitting on a his throne.  He has
 long, grey hair and beard and a strict look on his face.  On top of the
 throne, just above his shoulders, his two ravens Hugin and Munin are sitting
 and at his feet are his wolves Gere and Freke.
+~
+E
+altar~
+Even though the altar is more than ten feet long it appears to be made from a
+single block of white virgin marble.
 ~
 D2
 You see the southern end of the temple.
@@ -2882,85 +2882,85 @@ S
 
 #RESETS
 M 1 5301 20 5300 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5330 1 5300 1 Load bard of Thalos
-E 0 5311 0 19 a silver flute is loaded нет of bard of Thalos
+E 0 5311 0 19 A silver flute is loaded нет of bard of Thalos
 M 1 5321 2 5300 2 Load an imperial cityguard
-E 0 5331 0 0 an imperial war banner is loaded освещает of an imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of an imperial cityguard
-E 0 5322 0 6 an imperial helm is loaded на голову of an imperial cityguard
-E 0 5323 0 7 a pair of imperial plate leggings is loaded на бедра of an imperial cityguard
-E 0 5324 0 8 a pair of imperial plate boots is loaded на ноги of an imperial cityguard
-E 0 5325 0 9 a pair of imperial plate gloves is loaded на плечи of an imperial cityguard
-E 0 5320 0 19 an imperial shield is loaded нет of an imperial cityguard
-E 0 5318 0 16 an imperial mace is loaded вооружение of an imperial cityguard
+E 0 5331 0 0 An imperial war banner is loaded освещает of an imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of an imperial cityguard
+E 0 5322 0 6 An imperial helm is loaded на голову of an imperial cityguard
+E 0 5323 0 7 A pair of imperial plate leggings is loaded на бедра of an imperial cityguard
+E 0 5324 0 8 A pair of imperial plate boots is loaded на ноги of an imperial cityguard
+E 0 5325 0 9 A pair of imperial plate gloves is loaded на плечи of an imperial cityguard
+E 0 5320 0 19 An imperial shield is loaded нет of an imperial cityguard
+E 0 5318 0 16 An imperial mace is loaded вооружение of an imperial cityguard
 M 1 5321 2 5300 2 Load an imperial cityguard
-E 0 5331 0 0 an imperial war banner is loaded освещает of an imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of an imperial cityguard
-E 0 5324 0 8 a pair of imperial plate boots is loaded на ноги of an imperial cityguard
-E 0 5325 0 9 a pair of imperial plate gloves is loaded на плечи of an imperial cityguard
-E 0 5326 0 10 a pair of imperial plate sleeves is loaded на руки of an imperial cityguard
-E 0 5320 0 11 an imperial shield is loaded как щит of an imperial cityguard
-E 0 5317 0 19 an imperial sword is loaded нет of an imperial cityguard
+E 0 5331 0 0 An imperial war banner is loaded освещает of an imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of an imperial cityguard
+E 0 5324 0 8 A pair of imperial plate boots is loaded на ноги of an imperial cityguard
+E 0 5325 0 9 A pair of imperial plate gloves is loaded на плечи of an imperial cityguard
+E 0 5326 0 10 A pair of imperial plate sleeves is loaded на руки of an imperial cityguard
+E 0 5320 0 11 An imperial shield is loaded как щит of an imperial cityguard
+E 0 5317 0 19 An imperial sword is loaded нет of an imperial cityguard
 M 1 5303 11 5300 1 Load an imperial cityguard
-E 0 5321 0 4 an imperial cloak is loaded нет of an imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of an imperial cityguard
-E 0 5327 0 12 an imperial cape is loaded накинуто на тело of an imperial cityguard
-E 0 5329 0 14 an imperial metal bracer is loaded на Л. запястье of an imperial cityguard
-E 0 5318 0 16 an imperial mace is loaded вооружение of an imperial cityguard
+E 0 5321 0 4 An imperial cloak is loaded нет of an imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of an imperial cityguard
+E 0 5327 0 12 An imperial cape is loaded накинуто на тело of an imperial cityguard
+E 0 5329 0 14 An imperial metal bracer is loaded на Л. запястье of an imperial cityguard
+E 0 5318 0 16 An imperial mace is loaded вооружение of an imperial cityguard
 M 1 5304 9 5302 1 Load a female citizen of Thalos
 M 1 5301 20 5304 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5303 11 5304 1 Load an imperial cityguard
-E 0 5321 0 4 an imperial cloak is loaded нет of an imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of an imperial cityguard
-E 0 5320 0 19 an imperial shield is loaded нет of an imperial cityguard
-E 0 5317 0 16 an imperial sword is loaded вооружение of an imperial cityguard
+E 0 5321 0 4 An imperial cloak is loaded нет of an imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of an imperial cityguard
+E 0 5320 0 19 An imperial shield is loaded нет of an imperial cityguard
+E 0 5317 0 16 An imperial sword is loaded вооружение of an imperial cityguard
 M 1 5302 9 5304 1 Load a citizen of Thalos
 M 1 5301 20 5306 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5303 11 5307 1 Load an imperial cityguard
-E 0 5321 0 4 an imperial cloak is loaded нет of an imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of an imperial cityguard
-E 0 5328 0 13 an imperial belt is loaded на поясе of an imperial cityguard
-E 0 5329 0 14 an imperial metal bracer is loaded на Л. запястье of an imperial cityguard
-E 0 5318 0 16 an imperial mace is loaded вооружение of an imperial cityguard
+E 0 5321 0 4 An imperial cloak is loaded нет of an imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of an imperial cityguard
+E 0 5328 0 13 An imperial belt is loaded на поясе of an imperial cityguard
+E 0 5329 0 14 An imperial metal bracer is loaded на Л. запястье of an imperial cityguard
+E 0 5318 0 16 An imperial mace is loaded вооружение of an imperial cityguard
 M 1 5304 9 5307 1 Load a female citizen of Thalos
 M 1 5302 9 5308 1 Load a citizen of Thalos
 M 1 5301 20 5310 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5304 9 5312 1 Load a female citizen of Thalos
 M 1 5303 11 5313 1 Load an imperial cityguard
-E 0 5330 0 1 an imperial city guard signet ring is loaded на Л. палец of an imperial cityguard
-E 0 5321 0 4 an imperial cloak is loaded нет of an imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of an imperial cityguard
-E 0 5320 0 19 an imperial shield is loaded нет of an imperial cityguard
-E 0 5317 0 16 an imperial sword is loaded вооружение of an imperial cityguard
+E 0 5330 0 1 An imperial city guard signet ring is loaded на Л. палец of an imperial cityguard
+E 0 5321 0 4 An imperial cloak is loaded нет of an imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of an imperial cityguard
+E 0 5320 0 19 An imperial shield is loaded нет of an imperial cityguard
+E 0 5317 0 16 An imperial sword is loaded вооружение of an imperial cityguard
 M 1 5301 20 5314 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5303 11 5315 1 Load an imperial cityguard
-E 0 5321 0 4 an imperial cloak is loaded нет of an imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of an imperial cityguard
-E 0 5327 0 12 an imperial cape is loaded накинуто на тело of an imperial cityguard
-E 0 5328 0 13 an imperial belt is loaded на поясе of an imperial cityguard
-E 0 5318 0 16 an imperial mace is loaded вооружение of an imperial cityguard
+E 0 5321 0 4 An imperial cloak is loaded нет of an imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of an imperial cityguard
+E 0 5327 0 12 An imperial cape is loaded накинуто на тело of an imperial cityguard
+E 0 5328 0 13 An imperial belt is loaded на поясе of an imperial cityguard
+E 0 5318 0 16 An imperial mace is loaded вооружение of an imperial cityguard
 M 1 5301 20 5316 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5302 9 5316 1 Load a citizen of Thalos
 M 1 5311 1 5317 1 Load George the Butcher
 G 0 5219 0 Кус|ок|ка|ку|ок|ом|ке|ка|ков {yоленины{x is given to George the Butcher
-E 0 601 0 16 a meat cleaver is loaded вооружение of George the Butcher
+E 0 601 0 16 A meat cleaver is loaded вооружение of George the Butcher
 G 0 602 0 A side of beef is given to George the Butcher
 G 0 603 0 A side of pork is given to George the Butcher
 G 0 604 0 A side of horse is given to George the Butcher
 G 0 605 0 A defeathered chicken is given to George the Butcher
 M 1 5306 1 5319 1 Load the fanatic priest
-E 0 5218 0 3 {Dдемоноликий {Yталисман {x is loaded на шею of the fanatic priest
-E 0 5222 0 12 {DчернаЯ шелковаЯ роба {x is loaded накинуто на тело of the fanatic priest
-E 0 5252 0 16 {Bтoнкий длинный клинок {x is loaded вооружение of the fanatic priest
-E 0 5239 0 19 унылый серый {wкамешек is loaded нет of the fanatic priest
+E 0 5218 0 3 {dдемонолик|ий|ого|ому|ий|им|ом|их|их {yталисман||а|у||ом|е|а|ов {x is loaded на шею of the fanatic priest
+E 0 5222 0 12 {dчерн|ая|ой|ой|ую|ой|ой|ых|ых шелков|ая|ой|ой|ую|ой|ой|ых|ых роб|а|ы|е|у|ой|е|ы| {x is loaded накинуто на тело of the fanatic priest
+E 0 5252 0 16 {bтoнк|ий|ого|ому|ий|им|ом|их|их длинн|ый|ого|ому|ый|ым|ом|ых|ых клин|ок|ка|ку|ок|ом|ке|ка|ков {x is loaded вооружение of the fanatic priest
+E 0 5239 0 19 Уныл|ый|ого|ому|ый|ым|ом|ых|ых сер|ый|ого|ому|ый|ым|ом|ых|ых {wкамеш|ек|ка|ку|ек|ком|ке|ка|ков{x is loaded нет of the fanatic priest
 M 1 5301 20 5320 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5312 1 5320 1 Load Farmer Betty
 G 0 609 0 A head of cabbage is given to Farmer Betty
 G 0 610 0 A head of lettuce is given to Farmer Betty
@@ -2971,23 +2971,23 @@ M 1 5314 1 5321 1 Load Ben the Smith
 G 0 601 0 A meat cleaver is given to Ben the Smith
 G 0 615 0 A pitchfork is given to Ben the Smith
 M 1 5301 20 5322 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5303 11 5324 1 Load an imperial cityguard
-E 0 5321 0 4 an imperial cloak is loaded нет of an imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of an imperial cityguard
-E 0 5320 0 19 an imperial shield is loaded нет of an imperial cityguard
-E 0 5317 0 16 an imperial sword is loaded вооружение of an imperial cityguard
+E 0 5321 0 4 An imperial cloak is loaded нет of an imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of an imperial cityguard
+E 0 5320 0 19 An imperial shield is loaded нет of an imperial cityguard
+E 0 5317 0 16 An imperial sword is loaded вооружение of an imperial cityguard
 M 1 5301 20 5326 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5304 9 5326 1 Load a female citizen of Thalos
 M 1 5302 9 5327 1 Load a citizen of Thalos
 M 1 5301 20 5328 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5313 1 5329 1 Load Thaellor the dwarf
 M 1 5329 2 5330 2 Load bard of Thalos
-E 0 5309 0 19 a mandolin is loaded нет of bard of Thalos
+E 0 5309 0 19 A mandolin is loaded нет of bard of Thalos
 M 1 5329 2 5330 2 Load bard of Thalos
-E 0 5310 0 19 a golden harp is loaded нет of bard of Thalos
+E 0 5310 0 19 A golden harp is loaded нет of bard of Thalos
 M 1 5310 1 5330 1 Load Dan the Barkeep
 G 0 648 0 A shot of whiskey is given to Dan the Barkeep
 G 0 649 0 A quart of ale is given to Dan the Barkeep
@@ -2995,123 +2995,123 @@ G 0 650 0 A quart of port brew is given to Dan the Barkeep
 M 1 5304 9 5330 1 Load a female citizen of Thalos
 M 1 5302 9 5330 1 Load a citizen of Thalos
 M 1 5309 1 5331 1 Load the mayor of Thalos
-E 0 5224 0 19 {DгравированнаЯ печать черного дерева{x is loaded нет of the mayor of Thalos
+E 0 5224 0 19 {dгравированн|ая|ую|ой|ую|ой|ой|ых|ых печат|ь|ь|и|ь|ью|и|и|ей черного дерева{x is loaded нет of the mayor of Thalos
 O 0 5307 0 5331 The curved desk loaded to South wing of the city hall
 P 0 5304 4 5307 1 A scroll of enchantment put inside a scroll of enchantment
 P 0 5305 4 5307 1 A bound scroll put inside a bound scroll
 P 0 5231 9 5307 1 {rалo{y-{bсин|ий|его|ему|ий|им|ем|их|их {wкамеш|ек|ка|ку|ек|ком|ке|ка|ков {x put inside {Rалo{Y-{Bсин|ий|его|ему|ий|им|ем|их|их {wкамеш|ек|ка|ку|ек|ком|ке|ка|ков {x
 M 1 5303 11 5331 1 Load an imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of an imperial cityguard
-E 0 5327 0 12 an imperial cape is loaded накинуто на тело of an imperial cityguard
-E 0 5328 0 13 an imperial belt is loaded на поясе of an imperial cityguard
-E 0 5329 0 14 an imperial metal bracer is loaded на Л. запястье of an imperial cityguard
-E 0 5318 0 16 an imperial mace is loaded вооружение of an imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of an imperial cityguard
+E 0 5327 0 12 An imperial cape is loaded накинуто на тело of an imperial cityguard
+E 0 5328 0 13 An imperial belt is loaded на поясе of an imperial cityguard
+E 0 5329 0 14 An imperial metal bracer is loaded на Л. запястье of an imperial cityguard
+E 0 5318 0 16 An imperial mace is loaded вооружение of an imperial cityguard
 M 1 5301 20 5332 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5304 9 5332 1 Load a female citizen of Thalos
 O 0 5308 0 5333 The glass cabinet loaded to East wing of the city hall
 P 0 3105 8 5308 1 Бронзов|ый|ого|ому|ый|ым|ом|ых|ых нарукавник||а|у||ом|е|а|ов put inside бронзов|ый|ого|ому|ый|ым|ом|ых|ых нарукавник||а|у||ом|е|а|ов
 P 0 5214 8 5308 1 {wгладк|ий|ого|ому|ий|им|ом|ых|ых кварцев|ый|ого|ому|ый|ым|ом|ых|ых шар||а|у||ом|е|а|ов{x put inside {Wгладк|ий|ого|ому|ий|им|ом|ых|ых кварцев|ый|ого|ому|ый|ым|ом|ых|ых шар||а|у||ом|е|а|ов{x
 P 0 5230 1 5308 1 {cнебесно-голуб|ой|ого|ому|ой|ым|ом|ых|ых камеш|ек|ка|ку|ек|ком|ке|ка|ков {x put inside {Cнебесно-голуб|ой|ого|ому|ой|ым|ом|ых|ых камеш|ек|ка|ку|ек|ком|ке|ка|ков {x
 M 1 5301 20 5334 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 O 0 5306 0 5334 A large beautiful fountain loaded to The private gardens and courtyard of Thalos
 M 1 5303 11 5334 1 Load an imperial cityguard
-E 0 5330 0 1 an imperial city guard signet ring is loaded на Л. палец of an imperial cityguard
-E 0 5321 0 4 an imperial cloak is loaded нет of an imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of an imperial cityguard
-E 0 5320 0 19 an imperial shield is loaded нет of an imperial cityguard
-E 0 5317 0 16 an imperial sword is loaded вооружение of an imperial cityguard
+E 0 5330 0 1 An imperial city guard signet ring is loaded на Л. палец of an imperial cityguard
+E 0 5321 0 4 An imperial cloak is loaded нет of an imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of an imperial cityguard
+E 0 5320 0 19 An imperial shield is loaded нет of an imperial cityguard
+E 0 5317 0 16 An imperial sword is loaded вооружение of an imperial cityguard
 M 1 5320 3 5335 3 Load An imperial cityguard
-E 0 5330 0 1 an imperial city guard signet ring is loaded на Л. палец of An imperial cityguard
-E 0 5321 0 4 an imperial cloak is loaded нет of An imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of An imperial cityguard
-E 0 5327 0 12 an imperial cape is loaded накинуто на тело of An imperial cityguard
-E 0 5328 0 13 an imperial belt is loaded на поясе of An imperial cityguard
-E 0 5317 0 16 an imperial sword is loaded вооружение of An imperial cityguard
+E 0 5330 0 1 An imperial city guard signet ring is loaded на Л. палец of An imperial cityguard
+E 0 5321 0 4 An imperial cloak is loaded нет of An imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of An imperial cityguard
+E 0 5327 0 12 An imperial cape is loaded накинуто на тело of An imperial cityguard
+E 0 5328 0 13 An imperial belt is loaded на поясе of An imperial cityguard
+E 0 5317 0 16 An imperial sword is loaded вооружение of An imperial cityguard
 M 1 5320 3 5335 3 Load An imperial cityguard
-E 0 5330 0 1 an imperial city guard signet ring is loaded на Л. палец of An imperial cityguard
-E 0 5321 0 4 an imperial cloak is loaded нет of An imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of An imperial cityguard
-E 0 5327 0 12 an imperial cape is loaded накинуто на тело of An imperial cityguard
-E 0 5329 0 14 an imperial metal bracer is loaded на Л. запястье of An imperial cityguard
-E 0 5318 0 16 an imperial mace is loaded вооружение of An imperial cityguard
+E 0 5330 0 1 An imperial city guard signet ring is loaded на Л. палец of An imperial cityguard
+E 0 5321 0 4 An imperial cloak is loaded нет of An imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of An imperial cityguard
+E 0 5327 0 12 An imperial cape is loaded накинуто на тело of An imperial cityguard
+E 0 5329 0 14 An imperial metal bracer is loaded на Л. запястье of An imperial cityguard
+E 0 5318 0 16 An imperial mace is loaded вооружение of An imperial cityguard
 M 1 5320 3 5335 3 Load An imperial cityguard
-E 0 5321 0 4 an imperial cloak is loaded нет of An imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of An imperial cityguard
-E 0 5327 0 12 an imperial cape is loaded накинуто на тело of An imperial cityguard
-E 0 5328 0 13 an imperial belt is loaded на поясе of An imperial cityguard
-E 0 5329 0 14 an imperial metal bracer is loaded на Л. запястье of An imperial cityguard
-E 0 5317 0 16 an imperial sword is loaded вооружение of An imperial cityguard
+E 0 5321 0 4 An imperial cloak is loaded нет of An imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of An imperial cityguard
+E 0 5327 0 12 An imperial cape is loaded накинуто на тело of An imperial cityguard
+E 0 5328 0 13 An imperial belt is loaded на поясе of An imperial cityguard
+E 0 5329 0 14 An imperial metal bracer is loaded на Л. запястье of An imperial cityguard
+E 0 5317 0 16 An imperial sword is loaded вооружение of An imperial cityguard
 M 1 5305 1 5336 1 Load Gordon the Brave
-E 0 5204 0 8 {cп{Cар{cа {cм{Cиф{wриль{Cны{cх {cб{Cо{wтин{Cо{cк{x is loaded на ноги of Gordon the Brave
-E 0 5203 0 10 {cм{Cиф{Wриль{Cны{cе {cн{Cап{Wлечн{Cик{cи  {x is loaded на руки of Gordon the Brave
-E 0 5205 0 7 {cко{Cмпле{cкт м{Cиф{wриль{Cны{cх п{Cо{wнож{Cе{cй{x is loaded на бедра of Gordon the Brave
-E 0 5206 0 13 {cмифрильный {wпоЯс {x is loaded на поясе of Gordon the Brave
-E 0 5201 0 6 {cми{Cфр{wил{Cьн{cый {wшлем {x is loaded на голову of Gordon the Brave
-E 0 5202 0 9 {Cпара {cм{Cиф{wриль{Cны{cх {cр{Cу{wкав{Cи{cц{x is loaded на плечи of Gordon the Brave
-E 0 5301 0 5 a beautiful iron breast plate is loaded на тело of Gordon the Brave
-E 0 5332 0 16 a two-handed sword is loaded вооружение of Gordon the Brave
-E 0 5226 0 19 {DгравированнаЯ печать из слоновой кости{x is loaded нет of Gordon the Brave
+E 0 5204 0 8 {cп{cар{c|а|ы|е|у|ой|е|ы| {cм{cиф{wриль{cны{cх {cб{cо{wтин{cо{cк{x is loaded на ноги of Gordon the Brave
+E 0 5203 0 10 {cм{cиф{wриль{cны{c|е|х|м|е|ми|х {cн{cап{wлечн{cик{c|и|ов|ам|и|ами|ах  {x is loaded на руки of Gordon the Brave
+E 0 5205 0 7 {cко{cмпле{cкт||а|у||ом|е|а|ов м{cиф{wриль{cны{cх п{cо{wнож{cе{cй{x is loaded на бедра of Gordon the Brave
+E 0 5206 0 13 {cмифрильн|ый|ого|ому|ый|ым|ом|ых|ых {wпояс||а|у||ом|е|а|ов {x is loaded на поясе of Gordon the Brave
+E 0 5201 0 6 {cми{cфр{wил{cьн|{cый|{cого|{cому|{cый|{cым|{cом|{cых|{cых {wшлем||а|у||ом|е|а|ов {x is loaded на голову of Gordon the Brave
+E 0 5202 0 9 {cпар|а|ы|е|у|ой|е|ы| {cм{cиф{wриль{cны{cх {cр{cу{wкав{cи{cц{x is loaded на плечи of Gordon the Brave
+E 0 5301 0 5 A beautiful iron breast plate is loaded на тело of Gordon the Brave
+E 0 5332 0 16 A two-handed sword is loaded вооружение of Gordon the Brave
+E 0 5226 0 19 {dгравированн|ая|ую|ой|ую|ой|ой|ых|ых печат|ь|ь|и|ь|ью|и|и|ей из слоновой кости{x is loaded нет of Gordon the Brave
 M 1 5315 1 5337 1 Load the librarian
 M 1 5301 20 5338 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5317 1 5338 1 Load an old wizard
 M 1 5302 9 5338 1 Load a citizen of Thalos
 M 1 5301 20 5340 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5304 9 5340 1 Load a female citizen of Thalos
 M 1 5303 11 5341 1 Load an imperial cityguard
-E 0 5321 0 4 an imperial cloak is loaded нет of an imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of an imperial cityguard
-E 0 5327 0 12 an imperial cape is loaded накинуто на тело of an imperial cityguard
-E 0 5318 0 16 an imperial mace is loaded вооружение of an imperial cityguard
+E 0 5321 0 4 An imperial cloak is loaded нет of an imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of an imperial cityguard
+E 0 5327 0 12 An imperial cape is loaded накинуто на тело of an imperial cityguard
+E 0 5318 0 16 An imperial mace is loaded вооружение of an imperial cityguard
 M 1 5319 2 5342 2 Load a man
 M 1 5301 20 5344 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5318 4 5344 4 Load a beautiful masseuse
 M 1 5302 9 5344 1 Load a citizen of Thalos
 M 1 5304 9 5344 1 Load a female citizen of Thalos
 M 1 5316 2 5345 2 Load a young scholar
 M 1 5301 20 5346 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5308 8 5346 2 Load the stone golem
-E 0 5221 0 16 {cдвуручный {Dмеч {x is loaded вооружение of the stone golem
-E 0 5233 0 19 {rтемно{Y-{Rкрасный {wкамешек {x is loaded нет of the stone golem
+E 0 5221 0 16 {cдвуручн|ый|ого|ому|ый|ым|ом {dмеч||а|у||ем|е|а|ей {x is loaded вооружение of the stone golem
+E 0 5233 0 19 {rтемно{y-{rкрасн|ый|ого|ому|ый|ым|ом|ых|ых {wкамеш|ек|ка|ку|ек|ком|ке|ка|ков {x is loaded нет of the stone golem
 M 1 5308 8 5347 2 Load the stone golem
-E 0 5221 0 16 {cдвуручный {Dмеч {x is loaded вооружение of the stone golem
-E 0 5232 0 19 {Yпламенно-{Bсиний {Dкамешек {x is loaded нет of the stone golem
+E 0 5221 0 16 {cдвуручн|ый|ого|ому|ый|ым|ом {dмеч||а|у||ем|е|а|ей {x is loaded вооружение of the stone golem
+E 0 5232 0 19 {yпламенно-{bсин|ий|его|ему|ий|им|ем|их|их {dкамеш|ек|ка|ку|ек|ком|ке|ка|ков {x is loaded нет of the stone golem
 M 1 5301 20 5348 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5308 8 5348 2 Load the stone golem
-E 0 5221 0 16 {cдвуручный {Dмеч {x is loaded вооружение of the stone golem
-E 0 5235 0 19 {cперламутрово{Y-{Wбелый {wкамешек is loaded нет of the stone golem
+E 0 5221 0 16 {cдвуручн|ый|ого|ому|ый|ым|ом {dмеч||а|у||ем|е|а|ей {x is loaded вооружение of the stone golem
+E 0 5235 0 19 {cперламутрово{y-{wбел|ый|ого|ому|ый|ым|ом|ых|ых {wкамеш|ек|ка|ку|ек|ком|ке|ка|ков{x is loaded нет of the stone golem
 M 1 5300 1 5350 1 Load the baby beholder
-E 0 5243 0 19 {Dбесцветный камешек is loaded нет of the baby beholder
+E 0 5243 0 19 {dбесцветн|ый|ого|ому|ый|ым|ом|ых|ых камеш|ек|ка|ку|ек|ком|ке|ка|ков{x is loaded нет of the baby beholder
 M 1 5307 1 5350 1 Load the priest of Thalos
-E 0 5302 0 19 a green serpentine staff is loaded нет of the priest of Thalos
-E 0 5223 0 3 {Dтемно{Y-{Gзеленый {mплащ {x is loaded на шею of the priest of Thalos
+E 0 5302 0 19 A green serpentine staff is loaded нет of the priest of Thalos
+E 0 5223 0 3 {dтемно{y-{gзелен|ый|ого|ому|ый|ым|ом|ых|ых {mплащ||а|у||ем|е|а|ей {x is loaded на шею of the priest of Thalos
 M 1 5301 20 5350 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5303 11 5350 1 Load an imperial cityguard
-E 0 5321 0 4 an imperial cloak is loaded нет of an imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of an imperial cityguard
-E 0 5320 0 19 an imperial shield is loaded нет of an imperial cityguard
-E 0 5317 0 16 an imperial sword is loaded вооружение of an imperial cityguard
+E 0 5321 0 4 An imperial cloak is loaded нет of an imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of an imperial cityguard
+E 0 5320 0 19 An imperial shield is loaded нет of an imperial cityguard
+E 0 5317 0 16 An imperial sword is loaded вооружение of an imperial cityguard
 M 1 5302 9 5350 1 Load a citizen of Thalos
 M 1 5301 20 5352 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5303 11 5352 1 Load an imperial cityguard
-E 0 5330 0 1 an imperial city guard signet ring is loaded на Л. палец of an imperial cityguard
-E 0 5319 0 5 an imperial chest plate is loaded на тело of an imperial cityguard
-E 0 5327 0 12 an imperial cape is loaded накинуто на тело of an imperial cityguard
-E 0 5328 0 13 an imperial belt is loaded на поясе of an imperial cityguard
-E 0 5318 0 16 an imperial mace is loaded вооружение of an imperial cityguard
+E 0 5330 0 1 An imperial city guard signet ring is loaded на Л. палец of an imperial cityguard
+E 0 5319 0 5 An imperial chest plate is loaded на тело of an imperial cityguard
+E 0 5327 0 12 An imperial cape is loaded накинуто на тело of an imperial cityguard
+E 0 5328 0 13 An imperial belt is loaded на поясе of an imperial cityguard
+E 0 5318 0 16 An imperial mace is loaded вооружение of an imperial cityguard
 M 1 5301 20 5354 1 Load the pet lamia
-E 0 5300 0 3 a lamia collar is loaded на шею of the pet lamia
+E 0 5300 0 3 A lamia collar is loaded на шею of the pet lamia
 M 1 5308 8 5354 2 Load the stone golem
-E 0 5221 0 16 {cдвуручный {Dмеч {x is loaded вооружение of the stone golem
-E 0 5237 0 19 {Mлилово{Y-{Gзеленый {wкамешек is loaded нет of the stone golem
+E 0 5221 0 16 {cдвуручн|ый|ого|ому|ый|ым|ом {dмеч||а|у||ем|е|а|ей {x is loaded вооружение of the stone golem
+E 0 5237 0 19 {mлилово{y-{gзелен|ый|ого|ому|ый|ым|ом|ых|ых {wкамеш|ек|ка|ку|ек|ком|ке|ка|ков{x is loaded нет of the stone golem
 M 1 5326 4 5356 2 Load a harmless snake
 M 1 5323 3 5358 2 Load a deer
 M 1 5304 9 5361 1 Load a female citizen of Thalos
@@ -3134,22 +3134,22 @@ R 0 5376 6 Randomize The Void
 R 0 5377 6 Randomize The Void
 R 0 5378 5 Randomize The Void
 M 1 5335 1 5379 1 Load {yстатУЯ {Dнеизвестной {rЗдрени{x
-E 0 5333 0 19 {CМагический щит {x is loaded нет of {yстатУЯ {Dнеизвестной {rЗдрени{x
-E 0 5334 0 16 {Dстилет{x с {rокровавленной{x рукоЯткой is loaded вооружение of {yстатУЯ {Dнеизвестной {rЗдрени{x
+E 0 5333 0 19 {cмагическ|ий|ого|ому|ий|им|ом|их|их щит||а|у||ом|е|а|ов {x is loaded нет of {yстатУЯ {Dнеизвестной {rЗдрени{x
+E 0 5334 0 16 {dстилет{x с {rокровавленной{x рукояткой is loaded вооружение of {yстатУЯ {Dнеизвестной {rЗдрени{x
 M 1 5332 2 5380 2 Load the janitor
 M 1 5331 1 5381 1 Load the cityguard
-E 0 3365 0 0 боевое знамя is loaded освещает of the cityguard
-E 0 3364 0 1 Печатка is loaded на Л. палец of the cityguard
-E 0 3350 0 16 обыкновенный  меч is loaded вооружение of the cityguard
-E 0 3353 0 5 обыкновенный жилет is loaded на тело of the cityguard
-E 0 3355 0 4 обыкновенный плащ is loaded нет of the cityguard
+E 0 3365 0 0 Боев|ое|ого|ому|ое|ым|ом|ых|ых знам|я|ени|ени|я|енем|ени|ени|ен is loaded освещает of the cityguard
+E 0 3364 0 1 Печатк|а|и|е|у|ой|е|и|ок is loaded на Л. палец of the cityguard
+E 0 3350 0 16 Обыкновенн|ый|ого|ому|ый|ым|ом|ых|ых  меч||а|у||ом|е|а|ей is loaded вооружение of the cityguard
+E 0 3353 0 5 Обыкновенн|ый|ого|ому|ый|ым|ом|ых|ых жилет||а|у||ом|е|а|ов is loaded на тело of the cityguard
+E 0 3355 0 4 Обыкновенн|ый|ого|ому|ый|ым|ом|ых|ых плащ||а|у||ом|е|а|ей is loaded нет of the cityguard
 M 1 5333 3 5382 3 Load the beastly fido
 M 1 5334 1 5384 1 Load the cityguard
-E 0 3365 0 0 боевое знамя is loaded освещает of the cityguard
-E 0 3364 0 1 Печатка is loaded на Л. палец of the cityguard
-E 0 3350 0 16 обыкновенный  меч is loaded вооружение of the cityguard
-E 0 3353 0 5 обыкновенный жилет is loaded на тело of the cityguard
-E 0 3354 0 19 обыкновенный щит is loaded нет of the cityguard
+E 0 3365 0 0 Боев|ое|ого|ому|ое|ым|ом|ых|ых знам|я|ени|ени|я|енем|ени|ени|ен is loaded освещает of the cityguard
+E 0 3364 0 1 Печатк|а|и|е|у|ой|е|и|ок is loaded на Л. палец of the cityguard
+E 0 3350 0 16 Обыкновенн|ый|ого|ому|ый|ым|ом|ых|ых  меч||а|у||ом|е|а|ей is loaded вооружение of the cityguard
+E 0 3353 0 5 Обыкновенн|ый|ого|ому|ый|ым|ом|ых|ых жилет||а|у||ом|е|а|ов is loaded на тело of the cityguard
+E 0 3354 0 19 Обыкновенн|ый|ого|ому|ый|ым|ом|ых|ых щит||а|у||ом|е|а|ов is loaded нет of the cityguard
 S
 
 

@@ -6,7 +6,7 @@ Credits <  1 110> Антарийский Зоопарк.~
 Security 8
 Flags 0
 Clan none~
-Version 3
+Version 77
 End
 
 
@@ -254,11 +254,12 @@ AHMV medium
 ~
 dragon~
 ABCFGRT BDFHJTVYa -1000 0
-110 5000 1d1+29500 10d10+20000 15d15+2000 flbite
+110 5000 100d120+29500 10d10+20000 15d15+2000 flbite
 -1000 -1000 -1000 -500
 ACDEFHIKN ABHJKNPS BDEHNPR FI
 stand stand none 10000
 AHZ giant
+
 #30170
 green dragon~
 {gЗелёный дракон{x~
@@ -268,7 +269,7 @@ green dragon~
 dragon~
 ABCGQRST BDFHJNOPQTVac 1000 0
 90 180 1d1+25000 1d1+20000 15d15+500 frbite
--200 -200 -150 -200
+-600 -600 -650 -600
 ACDEHJKO AB BDEH FI
 stand stand none 0
 AHZ giant
@@ -311,19 +312,21 @@ ABCFGQRT DFHJTVa -1000 0
 ACDEHJKO ABCEO BDEHKS FI
 stand stand male 0
 AHZ giant
+
 #30213
 advocate адвокат~
 Адвокат~
-Защитник прав животних (advocate) стоит здесь.
+{DЛиповый защитник прав животних{x (advocate) стоит здесь.
 ~
 ~
 human~
-ABCQRST DFVc 1000 0
-108 216 1d1+30000 10d10+3000 80d30+500 pound
--100 -100 -100 -100
-BCFHIKN N 0 M
+ABCQRST DFHNOVc 1000 0
+108 716 1d1+30000 10d10+3000 80d30+500 pound
+-900 -900 -900 -1000
+BCDFHIJKN CNOP DK M
 stand stand male 10000
 AHMV medium
+
 #30214
 приведение ghost~
 {DПривидение{x~
@@ -332,11 +335,12 @@ AHMV medium
 ~
 human~
 AFHIOQRST BDFHPQTUVc -1000 0
-95 400 1d1+25000 1d1+3000 15d15+95 drain
-0 0 0 0
-CDFHIKN 0 0 N
+95 500 120d10+25000 1d1+3000 15d15+295 drain
+-500 -500 -500 -500
+CDFHIJKN AB CMO N
 stand stand female 0
 AHMV medium
+
 #30215
 dragon ulamba уламба~
 {CУ{mл{cам{mб{Cа{x~
@@ -1538,7 +1542,7 @@ D 0 30204 4 2 The up door of {WВ воздухе над Антарией{x is closed and locked
 D 0 30204 5 2 The down door of {WВ воздухе над Антарией{x is closed and locked
 D 0 30212 5 2 The down door of Магазин животных is closed and locked
 M 1 30151 1 30155 1 Load {yСилиЯ{x
-E 0 30154 0 17 {RРубин{x ({RRuby{x) is loaded зажато в руке of {yСилиЯ{x
+E 0 30154 0 17 {rрубин{x ({rruby{x) is loaded зажато в руке of {yСилиЯ{x
 O 0 30151 0 30156 Cундук (chest) loaded to Сокровищница.
 P 0 2423 2 30151 5 Большой алмаз (large diamond) put inside большой алмаз (large diamond)
 P 0 30152 1 30151 1 Большой жезл (wand) c головой непонятного {rзверя{x на конце put inside Большой жезл (wand) c головой непонЯтного {RзверЯ{x на конце
@@ -1549,7 +1553,7 @@ M 1 30164 1 30165 1 Load рысь
 M 1 30165 1 30166 1 Load тень пантеры
 M 1 30155 1 30167 1 Load тень рыси
 M 1 30154 1 30168 1 Load Единорог
-E 0 30155 0 17 Колокольчики (bell) Единорога is loaded зажато в руке of Единорог
+E 0 30155 0 17 Колокольчики (bell) единорога is loaded зажато в руке of Единорог
 M 1 30156 1 30170 1 Load Рок
 M 1 30157 1 30172 1 Load СвиньЯ
 M 1 30158 1 30173 1 Load Крот
@@ -1561,22 +1565,22 @@ E 0 30158 0 17 Изумрудный шар (ball) с голубоватыми жилами is loaded зажато в ру
 M 1 30162 1 30181 1 Load {DЧернаЯ пантера{x
 M 1 30161 1 30182 1 Load Пушистый лемминг
 M 1 30163 1 30184 1 Load сова
-E 0 30157 0 1 кольцо совы(owl ring) is loaded на Л. палец of сова
+E 0 30157 0 1 Кольцо совы(owl ring) is loaded на Л. палец of сова
 M 1 30166 1 30185 1 Load Ястреб
-E 0 30156 0 8 когти Ястреба (hawk) is loaded на ноги of Ястреб
+E 0 30156 0 8 Когти ястреба (hawk) is loaded на ноги of Ястреб
 O 0 30159 0 30189 {dкнига (book) магии{x loaded to Тайная комната
 M 1 30170 1 30196 1 Load {gЗелёный дракон{x
-E 0 30164 0 18 {gЗеленый ключ{x (key) is loaded летает вокруг of {gЗелёный дракон{x
+E 0 30164 0 18 {gзеленый ключ{x (key) is loaded летает вокруг of {gЗелёный дракон{x
 M 1 30171 1 30197 1 Load {RКрасный дракон{x
-E 0 30165 0 18 {RКрасный ключ{x (key) is loaded летает вокруг of {RКрасный дракон{x
+E 0 30165 0 18 {rкрасный ключ{x (key) is loaded летает вокруг of {RКрасный дракон{x
 M 1 30172 1 30198 1 Load {YЖелтый дракон{x
-E 0 30166 0 18 {YЖелтый ключ{x (key) is loaded летает вокруг of {YЖелтый дракон{x
-E 0 30169 0 16 {CП{cосох {wжизни{x ({Wlife{x) is loaded вооружение of {YЖелтый дракон{x
+E 0 30166 0 18 {yжелтый ключ{x (key) is loaded летает вокруг of {YЖелтый дракон{x
+E 0 30169 0 16 {cп{cосох {wжизни{x ({wlife{x) is loaded вооружение of {YЖелтый дракон{x
 M 1 30173 1 30199 1 Load {BСиний дракон{x
-E 0 30167 0 16 Оружие Демонов (demon) is loaded вооружение of {BСиний дракон{x
-E 0 30163 0 18 {BСиний ключ{x (key) is loaded летает вокруг of {BСиний дракон{x
+E 0 30167 0 16 Оружие демонов (demon) is loaded вооружение of {BСиний дракон{x
+E 0 30163 0 18 {bсиний ключ{x (key) is loaded летает вокруг of {BСиний дракон{x
 M 1 30169 1 30210 1 Load {DЧёрный дракон{x
-E 0 30161 0 17 Исчадье {RАДА (hell){x is loaded зажато в руке of {DЧёрный дракон{x
+E 0 30161 0 17 Исчадье {rада (hell){x is loaded зажато в руке of {DЧёрный дракон{x
 O 0 30160 0 30211 Чёрная дыра loaded to {DПустота{x
 M 1 30213 1 30212 1 Load Адвокат
 M 1 30214 1 30213 1 Load {DПривидение{x

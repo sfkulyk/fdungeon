@@ -105,7 +105,7 @@ weapons master дроу оружейник~
 ~
 human~
 ABN D -1000 0
-109 218 5d10+450 11d9+100 3d10+21 none
+107 214 5d10+450 11d9+100 3d10+21 none
 5 -6 -6 6
 EFNU ABCD 0 0
 stand stand male 5000
@@ -1197,62 +1197,62 @@ S
 
 #RESETS
 M 1 5105 3 5120 1 Load мастер
-E 0 5110 0 17 голубой жезл (blue wand) is loaded зажато в руке of мастер
-E 0 5106 0 16 пятиглавый хлыст (snake-headed whip) is loaded вооружение of мастер
+E 0 5110 0 17 Голубой жезл (blue wand) is loaded зажато в руке of мастер
+E 0 5106 0 16 Пятиглавый хлыст (snake-headed whip) is loaded вооружение of мастер
 M 1 5100 15 5122 15 Load раб-гоблин
 M 1 5102 4 5124 1 Load знатный воин
-E 0 5101 0 16 меч знати (noble's longsword) is loaded вооружение of знатный воин
+E 0 5101 0 16 Меч знати (noble's longsword) is loaded вооружение of знатный воин
 M 1 5103 4 5124 1 Load маг
-E 0 5102 0 16 двуглавый хлыст (snake-headed whip) is loaded вооружение of маг
+E 0 5102 0 16 Двуглавый хлыст (snake-headed whip) is loaded вооружение of маг
 M 1 5104 4 5124 1 Load священница
-E 0 5103 0 16 трехглавый хлыст (snake-headed whip) is loaded вооружение of священница
+E 0 5103 0 16 Трехглавый хлыст (snake-headed whip) is loaded вооружение of священница
 M 1 5107 3 5125 1 Load матрона
-E 0 5104 0 16 четырехглавый хлыст (snake-headed whip) is loaded вооружение of матрона
+E 0 5104 0 16 Четырехглавый хлыст (snake-headed whip) is loaded вооружение of матрона
 G 0 5114 0 Зеленая шляпа (green hat) is given to матрона
 M 1 5101 10 5133 5 Load дроу-обыватель
-E 0 5100 0 16 меч обывателя (commoner longsword) is loaded вооружение of дроу-обыватель
+E 0 5100 0 16 Меч обывателя (commoner longsword) is loaded вооружение of дроу-обыватель
 M 1 5109 1 5148 1 Load нечто
-E 0 5113 0 16 кинжал с {Dпауком{x на {cэфесе{x is loaded вооружение of нечто
+E 0 5113 0 16 Кинжал||а|у||ом|е|а|ов с {dпауком{x на {cэфесе{x is loaded вооружение of нечто
 M 1 5106 2 5150 1 Load оружейник
-E 0 5105 0 16 черный клинок (black longsword) is loaded вооружение of оружейник
+E 0 5105 0 16 Черный клинок (black longsword) is loaded вооружение of оружейник
 G 0 5199 0 Метательный нож(knife) is given to оружейник
 M 1 5106 2 5101 1 Load оружейник
-E 0 5105 0 16 черный клинок (black longsword) is loaded вооружение of оружейник
+E 0 5105 0 16 Черный клинок (black longsword) is loaded вооружение of оружейник
 M 1 5102 4 5104 1 Load знатный воин
-E 0 5101 0 16 меч знати (noble's longsword) is loaded вооружение of знатный воин
+E 0 5101 0 16 Меч знати (noble's longsword) is loaded вооружение of знатный воин
 M 1 5103 4 5104 1 Load маг
-E 0 5102 0 16 двуглавый хлыст (snake-headed whip) is loaded вооружение of маг
+E 0 5102 0 16 Двуглавый хлыст (snake-headed whip) is loaded вооружение of маг
 M 1 5104 4 5104 1 Load священница
-E 0 5103 0 16 трехглавый хлыст (snake-headed whip) is loaded вооружение of священница
+E 0 5103 0 16 Трехглавый хлыст (snake-headed whip) is loaded вооружение of священница
 M 1 5107 3 5105 1 Load матрона
-E 0 5104 0 16 четырехглавый хлыст (snake-headed whip) is loaded вооружение of матрона
-E 0 5111 0 6 шлем (helmet) is loaded на голову of матрона
+E 0 5104 0 16 Четырехглавый хлыст (snake-headed whip) is loaded вооружение of матрона
+E 0 5111 0 6 Шлем (helmet) is loaded на голову of матрона
 M 1 5102 4 5108 1 Load знатный воин
-E 0 5101 0 16 меч знати (noble's longsword) is loaded вооружение of знатный воин
+E 0 5101 0 16 Меч знати (noble's longsword) is loaded вооружение of знатный воин
 M 1 5103 4 5108 1 Load маг
-E 0 5102 0 16 двуглавый хлыст (snake-headed whip) is loaded вооружение of маг
+E 0 5102 0 16 Двуглавый хлыст (snake-headed whip) is loaded вооружение of маг
 M 1 5104 4 5108 1 Load священница
-E 0 5103 0 16 трехглавый хлыст (snake-headed whip) is loaded вооружение of священница
+E 0 5103 0 16 Трехглавый хлыст (snake-headed whip) is loaded вооружение of священница
 M 1 5107 3 5109 1 Load матрона
-E 0 5104 0 16 четырехглавый хлыст (snake-headed whip) is loaded вооружение of матрона
-E 0 5108 0 10 железный браслет (iron bracer) is loaded на руки of матрона
+E 0 5104 0 16 Четырехглавый хлыст (snake-headed whip) is loaded вооружение of матрона
+E 0 5108 0 10 Железный браслет (iron bracer) is loaded на руки of матрона
 M 1 5102 4 5111 1 Load знатный воин
-E 0 5101 0 16 меч знати (noble's longsword) is loaded вооружение of знатный воин
+E 0 5101 0 16 Меч знати (noble's longsword) is loaded вооружение of знатный воин
 M 1 5103 4 5111 1 Load маг
-E 0 5102 0 16 двуглавый хлыст (snake-headed whip) is loaded вооружение of маг
+E 0 5102 0 16 Двуглавый хлыст (snake-headed whip) is loaded вооружение of маг
 M 1 5104 4 5111 1 Load священница
-E 0 5103 0 16 трехглавый хлыст (snake-headed whip) is loaded вооружение of священница
+E 0 5103 0 16 Трехглавый хлыст (snake-headed whip) is loaded вооружение of священница
 M 1 5108 1 5113 1 Load матрона
-E 0 5112 0 1 рубиновый перстень (ruby ring) is loaded на Л. палец of матрона
-E 0 5107 0 16 шестиглавый хлыст (snake-headed whip) is loaded вооружение of матрона
+E 0 5112 0 1 Рубиновый перстень (ruby ring) is loaded на Л. палец of матрона
+E 0 5107 0 16 Шестиглавый хлыст (snake-headed whip) is loaded вооружение of матрона
 M 1 5105 3 5116 1 Load мастер
-E 0 5104 0 16 четырехглавый хлыст (snake-headed whip) is loaded вооружение of мастер
-E 0 5110 0 17 голубой жезл (blue wand) is loaded зажато в руке of мастер
+E 0 5104 0 16 Четырехглавый хлыст (snake-headed whip) is loaded вооружение of мастер
+E 0 5110 0 17 Голубой жезл (blue wand) is loaded зажато в руке of мастер
 M 1 5101 10 5118 5 Load дроу-обыватель
-E 0 5100 0 16 меч обывателя (commoner longsword) is loaded вооружение of дроу-обыватель
+E 0 5100 0 16 Меч обывателя (commoner longsword) is loaded вооружение of дроу-обыватель
 M 1 5105 3 5118 1 Load мастер
-E 0 5105 0 16 черный клинок (black longsword) is loaded вооружение of мастер
-E 0 5110 0 17 голубой жезл (blue wand) is loaded зажато в руке of мастер
+E 0 5105 0 16 Черный клинок (black longsword) is loaded вооружение of мастер
+E 0 5110 0 17 Голубой жезл (blue wand) is loaded зажато в руке of мастер
 S
 
 

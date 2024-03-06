@@ -17,7 +17,7 @@ sedit <строка>       <social> [string]
 
 ѕример:
 
-SEDIT NEW smile 
+SEDIT NEW smile
 SEDIT cnoarg smile “ы счастливо улыбаешься.
 SEDIT onoarg smile $n счастливо улыбается.
 SEDIT cfound smile “ы улыбаешься $U.
@@ -37,8 +37,8 @@ SEDIT oself smile $n улыбается себе.
         $t :  (char *) arg1;
 	$n :  PERS( ch,  to  );
 	$e :  he     / she
-	$m :  him    / her 
-	$s :  his    / her 
+	$m :  him    / her
+	$s :  his    / her
 	$o :  он     / она
 	$g :  его    / ее
 	$u :  ему    / ей
@@ -58,9 +58,9 @@ SEDIT oself smile $n улыбается себе.
 
   kiss crow   (допустим, строка social $o целует $G.)
 
-–езультат:   
+–езультат:
 
-  он целует ее.  
+  он целует ее.
 
 ~
 
@@ -70,7 +70,7 @@ SEDIT oself smile $n улыбается себе.
 
 ADVANCE измен€ет уровень персонажа на заданный. Ёто единственный способ создать
 нового IMMORTAL'а в игре. ADVANCE также может использоватьс€ дл€ понижени€
-уровн€ персонажей. 
+уровн€ персонажей.
 ~
 
 60 TRUST~
@@ -97,7 +97,7 @@ the ban list, if the remover is of equal or higher level than the banner.
 
 A site may have all players, new players, or non-permitted players (set
 by editing the player file) banned, by changing the argument after the site.
-*s may be used to ban either by suffix (*.edu), prefix (labmac*), or 
+*s may be used to ban either by suffix (*.edu), prefix (labmac*), or
 content (*andrews*), but be careful not to accidently lock out too many
 sites with a wildcard.  Bans do not save unless the permban command is used.
 ~
@@ -133,7 +133,7 @@ players.
 Syntax: freeze <name>
 
 FREEZE <character> is a toggle which prevents a character from issuing any
-commands at all. It can be removed from within the game, so freezing a 
+commands at all. It can be removed from within the game, so freezing a
 troublemaker is usually a better option than they deny command.
 ~
 
@@ -144,7 +144,7 @@ Syntax: force all <command>
 FORCE forces one character to execute a command, except of course delete.
 
 Below level 57 (Deity) force can only be used on mobiles, and force all is
-unavailable.  You also cannot 'force orc murder hugo', for example. 
+unavailable.  You also cannot 'force orc murder hugo', for example.
 
 FORCE 'all' forces all player characters to execute a command.
 This is typically used for 'force all save'.
@@ -152,11 +152,11 @@ This is typically used for 'force all save'.
 
 56 SOCKETS~
 Syntax: sockets
-	sockets <name> 
+	sockets <name>
 
-SOCKETS reports all of the visible users connected to the server, including 
-users in the process of logging in.  The two numbers inside brackets are the 
-channel number and the 'connected' state.  The 'connected' states are listed in 
+SOCKETS reports all of the visible users connected to the server, including
+users in the process of logging in.  The two numbers inside brackets are the
+channel number and the 'connected' state.  The 'connected' states are listed in
 merc.h: 0 is CON_PLAYING; non-zero values are various states of logging in.
 
 The optional name argument shows the site of a player, or optional can be used
@@ -168,7 +168,7 @@ into an orc).
 Syntax: load mob <vnum>
 	load obj <vnum> <level>
 
-The load command is used to load new objects or mobiles (use clone to 
+The load command is used to load new objects or mobiles (use clone to
 duplicate strung items and mobs).  The vnums can be found with the vnum
 command, or by stat'ing an existing mob or object.
 
@@ -268,9 +268,9 @@ Syntax: transfer <character>
 	transfer all         <location>
 
 Transfer transfers the target character, or ALL player characters,
-to your current location (default) or to a specified location. Trans all 
+to your current location (default) or to a specified location. Trans all
 should almost never be used, as 100 players popping into one room can have
-horrible effects on slow links. Teleport is a synonym for transfer. 
+horrible effects on slow links. Teleport is a synonym for transfer.
 ~
 
 54 AT~
@@ -322,7 +322,7 @@ easily.  Without holy light, you can see what mortal players see.
 
 Wizinvis takes a level argument, and will mke you invisible to all players of
 a lower level than your invisibility level.  It defaults to the maximum
-(your level) if no argument is given.  Wizi 60 characters are totally 
+(your level) if no argument is given.  Wizi 60 characters are totally
 invisible.
 ~
 
@@ -331,7 +331,7 @@ Toggling your incognito status will hide your presence from people outside the
 room you are in, but leave you visible to those who are with you.  It takes
 a level argument similar to wizinvis, people at that level or higher can see
 you regarless of location.
-~ 
+~
 
 52 MEMORY~
 Syntax: memory
@@ -368,7 +368,7 @@ Syntax: stat <name>
 
 The stat command gives you detailed information on an object, mobile, or room
 within the game.  Without a class argument, the command will return a object
-(if found), a mobile (if no object exists, but a mobile does), or a room 
+(if found), a mobile (if no object exists, but a mobile does), or a room
 (if a number is  given).  Stat room with no argument stats the room you are
 standing in.  Stat can be used to find room vnums for goto.
 (see also goto, transfer)
@@ -403,7 +403,7 @@ Poofin and poofout only show to characters who can see you.
 59 PROTECT~
 Syntax: protect <character>
 
-Protect is used to protect a character from unwanted snooping.  Removing 
+Protect is used to protect a character from unwanted snooping.  Removing
 protected status from a character WILL be seen by that character.
 ~
 
@@ -451,14 +451,14 @@ turns it back on).
 ~
 
 52 WIZNET~
-Syntax: wiznet 
+Syntax: wiznet
 	wiznet show
 	wiznet status
 	wiznet <field>
 
 Wiznet is sort of an immortal news service, to show important events to
-the wiznetted immoral.  Wiznet by itself turns wiznet on and off, 
-wiznet show lists all settable flags (they are not detailed here), 
+the wiznetted immoral.  Wiznet by itself turns wiznet on and off,
+wiznet show lists all settable flags (they are not detailed here),
 wiznet status shows your current wiznet settings, and wiznet <field> toggles
 a field on and off.  The events should be self-explanatory, if they are not,
 fiddle with them a while.  More events are available at higher levels.

@@ -1,4 +1,4 @@
-; Races data version 2
+; Races data version 77
 #Race
 Name null race~
 WName error!  ~
@@ -46,9 +46,9 @@ Spec U
 Size 2
 Cbonus M
 Cpenalty 0
-Stats 13 13 13 13 13
-Mstats 18 18 18 18 18
-Hstats 26 26 26 26 26
+Stats 13 13 13 13 14
+Mstats 18 18 18 18 19
+Hstats 26 26 26 26 27
 Sk1 '(null)'
 Sk2 '(null)'
 Sk3 '(null)'
@@ -70,15 +70,15 @@ Aff J
 Off 0
 Imm 0
 Res B
-Vuln Z
+Vuln 0
 Form AHMV
 Spec KX
 Size 2
 Cbonus HKM
 Cpenalty F
-Stats 12 15 14 16 12
-Mstats 17 20 19 21 17
-Hstats 23 26 25 27 23
+Stats 12 15 14 16 13
+Mstats 17 20 19 21 18
+Hstats 23 26 25 27 24
 Sk1 'sneak'
 Sk2 'hide'
 Sk3 'quenia'
@@ -106,9 +106,9 @@ Spec L
 Size 2
 Cbonus FO
 Cpenalty E
-Stats 15 12 14 11 16
-Mstats 20 17 19 16 21
-Hstats 26 24 25 22 27
+Stats 15 12 14 11 17
+Mstats 20 17 19 16 22
+Hstats 26 24 25 22 28
 Sk1 'berserk'
 Sk2 'axe'
 Sk3 '(null)'
@@ -136,9 +136,9 @@ Spec J
 Size 4
 Cbonus IJ
 Cpenalty H
-Stats 19 10 10 11 17
-Mstats 24 15 15 16 22
-Hstats 30 21 21 22 30
+Stats 19 10 10 11 18
+Mstats 24 15 15 16 23
+Hstats 30 21 21 22 31
 Sk1 'bash'
 Sk2 'fast healing'
 Sk3 'mace'
@@ -166,9 +166,9 @@ Spec ABGNS
 Size 2
 Cbonus HL
 Cpenalty K
-Stats 16 15 15 16 12
-Mstats 21 20 20 21 17
-Hstats 27 26 26 27 23
+Stats 16 15 15 16 13
+Mstats 21 20 20 21 18
+Hstats 27 26 26 27 24
 Sk1 'fast healing'
 Sk2 '(null)'
 Sk3 '(null)'
@@ -196,9 +196,9 @@ Spec JM
 Size 3
 Cbonus I
 Cpenalty HM
-Stats 17 11 11 12 16
-Mstats 22 16 16 17 21
-Hstats 28 22 22 23 27
+Stats 17 11 11 12 17
+Mstats 22 16 16 17 22
+Hstats 28 22 22 23 28
 Sk1 'berserk'
 Sk2 'fast healing'
 Sk3 '(null)'
@@ -226,9 +226,9 @@ Spec Oa
 Size 1
 Cbonus N
 Cpenalty I
-Stats 11 13 13 19 11
-Mstats 16 18 18 24 16
-Hstats 22 24 24 30 22
+Stats 11 13 13 19 12
+Mstats 16 18 18 24 17
+Hstats 22 24 24 30 23
 Sk1 'sneak'
 Sk2 'hide'
 Sk3 'missile weapons'
@@ -256,9 +256,9 @@ Spec E
 Size 2
 Cbonus L
 Cpenalty K
-Stats 16 12 11 15 14
-Mstats 21 17 16 20 19
-Hstats 27 23 22 26 25
+Stats 16 12 11 15 15
+Mstats 21 17 16 20 20
+Hstats 27 23 22 26 26
 Sk1 'berserk'
 Sk2 '(null)'
 Sk3 '(null)'
@@ -285,10 +285,10 @@ Form AHMV
 Spec K
 Size 2
 Cbonus FHLM
-Cpenalty IK
-Stats 12 15 14 15 12
-Mstats 17 20 19 21 17
-Hstats 23 26 25 27 23
+Cpenalty K
+Stats 12 15 14 15 13
+Mstats 17 20 19 21 18
+Hstats 23 26 25 27 24
 Sk1 'sword'
 Sk2 'whip'
 Sk3 'dagger'
@@ -316,9 +316,9 @@ Spec DV
 Size 3
 Cbonus 0
 Cpenalty 0
-Stats 14 12 13 13 15
-Mstats 19 17 18 18 20
-Hstats 27 23 25 24 26
+Stats 14 12 13 13 16
+Mstats 19 17 18 18 21
+Hstats 27 23 25 24 27
 Sk1 'kick'
 Sk2 '(null)'
 Sk3 '(null)'
@@ -346,9 +346,9 @@ Spec FWY
 Size 2
 Cbonus E
 Cpenalty C
-Stats 14 12 13 14 13
-Mstats 19 17 18 19 18
-Hstats 25 23 24 25 25
+Stats 14 12 13 14 14
+Mstats 19 17 18 19 19
+Hstats 25 23 24 25 26
 Sk1 'envenom'
 Sk2 '(null)'
 Sk3 '(null)'
@@ -370,15 +370,15 @@ Aff TU
 Off 0
 Imm 0
 Res OT
-Vuln MS
+Vuln S
 Form AHMV
 Spec ABRTW
 Size 1
 Cbonus DG
 Cpenalty 0
-Stats 11 15 17 15 10
-Mstats 16 20 22 20 15
-Hstats 22 26 28 26 21
+Stats 11 15 17 15 11
+Mstats 16 20 22 20 16
+Hstats 22 26 28 26 22
 Sk1 '(null)'
 Sk2 '(null)'
 Sk3 '(null)'
@@ -406,9 +406,9 @@ Spec ACP
 Size 1
 Cbonus DGH
 Cpenalty I
-Stats 11 17 15 15 10
-Mstats 15 22 20 20 14
-Hstats 21 28 26 26 20
+Stats 11 17 15 15 11
+Mstats 15 22 20 20 15
+Hstats 21 28 26 26 21
 Sk1 'meditation'
 Sk2 '(null)'
 Sk3 '(null)'
@@ -436,9 +436,9 @@ Spec AQV
 Size 3
 Cbonus DH
 Cpenalty 0
-Stats 14 14 13 14 15
-Mstats 19 19 18 19 20
-Hstats 25 25 24 25 26
+Stats 14 14 13 14 16
+Mstats 19 19 18 19 21
+Hstats 25 25 24 25 27
 Sk1 '(null)'
 Sk2 '(null)'
 Sk3 '(null)'
@@ -466,9 +466,9 @@ Spec K
 Size 2
 Cbonus GJK
 Cpenalty L
-Stats 12 15 19 13 12
-Mstats 17 20 24 18 17
-Hstats 23 26 30 24 23
+Stats 12 15 19 13 13
+Mstats 17 20 24 18 18
+Hstats 23 26 30 24 24
 Sk1 '(null)'
 Sk2 '(null)'
 Sk3 '(null)'
@@ -479,12 +479,13 @@ Wbonus 2 0 -5 5 3 -7 -5 0 -3 0 0
 Hand pound
 Wealth 1
 END
+
 #Race
 Name skeleton~
 WName Скелет  ~
 Pc_race TRUE~
 Points 3
-Class 100 200 160 100
+Class 110 200 160 100
 Act 0
 Aff JZ
 Off F
@@ -496,9 +497,9 @@ Spec HIW
 Size 2
 Cbonus CLM
 Cpenalty K
-Stats 15 14 13 13 13
-Mstats 20 18 18 18 18
-Hstats 26 25 24 24 25
+Stats 15 14 13 13 14
+Mstats 20 18 18 18 17
+Hstats 26 25 24 24 26
 Sk1 'parry'
 Sk2 '(null)'
 Sk3 '(null)'
@@ -509,6 +510,7 @@ Wbonus 0 3 0 0 -4 4 0 -3 0 0 0
 Hand slash
 Wealth 0
 END
+
 #Race
 Name zombie~
 WName Зомби   ~
@@ -526,9 +528,9 @@ Spec HIWZ
 Size 2
 Cbonus IL
 Cpenalty K
-Stats 16 10 11 10 17
-Mstats 21 15 16 18 22
-Hstats 27 21 22 25 28
+Stats 16 10 11 10 18
+Mstats 21 15 16 18 23
+Hstats 27 21 22 25 29
 Sk1 '(null)'
 Sk2 '(null)'
 Sk3 '(null)'
@@ -809,36 +811,38 @@ Wbonus 0 0 0 0 0 0 0 0 0 0 0
 Hand bite
 Wealth 0
 END
+
 #Race
 Name goblin~
 WName Гоблин  ~
-Pc_race FALSE~
-Points 0
-Class 100 100 100 100
+Pc_race TRUE~
+Points 7
+Class 180 200 125 150
 Act 0
-Aff J
+Aff JZ
 Off 0
-Imm 0
-Res Q
-Vuln C
+Imm M
+Res LQ
+Vuln BS
 Form AHMV
-Spec 0
+Spec OT
 Size 2
-Cbonus 0
-Cpenalty 0
-Stats 13 13 13 13 13
-Mstats 18 18 18 18 18
-Hstats 26 26 26 26 26
-Sk1 '(null)'
-Sk2 '(null)'
-Sk3 '(null)'
+Cbonus LF
+Cpenalty KE
+Stats 12 14 12 15 14
+Mstats 17 19 17 20 19
+Hstats 23 25 23 26 25	
+Sk1 'axe'
+Sk2 'mace'
+Sk3 'fast healing'
 Sk4 '(null)'
 Sk5 '(null)'
-Dambonus 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-Wbonus 0 0 0 0 0 0 0 0 0 0 0
+Dambonus 0 0 0 0 0 0 0 0 -33 -100 0 0 0 -33 0 33 0 0 33 0
+Wbonus -6 -6 0 -6 9 5 -6 -6 -6 -6 0
 Hand punch
 Wealth 1
 END
+
 #Race
 Name hobgoblin~
 WName Хобгобл.~

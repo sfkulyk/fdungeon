@@ -23,12 +23,13 @@ titan strong guard citizen~
 он приветствует тебя и желает всего наилучшего.
 ~
 giant~
-ABT CDEFHJV 1000 0
-45 90 25d10+3000 1d1+99 3d12+45 slash
--15 -15 -15 4
-EIK ABL HIN JKP
-stand stand either 1200
+ABST CDEFHJV 1000 0
+45 190 25d10+5000 1d1+99 3d12+145 slash
+-150 -150 -150 -40
+EIJK ABL CDHIN 0
+stand stand either 120
 AHMV large
+
 #18002
 cat alley уличный котенок~
 уличный котенок~
@@ -39,27 +40,29 @@ cat alley уличный котенок~
 ради жалкого ужина. Ты чувствуешь жалость к малышу.
 ~
 cat~
-AB CDEFJZ -1000 0
-30 60 6d12+853 299d1+5 4d6+30 none
--9 -9 -9 6
-EFHIK ABL N K
+ABT CDEFJZ -1000 0
+30 90 6d12+1853 299d1+5 4d6+130 claw
+-90 -90 -90 -96
+EFHIJK ABL N K
 stand stand either 0
 AGV large
+
 #18003
 drummer bongo player барабанщик~
 барабанщик~
-Бродячий барабанщик танцует под звуки своего барабана.
+Бродячий {Yбарабанщик{x танцует под звуки своего барабана.
 ~
 Этот барабанщик привык играть на своем иструменте так хорошо, как
 только может.
 ~
 giant~
-ABT CDEFJ -1000 18004
-25 50 5d10+750 1d1+99 2d10+25 pierce
--7 -7 -7 0
+ABST CDEFJ -1000 18004
+25 80 5d10+1750 1d1+99 20d10+25 blunt
+-70 -70 -70 0
 EIK ABL HIN JKP
-stand stand either 3100
+stand stand either 310
 AHMV large
+
 #18004
 guitar player гитарист~
 гитарист~
@@ -70,12 +73,13 @@ guitar player гитарист~
 свое пение негромкой музыкой.
 ~
 giant~
-AB CDEFJ -1000 18004
-25 50 5d10+650 1d1+99 2d10+25 pierce
--7 -7 -7 0
-EIK ABL HIN JKP
+ABHS CDEFJ -1000 18004
+25 70 5d10+1650 1d1+99 2d10+55 pierce
+-70 -70 -70 -10
+EFIJK ABL HIN 0
 stand stand either 4330
 AHMV large
+
 #18005
 pipeplayer pipe layer играющая свирель~
 играющая на свирели~
@@ -86,12 +90,13 @@ pipeplayer pipe layer играющая свирель~
 прекрасна! Ты надеешься, что она никогда не закончится.
 ~
 giant~
-AB CDEFJ -1000 18004
-25 50 5d10+650 1d1+99 2d10+25 blast
--7 -7 -7 6
-EIK ABL HIN JKP
+ABHS CDEFJ -1000 18004
+25 70 5d10+1650 1d1+99 2d10+55 blast
+-70 -70 -70 -60
+EIJK ABL HIN 0
 stand stand either 5300
 AHMV large
+
 #18006
 armourer shop продавец~
 продавец доспехов~
@@ -103,8 +108,8 @@ armourer shop продавец~
 ~
 giant~
 ABNTe CDEFJ -500 0
-101 202 50d10+13000 1d1+99 6d10+20 slice
-14 -33 -33 2
+103 206 50d10+13000 1d1+99 6d10+20 slice
+17 -33 -33 2
 EIK ABCDL HIN JKP
 stand stand either 200000
 AHMV large
@@ -120,8 +125,8 @@ girl shop pet хозяйка магазин животное~
 ~
 giant~
 ABNTe CDEFJ -500 0
-108 216 50d10+13000 1d1+99 6d10+21 slice
-17 -43 -43 -10
+109 218 50d10+13000 1d1+99 6d10+21 slice
+18 -43 -43 -10
 EIK ABCDL HIN JKP
 stand stand either 200000
 AHMV large
@@ -137,7 +142,7 @@ grocer продавец мясо~
 giant~
 ABNTe CDEFJ -1000 0
 105 210 50d10+14000 1d1+99 5d10+21 scratch
-12 -41 -41 -3
+11 -41 -41 -3
 EIK ABCDL HIN JKP
 stand stand either 200000
 AHMV large
@@ -152,7 +157,7 @@ grocer продавец вегетарианец~
 ~
 giant~
 ABNTe CDEFJ -1000 0
-101 202 50d10+14000 1d1+140 5d10+20 scratch
+106 212 50d10+14000 1d1+140 5d10+21 scratch
 14 -41 -41 -30
 EIK ABCDL HIN JKP
 stand stand either 200000
@@ -170,8 +175,8 @@ weaponsmith weapon shopkeeper оружейник~
 ~
 giant~
 ABNTe CDEFJ 0 0
-103 206 50d10+15000 1d1+99 6d10+20 sting
-18 -43 -43 -30
+105 210 50d10+15000 1d1+99 6d10+21 sting
+7 -43 -43 -30
 CDEFIKN ABCDL HIN JKP
 stand stand either 200000
 AHMV large
@@ -186,8 +191,8 @@ library shopkeeper mage библиотекарь~
 ~
 giant~
 ABNe CDEFJ 500 0
-108 216 25d10+13750 1d1+99 6d10+21 beating
-16 -38 -38 -12
+102 204 25d10+13750 1d1+99 6d10+20 beating
+12 -38 -38 -12
 CDEFIKN ABCDL HIN JKP
 stand stand either 200000
 AHMV large
@@ -204,8 +209,8 @@ designer shopkeeper дизайнер~
 ~
 giant~
 ABNe CDEFJ -600 0
-101 202 50d10+15000 1d1+99 5d10+20 pierce
-12 -41 -41 -23
+107 214 50d10+15000 1d1+99 5d10+21 pierce
+6 -41 -41 -23
 CDEFIKN ABCDL BHIN JKP
 stand stand either 200000
 AHMV large
@@ -219,8 +224,8 @@ bartender pub owner бармен~
 ~
 giant~
 ABNTe CDEFJ -100 0
-100 200 50d10+15000 1d1+99 5d10+20 slash
-13 -41 -41 -23
+105 210 50d10+15000 1d1+99 5d10+21 slash
+9 -41 -41 -23
 CDEFIKN ABCDL HIN JKP
 stand stand either 200000
 AHMV large
@@ -236,7 +241,7 @@ waiter официант~
 giant~
 ABNTe CDEFJ 200 0
 99 198 25d10+14000 1d1+99 8d9+19 pierce
-8 -15 -15 -1
+11 -15 -15 -1
 CDEFIKN ABCDL HIN JKP
 stand stand either 200000
 AHMV large
@@ -252,7 +257,7 @@ innkeeper хозяин гостиница~
 giant~
 ABNTe CDEFJ -1000 0
 100 200 50d10+5000 1d1+99 5d10+20 pierce
-8 -21 -21 -3
+11 -21 -21 -3
 CDEFIKN ABCDL HIN JKP
 stand stand either 200000
 AHMV large
@@ -266,8 +271,8 @@ florist цветочница~
 ~
 giant~
 ABNTe CDEFJ -300 0
-106 212 25d10+4750 1d1+99 6d10+21 slice
-5 -18 -18 3
+104 208 25d10+4750 1d1+99 6d10+20 slice
+17 -18 -18 3
 CDEFIKN ABCDL HIN JKP
 stand stand either 200000
 AHMV large
@@ -281,12 +286,13 @@ sheriff шериф~
 он смог бы найти комнату для еще одного нежелательного туриста.
 ~
 giant~
-ABT CDEFJ 500 0
-30 60 6d12+1000 1d1+99 4d6+30 pierce
--9 -9 -9 6
-CDEFIKN ABL HIN JKP
+ABT CDEFJHNOV 500 0
+30 160 6d12+3000 1d1+99 4d6+130 pierce
+-90 -90 -90 -60
+CDEFIJKN ABCL DHIN JKP
 stand stand either 2100
 AHMV large
+
 #18018
 jailguard тюремщик~
 тюремщик~
@@ -296,26 +302,28 @@ jailguard тюремщик~
 ~
 giant~
 ABT CDEFJ -500 0
-28 56 6d12+703 1d1+99 2d12+28 claw
--8 -8 -8 6
+28 56 6d12+1703 1d1+99 2d12+28 claw
+-80 -80 -80 -60
 CDEFIKN ABL BHIN JKP
 stand stand either 3100
 AHMV large
+
 #18020
 prisoner stinky заключенный~
 вонючий заключенный~
-Ты видишь вонючего заключенного, запертого стальными замками.
+Ты видишь {Dвонючего {Yзаключенного{x, запертого стальными замками.
 ~
 *Фу*! Чем это так пахнет? Это воняет как ... как ... дохлая крыса! Ох!
 Это новый заключенный! Его арестовали за распространение вони по всему миру.
 ~
 giant~
-ABT CDEFJ -1000 0
-25 50 5d10+650 1d1+100 2d10+25 pierce
--7 -7 -7 1
-CDEFIKN ABL HIN JKPSZ
+ABST CDEFJNOV -1000 0
+25 100 5d10+1650 1d1+100 2d20+25 pierce
+-70 -70 -70 -100
+CDEFIKN ABMPCL DHIN  0
 stand stand either 0
 AHMV large
+
 #18021
 chocolate shopkeeper продавец шоколад~
 продавец шоколада~
@@ -328,8 +336,8 @@ chocolate shopkeeper продавец шоколад~
 ~
 giant~
 ABNTe CDEFJ -100 0
-100 200 25d1+13000 1d1+100 8d10+20 slice
-18 -35 -35 4
+106 212 25d1+13000 1d1+100 8d10+21 slice
+11 -35 -35 4
 CDEFIKN ABCDL HIN JKP
 stand stand either 200000
 AHMV large
@@ -345,7 +353,7 @@ icecream shopkeeper продавец мороженое~
 giant~
 ABNTe CDEFJ -100 0
 106 212 6d12+853 1d1+99 4d10+21 slap
-11 -9 -9 6
+10 -9 -9 6
 CDEFIKN ABCDL HIN JKP
 stand stand either 200000
 AHMV large
@@ -359,8 +367,8 @@ apiarist lady shopkeeper пчеловод~
 ~
 giant~
 ABNTe CDEFJ -100 0
-107 214 15d10+7850 1d1+100 4d10+21 beating
-11 -33 -33 -21
+108 216 15d10+7850 1d1+100 4d10+21 beating
+16 -33 -33 -21
 CDEFIKN ABCDL BHIN JKP
 stand stand either 200000
 AHMV large
@@ -376,11 +384,12 @@ baker shopkeeper булочник~
 ~
 giant~
 ABNTe CDEFJ -100 0
-103 206 25d10+15050 1d1+100 6d10+20 pierce
-7 -48 -48 -24
+109 218 25d10+15050 1d1+100 6d10+21 pierce
+15 -48 -48 -24
 CDEFIKN ABCDL HIN JKP
 stand stand either 200000
 AHMV large
+
 #18025
 zanrich shopkeeper Зенрич~
 Зенрич~
@@ -391,8 +400,8 @@ zanrich shopkeeper Зенрич~
 ~
 giant~
 ABNTe CDEFJ -100 0
-106 212 25d10+12750 1d1+100 6d10+21 pierce
-11 -38 -38 -22
+105 210 25d10+12750 1d1+100 6d10+21 pierce
+19 -38 -38 -22
 CDEFIKN ABCDL HIN JKP
 stand stand either 200000
 AHMV large
@@ -406,11 +415,12 @@ wizard master wands shopkeeper волшебник~
 ~
 giant~
 ABNTe CDEFJ -100 0
-99 198 10d10+15300 1d1+100 4d9+19 slash
-17 -51 -51 -30
+107 214 10d10+15300 1d1+100 4d10+21 slash
+15 -51 -51 -30
 CDEFIKN ABCDL HIN JKP
 stand stand either 200000
 AHMV large
+
 #18027
 templar knight храмовник~
 храмовник~
@@ -420,12 +430,13 @@ templar knight храмовник~
 ним в конфликт.
 ~
 giant~
-ABT CDEFJ 1000 0
-40 80 15d10+2200 1d1+90 4d8+40 scratch
--13 -13 -13 4
-CDEFIKN ABL HIN JKP
+ABST CDEFJHVY 1000 0
+40 100 15d10+2200 1d1+90 4d8+40 scratch
+-130 -130 -130 -40
+CDEFIJKN ABL HIN 0
 stand stand either 5250
 AHMV large
+
 #18028
 citizen titan горожанин~
 горожанин Титании~
@@ -436,11 +447,12 @@ citizen titan горожанин~
 ~
 giant~
 ABT CDEFJ -1000 0
-28 56 6d12+703 1d1+100 2d12+28 pierce
--8 -8 -8 6
+28 86 6d12+1703 1d1+100 8d12+48 pierce
+-80 -80 -80 -60
 CDEFIKN ABL HIN JKP
 stand stand either 2500
 AHMV large
+
 #18029
 cook maid chef повариха~
 повариха~
@@ -451,7 +463,7 @@ cook maid chef повариха~
 ~
 giant~
 ABT CDEFJ -500 0
-30 60 6d12+953 1d1+100 4d6+30 blast
+30 60 6d12+1953 1d1+100 4d6+30 blast
 -9 -9 -9 6
 CDEFIKN ABL HIN JKP
 stand stand either 3900
@@ -487,6 +499,7 @@ ABT CDEFJ -500 0
 CDEFIKN ABL HIN JKP
 stand stand either 10
 AHMV large
+
 #18032
 patrol guard дозорный~
 дозорный~
@@ -745,12 +758,13 @@ royal titan guard королевский охранник~
 Высокий и сильный, этот Королевский Охранник контролирует стены замка.
 ~
 giant~
-ABCT FJ -1000 0
-40 80 15d10+2000 1d1+201 4d8+40 slash
--12 -12 -12 -2
-BCDEFGHIK ABL HIN JKP
-stand stand either 7000
+ABCST FJHOVY -1000 0
+40 110 15d10+4000 1d1+201 4d8+60 slash
+-120 -120 -120 -20
+BCDEFGHIJK ABL HIN JKP
+stand stand either 70
 AHMV large
+
 #18049
 boy titan мальчик~
 мальчик Титании~
@@ -759,12 +773,13 @@ boy titan мальчик~
 Этот маленький мальчик развлекает себя игрой с камешками.
 ~
 giant~
-ABCT FJ -1000 0
-33 66 10d10+1300 1d1+111 6d4+33 slash
--11 -11 -11 5
+ABCST FJ -1000 0
+33 96 10d10+2300 1d1+1111 6d4+33 slash
+-61 -61 -61 -51
 BCDEFGHIK ABL HIN JKP
 stand stand either 330
 AHMV large
+
 #18050
 girl titan девочка~
 девочка Титании~
@@ -776,11 +791,12 @@ girl titan девочка~
 ~
 giant~
 ABCT FJ -1000 0
-33 66 10d10+1100 1d1+111 6d4+33 slash
--11 -11 -11 5
-BCDEFGHIK ABL HIN JKP
+33 86 10d10+3100 1d1+111 6d4+33 slash
+-71 -71 -71 -57
+BCDEFGHIJK ABL CDHIN 0
 stand stand either 390
 AHMV large
+
 #18051
 sleep sleeping guard спящий охранник~
 спящий охранник~
@@ -791,11 +807,12 @@ sleep sleeping guard спящий охранник~
 ~
 giant~
 ABCT FJ -1000 0
-40 80 15d10+2000 1d1+111 4d8+40 pierce
--13 -13 -13 4
-BCDEFGHIK ABL BHIN JKP
-sleep sleep either 5870
+40 180 15d10+3000 1d1+111 14d8+40 pierce
+-130 -130 -130 -140
+BCDEFGHIJK ABL BHIN JKP
+sleep stand either 58
 AHMV large
+
 #18052
 advisor first первая советчица~
 первая советчица~
@@ -804,12 +821,13 @@ advisor first первая советчица~
 Она занята важной беседой с королевой, было бы глупостью мешать им.
 ~
 dwarf~
-ABCT FJZ -1000 0
-50 100 50d10+5000 1d1+212 5d8+50 beating
--20 -20 -20 3
+ABCST FJHVYZ -1000 0
+50 100 50d10+7000 1d1+212 5d18+50 beating
+-120 -120 -120 -130
 BCDEFGHIK ABL LNQ KRSZ
 stand stand either 7100
 AHMV large
+
 #18053
 keeper deadly pet owner shopkeeper владелец монстр~
 владелец боевых монстров~
@@ -822,10 +840,11 @@ keeper deadly pet owner shopkeeper владелец монстр~
 giant~
 ABNTe FJ -1000 0
 103 206 50d10+14500 1d1+212 5d10+20 pierce
-16 -50 -50 -23
+8 -50 -50 -23
 CDEFIKN ABCDL HIN JKP
 stand stand either 5000
 AHMV large
+
 #18054
 cougar black pet пума~
 Черная Пума~
@@ -840,6 +859,7 @@ ABITV DFHUVZ 1000 0
 EFHN HM GHIJK I
 stand stand either 0
 AGV large
+
 #18055
 kraken pet кракен~
 Убийственный Спрут~
@@ -935,12 +955,13 @@ king dractax titan король Дректекс~
 Величавый и гордый король планирует будущее своего королевства.
 ~
 giant~
-ABT DFJV -1000 0
-53 106 50d10+7000 1d1+401 6d7+53 pierce
--22 -22 -22 2
-CDEFGKNO BO HIJ JKP
+ABCSTQR DFJHNOVY -1000 0
+53 156 50d10+9000 1d1+1401 6d17+53 pierce
+-220 -220 -220 -220
+CDEFJGKNO ABO CDHIJ 0
 stand stand either 19990
 AHMV large
+
 #18062
 queen crystal titan королева Кристл~
 Королева Кристл~
@@ -949,12 +970,13 @@ queen crystal titan королева Кристл~
 Величавая и гордая королева планирует будущее своего королевства.
 ~
 giant~
-ABT DFJV -1000 0
-51 102 50d10+5500 1d1+502 5d8+51 pierce
--21 -21 -21 3
-CDEFGKNO BO HIJ JKP
+ABCRSTQ DFJHNOVY -1000 0
+51 152 50d10+7500 1d1+1502 5d28+51 pierce
+-212 -212 -212 -223
+CDEFIJGKNO BO CDHIJ J
 stand stand either 16990
 AHMV large
+
 #18063
 assassin убийца~
 убийца~
@@ -965,12 +987,13 @@ assassin убийца~
 уничтожить короля и королеву. Почему со стороны всегда виднее?
 ~
 giant~
-ABT DFJV -1000 0
-45 90 25d10+3500 1d1+302 8d4+45 slash
--15 -15 -15 4
-CDEFGKNO ABL HIN JP
+ABST BDFJOVQTh -1000 0
+45 190 25d10+5500 1d1+302 8d14+45 slash
+-150 -150 -150 -114
+ABCDEFJGKNO ABLM CDHIN JPS
 stand stand either 8990
 AHMV large
+
 #18064
 rat крыса~
 маленькая крыса~
@@ -979,12 +1002,13 @@ rat крыса~
 Уродливая крыса пожевывает ковер.
 ~
 rat~
-ABT DFJV -500 0
-30 60 6d12+953 1d1+201 4d6+30 beating
--9 -9 -9 6
-CDEFGKNO ABL HIN JKP
+ABFST DFJV -500 0
+30 160 6d12+1953 1d1+201 4d6+30 beating
+-90 -90 -90 -60
+CDEFJGKNO ABL HIN JKP
 stand stand either 0
 AHMV large
+
 #18065
 peasant крестьянка~
 счастливая крестьянка~
@@ -995,11 +1019,12 @@ peasant крестьянка~
 ~
 giant~
 ABT DFHJ -1000 0
-28 56 6d12+703 1d1+504 2d12+28 pierce
+28 56 6d12+1703 1d1+504 2d12+28 pierce
 -8 -8 -8 6
 CDEFGKNO ABL HIN JKP
 stand stand either 100
 AHMV large
+
 #18066
 guildmaster warrior cleric мастер~
 мастер~
@@ -1014,6 +1039,7 @@ ABJKRVb DFJ 0 0
 FHN AB HI JP
 stand stand either 8000
 AHMV large
+
 #18067
 guildstudent cleric student ученик~
 ученик~
@@ -1072,6 +1098,7 @@ ABRT DJ 0 0
 0 0 HI JP
 stand stand either 3345
 AHMV large
+
 #18071
 guildguard cleric стражник~
 стражник~
@@ -1080,12 +1107,13 @@ guildguard cleric стражник~
 Этот человек - мастер своего дела. Не стоит раздражать его.
 ~
 giant~
-ABQT DJ 0 0
-30 60 6d12+1003 3d7+4 4d6+30 pierce
+ABQST DJH 0 0
+30 60 6d12+2003 3d7+4 4d6+30 pierce
 -9 -9 -9 5
-0 0 HI JP
+0 0 CDHI JP
 stand stand either 4367
 AHMV large
+
 #18072
 guildguard warrior стражник~
 стражник~
@@ -1124,11 +1152,12 @@ boy servant мальчик слуга~
 ~
 giant~
 AG J 0 0
-25 50 5d10+650 1d6+1 2d10+25 beating
--7 -7 -7 0
-0 0 HI JP
+25 50 5d10+1650 1d6+1 2d10+25 beating
+-70 -70 -70 -90
+J C HI JP
 stand stand either 2267
 AHMV large
+
 #18075
 tourist турист~
 турист~
@@ -1139,7 +1168,7 @@ tourist турист~
 ~
 giant~
 ACGH J 0 0
-25 50 5d10+650 1d6+1 2d10+25 beating
+25 50 5d10+1650 1d6+1 2d10+25 beating
 -7 -7 -7 6
 0 0 HI JP
 stand stand either 3413
@@ -1198,12 +1227,13 @@ lieutenant commander лейтенант~
 защиты на случай нападения. Тебе лучше не отвлекать его.
 ~
 giant~
-ABGH J -1000 18062
-42 84 25d10+3250 1d8+100 3d12+42 pierce
+ABGHST JNOV -1000 18062
+42 184 25d10+4250 1d8+100 3d12+42 pierce
 -14 -14 -14 4
-0 0 DHI CJP
+0 0 DCHI CJP
 stand stand either 6699
 AHMV large
+
 #18080
 soldier солдат~
 Солдат Титании~
@@ -1213,12 +1243,13 @@ soldier солдат~
 Он только и ждет следующего приказа и цели.
 ~
 giant~
-AGH J -1000 18079
-38 76 10d10+1800 1d8+120 5d6+38 slash
+AGH JNOV -1000 18079
+38 96 10d10+2800 1d8+120 5d6+38 slash
 -13 -13 -13 5
-0 0 BHI JP
+0 0 BCDHI JP
 stand stand either 6660
 AHMV large
+
 #18087
 armourer оружейник~
 оружейник~
@@ -1274,8 +1305,8 @@ apothecary аптекарша~
 ~
 giant~
 ABNTe CDEFJ -1000 0
-104 208 25d10+3000 1d1+320 8d10+20 slash
-17 -15 -15 -2
+108 216 25d10+3000 1d1+320 8d10+21 slash
+13 -15 -15 -2
 CDEFIKN ABCDL BHIN JKP
 stand stand either 500000
 AHMV large
@@ -1759,91 +1790,113 @@ food A A
 36 36 0 0 0
 30 20 440 100 B
 T 0 0
+
 #18043
 titan dagger silver~
-серебряный кинжал(Dagger of The Titans)~
-Серебряный кинжал(Dagger of The Titans) будет служить верой и правдой.~
+{Yсеребряный{x кинжал(Dagger of The Titans)~
+{YСеребряный{x кинжал(Dagger of The Titans) будет служить верой и правдой.~
 silver~
 weapon AB AN
-dagger 6 6 pierce D
-25 120 5900 480 D
+dagger 7 8 pierce BD
+30 200 2000000 480 D
 A
-19 5
+1 1
 A
-18 5
+19 10
+A
+18 10
 T 0 0
+
 #18044
 titan sword silver~
-серебряный меч(Sword of The Titans)~
-Серебряный меч(Sword of The Titans) будет служить верой и правдой.~
+{Yсеребряный{x меч(Sword of The Titans)~
+{YСеребряный{x меч(Sword of The Titans) будет служить верой и правдой.~
 silver~
 weapon AB AN
-sword 5 6 pierce 0
-25 250 5100 480 D
+sword 7 8 slash BD
+30 200 2000000 480 D
 A
-19 1
+1 1
+A
+19 10
+A
+18 10
 T 0 0
+
 #18045
 titan mace silver~
-серебряная булава(Mace of The Titans)~
-Серебряная булава(Mace of The Titans) будет служить верой и правдой.~
+{Yсеребряная{x булава(Mace of The Titans)~
+{YСеребряная{x булава(Mace of The Titans) будет служить верой и правдой.~
 silver~
 weapon AB AN
-mace 7 7 crush AF
-25 250 5660 480 D
+mace 8 7 crush BD
+30 200 2000000 480 D
 A
-18 4
+1 1
 A
-19 5
+18 12
+A
+19 12
 T 0 0
+
 #18046
 titan axe silver~
-серебряный топор(Axe of The Titans)~
-Серебряный топор(Axe of The Titans) будет служить верой и правдой.~
-steel~
+{Yсеребряный{x топор(Axe of The Titans)~
+{YСеребряный{x топор(Axe of The Titans) будет служить верой и правдой.~
+silver~
 weapon AB AN
-axe 6 7 chomp D
-25 250 5330 700 A
+axe 7 8 chomp BD
+30 200 2000000 700 A
 A
-18 7
+1 1
 A
-19 3
+18 10
+A
+19 10
 T 0 0
+
 #18047
 titan silver spear~
-серябряное копье(Spear of The Titans)~
-Серябряное копье(Spear of The Titans) будет служить верой и правдой.~
+{Yсерябряное{x копье(Spear of The Titans)~
+{YСерябряное{x копье(Spear of The Titans) будет служить верой и правдой.~
 silver~
 weapon AB AN
-spear 7 6 pierce D
-25 250 5250 480 D
+spear 7 8 pierce BD
+30 200 2000000 480 D
 A
-19 4
+1 1
 A
-18 4
+19 10
+A
+18 10
 T 0 0
+
 #18048
 titan silver whip~
-серебряный хлыст(Whip of The Titans)~
-Серебряный хлыст(Whip of The Titans) будет служить верой и правдой.~
+{Yсеребряный{x хлыст(Whip of The Titans)~
+{YСеребряный{x хлыст(Whip of The Titans) будет служить верой и правдой.~
 silver~
 weapon AB AN
-whip 6 9 whip G
-30 200 1000 480 D
+whip 7 8 whip BD
+30 200 2000000 480 D
 A
-19 4
+1 1
 A
-18 6
+19 10
+A
+18 10
 T 0 0
+
 #18049
 book titan lore~
 титановская книга знаний(Book on Titan Lore)~
-Титановская книга знаний(Book on Titan Lore) в кожаном переплете.~
+{DТитановская книга{x знаний(Book on Titan Lore) в кожаном переплете.~
 leather~
 wand A AO
 50 20 20 'sleep' 0
-25 80 10620 120 D
+25 80 700000 120 D
 T 0 0
+
 #18050
 tulip yellow~
 {YЖелтый тюльпан{x(Yellow Tulip)~
@@ -2018,7 +2071,7 @@ small steel box~
 wood~
 container A A
 500 A 0 500 50
-20 20 4500 450 D
+20 20 45000 450 D
 T 0 0
 #18066
 backpack~
@@ -2027,7 +2080,7 @@ backpack~
 leather~
 container AGH A
 1000 A 0 1000 25
-20 25 15000 120 D
+20 25 150000 120 D
 T 0 0
 #18067
 wand titans titan magic~
@@ -2200,7 +2253,7 @@ fountain marble~
 Большой мраморный фонтан(marble fountain) напоит тебя чистейшей "водой".~
 marble~
 fountain AO 0
-10000 10000 'vodka' 0 0 
+10000 10000 'vodka' 0 0
 0 0 0 460 D
 T 0 0
 #18085
@@ -2235,17 +2288,23 @@ A
 A
 13 50
 T 0 0
+
 #18090
 hammer~
-Серебряный Метательный Молот(hammer)~
-Серебряный Метательный Молот(hammer) Титанов лежит тут.~
+{YСеребряный{x Метательный Молот(hammer)~
+{YСеребряный{x Метательный Молот(hammer) Титанов лежит тут.~
 silver~
 weapon AB ANR
-exotic 5 6 smash K
-25 0 2500 480 D
+exotic 8 7 smash AD
+30 100 2005000 480 D
 A
-18 4
+1 2
+A
+18 10
+A
+19 10
 T 0 0
+
 #18099
 potion cure sickness~
 снадобье излечения болезней(potion cure sickness)~
@@ -2279,7 +2338,7 @@ fountain~
 Сверкающая жидкость струится из мраморного фонтана(fountain).~
 none~
 fountain A P
-0 0 'water' 0 0 
+0 0 'water' 0 0
 0 0 0 1 B
 T 0 0
 #18103
@@ -5060,21 +5119,21 @@ D 0 18112 2 1 The south door of Дорога к дворцу is closed
 D 0 18122 1 1 The east door of Тронный зал is closed
 O 0 18084 0 18017 Прекрасный мраморный фонтан(marble fountain). loaded to Тайная школа Высших Друидов
 M 1 18029 1 18022 1 Load повариха
-E 0 18055 0 6 колпак повара(Cook's Hat) is loaded на голову of повариха
-E 0 18056 0 19 поварской котел(Cook's Pot) is loaded нет of повариха
+E 0 18055 0 6 Колпак повара(cook's hat) is loaded на голову of повариха
+E 0 18056 0 19 Поварской котел(cook's pot) is loaded нет of повариха
 M 1 18030 2 18022 2 Load раб
-E 0 18057 0 8 ботинки раба(serfs shoes) is loaded на ноги of раб
+E 0 18057 0 8 Ботинки раба(serfs shoes) is loaded на ноги of раб
 M 1 18001 10 18027 2 Load городской охранник
-E 0 18026 0 5 шлем охранника(townguard crest) is loaded на тело of городской охранник
+E 0 18026 0 5 Шлем охранника(townguard crest) is loaded на тело of городской охранник
 M 1 18001 10 18027 2 Load городской охранник
-E 0 18026 0 5 шлем охранника(townguard crest) is loaded на тело of городской охранник
+E 0 18026 0 5 Шлем охранника(townguard crest) is loaded на тело of городской охранник
 M 1 18050 8 18027 2 Load девочка Титании
 M 1 18001 10 18028 2 Load городской охранник
-E 0 18026 0 5 шлем охранника(townguard crest) is loaded на тело of городской охранник
+E 0 18026 0 5 Шлем охранника(townguard crest) is loaded на тело of городской охранник
 M 1 18001 10 18028 2 Load городской охранник
-E 0 18026 0 5 шлем охранника(townguard crest) is loaded на тело of городской охранник
+E 0 18026 0 5 Шлем охранника(townguard crest) is loaded на тело of городской охранник
 M 1 18001 10 18032 2 Load городской охранник
-E 0 18026 0 5 шлем охранника(townguard crest) is loaded на тело of городской охранник
+E 0 18026 0 5 Шлем охранника(townguard crest) is loaded на тело of городской охранник
 M 1 18099 3 18033 2 Load счастливый селянин
 G 0 18025 0 Разбитая винная бутылка(broken wine bottle) is given to счастливый селянин
 M 1 18002 7 18035 2 Load уличный котенок
@@ -5083,14 +5142,14 @@ M 1 18002 7 18037 2 Load уличный котенок
 G 0 18024 0 Рыбная кость(fish bone) is given to уличный котенок
 M 1 18017 1 18038 1 Load шериф
 M 1 18018 1 18042 1 Load тюремщик
-E 0 18063 0 16 {YЗолотой кинжал{x is loaded вооружение of тюремщик
+E 0 18063 0 16 {yзолотой кинжал{x is loaded вооружение of тюремщик
 M 1 18020 2 18043 1 Load вонючий заключенный
-E 0 18013 0 5 полосатый костюм заключенного(striped bodysuit) is loaded на тело of вонючий заключенный
+E 0 18013 0 5 Полосатый костюм заключенного(striped bodysuit) is loaded на тело of вонючий заключенный
 M 1 18065 3 18043 2 Load счастливая крестьянка
 M 1 18020 2 18044 1 Load вонючий заключенный
-E 0 18013 0 5 полосатый костюм заключенного(striped bodysuit) is loaded на тело of вонючий заключенный
+E 0 18013 0 5 Полосатый костюм заключенного(striped bodysuit) is loaded на тело of вонючий заключенный
 M 1 18001 10 18045 2 Load городской охранник
-E 0 18026 0 5 шлем охранника(townguard crest) is loaded на тело of городской охранник
+E 0 18026 0 5 Шлем охранника(townguard crest) is loaded на тело of городской охранник
 M 1 18014 1 18047 1 Load официант
 G 0 18000 0 Бутылка бордосского вина(bottle bordeau wine) is given to официант
 G 0 18001 0 Бутылка вина шабли(bottle chablis wine) is given to официант
@@ -5099,7 +5158,7 @@ G 0 18003 0 Бутылка австрийского красного(bottle austrian red) is given to офици
 G 0 18004 0 Бутылка совиньйонского белого(bottle sauvignon blanc) is given to официант
 G 0 18005 0 Бутылка вина танкьюрей(bottle tanqueray) is given to официант
 M 1 18028 4 18047 2 Load горожанин Титании
-E 0 18060 0 8 кожаные сапоги(Leather Boots of the Titans) is loaded на ноги of горожанин Титании
+E 0 18060 0 8 Кожаные сапоги(leather boots of the titans) is loaded на ноги of горожанин Титании
 M 1 18021 1 18048 1 Load продавец шоколада
 G 0 18076 0 Миндаль в шоколаде(chocolate almonds) is given to продавец шоколада
 G 0 18077 0 Шоколадная помадка(chocolate fudge) is given to продавец шоколада
@@ -5119,7 +5178,7 @@ G 0 18082 0 Серебряно-белый плащ(silver white cloak) is given to дизайнер
 G 0 18083 0 Изумрудный нарукавник(emerald-studded bracer) is given to дизайнер
 M 1 18077 1 18053 1 Load кожевница
 M 1 18001 10 18054 2 Load городской охранник
-E 0 18026 0 5 шлем охранника(townguard crest) is loaded на тело of городской охранник
+E 0 18026 0 5 Шлем охранника(townguard crest) is loaded на тело of городской охранник
 M 1 18016 1 18055 1 Load цветочница
 G 0 18050 0 {yжелтый тюльпан{x(yellow tulip) is given to цветочница
 G 0 18051 0 {rкрасный тюльпан{x(red tulip) is given to цветочница
@@ -5132,19 +5191,19 @@ G 0 18019 0 Медовые соты(honey comb) is given to пчеловод
 G 0 18020 0 Бочка меда(honey) is given to пчеловод
 G 0 18021 0 Банка меда(jar honey) is given to пчеловод
 M 1 18001 10 18059 2 Load городской охранник
-E 0 18026 0 5 шлем охранника(townguard crest) is loaded на тело of городской охранник
+E 0 18026 0 5 Шлем охранника(townguard crest) is loaded на тело of городской охранник
 M 1 18099 3 18059 2 Load счастливый селянин
 G 0 18025 0 Разбитая винная бутылка(broken wine bottle) is given to счастливый селянин
 M 1 18003 1 18059 1 Load барабанщик
-E 0 18010 0 16 барабан(bong drum) is loaded вооружение of барабанщик
+E 0 18010 0 16 Барабан(bong drum) is loaded вооружение of барабанщик
 M 1 18004 1 18059 1 Load гитарист
-E 0 18011 0 16 гитара(guitar) is loaded вооружение of гитарист
+E 0 18011 0 16 Гитара(guitar) is loaded вооружение of гитарист
 M 1 18005 1 18059 1 Load играющая на свирели
-E 0 18012 0 16 свирель(wind pipe) is loaded вооружение of играющая на свирели
+E 0 18012 0 16 Свирель(wind pipe) is loaded вооружение of играющая на свирели
 M 1 18028 4 18059 2 Load горожанин Титании
-E 0 18060 0 8 кожаные сапоги(Leather Boots of the Titans) is loaded на ноги of горожанин Титании
+E 0 18060 0 8 Кожаные сапоги(leather boots of the titans) is loaded на ноги of горожанин Титании
 M 1 18032 2 18060 2 Load дозорный
-E 0 18061 0 16 дубина дозорного(patrol guard's club) is loaded вооружение of дозорный
+E 0 18061 0 16 Дубина дозорного(patrol guard's club) is loaded вооружение of дозорный
 M 1 18033 3 18060 2 Load селянин
 M 1 18006 1 18061 1 Load продавец доспехов
 G 0 18033 0 Серебряная кираса(breast plate of the titans) is given to продавец доспехов
@@ -5164,7 +5223,7 @@ G 0 18049 0 Титановская книга знаний(book on titan lore) is given to оружейник
 G 0 18090 0 Серебряный метательный молот(hammer) is given to оружейник
 G 0 18043 0 Серебряный кинжал(dagger of the titans) is given to оружейник
 M 1 18028 4 18067 2 Load горожанин Титании
-E 0 18060 0 8 кожаные сапоги(Leather Boots of the Titans) is loaded на ноги of горожанин Титании
+E 0 18060 0 8 Кожаные сапоги(leather boots of the titans) is loaded на ноги of горожанин Титании
 M 1 18098 1 18068 1 Load аптекарша
 G 0 18028 0 Напиток невидимости(potion of invisibility) is given to аптекарша
 G 0 18029 0 Напиток телепортации(potion of teleportation) is given to аптекарша
@@ -5188,7 +5247,7 @@ G 0 18008 0 Крылышко цыпленка(chicken wing) is given to продавец мяса
 G 0 18009 0 Ножка ягненка(leg lamb) is given to продавец мяса
 G 0 18100 0 Яблоко(apple) is given to продавец мяса
 M 1 18001 10 18074 2 Load городской охранник
-E 0 18026 0 5 шлем охранника(townguard crest) is loaded на тело of городской охранник
+E 0 18026 0 5 Шлем охранника(townguard crest) is loaded на тело of городской охранник
 M 1 18002 7 18074 2 Load уличный котенок
 G 0 18024 0 Рыбная кость(fish bone) is given to уличный котенок
 M 1 18033 3 18074 2 Load селянин
@@ -5216,9 +5275,9 @@ G 0 18027 0 Бутылка рома(bottle rum) is given to хозяин гостиницы
 M 1 18002 7 18089 2 Load уличный котенок
 G 0 18024 0 Рыбная кость(fish bone) is given to уличный котенок
 M 1 18028 4 18089 2 Load горожанин Титании
-E 0 18060 0 8 кожаные сапоги(Leather Boots of the Titans) is loaded на ноги of горожанин Титании
+E 0 18060 0 8 Кожаные сапоги(leather boots of the titans) is loaded на ноги of горожанин Титании
 M 1 18032 2 18089 2 Load дозорный
-E 0 18061 0 16 дубина дозорного(patrol guard's club) is loaded вооружение of дозорный
+E 0 18061 0 16 Дубина дозорного(patrol guard's club) is loaded вооружение of дозорный
 M 1 18065 3 18089 2 Load счастливая крестьянка
 M 1 18025 1 18090 1 Load Зенрич
 G 0 18064 0 Шарманка(music box) is given to Зенрич
@@ -5229,7 +5288,7 @@ G 0 18049 0 Титановская книга знаний(book on titan lore) is given to библиотекар
 M 1 18064 3 18095 2 Load маленькая крыса
 M 1 18064 3 18096 2 Load маленькая крыса
 M 1 18001 10 18099 1 Load городской охранник
-E 0 18026 0 5 шлем охранника(townguard crest) is loaded на тело of городской охранник
+E 0 18026 0 5 Шлем охранника(townguard crest) is loaded на тело of городской охранник
 M 1 18007 1 18100 1 Load хозяйка магазина животных
 M 1 18057 1 18101 1 Load Обезьяна
 M 1 18058 1 18101 1 Load Ручной Лев
@@ -5250,7 +5309,7 @@ G 0 18071 0 Жезл неизвестной магии(wand of avian magic) is given to волшебник
 G 0 18072 0 Жезл магии дроу(wand of drow magic) is given to волшебник
 M 1 18027 2 18104 2 Load храмовник
 M 1 18027 2 18105 2 Load храмовник
-E 0 18059 0 17 посох храмовника(Staff of Knight Templar) is loaded зажато в руке of храмовник
+E 0 18059 0 17 Посох храмовника(staff of knight templar) is loaded зажато в руке of храмовник
 M 1 18048 8 18108 2 Load Королевский Охранник
 G 0 18062 0 Золотой ключ(key to the  valley of the titans) is given to Королевский Охранник
 M 1 18048 8 18108 2 Load Королевский Охранник
@@ -5273,38 +5332,38 @@ M 1 18069 1 18113 1 Load мастер
 M 1 18070 1 18113 1 Load стражник
 M 1 18073 1 18113 1 Load стражник
 M 1 18034 1 18114 1 Load организатор турнира
-E 0 18086 0 16 улучшеное боевое оружие(Enhanced Tournament Combat Weapon) is loaded вооружение of организатор турнира
+E 0 18086 0 16 Улучшеное боевое оружие(enhanced tournament combat weapon) is loaded вооружение of организатор турнира
 M 1 18039 1 18114 1 Load злой малютка дракон
 M 1 18035 1 18115 1 Load участник турнира
-E 0 18022 0 16 обычное боевое оружие(Standard Tournament Combat Weapon) is loaded вооружение of участник турнира
+E 0 18022 0 16 Обычное боевое оружие(standard tournament combat weapon) is loaded вооружение of участник турнира
 M 1 18040 1 18115 1 Load злое дерево
 M 1 18047 1 18115 1 Load демон камня
-E 0 18085 0 16 оружие демонов(Standard Demon Weapon) is loaded вооружение of демон камня
+E 0 18085 0 16 Оружие демонов(standard demon weapon) is loaded вооружение of демон камня
 M 1 18036 1 18116 1 Load магичка
 M 1 18041 1 18116 1 Load убийственная дождевая туча
 M 1 18037 1 18117 1 Load клеричка
-E 0 18022 0 16 обычное боевое оружие(Standard Tournament Combat Weapon) is loaded вооружение of клеричка
+E 0 18022 0 16 Обычное боевое оружие(standard tournament combat weapon) is loaded вооружение of клеричка
 M 1 18042 1 18117 1 Load демон огня
-E 0 18085 0 16 оружие демонов(Standard Demon Weapon) is loaded вооружение of демон огня
+E 0 18085 0 16 Оружие демонов(standard demon weapon) is loaded вооружение of демон огня
 M 1 18043 1 18117 1 Load демон воды
-E 0 18085 0 16 оружие демонов(Standard Demon Weapon) is loaded вооружение of демон воды
+E 0 18085 0 16 Оружие демонов(standard demon weapon) is loaded вооружение of демон воды
 M 1 18038 1 18118 1 Load странник
-E 0 18022 0 16 обычное боевое оружие(Standard Tournament Combat Weapon) is loaded вооружение of странник
+E 0 18022 0 16 Обычное боевое оружие(standard tournament combat weapon) is loaded вооружение of странник
 M 1 18044 1 18118 1 Load демон воздуха
-E 0 18085 0 16 оружие демонов(Standard Demon Weapon) is loaded вооружение of демон воздуха
+E 0 18085 0 16 Оружие демонов(standard demon weapon) is loaded вооружение of демон воздуха
 M 1 18045 1 18119 1 Load демон земли
-E 0 18085 0 16 оружие демонов(Standard Demon Weapon) is loaded вооружение of демон земли
+E 0 18085 0 16 Оружие демонов(standard demon weapon) is loaded вооружение of демон земли
 M 1 18046 1 18119 1 Load демон леса
-E 0 18085 0 16 оружие демонов(Standard Demon Weapon) is loaded вооружение of демон леса
+E 0 18085 0 16 Оружие демонов(standard demon weapon) is loaded вооружение of демон леса
 M 1 18030 2 18120 1 Load раб
-E 0 18057 0 8 ботинки раба(serfs shoes) is loaded на ноги of раб
+E 0 18057 0 8 Ботинки раба(serfs shoes) is loaded на ноги of раб
 M 1 18074 1 18121 1 Load мальчик-слуга
 M 1 18097 1 18122 1 Load придворный чародей
 M 1 18052 1 18122 1 Load первая советчица
 M 1 18061 1 18122 1 Load Король Дректекс
 M 1 18064 3 18123 1 Load маленькая крыса
 M 1 18063 1 18123 1 Load убийца
-E 0 18103 0 19 {Dтемный щит {x is loaded нет of убийца
+E 0 18103 0 19 {dтемн|ый|ого|ому|ый|ым|ом|ых|ых щит||а|у||ом|е|а|ов {x is loaded нет of убийца
 M 1 18053 1 18124 1 Load владелец боевых монстров
 M 1 18090 1 18125 1 Load Ужасная Гидра
 M 1 18054 1 18125 1 Load Черная Пума

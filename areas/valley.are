@@ -507,7 +507,7 @@ spring fountain elvish эдьфийский фонтан ручеек~
 {w({D∆урчит{w){GЁльфийский {gручей{x журчит в тишине.~
 water~
 fountain 0 P
-2147483647 2147483647 'elvish wine' 0 0 
+2147483647 2147483647 'elvish wine' 0 0
 0 0 0 350 W
 T 0 0
 #0
@@ -2211,27 +2211,27 @@ D 0 7880 3 2 The west door of Ћогово ќгнегидры is closed and locked
 D 0 7881 1 2 The east door of –абоча€ комната is closed and locked
 D 0 7882 3 2 The west door of ’ранилище is closed and locked
 M 1 7801 6 7805 1 Load эльф
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльф
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльф
 M 1 7800 6 7806 1 Load большой пес
 M 1 7800 6 7807 1 Load большой пес
 M 1 7802 6 7811 1 Load эльфийка
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка
 M 1 7814 3 7815 1 Load антелопа
 M 1 7801 6 7816 1 Load эльф
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльф
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльф
 M 1 7801 6 7818 1 Load эльф
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльф
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльф
 M 1 7813 3 7818 1 Load волк
 M 1 7801 6 7820 1 Load эльф
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльф
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльф
 M 1 7802 6 7820 1 Load эльфийка
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка
 M 1 7800 6 7823 1 Load большой пес
 M 1 7814 3 7825 1 Load антелопа
 M 1 7805 5 7827 1 Load эльф-скаут
-E 0 7801 0 8 эльфийские сапоги(elven boots) is loaded на ноги of эльф-скаут
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльф-скаут
-E 0 7803 0 3 коричневый плащ(brown cloak) is loaded на шею of эльф-скаут
+E 0 7801 0 8 Ёльфийские сапоги(elven boots) is loaded на ноги of эльф-скаут
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльф-скаут
+E 0 7803 0 3  оричневый плащ(brown cloak) is loaded на шею of эльф-скаут
 O 0 7826 0 7827 {gэльфийск|ий|ого|ому|ий|им|ом {gруч|ей|ь€|ью|ей|ьем|е{x loaded to ¬доль тропы
 M 1 7813 3 7830 1 Load волк
 M 1 7800 6 7833 1 Load большой пес
@@ -2240,20 +2240,20 @@ M 1 7800 6 7837 1 Load большой пес
 M 1 7806 5 7838 1 Load эльфийка
 M 1 7806 5 7839 1 Load эльфийка
 M 1 7802 6 7842 1 Load эльфийка
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка
 M 1 7805 5 7842 1 Load эльф-скаут
-E 0 7801 0 8 эльфийские сапоги(elven boots) is loaded на ноги of эльф-скаут
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльф-скаут
-E 0 7803 0 3 коричневый плащ(brown cloak) is loaded на шею of эльф-скаут
+E 0 7801 0 8 Ёльфийские сапоги(elven boots) is loaded на ноги of эльф-скаут
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльф-скаут
+E 0 7803 0 3  оричневый плащ(brown cloak) is loaded на шею of эльф-скаут
 M 1 7801 6 7844 1 Load эльф
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльф
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльф
 M 1 7807 1 7845 1 Load старейшина
 G 0 7804 0  люч(key) is given to старейшина
-E 0 7806 0 1 золотое кольцо(gold ring) is loaded на Ћ. палец of старейшина
-E 0 7825 0 16 двуручный посох(quarterstaff) is loaded вооружение of старейшина
+E 0 7806 0 1 «олотое кольцо(gold ring) is loaded на Ћ. палец of старейшина
+E 0 7825 0 16 ƒвуручный посох(quarterstaff) is loaded вооружение of старейшина
 M 1 7808 1 7845 1 Load старейшина
-E 0 7806 0 1 золотое кольцо(gold ring) is loaded на Ћ. палец of старейшина
-E 0 7825 0 16 двуручный посох(quarterstaff) is loaded вооружение of старейшина
+E 0 7806 0 1 «олотое кольцо(gold ring) is loaded на Ћ. палец of старейшина
+E 0 7825 0 16 ƒвуручный посох(quarterstaff) is loaded вооружение of старейшина
 O 0 7809 0 7846 «елье(potion) loaded to ’ранилище
 O 0 7823 0 7846 —виток(scroll) loaded to ’ранилище
 O 0 7820 0 7846 —виток(scroll) loaded to ’ранилище
@@ -2264,75 +2264,75 @@ O 0 7819 0 7846 —виток(scroll) loaded to ’ранилище
 M 1 7806 5 7847 2 Load эльфийка
 M 1 7806 5 7847 2 Load эльфийка
 M 1 7803 4 7848 1 Load эльф-часовой
-E 0 7800 0 5 эльфийска€ кольчуга(elven chainmail) is loaded на тело of эльф-часовой
-E 0 7801 0 8 эльфийские сапоги(elven boots) is loaded на ноги of эльф-часовой
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльф-часовой
-E 0 7803 0 3 коричневый плащ(brown cloak) is loaded на шею of эльф-часовой
+E 0 7800 0 5 Ёльфийска€ кольчуга(elven chainmail) is loaded на тело of эльф-часовой
+E 0 7801 0 8 Ёльфийские сапоги(elven boots) is loaded на ноги of эльф-часовой
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльф-часовой
+E 0 7803 0 3  оричневый плащ(brown cloak) is loaded на шею of эльф-часовой
 M 1 7804 4 7848 1 Load эльфийка-часовой
-E 0 7800 0 5 эльфийска€ кольчуга(elven chainmail) is loaded на тело of эльфийка-часовой
-E 0 7801 0 8 эльфийские сапоги(elven boots) is loaded на ноги of эльфийка-часовой
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка-часовой
-E 0 7803 0 3 коричневый плащ(brown cloak) is loaded на шею of эльфийка-часовой
+E 0 7800 0 5 Ёльфийска€ кольчуга(elven chainmail) is loaded на тело of эльфийка-часовой
+E 0 7801 0 8 Ёльфийские сапоги(elven boots) is loaded на ноги of эльфийка-часовой
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка-часовой
+E 0 7803 0 3  оричневый плащ(brown cloak) is loaded на шею of эльфийка-часовой
 M 1 7804 4 7850 1 Load эльфийка-часовой
-E 0 7800 0 5 эльфийска€ кольчуга(elven chainmail) is loaded на тело of эльфийка-часовой
-E 0 7801 0 8 эльфийские сапоги(elven boots) is loaded на ноги of эльфийка-часовой
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка-часовой
-E 0 7803 0 3 коричневый плащ(brown cloak) is loaded на шею of эльфийка-часовой
+E 0 7800 0 5 Ёльфийска€ кольчуга(elven chainmail) is loaded на тело of эльфийка-часовой
+E 0 7801 0 8 Ёльфийские сапоги(elven boots) is loaded на ноги of эльфийка-часовой
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка-часовой
+E 0 7803 0 3  оричневый плащ(brown cloak) is loaded на шею of эльфийка-часовой
 M 1 7805 5 7852 1 Load эльф-скаут
-E 0 7801 0 8 эльфийские сапоги(elven boots) is loaded на ноги of эльф-скаут
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльф-скаут
-E 0 7803 0 3 коричневый плащ(brown cloak) is loaded на шею of эльф-скаут
+E 0 7801 0 8 Ёльфийские сапоги(elven boots) is loaded на ноги of эльф-скаут
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльф-скаут
+E 0 7803 0 3  оричневый плащ(brown cloak) is loaded на шею of эльф-скаут
 M 1 7814 3 7852 1 Load антелопа
 M 1 7803 1 7853 1 Load эльф-часовой
-E 0 7800 0 5 эльфийска€ кольчуга(elven chainmail) is loaded на тело of эльф-часовой
-E 0 7801 0 8 эльфийские сапоги(elven boots) is loaded на ноги of эльф-часовой
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльф-часовой
-E 0 7803 0 3 коричневый плащ(brown cloak) is loaded на шею of эльф-часовой
+E 0 7800 0 5 Ёльфийска€ кольчуга(elven chainmail) is loaded на тело of эльф-часовой
+E 0 7801 0 8 Ёльфийские сапоги(elven boots) is loaded на ноги of эльф-часовой
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльф-часовой
+E 0 7803 0 3  оричневый плащ(brown cloak) is loaded на шею of эльф-часовой
 M 1 7802 6 7854 1 Load эльфийка
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка
 M 1 7804 4 7856 1 Load эльфийка-часовой
-E 0 7800 0 5 эльфийска€ кольчуга(elven chainmail) is loaded на тело of эльфийка-часовой
-E 0 7801 0 8 эльфийские сапоги(elven boots) is loaded на ноги of эльфийка-часовой
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка-часовой
-E 0 7803 0 3 коричневый плащ(brown cloak) is loaded на шею of эльфийка-часовой
+E 0 7800 0 5 Ёльфийска€ кольчуга(elven chainmail) is loaded на тело of эльфийка-часовой
+E 0 7801 0 8 Ёльфийские сапоги(elven boots) is loaded на ноги of эльфийка-часовой
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка-часовой
+E 0 7803 0 3  оричневый плащ(brown cloak) is loaded на шею of эльфийка-часовой
 M 1 7803 4 7860 1 Load эльф-часовой
-E 0 7800 0 5 эльфийска€ кольчуга(elven chainmail) is loaded на тело of эльф-часовой
-E 0 7801 0 8 эльфийские сапоги(elven boots) is loaded на ноги of эльф-часовой
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльф-часовой
-E 0 7803 0 3 коричневый плащ(brown cloak) is loaded на шею of эльф-часовой
+E 0 7800 0 5 Ёльфийска€ кольчуга(elven chainmail) is loaded на тело of эльф-часовой
+E 0 7801 0 8 Ёльфийские сапоги(elven boots) is loaded на ноги of эльф-часовой
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльф-часовой
+E 0 7803 0 3  оричневый плащ(brown cloak) is loaded на шею of эльф-часовой
 M 1 7813 3 7860 1 Load волк
 M 1 7805 5 7862 1 Load эльф-скаут
-E 0 7801 0 8 эльфийские сапоги(elven boots) is loaded на ноги of эльф-скаут
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльф-скаут
-E 0 7803 0 3 коричневый плащ(brown cloak) is loaded на шею of эльф-скаут
+E 0 7801 0 8 Ёльфийские сапоги(elven boots) is loaded на ноги of эльф-скаут
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльф-скаут
+E 0 7803 0 3  оричневый плащ(brown cloak) is loaded на шею of эльф-скаут
 M 1 7804 4 7863 1 Load эльфийка-часовой
-E 0 7800 0 5 эльфийска€ кольчуга(elven chainmail) is loaded на тело of эльфийка-часовой
-E 0 7801 0 8 эльфийские сапоги(elven boots) is loaded на ноги of эльфийка-часовой
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка-часовой
-E 0 7803 0 3 коричневый плащ(brown cloak) is loaded на шею of эльфийка-часовой
+E 0 7800 0 5 Ёльфийска€ кольчуга(elven chainmail) is loaded на тело of эльфийка-часовой
+E 0 7801 0 8 Ёльфийские сапоги(elven boots) is loaded на ноги of эльфийка-часовой
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка-часовой
+E 0 7803 0 3  оричневый плащ(brown cloak) is loaded на шею of эльфийка-часовой
 M 1 7802 6 7865 1 Load эльфийка
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка
 M 1 7803 4 7866 1 Load эльф-часовой
-E 0 7800 0 5 эльфийска€ кольчуга(elven chainmail) is loaded на тело of эльф-часовой
-E 0 7801 0 8 эльфийские сапоги(elven boots) is loaded на ноги of эльф-часовой
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльф-часовой
-E 0 7803 0 3 коричневый плащ(brown cloak) is loaded на шею of эльф-часовой
+E 0 7800 0 5 Ёльфийска€ кольчуга(elven chainmail) is loaded на тело of эльф-часовой
+E 0 7801 0 8 Ёльфийские сапоги(elven boots) is loaded на ноги of эльф-часовой
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльф-часовой
+E 0 7803 0 3  оричневый плащ(brown cloak) is loaded на шею of эльф-часовой
 M 1 7802 6 7868 1 Load эльфийка
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльфийка
 M 1 7800 6 7873 1 Load большой пес
 M 1 7805 5 7876 1 Load эльф-скаут
-E 0 7801 0 8 эльфийские сапоги(elven boots) is loaded на ноги of эльф-скаут
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльф-скаут
-E 0 7803 0 3 коричневый плащ(brown cloak) is loaded на шею of эльф-скаут
+E 0 7801 0 8 Ёльфийские сапоги(elven boots) is loaded на ноги of эльф-скаут
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльф-скаут
+E 0 7803 0 3  оричневый плащ(brown cloak) is loaded на шею of эльф-скаут
 M 1 7801 6 7877 1 Load эльф
-E 0 7802 0 16 эльфийский длинный меч(elven longsword) is loaded вооружение of эльф
+E 0 7802 0 16 Ёльфийский длинный меч(elven longsword) is loaded вооружение of эльф
 M 1 7810 1 7878 1 Load отшельник
 M 1 7809 1 7880 1 Load пирогидра
 G 0 7805 0  люч(key) is given to пирогидра
 M 1 7811 1 7881 1 Load “ейлмон
-E 0 7806 0 1 золотое кольцо(gold ring) is loaded на Ћ. палец of “ейлмон
-E 0 7807 0 16 двуручный посох(quarterstaff) is loaded вооружение of “ейлмон
-E 0 7824 0 0 —тержень Ќейтралитета(Rod of Neutrality) is loaded освещает of “ейлмон
+E 0 7806 0 1 «олотое кольцо(gold ring) is loaded на Ћ. палец of “ейлмон
+E 0 7807 0 16 ƒвуручный посох(quarterstaff) is loaded вооружение of “ейлмон
+E 0 7824 0 0 —тержень нейтралитета(rod of neutrality) is loaded освещает of “ейлмон
 O 0 7808 0 7882 «елье(potion) loaded to ’ранилище
 O 0 7822 0 7882 —виток(scroll) loaded to ’ранилище
 O 0 7821 0 7882 —виток(scroll) loaded to ’ранилище

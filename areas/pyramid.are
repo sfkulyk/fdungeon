@@ -109,7 +109,7 @@ oldstyle magic carpet~
 The magic carpet~
 A small woven carpet lies under your feet.
 ~
-The carpet is simply beautiful, made from intricately woven silken material.  
+The carpet is simply beautiful, made from intricately woven silken material.
 It seems to rise up at the touch of your feet.  Wait, it is rising, a few feet
 above the ground!  In fact, it seems to be ALIVE!
 ~
@@ -156,7 +156,7 @@ oldstyle efreeti efreet~
 The efreeti~
 The efreeti stands here, sheathed in a column of fire.
 ~
-The efreeti is a mighty being formed from living fire.  He gazes down at you 
+The efreeti is a mighty being formed from living fire.  He gazes down at you
 with disdain and scorn, arms folded across his mighty chest.
 ~
 human~
@@ -189,7 +189,7 @@ The djinn issues forth from the confines of a small lamp.
 ~
 The djinn is a mighty being formed from the air itself and frequently
 imprisoned in a small lamp, used to do the bidding of those who find him.
-He smiles down at you congenially, arms folded across his blue-tinged 
+He smiles down at you congenially, arms folded across his blue-tinged
 skin, and strokes his goatee.
 ~
 human~
@@ -223,7 +223,7 @@ A gynosphinx sits here, befuddled by a riddle.
 ~
 The gynosphinx is a crafty but gentle creature, having the body of a
 beautiful dark-skinned woman from the waist up, a feathery set of wings
-and the hind legs of a mighty cat.  Right now she is confused, having 
+and the hind legs of a mighty cat.  Right now she is confused, having
 just heard a puzzling riddle from a cousin criosphinx.
 ~
 human~
@@ -256,7 +256,7 @@ A mighty androsphinx tosses its lion-like mane.
 ~
 The mighty androsphinx is a huge creature, with the body of a lion whose
 face  is quite man-like, perhaps even handsome, and a massive pair of feathered
-wings.  Tales are told of pharoahs that were rendered permanently deaf by the 
+wings.  Tales are told of pharoahs that were rendered permanently deaf by the
 mighty roar of this sphinx.
 ~
 human~
@@ -272,7 +272,7 @@ The great sphinx~
 A mighty sphinx rests here in the sand, dormant now for centuries.
 The great sphinx appears to be indestructible!
 ~
-The great sphinx towers tens of feet above you, resting here in a state of 
+The great sphinx towers tens of feet above you, resting here in a state of
 dormancy.  It has become almost indistinguishable from the sand that surrounds
 it, although you can still make out the features of the handsome face that once
 advised many rulers.
@@ -292,7 +292,7 @@ You have awakened the mighty servant to the pharoahs, Ramses.
 As your light spills over his face and body, you can see his features begin
 to fill out, swell, and harden, until an apparently healthy man stands before
 you, clad only in the raiments he was left in when he last slept.  His hair is
-a soft black, his skin a deep chocolate, and his tall frame is totally still, 
+a soft black, his skin a deep chocolate, and his tall frame is totally still,
 his chest not even moving to breathe.
 ~
 human~
@@ -323,14 +323,14 @@ AHMV medium
 egyptian mace~
 an egyptian mace~
 A hierogylph-engraved mace has been left here.~
-oldstyle~
+iron~
 weapon 0 AN
 mace 4 5 pound G
-6 100 370 1 B
-A
-19 2
+6 100 370 500 W
 A
 18 2
+A
+19 2
 E
 egyptian mace~
 The mace is formed from solid brass, and engraved in strange hieroglyphs.
@@ -375,9 +375,9 @@ armor G AE
 5 5 5 0 0
 13 100 1470 1 B
 A
-2 1
-A
 13 5
+A
+2 1
 E
 cloth turban~
 The turban used to be white cloth, now it is covered with oil and dirt from
@@ -432,9 +432,9 @@ light AG AO
 0 0 999 0 0
 20 100 720 1 B
 A
-13 10
-A
 14 20
+A
+13 10
 E
 ball fire~
 The ball of fire is hot to the touch and very very bright.
@@ -449,9 +449,9 @@ weapon BG AN
 axe 3 6 slash 0
 20 180 1820 1 B
 A
-18 1
-A
 19 2
+A
+18 1
 E
 stone scimitar~
 The scimitar is formed from solid stone, chipped and carved to perfection,
@@ -527,9 +527,9 @@ staff ABGK AO
 25 5 5 'fly' 0
 20 100 4700 1 B
 A
-17 -5
-A
 18 1
+A
+17 -5
 E
 lamp~
 The lamp is quite old and tarnished.  You rub at it to get some of the
@@ -545,11 +545,11 @@ jewelry IK AO
 0 0 0 0 0
 14 90 2100 1 B
 A
-17 -3
+4 1
 A
 3 1
 A
-4 1
+17 -3
 E
 ankh~
 The ankh is a small brass symbol of an ancient religion.
@@ -580,11 +580,11 @@ weapon G AN
 exotic 5 4 claw 0
 26 200 4400 1 B
 A
-5 1
+19 2
 A
 18 2
 A
-19 2
+5 1
 E
 lion paw~
 The massive paw has straps on it formed of bronze, so that it will
@@ -616,7 +616,7 @@ money 0 A
 0 200 0 1 B
 E
 treasure~
-The treasure is incredibly large, filled with gold coins and valuables, more 
+The treasure is incredibly large, filled with gold coins and valuables, more
 wealth than you could ever possibly imagine accumulated in one place.
 ~
 T 0 0
@@ -642,18 +642,18 @@ trash EGHM AO
 0 0 0 0 0
 0 10 0 1 B
 A
-1 -3
-A
-2 -3
-A
-5 -3
+14 -100
 A
 13 -50
 A
-14 -100
+5 -3
+A
+2 -3
+A
+1 -3
 E
 curse mummy~
-Rumor has it that whomever disturbs the grave of the mummy shall be 
+Rumor has it that whomever disturbs the grave of the mummy shall be
 cursed for all eternity, and that the descendents of that person shall
 likewise be cursed for ten generations to follow.
 ~
@@ -682,13 +682,13 @@ armor G AE
 8 8 8 3 0
 33 100 5500 1 B
 A
-12 25
-A
-13 10
+20 -1
 A
 14 30
 A
-20 -1
+13 10
+A
+12 25
 E
 golden mask~
 This beautiful mask was shaped from solid gold and magically enchanted
@@ -725,8 +725,8 @@ A
 20 -2
 E
 sun wand~
-This small brass shaft is a holy weapon used by the ancient people of 
-this land to defend against the deadliest of foes.  It shines with the 
+This small brass shaft is a holy weapon used by the ancient people of
+this land to defend against the deadliest of foes.  It shines with the
 brilliant blazing light of the sun.
 ~
 T 0 0
@@ -739,9 +739,9 @@ jewelry BG AB
 0 0 0 0 0
 20 50 1300 1 B
 A
-3 1
-A
 12 20
+A
+3 1
 E
 sandy ring~
 The ring is small, smooth, sandy-colored and unremarkable, save that
@@ -774,13 +774,13 @@ armor GK AF
 9 9 9 2 0
 32 200 7800 1 B
 A
-1 2
-A
 14 30
+A
+1 2
 E
 sphinxian leggings~
 These magically fashioned leggings impart the strength and stamina
-of the mightiest of the ancient sphinxes.  You feel ancient power 
+of the mightiest of the ancient sphinxes.  You feel ancient power
 emanating from them; they seem to be almost alive.
 ~
 T 0 0
@@ -788,22 +788,22 @@ T 0 0
 Mustafa flail~
 ќгромн|ая|ой|ой|ую|ой|ой|ых|ых цеп|ь|и|и|ь|ью|и|и|ей ({Wflail{x) ћустафы~
 ќгромная цепь ({Wflail{x) ћустафы пылится здесь.~
-iron~
+steel~
 weapon HIJKM AN
-flail 9 9 bite DH
-50 5 20000 500 D
+flail 9 10 bite DH
+50 5 20000 700 A
 A
-4 2
-A
-3 2
-A
-18 10
-A
-1 2
+19 9
 A
 5 2
 A
-19 9
+1 2
+A
+18 10
+A
+3 2
+A
+4 2
 E
 flail~
 ¬елосипедная цепь ћустафы из соседней общаги.
@@ -818,15 +818,15 @@ light ACJK A
 0 0 999 0 0
 50 10 10000 170 D
 A
-19 5
-A
-18 7
-A
-13 50
+6 -1
 A
 12 60
 A
-6 -1
+13 50
+A
+18 7
+A
+19 5
 T 0 0
 #0
 
@@ -1020,15 +1020,15 @@ cardinal directions.
 ~
 0 0 10
 E
-stones~
-As you look closer you can make out a crack in the center of the stones
-beneath your feet.  With some effort you might be able to lift that 
-section up and get inside!
-~
-E
 plaque~
 The plaque reads:
 This area (Great Pyramid) written by Andersen.
+~
+E
+stones~
+As you look closer you can make out a crack in the center of the stones
+beneath your feet.  With some effort you might be able to lift that
+section up and get inside!
 ~
 D0
 The north side of the pyramid slopes down into the sands.
@@ -1060,7 +1060,7 @@ D5
 S
 #8707
 Climbing the Great Pyramid~
-Here the elements have carved away at the sides of the pyramid quite a 
+Here the elements have carved away at the sides of the pyramid quite a
 bit.  You aren't so sure of your footing anymore...
 
 Suddenly the wind picks up, and you lose your balance!
@@ -1081,7 +1081,7 @@ stones of the ceiling.
 E
 stones~
 As you look closer you can make out a crack in the center of the stones
-above your head.  With some effort you might be able to lift that 
+above your head.  With some effort you might be able to lift that
 section up and get outside!
 ~
 D4
@@ -1097,7 +1097,7 @@ You see a small dusty chamber.
 S
 #8709
 A Musty Chamber~
-You are standing in a dank, musty chamber just inside the pyramid. 
+You are standing in a dank, musty chamber just inside the pyramid.
 Footprints and other strange marks are set into the dusty floor here.
 It would seem that some of the tenants of this monument are still alive.
    Exits lead in all directions.   The door to the west is covered with
@@ -1105,16 +1105,16 @@ inscriptions.
 ~
 0 8 0
 E
-door stone~
-The stone door is covered in strange inscriptions and hieroglyphs that warn
-you not to proceed any further.
-~
-E
 sigils hieroglyphs inscriptions writing~
 You cannot understand the strange glyphs that cover the door, but most of
 them seem to depict scenes of fire and massive creatures of apparently
 tremendous strength.  You have a feeling that the glyphs are serving as a
 warning.
+~
+E
+door stone~
+The stone door is covered in strange inscriptions and hieroglyphs that warn
+you not to proceed any further.
 ~
 D0
 You see a tiny crawlway raised about three feet off the ground.
@@ -1164,7 +1164,7 @@ S
 #8711
 The Chamber of the Efreet~
 You make your way across the fire pool, and into a small stone chamber.
-Here the flames are nearly as high as your head, singeing your face and 
+Here the flames are nearly as high as your head, singeing your face and
 evaporating your sweat instantaneously.
 ~
 0 8 7
@@ -1200,7 +1200,7 @@ S
 #8713
 A Tiny Crawlway~
 You are on your hands and knees, inside a small crawlway that winds
-through the inside of the pyramid.  The crawlway is thick with sand, dust, 
+through the inside of the pyramid.  The crawlway is thick with sand, dust,
 and markings of the passage of other creatures.
 ~
 0 9 0
@@ -1218,7 +1218,7 @@ S
 #8714
 A Tiny Crawlway~
 You are on your hands and knees, inside a small crawlway that winds
-through the inside of the pyramid.  The crawlway is thick with sand, dust, 
+through the inside of the pyramid.  The crawlway is thick with sand, dust,
 and markings of the passage of other creatures.
 ~
 0 9 0
@@ -1273,7 +1273,7 @@ The crawlway gets a little larger to the north.
 S
 #8717
 A Slippery Hole~
-The sides of this hole are slippery-smooth.  You lower yourself in, and 
+The sides of this hole are slippery-smooth.  You lower yourself in, and
 proceed to move downward... when suddenly you lose your purchase!
 
 You fall for what seems like an eternity, and smash into the stones below...
@@ -1285,13 +1285,13 @@ small rocky crevasse.
 ~
 0 13 0
 E
-u up~
-The hole looks far too slippery to climb back up.
+bones~
+The bones have whitened and cracked in the dry air, apparently the remains
+of adventurers, thieves, and creatures that did not survive the fall.
 ~
 E
-bones~
-The bones have whitened and cracked in the dry air, apparently the remains 
-of adventurers, thieves, and creatures that did not survive the fall.
+u up~
+The hole looks far too slippery to climb back up.
 ~
 D2
 You see a rocky crevasse that proceeds deep under the pyramid.
@@ -1307,13 +1307,13 @@ small rocky crevasse.
 ~
 0 9 0
 E
-u up~
-The hole looks far too slippery to climb back up.
+bones~
+The bones have whitened and cracked in the dry air, apparently the remains
+of adventurers, thieves, and creatures that did not survive the fall.
 ~
 E
-bones~
-The bones have whitened and cracked in the dry air, apparently the remains 
-of adventurers, thieves, and creatures that did not survive the fall.
+u up~
+The hole looks far too slippery to climb back up.
 ~
 D2
 You see a rocky crevasse that proceeds deep under the pyramid.
@@ -1361,7 +1361,7 @@ man old~
 The old man looks like he has been trapped down here far too long, and
 has begun to lose his mind.  He moves about slowly, cackling to himself.
 
-He turns to you and shouts, 'nope measse!  nope measse!', then turns 
+He turns to you and shouts, 'nope measse!  nope measse!', then turns
 back and stares into the fire.
 
 'What a strange person,' you think to yourself.
@@ -1398,12 +1398,6 @@ source is too dim to see exactly what it is.
 ~
 0 9 0
 E
-black shape~
-Wind howls about your ears like the roar of a tiger.  As your eyes
-adjust to the light the shape to the south almost seems to take the
-form of a massive animal head.
-~
-E
 tiger head animal sesame~
 You are now certain that the wind is the cold breath of some unearthly
 giant animal, whose voice rumbles lowly on the breeze, and whose
@@ -1413,6 +1407,12 @@ You move closer for a better look, when suddenly a pair of eyes flashes.
 A cold voice echoes: 'SEEK YE THE DIAMOND... IN THE ROUGH...'
 
 ... Then all is silent.
+~
+E
+black shape~
+Wind howls about your ears like the roar of a tiger.  As your eyes
+adjust to the light the shape to the south almost seems to take the
+form of a massive animal head.
 ~
 D2
 You see a strange-looking black shape.
@@ -1470,7 +1470,7 @@ You see a tomb.
 S
 #8725
 A Looted Tomb~
-The floor of this small tomb is littered with the lids of 
+The floor of this small tomb is littered with the lids of
 smashed sarcophagi, bits of treasure dropped by thieves and
 looters, and corpses pulled from their resting places.
 ~
@@ -1499,21 +1499,21 @@ except a large stone coffin that leans against the western wall.
 ~
 0 8 0
 E
-coffin lid~
-The coffin is sculpted into the form of a man, standing several heads above
-you, and clad in the garments of pharoahs.  It has apparently been untouched
-by the ravages of time and the activities of looters.  Several markings on the 
-side indicate spots where unsuccessful attempts were made to open the coffin.
-
-You can't see any way to open it.
-~
-E
 man garments pharoah~
 As you look closer at the figure sculpted into the stone coffin you notice a
 small marking carved into its chest.  It looks like a scarab or small beetle
 would fit into the small space, if properly sized.
 
 Hmm.
+~
+E
+coffin lid~
+The coffin is sculpted into the form of a man, standing several heads above
+you, and clad in the garments of pharoahs.  It has apparently been untouched
+by the ravages of time and the activities of looters.  Several markings on the
+side indicate spots where unsuccessful attempts were made to open the coffin.
+
+You can't see any way to open it.
 ~
 D1
 To the east is another tomb.
@@ -1534,13 +1534,13 @@ of dust.  Some inscriptions are carved into the wall here.
 ~
 0 9 0
 E
+coffin lid~
+On this side the coffin lid is smooth featureless stone.
+~
+E
 inscriptions~
 You blow dust away from the inscriptions to read:
 'Beware the curse of the mummy.'
-~
-E
-coffin lid~
-On this side the coffin lid is smooth featureless stone.
 ~
 D1
 You see the backside of the coffin lid, featureless stone.
@@ -1596,8 +1596,8 @@ S
 #8730
 The Ancient Hall~
 Here the air is deathly still, motes of dust thickly obscuring your
-vision.  Several stone statues line the walls of the hall, depicting the 
-gods of an ancient society.  Strange glyphs and sigils cover the walls, a 
+vision.  Several stone statues line the walls of the hall, depicting the
+gods of an ancient society.  Strange glyphs and sigils cover the walls, a
 peculiar pictorial form of written language that you don't understand.
    Some steps lead to a raised dais to the south.
 ~
@@ -1732,7 +1732,7 @@ S
 #8737
 A Dank Chamber~
 This chamber has a dank, dusty, musty smell to it.  Small footprints
-in the dust betray the recent passage of some sort of creatures.  A hole 
+in the dust betray the recent passage of some sort of creatures.  A hole
 in the floor lies to the west and a stairway is to the east.
 ~
 0 2629640 0
@@ -1879,14 +1879,14 @@ final resting place of the mighty pharoahs of this land.
 ~
 0 13 0
 E
-tomb~
-The tomb looks like it has stood for many years, much like the pyramid
-which encloses it.  It is covered in small hieroglyphics.
-~
-E
 hieroglyphics carvings~
 The markings indicate that this tomb is indeed the tomb of the greatest
 pharoahs of the ancient civilization that built this massive pyramid.
+~
+E
+tomb~
+The tomb looks like it has stood for many years, much like the pyramid
+which encloses it.  It is covered in small hieroglyphics.
 ~
 D0
 You see the tomb of the pharoahs.
@@ -1922,8 +1922,8 @@ S
 A Rubble-Strewn Hallway~
 This hallway formerly had a beautiful arch to the ceiling, now
 collapsed under the weight of the slowly settling stones of the
-pyramid.  Now, a massive pile of rubble leads up into a hole high 
-in the northern portion of the hallway.  To the south, through the 
+pyramid.  Now, a massive pile of rubble leads up into a hole high
+in the northern portion of the hallway.  To the south, through the
 rubble and fallen stones you see a sandstone crypt.
 ~
 0 13 0
@@ -2015,13 +2015,13 @@ they appear to have been used recently.
 ~
 0 8 0
 E
+bricks~
+The small golden bricks are very smooth and also quite soft.
+~
+E
 rug rugs tapestry tapestries~
 The rugs and tapestries are very fine and worn with age, their colors
 now faded.  They depict scenes of life in an ancient desert city.
-~
-E
-bricks~
-The small golden bricks are very smooth and also quite soft.
 ~
 D3
 You see an arched hall.
@@ -2102,21 +2102,21 @@ sand~
 Sand is about all you CAN see right now.  Unfortunately, it isn't very
 interesting sand, only white, dry, and blowing all over the place.
 ~
-D0
-You see only a wall of whirling, blowing, dry sand.
-~
-~
-0 -1 8753
-D3
-You see only a wall of whirling, blowing, dry sand.
-~
-~
-0 -1 8754
 D2
 You see only a wall of whirling, blowing, dry sand.
 ~
 ~
 0 -1 8755
+D3
+You see only a wall of whirling, blowing, dry sand.
+~
+~
+0 -1 8754
+D0
+You see only a wall of whirling, blowing, dry sand.
+~
+~
+0 -1 8753
 D1
 You see only a wall of whirling, blowing, dry sand.
 ~
@@ -2145,16 +2145,16 @@ You see only a wall of whirling, blowing, dry sand.
 ~
 ~
 0 -1 8755
-D0
-You see only a wall of whirling, blowing, dry sand.
-~
-~
-0 -1 8754
 D2
 You see only a wall of whirling, blowing, dry sand.
 ~
 ~
 0 -1 8756
+D0
+You see only a wall of whirling, blowing, dry sand.
+~
+~
+0 -1 8754
 S
 #8756
 A Swirling Sandstorm~
@@ -2168,17 +2168,12 @@ sand~
 Sand is about all you CAN see right now.  Unfortunately, it isn't very
 interesting sand, only white, dry, and blowing all over the place.
 ~
-D0
-You see only a wall of whirling, blowing, dry sand.
-~
-~
-0 -1 8755
-D3
+D1
 You see only a wall of whirling, blowing, dry sand.
 ~
 ~
 0 -1 8756
-D1
+D3
 You see only a wall of whirling, blowing, dry sand.
 ~
 ~
@@ -2188,6 +2183,11 @@ You see only a wall of whirling, blowing, dry sand.
 ~
 ~
 0 -1 8757
+D0
+You see only a wall of whirling, blowing, dry sand.
+~
+~
+0 -1 8755
 S
 #8757
 A Swirling Sandstorm~
@@ -2232,18 +2232,18 @@ every other direction.
 ~
 0 0 10
 E
-sand dune~
-The sand is very white, and very sandy.  There sure is a lot of it.
+hieroglyphics symbols~
+Like most of the ancient hieroglyphics of this land, the symbols are
+totally incomprehensible to you.  Perhaps the Sphinx has the answer
+to this ancient riddle.
 ~
 E
 riddle~
 A vision forms before your eyes, in glowing hieroglyphic symbols.
 ~
 E
-hieroglyphics symbols~
-Like most of the ancient hieroglyphics of this land, the symbols are
-totally incomprehensible to you.  Perhaps the Sphinx has the answer
-to this ancient riddle.
+sand dune~
+The sand is very white, and very sandy.  There sure is a lot of it.
 ~
 D0
 You see only a wall of whirling, blowing, dry sand.
@@ -2311,66 +2311,66 @@ M 1 8701 4 8703 2 Load A hooded cobra snake
 M 1 8700 6 8705 1 Load A horrible asp
 M 1 8702 3 8706 1 Load A wily little mongoose
 M 1 8703 6 8709 2 Load A pyramid watcher
-E 0 8700 0 16 an egyptian mace is loaded вооружение of A pyramid watcher
+E 0 8700 0 16 An egyptian mace is loaded вооружение of A pyramid watcher
 M 1 8703 6 8709 2 Load A pyramid watcher
-E 0 8701 0 12 sand-colored robes is loaded накинуто на тело of A pyramid watcher
+E 0 8701 0 12 Sand-colored robes is loaded накинуто на тело of A pyramid watcher
 M 1 8709 1 8711 1 Load The efreeti
-E 0 8707 0 0 a small hot ball of fire is loaded освещает of The efreeti
+E 0 8707 0 0 A small hot ball of fire is loaded освещает of The efreeti
 M 1 8700 6 8713 2 Load A horrible asp
 M 1 8702 3 8716 1 Load A wily little mongoose
 O 0 8723 0 8719 The diamond loaded to A Rough Crevasse
 M 1 8706 1 8723 1 Load The magic carpet
 M 1 8711 1 8723 1 Load The djinn
-E 0 8713 0 17 the lamp is loaded зажато в руке of The djinn
+E 0 8713 0 17 The lamp is loaded зажато в руке of The djinn
 M 1 8704 6 8725 1 Load A tomb thief
-E 0 3351 0 16 обыкновенный кинжал is loaded вооружение of A tomb thief
+E 0 3351 0 16 ќбыкновенн|ый|ого|ому|ый|ым|ом|ых|ых кинжал||а|у||ом|е|а|ов is loaded вооружение of A tomb thief
 M 1 8707 4 8725 2 Load A mummy
-E 0 8704 0 5 some cloth wrappings is loaded на тело of A mummy
+E 0 8704 0 5 Some cloth wrappings is loaded на тело of A mummy
 G 0 8706 0 A jar of formaldehyde is given to A mummy
 M 1 8707 4 8725 2 Load A mummy
-E 0 8704 0 5 some cloth wrappings is loaded на тело of A mummy
+E 0 8704 0 5 Some cloth wrappings is loaded на тело of A mummy
 G 0 8705 0 A bottle of embalming fluid is given to A mummy
 M 1 8702 3 8726 1 Load A wily little mongoose
 M 1 8704 6 8726 1 Load A tomb thief
-E 0 3351 0 16 обыкновенный кинжал is loaded вооружение of A tomb thief
+E 0 3351 0 16 ќбыкновенн|ый|ого|ому|ый|ым|ом|ых|ых кинжал||а|у||ом|е|а|ов is loaded вооружение of A tomb thief
 M 1 8717 1 8732 1 Load Ramses the Damned
 G 0 8719 0 A pile of sand is given to Ramses the Damned
 G 0 8720 0 The curse of the mummy is given to Ramses the Damned
 G 0 8721 0 A small elixir is given to Ramses the Damned
 G 0 8721 0 A small elixir is given to Ramses the Damned
-E 0 8722 0 6 a golden mask is loaded на голову of Ramses the Damned
+E 0 8722 0 6 A golden mask is loaded на голову of Ramses the Damned
 M 1 8704 6 8733 1 Load A tomb thief
-E 0 3351 0 16 обыкновенный кинжал is loaded вооружение of A tomb thief
+E 0 3351 0 16 ќбыкновенн|ый|ого|ому|ый|ым|ом|ых|ых кинжал||а|у||ом|е|а|ов is loaded вооружение of A tomb thief
 M 1 8704 6 8734 1 Load A tomb thief
-E 0 3351 0 16 обыкновенный кинжал is loaded вооружение of A tomb thief
+E 0 3351 0 16 ќбыкновенн|ый|ого|ому|ый|ым|ом|ых|ых кинжал||а|у||ом|е|а|ов is loaded вооружение of A tomb thief
 M 1 8704 6 8735 1 Load A tomb thief
-E 0 3351 0 16 обыкновенный кинжал is loaded вооружение of A tomb thief
+E 0 3351 0 16 ќбыкновенн|ый|ого|ому|ый|ым|ом|ых|ых кинжал||а|у||ом|е|а|ов is loaded вооружение of A tomb thief
 M 1 8703 6 8737 2 Load A pyramid watcher
-E 0 8700 0 16 an egyptian mace is loaded вооружение of A pyramid watcher
+E 0 8700 0 16 An egyptian mace is loaded вооружение of A pyramid watcher
 M 1 8703 6 8737 2 Load A pyramid watcher
-E 0 8701 0 12 sand-colored robes is loaded накинуто на тело of A pyramid watcher
+E 0 8701 0 12 Sand-colored robes is loaded накинуто на тело of A pyramid watcher
 M 1 8707 4 8737 1 Load A mummy
-E 0 8704 0 5 some cloth wrappings is loaded на тело of A mummy
+E 0 8704 0 5 Some cloth wrappings is loaded на тело of A mummy
 M 1 8737 1 8737 1 Load {R«ЋќЅЌџ…{x ћустафа.
-E 0 8738 0 0 голубой шар (ball) is loaded освещает of {R«ЋќЅЌџ…{x ћустафа.
-E 0 8737 0 16 ќгромная цепь ({Wflail{x) ћустафы is loaded вооружение of {R«ЋќЅЌџ…{x ћустафа.
+E 0 8738 0 0 √олубой шар (ball) is loaded освещает of {R«ЋќЅЌџ…{x ћустафа.
+E 0 8737 0 16 ќгромн|а€|ой|ой|ую|ой|ой|ых|ых цеп|ь|и|и|ь|ью|и|и|ей ({wflail{x) мустафы is loaded вооружение of {R«ЋќЅЌџ…{x ћустафа.
 M 1 8700 6 8740 1 Load A horrible asp
 M 1 8703 6 8740 2 Load A pyramid watcher
-E 0 8700 0 16 an egyptian mace is loaded вооружение of A pyramid watcher
+E 0 8700 0 16 An egyptian mace is loaded вооружение of A pyramid watcher
 M 1 8703 6 8740 2 Load A pyramid watcher
-E 0 8701 0 12 sand-colored robes is loaded накинуто на тело of A pyramid watcher
+E 0 8701 0 12 Sand-colored robes is loaded накинуто на тело of A pyramid watcher
 M 1 8701 4 8741 2 Load A hooded cobra snake
 M 1 8707 4 8741 1 Load A mummy
-E 0 8704 0 5 some cloth wrappings is loaded на тело of A mummy
+E 0 8704 0 5 Some cloth wrappings is loaded на тело of A mummy
 M 1 8704 6 8742 1 Load A tomb thief
-E 0 3351 0 16 обыкновенный кинжал is loaded вооружение of A tomb thief
+E 0 3351 0 16 ќбыкновенн|ый|ого|ому|ый|ым|ом|ых|ых кинжал||а|у||ом|е|а|ов is loaded вооружение of A tomb thief
 M 1 8705 1 8743 1 Load Ali Baba
-E 0 8703 0 6 a dirty cloth turban is loaded на голову of Ali Baba
-E 0 8702 0 16 an obsidian dirk is loaded вооружение of Ali Baba
+E 0 8703 0 6 A dirty cloth turban is loaded на голову of Ali Baba
+E 0 8702 0 16 An obsidian dirk is loaded вооружение of Ali Baba
 M 1 8710 2 8745 1 Load A caryatid
-E 0 8708 0 16 a stone scimitar is loaded вооружение of A caryatid
+E 0 8708 0 16 A stone scimitar is loaded вооружение of A caryatid
 M 1 8710 2 8745 1 Load A caryatid
-E 0 8708 0 16 a stone scimitar is loaded вооружение of A caryatid
+E 0 8708 0 16 A stone scimitar is loaded вооружение of A caryatid
 G 0 8709 0 A stone key is given to A caryatid
 O 0 8710 0 8745 A mighty stone sarcophagus loaded to The Tomb of the Pharoahs
 P 0 8711 1 8710 1 Some ancient dust put inside some ancient dust
@@ -2395,7 +2395,7 @@ M 1 8708 4 8756 1 Load A sandman
 R 0 8757 4 Randomize A Swirling Sandstorm
 M 1 8708 4 8757 1 Load A sandman
 M 1 8716 1 8758 1 Load The great sphinx
-E 0 8717 0 17 the answer is loaded зажато в руке of The great sphinx
+E 0 8717 0 17 The answer is loaded зажато в руке of The great sphinx
 O 0 8718 0 8759 The treasure of the sphinx loaded to Through the Hole in the Sand
 O 0 8724 0 8759 A blazing sun wand loaded to Through the Hole in the Sand
 O 0 8725 0 8759 A sandy-colored ring loaded to Through the Hole in the Sand

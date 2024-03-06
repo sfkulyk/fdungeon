@@ -33,13 +33,13 @@ look $n
 endif
 ~
 #5
-if ispc $n 
-    emote орет '{mРЯдовой $n ! Ноги вместе, руки на ширину плеч, в Яму прыгом {RМАРШ!{x'{/ 
+if ispc $n
+    emote орет '{mРЯдовой $n ! Ноги вместе, руки на ширину плеч, в Яму прыгом {RМАРШ!{x'{/
     mob transfer $n 12536
 endif
 ~
 #6
-if ispc $n 
+if ispc $n
     emote орет '{mРЯдовой $n ! {RПОЧЕМУ НЕ НА ПОСТУ?!! {WТри нарЯда ВНЕ ОЧЕРЕДИ!{x'{/
     mob transfer $n 12438
     mob force $n toilet
@@ -112,19 +112,19 @@ if ispc $n
    say Hаказание за это пpеступление - смеpть, и ты пpиведешь его в исполнение!
    say Ищи the {RA slaver buyer{x где-то в pайоне {YEntrance to the Slaver's Market{x!
    say Этот pайон находитсЯ в area {YUnderDark{x.
-  else if level $n <= 30 and $n > 20 
+  else if level $n <= 30 and $n > 20
    say Ужасный пpеступник, {RСтрадающаЯ душа{x , сбежал из темницы!
    say С тех поp беглый {RСтрадающаЯ душа{x ,  убил 9 человек!
    say Hаказание за это пpеступление - смеpть, и ты пpиведешь его в исполнение!
    say Ищи the {RСтрадающаЯ душа{x где-то в pайоне {YЗал Замороженных душ{x!
    say Этот pайон находитсЯ в area {YАд{x.
-  else  if level $n <= 55 and $n > 30 
+  else  if level $n <= 55 and $n > 30
    say Ужасный пpеступник, {RПушистый белый кролик{x, сбежал из темницы!
    say С тех поp беглый {RПушистый белый кролик{x ,  убил 15 человек!
    say Hаказание за это пpеступление - смеpть, и ты пpиведешь его в исполнение!
    say Ищи the {RПушистый белый кролик{x где-то в pайоне {YКаменный колодец{x!
    say Этот pайон находитсЯ в area {YЗатерЯнные Души{x.
- else  if level  $n <= 70 ) and $n > 55 
+ else  if level  $n <= 70 ) and $n > 55
    say Ужасный пpеступник, {RA drakyri healer{x, сбежал из темницы!
    say С тех поp беглый {RA drakyri healer{x ,  убил 25 человек!
    say Hаказание за это пpеступление - смеpть, и ты пpиведешь его в исполнение!
@@ -177,7 +177,7 @@ endif
 #22
 if ispc $n
 sc
-say Как жизнь $n ? 
+say Как жизнь $n ?
 emote призывает {DДемонов {RАДА{x чтобы они охранЯли твой покой.
 say {YОтдохни после боЯ{x
 comf $n
@@ -275,7 +275,7 @@ endif
 if ispc $n
 if level $n <= 17
 say {cКоррешш, помогги.. ломит, ужжассно.. мне б ша глюкнуть че-ттоо..
-say х-хемлока, например, бахнуть.. 
+say х-хемлока, например, бахнуть..
 say {cСлушай, если достанешь мне хоть че-нить - ЯЯ в долгу не останусь!..{x
 endif
 endif
@@ -555,9 +555,9 @@ if sex $n < 2
 sc
 say {WКстати, ты пиво "{D22{x{W" принёс?{x"
 mob force $n say {WДа, есть же!{x
-shake $n 
+shake $n
 else
-sc 
+sc
 say {WКстати, ты пиво "{D22{x{W" принесла?{x"
 mob force $n say {WНу ты жлоб! Поцелуй-ка меня в ...{x
 kiss $n
@@ -570,9 +570,9 @@ if sex $n < 2
 sc
 say {WКстати, ты пиво "{D22{x{W" принёс?{x"
 mob force $n say {WСегодня только белая!{x
-bow $n 
+bow $n
 else
-sc 
+sc
 say {WКстати, ты пиво "{D22{x{W" принесла?{x"
 mob force $n say {WКонечно, дорогой!{x
 smile $n
@@ -580,6 +580,15 @@ endif
 endif
 endif
 "
+~
+#10000
+if ispc $n
+say За родную Долину Яйца вырву всем вам, захватчики хреновы!!!
+mob force $n chat {CИнформациЯ: {yА мы в {CД{Wолину{y на {Rогонёк{y!!!{x
+mob force $n chan chat
+mob force $n chat {CИнформациЯ: {yА мы в {CД{Wолину{y на {Rогонёк{y!!!{x
+mob force $n chan chat
+endif
 ~
 #10131
 if clan $n 'chaos'
@@ -630,9 +639,9 @@ say Hi!
 if clan $n 'jumandji'
 say Здравствуй, родной! :){x
 kiss $n
-else       
+else
 say {GИ чего мы тут делаем? {RАА{G? А ну бегом.. отсюда..{x
-murder $n        
+murder $n
 say {GЧто не бежитсЯ? :E{x
 endif
 ~
