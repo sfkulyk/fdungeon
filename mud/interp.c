@@ -1391,7 +1391,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
     {
       if ( race_table[i].dambonus[j] < 0)
       {
-        ptc(ch,"{C%s{x: {G%d%%\n\r{x",bonus_dam_types[j],race_table[i].dambonus[j]);
+        ptc(ch,"{C%9s{x: {G%d%%\n\r{x",bonus_dam_types[j],race_table[i].dambonus[j]);
         is_found=TRUE;
       }
     }
@@ -1399,7 +1399,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
     {
       if ( race_table[i].dambonus[j] > 0 )
       {
-        ptc(ch,"{C%s{x: {R+%d%%\n\r{x",bonus_dam_types[j],race_table[i].dambonus[j]);
+        ptc(ch,"{C%9s{x: {R+%d%%\n\r{x",bonus_dam_types[j],race_table[i].dambonus[j]);
         is_found=TRUE;
       }
     }

@@ -492,9 +492,7 @@ void do_guild( CHAR_DATA *ch, const char *argument )
     if (GUILD(victim, DWARVES_GUILD))
     {
       ptc(ch,"%s теперь состоит в Гильдии Гномов.\n\r",victim->name);
-//      if (!IS_IMMORTAL(ch))
       gecho("{YЯркие вспышки прочертили небо, и земля содрогнулась от тяжкого стона.{x");
-//      if (!IS_IMMORTAL(ch))
       gecho("{DГильдия гномов{x приняла еще одного {CКУЗНЕЦА{x.");
       stc ("Тебя приняли в гильдию Гномов.\n\r", victim);
     }
@@ -536,9 +534,7 @@ void do_guild( CHAR_DATA *ch, const char *argument )
     if (GUILD(victim, DRUIDS_GUILD))
     {
       ptc(ch,"%s теперь послушник в Гильдии Друидов.\n\r",victim->name);
-//      if (!IS_IMMORTAL(ch))
       gecho("{YЯркие вспышки прочертили небо, травы и деревья радостно прошелестели в приветствии.{x");
-//      if (!IS_IMMORTAL(ch))
       gecho("{GГильдия Друидов{x приняла еще одного {GПОСЛУШНИКА{x.");
       stc ("Тебя приняли в гильдию Друидов.\n\r", victim);
     }

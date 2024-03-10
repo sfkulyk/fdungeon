@@ -1989,48 +1989,48 @@ bool damage(CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,int dt,bool sh
   int number;
   int dam_temp=dam,str_bonus;
 
- if (dam >=0)
- {
-  if (dam_type>=1000)
+  if (dam >=0)
   {
-    dam_type-=1000;
-    dam_hit=TRUE;
-  }
-
-  if ( victim->position == POS_DEAD ) return FALSE;
-
-  if ( !IS_IMMORTAL(ch) )
-  {
-   if ( dam > 2000 && dt != gsn_backstab)
-   {
-    dam = 1200;
-    if (!IS_NPC(ch) && !IS_IMMORTAL(ch) && obj)
+    if (dam_type>=1000)
     {
-      stc("Смертный не может держать такое оружие!.\n\r",ch);
-      obj_from_char(obj);
-      extract_obj(obj);
+      dam_type-=1000;
+      dam_hit=TRUE;
     }
-   }
 
-   if (!breath)
-   {
-    if (!IS_SET(global_cfg,CFG_NODR))
+    if ( victim->position == POS_DEAD ) return FALSE;
+
+    if ( !IS_IMMORTAL(ch) )
     {
-     if ( dam > 35) dam = (dam - 35)/2 + 35;
-     if ( dam > 80) dam = (dam - 80)/2 + 80;
-     if ( dt != gsn_backstab  &&  dam > 150 ) dam = (dam - 150)/2 + 150;
-    }
-   }
-   else
-   {
-    shield = get_eq_char(victim, WEAR_RHAND);
-    if (shield && CAN_WEAR(shield, ITEM_WEAR_SHIELD)) dam = (dam * 4)/5;
+      if ( dam > 2000 && dt != gsn_backstab)
+      {
+        dam = 1200;
+        if (!IS_NPC(ch) && !IS_IMMORTAL(ch) && obj)
+        {
+          stc("Смертный не может держать такое оружие!.\n\r",ch);
+          obj_from_char(obj);
+          extract_obj(obj);
+        }
+      }
 
-    shield = get_eq_char(victim, WEAR_LHAND);
-    if (shield && CAN_WEAR(shield, ITEM_WEAR_SHIELD)) dam = (dam * 4)/5;
-   }
+      if (!breath)
+      {
+        if (!IS_SET(global_cfg,CFG_NODR))
+        {
+          if ( dam > 35) dam = (dam - 35)/2 + 35;
+          if ( dam > 80) dam = (dam - 80)/2 + 80;
+          if ( dt != gsn_backstab  &&  dam > 150 ) dam = (dam - 150)/2 + 150;
+        }
+      }
+      else
+      {
+        shield = get_eq_char(victim, WEAR_RHAND);
+        if (shield && CAN_WEAR(shield, ITEM_WEAR_SHIELD)) dam = (dam * 4)/5;
+
+        shield = get_eq_char(victim, WEAR_LHAND);
+        if (shield && CAN_WEAR(shield, ITEM_WEAR_SHIELD)) dam = (dam * 4)/5;
+      }
+    }
   }
- }
 
   if (victim && ch && victim!=ch && !IS_NPC(victim) && !IS_NPC(ch))
   {
@@ -2356,10 +2356,7 @@ bool damage(CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,int dt,bool sh
         }
       }
     }
-
-    do_printf(log_buf, "В %s [%u], %s убил ",ch->in_room->name,ch->in_room->vnum,
-    get_char_desc(ch,'1'));
-    strcat(log_buf,get_char_desc(victim,'4'));
+    do_printf(log_buf, "In room [%s] id %u, area %s, %s killed %s (vnum %d)",ch->in_room->name,ch->in_room->vnum,ch->in_room->area->name,get_char_desc(ch,'1'),victim->name,IS_NPC(victim)?victim->pIndexData->vnum:0);
     if (!IS_NPC(victim)) strcat(log_buf,(victim->desc !=NULL)?"":" !!! LOSTLINK KILL !!!");
     log_string( log_buf );
 

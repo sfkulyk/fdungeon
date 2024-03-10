@@ -458,19 +458,7 @@ void do_blacksmith (CHAR_DATA *ch, const char *argument)
       case ENCH_REMINVIS:
         REM_BIT(objt->extra_flags,ITEM_INVIS);
         break;
-      /*
-      case ENCH_REMANTIGOOD:
-        REM_BIT(objt->extra_flags,ITEM_ANTI_GOOD);
-        break;
 
-      case ENCH_REMANTINEUTRAL:
-        REM_BIT(objt->extra_flags,ITEM_ANTI_NEUTRAL);
-        break;
-
-      case ENCH_REMANTIEVIL:
-        REM_BIT(objt->extra_flags,ITEM_ANTI_EVIL);
-        break;
-      */
       case ENCH_REMVAMP:
         if (objt->item_type!=ITEM_WEAPON)
         {

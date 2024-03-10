@@ -157,26 +157,26 @@ const struct attack_type attack_table [MAX_DAMAGE_MESSAGE] =
 
 const char * bonus_dam_types[DAM_MAX+1] =
 {
- "none      ",
- "bash      ",
- "pierce    ",
- "slash     ",
- "fire      ",
- "cold      ",
- "lightning ",
- "acid      ",
- "poison    ",
- "negative  ",
- "holy      ",
- "energy    ",
- "mental    ",
- "disease   ",
- "drowning  ",
- "light     ",
- "other     ",
- "harm      ",
- "charm     ",
- "sound     ",
+ "none",
+ "bash",
+ "pierce",
+ "slash",
+ "fire",
+ "cold",
+ "lightning",
+ "acid",
+ "poison",
+ "negative",
+ "holy",
+ "energy",
+ "mental",
+ "disease",
+ "drowning",
+ "light",
+ "other",
+ "harm",
+ "charm",
+ "sound",
  ""
 };
 
@@ -264,26 +264,10 @@ struct  deity_choice  deity_table [MAX_DEITIES] =
 // Class table.
 const struct class_type class_table [MAX_CLASS] =
 {
- {
-   "mage", "Mag",   STAT_INT, OBJ_VNUM_SCHOOL_DAGGER,
-   60,  7,  8, TRUE,
-   "mage basics",   "mage default"
- },
- {
-   "cleric", "Cle", STAT_WIS, OBJ_VNUM_SCHOOL_MACE,
-   60,  9, 10, TRUE,
-   "cleric basics", "cleric default"
- },
- {
-   "thief", "Thi",  STAT_DEX, OBJ_VNUM_SCHOOL_DAGGER,
-   60, 11, 13, FALSE,
-   "thief basics",  "thief default"
- },
- {
-   "warrior", "War",STAT_STR, OBJ_VNUM_SCHOOL_SWORD,
-   60, 14, 15, FALSE,
-   "warrior basics","warrior default"
- }
+ { "mage", "Mag",   STAT_INT, OBJ_VNUM_SCHOOL_DAGGER, 60,  7,  8, TRUE, "mage basics",   "mage default" },
+ { "cleric", "Cle", STAT_WIS, OBJ_VNUM_SCHOOL_MACE,   60,  9, 10, TRUE, "cleric basics", "cleric default" },
+ { "thief", "Thi",  STAT_DEX, OBJ_VNUM_SCHOOL_DAGGER, 60, 11, 13, FALSE, "thief basics",  "thief default" },
+ { "warrior", "War",STAT_STR, OBJ_VNUM_SCHOOL_SWORD, 60, 14, 15, FALSE, "warrior basics","warrior default" }
 };
 
 const struct picture_type where_name_female[] =
@@ -1052,8 +1036,6 @@ const   struct  str_app_type    str_app         [37]            =
  { 20, 25,1000,120 }  // 36
 };
 
-
-
 const   struct  int_app_type    int_app         [37]           =
 {
 // learn
@@ -1178,7 +1160,6 @@ const   struct  dex_app_type    dex_app         [37]            =
  { -600 },   /* 35 */
  { -600 }    /* 36 */
 };
-
 
 const   struct  con_app_type    con_app         [37]            =
 {
@@ -1307,21 +1288,21 @@ const struct liq_type liq_table [] =
 struct skill_type skill_table [] =
 {
 // {
-//   "Skill Name",              // Название навыка
-//   { mag,cle,thi,war},        // минимальный уровень для MCTW
-//   {learn,learn,learn,learn}, // сложность изучения
-//   spell_pointer,             // указатель на спелл
-//   legal_targets,             // флаг для TARGET
-//   position,                  // минимальная позиция
+//   "Skill Name",
+//   { mag,cle,thi,war},        // min level for
+//   {learn,learn,learn,learn}, // learning hardness
+//   spell_pointer,             // pointer to spell
+//   legal_targets,             // flag for TARGET
+//   position,                  // min POS
 //   &gsn,                      // &gsn
-//   category,                  // флаг категории
-//   min_mana,                  // минимум маны для спелла
-//   wait_time,                 // wait_time
-//   "damage msg",              // сообщение при дамадже
-//   "wear off msg",            // сообщение при снятии аффекта
-//   "wear off obj msg",        // сообщ. при снятии аффекта предмета
-//   flag,                      // флаг
-//   "brief help"               // краткая справка
+//   category,
+//   min_mana,
+//   wait_time,
+//   "damage msg",
+//   "wear off msg",
+//   "wear off obj msg",
+//   flag,
+//   "brief help"
 // },
  {
      "reserved",
