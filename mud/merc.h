@@ -489,7 +489,8 @@ void  add_pkiller        (CHAR_DATA *ch, CHAR_DATA *killer);
 void  remove_pkiller     (CHAR_DATA *ch, char *name);
 void  remove_one_stealer (CHAR_DATA *ch);
 
-
+// music.c
+void load_songs(void);
 
 // saboteur.c
 bool  is_offered          ( CD *ch );

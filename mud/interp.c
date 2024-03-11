@@ -13,7 +13,7 @@
 #include "tables.h"
 #include "magic.h"
 
-DECLARE_SPELL_FUN( spell_null              );
+DECLARE_SPELL_FUN( spell_null );
 bool fLogAll = FALSE;
 
 struct  cmd_type        cmd_table       [] =

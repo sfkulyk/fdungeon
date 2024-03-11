@@ -16,7 +16,6 @@
 #endif
 #include "merc.h"
 #include "recycle.h"
-#include "tables.h"
 #include "interp.h"
 
 #if defined(WIN32)

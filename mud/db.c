@@ -14,7 +14,6 @@
 #include "merc.h"
 #include "db.h"
 #include "recycle.h"
-#include "music.h"
 #include "tables.h"
 
 // comment out to turn "magic number" debugging of memory allocation/recycling off
