@@ -59,7 +59,7 @@ And the man pages, outdate.
        | \/  \/ |                                             | \/  \/ |{x~                                                                     
 -1 ROM~
  Данный ROM был запущен...а кто ж его помнит когда...мощными усилиями 
-Капитана,  Warlock'a и Saboteur'а. 
+Saboteur'а, Adron (aka Warlock) и Капитана.
 Честь им и хвала! (то есть нам...)~
 -1 IMMORTAL IMMORT GOD WIZARD WIZ~
 'Immortal', бессмертные - боги этого мира. В их руках законодательная и
@@ -108,7 +108,7 @@ Also see "help ROM" for information about the Rivers of Mud code base.
  ||  Tom Madsen, Michael Seifert,and Sebastian Hammer  ||
  || Based on MERC 2.1 code by Hatchet, Furey, and Kahn ||         
  || Based ROM 2.4 copyright (c) 1993-1995 Russ Taylor. ||       
-  \\ Forgotten Dungeon (C)1998-2000 Saboteur & Adron  //      [ ]_[ ]_[ ]_[ ]
+  \\ Forgotten Dungeon (C)1998-2006 Saboteur & Adron  //      [ ]_[ ]_[ ]_[ ]
    +--------------------------------------------------+        |_=_=_=_=_=_|   
    =-------------=           _+_    [ ]_[ ]_[ ]_[ ]   _______|  |=_= -    |    
    | ####      > |            |      |_=_-_  = =_|    \______|  |-  = []  |\ 
@@ -129,13 +129,12 @@ Select your codepage:   ^^^^^`^`^^`^`^`^^^""""""""^`^^``^^`^^`^^`^`^``^`^``^`
 ~
  
 -1 MOTD~ 
-* Ты обязан знать правила, установленные бессмертными. Чтобы узнать их,
-  набери {w'RULES'{x. Помни - незнание законов не освобождает от
-  ответственности.
+Добро пожаловать в забытый мир {YForgotten Dungeon{x.
+* Прочитай и соблюдай правила, установленные бессмертными. Набери {w'RULES'{x
+чтобы прочитать их.Помни - незнание законов не освобождает от ответственности.
 * Важные команды: {whelp, commands, news, notes, changes{x.
-* Используй команду {rdelete{x для удаления неудавшегося персонажа.
-* Если вы хотите связаться с бессмертными, вы можете написать письмо
-  на адресс {Cmud@astral.ntu-kpi.kiev.ua{x.
+* Если вы хотите связаться с бессмертными, пишите note to all
+* Также у нас есть телеграм канал: {Yhttps://t.me/fdungeon{x
   
 [Нажми ENTER для продолжения]
 ~

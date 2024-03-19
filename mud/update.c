@@ -1711,7 +1711,7 @@ void remort_update(void)
   // drop extra classes
   REM_BIT(ch->act,PLR_5REMORT);
   REM_BIT(ch->act,PLR_LASTREMORT);
-  if (ch->remort > 2)
+  if (ch->remort > 3)
   {
     stc ("Выбери какой класс выкинуть: \n\r",ch);
     if (ch->classmag) stc("mage ",ch);

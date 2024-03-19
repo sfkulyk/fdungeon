@@ -13,7 +13,7 @@
 #include "tables.h"
 #include "magic.h"
 
-DECLARE_SPELL_FUN( spell_null );
+DECLARE_SPELL_FUN( spell_null              );
 bool fLogAll = FALSE;
 
 struct  cmd_type        cmd_table       [] =
@@ -34,10 +34,10 @@ struct  cmd_type        cmd_table       [] =
  { "chat",        "чат",         "чат",         do_chat,        POS_DEAD,      0,  WIZ_GSPEAKS,SHOW|MORPH|HIDE|SPAM|NOMOB },
  { "censored",    "цензура",     "цензура",     do_censored,    POS_DEAD,      1,  WIZ_GSPEAKS,SHOW|MORPH|HIDE|SPAM|NOMOB|FREEZE },
  { "buy",         "купить",      "купити",      do_buy,         POS_RESTING,   0,  WIZ_SECURE, SHOW|NOMOB|FREEZE|NOLOG },
- { "bounty",      "награда",     "нагорода",    do_bounty,      POS_DEAD,      0,  WIZ_SKILLS, SHOW|MORPH|NOMOB|SPAM|FREEZE|SAVE },
+ { "bounty",      "награда",     "замовити",    do_bounty,      POS_DEAD,      0,  WIZ_SKILLS, SHOW|MORPH|NOMOB|SPAM|FREEZE|SAVE },
  { "channels",    "каналы",      "канали",      do_channels,    POS_DEAD,      0,  WIZ_CONFIG, SHOW|MORPH|HIDE|NOMOB|NOLOG },
  { "deaf",        "тишина",      "тиша",        do_deaf,        POS_DEAD,      0,  WIZ_CONFIG, SHOW|MORPH|HIDE|NOMOB|NOLOG },
- { "exits",       "выходы",      "выходи",      do_exits,       POS_RESTING,   0,  LOG_NEVER,  SHOW|MORPH|HIDE|NOMOB|NOLOG },
+ { "exits",       "выходы",      "виходи",      do_exits,       POS_RESTING,   0,  LOG_NEVER,  SHOW|MORPH|HIDE|NOMOB|NOLOG },
  { "get",         "взять",       "взяти",       do_get,         POS_RESTING,   0,  WIZ_SECURE, SHOW|NOZRIT|FREEZE|NOLOG },
  { "goto",        "гото",        "гото",        do_goto,        POS_DEAD,    102,  WIZ_SECURE, SHOW|FREEZE },
  { "group",       "группа",      "група",       do_group,       POS_SLEEPING,  0,  LOG_NEVER,  SHOW|HIDE|NOLOG },
@@ -66,7 +66,7 @@ struct  cmd_type        cmd_table       [] =
  { "stopfoll",    "остановить",  "зупинити",    do_stopfoll,    POS_DEAD,      0,  WIZ_CONFIG, SHOW|NOMOB|HIDE|FREEZE|NOLOG },
  { "tell",        "сказать",     "сказати",     do_tell,        POS_RESTING,   0,  WIZ_SPEAKS, SHOW|MORPH|HIDE|SPAM },
  { "unlock",      "отпереть",    "відімкнути",  do_unlock,      POS_RESTING,   0,  WIZ_SECURE, SHOW|FREEZE|NOLOG },
- { "wield",       "вооружиться", "вооружиться", do_wear,        POS_RESTING,   0,  WIZ_SECURE, SHOW|FREEZE|SAVE|NOLOG },
+ { "wield",       "вооружиться", "озброїтись",  do_wear,        POS_RESTING,   0,  WIZ_SECURE, SHOW|FREEZE|SAVE|NOLOG },
  { "wizhelp",     "иммсправка",  "иммсправка",  do_wizhelp,     POS_DEAD,    102,  LOG_NEVER,  SHOW|MORPH|HIDE|NOLOG|NOMOB },
  { "spec",        "спец",        "спец",        do_spec,        POS_FIGHTING,  0,  WIZ_SKILLS, SHOW|NOMOB|FREEZE|NOLOG },
  { "spam",        "спам",        "спам",        do_spam,        POS_DEAD,      0,  WIZ_CONFIG, SHOW|NOMOB|HIDE|MORPH|NOORDER|NOLOG },
@@ -75,7 +75,7 @@ struct  cmd_type        cmd_table       [] =
  { "changes",     "изменения",   "зміни",       do_changes,     POS_DEAD,      0,  WIZ_NOTES,  SHOW|MORPH|HIDE|NOMOB|NOLOG },
  { "commands",    "команды",     "команди",     do_commands,    POS_DEAD,      0,  LOG_NEVER,  SHOW|MORPH|HIDE|NOMOB|NOLOG },
  { "compare",     "сравнить",    "порівняти",   do_compare,     POS_RESTING,   0,  LOG_NEVER,  SHOW|NOMOB|FREEZE|NOLOG },
- { "complain",    "жалоба",      "жалоба",      do_complain,    POS_SLEEPING,  0,  WIZ_NOTES,  SHOW|MORPH|HIDE|NOMOB|NOLOG },
+ { "complain",    "жалоба",      "скарга",      do_complain,    POS_SLEEPING,  0,  WIZ_NOTES,  SHOW|MORPH|HIDE|NOMOB|NOLOG },
  { "consider",    "определить",  "визначити",   do_consider,    POS_RESTING,   0,  WIZ_SECURE, SHOW|NOMOB|FREEZE|NOLOG },
  { "count",       "сколько",     "скільки",     do_count,       POS_SLEEPING,  0,  LOG_NEVER,  SHOW|MORPH|HIDE|NOMOB|NOLOG },
  { "credits",     "автора",      "автора",      do_credits,     POS_DEAD,      0,  LOG_NEVER,  SHOW|MORPH|HIDE|NOLOG },
@@ -84,7 +84,7 @@ struct  cmd_type        cmd_table       [] =
  { "help",        "справка",     "справка",     do_help,        POS_DEAD,      0,  LOG_NEVER,  SHOW|MORPH|HIDE|NOLOG },
  { "idea",        "идея",        "ідея",        do_idea,        POS_DEAD,      0,  WIZ_NOTES,  SHOW|MORPH|HIDE|NOMOB|NOLOG },
  { "bugreport",   "багрепорт",   "багрепорт",   do_bugreport,   POS_DEAD,      0,  WIZ_NOTES,  SHOW|MORPH|HIDE|NOMOB|NOLOG },
- { "inform",      "информация",  "інформация",  do_inform,      POS_SLEEPING,  0,  LOG_NEVER,  SHOW|HIDE|NOLOG|NOMOB },
+ { "inform",      "информация",  "інформація",  do_inform,      POS_SLEEPING,  0,  LOG_NEVER,  SHOW|HIDE|NOLOG|NOMOB },
  { "motd",        "мотд",        "мотд",        do_motd,        POS_DEAD,      0,  LOG_NEVER,  MORPH|NOMOB|NOLOG },
  { "news",        "новости",     "новини",      do_news,        POS_DEAD,      0,  WIZ_NOTES,  SHOW|MORPH|HIDE|NOMOB|NOLOG },
  { "bulletin",    "бюллетень",   "бюллетень",   do_news,        POS_DEAD,      0,  WIZ_NOTES,  SHOW|MORPH|HIDE|NOMOB|NOLOG },
@@ -102,7 +102,7 @@ struct  cmd_type        cmd_table       [] =
  { "sedit",       "седит",       "седит",       do_sedit,       POS_DEAD,    103,  WIZ_SECURE, SHOW|OLC|NOMOB },
  { "spells",      "заклинания",  "заклинання",  do_spells,      POS_DEAD,      0,  LOG_NEVER,  SHOW|MORPH|NOLOG|NOMOB },
  { "time",        "время",       "час",         do_time,        POS_DEAD,      0,  LOG_NEVER,  SHOW|MORPH|HIDE|NOLOG|NOMOB },
- { "tournament",  "tournament",  "tournament",  do_tournament,  POS_SLEEPING,  0,  WIZ_GSPEAKS,SHOW|NOORDER|NOMOB|FREEZE|NOPUB },
+ { "tournament",  "tournament",  "турнір",      do_tournament,  POS_SLEEPING,  0,  WIZ_GSPEAKS,SHOW|NOORDER|NOMOB|FREEZE|NOPUB },
  { "weather",     "погода",      "погода",      do_weather,     POS_RESTING,   0,  LOG_NEVER,  SHOW|HIDE|NOLOG|NOMOB },
  { "who",         "кто",         "хто",         do_who,         POS_DEAD,      0,  WIZ_SECURE, SHOW|MORPH|HIDE|NOLOG|NOMOB },
  { "whois",       "показать",    "хтосаме",     do_whois,       POS_DEAD,      0,  WIZ_SECURE, SHOW|MORPH|HIDE|NOLOG|NOMOB },
@@ -130,10 +130,10 @@ struct  cmd_type        cmd_table       [] =
  { "nosend",      "непринимать",   "неприймати",     do_nosend,      POS_DEAD,      0,  WIZ_CONFIG, SHOW|MORPH|HIDE|NOMOB|NOORDER|FREEZE|NOLOG },
  { "outfit",      "оутфит",        "оутфит",         do_outfit,      POS_RESTING,   0,  WIZ_SECURE, SHOW|NOMOB|FREEZE|SAVE },
  { "offline",     "оффлайн",       "офлайн",         do_offline,     POS_DEAD,      0,  WIZ_SECURE, SHOW|HIDE|NOMOB|OLC|NOPUB },
- { "offer",       "заказ",         "заказ",          do_offer,       POS_DEAD,      1,  WIZ_SECURE, SHOW|HIDE|NOMOB|NOORDER|FREEZE },
+ { "offer",       "заказ",         "замовлення",     do_offer,       POS_DEAD,      1,  WIZ_SECURE, SHOW|HIDE|NOMOB|NOORDER|FREEZE },
  { "password",    "пароль",        "пароль",         do_password,    POS_DEAD,      0,  LOG_NEVER,  SHOW|MORPH|HIDE|NOMOB|NOORDER|SAVE|NOLOG|NOFORCE },
  { "prompt",      "строка",        "строка",         do_prompt,      POS_DEAD,      0,  WIZ_CONFIG, SHOW|MORPH|HIDE|NOMOB|NOLOG },
- { "scroll",      "скроллинг",     "скроллинг",      do_scroll,      POS_DEAD,      0,  WIZ_CONFIG, SHOW|MORPH|HIDE|NOMOB|NOLOG },
+ { "scroll",      "скроллинг",     "скроллінг",      do_scroll,      POS_DEAD,      0,  WIZ_CONFIG, SHOW|MORPH|HIDE|NOMOB|NOLOG },
  { "title",       "титл",          "тітл",           do_title,       POS_DEAD,      1,  WIZ_CONFIG, SHOW|MORPH|HIDE|NOMOB|NOLOG },
  { "unalias",     "уналиас",       "уналиас",        do_unalias,     POS_DEAD,      0,  WIZ_CONFIG, SHOW|MORPH|HIDE|NOMOB|FULL|NOORDER|FREEZE|SAVE },
  { "wimpy",       "трусость",      "боягузтво",      do_wimpy,       POS_DEAD,      0,  WIZ_CONFIG, SHOW|MORPH|HIDE|FREEZE|NOLOG },
@@ -146,7 +146,7 @@ struct  cmd_type        cmd_table       [] =
  { ".",           "кричать",   "кричати",     do_gossip,      POS_SLEEPING,  0,  WIZ_GSPEAKS,SPAM|NOARMY },
  { "gossip",      "кричать",   "кричати",     do_gossip,      POS_SLEEPING,  0,  WIZ_GSPEAKS,SHOW|SPAM|NOARMY },
  { ",",           "эмоция",    "эмоція",      do_emote,       POS_RESTING,   0,  WIZ_SPEAKS, SPAM|NOZRIT },
- { "newbiechat",  "ньюьбие",   "ньюьбічат",   do_newbiechat,  POS_SLEEPING,  0,  WIZ_GSPEAKS,SHOW|HIDE|SPAM|NOMOB },
+ { "newbiechat",  "ньюьбие",   "ньюбічат",    do_newbiechat,  POS_SLEEPING,  0,  WIZ_GSPEAKS,SHOW|HIDE|SPAM|NOMOB },
  { "grats",       "поздравить","поздоровити", do_grats,       POS_SLEEPING,  0,  WIZ_GSPEAKS,SHOW|HIDE|SPAM|NOMOB },
  { "gtell",       "сказгруппе","казатигрупі", do_gtell,       POS_DEAD,      0,  WIZ_SPEAKS, SHOW|HIDE|SPAM },
  { ";",           ";",         ";",           do_gtell,       POS_DEAD,      0,  WIZ_SPEAKS, HIDE|SPAM },
@@ -165,7 +165,7 @@ struct  cmd_type        cmd_table       [] =
  { "yell",        "орать",     "репетувати",  do_yell,        POS_RESTING,   0,  WIZ_SPEAKS, SHOW|SPAM },
 
  { "showprac",    "показпрак", "показпрак",   do_showprac,    POS_SLEEPING,  0,  LOG_NEVER,  SHOW|HIDE|NOMOB|NOLOG },
- { "showskill",   "показнавык","показнавычки",do_showskill,   POS_DEAD,      0,  LOG_NEVER,  SHOW|MORPH|HIDE|NOMOB|NOLOG },
+ { "showskill",   "показнавык","показнавички",do_showskill,   POS_DEAD,      0,  LOG_NEVER,  SHOW|MORPH|HIDE|NOMOB|NOLOG },
  { "unread",      "нечитанных","нечитаних",   do_unread,      POS_SLEEPING,  0,  LOG_NEVER,  SHOW|MORPH|HIDE|NOMOB|NOLOG },
 
  /*** Object manipulation commands. ***/
@@ -174,7 +174,7 @@ struct  cmd_type        cmd_table       [] =
  { "drink",       "выпить",    "випити",    do_drink,       POS_RESTING,   0,  WIZ_SECURE, SHOW|FREEZE|SAVE|NOLOG },
  { "drop",        "бросить",   "бросити",   do_drop,        POS_RESTING,   0,  WIZ_SECURE, SHOW|NOZRIT|FREEZE|NOLOG },
  { "eat",         "съесть",    "з'їсти",    do_eat,         POS_RESTING,   0,  WIZ_SECURE, SHOW|FREEZE|NOLOG },
- { "envenom",     "отравить",  "отравити",  do_envenom,     POS_RESTING,   0,  WIZ_SKILLS, SHOW|FREEZE|NOLOG },
+ { "envenom",     "отравить",  "отруїти",   do_envenom,     POS_RESTING,   0,  WIZ_SKILLS, SHOW|FREEZE|NOLOG },
  { "fill",        "наполнить", "наповнити", do_fill,        POS_RESTING,   0,  WIZ_SECURE, SHOW|NOZRIT|FREEZE|SAVE|NOLOG },
  { "give",        "дать",      "дати",      do_give,        POS_RESTING,   0,  WIZ_SECURE, SHOW|NOZRIT|FREEZE|NOLOG },
  { "send",        "послать",   "послати",   do_send,        POS_RESTING,   0,  WIZ_SECURE, SHOW|NOMOB|NOZRIT|FREEZE |NOLOG},
@@ -187,7 +187,7 @@ struct  cmd_type        cmd_table       [] =
  { "pour",        "опорожнить","опорожнити",do_pour,        POS_RESTING,   0,  WIZ_SECURE, SHOW|FREEZE|SAVE|NOLOG },
  { "push",        "пнуть",     "пнути",     do_push,        POS_STANDING,  0,  WIZ_SKILLS, SHOW|NOZRIT|FREEZE|NOLOG },
  { "put",         "положить",  "покласти",  do_put,         POS_RESTING,   0,  WIZ_SECURE, SHOW|NOZRIT|FREEZE|NOLOG },
- { "quaff",       "глотнуть",  "глотнути",  do_quaff,       POS_RESTING,   0,  WIZ_SECURE, SHOW|NOZRIT|FREEZE|SAVE|NOLOG },
+ { "quaff",       "глотнуть",  "ковтнути",  do_quaff,       POS_RESTING,   0,  WIZ_SECURE, SHOW|NOZRIT|FREEZE|SAVE|NOLOG },
  { "recite",      "прочесть",  "прочитати", do_recite,      POS_RESTING,   0,  WIZ_SKILLS, SHOW|NOZRIT|NOALL|FREEZE|NOLOG },
  { "sell",        "продать",   "продати",   do_sell,        POS_RESTING,   0,  WIZ_SECURE, SHOW|NOMOB|FREEZE|NOLOG },
  { "take",        "взять",     "взяти",     do_get,         POS_RESTING,   0,  WIZ_SECURE, SHOW|NOZRIT|FREEZE|NOLOG },
@@ -208,7 +208,7 @@ struct  cmd_type        cmd_table       [] =
  { "confiscate",  "забрать",   "забрати",   do_seize,       POS_DEAD,    105,  WIZ_SECURE, SHOW|NOMOB|NOORDER|FREEZE|SAVE },
  { "cfix",        "cfix",      "cfix",      do_cfix,        POS_DEAD,    109,  WIZ_CONFIG, SHOW|NOMOB|NOORDER|FREEZE|SAVE },
  { "gfix",        "gfix",      "gfix",      do_gfix,        POS_DEAD,    109,  WIZ_CONFIG, SHOW|NOMOB|NOORDER|FREEZE|SAVE },
- { "forge",       "ковать",    "ковати",    do_forge,       POS_STANDING,109,  WIZ_SKILLS, SHOW|NOMOB|NOORDER|FREEZE|SAVE },
+ { "forge",       "ковать",    "кувати",    do_forge,       POS_STANDING,109,  WIZ_SKILLS, SHOW|NOMOB|NOORDER|FREEZE|SAVE },
  { "ldefend",     "узащита",   "узахист",   do_ldefend,     POS_STANDING,110,  WIZ_SKILLS, SHOW|NOMOB|NOORDER|FREEZE|SAVE },
 
  // Combat commands
@@ -236,7 +236,7 @@ struct  cmd_type        cmd_table       [] =
  { "seen",        "сиин",         "сиин",         do_seen,        POS_DEAD,      0,  WIZ_SECURE, SHOW|HIDE|NOMOB|NOPUB },
  { "backup",      "архив",        "архів",        do_backup,      POS_DEAD,      0,  WIZ_SECURE, SHOW|FULL|NOMOB|NOORDER|OLC|FREEZE|NOPUB },
  { "backup2",     "архив2",       "архів2",       do_backup2,     POS_DEAD,    102,  WIZ_SECURE, SHOW|FULL|NOMOB|NOORDER|OLC|FREEZE|NOPUB },
- { "blink",       "мерцать",      "мерцати",      do_blink,       POS_DEAD,      0,  WIZ_SECURE, SHOW|MORPH|HIDE|NOMOB|SAVE|NOLOG|FREEZE },
+ { "blink",       "мерцать",      "мерехтіти",    do_blink,       POS_DEAD,      0,  WIZ_SECURE, SHOW|MORPH|HIDE|NOMOB|SAVE|NOLOG|FREEZE },
  { "enter",       "войти",        "увійти",       do_enter,       POS_STANDING,  0,  WIZ_SECURE, SHOW|FREEZE|NOLOG },
  { "follow",      "следовать",    "слідувати",    do_follow,      POS_STANDING,  0,  WIZ_SECURE, SHOW|FREEZE|NOLOG },
  { "gain",        "учить",        "вчити",        do_gain,        POS_RESTING,   0,  WIZ_SECURE, SHOW|NOMOB|NOORDER|FREEZE|SAVE },
@@ -336,7 +336,7 @@ struct  cmd_type        cmd_table       [] =
  { "crush",       "толкнуть",  "толкнути",  do_crush,       POS_FIGHTING,  0,  WIZ_SKILLS, SHOW|NOORDER|FREEZE|NOLOG },
  { "blacksmith",  "перековать","перекувати",do_blacksmith,  POS_STANDING,  0,  WIZ_SECURE, SHOW|HIDE|NOMOB|NOORDER|FREEZE },
  { "vbite",       "укус",      "укусити",   do_vbite,       POS_FIGHTING,  0,  WIZ_SKILLS, SHOW|NOORDER|NOMOB|FREEZE|NOLOG },
- { "resurrect",   "возродить", "возродити", do_resurrect,   POS_FIGHTING,  0,  WIZ_SKILLS, SHOW|NOMOB|FREEZE|NOLOG },
+ { "resurrect",   "возродить", "відродити", do_resurrect,   POS_FIGHTING,  0,  WIZ_SKILLS, SHOW|NOMOB|FREEZE|NOLOG },
 
  { "travel",      "путешествовать", "подорожувати",  do_travel,      POS_STANDING,  0,  WIZ_SECURE, NOMOB|FREEZE },
 
@@ -367,9 +367,9 @@ struct  cmd_type        cmd_table       [] =
  { "lore",        "узнать",      "дізнатися",   do_lore,        POS_RESTING,   0,  WIZ_SKILLS, SHOW|FREEZE|NOMOB|NOLOG|FREEZE },
  { "morph",       "превратиться","перетворитись",do_polymorph,   POS_RESTING,   0,  WIZ_SECURE, SHOW|HIDE|NOMOB|NOORDER|FREEZE },
  { "reform",      "перекинуться","перекинутись",do_reform,      POS_RESTING,   0,  WIZ_SECURE, SHOW|MORPH|HIDE|NOMOB|NOORDER|FREEZE|SAVE },
- { "referi",      "рефери",      "рефери",      do_referi,      POS_STANDING,  0,  WIZ_SECURE, SHOW|HIDE|NOMOB|NOORDER|FREEZE|NOLOG },
+ { "referi",      "рефери",      "рефері",      do_referi,      POS_STANDING,  0,  WIZ_SECURE, SHOW|HIDE|NOMOB|NOORDER|FREEZE|NOLOG },
  { "test",        "unknown",     "unknown",     do_test,        POS_RESTING,   1,  LOG_NEVER,  SHOW|MORPH|HIDE|NOMOB|FREEZE|NOPUB },
- { "version",     "версия",      "версия",      do_version,     POS_DEAD,      0,  WIZ_SECURE, SHOW|MORPH|HIDE|NOMOB },
+ { "version",     "версия",      "версія",      do_version,     POS_DEAD,      0,  WIZ_SECURE, SHOW|MORPH|HIDE|NOMOB },
  { "vote",        "голосовать",  "голосувати",  do_vote,        POS_DEAD,      0,  WIZ_SECURE, SHOW|MORPH|HIDE|NOMOB|NOLOG },
  { "global",      "глобал",      "глобал",      do_global,      POS_DEAD,    103,  WIZ_CONFIG, SHOW|MORPH|HIDE|NOMOB|OLC },
  { "suicide",     "умереть",     "суіцид",      do_suicide,     POS_DEAD,      0,  WIZ_SECURE, SHOW|MORPH|HIDE|NOMOB|FULL|NOADR|NOORDER|FREEZE|SAVE },
@@ -383,7 +383,7 @@ struct  cmd_type        cmd_table       [] =
  { "dampool",     "unknown",     "unknown",     do_dampool,     POS_SLEEPING,102,  WIZ_SECURE, SHOW|HIDE|NOMOB|NOORDER},
  { "marry",       "предложение", "шлюб",        do_marry,       POS_STANDING,  1,  WIZ_SKILLS, SHOW|NOMOB|NOORDER|NOADR|FREEZE|OLC},
  { "ptalk",       "ссказать",    "ссказати",    do_ptalk,       POS_DEAD,      1,  WIZ_SPEAKS, SHOW|NOMOB|HIDE|MORPH },
- { "divorce",     "развод",      "развод",      do_divorce,     POS_STANDING,  1,  WIZ_SKILLS, SHOW|NOMOB|HIDE|NOORDER|FREEZE|OLC},
+ { "divorce",     "развод",      "розлучити",   do_divorce,     POS_STANDING,  1,  WIZ_SKILLS, SHOW|NOMOB|HIDE|NOORDER|FREEZE|OLC},
  { "race",        "раса",        "раса",        do_race,        POS_DEAD,    106,  WIZ_SECURE, SHOW|NOMOB|HIDE|OLC|NOORDER},
  { "fly",         "взлететь",    "злетіти",     do_fly,         POS_FIGHTING,  1,  WIZ_SKILLS, SHOW|FREEZE|NOLOG},
  { "walk",        "приземлится", "приземлитися",do_walk,        POS_FIGHTING,  1,  WIZ_SKILLS, SHOW|FREEZE|NOLOG},
@@ -1391,7 +1391,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
     {
       if ( race_table[i].dambonus[j] < 0)
       {
-        ptc(ch,"{C%9s{x: {G%d%%\n\r{x",bonus_dam_types[j],race_table[i].dambonus[j]);
+        ptc(ch,"{C%s{x: {G%d%%\n\r{x",bonus_dam_types[j],race_table[i].dambonus[j]);
         is_found=TRUE;
       }
     }
@@ -1399,7 +1399,7 @@ void do_ahelp(CHAR_DATA *ch, const char *argument)
     {
       if ( race_table[i].dambonus[j] > 0 )
       {
-        ptc(ch,"{C%9s{x: {R+%d%%\n\r{x",bonus_dam_types[j],race_table[i].dambonus[j]);
+        ptc(ch,"{C%s{x: {R+%d%%\n\r{x",bonus_dam_types[j],race_table[i].dambonus[j]);
         is_found=TRUE;
       }
     }
