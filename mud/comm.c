@@ -238,6 +238,7 @@ char convert_in(int codepage, unsigned char source);
 long EncodeTRANSLITERATION(const char *pWindows,char *pTransliteration);
 long EncodeKOI8R(const char *pWindows, char *pKoi8r);
 long EncodeDOS(const char *pWindows, char *pDos);
+long EncodeUTF(const char *pWindows, char *pUTF);
 void TelnetCopy(char *dest, const char *source);
 bool MOBtrigger = TRUE;  /* act() switch                 */
 void write_to_buffer_old( DESCRIPTOR_DATA *d, const char *txt, int length );
@@ -1560,6 +1561,9 @@ void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, int length )
       if(l > d->outsize)
               bug("TRANSLIT conversion overflow could screw up memory blocks.", l);
       break;
+    case 5:
+      l = EncodeUTF(txt, d->outbuf + d->outtop);
+      break;
     default:
       TelnetCopy( d->outbuf + d->outtop, txt );
       break;
@@ -1728,7 +1732,7 @@ void nanny (DESCRIPTOR_DATA * d, const char * argument)
 
     d->codepage = atoi (argument) ;
 
-    if ((d->codepage < 1) || (d->codepage > 4))
+    if ((d->codepage < 1) || (d->codepage > 5))
     {
       write_to_buffer (d, "Invalid codepage, try again.\n\rCodepage: ", 0) ;
       return;
