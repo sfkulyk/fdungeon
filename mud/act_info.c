@@ -3481,9 +3481,8 @@ void do_areamobs(CHAR_DATA *ch, const char *argument)
   for ( vnum = min; vnum <= max; vnum++ )
   {
     if (!(pMobIndex = get_mob_index(vnum))) continue;
-    ptc(ch,"%5d %3d %15s %s (%s)\n\r                          %s (%s)\n\r",
+    ptc(ch,"%5d %3d %15s imm: %s\n\r                          res: %s\n\r",
       vnum, pMobIndex->level, pMobIndex->player_name,
-      pMobIndex->imm_flags,imm_bit_name(pMobIndex->imm_flags),
-      pMobIndex->res_flags,imm_bit_name(pMobIndex->res_flags));
+      imm_bit_name(pMobIndex->imm_flags),imm_bit_name(pMobIndex->res_flags));
   }
 }

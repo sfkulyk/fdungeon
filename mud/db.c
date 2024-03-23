@@ -62,6 +62,7 @@ struct magic {
   {                                 \
     free_string( field );           \
     field = fread_string( fp );     \
+    fMatch = TRUE;                  \
     break;                          \
   }
 
@@ -615,7 +616,11 @@ void load_clans()
           return;
         }
 
-        if (strcmp (word, "#CLAN")) break;
+        if (strcmp (word, "#CLAN"))
+        {
+          fMatch = TRUE;
+          break;
+        }
 
         clan = new_clan ();
         clan->next=clan_list;
@@ -662,6 +667,7 @@ void load_clans()
           clan->clansnt[clanskill]=fread_number64(fp);
           clanskill++;
           fMatch = TRUE;
+          break;
         }
         break;
 
@@ -679,6 +685,7 @@ void load_clans()
           fread_to_eol(fp);
           SET_BIT(clan->flag,CLAN_LONER);
           fMatch=TRUE;
+          break;
         }
         break;
 
@@ -704,10 +711,9 @@ void load_clans()
         KEYS( "War", clan->war,fread_string(fp));
         break;
     }
-
     if ( !fMatch )
     {
-      log_string( "BUG: read_clans: unknown string.");
+      log_printf( "Load clans: unknown string %s", word);
       fread_to_eol( fp );
     }
   }
