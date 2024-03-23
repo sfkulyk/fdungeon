@@ -3466,22 +3466,24 @@ void mstat_info(CHAR_DATA *ch, CHAR_DATA *victim)
   stc("\n\r{D=---------------------------------------------------------------------------={x\n\r",ch);
 }
 
+// list mob index data from current area
 void do_areamobs(CHAR_DATA *ch, const char *argument)
 {
-  AREA_DATA *area=ch->in_room;
-  int64   min, max;
-  if (!ch->in_room) return;
-  min=ch->in_room->min_vnum;
-  max=ch->in_room->max_vnum;
-  CHAR_DATA *person;
+  MOB_INDEX_DATA  *pMobIndex;
+  int64 min, max, vnum;
 
+  if (!ch->in_room) return;
+  min = ch->in_room->area->min_vnum;
+  max = ch->in_room->area->max_vnum;
+
+  ptc(ch,"List of mobiles in [%s]",ch->in_room->area->name);
   // Examine all mobs.
-  ptc(ch,"VNUM Mobile Name     lvl Immunes Resistance");
-  for ( person = char_list; person; person = person->next )
+  for ( vnum = min; vnum <= max; vnum++ )
   {
-    if (!IS_NPC(person)) continue;
-    if (!person->pIndexData) continue;
-    if (person->pIndexData->vnum < min || person->pIndexData > max) continue;
-    ptc(ch,"%4d %15s %3d %s %s",person->pIndexData->vnum, person->name, person->level, imm_bit_name(person->imm_flags), imm_bit_name(person->res_flags));
+    if (!(pMobIndex = get_mob_index(vnum))) continue;
+    ptc(ch,"%5d %3d %15s %s (%s)\n\r                          %s (%s)\n\r",
+      vnum, pMobIndex->level, pMobIndex->player_name,
+      pMobIndex->imm_flags,imm_bit_name(pMobIndex->imm_flags),
+      pMobIndex->res_flags,imm_bit_name(pMobIndex->res_flags));
   }
 }

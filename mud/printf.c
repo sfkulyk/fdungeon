@@ -197,8 +197,8 @@ while (*fmt)
           if (*p=='{' || *p=='`')
           {
             *(buf++) = *p++;
-//            if (!*p || *p=='\0') break;
-            if (!*p) break;
+            if (!*p || *p=='\0') break;
+//            if (!*p) break;
             if (*p=='{' || *p=='`') format--;
           }
           else format--;

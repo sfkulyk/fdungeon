@@ -540,6 +540,7 @@
 #define RES_DROWNING   (R)
 #define RES_LIGHT      (S)
 #define RES_SOUND      (T)
+#define RES_HARM       (U)
 #define RES_WOOD       (X)
 #define RES_SILVER     (Y)
 #define RES_IRON       (Z)
