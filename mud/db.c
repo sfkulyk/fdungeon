@@ -49,20 +49,21 @@ struct magic {
 #undef KEY
 #endif
 
-#define KEY( literal, field, value )                \
-                if ( !str_cmp( word, literal ) )    \
-                {                                   \
-                    field  = value;                 \
-                    break;                          \
-                                }
+#define KEY( literal, field, value ) \
+  if ( !str_cmp( word, literal ) )   \
+  {                                  \
+    field  = value;                  \
+    fMatch = TRUE;                   \
+    break;                           \
+  }
 
-#define SKEY( string, field )                       \
-                if ( !str_cmp( word, string ) )     \
-                {                                   \
-                    free_string( field );           \
-                    field = fread_string( fp );     \
-                    break;                          \
-                                }
+#define SKEY( string, field )       \
+  if ( !str_cmp( word, string ) )   \
+  {                                 \
+    free_string( field );           \
+    field = fread_string( fp );     \
+    break;                          \
+  }
 
 #if !defined(OLD_RAND)
 #ifdef  WIN32
@@ -522,10 +523,20 @@ void load_newspaper(void)
         }
         break;
       case 'D':
-        KEY("Date",news->date,fread_string(fp));
+        if ( !str_cmp( word, "Date" ) )
+        {
+          news->date  = fread_string(fp);
+          fMatch = TRUE;
+          break;
+        }
         break;
       case 'S':
-        KEY("Stamp",news->date_stamp,fread_number(fp));
+        if ( !str_cmp( word, "Stamp" ) )
+        {
+          news->date_stamp  = fread_number(fp);
+          fMatch = TRUE;
+          break;
+        }
         break;
       case 'T':
         if (!strcmp(word, "Type"))
@@ -544,7 +555,12 @@ void load_newspaper(void)
            counter++;
            fMatch=TRUE;
         }
-        KEY("Text",news->text,fread_string(fp));
+        if ( !str_cmp( word, "Text" ) )
+        {
+          news->text  = fread_string(fp);
+          fMatch = TRUE;
+          break;
+        }
         break;
     }
     if ( !fMatch )
@@ -1137,7 +1153,9 @@ void wield_random_armor( CHAR_DATA *mob )
 void load_area( FILE *fp )
 {
   AREA_DATA *pArea;
-  const char      *word;
+  const char *word;
+  bool fMatch=FALSE;
+
 
   pArea               = alloc_perm( sizeof(*pArea) );
   pArea->age          = 15;
@@ -1170,8 +1188,14 @@ void load_area( FILE *fp )
        {
          pArea->min_vnum = fread_number64( fp );
          pArea->max_vnum = fread_number64( fp );
+         fMatch=TRUE;
+         break;
        }
-       if ( !str_cmp(word,"Version")) pArea->version=fread_number(fp);
+       if ( !str_cmp(word,"Version")) {
+         pArea->version=fread_number(fp);
+         fMatch=TRUE;
+         break;
+       }
        break;
       case 'E':
        if ( !str_cmp( word, "End" ) )
@@ -1194,6 +1218,11 @@ void load_area( FILE *fp )
       case 'F':
        KEY( "Flags", pArea->area_flags, fread_number64( fp ) );
        break;
+    }
+    if ( !fMatch )
+    {
+      log_printf( "load area: unknown string '%s'",word);
+      fread_to_eol( fp );
     }
   }
 }
