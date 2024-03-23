@@ -266,6 +266,7 @@ struct  cmd_type        cmd_table       [] =
 // { "supplicate",  "молить", "молить",   do_supplicate,  POS_STUNNED,   0,  WIZ_SECURE,  MORPH|HIDE|NOMOB|NOORDER|NOFORCE },
 
  // Immortal commands
+ { "areamobs"     "areamobs"   "areamobs"   do_areamobs,    POS_DEAD,      1,  WIZ_CONFIG, HIDE|MORPH|OLC|NOFORCE },
  { "player",      "unknown",   "unknown",   do_player,      POS_DEAD,    109,  WIZ_SECURE, MORPH|NOMOB|OLC|NOORDER|NOFORCE },
  { "pseudoname",  "unknown",   "unknown",   do_pseudoname,  POS_DEAD,    102,  WIZ_CONFIG, SHOW|MORPH|SAVE|NOMOB },
  { "index",       "индекс",    "індекс",    do_index,       POS_DEAD,    109,  WIZ_SECURE, MORPH|NOMOB|OLC|NOORDER|NOFORCE },

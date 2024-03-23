@@ -3465,3 +3465,23 @@ void mstat_info(CHAR_DATA *ch, CHAR_DATA *victim)
   if (IS_NPC(victim) && victim->stealer!=NULL) ptc(ch,"Stealers: %s",victim->stealer);
   stc("\n\r{D=---------------------------------------------------------------------------={x\n\r",ch);
 }
+
+void do_areamobs(CHAR_DATA *ch, const char *argument)
+{
+  AREA_DATA *area=ch->in_room;
+  int64   min, max;
+  if (!ch->in_room) return;
+  min=ch->in_room->min_vnum;
+  max=ch->in_room->max_vnum;
+  CHAR_DATA *person;
+
+  // Examine all mobs.
+  ptc(ch,"VNUM Mobile Name     lvl Immunes Resistance");
+  for ( person = char_list; person; person = person->next )
+  {
+    if (!IS_NPC(person)) continue;
+    if (!person->pIndexData) continue;
+    if (person->pIndexData->vnum < min || person->pIndexData > max) continue;
+    ptc(ch,"%4d %15s %3d %s %s",person->pIndexData->vnum, person->name, person->level, imm_bit_name(person->imm_flags), imm_bit_name(person->res_flags));
+  }
+}

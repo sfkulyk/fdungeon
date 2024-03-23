@@ -368,3 +368,4 @@ DECLARE_DO_FUN2( do_damage_obj   ); // damaging object  (C) Astellar
 DECLARE_DO_FUN2( do_forge        ); // forge items (C) Astellar
 DECLARE_DO_FUN2( do_ldefend      ); // level defend character (C) Astellar
 DECLARE_DO_FUN2( do_complain     ); // complains of players (C) Apc
+DECLARE_DO_FUN2( do_areamobs     ); // list mobiles in area (C) Saboteur
