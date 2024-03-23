@@ -117,9 +117,6 @@ void damage_eq_char ( CHAR_DATA *ch)
      return;
    }
 
-//   obj = get_eq_char( victim, wear_l[number_range( 1, (MAX_WEAR_L-1))].wear_num);
-//   if( obj != NULL || number_range(0,4) == 0 ) return;
-
    ptc( ch, "{RRecieving random victim object: \n\r{Y%s\n\r", obj->short_descr);
 
    if( obj != NULL || obj->item_type == ITEM_LIGHT || number_range(0,4) == 0)
@@ -242,7 +239,6 @@ void violence_update( void )
   }
 }
 
-
 bool check_blink( CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj )
 {
   int skill=get_skill(victim,gsn_blink);
@@ -282,7 +278,6 @@ bool check_blink( CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj )
   doact( "{y$C1{x {Cмерцает{x и твое оружие проходит сквозь него, не причинив вреда.", ch, NULL, victim, TO_CHAR,SPAM_MISS);
   victim->mana -= 5-(skill/50);
   check_improve(victim,gsn_blink,TRUE,6);
-//  if( IS_MAGIC_DEITY(ch) ) change_favour(ch, 1);
   return TRUE;
 }
 
@@ -332,7 +327,6 @@ bool check_shield_block( CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj)
   doact( buf1, ch, NULL, victim, TO_VICT,SPAM_MISS);
   doact( buf2, ch, NULL, victim, TO_CHAR,SPAM_MISS);
   check_improve(victim,gsn_shield_block,TRUE,6);
-//  if( IS_MIGHT_DEITY(ch) ) change_favour(ch, 1);
   return TRUE;
 }
 
@@ -380,7 +374,6 @@ bool check_parry( CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj )
   doact( "Ты {wпаpиpуешь{x атаку {y$c2{x.",  ch, NULL, victim, TO_VICT,SPAM_MISS);
   doact( "{y$C1{x {wпаpиpует{x твою атаку.", ch, NULL, victim, TO_CHAR,SPAM_MISS);
   check_improve(victim,gsn_parry,TRUE,6);
-//  if( IS_MIGHT_DEITY(ch) ) change_favour(ch, 1);
   return TRUE;
 }
 
@@ -404,7 +397,6 @@ void set_fighting( CHAR_DATA *ch, CHAR_DATA *victim )
   }
 }
 
-// victim dodges ch's attack
 bool check_dodge( CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj )
 {
   int chance;
@@ -435,7 +427,6 @@ bool check_dodge( CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj )
   doact( "Ты {wуклоняешься{x от атаки {y$c2{x.", ch, NULL, victim, TO_VICT,SPAM_MISS);
   doact( "{y$C1{x {wуклоняется{x от твоей атаки.", ch, NULL, victim, TO_CHAR,SPAM_MISS);
   check_improve(victim,gsn_dodge,TRUE,6);
-//  if( IS_MIGHT_DEITY(ch) ) change_favour(ch, 1);
   return TRUE;
 }
 
@@ -535,20 +526,9 @@ void new_one_hit(CHAR_DATA *ch,CHAR_DATA *victim,int dt,OBJ_DATA *obj,bool rgh)
   if ( diceroll == 0 || ( diceroll != 19 && diceroll < (char_hr+vict_ac) ))
   {
     damage( ch, victim, 0, dam_type+1000, dt, TRUE, FALSE, (obj)?obj:wield );
-/*
-    if (IS_CFG(victim,CFG_AUTODAM) && IS_IMMORTAL(victim))
-      ptc(victim,"VF:Diceroll %d, vict_ac %d, char_hr %d\n\r",diceroll, vict_ac, char_hr);
-    if (IS_CFG(ch,CFG_AUTODAM) && IS_IMMORTAL(ch))
-      ptc(ch,"CF:Diceroll %d, vict_ac %d, char_hr %d\n\r",diceroll, vict_ac, char_hr);
-*/
     return;
   }
-/*
-    if (IS_CFG(victim,CFG_AUTODAM) && IS_IMMORTAL(victim))
-  ptc(victim,"VP:Diceroll %d, vict_ac %d, char_hr %d\n\r",diceroll, vict_ac, char_hr);
-    if (IS_CFG(ch,CFG_AUTODAM) && IS_IMMORTAL(ch))
-  ptc(ch,"CP:Diceroll %d, vict_ac %d, char_hr %d\n\r",diceroll, vict_ac, char_hr);
-*/
+
   if ( diceroll !=19 && dt!=gsn_backstab && dt!=gsn_missile)
   {
     if ( check_shield_block(ch, victim, (obj)?obj:wield)) return;
@@ -617,21 +597,6 @@ void new_one_hit(CHAR_DATA *ch,CHAR_DATA *victim,int dt,OBJ_DATA *obj,bool rgh)
   if IS_SET(ch->act,PLR_ARMY) dam*=2;
   if (IS_CFG(ch,CFG_AUTODAM) && IS_IMMORTAL(ch)) {ptc (ch, "new_hit damage2: %d\n\r",dam);}
   if ( dam <= 0 ) dam = 0;
-/*
-  if (!IS_NPC(ch) && get_skill(ch,gsn_death_blow) > 1 &&
-      ch->level >= 20 && wield && wield->item_type == ITEM_WEAPON )
-  {
-    if (number_percent() < 0.2 * get_skill(ch,gsn_death_blow))
-    {
-      stc("{RТы наносишь удар с невероятной силой!{X\n\r",ch);
-      ptc(victim,"{W%s {Rнаносит удар с невероятной силой!{X\n\r",ch->short_descr);
-      dam =(dam*ch->level)/20;
-      check_improve(ch,gsn_death_blow,TRUE,1);
-    }
-    else check_improve(ch,gsn_death_blow,FALSE,2);
-  }
-*/
-
 
   result=damage( ch, victim, dam, dam_type+1000, dt, TRUE, FALSE, (obj) ? obj : wield );
 
@@ -642,9 +607,8 @@ void new_one_hit(CHAR_DATA *ch,CHAR_DATA *victim,int dt,OBJ_DATA *obj,bool rgh)
     damage( victim, ch, dam/10, 37, DAM_FIRE,TRUE, FALSE, NULL);
   }
 
-// handling weapon flag effects (poison, etc...)
-// Handling weapon flag specifics (used in fight.c/one_hit() )
-
+  // handling weapon flag effects (poison, etc...)
+  // Handling weapon flag specifics (used in fight.c/one_hit() )
   if (result && wield)
   {
     int dam;
@@ -840,20 +804,9 @@ void one_hit(CHAR_DATA *ch,CHAR_DATA *victim,int dt,OBJ_DATA *obj,bool rgh)
   if ( diceroll == 0 || ( diceroll != 19 && diceroll < thac0 - victim_ac ) )
   {
     damage( ch, victim, 0, dam_type+1000, dt, TRUE, FALSE, (obj)?obj:wield );
-/*
-    if (IS_CFG(victim,CFG_AUTODAM) && IS_IMMORTAL(victim))
-      ptc(victim,"VF:Diceroll %d, Thac0 %d, AC %d, thac0-ac %d\n\r",diceroll, thac0, victim_ac, thac0-victim_ac);
-    if (IS_CFG(ch,CFG_AUTODAM) && IS_IMMORTAL(ch))
-      ptc(ch,"CF:Diceroll %d, Thac0 %d, AC %d, thac0-ac %d\n\r",diceroll, thac0, victim_ac, thac0-victim_ac);
-*/
     return;
   }
-/*
-  if (IS_CFG(ch,CFG_AUTODAM) && IS_IMMORTAL(ch))
-    ptc(ch,"CP:Diceroll %d, Thac0 %d, AC %d, thac0-ac %d\n\r",diceroll, thac0, victim_ac, thac0-victim_ac);
-  if (IS_CFG(victim,CFG_AUTODAM) && IS_IMMORTAL(victim))
-     ptc(victim,"VP:Diceroll %d, Thac0 %d, AC %d, thac0-ac %d\n\r",diceroll, thac0, victim_ac, thac0-victim_ac);
-*/
+
    if ( diceroll !=19 && dt!=gsn_backstab && dt!=gsn_missile)
   {
     if ( check_shield_block(ch, victim, (obj)?obj:wield)) return;
@@ -918,32 +871,12 @@ void one_hit(CHAR_DATA *ch,CHAR_DATA *victim,int dt,OBJ_DATA *obj,bool rgh)
     if (IS_SET(race_table[ch->race].spec,SPEC_BACKSTAB)) dam+=dam/14;
     dam += (dam * (category_bonus(ch, OFFENCE)-category_bonus(victim,PROTECT))/20);
   }
-/*
-  if (IS_CFG(ch,CFG_AUTODAM) && IS_IMMORTAL(ch))
-     {ptc (ch, "one_hit damage1: %d\n\r",dam);}
-*/
+
   if (IS_NPC(ch)) dam += number_range(ch->level/2,ch->level);
   else if (!IS_SET(global_cfg,CFG_NODR)) {dam += GET_DAMROLL(ch) * UMIN(100,skill) /100;}
 
   if IS_SET(ch->act,PLR_ARMY) dam*=2;
   if ( dam <= 0 ) dam = 0;
-/*
-  if (!IS_NPC(ch) && get_skill(ch,gsn_death_blow) > 1 &&
-      ch->level >= 20 && wield && wield->item_type == ITEM_WEAPON )
-      {
-        if (number_percent() < 0.2 * get_skill(ch,gsn_death_blow))
-     {
-      stc("{RТы наносишь удар с невероятной силой!{X\n\r",ch);
-      ptc(victim,"{W%s {Rнаносит удар с невероятной силой!{X\n\r",ch->short_descr);
-      dam =(dam*ch->level)/20;
-      check_improve(ch,gsn_death_blow,TRUE,1);
-     }
-        else check_improve(ch,gsn_death_blow,FALSE,2);
-      }
-
-  if (IS_CFG(ch,CFG_AUTODAM) && IS_IMMORTAL(ch))
-     {ptc (ch, "one_hit damage2: %d\n\r",dam);}
-*/
 
   result=damage( ch, victim, dam, dam_type+1000, dt, TRUE, FALSE, (obj) ? obj : wield );
 
@@ -954,12 +887,8 @@ void one_hit(CHAR_DATA *ch,CHAR_DATA *victim,int dt,OBJ_DATA *obj,bool rgh)
     damage( victim, ch, dam/10, 37, DAM_FIRE,TRUE, FALSE, NULL);
   }
 
-//  Damaging objects: Buggy...
-//    if( ch && ch->fighting) damage_eq_char(ch);
-
-// handling weapon flag effects (poison, etc...)
-// Handling weapon flag specifics (used in fight.c/one_hit() )
-
+  // handling weapon flag effects (poison, etc...)
+  // Handling weapon flag specifics (used in fight.c/one_hit() )
   if (result && wield != NULL)
   {
     int dam;
@@ -1006,7 +935,6 @@ void one_hit(CHAR_DATA *ch,CHAR_DATA *victim,int dt,OBJ_DATA *obj,bool rgh)
       damage(ch,victim,dam,0,DAM_NEGATIVE,FALSE,FALSE, NULL);
       if (!IS_SET(race_table[ch->race].spec,SPEC_VAMPIRE)) ch->alignment = UMAX(-1000,ch->alignment - 1);
       ch->hit += dam/2;
-// hp>max ne budet
       if (ch->hit>ch->max_hit) ch->hit=ch->max_hit;
     }
 
@@ -1018,7 +946,6 @@ void one_hit(CHAR_DATA *ch,CHAR_DATA *victim,int dt,OBJ_DATA *obj,bool rgh)
       doact("Ты чувствуешь как {w$i1{x вытягивает из тебя энергию.",victim,wield,NULL,TO_CHAR, SPAM_WEAPAF);
       if (!IS_SET(race_table[ch->race].spec,SPEC_VAMPIRE)) ch->alignment = UMAX(-1000,ch->alignment - 1);
       ch->mana += dam/2;
-// mana>max ne budet
       if (ch->mana>ch->max_mana) ch->mana=ch->max_mana;
     }
 
@@ -1049,7 +976,6 @@ void one_hit(CHAR_DATA *ch,CHAR_DATA *victim,int dt,OBJ_DATA *obj,bool rgh)
       damage(ch,victim,dam,0,DAM_LIGHTNING,FALSE,FALSE, NULL);
     }
   }
-
   tail_chain( );
 }
 
@@ -1109,7 +1035,7 @@ void tatoo_works(CHAR_DATA *ch, CHAR_DATA *victim)
         stc("Тепло проходит сквозь тебя, унося боль.\n\r",ch);
         act("$c1 выглядит значительно лучше.",ch,NULL,NULL,TO_ROOM);
       }
-// if (check_dispel(ch->level, ch, gsn_weaken));
+
       if (number_percent()<50 && check_dispel(ch->level, ch, gsn_curse))
       {
         stc("Ты чувствуешь себя лучше.\n\r",ch);
@@ -1158,20 +1084,14 @@ void tatoo_works(CHAR_DATA *ch, CHAR_DATA *victim)
         if (is_affected(ch, gsn_blindness))
         {
           affect_strip(ch, gsn_blindness);
-//      if ( skill_table[gsn_blindness].msg_off )
-//        ptc(ch,"%s\n\r",skill_table[gsn_blindness].msg_off, ch );
         }
         if (is_affected(ch, gsn_dirt))
         {
           affect_strip(ch, gsn_dirt);
-//      if ( skill_table[gsn_dirt].msg_off )
-//        ptc(ch,"%s\n\r",skill_table[gsn_dirt].msg_off, ch );
         }
         if (is_affected(ch, skill_lookup("fire breath")))
         {
           affect_strip(ch, skill_lookup("fire breath"));
-//      if ( skill_table[skill_lookup("fire breath")].msg_off )
-//        ptc(ch,"%s\n\r",skill_table[skill_lookup("fire breath")].msg_off, ch );
         }
       }
       break;
@@ -1296,13 +1216,9 @@ void mob_hit (CHAR_DATA *ch, CHAR_DATA *victim)
 
   if (ch->wait > 0) return;
 
-//  number = number_range(0,2);
-//  if (number == 1 && IS_SET(ch->act,ACT_MAGE)) { mob_cast_mage(ch,victim); return; }
-//  if (number == 2 && IS_SET(ch->act,ACT_CLERIC)) { mob_cast_cleric(ch,victim); return; }
-
   /* now for the skills */
   if (IS_SET(ch->off_flags, OFF_BACKSTAB) && ! IS_AFFECTED(ch,AFF_CHARM) &&
-      ! IS_SET(ch->in_room->room_flags,ROOM_NOFLEE))
+    ! IS_SET(ch->in_room->room_flags,ROOM_NOFLEE))
   {
     int nDir;
     int nBackDirs[DIR_DOWN+1] =
@@ -1402,26 +1318,18 @@ void multi_hit( CHAR_DATA *ch, CHAR_DATA *victim)
 
   wield=get_eq_char(ch,WEAR_RHAND);
 
-//shans prohojdeniya spella, unikal'nogo dlya kajdogo deity
   if (IS_DEVOTED_ANY(ch))
   {
     chance=ch->pcdata->favour;
     if (IS_DEVOTED_ANY(victim) && ch->pcdata->dn == victim->pcdata->dn)
       chance-=victim->pcdata->favour/2;
 
-//     0,   100,  "Последователь"      6%  100      3%  0
-//   101,   500,  "Младший аколит"     9%  500      6%  100
-//   501,  1000,  "Старший аколит"     12% 1000     9%  500
-//  1001,  2500,  "Аббат"              15% 2.5K     12% 1000
-//  2501,  4949,  "Жрец"               18% 5K       15% 2500
-//  4950,  5000,  "Верховный Жрец"
-
-    if      (chance>0    && chance<=100 ) chance=3+chance/33;
-    else if (chance>100  && chance<=500 ) chance=6+(chance-100)/133;
-    else if (chance>500  && chance<=1000) chance=9+(chance-500)/166;
-    else if (chance>1000 && chance<=2500) chance=12+(chance-1000)/500;
-    else if (chance>2500 && chance<=5000) chance=15+(chance-2500)/833;
-    else chance=0;
+    if      (chance>0    && chance<=100 ) chance=3+chance/33;          //   0,  100, "Последователь"   6%  100  3%    0
+    else if (chance>100  && chance<=500 ) chance=6+(chance-100)/133;   // 101,  500, "Младший аколит"  9%  500  6%  100
+    else if (chance>500  && chance<=1000) chance=9+(chance-500)/166;   // 501, 1000, "Старший аколит" 12% 1000  9%  500
+    else if (chance>1000 && chance<=2500) chance=12+(chance-1000)/500; //1001, 2500, "Аббат"          15% 2.5K 12% 1000
+    else if (chance>2500 && chance<=5000) chance=15+(chance-2500)/833; //2501, 4949, "Жрец"           18% 5K   15% 2500
+    else chance=0;                                                     //4950, 5000, "Верховный Жрец"
 
     if (number_percent() < chance) tatoo_works(ch, victim);
   }
@@ -1482,7 +1390,6 @@ void dam_message( CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,bool imm
   int dammsg;
 
   if (!ch || !victim ) return;
-
 
   for (dammsg=0;dam_msg_table[dammsg].to!=-1;dammsg++)
   {
@@ -1616,29 +1523,24 @@ int xp_compute( CHAR_DATA *gch, CHAR_DATA *victim, int total_levels )
 
   if (level_range > 4) base_exp = 135 + 15 * (level_range - 4);
 
-  /* do alignment computations */
-
+  /* do alignment computations */  
   align = victim->alignment - gch->alignment;
 
-  if (IS_SET(victim->act,ACT_NOALIGN)
-  || (gch->questmob == victim))
+  if (IS_SET(victim->act,ACT_NOALIGN) || (gch->questmob == victim))
   {
   }
-
   else if (align > 500) /* monster is more good than slayer */
   {
     change = (align - 500) * base_exp / 500 * gch->level/total_levels;
     change = UMAX(1,change);
     gch->alignment = UMAX(-1000,gch->alignment - change);
   }
-
   else if (align < -500) /* monster is more evil than slayer */
   {
     change = ( -1 * align - 500) * base_exp/500 * gch->level/total_levels;
     change = UMAX(1,change);
     gch->alignment = UMIN(1000,gch->alignment + change);
   }
-
   else /* improve this someday */
   {
     change = gch->alignment * base_exp/500 * gch->level/total_levels;
@@ -1649,7 +1551,6 @@ int xp_compute( CHAR_DATA *gch, CHAR_DATA *victim, int total_levels )
 
   /* calculate exp multiplier */
   if (IS_SET(victim->act,ACT_NOALIGN)) xp = base_exp;
-
   else if (gch->alignment > 500)  /* for goodie two shoes */
   {
     if (victim->alignment < -750) xp = (base_exp *4)/3;
@@ -1659,7 +1560,6 @@ int xp_compute( CHAR_DATA *gch, CHAR_DATA *victim, int total_levels )
     else if (victim->alignment > 250) xp = (base_exp * 3)/4;
     else xp = base_exp;
   }
-
   else if (gch->alignment < -500) /* for baddies */
   {
     if (victim->alignment > 750) xp = (base_exp * 5)/4;
@@ -1669,7 +1569,6 @@ int xp_compute( CHAR_DATA *gch, CHAR_DATA *victim, int total_levels )
     else if (victim->alignment < -250) xp = (base_exp * 9)/10;
     else xp = base_exp;
   }
-
   else if (gch->alignment > 200)  /* a little good */
   {
     if (victim->alignment < -500) xp = (base_exp * 6)/5;
@@ -1677,7 +1576,6 @@ int xp_compute( CHAR_DATA *gch, CHAR_DATA *victim, int total_levels )
     else if (victim->alignment > 0) xp = (base_exp * 3)/4;
     else xp = base_exp;
   }
-
   else if (gch->alignment < -200) /* a little bad */
   {
     if (victim->alignment > 500) xp = (base_exp * 6)/5;
@@ -1685,7 +1583,6 @@ int xp_compute( CHAR_DATA *gch, CHAR_DATA *victim, int total_levels )
     else if (victim->alignment < 0) xp = (base_exp * 3)/4;
     else xp = base_exp;
   }
-
   else // neutral
   {
     if (victim->alignment > 500 || victim->alignment < -500) xp = (base_exp * 4)/3;
@@ -1819,7 +1716,7 @@ void group_gain( CHAR_DATA *ch, CHAR_DATA *victim )
 
     if ( !is_same_group( gch, ch ) || IS_NPC(gch)) continue;
 
-// pc group bonus (c) Ghost
+    // pc group bonus (c) Ghost
     gbonus=1.0;
     if (members_pkrange>1 && members_pkrange<7 && dam_sum>victim->max_hit*0.9)
       for(i=0;i<MAX_VICT;i++)
@@ -1874,84 +1771,85 @@ void group_gain( CHAR_DATA *ch, CHAR_DATA *victim )
 
 int check_victim(CHAR_DATA *ch, CHAR_DATA *victim)
 {
- int i,k,rez = MAX_VICT;
- bool found = FALSE;
- VICTIM_DATA temp, tmp;
- temp.victim = NULL;
- temp.dampool = 0;
- tmp.victim = NULL;
- tmp.dampool = 0;
+  int i,k,rez = MAX_VICT;
+  bool found = FALSE;
+  VICTIM_DATA temp, tmp;
+  temp.victim = NULL;
+  temp.dampool = 0;
+  tmp.victim = NULL;
+  tmp.dampool = 0;
 
- if (!IS_NPC(victim) || IS_NPC(ch)) return rez;
+  if (!IS_NPC(victim) || IS_NPC(ch)) return rez;
 
- for(i=0;i<MAX_VICT;i++)
-  if (ch->pcdata->victims[i].victim==victim)
+  for(i=0;i<MAX_VICT;i++)
+    if (ch->pcdata->victims[i].victim==victim)
+    {
+      found = TRUE;
+      break;
+    }
+
+  if (!found)
   {
-   found = TRUE;
-   break;
-  }
- if (!found)
- {
-  if (ch->pcdata->victims[0].victim==NULL)
-  {
-   ch->pcdata->victims[0].victim = victim;
-   ch->pcdata->victims[0].dampool = 0;
-  }
-  else
-  {
-   tmp.victim = victim;
-   tmp.dampool = 0;
-   for(i=0;i<MAX_VICT;i++)
-    if (tmp.victim == NULL)
-     break;
+    if (ch->pcdata->victims[0].victim==NULL)
+    {
+      ch->pcdata->victims[0].victim = victim;
+      ch->pcdata->victims[0].dampool = 0;
+    }
     else
     {
-     temp.victim = ch->pcdata->victims[i].victim;
-     temp.dampool = ch->pcdata->victims[i].dampool;
-     ch->pcdata->victims[i].victim = tmp.victim;
-     ch->pcdata->victims[i].dampool = tmp.dampool;
-     tmp.victim = temp.victim;
-     tmp.dampool = temp.dampool;
+      tmp.victim = victim;
+      tmp.dampool = 0;
+      for(i=0;i<MAX_VICT;i++)
+        if (tmp.victim == NULL)
+          break;
+        else
+        {
+          temp.victim = ch->pcdata->victims[i].victim;
+          temp.dampool = ch->pcdata->victims[i].dampool;
+          ch->pcdata->victims[i].victim = tmp.victim;
+          ch->pcdata->victims[i].dampool = tmp.dampool;
+          tmp.victim = temp.victim;
+          tmp.dampool = temp.dampool;
+        }
     }
   }
- }
 
- // пересортировка массива
- temp.victim = NULL;
- temp.dampool = 0;
- for(i=0;i<MAX_VICT;i++)
- {
-   if (ch->pcdata->victims[i].victim==ch->fighting)
-   {
-    temp.victim = ch->pcdata->victims[i].victim;
-    temp.dampool = ch->pcdata->victims[i].dampool;
-    for(k=i;k>0;k--)
-    {
-     ch->pcdata->victims[k].victim = ch->pcdata->victims[k-1].victim;
-     ch->pcdata->victims[k].dampool = ch->pcdata->victims[k-1].dampool;
-    }
-    ch->pcdata->victims[0].victim = temp.victim;
-    ch->pcdata->victims[0].dampool = temp.dampool;
-    break;
-   }
- }
-
- rez = 10;
- // ищем чего возвращать
- for(i=0;i<MAX_VICT;i++)
-  if (ch->pcdata->victims[i].victim==victim)
+  // пересортировка массива
+  temp.victim = NULL;
+  temp.dampool = 0;
+  for(i=0;i<MAX_VICT;i++)
   {
-   rez = i;
-   break;
+    if (ch->pcdata->victims[i].victim==ch->fighting)
+    {
+      temp.victim = ch->pcdata->victims[i].victim;
+      temp.dampool = ch->pcdata->victims[i].dampool;
+      for(k=i;k>0;k--)
+      {
+        ch->pcdata->victims[k].victim = ch->pcdata->victims[k-1].victim;
+        ch->pcdata->victims[k].dampool = ch->pcdata->victims[k-1].dampool;
+      }
+      ch->pcdata->victims[0].victim = temp.victim;
+      ch->pcdata->victims[0].dampool = temp.dampool;
+      break;
+    }
   }
 
- return rez;
+  rez = 10;
+  // ищем чего возвращать
+  for(i=0;i<MAX_VICT;i++)
+    if (ch->pcdata->victims[i].victim==victim)
+    {
+      rez = i;
+      break;
+    }
+
+  return rez;
 }
 
 int get_ac_modifier(CHAR_DATA *ch, CHAR_DATA *victim, int dt)
 {
   int ac;
-  if (/*IS_NPC(victim) ||*/ dt>3 || dt == gsn_backstab) return 0;
+  if ( dt>3 || dt == gsn_backstab) return 0;
 
   switch(dt)
   {
@@ -2070,8 +1968,7 @@ bool damage(CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,int dt,bool sh
   // Inviso attacks ... not.
   //  if (ch->race!=RACE_SPRITE)  // even for sprites...
   {
-    if ( IS_AFFECTED(ch, AFF_INVISIBLE) ||
-         IS_AFFECTED(ch, AFF_SNEAK))
+    if ( IS_AFFECTED(ch, AFF_INVISIBLE) || IS_AFFECTED(ch, AFF_SNEAK))
     {
       affect_strip( ch, gsn_sneak );
       affect_strip( ch, gsn_invis );
@@ -2090,26 +1987,19 @@ bool damage(CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,int dt,bool sh
 
   if (IS_AFFECTED(ch,AFF_HIDE))
   {
-   affect_strip( ch, gsn_hide);
-   REM_BIT(ch->affected_by,AFF_HIDE);
-   stc("Ты больше не спрятан.\n\r",ch);
+    affect_strip( ch, gsn_hide);
+    REM_BIT(ch->affected_by,AFF_HIDE);
+    stc("Ты больше не спрятан.\n\r",ch);
   }
 
   //some immune check.
   //didn't place returns only 'cause immune is needed later (c) Apc
   immune = FALSE;
   if ( check_immune(victim,dt) == IS_IMMUNE ) immune=TRUE;
-  if (IS_NPC(victim)
-   && (
-         victim->pIndexData->pShop
-      || victim->pIndexData->vnum == 3011
-      )
-     )
-  immune=TRUE;
+  if (IS_NPC(victim) && (victim->pIndexData->pShop || victim->pIndexData->vnum == 3011)) immune=TRUE;
 
   //Weapons with magic damtypes deal 0 damage
   if (dam_hit && !IS_NPC(ch) && dt>3 && dt != gsn_backstab && dt!=gsn_missile) dam = 0;
-
 
   if (!immune && dam > 0)
   {
@@ -2210,25 +2100,24 @@ bool damage(CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,int dt,bool sh
   }
   if (immune || dam == 0) return FALSE;
 
-
   // updating the damage indicator
   if (!IS_NPC(ch))
   {
-   number = check_victim(ch,victim);
-   if (number < MAX_VICT) ch->pcdata->victims[number].dampool+=dam;
+    number = check_victim(ch,victim);
+    if (number < MAX_VICT) ch->pcdata->victims[number].dampool+=dam;
   }
   else if (IS_AFFECTED(ch, AFF_CHARM))
   {
-   if (ch->master && ch->master->pet==ch && !IS_NPC(ch->master))
-   {
-    number = check_victim(ch->master,victim);
-    if (number < MAX_VICT) ch->master->pcdata->victims[number].dampool+=dam*2/3;
-   }
-   else if (ch->master && !IS_NPC(ch->master))
-   {
-    number = check_victim(ch->master,victim);
-    if (number < MAX_VICT) ch->master->pcdata->victims[number].dampool+=dam/3;
-   }
+    if (ch->master && ch->master->pet==ch && !IS_NPC(ch->master))
+    {
+      number = check_victim(ch->master,victim);
+      if (number < MAX_VICT) ch->master->pcdata->victims[number].dampool+=dam*2/3;
+    }
+    else if (ch->master && !IS_NPC(ch->master))
+    {
+      number = check_victim(ch->master,victim);
+      if (number < MAX_VICT) ch->master->pcdata->victims[number].dampool+=dam/3;
+    }
   }
 
   // Hurt the victim. Inform the victim of his new state.
@@ -2283,21 +2172,21 @@ bool damage(CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,int dt,bool sh
     group_gain( ch, victim );
 
     if (!IS_NPC(victim) && !IS_SET(victim->act, PLR_ARMY)
-        && !IS_SET(victim->in_room->room_flags,ROOM_ARENA)
-        && victim->remort!=0)
+      && !IS_SET(victim->in_room->room_flags,ROOM_ARENA)
+      && victim->remort!=0)
     {
       if (!IS_NPC(ch)) victim->pcdata->deathcounter+=5;
       else if ( (ch->level-victim->level)<20) victim->pcdata->deathcounter+=1;
 
       if (victim->pcdata->deathcounter>=15)
       {
-         if (victim->remort)
-         {
-           stc("{R{*Ты умиpал слишком часто, твое здоpовье ухудшается!{x\n\r", victim);
-           victim->max_hit-=10;
-         }
-         victim->pcdata->deathcounter=0;
-         WILLSAVE(ch);
+        if (victim->remort)
+        {
+          stc("{R{*Ты умиpал слишком часто, твое здоpовье ухудшается!{x\n\r", victim);
+          victim->max_hit-=10;
+        }
+        victim->pcdata->deathcounter=0;
+        WILLSAVE(ch);
       }
     }
 
@@ -2333,26 +2222,24 @@ bool damage(CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,int dt,bool sh
       }
 
       if (!IS_NPC(ch)) do_ear(victim,ch);
-//      else if (ch->master)  do_ear(victim,ch->master);
-
       // bounty
       if (victim->pcdata->bounty!=0 && ch!=victim && (!IS_SET(victim->act,PLR_ARMY)))
-       {
+      {
         if (ch->master && !IS_NPC(ch->master))
         {
-         ptc(ch->master,"Ты получаешь {Y%u{x золотых монет за убийство %s!\n\r",victim->pcdata->bounty,victim->name);
-         ch->master->gold+=victim->pcdata->bounty;
-         victim->pcdata->bounty=0;
-         do_printf(buf,"{CНаграда за голову {Y%s{C выплачена.",victim->name);
-         info (NULL,1,4,buf,"{x");
+          ptc(ch->master,"Ты получаешь {Y%u{x золотых монет за убийство %s!\n\r",victim->pcdata->bounty,victim->name);
+          ch->master->gold+=victim->pcdata->bounty;
+          victim->pcdata->bounty=0;
+          do_printf(buf,"{CНаграда за голову {Y%s{C выплачена.",victim->name);
+          info (NULL,1,4,buf,"{x");
         }
         else if (!IS_NPC(ch))
         {
-         ptc(ch,"Ты получаешь {Y%u{x золотых монет за убийство %s!\n\r",victim->pcdata->bounty,victim->name);
-         ch->gold+=victim->pcdata->bounty;
-         victim->pcdata->bounty=0;
-         do_printf(buf,"{CНаграда за голову {Y%s{C выплачена.",victim->name);
-         info (NULL,1,4,buf,"{x");
+          ptc(ch,"Ты получаешь {Y%u{x золотых монет за убийство %s!\n\r",victim->pcdata->bounty,victim->name);
+          ch->gold+=victim->pcdata->bounty;
+          victim->pcdata->bounty=0;
+          do_printf(buf,"{CНаграда за голову {Y%s{C выплачена.",victim->name);
+          info (NULL,1,4,buf,"{x");
         }
       }
     }
@@ -2384,9 +2271,9 @@ bool damage(CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,int dt,bool sh
       else if (!IS_NPC(ch) && !IS_NPC(victim))
       {
         if( IS_DEVOTED_ANY(ch) && IS_DEVOTED_ANY(victim)
-         && ( ch->pcdata->dn == victim->pcdata->dn )
-         && !IS_SET(ch->in_room->room_flags,ROOM_ARENA) )
-              change_favour( ch, -50);
+          && ( ch->pcdata->dn == victim->pcdata->dn )
+          && !IS_SET(ch->in_room->room_flags,ROOM_ARENA) )
+            change_favour( ch, -50);
         ch->vic_pc_total++;
         victim->death_pc_total++;
       }
@@ -2394,20 +2281,18 @@ bool damage(CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,int dt,bool sh
 
     raw_kill( victim );
     if (IS_CFG(ch,CFG_AUTOLOOK)) do_look(ch,"in corpse");
-    // dump the flags
 
     if (ch != victim && victim->criminal>0)
     {
-     if (!IS_NPC(ch)
-     || ch->spec_fun==spec_lookup("spec_executioner"))
-      victim->criminal-=200;
+      if (!IS_NPC(ch) || ch->spec_fun==spec_lookup("spec_executioner"))
+        victim->criminal-=200;
       else victim->criminal-=50;
 
-     if (victim->criminal<0)
+      if (victim->criminal<0)
       {
-       victim->criminal=0;
-       REM_BIT(victim->act,PLR_WANTED);
-       stc("{YТы больше не в розыске.{x\n\r",victim);
+        victim->criminal=0;
+        REM_BIT(victim->act,PLR_WANTED);
+        stc("{YТы больше не в розыске.{x\n\r",victim);
       }
     }
     // RT new auto commands
@@ -2462,22 +2347,18 @@ bool damage(CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,int dt,bool sh
   if ( IS_NPC(victim))
   {
     if (IS_AFFECTED(victim, AFF_CHARM) && victim->master!=NULL
-     && victim->master->in_room != victim->in_room)
-     do_function(victim, &do_flee, "" );
+      && victim->master->in_room != victim->in_room)
+      do_function(victim, &do_flee, "" );
     else if ( IS_SET(victim->act, ACT_WIMPY) && number_bits( 2 ) == 0
-     && victim->hit < victim->max_hit / 5
-     && victim->wait < PULSE_VIOLENCE / 2) do_function(victim, &do_flee, "" );
+      && victim->hit < victim->max_hit / 5
+      && victim->wait < PULSE_VIOLENCE / 2) do_function(victim, &do_flee, "" );
   }
 
-  if ( !IS_NPC(victim) &&  victim->hit > 0
-   &&   victim->hit <= victim->wimpy
-   &&   victim->wait < PULSE_VIOLENCE / 2 )
+  if ( !IS_NPC(victim) &&  victim->hit > 0 && victim->hit <= victim->wimpy && victim->wait < PULSE_VIOLENCE / 2 )
   {
     do_function (victim, &do_flee, "" );
     if ( number_percent() < 33 ) victim->wimpy = 0;
-    if ( !IS_IMMORTAL(victim)
-     &&  !IS_AFFECTED(victim,AFF_BERSERK)
-     &&  number_percent() < 33 )
+    if ( !IS_IMMORTAL(victim) && !IS_AFFECTED(victim,AFF_BERSERK) && number_percent() < 33 )
     {
        AFFECT_DATA af;
        af.where     = TO_AFFECTS;
@@ -2500,27 +2381,12 @@ bool is_safe(CHAR_DATA *ch, CHAR_DATA *victim)
   if (victim->in_room == NULL || ch->in_room == NULL) return TRUE;
 
   if (!IS_NPC(ch) && !IS_NPC(victim)
-      && victim->pcdata->condition[COND_ADRENOLIN] <= 0
-      && victim->desc==NULL
-     )
+    && victim->pcdata->condition[COND_ADRENOLIN] <= 0
+    && victim->desc==NULL)
   {
     stc("Он в лостлинке!\n\r",ch);
     return TRUE;
   }
-
-/* remmed out - not used (c) Apc
-  if (IS_AFFECTED( ch, AFF_GASEOUS_FORM ))
-  {
-    stc("Ты в неподходящей для нападения форме...\n\r",ch);
-    return TRUE;
-  }
-  if (IS_AFFECTED( victim, AFF_GASEOUS_FORM ))
-  {
-    stc("Ты вдруг понимаешь, что ганяешься за призраком...\n\r",ch);
-    return TRUE;
-  }
-  if ( IS_SET(ch->in_room->ra,RAFF_VIOLENCE) ) return FALSE;
-*/
 
   if (!IS_NPC(victim) && IS_SET(victim->act, PLR_WANTED)) return FALSE;
 
@@ -2568,10 +2434,9 @@ bool is_safe(CHAR_DATA *ch, CHAR_DATA *victim)
     /* NPC doing the killing */
     if (IS_NPC(ch))
     {
-      if (IS_SET(victim->in_room->room_flags,ROOM_SAFE))
-       if (IS_NPC(victim) || victim->pcdata->condition[COND_ADRENOLIN]<=0)
+      if (IS_SET(victim->in_room->room_flags,ROOM_SAFE)
+        && (IS_NPC(victim) || victim->pcdata->condition[COND_ADRENOLIN]<=0))
       {
-//        stc("Hе в этой комнате.\n\r",ch);
         return TRUE;
       }
 
@@ -2579,7 +2444,6 @@ bool is_safe(CHAR_DATA *ch, CHAR_DATA *victim)
       if (IS_AFFECTED(ch,AFF_CHARM) && ch->master != NULL
        &&  ch->master->fighting != victim)
       {
-//        stc("Игpоки твои дpузья!\n\r",ch);  // idiotizm?
         return TRUE;
       }
     }
@@ -2625,24 +2489,6 @@ bool is_safe(CHAR_DATA *ch, CHAR_DATA *victim)
 bool is_safe_spell(CHAR_DATA *ch, CHAR_DATA *victim, bool area )
 {
   if (!victim->in_room || !ch->in_room ) return TRUE;
-
-/*
-  if (IS_AFFECTED( ch, AFF_GASEOUS_FORM ))
-  {
-    stc("Ты в неподходящей для нападения форме...\n\r",ch);
-    return TRUE;
-  }
-  if (IS_AFFECTED( victim, AFF_GASEOUS_FORM))
-  {
-    stc("Ты вдруг понимаешь, что ганяешься за призраком...\n\r",ch);
-    return TRUE;
-  }
-  if (IS_AFFECTED(victim,AFF_MAGIC_BAR))
-  {
-    act("$t защищает $C2 от магии.",ch,SabAdron,victim,TO_CHAR);
-    return TRUE;
-  }
-*/
   if ((victim == ch || is_same_group(ch, victim)) && area) return TRUE;
   if (victim->fighting == ch || victim == ch) return FALSE;
   if (IS_SET(ch->in_room->ra, RAFF_VIOLENCE) ) return FALSE;
@@ -2655,9 +2501,8 @@ bool is_safe_spell(CHAR_DATA *ch, CHAR_DATA *victim, bool area )
   if (IS_SET(victim->in_room->room_flags,ROOM_ARENA) && IS_CFG(victim,CFG_ZRITEL)) return TRUE;
 
   if (!IS_NPC(ch) && !IS_NPC(victim)
-      && victim->pcdata->condition[COND_ADRENOLIN] <= 0
-      && victim->desc==NULL
-     )
+    && victim->pcdata->condition[COND_ADRENOLIN] <= 0
+    && victim->desc==NULL)
   {
     stc("Он в лостлинке!\n\r",ch);
     return TRUE;
@@ -2706,25 +2551,20 @@ bool is_safe_spell(CHAR_DATA *ch, CHAR_DATA *victim, bool area )
 void check_criminal( CHAR_DATA *ch, CHAR_DATA *victim, int level )
 {
   if (!ch || !victim || ch==victim
-      || IS_NPC(ch)  || IS_NPC(victim)
-      || IS_SET(victim->act, PLR_WANTED)
-     )
-   return;
+    || IS_NPC(ch)  || IS_NPC(victim)
+    || IS_SET(victim->act, PLR_WANTED))
+    return;
   if (ch->in_room && IS_SET(ch->in_room->room_flags, ROOM_ARENA)) return;
   while ( IS_AFFECTED(victim, AFF_CHARM) && victim->master) victim = victim->master;
   while ( IS_AFFECTED(ch, AFF_CHARM) && ch->master) ch= ch->master;
 
-
   if ( victim->pcdata->condition[COND_ADRENOLIN]>0
-        && ch->pcdata->condition[COND_ADRENOLIN]>0) return;
+    && ch->pcdata->condition[COND_ADRENOLIN]>0) return;
 
   if ( victim->pcdata->condition[COND_ADRENOLIN]<1)
   {
     victim->pcdata->condition[COND_ADRENOLIN] = 2;
     ch->pcdata->condition[COND_ADRENOLIN]=3;
-//    if( IS_GOOD_DEITY(ch) ) change_favour(ch, -40);
-//    if( IS_EVIL_DEITY(ch) ) change_favour(ch, 40);
-//    if( IS_FANATIC_DEITY(ch) ) change_favour(ch, 10);
     stc("{rАдреналин бушует у тебя в крови!{x\n\r",victim);
     stc("{rАдреналин бушует у тебя в крови!{x\n\r",ch);
   }
@@ -2790,7 +2630,6 @@ void update_pos( CHAR_DATA *victim )
   else                          victim->position = POS_STUNNED;
 }
 
-
 void stop_fighting( CHAR_DATA *ch, bool fBoth )
 {
   CHAR_DATA *fch;
@@ -2830,8 +2669,8 @@ void death_cry( CHAR_DATA *ch )
   room = (ch->in_room!=NULL)? ch->in_room : ch->was_in_room;
   if (room==NULL)
   {
-   bug("Char is nowhere",0);
-   return;
+    bug("Char is nowhere",0);
+    return;
   }
 
   switch ( number_bits(4))
@@ -2893,22 +2732,22 @@ void death_cry( CHAR_DATA *ch )
     name            = IS_NPC(ch) ? get_char_desc(ch,'2'): ch->name;
     if((obj             = create_object( get_obj_index( vnum ), 0 )))
     {
-     obj->timer      = number_range( 4, 7 );
+      obj->timer      = number_range( 4, 7 );
 
-     do_printf( buf, obj->short_descr, name );
-     free_string( obj->short_descr );
-     obj->short_descr = str_dup( buf );
+      do_printf( buf, obj->short_descr, name );
+      free_string( obj->short_descr );
+      obj->short_descr = str_dup( buf );
 
-     do_printf( buf, obj->description, name );
-     free_string( obj->description );
-     obj->description = str_dup( buf );
+      do_printf( buf, obj->description, name );
+      free_string( obj->description );
+      obj->description = str_dup( buf );
 
-     if (obj->item_type == ITEM_FOOD)
-     {
-      if (IS_SET(ch->form,FORM_POISON)) obj->value[3] = 1;
-      else if (!IS_SET(ch->form,FORM_EDIBLE)) obj->item_type = ITEM_TRASH;
-     }
-     obj_to_room( obj, room );
+      if (obj->item_type == ITEM_FOOD)
+      {
+        if (IS_SET(ch->form,FORM_POISON)) obj->value[3] = 1;
+        else if (!IS_SET(ch->form,FORM_EDIBLE)) obj->item_type = ITEM_TRASH;
+      }
+      obj_to_room( obj, room );
     }
   }
 
@@ -2921,8 +2760,8 @@ void death_cry( CHAR_DATA *ch )
     EXIT_DATA *pexit;
 
     if ( ( pexit = was_in_room->exit[door] ) != NULL
-     && pexit->u1.to_room != NULL
-     && pexit->u1.to_room != was_in_room )
+      && pexit->u1.to_room != NULL
+      && pexit->u1.to_room != was_in_room )
     {
       ch->in_room = pexit->u1.to_room;
       act( msg, ch, NULL, NULL, TO_ROOM );
@@ -2968,7 +2807,6 @@ void char_death(CHAR_DATA *ch)
   corpse->description = str_dup(buf);
 
   if (ch->race==RACE_ZOMBIE) {
-    /* sigh... replace for strcat(corpse->name, " zombie") (uni) */
     do_printf(buf, "%s zombie", corpse->name);
     free_string(corpse->name);
     corpse->name = str_dup(buf);
@@ -3158,10 +2996,8 @@ void make_corpse( CHAR_DATA *ch )
 
   if (!IS_NPC(ch))
   {
-    /*
-     * So, if he/she dies when I was in disconnect, he/she left in my PK?
-     *  - heh: currently, only mob's can `forget' (:
-     */
+    /* So, if he/she dies when I was in disconnect, he/she left in my PK?
+     *  - heh: currently, only mob's can `forget' (:  */
     for ( d = descriptor_list; d != NULL; d = d->next )
     if (d->connected == CON_PLAYING) remove_pkiller(d->character,ch->name);
   }
@@ -3301,8 +3137,6 @@ void do_berserk( CHAR_DATA *ch, const char *argument)
     af.modifier  = ch->level/5 + category_bonus(ch,FORTITUDE);
     if (af.modifier>0) af.modifier=0-af.modifier;
     affect_to_char(ch,&af);
-//    if( IS_MIGHT_DEITY(ch) ) change_favour(ch, 10);
-//    if( IS_FANATIC_DEITY(ch) ) change_favour(ch, 10);
   }
   else
   {
@@ -3405,7 +3239,6 @@ void do_bash( CHAR_DATA *ch, const char *argument )
     WAIT_STATE(ch,skill_table[gsn_bash].beats);
     victim->position = POS_RESTING;
     damage(ch,victim,number_range(2,10 + dice(ch->level, ch->size+1) + chance/4),gsn_bash,DAM_BASH,TRUE, FALSE, NULL);
-//   if( IS_MIGHT_DEITY(ch) ) change_favour(ch, 2);
   }
   else
   {
@@ -3514,97 +3347,90 @@ void do_strangle(CHAR_DATA *ch, const char *argument)
   percent_ = number_percent();
   if (offence + dice(3,40)  >  defence + dice(3,40))
   {
-  {
-   if (percent_ < 30)
+    if (percent_ < 30)
     {
-     act("{y$c1{x придушивает тебя!", ch,NULL,victim,TO_VICT);
-     act("Ты придушиваешь {y$C4{x.",ch,NULL,victim,TO_CHAR);
-     act("{y$c1{x придушивает {y$C4{x.", ch,NULL,victim,TO_NOTVICT);
-     stc( "Ты засыпаешь....\n\r", victim );
-     act( "$c1 засыпает.", victim, NULL, NULL, TO_ROOM );
-     victim->position = POS_SLEEPING;
+      act("{y$c1{x придушивает тебя!", ch,NULL,victim,TO_VICT);
+      act("Ты придушиваешь {y$C4{x.",ch,NULL,victim,TO_CHAR);
+      act("{y$c1{x придушивает {y$C4{x.", ch,NULL,victim,TO_NOTVICT);
+      stc( "Ты засыпаешь....\n\r", victim );
+      act( "$c1 засыпает.", victim, NULL, NULL, TO_ROOM );
+      victim->position = POS_SLEEPING;
 
-     af.where     = TO_AFFECTS;
-     af.type      = gsn_sleep;
-     af.level     = ch->level;
-     af.duration  = 0;
-     af.location  = APPLY_NONE;
-     af.modifier  = 0;
-     af.bitvector = 0;
-     affect_to_char( victim, &af );
+      af.where     = TO_AFFECTS;
+      af.type      = gsn_sleep;
+      af.level     = ch->level;
+      af.duration  = 0;
+      af.location  = APPLY_NONE;
+      af.modifier  = 0;
+      af.bitvector = 0;
+      affect_to_char( victim, &af );
 
-     check_improve(ch,gsn_strangle,TRUE,1);
-//     if( IS_STEALTH_DEITY(ch) ) change_favour(ch, 25);
+      check_improve(ch,gsn_strangle,TRUE,1);
     }
-   else
+    else
     {
-     act("{y$c1{x придушивает тебя! ..но не до конца..",ch,NULL,victim,TO_VICT);
-     act("Ты не смог полностью придушить {y$C4{x.",ch,NULL,victim,TO_CHAR);
-     act("{y$c1{x почти придушил {y$C4{x. ", ch,NULL,victim,TO_NOTVICT);
-     stc( "Ты чувствуешь слабость во всем...\n\r", victim );
-     act( "$c1 чувствует некий дискомфорт.", victim, NULL, NULL, TO_ROOM );
+      act("{y$c1{x придушивает тебя! ..но не до конца..",ch,NULL,victim,TO_VICT);
+      act("Ты не смог полностью придушить {y$C4{x.",ch,NULL,victim,TO_CHAR);
+      act("{y$c1{x почти придушил {y$C4{x. ", ch,NULL,victim,TO_NOTVICT);
+      stc( "Ты чувствуешь слабость во всем...\n\r", victim );
+      act( "$c1 чувствует некий дискомфорт.", victim, NULL, NULL, TO_ROOM );
 
-     if (percent_ < 75)
+      if (percent_ < 75)
       {
-       af.where     = TO_AFFECTS;
-       af.type      = gsn_strangle;
-       af.level     = ch->level;
-       af.duration  = 1;
-       af.location  = APPLY_HITROLL;
-       af.modifier  = -1 * ((percent_ <50 )?(ch->level):(ch->level / 2));
-       af.bitvector = 0;
-       affect_to_char( victim, &af );
-       stc("У тебя, похоже, начались проблемы с меткостью..\n\r",victim);
-       act("$c1, похоже, не может точно прицелиться..",victim,NULL,NULL,TO_ROOM);
-//       if( IS_STEALTH_DEITY(ch) ) change_favour(ch, 15);
+        af.where     = TO_AFFECTS;
+        af.type      = gsn_strangle;
+        af.level     = ch->level;
+        af.duration  = 1;
+        af.location  = APPLY_HITROLL;
+        af.modifier  = -1 * ((percent_ <50 )?(ch->level):(ch->level / 2));
+        af.bitvector = 0;
+        affect_to_char( victim, &af );
+        stc("У тебя, похоже, начались проблемы с меткостью..\n\r",victim);
+        act("$c1, похоже, не может точно прицелиться..",victim,NULL,NULL,TO_ROOM);
       }
-     if (percent_ < 45)
+      if (percent_ < 45)
       {
-       af.where     = TO_AFFECTS;
-       af.type      = gsn_strangle;
-       af.level     = ch->level;
-       af.duration  = 1;
-       af.location  = APPLY_DEX;
-       af.modifier  = -1 - (ch->level >= 18) - 2*(ch->level >= 25) - 3*(ch->level >= 32) - 3*(ch->level >=101);
-       af.bitvector = AFF_SLOW;
-       affect_to_char( victim, &af );
-       stc("У тебя ,похоже, проблемы с координацией движений..\n\r",victim);
-       act("$c1 начинает двигаться медленно и глючно..",victim,NULL,NULL,TO_ROOM);
-//       if( IS_STEALTH_DEITY(ch) ) change_favour(ch, 15);
+        af.where     = TO_AFFECTS;
+        af.type      = gsn_strangle;
+        af.level     = ch->level;
+        af.duration  = 1;
+        af.location  = APPLY_DEX;
+        af.modifier  = -1 - (ch->level >= 18) - 2*(ch->level >= 25) - 3*(ch->level >= 32) - 3*(ch->level >=101);
+        af.bitvector = AFF_SLOW;
+        affect_to_char( victim, &af );
+        stc("У тебя ,похоже, проблемы с координацией движений..\n\r",victim);
+        act("$c1 начинает двигаться медленно и глючно..",victim,NULL,NULL,TO_ROOM);
       }
-     if (percent_ < 30)
+      if (percent_ < 30)
       {
-       af.where     = TO_AFFECTS;
-       af.type      = gsn_strangle;
-       af.level     = ch->level;
-       af.duration  = 1;
-       af.location  = APPLY_STR;
-       af.modifier  = -1 * (ch->level / 5);
-       af.bitvector = 0;
-       affect_to_char( victim, &af );
-       stc( "Ты чувствуешь, как сила уходит из тебя..\n\r", victim );
-       act("$c1 выглядит слабым и уставшим..",victim,NULL,NULL,TO_ROOM);
-//       if( IS_STEALTH_DEITY(ch) ) change_favour(ch, 10);
+        af.where     = TO_AFFECTS;
+        af.type      = gsn_strangle;
+        af.level     = ch->level;
+        af.duration  = 1;
+        af.location  = APPLY_STR;
+        af.modifier  = -1 * (ch->level / 5);
+        af.bitvector = 0;
+        affect_to_char( victim, &af );
+        stc( "Ты чувствуешь, как сила уходит из тебя..\n\r", victim );
+        act("$c1 выглядит слабым и уставшим..",victim,NULL,NULL,TO_ROOM);
       }
-     if (percent_ < 35)
+      if (percent_ < 35)
       {
-       af.where     = TO_AFFECTS;
-       af.type      = gsn_strangle;
-       af.level     = ch->level;
-       af.duration  = 1;
-       af.location  = APPLY_INT;
-       af.modifier  = -1 * (ch->level / 8) - 1;
-       af.bitvector = 0;
-       affect_to_char( victim, &af );
-       stc( "Похоже, у тебя проблемы с головой..\n\r",ch);
-       act( "У $c1, похоже, затуманилась голова..",victim,NULL,NULL,TO_ROOM);
-//       if( IS_STEALTH_DEITY(ch) ) change_favour(ch, 15);
+        af.where     = TO_AFFECTS;
+        af.type      = gsn_strangle;
+        af.level     = ch->level;
+        af.duration  = 1;
+        af.location  = APPLY_INT;
+        af.modifier  = -1 * (ch->level / 8) - 1;
+        af.bitvector = 0;
+        affect_to_char( victim, &af );
+        stc( "Похоже, у тебя проблемы с головой..\n\r",ch);
+        act( "У $c1, похоже, затуманилась голова..",victim,NULL,NULL,TO_ROOM);
       }
-     add_pkiller(victim,ch);
-     one_hit( victim, ch, TYPE_UNDEFINED, NULL, TRUE );
-     check_improve(ch,gsn_strangle,TRUE,1);
+      add_pkiller(victim,ch);
+      one_hit( victim, ch, TYPE_UNDEFINED, NULL, TRUE );
+      check_improve(ch,gsn_strangle,TRUE,1);
     }
-  }
   }
   else
   {
@@ -3617,125 +3443,123 @@ void do_strangle(CHAR_DATA *ch, const char *argument)
 
 void do_throw( CHAR_DATA *ch, const char *argument )
 {
- CHAR_DATA *victim,*tmp_vict;
- OBJ_DATA *obj;
- char arg1[MAX_STRING_LENGTH],arg2[MAX_STRING_LENGTH];
- int chance;
+  CHAR_DATA *victim,*tmp_vict;
+  OBJ_DATA *obj;
+  char arg1[MAX_STRING_LENGTH],arg2[MAX_STRING_LENGTH];
+  int chance;
 
- argument = one_argument(argument,arg1);
- argument = one_argument(argument,arg2);
+  argument = one_argument(argument,arg1);
+  argument = one_argument(argument,arg2);
 
- if ((chance = get_skill(ch,gsn_missile)) == 0 )
- {
-  stc("Ты не умеешь метать оружие.\n\r",ch);
-  return;
- }
-
- if (arg1[0] == '\0')
- {
-  stc("Кинуть что (и в кого)?\n\r",ch);
-  return;
- }
-
- if ((obj = get_obj_carry(ch,arg1, ch)) == NULL)
- {
-  stc("У тебя нет этой вещи.\n\r",ch);
-  return;
- }
-
- if (get_obj_weight(obj) > (str_app[get_curr_stat(ch,STAT_STR)].wield*10)
-  || obj->level > ch->level)
- {
-  stc( "Тяжеловато для метания.\n\r", ch );
-  return;
- }
-
- if (IS_OBJ_STAT(obj,ITEM_NODROP))
- {
-  stc("Ты не можешь от этого избавиться.\n\r",ch);
-  return;
- }
-
- if (obj->item_type !=ITEM_WEAPON
-   || !IS_WEAPON_STAT(( obj ) ,WEAPON_MISSILE))
- {
-  stc("Ты не можешь это метнуть.\n\r",ch);
-  return;
- }
-
- if (arg2[0] == '\0')
- {
-  victim = ch->fighting;
-  if (victim == NULL)
+  if ((chance = get_skill(ch,gsn_missile)) == 0 )
   {
-   stc("Но ты не сражаешься.\n\r",ch);
-   return;
+    stc("Ты не умеешь метать оружие.\n\r",ch);
+    return;
   }
- }
- else if ((victim = get_char_room(ch,arg2)) == NULL)
- {
-  stc("Нет здесь таких.\n\r",ch);
-  return;
- }
 
- if (victim == ch)
- {
-  stc("Кинуть в себя - дурная идея.\n\r",ch);
-  return;
- }
-
- if (is_safe(ch,victim)) return;
-
- if (IS_AFFECTED(ch,AFF_CHARM) && ch->master == victim)
- {
-  act("Hо {y$C1{x твой коpеш!",ch,NULL,victim,TO_CHAR);
-  return;
- }
-
- /* now the attack */
- check_criminal(ch,victim,60);
- {
-  act("{y$c1{x швыряет в тебя $i1!",ch,obj,victim,TO_VICT);
-  act("Ты швыряешь $i1 в {y$C4{x!",ch,obj,victim,TO_CHAR);
-  act("{y$c1{x швыряет $i1 в {y$C4{x.",ch,obj,victim,TO_NOTVICT);
-  WAIT_STATE(ch,skill_table[gsn_missile].beats);
-  tmp_vict = ch;
-  tmp_vict = ch->in_room->people;
-  if (obj->item_type == ITEM_WEAPON)
+  if (arg1[0] == '\0')
   {
-   if (IS_WEAPON_STAT(( obj ) ,WEAPON_ROUND))
-   {
-    if (can_see( ch, victim,CHECK_LVL )) one_hit( ch, victim, gsn_missile,obj, TRUE );
-    while (tmp_vict != NULL)
+    stc("Кинуть что (и в кого)?\n\r",ch);
+    return;
+  }
+
+  if ((obj = get_obj_carry(ch,arg1, ch)) == NULL)
+  {
+    stc("У тебя нет этой вещи.\n\r",ch);
+    return;
+  }
+
+  if (get_obj_weight(obj) > (str_app[get_curr_stat(ch,STAT_STR)].wield*10)
+    || obj->level > ch->level)
+  {
+    stc( "Тяжеловато для метания.\n\r", ch );
+    return;
+  }
+
+  if (IS_OBJ_STAT(obj,ITEM_NODROP))
+  {
+    stc("Ты не можешь от этого избавиться.\n\r",ch);
+    return;
+  }
+
+  if (obj->item_type !=ITEM_WEAPON
+    || !IS_WEAPON_STAT(( obj ) ,WEAPON_MISSILE))
+  {
+    stc("Ты не можешь это метнуть.\n\r",ch);
+    return;
+  }
+
+  if (arg2[0] == '\0')
+  {
+    victim = ch->fighting;
+    if (victim == NULL)
     {
-     if (can_see( ch, tmp_vict,CHECK_LVL )) one_hit(ch , tmp_vict, gsn_missile,obj, TRUE);
-     tmp_vict = tmp_vict->next_in_room;
+      stc("Но ты не сражаешься.\n\r",ch);
+      return;
     }
-   }
-   else if (can_see( ch, victim,CHECK_LVL )) one_hit( ch, victim, gsn_missile,obj, TRUE );
   }
-  else if (can_see( ch, victim,CHECK_LVL )) one_hit( ch, victim, gsn_missile,obj, TRUE );
-//  if( IS_STEALTH_DEITY(ch) ) change_favour(ch, 3);
-//  if( IS_MIGHT_DEITY(ch) ) change_favour(ch, 1);
-  if (!IS_WEAPON_STAT(( obj ) ,WEAPON_RETURN))
+  else if ((victim = get_char_room(ch,arg2)) == NULL)
   {
-   if (number_percent( ) > 20)
-   {
-    obj_from_char( obj);
-    obj_to_room( obj, ch->in_room );
-    act("$i1 падает на землю.",ch,obj,victim,TO_CHAR);
-    act("$i1 падает на землю.",ch,obj,victim,TO_VICT);
-    act("$i1 падает на землю.",ch,obj,victim,TO_NOTVICT);
-   }
-   else
-   {
-    extract_obj( obj );
-    act("$i1 ломается от броска.",ch,obj,victim,TO_CHAR);
-    act("$i1 ломается от броска.",ch,obj,victim,TO_VICT);
-    act("$i1 ломается от броска.",ch,obj,victim,TO_NOTVICT);
-   }
+    stc("Нет здесь таких.\n\r",ch);
+    return;
   }
- }
+
+  if (victim == ch)
+  {
+    stc("Кинуть в себя - дурная идея.\n\r",ch);
+    return;
+  }
+
+  if (is_safe(ch,victim)) return;
+
+  if (IS_AFFECTED(ch,AFF_CHARM) && ch->master == victim)
+  {
+    act("Hо {y$C1{x твой коpеш!",ch,NULL,victim,TO_CHAR);
+    return;
+  }
+
+  /* now the attack */
+  check_criminal(ch,victim,60);
+  {
+    act("{y$c1{x швыряет в тебя $i1!",ch,obj,victim,TO_VICT);
+    act("Ты швыряешь $i1 в {y$C4{x!",ch,obj,victim,TO_CHAR);
+    act("{y$c1{x швыряет $i1 в {y$C4{x.",ch,obj,victim,TO_NOTVICT);
+    WAIT_STATE(ch,skill_table[gsn_missile].beats);
+    tmp_vict = ch;
+    tmp_vict = ch->in_room->people;
+    if (obj->item_type == ITEM_WEAPON)
+    {
+      if (IS_WEAPON_STAT(( obj ) ,WEAPON_ROUND))
+      {
+        if (can_see( ch, victim,CHECK_LVL )) one_hit( ch, victim, gsn_missile,obj, TRUE );
+        while (tmp_vict != NULL)
+        {
+          if (can_see( ch, tmp_vict,CHECK_LVL )) one_hit(ch , tmp_vict, gsn_missile,obj, TRUE);
+            tmp_vict = tmp_vict->next_in_room;
+        }
+      }
+      else if (can_see( ch, victim,CHECK_LVL )) one_hit( ch, victim, gsn_missile,obj, TRUE );
+    }
+    else if (can_see( ch, victim,CHECK_LVL )) one_hit( ch, victim, gsn_missile,obj, TRUE );
+    if (!IS_WEAPON_STAT(( obj ) ,WEAPON_RETURN))
+    {
+      if (number_percent( ) > 20)
+      {
+        obj_from_char( obj);
+        obj_to_room( obj, ch->in_room );
+        act("$i1 падает на землю.",ch,obj,victim,TO_CHAR);
+        act("$i1 падает на землю.",ch,obj,victim,TO_VICT);
+        act("$i1 падает на землю.",ch,obj,victim,TO_NOTVICT);
+      }
+      else
+      {
+        extract_obj( obj );
+        act("$i1 ломается от броска.",ch,obj,victim,TO_CHAR);
+        act("$i1 ломается от броска.",ch,obj,victim,TO_VICT);
+        act("$i1 ломается от броска.",ch,obj,victim,TO_NOTVICT);
+      }
+    }
+  }
 }
 
 void do_dirt( CHAR_DATA *ch, const char *argument )
@@ -3750,9 +3574,9 @@ void do_dirt( CHAR_DATA *ch, const char *argument )
   if (!can_attack(ch,1)) return;
 
   if ( (chance = get_skill(ch,gsn_dirt)) == 0
-    ||   (IS_NPC(ch) && !IS_SET(ch->off_flags,OFF_KICK_DIRT))
-    ||   (!IS_NPC(ch)
-    &&    (!IS_NPC(ch) && (!check_skill(ch,gsn_dirt)))))
+    || (IS_NPC(ch) && !IS_SET(ch->off_flags,OFF_KICK_DIRT))
+    || (!IS_NPC(ch)
+    && (!IS_NPC(ch) && (!check_skill(ch,gsn_dirt)))))
   {
     stc("Ты только испачкал ногу.\n\r",ch);
     cant_mes (ch);
@@ -3827,8 +3651,6 @@ void do_dirt( CHAR_DATA *ch, const char *argument )
   if ((rhand && CAN_WEAR(rhand,ITEM_WEAR_SHIELD)) && (lhand && CAN_WEAR(lhand, ITEM_WEAR_SHIELD)))
     chance -= 5;
 
-
-
   /* sloppy hack to prevent false zeroes */
   if (chance % 5 == 0) chance += 1;
 
@@ -3847,7 +3669,6 @@ void do_dirt( CHAR_DATA *ch, const char *argument )
     case(SECT_DESERT):      chance += 10;break;
   }
 
-
   if (chance == 0)
   {
     stc("Hе всем можно пользоваться в качестве гpязи(dirt).\n\r",ch);
@@ -3864,8 +3685,6 @@ void do_dirt( CHAR_DATA *ch, const char *argument )
     damage(ch,victim,number_range(2,5),gsn_dirt,DAM_NONE,FALSE,FALSE, NULL);
     stc("Ты ничего не видишь!\n\r",victim);
     check_improve(ch,gsn_dirt,TRUE,2);
-//    if( IS_STEALTH_DEITY(ch) ) change_favour(ch, 5);
-//    if( IS_MIGHT_DEITY(ch) ) change_favour(ch, 1);
     WAIT_STATE(ch,skill_table[gsn_dirt].beats);
 
     af.where        = TO_AFFECTS;
@@ -3921,7 +3740,6 @@ void do_trip( CHAR_DATA *ch, const char *argument )
 
   if (is_safe(ch,victim)) return;
 
-
   if (IS_AFFECTED(victim,AFF_FLYING))
   {
     act("{y$G{x ноги не на земле.",ch,NULL,victim,TO_CHAR);
@@ -3953,10 +3771,8 @@ void do_trip( CHAR_DATA *ch, const char *argument )
 
   chance += (get_curr_stat(ch,STAT_DEX)-get_curr_stat(victim,STAT_DEX)) * 2;
 
-  if (IS_SET(ch->off_flags,OFF_FAST) || IS_AFFECTED(ch,AFF_HASTE))
-        chance += 10;
-  if (IS_SET(victim->off_flags,OFF_FAST) || IS_AFFECTED(victim,AFF_HASTE))
-        chance -= 20;
+  if (IS_SET(ch->off_flags,OFF_FAST) || IS_AFFECTED(ch,AFF_HASTE)) chance += 10;
+  if (IS_SET(victim->off_flags,OFF_FAST) || IS_AFFECTED(victim,AFF_HASTE)) chance -= 20;
 
   chance += (ch->level - victim->level) * 2;
 
@@ -3966,8 +3782,6 @@ void do_trip( CHAR_DATA *ch, const char *argument )
     act("{y$c1{x подсекает тебя и ты падаешь!",ch,NULL,victim,TO_VICT);
     act("Ты подсекаешь {y$C4{x и {y$O{x падает!",ch,NULL,victim,TO_CHAR);
     act("{y$c1{x подсекает {y$C4{x, отпpавляя $G на землю.",ch,NULL,victim,TO_NOTVICT);
-//    if( IS_STEALTH_DEITY(ch) ) change_favour(ch, 4);
-//    if( IS_MIGHT_DEITY(ch) ) change_favour(ch, 1);
     check_improve(ch,gsn_trip,TRUE,1);
 
     DAZE_STATE(victim,2 * PULSE_VIOLENCE);
@@ -4007,8 +3821,6 @@ void do_kill( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-/* Allow player killing */
-
   if (!IS_NPC(victim))
   {
     if (!IS_SET(victim->act, PLR_WANTED) || ch->criminal<100)
@@ -4039,12 +3851,10 @@ void do_kill( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-  if (IS_SET(ch->act,PLR_TIPSY)) // tipsy by Dinger
-   if (tipsy(ch,"kill")) return;
+  if (IS_SET(ch->act,PLR_TIPSY) && tipsy(ch,"kill")) return;
 
   WAIT_STATE( ch, 1 * PULSE_VIOLENCE );
   check_criminal( ch, victim ,60);
-
 
   multi_hit( ch, victim);
   if ( IS_NPC( victim ) && HAS_TRIGGER( victim, TRIG_KILL ) )
@@ -4153,10 +3963,10 @@ void do_backstab( CHAR_DATA *ch, const char *argument )
   if ((obj=get_eq_char(ch,WEAR_RHAND))!=NULL)
   {
     if (obj->item_type!=ITEM_WEAPON || attack_table[obj->value[3]].damage!=DAM_PIERCE)
-     {
+    {
       obj=NULL;
       rgh=FALSE;
-     }
+    }
   }
   if (!obj)
   {
@@ -4218,12 +4028,6 @@ void do_backstab( CHAR_DATA *ch, const char *argument )
         return;
       }
       else if (!IS_AWAKE(victim) || !GUILD(ch,ASSASIN_GUILD) || !is_offered(victim))
-//      if( IS_STEALTH_DEITY(ch) )
-//      {
-//        change_favour(ch, 5);
-//        if( !IS_NPC(victim) ) change_favour(ch, 10);
-//      }
-//      if( IS_FANATIC_DEITY(ch) ) change_favour(ch, 15);
       one_hit(ch,victim,gsn_backstab, NULL, rgh  );
     }
   }
@@ -4330,11 +4134,9 @@ void do_flee( CHAR_DATA *ch, const char *argument )
    if( number_percent() < 3*(ch->level/2))
    {
      stc( "Ты незаметно ускользнул.\n\r", ch);
-//     if( IS_STEALTH_DEITY(ch) ) change_favour(ch, 1);
    }
    else
    {
-//     if( IS_STEALTH_DEITY(ch) ) change_favour(ch, -5);
      stc( "Ты теpяешь 10 exp.\n\r", ch);
      gain_exp( ch, -10 );
    }
@@ -4383,11 +4185,9 @@ void do_flee( CHAR_DATA *ch, const char *argument )
      if( (ch->classthi == 1) && (number_percent() < 3*(ch->level/2) ) )
      {
        stc( "Ты незаметно ускользнул.\n\r", ch);
-//       if( IS_STEALTH_DEITY(ch) ) change_favour(ch, 1);
      }
      else
      {
-//       if( IS_STEALTH_DEITY(ch) ) change_favour(ch, -5);
        stc( "Ты теpяешь 10 exp.\n\r", ch);
        gain_exp( ch, -10 );
      }
@@ -4408,7 +4208,6 @@ void do_flee( CHAR_DATA *ch, const char *argument )
        stc("Ты в ужасе!\n\r",ch);
      }
    }
-//   if( IS_FANATIC_DEITY(ch) ) change_favour(ch, -3);
    return;
  }
  stc( "Ты ПАHИКУЕШЬ! Тебе некуда бежать!\n\r", ch );
@@ -4458,14 +4257,6 @@ void do_rescue( CHAR_DATA *ch, const char *argument )
     return;
   }
 
-/*
-  if (!IS_NPC(fch) && !PK_RANGE(ch,fch))
-  {
-    stc("Не лезь в детские разборки.\n\r",ch);
-    return;
-  }
-*/
-
   WAIT_STATE( ch, skill_table[gsn_rescue].beats );
   if ( number_percent( ) > get_skill(ch,gsn_rescue)+3*(category_bonus(ch,PROTECT)-category_bonus(ch,OFFENCE)))
   {
@@ -4484,13 +4275,11 @@ void do_rescue( CHAR_DATA *ch, const char *argument )
   check_criminal( ch, fch , 30);
   set_fighting( ch, fch );
   set_fighting( fch, ch );
-//  if( IS_MIGHT_DEITY(ch) ) change_favour(ch, 10);
 }
 
 void do_kick( CHAR_DATA *ch, const char *argument )
 {
   CHAR_DATA *victim=NULL;
-
 
   if (!IS_NPC(ch) && (!check_skill(ch,gsn_kick)))
   {
@@ -4534,8 +4323,6 @@ void do_kick( CHAR_DATA *ch, const char *argument )
     {
         damage(ch,victim,number_range( 1, dam_kick ), gsn_kick,DAM_BASH,TRUE,FALSE, NULL);
         check_improve(ch,gsn_kick,TRUE,1);
-//        if( IS_MIGHT_DEITY(ch) )
-//            change_favour(ch, 2);
     }
   }
   else
@@ -4625,7 +4412,6 @@ void do_disarm( CHAR_DATA *ch, const char *argument )
     WAIT_STATE( ch, skill_table[gsn_disarm].beats );
     disarm( ch, victim, fLeft );
     check_improve(ch,gsn_disarm,TRUE,1);
-//    if( IS_MIGHT_DEITY(ch) ) change_favour(ch, 5);
   }
   else
   {
@@ -4637,7 +4423,6 @@ void do_disarm( CHAR_DATA *ch, const char *argument )
   }
   check_criminal( ch, victim , 60);
 }
-
 
 // *** Shield cleave absolutely rewritten (C) Astellar & Kardi
 // Idea (c) Apc & Thor
@@ -4691,7 +4476,6 @@ void do_cleave( CHAR_DATA *ch, const char *argument )
   koef = koef/2;
   chance = get_skill (ch, gsn_cleave);
   chance = chance*3/5;
-//  if (weapon->value[0] == WEAPON_MACE) chance -= chance/10;
   chance -= get_skill(victim,gsn_dodge)/20;
   chance -= koef;
   if (IS_SET(race_table[victim->race].spec,SPEC_DODGE)) chance -=5;
@@ -4746,7 +4530,6 @@ void do_cleave( CHAR_DATA *ch, const char *argument )
       act("$n сильным ударом разбивает щит $C2.",ch,NULL,victim,TO_NOTVICT);
       check_improve(ch,gsn_cleave,TRUE,1);
       damage_obj( victim, shield, shield->condition, 1);
-//     if( IS_MIGHT_DEITY(ch) ) change_favour(ch, 8);
    }
    else
    {
@@ -4779,7 +4562,6 @@ void do_crush( CHAR_DATA *ch, const char *argument )
 {
   CHAR_DATA *victim;
   char arg[MAX_INPUT_LENGTH];
-//  int chance=50;
   int damage_crush;
   int offence, defence;
 
@@ -4833,22 +4615,6 @@ void do_crush( CHAR_DATA *ch, const char *argument )
 
   /* size  and weight */
   check_criminal(ch,victim,60);
-/*
-  chance += ch->carry_weight / 50;
-  chance -= victim->carry_weight / 40;
-
-  if (ch->size != victim->size) chance += (ch->size - victim->size) *10;
-
-  chance += get_curr_stat(ch,STAT_STR)/2;
-  chance += (get_curr_stat(ch,STAT_DEX)-get_curr_stat(victim,STAT_DEX))*5;
-
-  if (IS_AFFECTED(victim,AFF_FLYING)) chance -= 10;
-  if (IS_SET(ch->off_flags,OFF_FAST)) chance += 10;
-  if (IS_SET(victim->off_flags,OFF_FAST)) chance -= 10;
-
-  chance += (ch->level - victim->level) * 5;
-*/
-
   offence = ch->level + (get_curr_stat(ch, STAT_STR) + get_curr_stat(ch, STAT_DEX)) * 2 + 15;
   offence += ch->size * 10;
   if (IS_SET(ch->off_flags,OFF_FAST))
@@ -4862,8 +4628,6 @@ void do_crush( CHAR_DATA *ch, const char *argument )
     defence += 10;
   if (IS_SET(race_table[victim->race].spec,SPEC_RESBASH))
     defence += 10;
-
-//  ptc(ch, "offence [%d] VS defence [%d]\n\r\n\r", offence, defence);
 
   if (offence + dice(3,40)  >  defence + dice(3,40))
   {
@@ -4879,7 +4643,6 @@ void do_crush( CHAR_DATA *ch, const char *argument )
     act("$c1 необычайно мощным ударом ломает тебе кости!",ch,NULL,victim,TO_VICT);
     act("Ты со всей силы врезаешься плечем в $C4, сокрушая $G!",ch,NULL,victim,TO_CHAR);
     act("$c1 необычайно мощным ударом ломает кости $C3.",ch,NULL,victim,TO_NOTVICT);
-//    if( IS_MIGHT_DEITY(ch) ) change_favour(ch, 6);
     damage_crush = 10+dice(1+ch->level/30,(ch->damroll<600) ? ch->damroll/2 : 300);
     damage_crush-=damage_crush*victim->size/20;
     if (IS_SET(race_table[victim->race].spec,SPEC_RESBASH)) damage_crush/=2;
@@ -4972,7 +4735,6 @@ void do_tail( CHAR_DATA *ch, const char *argument )
     act("$c1 посылает тебя на землю взмахом хвоста!!",ch,NULL,victim,TO_VICT);
     act("Ты посылаешь $C4 на землю взмахом хвоста!",ch,NULL,victim,TO_CHAR);
     act("$c1 посылает $C4 на землю взмахом хвоста.",ch,NULL,victim,TO_NOTVICT);
-//    if( IS_MIGHT_DEITY(ch) ) change_favour(ch, 5);
     wait = 1;
 
     switch(number_bits(2))
@@ -5076,55 +4838,53 @@ bool check_skill ( CHAR_DATA *ch, int gsn_skill)
 
 void cant_mes ( CHAR_DATA *ch)
 {
- if (IS_AFFECTED(ch,AFF_CHARM) && ch->master!=NULL)
- {
-  if ( !IS_NPC(ch) || ch->race==RACE_HUMAN
-        || ch->race==RACE_DWARF  || ch->race==RACE_ELF
-        || ch->race==RACE_DROW   || ch->race==RACE_DRUID
-        || ch->race==RACE_HOBBIT || ch->race==RACE_VAMPIRE)
-   ptc(ch->master, "%s говорит тебе '{GИзвини, хозяин, но я не умею этого.{x'\n\r",get_char_desc(ch,'1'));
+  if (IS_AFFECTED(ch,AFF_CHARM) && ch->master!=NULL)
+  {
+    if ( !IS_NPC(ch) || ch->race==RACE_HUMAN
+      || ch->race==RACE_DWARF  || ch->race==RACE_ELF
+      || ch->race==RACE_DROW   || ch->race==RACE_DRUID
+      || ch->race==RACE_HOBBIT || ch->race==RACE_VAMPIRE)
+     ptc(ch->master, "%s говорит тебе '{GИзвини, хозяин, но я не умею этого.{x'\n\r",get_char_desc(ch,'1'));
    else do_function(ch, &do_emote, "озадаченно вертит головой, не в силах выполнить приказ.");
- }
+  }
 }
 
 bool can_attack(CHAR_DATA *ch, int type)
 {
- if (is_affected(ch,gsn_sleep))
- {
-   stc("Ты же спишь!\n\r",ch);
-   return FALSE;
- }
+  if (is_affected(ch,gsn_sleep))
+  {
+    stc("Ты же спишь!\n\r",ch);
+    return FALSE;
+  }
 
- if( is_affected(ch,gsn_gaseous_form) )
- {
-   stc(" Бестелесность напоминает о себе...\n\r", ch);
-   return FALSE;
- }
+  if( is_affected(ch,gsn_gaseous_form) )
+  {
+    stc(" Бестелесность напоминает о себе...\n\r", ch);
+    return FALSE;
+  }
 
- if (IS_AFFECTED(ch,AFF_CALM) && ch->fighting==NULL)
- {
-  if (type==1) stc("Ты не в том состоянии, чтобы нападать...\n\r",ch);
-  else         stc("Ты не в том состоянии, чтобы колдовать...\n\r",ch);
-  return FALSE;
- }
+  if (IS_AFFECTED(ch,AFF_CALM) && ch->fighting==NULL)
+  {
+    if (type==1) stc("Ты не в том состоянии, чтобы нападать...\n\r",ch);
+    else         stc("Ты не в том состоянии, чтобы колдовать...\n\r",ch);
+    return FALSE;
+  }
 
- if (is_affected(ch,skill_lookup("fear")) && ch->fighting==NULL)
- {
-   if (type==1) stc("От страха у тебя дрожат руки и ноги, ты не можешь нападать.\n\r",ch);
-   else         stc("От страха твой язык заплетается, ты не можешь произнести заклинание.\n\r",ch);
-   return FALSE;
- }
+  if (is_affected(ch,skill_lookup("fear")) && ch->fighting==NULL)
+  {
+    if (type==1) stc("От страха у тебя дрожат руки и ноги, ты не можешь нападать.\n\r",ch);
+    else         stc("От страха твой язык заплетается, ты не можешь произнести заклинание.\n\r",ch);
+    return FALSE;
+  }
 
- if ( IS_AFFECTED(ch,AFF_PEACE) && ch->fighting == NULL )
+  if ( IS_AFFECTED(ch,AFF_PEACE) && ch->fighting == NULL )
   {
     stc("У тебя слишком миролюбивое настроение.\n\r",ch);
     return FALSE;
   }
 
- if ( IS_SET(ch->in_room->ra,RAFF_VIOLENCE) )
+//  if (IS_SET(ch->in_room->ra,RAFF_VIOLENCE)) return TRUE;
   return TRUE;
-
- return TRUE;
 }
 
 void do_shock_hit( CHAR_DATA *ch, const char *argument )
@@ -5216,7 +4976,6 @@ void do_shock_hit( CHAR_DATA *ch, const char *argument )
     WAIT_STATE(ch,2*PULSE_VIOLENCE);
     damage(ch,victim,ch->level/2+1,gsn_shock_hit, DAM_BASH, TRUE, FALSE, NULL);
     check_improve(ch,gsn_shock_hit,TRUE,2);
-//    if( IS_MIGHT_DEITY(ch) ) change_favour(ch, 3);
   }
   else
   {
@@ -5306,7 +5065,6 @@ void do_vbite( CHAR_DATA *ch, const char *argument )
     DAZE_STATE(victim, 5 * PULSE_VIOLENCE);
     ch->mana/=3;
     damage(ch,victim,1,0, DAM_PIERCE, TRUE, FALSE, NULL);
-//    if( IS_EVIL_DEITY(ch) ) change_favour(ch, 10);
   }
   else
   {
@@ -5406,8 +5164,6 @@ void do_lash( CHAR_DATA *ch, const char *argument )
     act("$c1 взмахом хлыста поцарапал $C2!",ch,NULL,victim,TO_NOTVICT);
     act("Ты уклоняешься от хлыста $C2.",ch,NULL,victim,TO_VICT);
     check_improve(ch,gsn_lash,FALSE,1);
-//    if( IS_EVIL_DEITY(ch) ) change_favour(ch, 1);
-//    if( IS_STEALTH_DEITY(ch) ) change_favour(ch, 2);
     WAIT_STATE(ch,2*PULSE_VIOLENCE);
   }
 }
@@ -5476,13 +5232,10 @@ void do_frame( CHAR_DATA *ch, const char *argument )
   defence = opp->level + get_curr_stat(opp, STAT_DEX) +
             victim->level + get_curr_stat(victim, STAT_DEX);
 
-//  if (! IS_NPC(opp) && ! IS_NPC(victim) && victim->level + 8 < opp->level)
-
   add_pkiller(victim,ch);
 
   if ((IS_NPC(opp) || IS_NPC(victim)) && offence + dice(3,40) > defence + dice(3,40))
   {
-//    if( IS_STEALTH_DEITY(ch) ) change_favour(ch, 15);
     act("Ты слегка уворачиваешься..... и твой противник атакует $C4!!!", ch, NULL, victim, TO_CHAR);
     act("$c1 слегка уворачивается..... и его противник атакует $C4!!!", ch, NULL, victim, TO_NOTVICT);
     act("Твой противник слегка уворачивается..... и ты атакуешь $C4!!!", opp, NULL, victim, TO_CHAR);
@@ -5504,7 +5257,6 @@ void do_frame( CHAR_DATA *ch, const char *argument )
   }
 }
 
-
 void do_pacify( CHAR_DATA *ch, const char *argument )
 {
   CHAR_DATA *rch;
@@ -5520,21 +5272,19 @@ void do_pacify( CHAR_DATA *ch, const char *argument )
 
   for ( rch = ch->in_room->people; rch != NULL; rch = rch->next_in_room )
   {
-   if (   IS_NPC(rch)
-       && !IS_AFFECTED(rch,AFF_BERSERK)
-       && (rch->level <= ch->level)
-       && (number_percent() >= 50 - (ch->level - rch->level))
-      )
-   {
-    if (IS_SET(rch->act,ACT_AGGRESSIVE))
+    if ( IS_NPC(rch)
+      && !IS_AFFECTED(rch,AFF_BERSERK)
+      && (rch->level <= ch->level)
+      && (number_percent() >= 50 - (ch->level - rch->level)))
     {
-     REM_BIT(rch->act,ACT_AGGRESSIVE);
-     if (rch->fighting) stop_fighting( rch, TRUE );
-     act( "$c1 попускается.", rch, NULL, NULL, TO_ROOM );
+      if (IS_SET(rch->act,ACT_AGGRESSIVE))
+      {
+        REM_BIT(rch->act,ACT_AGGRESSIVE);
+        if (rch->fighting) stop_fighting( rch, TRUE );
+        act( "$c1 попускается.", rch, NULL, NULL, TO_ROOM );
+      }
     }
-   }
   }
   stc( "Покойся с {Wмиром!{x.\n\r", ch );
   return;
 }
-

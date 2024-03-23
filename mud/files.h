@@ -26,4 +26,3 @@
 #define MUSIC_FILE      "music.txt"            // music
 #define OLC_FILE        "../log/olc.log"       // olc log file
 #define SOCIAL_FILE     "../areas/social.txt"  // social file
-

@@ -11,12 +11,12 @@
 
 struct guild_type guild_table[] =
 {
- { 0,             "None",          0,                     0 },
- { DWARVES_GUILD, "Dwarves Guild", OFF_DWARVES_ACCOUNTER, 0 },
- { ASSASIN_GUILD, "Assasin Guild", OFF_ASSASIN_ACCOUNTER, 0 },
- { VAMPIRE_GUILD, "Vampire Guild", 0,                     0 },
- { DRUIDS_GUILD,  "Druides Guild", 0,                     0 },
- { 255,           NULL,            0,                     0 }
+  { 0,             "None",          0,                     0 },
+  { DWARVES_GUILD, "Dwarves Guild", OFF_DWARVES_ACCOUNTER, 0 },
+  { ASSASIN_GUILD, "Assasin Guild", OFF_ASSASIN_ACCOUNTER, 0 },
+  { VAMPIRE_GUILD, "Vampire Guild", 0,                     0 },
+  { DRUIDS_GUILD,  "Druides Guild", 0,                     0 },
+  { 255,           NULL,            0,                     0 }
 };
 
 DECLARE_DO_FUN2( do_say  );
@@ -263,23 +263,10 @@ void do_offer(CHAR_DATA *ch, const char *argument)
     {
       if (!strcmp(ch->name,offer->customer) && !str_cmp(offer->name, vch->name))
       {
-        /*
-        if (offer->gold>0)
-        {
-          offer->gold+=reward;
-          ptc(ch,"¬ы добавл€ете {Y%u{x золота - теперь за голову {Y%s{x назначено {Y%u{x.\n\r",reward,offer->name,offer->gold);
-          do_printf(buf,"”величено вознаграждение за голову {Y%s{R, теперь оно составл€ет {Y%u{R золота.",offer->name,offer->gold);
-          assasin_echo(buf);
-          ch->gold-=reward;
-          save_config();
-        }
-        else stc("¬ы можете только добавить золото в награду.\n\r",ch);
-        */
         ptc(ch,"¬ы уже заказали убийство этого персонажа.\n\r");
         return;
       }
     }
-
 
     offer=new_offer();
     offer->customer=str_dup(ch->name);
