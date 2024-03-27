@@ -847,7 +847,8 @@ void init_descriptor( int control )
     int addr;
 
     addr = ntohl( sock.sin_addr.s_addr );
-    do_printf( buf, "%3d.%3d.%3d.%3d ",
+//    do_printf( buf, "%3d.%3d.%3d.%3d ",
+    do_printf( buf, "%d.%d.%d.%d ",
       ( addr >> 24 ) & 0xFF, ( addr >> 16 ) & 0xFF,
       ( addr >>  8 ) & 0xFF, ( addr       ) & 0xFF);
     wiznet(log_buf,NULL,NULL,WIZ_ADDR,0);
@@ -864,6 +865,7 @@ void init_descriptor( int control )
     }
     from=gethostbyaddr((char *) &sock.sin_addr,sizeof(sock.sin_addr),AF_INET);
     dnew->host = str_dup( from ? from->h_name : buf );
+    log_printf("init_descriptor: buf [%s], h_name or buf [%s]", buf, from?from->h_name:buf);
   }
 
   if ( check_ban(dnew->host,BAN_ALL))

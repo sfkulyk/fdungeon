@@ -3476,7 +3476,7 @@ void do_areamobs(CHAR_DATA *ch, const char *argument)
   min = ch->in_room->area->min_vnum;
   max = ch->in_room->area->max_vnum;
 
-  ptc(ch,"List of mobiles in [%s]",ch->in_room->area->name);
+  ptc(ch,"List of mobiles in [%s]\n\r",ch->in_room->area->name);
   // Examine all mobs.
   for ( vnum = min; vnum <= max; vnum++ )
   {
