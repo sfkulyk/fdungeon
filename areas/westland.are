@@ -373,7 +373,7 @@ You see a dark form that has no features. He is sent by Darken
 Rahl to stop you. Beware, his touch is poison.
 ~
 human~
-ACGST GJHNOV -1000 0
+ACGST GJNOV -1000 0
 101 400 50d10+30000 10d10+10203 100d20+100 wrath
 -400 -400 -400 -400
 CDEFGHIJKN ABI DCE KX
@@ -488,7 +488,7 @@ human~
 ABCFGRSTQ GJHNOVgnm -1000 0
 93 250 50d10+31000 10d10+10203 20d19+95 wrath
 -277 -277 -270 -240
-BCDEFIJKN CHJKLP EFG 0
+BCDEFIJKN HJKLP EFG 0
 stand stand female 300
 AHMV large
 
@@ -504,7 +504,7 @@ human~
 ABCGRST GJHNOV -1000 0
 88 210 50d18+28000 10d10+10203 20d15+110 wrath
 -277 -277 -270 -240
-BCDEFIKN ABIP CE 0
+BCDEFIKN AIP CE 0
 stand stand male 300
 AHMV medium
 
@@ -550,7 +550,7 @@ human~
 ABCST NOVbceh 900 0
 90 800 50d12+20000 10d10+3000 15d19+100 crush
 -270 -270 -270 -250
-EFHIJKNQR B ACLX 0
+BEFHIJKNQR 0 ACLX 0
 stand stand male 0
 AHMV medium
 

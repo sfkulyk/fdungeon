@@ -433,7 +433,7 @@ void light_update (CHAR_DATA *ch)
 
 //-----------
 
-void nostalgia_update (CHAR_DATA *ch)
+void nostalgia_update(CHAR_DATA *ch)
 {
  switch(number_range(1,10))
  {

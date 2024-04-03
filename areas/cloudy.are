@@ -181,7 +181,7 @@ dragon winged дракон~
 здесь половины Короны Королей и не собираются отдавать ее первому встречному.
 ~
 dragon~
-ABFGKRSTQ HJNOVTY -600 0
+ABFGRSTQ HJNOVTY -600 0
 110 900 100d112+80000 100d100+5000 20d16+900 pound
 -1000 -1000 -1000 -1200
 ACEFHJKN ABHC DEJOR ZI
@@ -490,7 +490,7 @@ unique~
 AGHST NOV -600 0
 58 216 35d10+7500 10d10+1000 5d10+58 pound
 -227 -226 -228 -213
-EDIJKU C AF 0
+EDIJKU ABC AF 0
 stand stand male 5390
 0 medium
 
@@ -507,7 +507,7 @@ unique~
 AGHST NOV 600 0
 58 216 35d10+7500 10d10+1000 5d10+78 pound
 -228 -227 -125 -111
-CEFGHJNUK C AQF 0
+CEFGHJNUK ABC AQF 0
 stand stand male 5214
 0 medium
 
@@ -684,7 +684,7 @@ unique~
 AGHST NOVenm -900 0
 59 218 35d10+7500 10d10+1000 8d9+59 pound
 -229 -227 -227 -210
-CEFKJ C AQ 0
+CEFKJ ABC AQ 0
 stand stand male 5812
 0 medium
 
@@ -700,7 +700,7 @@ unique~
 ACGHST NOV 900 0
 59 118 35d10+7500 10d10+1000 8d6+59 pound
 -227 -229 -227 -213
-CEFKJ C AQ 0
+CEFKJ ABC AQ 0
 stand stand male 5834
 0 medium
 
@@ -789,7 +789,7 @@ unique~
 ABDFKRSTQ HNOVYU -800 0
 104 782 100d200+38000 100d100+5000 15d13+491 pound
 -562 -562 -559 -541
-AEFJKMR ABCJ DMLOPSQ 0
+AEFJKMR ABJ DMLOPSQ 0
 stand stand male 35730
 0 medium
 
@@ -855,7 +855,7 @@ unique~
 ABCRSTQ HNOVY 0 0
 105 780 300d250+40000 100d10+15000 12d11+400 pound
 -457 -458 -461 -440
-ACEFHJKNU ABCH IOPQSU 0
+ACEFHJKNU ABH IOPQSU 0
 stand stand male 2572
 0 medium
 
