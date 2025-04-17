@@ -5,7 +5,7 @@ Rname Астеллар||а|у|а|ом|е|а|ов~
 MinAlign 350
 MaxAlign 1000
 Descr Бог {yМудрости{x, {wСправедливости{x, {mМагии{x и {cВечности{x~
-Worship 0
+Worship 1
 App 2 1 0 0 6 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 END
 #Deity
@@ -23,7 +23,7 @@ Rname Ирэникус||а|у|а|ос|е|а|ов~
 MinAlign -1000
 MaxAlign 0
 Descr Бог Черного Мрака, Зависти и Злобы~
-Worship 1
+Worship 2
 App 0 0 0 0 8 3 7 2 0 0 0 0 0 0 0 0 0 0 0 0
 END
 #Deity
@@ -77,7 +77,7 @@ Rname Этэйрос||а|у|а|ом|е|а|ов~
 MinAlign -1000
 MaxAlign 1000
 Descr Бог {RВойны{x, {wУничтожениЯ{x, {DГорЯ{x и Безнадежности~
-Worship 4
+Worship 5
 App 0 0 3 1 13 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 END
 #Deity
