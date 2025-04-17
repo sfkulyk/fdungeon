@@ -44,7 +44,7 @@ void load_social_table ()
     log_string("BUG:Could not open " SOCIAL_FILE " for reading.");
     exit(1);
   }
-  word=fread_word(fp)
+  word=fread_word(fp);
   maxsocial=fread_number(fp);
 
   // IMPORTANT to use malloc so we can realloc later on
