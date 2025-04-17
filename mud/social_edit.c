@@ -37,12 +37,14 @@ void load_social_table ()
   FILE *fp;
   int i;
   bool new=FALSE;
+  const char *word; // empty variable just to skip "MaxSocial" word in file
 
   if ((fp=fopen(SOCIAL_FILE,"r"))==NULL)
   {
     log_string("BUG:Could not open " SOCIAL_FILE " for reading.");
     exit(1);
   }
+  word=fread_word(fp)
   maxsocial=fread_number(fp);
 
   // IMPORTANT to use malloc so we can realloc later on
