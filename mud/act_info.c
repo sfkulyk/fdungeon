@@ -1320,7 +1320,7 @@ void do_score(CHAR_DATA *ch, const char *argument)
   int i;
   int64 gold, silver;
   char buf[MAX_INPUT_LENGTH];
-  CHAR_DATA *tmpchar;
+  CHAR_DATA *tmpchar=ch;
 
   if (IS_TRUSTED(ch,AVATAR) && !EMPTY(argument))
   {
@@ -1332,10 +1332,6 @@ void do_score(CHAR_DATA *ch, const char *argument)
     {
       ptc(ch,"\n\rНе можу знайти '%s'\n\r",argument);
     }
-  }
-  else
-  {
-    tmpchar=ch;
   }
 
   gold = tmpchar->gold;
