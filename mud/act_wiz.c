@@ -3591,9 +3591,9 @@ void do_cset(CHAR_DATA *ch, const char *argument)
 
   if (!str_prefix(arg2, "qp"))
   {
-    if (value < 0 || value > 50000)
+    if (value < 0 || value > 99999)
     {
-      stc("Квестовые очки ставятся от 0 до 50,000.\n\r", ch);
+      stc("Квестовые очки ставятся от 0 до 99,999.\n\r", ch);
       return;
     }
     ptc(ch,"Теперь у {Y%s{x %d qp. было %d\n\r",victim->name,value,victim->questpoints);
@@ -3603,9 +3603,9 @@ void do_cset(CHAR_DATA *ch, const char *argument)
 
   if( !str_cmp(arg2, "addqp") )
   {
-    if( value < 0 || victim->questpoints+value > 50000)
+    if( value < 0 || victim->questpoints+value > 99999)
     {
-      stc("Уровень квестовых очков от 0 до 50,000.\n\r",ch);
+      stc("Уровень квестовых очков от 0 до 99,999.\n\r",ch);
       return;
     }
     ptc(ch,"Теперь у %s %d qp. было %d",victim->name,victim->questpoints+value, victim->questpoints);
@@ -3628,9 +3628,9 @@ void do_cset(CHAR_DATA *ch, const char *argument)
 
   if( !str_cmp(arg2, "remqp") )
   {
-    if( value < 0 || value > 50000 )
+    if( value < 0 || value > 99999 )
     {
-      stc("Уровень квестовых очков от 0 до 50,000.\n\r",ch);
+      stc("Уровень квестовых очков от 0 до 99,999.\n\r",ch);
       return;
     }
     if( victim->questpoints<value )
