@@ -1320,88 +1320,106 @@ void do_score(CHAR_DATA *ch, const char *argument)
   int i;
   int64 gold, silver;
   char buf[MAX_INPUT_LENGTH];
-  gold = ch->gold;
-  silver = ch->silver;
+  CHAR_DATA *tmpchar;
+
+  if (IS_TRUSTED(ch,AVATAR) && !EMPTY(argument))
+  {
+    if (get_pchar_world(ch,argument))
+    {
+      tmpchar=get_pchar_world(ch,argument);
+    }
+    else
+    {
+      ptc(ch,"\n\rНе можу знайти '%s'\n\r",argument);
+    }
+  }
+  else
+  {
+    tmpchar=ch;
+  }
+
+  gold = tmpchar->gold;
+  silver = tmpchar->silver;
 
   ptc(ch,"\n\r{G    /~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/~\\");
   ptc(ch,"\n\r   |    {CИмя: {W%12s %52s {G|__/\n\r   |--------------------------------------------------------------------------|",
-  ch->name,IS_NPC(ch)?"NPC":ch->pcdata->title);
+  tmpchar->name,IS_NPC(tmpchar)?"NPC":tmpchar->pcdata->title);
 
-  if (ch->level>18)
+  if (tmpchar->level>18)
   {
     ptc(ch,"\n\r   |  {YУровень: {C%-11d{G | {YВозраст:{C %-3d {G({C%-4d{G ч) | {YХарактер: {W%-5d {y({RКр.%4d{y){G|",
-    ch->level,get_age(ch),IS_NPC(ch)?0:(ch->played+(int)(current_time-ch->logon))/3600,ch->alignment,ch->criminal);
+    tmpchar->level,get_age(tmpchar),IS_NPC(tmpchar)?0:(tmpchar->played+(int)(current_time-tmpchar->logon))/3600,tmpchar->alignment,tmpchar->criminal);
   }
   else
   {
     ptc(ch,"\n\r   |  {YУровень: {C%-11d{G | {YВозраст:{C %-3d {G({C%-4d{G ч) | {YХарактер: %15s{G|",
-    ch->level,get_age(ch),IS_NPC(ch)?0:(ch->played+(int)(current_time-ch->logon))/3600,get_align(ch));
+    tmpchar->level,get_age(tmpchar),IS_NPC(tmpchar)?0:(tmpchar->played+(int)(current_time-tmpchar->logon))/3600,get_align(tmpchar));
   }
 
   ptc(ch,"\n\r   {G|  {YРаса   :{C  %-10s {G| {YПол    :{C %-13s{G| {YКласс : {C%16s{G |\n\r   |-----------------------+-----------------------+--------------------------|",
-  race_wname(ch),ch->sex == 0 ? "бесполый" : ch->sex == 1 ? "мужской" : "женский",
-  IS_NPC(ch) ? "монстр" : classname(ch));
+  race_wname(tmpchar),tmpchar->sex == 0 ? "бесполый" : tmpchar->sex == 1 ? "мужской" : "женский",
+  IS_NPC(tmpchar) ? "монстр" : classname(tmpchar));
 
-  if (ch->level < 20)
+  if (tmpchar->level < 20)
   {
     ptc(ch,"\n\r{G   |  {RSTR : {C%-2d ({Y%-2d{G)        | {WПрактик     : {C%-7d{G |                          |\n\r   |  {RINT : {C%-2d ({Y%-2d{G)        | {WТренировок  : {C%-7d{G |                          |\n\r   {G|  {RWIS : {C%-2d ({Y%-2d{G)        | {WТекущий опыт: {C%-7d{G |                          |",
-    ch->perm_stat[STAT_STR],get_curr_stat(ch,STAT_STR),ch->practice,
-    ch->perm_stat[STAT_INT],get_curr_stat(ch,STAT_INT),ch->train,
-    ch->perm_stat[STAT_WIS],get_curr_stat(ch,STAT_WIS),ch->exp);
+    tmpchar->perm_stat[STAT_STR],get_curr_stat(tmpchar,STAT_STR),tmpchar->practice,
+    tmpchar->perm_stat[STAT_INT],get_curr_stat(tmpchar,STAT_INT),tmpchar->train,
+    tmpchar->perm_stat[STAT_WIS],get_curr_stat(tmpchar,STAT_WIS),tmpchar->exp);
 
     ptc(ch,"\n\r{G   |  {RDEX : {C%-2d ({Y%-2d{G)        | {WДо уровня   : {C%-7d{G |                          |\n\r   |  {RCON : {C%-2d ({Y%-2d{G)        | {RТрусость    : {C%-7d{G |                          |",
-    ch->perm_stat[STAT_DEX],get_curr_stat(ch,STAT_DEX),
-    IS_NPC(ch)?0:(ch->level + 1) * exp_per_level(ch,ch->pcdata->points) - ch->exp,
-    ch->perm_stat[STAT_CON],get_curr_stat(ch,STAT_CON),ch->wimpy);
+    tmpchar->perm_stat[STAT_DEX],get_curr_stat(tmpchar,STAT_DEX),
+    IS_NPC(tmpchar)?0:(tmpchar->level + 1) * exp_per_level(tmpchar,tmpchar->pcdata->points) - tmpchar->exp,
+    tmpchar->perm_stat[STAT_CON],get_curr_stat(tmpchar,STAT_CON),tmpchar->wimpy);
   }
   else
   {
    ptc(ch,"\n\r{G   |  {RSTR : {C%-2d ({Y%-2d{G)        | {WПрактик     : {C%-7d{G | Saves vs Spell :{Y%4d/%4d{G|\n\r   |  {RINT : {C%-2d ({Y%-2d{G)        | {WТренировок  : {C%-7d{G | {gпротив выпадов : {C%-8d{G|\n\r   |  {RWIS : {C%-2d ({Y%-2d{G)        | {WТекущий опыт: {C%-7d{G | {gпротив рубящих : {C%-8d{G|",
-   ch->perm_stat[STAT_STR],get_curr_stat(ch,STAT_STR),ch->practice,-1*calc_saves(ch),ch->saving_throw,
-   ch->perm_stat[STAT_INT],get_curr_stat(ch,STAT_INT),ch->train,(ch->level>19)?GET_AC(ch,AC_PIERCE):0,
-   ch->perm_stat[STAT_WIS],get_curr_stat(ch,STAT_WIS),ch->exp,(ch->level>19)?GET_AC(ch,AC_BASH):0);
+   tmpchar->perm_stat[STAT_STR],get_curr_stat(tmpchar,STAT_STR),tmpchar->practice,-1*calc_saves(tmpchar),tmpchar->saving_throw,
+   tmpchar->perm_stat[STAT_INT],get_curr_stat(tmpchar,STAT_INT),tmpchar->train,(tmpchar->level>19)?GET_AC(tmpchar,AC_PIERCE):0,
+   tmpchar->perm_stat[STAT_WIS],get_curr_stat(tmpchar,STAT_WIS),tmpchar->exp,(tmpchar->level>19)?GET_AC(tmpchar,AC_BASH):0);
 
    ptc(ch,"\n\r{G   |  {RDEX : {C%-2d ({Y%-2d{G)        | {WДо уровня   : {C%-7d{G | {gпротив тяжелых : {C%-8d{G|\n\r   |  {RCON : {C%-2d ({Y%-2d{G)        | {RТрусость    : {C%-7d{G | {gпротив экзотич.: {C%-8d{G|",
-   ch->perm_stat[STAT_DEX],get_curr_stat(ch,STAT_DEX),
-   IS_NPC(ch)?0:(ch->level + 1) * exp_per_level(ch,ch->pcdata->points) - ch->exp,(ch->level>19)?GET_AC(ch,AC_SLASH):0,
-   ch->perm_stat[STAT_CON],get_curr_stat(ch,STAT_CON),ch->wimpy,(ch->level>19)?GET_AC(ch,AC_EXOTIC):0);
+   tmpchar->perm_stat[STAT_DEX],get_curr_stat(tmpchar,STAT_DEX),
+   IS_NPC(tmpchar)?0:(tmpchar->level + 1) * exp_per_level(tmpchar,tmpchar->pcdata->points) - tmpchar->exp,(tmpchar->level>19)?GET_AC(tmpchar,AC_SLASH):0,
+   tmpchar->perm_stat[STAT_CON],get_curr_stat(tmpchar,STAT_CON),tmpchar->wimpy,(tmpchar->level>19)?GET_AC(tmpchar,AC_EXOTIC):0);
   }
-  if (ch->level > 14)
+  if (tmpchar->level > 14)
   {
    ptc(ch,"\n\r{G   |-----------------------+-----------------------+--------------------------|\n\r   | {YЗолото : %12u{G",  gold);
    ptc(ch," | {GЗдоровье: {C%-5d{G/{C%-5d{G | {gк попаданию: {C%-12d{G|\n\r   | {WСеребро: %12u{G",
-    ch->hit,ch->max_hit,GET_HITROLL(ch),  silver);
+    tmpchar->hit,tmpchar->max_hit,GET_HITROLL(tmpchar),  silver);
    ptc(ch," | {CМана    : {C%-5d{G/{C%-5d{G | {gк поражению: {C%-12d{G|",
-    ch->mana,ch->max_mana,GET_DAMROLL(ch));
+    tmpchar->mana,tmpchar->max_mana,GET_DAMROLL(tmpchar));
   }
   else
   {
    ptc(ch,"\n\r{G   |-----------------------+-----------------------+--------------------------|\n\r   | {YЗолото : %12u{G | ",gold);
-   ptc(ch,"Здоровье: {C%-5d{G/{C%-5d{G |                          |\n\r   | {WСеребро: %12u{G | ",ch->hit,ch->max_hit,silver);
-   ptc(ch,"{CМана    : {C%-5d{G/{C%-5d{G |                          |",ch->mana,ch->max_mana);
+   ptc(ch,"Здоровье: {C%-5d{G/{C%-5d{G |                          |\n\r   | {WСеребро: %12u{G | ",tmpchar->hit,tmpchar->max_hit,silver);
+   ptc(ch,"{CМана    : {C%-5d{G/{C%-5d{G |                          |",tmpchar->mana,tmpchar->max_mana);
   }
 
-  do_printf(buf,(ch->countdown==0) ? "нет          " : (ch->questobj==0) ? "убить тварь  ":"найти предмет");
+  do_printf(buf,(tmpchar->countdown==0) ? "нет          " : (tmpchar->questobj==0) ? "убить тварь  ":"найти предмет");
 
-  ptc(ch,"\n\r{G   | {WМаx.вещей:{C%-5d{G/",ch->carry_number);
-  ptc(ch,"{C%-5d{G | ",can_carry_n(ch));
-  ptc(ch,"{GДвижения: {C%-5d{G/",ch->move);
-  ptc(ch,"{C%-5d{G | ",ch->max_move);
-  ptc(ch,"{GКвестовое время: {W%-8d{G|\n\r   {G| ",(ch->countdown>0)?ch->countdown:ch->nextquest);
-  ptc(ch,"{WМax.вес  :{C%-5d{G/",get_carry_weight(ch)/10);
-  ptc(ch,"{C%-5d{G | ",can_carry_w(ch)/10);
-  ptc(ch,"{RКвестовые очки: {C%-5d{G | ",ch->questpoints);
+  ptc(ch,"\n\r{G   | {WМаx.вещей:{C%-5d{G/",tmpchar->carry_number);
+  ptc(ch,"{C%-5d{G | ",can_carry_n(tmpchar));
+  ptc(ch,"{GДвижения: {C%-5d{G/",tmpchar->move);
+  ptc(ch,"{C%-5d{G | ",tmpchar->max_move);
+  ptc(ch,"{GКвестовое время: {W%-8d{G|\n\r   {G| ",(tmpchar->countdown>0)?tmpchar->countdown:tmpchar->nextquest);
+  ptc(ch,"{WМax.вес  :{C%-5d{G/",get_carry_weight(tmpchar)/10);
+  ptc(ch,"{C%-5d{G | ",can_carry_w(tmpchar)/10);
+  ptc(ch,"{RКвестовые очки:{C%-6d{G | ",tmpchar->questpoints);
   ptc(ch,"{YЗадание: {W%s {G  |",buf);
 
   ptc(ch,"\n\r{G   |--------------------------------------------------------------------------|");
 
-  if (!IS_NPC(ch))
+  if (!IS_NPC(tmpchar))
   {
-    if(ch->pcdata->condition[COND_DRUNK] > 10 )stc("\n\r   | {RТы пьян{G                                                                  |",   ch);
-    if (ch->pcdata->condition[COND_THIRST] == 0)stc("\n\r   | {CТы хочешь пить.{G                                                          |", ch);
-    if (ch->pcdata->condition[COND_HUNGER] == 0)stc("\n\r   | {DТы голоден.{G                                                              |",  ch);
+    if(tmpchar->pcdata->condition[COND_DRUNK] > 10 )stc("\n\r   | {RТы пьян{G                                                                  |",   ch);
+    if (tmpchar->pcdata->condition[COND_THIRST] == 0)stc("\n\r   | {CТы хочешь пить.{G                                                          |", ch);
+    if (tmpchar->pcdata->condition[COND_HUNGER] == 0)stc("\n\r   | {DТы голоден.{G                                                              |",  ch);
   }
-  switch (ch->position)
+  switch (tmpchar->position)
   {
    case POS_DEAD:
      stc("\n\r   | {RТы МЕРТВ!!{G                                                               |",             ch);
@@ -1433,7 +1451,7 @@ void do_score(CHAR_DATA *ch, const char *argument)
   }
  //Shows victim for which char is waiting
 
-  if (ch->level<20)
+  if (tmpchar->level<20)
   {
     for (i = 0; i < 4; i++)
     {
@@ -1450,25 +1468,25 @@ void do_score(CHAR_DATA *ch, const char *argument)
 
       stc("\n\r{G   |   {WТы {G", ch);
 
-   if      (GET_AC(ch,i) >= 101)
+   if      (GET_AC(tmpchar,i) >= 101)
      ptc(ch,"совсем беззащитен против %-26s                 {G|{x",temp);
-   else if (GET_AC(ch,i) >= 80)
+   else if (GET_AC(tmpchar,i) >= 80)
      ptc(ch,"беззащитен против %-26s                        {G|{x",temp);
-   else if (GET_AC(ch,i) >= 60)
+   else if (GET_AC(tmpchar,i) >= 60)
      ptc(ch,"слегка защищен от %-26s                        {G|{x",temp);
-   else if (GET_AC(ch,i) >= 40)
+   else if (GET_AC(tmpchar,i) >= 40)
      ptc(ch,"немного защищен от %-26s                       {G|{x",temp);
-   else if (GET_AC(ch,i) >= 20)
+   else if (GET_AC(tmpchar,i) >= 20)
      ptc(ch,"кое-как защищен от %-26s                       {G|{x",temp);
-   else if (GET_AC(ch,i) >= 0)
+   else if (GET_AC(tmpchar,i) >= 0)
      ptc(ch,"защищен от %-26s                               {G|{x",temp);
-   else if (GET_AC(ch,i) >= -20)
+   else if (GET_AC(tmpchar,i) >= -20)
      ptc(ch,"хорошо защищен от %-26s                        {G|{x",temp);
-   else if (GET_AC(ch,i) >= -40)
+   else if (GET_AC(tmpchar,i) >= -40)
      ptc(ch,"очень хорошо защищен от %-26s                  {G|{x",temp);
-   else if (GET_AC(ch,i) >= -60)
+   else if (GET_AC(tmpchar,i) >= -60)
      ptc(ch,"отлично защищен от %-26s                       {G|{x",temp);
-   else if (GET_AC(ch,i) >= -80)
+   else if (GET_AC(tmpchar,i) >= -80)
      ptc(ch,"великолепно защищен от %-26s                   {G|{x",temp);
    else
      ptc(ch,"божественно защищен от %-26s                   {G|{x",temp);
@@ -1476,19 +1494,19 @@ void do_score(CHAR_DATA *ch, const char *argument)
    }
   }
      /* RT wizinvis and holy light */
-  if (IS_IMMORTAL(ch))
+  if (IS_IMMORTAL(tmpchar))
   {
     stc("\n\r{G   | {GHoly Light: ",ch);
-    if (IS_SET(ch->act,PLR_HOLYLIGHT)) stc("{Won      ",ch);
+    if (IS_SET(tmpchar->act,PLR_HOLYLIGHT)) stc("{Won      ",ch);
     else  stc("{Doff     ",ch);
 
    ptc(ch, "{GInvisible level:{D%-3d    {GIncognito level {D%-3d{G           |{x",
-   (ch->invis_level)?ch->invis_level:0,(ch->incog_level)?ch->incog_level:0);
+   (tmpchar->invis_level)?tmpchar->invis_level:0,(tmpchar->incog_level)?tmpchar->incog_level:0);
   }
 
-  if (get_trust(ch) != ch->level)
+  if (get_trust(tmpchar) != tmpchar->level)
   {
-    ptc(ch, "\n\r{G   | {CYou are trusted at level {W%d{C.{G                                            |{x",get_trust(ch));
+    ptc(ch, "\n\r{G   | {CYou are trusted at level {W%d{C.{G                                            |{x",get_trust(tmpchar));
   }
 
   stc("\n\r {G/~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/  |\n\r",ch);
