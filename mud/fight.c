@@ -32,6 +32,33 @@ const struct corpse_list corpse_table[]=
  { NULL,NULL,NULL }
 };
 
+void say_last_word(CHAR_DATA *victim)
+{
+  char buf[MAX_INPUT_LENGTH];
+  int myrandom;
+  
+  if (!victim) return;
+
+  if (victim->race == RACE_HUMAN) {
+    myrandom=number_range(1,100);
+    if ( myrandom < 10 ) do_printf( buf, "{y$c1{x стонет: {r%s{x", human_lastword[myrandom]);
+    else                 return;
+  }
+  if (victim->race == RACE_ELF) {
+    myrandom=number_range(1,100);
+    if ( myrandom < 10 ) do_printf( buf, "{y$c1{x стонет: {r%s{x", elf_lastword[myrandom]);
+    else                 return;
+  }
+  if (victim->race == RACE_DWARF) {
+    myrandom=number_range(1,100);
+    if ( myrandom < 10 ) do_printf( buf, "{y$c1{x стонет: {r%s{x", dwarf_lastword[myrandom]);
+    else                 return;
+  }
+
+  act( buf, victim, NULL, NULL, TO_ROOM);
+  return;
+};
+
 void damage_both_objs( CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *c_obj, OBJ_DATA *v_obj, int reason)
 {
   int d_dam_diff, dtemp, codam = 1, vodam = 1;
@@ -2151,6 +2178,9 @@ bool damage(CHAR_DATA *ch, CHAR_DATA *victim,int dam,int dam_type,int dt,bool sh
         mp_percent_trigger( victim, ch, NULL, NULL, TRIG_DEATH );
         if (victim) victim->position=POS_DEAD;
         else return 0;
+      }
+      if ( IS_NPC(victim)) {
+        say_last_word(victim);
       }
       break;
 

@@ -550,6 +550,10 @@ bool can_attack      args( ( CD *ch, int type) );
 void raw_kill        args( ( CHAR_DATA *victim ) );
 bool check_skill     args( ( CHAR_DATA *ch, int gsn_skill) );
 
+extern const char *human_lastword[];
+extern const char *elf_lastword[];
+extern const char *dwarf_lastword[];
+
 // handler.c
 RAFFECT *get_raffect        ( ROOM_INDEX_DATA *room, int bit);
 int     raffect_level       ( ROOM_INDEX_DATA *room, int ra_bit);
@@ -874,4 +878,3 @@ void printf_to_char args( ( CD *ch, char *fmt, ...) );
 #undef DSD
 
 #endif
-
