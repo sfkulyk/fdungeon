@@ -350,9 +350,9 @@ int main( int argc, char **argv )
 
   // send start status to telegram
   fclose(fpReserve);
-  if ( (fp=fopen("send_note.txt","w") ) == NULL ) perror(name);
-  else  {
+  {
     int exitcode;
+    FILE *fp = fopen("send_note.txt","w");
     do_fprintf( fp, "ROM is started");
     fclose(fp);
     exitcode=system("./send_note.sh");

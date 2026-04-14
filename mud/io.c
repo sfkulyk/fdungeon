@@ -33,6 +33,8 @@ struct  dirent *readdir (DIR *dirstream);
 int             closedir(DIR *dirstream);
 #endif
 
+extern char str_boot_time[];
+
 char *pflag64(int64 flag)
 {
   int count,pos=0;
@@ -1178,5 +1180,6 @@ void do_player(CHAR_DATA *ch, const char *argument)
 
 void do_version( CHAR_DATA *ch, const char *argument )
 {
-  stc("\n\r{CForgotten Dungeon. {YCurrent version: {G4.92.00 (Saboteur){x\n\r",ch);
+  const char *version = "4.92.00 (C) Saboteur";
+  ptc(ch,"\n\r{CForgotten Dungeon.\n\r{YCurrent version: {G%s{x\n\r{YUptime from: {G%s{x\n\r", version, str_boot_time);
 }

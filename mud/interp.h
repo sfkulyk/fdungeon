@@ -287,6 +287,7 @@ DECLARE_DO_FUN2( do_rape         ); // moved from social to command (C) Sab
 DECLARE_DO_FUN2( do_crimereport  ); // (C) Adron
 DECLARE_DO_FUN2( do_chat         ); // Chat channel (C) Sab
 DECLARE_DO_FUN2( do_version      ); // Shows version (info about compiling)
+DECLARE_DO_FUN2( do_uptime       ); // Shows version (info about compiling)
 DECLARE_DO_FUN2( do_stopfoll     ); // Remove followers from group (C)Sab
 DECLARE_DO_FUN2( do_offline      ); // for offline char modifications (C) Sab
 DECLARE_DO_FUN2( do_account      ); // bank for gold (C) Saboteur

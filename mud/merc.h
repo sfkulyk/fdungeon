@@ -553,6 +553,12 @@ bool check_skill     args( ( CHAR_DATA *ch, int gsn_skill) );
 extern const char *human_lastword[];
 extern const char *elf_lastword[];
 extern const char *dwarf_lastword[];
+extern const char *giant_lastword[];
+extern const char *vampire_lastword[];
+extern const char *ogre_lastword[];
+extern const char *hobbit_lastword[];
+extern const char *orc_lastword[];
+extern const char *drow_lastword[];
 
 // handler.c
 RAFFECT *get_raffect        ( ROOM_INDEX_DATA *room, int bit);

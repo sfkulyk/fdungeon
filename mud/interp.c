@@ -371,6 +371,7 @@ struct  cmd_type        cmd_table       [] =
  { "referi",      "рефери",      "рефері",      do_referi,      POS_STANDING,  0,  WIZ_SECURE, SHOW|HIDE|NOMOB|NOORDER|FREEZE|NOLOG },
  { "test",        "unknown",     "unknown",     do_test,        POS_RESTING,   1,  LOG_NEVER,  SHOW|MORPH|HIDE|NOMOB|FREEZE|NOPUB },
  { "version",     "версия",      "версія",      do_version,     POS_DEAD,      0,  WIZ_SECURE, SHOW|MORPH|HIDE|NOMOB },
+ { "uptime",      "аптайм",      "аптайм",      do_version,     POS_DEAD,      0,  WIZ_SECURE, SHOW|MORPH|HIDE|NOMOB },
  { "vote",        "голосовать",  "голосувати",  do_vote,        POS_DEAD,      0,  WIZ_SECURE, SHOW|MORPH|HIDE|NOMOB|NOLOG },
  { "global",      "глобал",      "глобал",      do_global,      POS_DEAD,    103,  WIZ_CONFIG, SHOW|MORPH|HIDE|NOMOB|OLC },
  { "suicide",     "умереть",     "суіцид",      do_suicide,     POS_DEAD,      0,  WIZ_SECURE, SHOW|MORPH|HIDE|NOMOB|FULL|NOADR|NOORDER|FREEZE|SAVE },
