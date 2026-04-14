@@ -347,6 +347,19 @@ int main( int argc, char **argv )
   control = init_socket( port );
   boot_db( );
   log_printf("ROM is ready to rock on port %d.", port );
+
+  // send start status to telegram
+  fclose(fpReserve);
+  if ( (fp=fopen("send_note.txt","w") ) == NULL ) perror(name);
+  else  {
+    int exitcode;
+    do_fprintf( fp, "ROM is started");
+    fclose(fp);
+    exitcode=system("./send_note.sh");
+    log_printf ("sent to TG (%d)", exitcode);
+  }
+  fpReserve = fopen( NULL_FILE, "r" );
+
   game_loop_unix( control );
 #if !defined( WIN32 )
   close( control );

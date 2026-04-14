@@ -54,6 +54,36 @@ void say_last_word(CHAR_DATA *victim)
     if ( myrandom < 10 ) do_printf( buf, "{y$c1{x стонет: {r%s{x", dwarf_lastword[myrandom]);
     else                 return;
   }
+  if (victim->race == RACE_GIANT) {
+    myrandom=number_range(1,100);
+    if ( myrandom < 10 ) do_printf( buf, "{y$c1{x стонет: {r%s{x", giant_lastword[myrandom]);
+    else                 return;
+  }
+  if (victim->race == RACE_VAMPIRE) {
+    myrandom=number_range(1,100);
+    if ( myrandom < 10 ) do_printf( buf, "{y$c1{x стонет: {r%s{x", vampire_lastword[myrandom]);
+    else                 return;
+  }
+  if (victim->race == RACE_OGRE) {
+    myrandom=number_range(1,100);
+    if ( myrandom < 10 ) do_printf( buf, "{y$c1{x стонет: {r%s{x", ogre_lastword[myrandom]);
+    else                 return;
+  }
+  if (victim->race == RACE_HOBBIT) {
+    myrandom=number_range(1,100);
+    if ( myrandom < 10 ) do_printf( buf, "{y$c1{x стонет: {r%s{x", hobbit_lastword[myrandom]);
+    else                 return;
+  }
+  if (victim->race == RACE_ORC) {
+    myrandom=number_range(1,100);
+    if ( myrandom < 10 ) do_printf( buf, "{y$c1{x стонет: {r%s{x", orc_lastword[myrandom]);
+    else                 return;
+  }
+  if (victim->race == RACE_DROW) {
+    myrandom=number_range(1,100);
+    if ( myrandom < 10 ) do_printf( buf, "{y$c1{x стонет: {r%s{x", drow_lastword[myrandom]);
+    else                 return;
+  }
 
   act( buf, victim, NULL, NULL, TO_ROOM);
   return;
