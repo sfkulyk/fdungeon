@@ -395,7 +395,7 @@ void do_guild( CHAR_DATA *ch, const char *argument )
   {
      stc ("guild <char> <guild name>\n\r",ch);
     if (!IS_IMMORTAL(ch)) return;
-     stc ("guild <char> elder\n\r",ch);
+     stc ("guild <char> <guild name> elder\n\r",ch);
      stc ("guild <char> none\n\r",ch);
      stc ("guild list\n\r",ch);
      stc ("guild show\n\r",ch);
