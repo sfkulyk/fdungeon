@@ -1,0 +1,102 @@
+Forgotten Dungeon Paths (from Hassan)
+______________________________________________________________________________
+ N   Mob lvl       Name                     Path (run command)
+______________________________________________________________________________
+ 3  <  3 110>  -  Cloudy Mountain         :  run s3w4n2e7n6esu2e3n3u1w5n1w1u
+ 4  <  1  24>  -  Cеверные Равнины        :  run s3w4n2e3n или run 4n3w2n2e3n
+ 6  <  0 110>  -  Family House (obshaga)  :  %SPECRECALL% for married
+ 7  < 35  57>  -  Firetop Mountain        :  run s6e8n2n2e4n3en 
+ 9  <  5  13>  -  Gangland                :  run 7ses2ese или run 2s2e7se - need boat 
+11  <  5 105>  -  KPI                     :  run 7sesue
+12  <  1   1>  -  Limbo                   :  %do nothing few mins > config autologout%
+13  <  2  70>  -  Ma'н-Toр                :  run s6e4s2es2ed3ne4sw
+14  <  8   8>  -  Machine Dreams          :  run 2s3esu (norecol void) 
+15  <  3  30>  -  Marsh                   :  run 2s2e2s6wnws - need boat
+                                          :  run s13w2sesws2wsws  - need invis
+17  <  3  42>  -  New Ofcol               :  run s3w4n2e7n4ene3n2e
+18  <  8  40>  -  Nirvana                 :  run s8e2n2eu
+19  <  0 110>  -  Ofcol                   :  run s3w4n2e7n4ene2n
+20  <  0 109>  -  Old Thalos              :  через Void, потом run s3w - crossroad.
+21  <  6  60>  -  Olympus                 :  run s3w4n2e8n2u - need fly
+23  <  5  65>  -  Pyramid                 :  run 2s2e2s11e2n2e - need boat, invis
+24  <100 100>  -  ROM                     :  %CLANRECALL% (New Loners) for member of clan
+26  <  3  25>  -  Thalos                  :  run s6e4s4w
+27  < 10  50>  -  Underdark               :  run 3sdwdsn7d
+28  < 57  57>  -  Valhalla                :  run nnu
+29  < 30  54>  -  Ад                      :  eesss;enter oven;nwdw - pass door needed
+30  <  9  42>  -  АнтариЯ                 :  через Void, потом run s3w4sdnn
+31  <  1 110>  -  Антарийский Зоопарк     :  через Void, потом run s3w4sd2n3e5n2en
+32  <101 101>  -  Арена                   :  %ARENARECALL% -  for honest fight
+33  < 22  94>  -  АркадиЯ                 :  run 2s3w6s2e2s2s3edwsd - need invis, pass door
+                                          :  run s3w4n2e7nw3nd7n - RAK
+34  < 70 108>  -  Армагеддон              :  eesss;enter oven;nwd5w2des2en2es2ene2ds2wnws4wn2w2d2es2en2es2ene2s2ws2wnee - pass door, fly needed
+35  < 16  28>  -  АрмиЯ                   :  run s7wss - в комнату для свиданий
+36  <  8  37>  -  Астрал                  :  run 3unu - need fly
+37  <  5  20>  -  БашнЯ Виверн            :  run s6e4s2es2ede
+38  <  5  65>  -  БашнЯ Драконов          :  run s13w2ne3nu
+39  < 40  75>  -  БашнЯ Мертвых           :  run s6e4s2es2ed3ne4s2w
+40  <  5   8>  -  В небе (In the Air)     :  run 2u - need fly
+41  < 10 110>  -  Властелин колец         :  run s5w4n2w3nws2w
+               -  тенистая могила         :  Run s13ws2w2sws3wnw2n
+42  <  1  50>  -  ВысшаЯ БашнЯ Волшебства :  через тенистую могилу(norecal void with agrs), ищите заблудшего путешественника и от него на север.
+43  <  4  30>  -  Галактика               :  через тенистую могилу(norecal void with agrs), ищите "В таверне" и дальше вниз.
+44  <  1  35>  -  Город Дроу              :  run s6e4s2es2edws2d
+45  < 23  85>  -  Город Титанов           :  run s13w2ne2n4wn2w2n2w5s4ws
+46  < 33 110>  -  Дворец Пророков         :  run s13w2ne2nw5nwund5n10ese 
+47  <  1 110>  -  Дельта                  :  run 2s2e2s7w2de - need boat
+48  <  1  10>  -  ДеревнЯ Смурфов         :  run s7en
+49  <  2  15>  -  ДеревнЯ гномов          :  run s8es
+50  <  1   8>  -  Детский Сад             :  run s6e3nes
+51  <  3  25>  -  Долина Эльфов           :  run s3w4n2e7nw3nd
+52  <  0 110>  -  Зал славы рок-музыки    :  run 3sdwds
+53  < 32 110>  -  Замок Богов             :  (вход - 3n, дальше up for >=102)
+54  < 29 110>  -  Замок Редферна          :  run 2ses7sws4u или run 7ses2esws4u  - need boat 
+55  < 10  35>  -  Замок ЧародеЯ           :  через Void, потом run s3w2nw
+56  < 11 110>  -  Западные Земли          :  run s13w2ne2nwn
+57  < 10 110>  -  Запорозька Сiч          :  run 2s2e2s7w2den - need boat
+58  < 30  89>  -  ЗатерЯнные Души         :  run 2ses7sws4ues
+59  < 30 110>  -  Звезда СМЕРТИ           :  через тенистую могилу(norecal void with agrs), ищите "В таверне" и дальше run dnnd
+60  < 19  99>  -  ЗеркальнаЯ Реальность   :  run s6e2ne
+61  <  1  19>  -  Зоопарк Мидгаарда       :  run 7sesu (next distriction - south)
+62  < 12  60>  -  Изумрудный Лес          :  run 2s3w6s2e3swsw2u
+63  <  1  50>  -  КанализациЯ             :  run 3sd
+64  <  1  30>  -  Каньон Элементалов      :  run s6e4s2es2eds4u
+65  <  5  65>  -  Катакомбы               :  run s6e3n3en2n3w2d - sourh entrance 
+                                          :  run s6e3n3en2n2w2nw2n3e2sd - north entrance
+66  <  3   6>  -  Кладбище                :  run s3e7sws (key or pass door needed in Sexton - 6se)
+67  < 10  15>  -  Кольцо Фей              :  run 2s3w6s2e2s2s3ed - need invis
+68  <  3  20>  -  Крепость Гоблинов       :  run 2s3w6s2e2s5s2e4su - need invis
+69  <  2  25>  -  Лес Хаон Дора           :  run s5w - и дальше на вест и ...
+70  <  3  13>  -  Логово Троллей          :  run 2s2e2s6wnes - need boat      
+                                          :  run s13w2sesws2wses  - need invis                    
+71  < 67 110>  -  Львиный замок           :  run s7wn
+72  < 20  60>  -  Мавзолей                :  run s3e7sw6sds2w2ses - pass door needed
+73  <  5  70>  -  Мега Сити 1             :  run 2s2e2s13es - need boat, invis
+74  <  0 110>  -  Мидгаард                :  %RECAL% :-) (for all)
+75  <  4  10>  -  Миденьир                :  run 2s3w6s2e2s
+76  <  3  14>  -  МориЯ                   :  run s6e8n
+77  <  1  35>  -  Новый Талос             :  run 16e or run 21e (to center)
+78  < 20  31>  -  Облака                  :  run 2ses7sws4us
+79  < 63 100>  -  Остров Дракири          :  run s7w2sese4s;enter pool
+80  <  5  40>  -  Паучье Логово           :  run 2s2e2s6wnw2ne3nwuwn - need boat, invis
+                                             run s13w2sesws2wsw2ne3nwuwn - need invis
+81  <  3  30>  -  Пески Скорби            :  run 2s2e2s4e - need boat, invis
+82  < 33  70>  -  Пик Драконов            :  run s3w4n2e7n6esu2e3n3u
+83  <  3  29>  -  Подгорное царство       :  run s6e3n3en
+84  <  4 100>  -  ПотерЯнный город        :  run s13wswwnwwd
+85  < 40  65>  -  Призрачный Город        :  run s21e5sde2n
+                                          :  run s13wswwnwwds    
+86  <  2  20>  -  СвЯщеннаЯ Роща          :  run s8e2n
+87  < 94 110>  -  Темный Замок            :  run s6e3ne3s2wu
+89  < 70 105>  -  Улей                    :  через Void, потом run s3w4sd2s. look latenr & run w2ne - to centre.
+90  <  2  12>  -  Фабрика Мобов           :  run 2d3wse
+91  <  3  25>  -  Хоббитон                :  run s5w4n
+93  <  1  28>  -  ЧасовнЯ                 :  run s3e7sw6s - pass door needed
+94  <  0  30>  -  Школа                   :  nu (or for newbie nun)
+96  < 55 100>  -  Селение Инков           :  run s34e2se - need boat
+					  :  run s21e5sd9e - need boat
+98  <  5 110>  -  ШахматнаЯ доска         :  run 2s3w6s2e3swsw2u2sw4s2es2wu;enter mirror
+_________________________________________________________________________________
+
+Created by Guru 05.2000.
+Last Update by Guru 02.11.2000.
