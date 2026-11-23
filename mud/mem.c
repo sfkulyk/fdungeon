@@ -201,6 +201,8 @@ ROOM_INDEX_DATA *new_room_index( void )
   pRoom->contents    = NULL;
   pRoom->extra_descr = NULL;
   pRoom->area        = NULL;
+  pRoom->reset_first = NULL;
+  pRoom->reset_last  = NULL;
 
   for ( door=0; door < MAX_DIR; door++ ) pRoom->exit[door] = NULL;
 
@@ -219,7 +221,9 @@ void free_room_index( ROOM_INDEX_DATA *pRoom )
 {
   int door;
   EXTRA_DESCR_DATA *pExtra;
+  EXTRA_DESCR_DATA *pExtraNext;
   RESET_DATA *pReset;
+  RESET_DATA *pResetNext;
 
   free_string( pRoom->name );
   free_string( pRoom->description );
@@ -229,14 +233,16 @@ void free_room_index( ROOM_INDEX_DATA *pRoom )
     if ( pRoom->exit[door] ) free_exit( pRoom->exit[door] );
   }
 
-  for ( pExtra = pRoom->extra_descr; pExtra; pExtra = pExtra->next )
+  for (pExtra = pRoom->extra_descr; pExtra; pExtra = pExtraNext)
   {
-    free_extra_descr( pExtra );
+    pExtraNext = pExtra->next;
+    free_extra_descr(pExtra);
   }
 
-  for ( pReset = pRoom->reset_first; pReset; pReset = pReset->next )
+  for (pReset = pRoom->reset_first; pReset; pReset = pResetNext)
   {
-    free_reset_data( pReset );
+    pResetNext = pReset->next;
+    free_reset_data(pReset);
   }
 
   pRoom->next     = room_index_free;
@@ -318,20 +324,24 @@ OBJ_INDEX_DATA *new_obj_index( void )
 void free_obj_index( OBJ_INDEX_DATA *pObj )
 {
   EXTRA_DESCR_DATA *pExtra;
+  EXTRA_DESCR_DATA *pExtraNext;
   AFFECT_DATA *pAf;
+  AFFECT_DATA *pAfNext;
 
   free_string( pObj->name );
   free_string( pObj->short_descr );
   free_string( pObj->description );
 
-  for ( pAf = pObj->affected; pAf; pAf = pAf->next )
+  for (pAf = pObj->affected; pAf; pAf = pAfNext)
   {
-    free_affect( pAf );
+    pAfNext = pAf->next;
+    free_affect(pAf);
   }
 
-  for ( pExtra = pObj->extra_descr; pExtra; pExtra = pExtra->next )
+  for (pExtra = pObj->extra_descr; pExtra; pExtra = pExtraNext)
   {
-    free_extra_descr( pExtra );
+    pExtraNext = pExtra->next;
+    free_extra_descr(pExtra);
   }
 
   pObj->next    = obj_index_free;
