@@ -587,6 +587,11 @@ void game_loop_unix( int control )
     {
         sigusr1_received = 0;
         log_string("Received SIGUSR1: scheduling reboot.");
+	for (d=descriptor_list;d;d=d->next)
+        {
+          if ( !d->character || d->connected != CON_PLAYING ) continue;
+          ptc(d->character, "{YAutomated Reboot in 5 ticks{x\n\r");
+        }
         do_reboot(NULL, "5");
     }
 
@@ -772,7 +777,7 @@ void game_loop_unix( int control )
 
         stall_time.tv_usec = usecDelta;
         stall_time.tv_sec  = secDelta;
-        if ( select( 0, NULL, NULL, NULL, &stall_time ) < 0 )
+        if ( select( 0, NULL, NULL, NULL, &stall_time ) < 0 && errno != EINTR )
         {
           perror( "Game_loop: select: stall" );
           exit( 1 );
