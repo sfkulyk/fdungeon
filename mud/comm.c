@@ -232,6 +232,14 @@ time_t            current_time;    // time of this pulse
 
 int reboot_reason = 0;
 
+static volatile sig_atomic_t sigusr1_received = 0;
+
+static void sigusr1_handler(int sig)
+{
+    (void)sig;
+    sigusr1_received = 1;
+}
+
 /* saboteur and new */
 bool personal_ban(const char *addr, const char *hosts);
 char convert_in(int codepage, unsigned char source);
