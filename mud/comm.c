@@ -296,10 +296,7 @@ int main( int argc, char **argv )
 #endif
 
   signal(SIGSEGV, segmentation_handler);
-
-#if defined(unix)
   signal(SIGUSR1, sigusr1_handler); // reboot handler
-#endif
 
   PULSE_PER_SECOND=4;
   PULSE_VIOLENCE = ( 3 * PULSE_PER_SECOND);
@@ -578,14 +575,12 @@ void game_loop_unix( int control )
     if ( malloc_verify( ) != 1 ) abort( );
 #endif
 
-#if defined(unix)
     if (sigusr1_received)
     {
         sigusr1_received = 0;
         log_string("Received SIGUSR1: scheduling reboot.");
         do_reboot(NULL, "5");
     }
-#endif
 
      /* Poll all active descriptors. */
      FD_ZERO( &in_set  );
