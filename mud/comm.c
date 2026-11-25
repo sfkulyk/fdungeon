@@ -606,6 +606,7 @@ void game_loop_unix( int control )
 
      if ( select( maxdesc+1, &in_set, &out_set, &exc_set, &null_time ) < 0 )
      {
+       if (errno == EINTR) continue;
        perror( "Game_loop: select: poll" );
        exit( 1 );
      }
