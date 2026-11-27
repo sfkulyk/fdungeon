@@ -41,8 +41,7 @@ void string_append (CHAR_DATA * ch, const char ** pString)
   string_show (ch, *pString) ;
 
   // final newline
-  if (*(*pString + strlen(*pString) - 1) != '\r') stc ("\n\r", ch) ;
-
+  if (strlen(*pString) == 0 || (*pString)[strlen(*pString) - 1] != '\r') stc("\n\r", ch);
   ch->desc->pString = pString ;
 }
 

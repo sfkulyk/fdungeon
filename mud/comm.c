@@ -232,6 +232,14 @@ time_t            current_time;    // time of this pulse
 
 int reboot_reason = 0;
 
+static volatile sig_atomic_t sigusr1_received = 0;
+
+static void sigusr1_handler(int sig)
+{
+    (void)sig;
+    sigusr1_received = 1;
+}
+
 /* saboteur and new */
 bool personal_ban(const char *addr, const char *hosts);
 char convert_in(int codepage, unsigned char source);
@@ -310,6 +318,7 @@ int main( int argc, char **argv )
 #endif
 
   signal(SIGSEGV, segmentation_handler);
+  signal(SIGUSR1, sigusr1_handler); // reboot handler
 
   PULSE_PER_SECOND=4;
   PULSE_VIOLENCE = ( 3 * PULSE_PER_SECOND);
@@ -594,6 +603,18 @@ void game_loop_unix( int control )
     if ( malloc_verify( ) != 1 ) abort( );
 #endif
 
+    if (sigusr1_received)
+    {
+        sigusr1_received = 0;
+        log_string("Received SIGUSR1: scheduling reboot.");
+	for (d=descriptor_list;d;d=d->next)
+        {
+          if ( !d->character || d->connected != CON_PLAYING ) continue;
+          ptc(d->character, "{YAutomated Reboot in 5 ticks{x\n\r");
+        }
+        do_reboot(NULL, "5");
+    }
+
      /* Poll all active descriptors. */
      FD_ZERO( &in_set  );
      FD_ZERO( &out_set );
@@ -610,6 +631,7 @@ void game_loop_unix( int control )
 
      if ( select( maxdesc+1, &in_set, &out_set, &exc_set, &null_time ) < 0 )
      {
+       if (errno == EINTR) continue;
        perror( "Game_loop: select: poll" );
        exit( 1 );
      }
@@ -775,7 +797,7 @@ void game_loop_unix( int control )
 
         stall_time.tv_usec = usecDelta;
         stall_time.tv_sec  = secDelta;
-        if ( select( 0, NULL, NULL, NULL, &stall_time ) < 0 )
+        if ( select( 0, NULL, NULL, NULL, &stall_time ) < 0 && errno != EINTR )
         {
           perror( "Game_loop: select: stall" );
           exit( 1 );

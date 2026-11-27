@@ -97,8 +97,9 @@ void free_descriptor(DESCRIPTOR_DATA *d)
 
   free_string( d->host );
   free_string(d->showstr_head);
-  free_string(d->showstr_point);
-  free_mem( d->outbuf, d->outsize );
+  d->showstr_head = NULL;
+  d->showstr_point = NULL;
+  free_mem(d->outbuf, d->outsize);
 
   if (d==descriptor_list) descriptor_list=d->next;
   else
@@ -419,6 +420,9 @@ void free_pcdata(PC_DATA *pcdata)
   free_string(pcdata->lovers);
   free_string(pcdata->propose_marry);
   free_string(pcdata->title);
+  free_string(pcdata->deny_addr);
+  free_string(pcdata->denied_by);
+  free_string(pcdata->tickstr);
   free_buf(pcdata->buffer);
   for (alias = 0; alias < MAX_ALIAS; alias++)
   {
