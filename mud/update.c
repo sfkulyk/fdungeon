@@ -321,8 +321,9 @@ void drent_update (CHAR_DATA *ch)
 {
   CHAR_DATA *vch,*vch_next;
 
-  if (ch->pcdata->account<1)
-  {
+  if (ch->race != RACE_DWARF && !IS_IMMORTAL(ch))  {
+    if (ch->pcdata->account < 1)
+    {
     if (ch->gold<1)
     {
       vch_next = ch->next_in_room;
@@ -351,6 +352,7 @@ void drent_update (CHAR_DATA *ch)
   {
     guild_table[guild_lookup("dwarves guild")].gold++;
     ch->pcdata->account--;
+  }
   }
 }
 
@@ -578,7 +580,7 @@ void gain_condition( CHAR_DATA *ch, int iCond, int64 value )
     switch ( iCond )
     {
       case COND_HUNGER:
-        if (IS_SET(race_table[ch->race].spec,SPEC_NOEAT) || ch->level >= LEVEL_IMMORTAL)
+        if (IS_SET(race_table[ch->race].spec,SPEC_NOEAT) || IS_IMMORTAL(ch))
         {
           ch->pcdata->condition[iCond] = 20;
           return;
@@ -587,7 +589,7 @@ void gain_condition( CHAR_DATA *ch, int iCond, int64 value )
         else stc( "Ты хочешь есть.\n\r",ch );
         break;
       case COND_THIRST:
-        if (IS_SET(race_table[ch->race].spec,SPEC_NODRINK) || ch->level >= LEVEL_IMMORTAL)
+        if (IS_SET(race_table[ch->race].spec,SPEC_NODRINK) || IS_IMMORTAL(ch))
          {
           ch->pcdata->condition[iCond] = 20;
           REM_BIT(ch->act,PLR_MUSTDRINK);
@@ -672,12 +674,30 @@ void mobile_update( void )
        if (victim!=ch && IS_NPC(victim) && !IS_AFFECTED(victim,AFF_CHARM)
         && victim->questmob==NULL )
        {
+        char body[MAX_STRING_LENGTH];
+        bool leaves_corpse = !IS_SET(victim->act,ACT_EXTRACT_CORPSE);
+
         act("$c1 достает из чемоданчика {RОГРОМНЫЙ СКАЛЬПЕЛЬ{x и отрезает голову {Y$C3{x.",ch,NULL,victim,TO_ROOM);
+
+        // raw_kill() frees the victim, so its name has to be spelled out
+        // while it is still alive - $C2 afterwards printed freed memory
+        if (leaves_corpse)
+          do_printf(body,"Тело {y%s{x мгновенно рассыпается в прах.",
+            get_char_desc(victim,'2'));
+
         raw_kill(victim);
-        if (!IS_SET(victim->act,ACT_EXTRACT_CORPSE))
+
+        if (leaves_corpse)
         {
-         act("Тело $C2 мгновенно рассыпается в прах.",ch,NULL,victim,TO_ROOM);
-         extract_obj(get_obj_list(ch,"corpse",ch->in_room->contents));
+         OBJ_DATA *corpse;
+
+         act(body,ch,NULL,NULL,TO_ROOM);
+
+         // extract the corpse just made, and only that one: looking it up
+         // by the "corpse" keyword also finds player corpses lying here
+         for (corpse=ch->in_room->contents;corpse;corpse=corpse->next_content)
+           if (corpse->item_type == ITEM_CORPSE_NPC) break;
+         if (corpse != NULL) extract_obj(corpse);
         }
        }
      }
